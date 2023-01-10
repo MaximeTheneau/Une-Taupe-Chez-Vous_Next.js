@@ -1,0 +1,117 @@
+@import './variables.scss';
+
+.contact{
+    & header{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        & h1{
+            font-size: $font-size-large;
+            margin: 1rem 0;
+        }
+        & p{
+            font-size: $font-size-small;
+            margin: 1rem 0;
+        }
+    }
+    width: 98%;
+    margin: 0 auto;
+    padding: 1rem;
+    &__adress{
+        padding: 1rem;
+        margin: 1rem 0;
+        &__social{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 1rem 0;
+            & i{
+                font-size: 2.3rem;
+                color: $color-krea;
+                cursor: pointer;
+            }
+        }
+        & i{
+            padding: 0 1rem 0 0 ;
+        }
+        & address{
+            margin: 0 0 0.5rem 0;
+            font-size: $font-size-small;
+        }
+    }
+    &__form{
+        width: 98%;
+        margin: 0 auto;
+        padding: 1rem;
+        & span{
+            margin: 1rem 0 1rem;
+            font-weight: 900;
+        }
+        &__input{
+            margin: 1.5rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        &__textarea{
+            margin: 1.5rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        & textarea{
+            margin: 1rem 0;
+            overflow-y: hidden;
+            
+        }
+        & h3{
+            font-weight: bold;
+            font-size: 1rem;
+            margin: 1rem;
+        }
+    }
+
+}
+
+//* Media Queries
+
+@media screen and (min-width: 720px) {
+    .contact{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        &__adress{
+            order: 2;
+            display: flex;
+            flex-direction: column;
+            width: 30%;
+            margin: 0 auto;
+            &__social{
+                & i{
+                    font-size: 3rem;
+                    transition: all 0.3s ease;
+                    &:hover{
+                        color: rgb(126, 126, 126);
+                        font-size: 3.2em;
+                    }
+                }
+            }
+        }
+        &__form{
+            width: 60%;
+        }
+        & h3{
+            font-size: 1.5rem;
+        }
+    }
+
+
+}
+  
+@media screen and (min-width: 1024px) {
+    .contact{
+
+    }
+}
+  

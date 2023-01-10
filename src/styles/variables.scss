@@ -1,0 +1,39 @@
+/*--Colors--*/
+$color-primary: #cdb87f;
+$color-primary-opacity: #cdb87f7c;
+$color-primary-gradient: radial-gradient(circle at 32% 12%, rgba(229, 229, 229,0.05) 0%, rgba(229, 229, 229,0.05) 50%,rgba(101, 101, 101,0.05) 50%, rgba(101, 101, 101,0.05) 100%),radial-gradient(circle at 49% 59%, rgba(113, 113, 113,0.05) 0%, rgba(113, 113, 113,0.05) 50%,rgba(240, 240, 240,0.05) 50%, rgba(240, 240, 240,0.05) 100%),radial-gradient(circle at 16% 86%, rgba(118, 118, 118,0.05) 0%, rgba(118, 118, 118,0.05) 50%,rgba(207, 207, 207,0.05) 50%, rgba(207, 207, 207,0.05) 100%),linear-gradient(252deg, rgba(248,133,4, 0.31),rgba(170,143,67, 0.85));
+$color-krea: #7ebe64;
+$color-white: #fff;
+$color-white-opacity: rgba(255, 255, 255, 0.541);
+
+$color-blue: #20d2ff;
+$color-grey: rgb(126, 126, 126);
+$color-red: #e22121;
+$color-green: #21e2a1;
+$color-glass: rgba(255,255,255,0.1);
+
+/*--Fonts--*/
+$font-color: #0b0c0e;
+$font-color-opacity: #0b0c0e3d;
+
+
+$font-primary: 'fontGeneral', sans-serif;
+$font-secondary: 'fontTitle', sans-serif;
+$font-size: 1rem;
+$font-size-small: 0.8rem;
+$font-size-large: 1.8rem;
+$font-size-bold: 900;
+
+/*--Borders--*/
+$border-radius: 0.2rem;
+
+/*--Margins--*/
+$width-general: 98%;
+$width-general-720: 84%;
+
+$paddin-card: 0.2rem;
+
+/*--Shadow--*/
+$text-shadow-white: 0 4px 30px rgba(255, 255, 255, 0.493);
+$text-shadow-black: 0 4px 30px rgba(0, 0, 0, 0.18);
+
