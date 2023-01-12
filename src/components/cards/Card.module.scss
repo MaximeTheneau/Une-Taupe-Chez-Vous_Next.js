@@ -1,0 +1,26 @@
+.cards{
+  display: flex;
+  flex-wrap: wrap;
+}
+.card{
+  width: 90%;
+  margin: auto;
+}
+
+@media screen and (min-width: 450px) {
+  .card{
+    width: 45%;
+  }
+}
+
+@media screen and (min-width: 640px) {
+  .card{
+    width: 30%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .card{
+    width: 20%;
+  }
+}
