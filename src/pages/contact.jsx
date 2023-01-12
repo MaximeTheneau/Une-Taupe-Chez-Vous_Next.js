@@ -1,63 +1,25 @@
-// == Import
-// import { toggleModal } from '../../../../action/modalBox';
+import ContactForm from '../components/contactForm';
+import styles from '../styles/Contact.module.scss';
 
 // == Composant
-function Contact() {
-  // const dispatch = useDispatch();
-  // const nameValue = useSelector((state) => state.contact.name);
-  // const emailValue = useSelector((state) => state.contact.email);
-  // const messageValue = useSelector((state) => state.contact.message);
-
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
-    console.log(evt.target);
-  };
+export default function Contact() {
   return (
     <div className="contact">
       <h1>Contact</h1>
-      <form className="contact-form" onSubmit={handleSubmit}>
-        <label htmlFor="Name">
-          <div className="contact-form_title">Nom / Prénom*</div>
-          {/* <input
-            type="text"
-            className="contact-form-input"
-            name="user_name"
-            value={nameValue}
-            onChange={(evt) => dispatch(contactForm(evt.target.value, 'name'))}
-            required
-          /> */}
-        </label>
-        <label htmlFor="email">
-          <div className="contact-form_title">Email*</div>
-          {/* <input
-            name="user_email"
-            type="email"
-            value={emailValue}
-            className="contact-form-input"
-            onChange={(evt) => dispatch(contactForm(evt.target.value, 'email'))}
-            required
-          /> */}
-        </label>
-        <label htmlFor="message">
-          <div className="contact-form_title">Message*</div>
-          {/* <textarea
-            name="message"
-            className="contact-form-input"
-            value={messageValue}
-            onChange={(evt) => dispatch(contactForm(evt.target.value, 'message'))}
-            required
-          /> */}
-        </label>
-        <div className="contact-form_button">
-          <button type="submit">
-            <i className="icon-submit" value="send" />
-            Envoyer
-          </button>
-        </div>
-      </form>
+      <div>
+        <h2 className={styles.contact__title}>
+          Besoin d'un taupier professionnel dans les Yvelines?
+        </h2>
+        <p className={styles.contact__text}>
+          N'hésitez pas à nous contacter! Artisan taupier expérimenté et qualifié, n'hésitez pas
+          à remplir le formulaire ci-dessous pour nous faire part de vos besoins et nous vous 
+          répondrons dans les plus brefs délais.
+        </p>
+      </div>
+      <div>
+        <h2 className={styles.contact__title}>Formulaire de contact</h2>
+        <ContactForm />
+      </div>
     </div>
   );
 }
-
-// == Export
-export default Contact;

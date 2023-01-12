@@ -1,0 +1,25 @@
+@font-face {
+  font-family: 'fontTitle';
+  src: url('../asset/font/secondary/secondary.woff2'),
+    url('../asset/font/secondary/secondary.woff'),
+    url('../asset/font/secondary/secondary.ttf');
+  font-display: block;
+  font-style: normal;
+  line-height: 5;
+}
+
+@font-face {
+  font-family: 'fontGeneral';
+  src: url('../asset/font/principal/principal.woff2') format('woff2'),
+    url('../asset/font/principal/principal.woff' )format('woff'),
+    url('../asset/font/principal/principal.ttf') format('truetype');
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'fontSecondary';
+  src: url('../asset/font/title/title.woff2') format('woff2'),
+    url('../asset/font/title/title.woff') format('woff'),
+    url('../asset/font/title/title.ttf') format('truetype');
+  font-display: block;
+}
