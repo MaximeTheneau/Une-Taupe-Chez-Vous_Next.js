@@ -1,0 +1,88 @@
+@import './variables.scss';
+
+nav.navbar{
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    font-family: $font-primary;
+    padding:  0.5rem 2% 0.5rem 2%;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.02);
+    color: $font-color;
+    transition: color 2s ease;
+    & a:hover{
+        transition: color 0.5s ease;  
+        color: $color-krea;
+    }
+}
+.navbar__720{
+    display: none;
+}
+.navbar__responsive{
+    text-align: left;
+    & i{
+        cursor: pointer;
+        &:hover{
+            color: $color-krea;
+        }
+    }
+    &__block{
+        width: 100%;
+        height: 4rem;
+    }
+    &__list{
+        line-height: 1.8;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        animation: fadeIn 1s ease;
+        position: relative;
+        &-item{
+            &:hover{
+                color: $color-krea;
+            }
+            font-size: 1.5rem;
+            cursor: pointer;
+            &-social i{
+                margin: 0 0.5rem;
+            }
+        }
+    }
+}
+//* Animation
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        left: -100%;
+    }
+    30% {
+        opacity: 0.5;
+        left: 0;
+    }
+    100% {
+        left: 0;
+    }
+  }
+
+//* Media Queries
+
+@media screen and (min-width: 720px) {
+    .navbar__responsive{
+        display: none;
+    }
+    .navbar__720{
+        display: block;
+        font-size: 1.5rem;
+        &__list{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            &-item{
+                margin: 0 0 0 1rem;
+                cursor: pointer;
+            }
+        }
+    }
+  }
+  
+  
