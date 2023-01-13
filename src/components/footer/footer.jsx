@@ -12,18 +12,24 @@ export default function Footer() {
             </h2>
           </li>
           <li>
-            <Link href="page/histoire">Histoire</Link>
+            <Link href="/page/qui-somme-nous">Qui-sommes-nous</Link>
           </li>
           <li>
-            <Link href="contact">Demande de devis</Link>
+            <Link href="/contact">Demande de devis</Link>
           </li>
           <li>
-            <Link href="page/mention-legal">Mentions légales</Link>
+            <Link href="/page/mention-legal">Mentions légales</Link>
           </li>
         </ul>
         <ul>
           <li>
-            <h2>Nous contacter</h2>
+            <h2>Contacter</h2>
+          </li>
+          <li>
+            <Link href="/page/contact">
+              <i className="icon-linkedin" />
+              Contacter nous
+            </Link>
           </li>
           <li>
             <Link href="#zeze">
@@ -43,13 +49,13 @@ export default function Footer() {
             <h2>Services</h2>
           </li>
           <li>
-            <Link href="services/Taupe">Taupe</Link>
+            <Link href="/services/Taupe">Taupe</Link>
           </li>
           <li>
-            <Link href="services/Fouine">Fouine</Link>
+            <Link href="/services/Fouine">Fouine</Link>
           </li>
           <li>
-            <Link href="services/Ragondin">Ragondin</Link>
+            <Link href="/services/Ragondin">Ragondin</Link>
           </li>
         </ul>
       </div>

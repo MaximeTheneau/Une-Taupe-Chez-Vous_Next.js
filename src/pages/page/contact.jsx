@@ -1,5 +1,5 @@
-import ContactForm from '../components/contactForm';
-import styles from '../styles/Contact.module.scss';
+import ContactForm from '../../components/contactForm';
+import styles from '../../styles/Contact.module.scss';
 
 // == Composant
 export default function Contact() {

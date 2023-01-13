@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import Cards from '../components/cards/cards';
+import Faq from '../components/faq/faq';
 import styles from '../styles/Home.module.scss';
 
 export async function getStaticProps() {
@@ -49,6 +50,7 @@ export default function Home({ accueil, services, articles }) {
             alt={`Image de ${accueil.title}`}
             width={accueil.imgHeader.width}
             height={accueil.imgHeader.height}
+            sizes="100vw"
           />
         </div>
 
@@ -77,8 +79,8 @@ export default function Home({ accueil, services, articles }) {
               </Link>
             </p>
           </div>
-          <div className="home-map_img">
-            {/* <MapSvg /> */}
+          <div>
+            <Faq />
           </div>
         </div>
       </div>

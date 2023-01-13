@@ -3,12 +3,12 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    unoptimized: true,
+    // unoptimized: true,
     remotePatterns: [{
-      protocol: 'https',
-      hostname: 'localhost/Une-Taupe-Chez-Vous_Symfony',
+      protocol: 'http',
+      hostname: 'localhost',
       port: '',
-      pathname: '/public/uploads/images/*',
+      pathname: '**',
     }],
   },
   webpack(config) {
@@ -21,5 +21,6 @@ const nextConfig = {
     return config;
   },
 };
+
 
 module.exports = nextConfig;

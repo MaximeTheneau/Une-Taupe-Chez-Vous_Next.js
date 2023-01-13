@@ -14,12 +14,12 @@ export default function Navbar() {
           <SvgLogo className={styles.navbar__720__logo} />
         </Link>
         <ul className={styles.navbar__720__list}>
-          <Link href="/qui-sommes-nous">
+          <Link href="/page/qui-sommes-nous">
             <li className={styles['navbar__720__list-item']}>
               <span>Qui-sommes-nous</span>
             </li>
           </Link>
-          <Link href="/contact">
+          <Link href="/page/contact">
             <li className={styles['navbar__720__list-item']}>
               <span className={styles['navbar__720__list-item-link']}>Contact</span>
             </li>
@@ -62,12 +62,12 @@ export default function Navbar() {
                 <span className={styles['navbar__responsive__list-item-link']}>Accueil</span>
               </li>
             </Link>
-            <Link href="/qui-sommes-nous">
+            <Link href="/page/qui-sommes-nous">
               <li className={styles['navbar__responsive__list-item']}>
                 <span className={styles['navbar__responsive__list-item-link']}>Qui-sommes-nous</span>
               </li>
             </Link>
-            <Link href="/contact">
+            <Link href="/page/contact">
               <li className={styles['navbar__responsive__list-item']}>
                 <span className={styles['navbar__responsive__list-item-link']}>Contact</span>
               </li>
