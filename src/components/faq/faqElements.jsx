@@ -1,5 +1,4 @@
 function FaqElements({ faq, toggleFAQ }) {
-  console.log(faq.open);
   return (
     <>
       <div

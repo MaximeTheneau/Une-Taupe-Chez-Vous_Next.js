@@ -14,16 +14,21 @@ export async function getStaticProps() {
 
   const responseArticles = await fetch('http://localhost:8000/api/articles');
   const articles = await responseArticles.json();
+
+  const responseFaq = await fetch('http://localhost:8000/api/faq');
+  const faq = await responseFaq.json();
+
   return {
     props: {
       accueil,
       services,
       articles,
+      faq,
     },
   };
 }
 
-export default function Home({ accueil, services, articles }) {
+export default function Home({ accueil, services, articles, faq }) {
   console.log(accueil);
   return (
     <>
@@ -80,7 +85,7 @@ export default function Home({ accueil, services, articles }) {
             </p>
           </div>
           <div>
-            <Faq />
+            <Faq faq={faq} />
           </div>
         </div>
       </div>

@@ -12,10 +12,10 @@ export default function Footer() {
             </h2>
           </li>
           <li>
-            <Link href="/page/qui-somme-nous">Qui-sommes-nous</Link>
+            <Link href="/page/qui-sommes-nous">Qui-sommes-nous</Link>
           </li>
           <li>
-            <Link href="/contact">Demande de devis</Link>
+            <Link href="/page/contact">Demande de devis</Link>
           </li>
           <li>
             <Link href="/page/mention-legal">Mentions légales</Link>

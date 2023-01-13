@@ -1,23 +1,41 @@
+import Image from 'next/image';
 import ContactForm from '../../components/contactForm';
 import styles from '../../styles/Contact.module.scss';
 
+export async function getStaticProps() {
+  const responseContact = await fetch('http://localhost:8000/api/pages/Contact');
+  const page = await responseContact.json();
+
+  return {
+    props: {
+      page,
+    },
+  };
+}
+
 // == Composant
-export default function Contact() {
+export default function Contact({ page }) {
   return (
     <div className="contact">
-      <h1>Contact</h1>
+      <h1>{page.title}</h1>
+      <div>
+        <Image
+          src={page.imgHeader.path}
+          alt={page.title}
+          width={page.imgHeader.width}
+          height={page.imgHeader.height}
+        />
+      </div>
       <div>
         <h2 className={styles.contact__title}>
-          Besoin d'un taupier professionnel dans les Yvelines?
+          {page.subtitle}
         </h2>
         <p className={styles.contact__text}>
-          N'hésitez pas à nous contacter! Artisan taupier expérimenté et qualifié, n'hésitez pas
-          à remplir le formulaire ci-dessous pour nous faire part de vos besoins et nous vous 
-          répondrons dans les plus brefs délais.
+          {page.contents}
         </p>
       </div>
       <div>
-        <h2 className={styles.contact__title}>Formulaire de contact</h2>
+        <h2 className={styles.contact__title}>{page.contents}</h2>
         <ContactForm />
       </div>
     </div>

@@ -1,7 +1,19 @@
 import Head from "next/head";
+import Image from "next/image";
+
+export async function getStaticProps() {
+  const responsePage = await fetch('http://localhost:8000/api/pages/Mentions-Legales');
+  const page = await responsePage.json();
+
+  return {
+    props: {
+      page,
+    },
+  };
+}
 
 // == Composant
-export default function MentionsLegal() {
+export default function MentionsLegal({ page }) {
   return (
     <>
       <Head>
@@ -13,45 +25,21 @@ export default function MentionsLegal() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="mentions">
-        <h1>Mentions-légal</h1>
-        <ul>
-          <li className="list-mentions">
-            <i className="icon-location" />
-            <p>
-              Une Taupe Chez Vous,
-              <br />
-              71 rue Marie Curie,
-              <br />
-              27780 Garenne Sur Eure
-            </p>
-          </li>
-          <li className="list-mentions">
-            <i className="icon-phone" />
-            <p>+33 2 32 26 49 58</p>
-          </li>
-          <li className="list-mentions">
-            <p>N° SIRET : 39338032400029</p>
-          </li>
-        </ul>
-        <h2>Cookies</h2>
-        <p>Cookies strictement nécessaires à l’utilisation du service demandé.</p>
+      <div>
+        <h1>Qui somme nous</h1>
+        <div>
+          <Image
+            src={page.imgHeader.path}
+            alt={page.title}
+            width={page.imgHeader.width}
+            height={page.imgHeader.height}
+          />
+        </div>
+        <h2>{page.subtitle}</h2>
         <p>
-          Ils permettent l’utilisation des principales fonctionnalités du site,
-          comme le cas échéant l’accès à votre compte personnel, ou encore de
-          mémoriser les préférences d'affichage de votre terminal (langue,
-          paramètres d'affichage) et d'en tenir compte lors de vos visites, selon
-          la charte graphique et les logiciels de visualisation ou de lecture de
-          votre terminal. Ils peuvent inclure des cookies de réseaux sociaux
-          lorsque vous interagissez avec ces derniers. Ils nous permettent aussi
-          de lier entre elles les différentes pages consultées pour vous assurer
-          une navigation fluide.
+          {page.contents}
         </p>
-        <p>
-          Vous pouvez désactiver complètement les cookies dans votre navigateur.
-          Dans ce cas notre site ne fonctionnera plus normalement mais vous
-          pourrez quand même effectuer des actions basiques.
-        </p>
+        {page.contents2 && <p>{page.contents2}</p>}
       </div>
     </>
   );
