@@ -98,6 +98,12 @@ export default function Slug({ post }) {
             <p>{post.contents}</p>
             <h2>{post.subtitle}</h2>
             <p>{post.contents2}</p>
+            {post.subtitle2 !== null && (
+              <h2>{post.subtitle2}</h2>
+            )}
+            {post.contents3 !== null && (
+              <p>{post.contents3}</p>
+            )}
           </div>
         </div>
         <div className={styles.posts__contents__social}>

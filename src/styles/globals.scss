@@ -1,7 +1,7 @@
 @use 'reset.scss';
 @use 'fonts.scss';
 @use './icon.scss';
-@use './variables.scss';
+@import './variables.scss';
 
 html,
 body {
@@ -25,4 +25,24 @@ img{
   max-height: 100%;
   height: 100%;
   width: 100%;
+}
+
+header{
+  min-height: 10vh;
+}
+main{
+  min-height: 80vh;
+}
+footer{
+  min-height: 10vh;
+}
+footer{
+  background: $color-secondary;
+}
+
+.none{
+  display: none;
+}
+.block{
+  display: block;
 }

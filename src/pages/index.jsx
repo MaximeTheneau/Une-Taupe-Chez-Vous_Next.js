@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import Cards from '../components/cards/cards';
+import Faq from '../components/faq/faq';
 import styles from '../styles/Home.module.scss';
 
 export async function getStaticProps() {
@@ -13,16 +14,21 @@ export async function getStaticProps() {
 
   const responseArticles = await fetch('http://localhost:8000/api/articles');
   const articles = await responseArticles.json();
+
+  const responseFaq = await fetch('http://localhost:8000/api/faq');
+  const faq = await responseFaq.json();
+
   return {
     props: {
       accueil,
       services,
       articles,
+      faq,
     },
   };
 }
 
-export default function Home({ accueil, services, articles }) {
+export default function Home({ accueil, services, articles, faq }) {
   console.log(accueil);
   return (
     <>
@@ -49,6 +55,7 @@ export default function Home({ accueil, services, articles }) {
             alt={`Image de ${accueil.title}`}
             width={accueil.imgHeader.width}
             height={accueil.imgHeader.height}
+            sizes="100vw"
           />
         </div>
 
@@ -77,8 +84,8 @@ export default function Home({ accueil, services, articles }) {
               </Link>
             </p>
           </div>
-          <div className="home-map_img">
-            {/* <MapSvg /> */}
+          <div>
+            <Faq faq={faq} />
           </div>
         </div>
       </div>

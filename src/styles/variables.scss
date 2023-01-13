@@ -1,7 +1,10 @@
 /*--Colors--*/
-$color-primary: #cdb87f;
+$color-primary: #65c571;
 $color-primary-opacity: #cdb87f7c;
 $color-primary-gradient: radial-gradient(circle at 32% 12%, rgba(229, 229, 229,0.05) 0%, rgba(229, 229, 229,0.05) 50%,rgba(101, 101, 101,0.05) 50%, rgba(101, 101, 101,0.05) 100%),radial-gradient(circle at 49% 59%, rgba(113, 113, 113,0.05) 0%, rgba(113, 113, 113,0.05) 50%,rgba(240, 240, 240,0.05) 50%, rgba(240, 240, 240,0.05) 100%),radial-gradient(circle at 16% 86%, rgba(118, 118, 118,0.05) 0%, rgba(118, 118, 118,0.05) 50%,rgba(207, 207, 207,0.05) 50%, rgba(207, 207, 207,0.05) 100%),linear-gradient(252deg, rgba(248,133,4, 0.31),rgba(170,143,67, 0.85));
+
+$color-secondary: #725f49;
+
 $color-krea: #7ebe64;
 $color-white: #fff;
 $color-white-opacity: rgba(255, 255, 255, 0.541);
@@ -36,4 +39,4 @@ $paddin-card: 0.2rem;
 /*--Shadow--*/
 $text-shadow-white: 0 4px 30px rgba(255, 255, 255, 0.493);
 $text-shadow-black: 0 4px 30px rgba(0, 0, 0, 0.18);
-
+$box-shadow: 0 10px 20px rgba(160, 160, 160, 0.459);

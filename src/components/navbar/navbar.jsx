@@ -1,36 +1,27 @@
 import Link from 'next/link';
 import { useState } from 'react';
-import styles from '../styles/Navbar.module.scss';
+import styles from './Navbar.module.scss';
+import SvgLogo from '../../asset/svg/logo-une-taupe-chez-vous.svg';
 
 export default function Navbar() {
   const [toggleNav, setToggleNav] = useState(false);
   return (
     <>
-      <nav className={`${styles.navbar__720} ${styles.navbar}`}>
+      <nav
+        className={`${styles.navbar__720} ${styles.navbar}`}
+      >
+        <Link href="/">
+          <SvgLogo className={styles.navbar__720__logo} />
+        </Link>
         <ul className={styles.navbar__720__list}>
-          <Link href="/">
-            <li className={styles['navbar__720__list-item']}>
-              <span className={styles['navbar__720__list-item-link']}>Accueil</span>
-            </li>
-          </Link>
-          <Link href="/qui-sommes-nous">
+          <Link href="/page/qui-sommes-nous">
             <li className={styles['navbar__720__list-item']}>
               <span>Qui-sommes-nous</span>
             </li>
           </Link>
-          <Link href="/contact">
+          <Link href="/page/contact">
             <li className={styles['navbar__720__list-item']}>
               <span className={styles['navbar__720__list-item-link']}>Contact</span>
-            </li>
-          </Link>
-          <Link href="https://www.facebook.com/association.lespetitsfreresdespauvres" target="_blank" rel="noreferrer">
-            <li className={styles['navbar__720__list-item']}>
-              <i className="icon-facebook" />
-            </li>
-          </Link>
-          <Link href="https://www.instagram.com/lespetitsfreresdespauvres/" target="_blank" rel="noreferrer">
-            <li className={styles['navbar__720__list-item']}>
-              <i className="icon-instagram" />
             </li>
           </Link>
         </ul>
@@ -71,24 +62,16 @@ export default function Navbar() {
                 <span className={styles['navbar__responsive__list-item-link']}>Accueil</span>
               </li>
             </Link>
-            <Link href="/qui-sommes-nous">
+            <Link href="/page/qui-sommes-nous">
               <li className={styles['navbar__responsive__list-item']}>
                 <span className={styles['navbar__responsive__list-item-link']}>Qui-sommes-nous</span>
               </li>
             </Link>
-            <Link href="/contact">
+            <Link href="/page/contact">
               <li className={styles['navbar__responsive__list-item']}>
                 <span className={styles['navbar__responsive__list-item-link']}>Contact</span>
               </li>
             </Link>
-            <li className={styles['navbar__responsive__list-item-social']}>
-              <Link href="httt" target="_blank" rel="noreferrer">
-                <i className="icon-facebook" />
-              </Link>
-              <Link href="{contact.Github}" target="_blank" rel="noreferrer">
-                <i className="icon-instagram" />
-              </Link>
-            </li>
           </ul>
         ) : ''}
       </nav>
