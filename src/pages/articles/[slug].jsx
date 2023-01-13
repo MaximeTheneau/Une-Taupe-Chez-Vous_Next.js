@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
-import Head from 'next/head';
-import styles from '../../styles/Article.module.scss';
 import Image from 'next/image';
+import Head from 'next/head';
+import styles from '../page/Pages.module.scss';
 
 export async function getStaticPaths() {
   if (process.env.SKIP_BUILD_STATIC_GENERATION) {
@@ -82,41 +82,39 @@ export default function Slug({ post }) {
 
         </script>
       </Head>
-
-      <main className={`card ${styles.posts}`}>
+      <div className={styles.page}>
+        <div className={styles.page__image}>
+          <h1>Qui somme nous</h1>
+          <Image
+            src={post.imgPost.path}
+            alt={post.title}
+            width={post.imgPost.width}
+            height={post.imgPost.height}
+          />
+        </div>
         <div>
-          <h1>{post.title}</h1>
-          <div className={styles.posts__images}>
-            <Image
-              src={post.imgPost.path}
-              alt={post.title}
-              width={post.imgPost.width}
-              height={post.imgPost.height}
-            />
-          </div>
-          <div className={styles.posts__contents}>
-            <p>{post.contents}</p>
-            <h2>{post.subtitle}</h2>
-            <p>{post.contents2}</p>
-            {post.subtitle2 !== null && (
-              <h2>{post.subtitle2}</h2>
-            )}
-            {post.contents3 !== null && (
-              <p>{post.contents3}</p>
-            )}
-          </div>
+          <p>{post.contents}</p>
+          <h2>{post.subtitle}</h2>
+          <p>{post.contents2}</p>
+          {post.subtitle2 !== null && (
+          <h2>{post.subtitle2}</h2>
+          )}
+          {post.contents3 !== null && (
+          <p>{post.contents3}</p>
+          )}
         </div>
-        <div className={styles.posts__contents__social}>
-          <select onChange={(e) => handleChangeShareSocial(e)} className="select">
-            <option value="---">Partager sur ...</option>
-            <option value="facebook" data-icon="icon-facebook">Facebook</option>
-            <option value="twitter">Twitter</option>
-            <option value="linkedin">Linkedin</option>
-            <option value="pinterest">Pinterest</option>
-            <option value="email">Email</option>
-          </select>
-        </div>
-      </main>
+      </div>
+      <div>
+        <select onChange={(e) => handleChangeShareSocial(e)} className="select">
+          <option value="---">Partager sur ...</option>
+          <option value="facebook" data-icon="icon-facebook">Facebook</option>
+          <option value="twitter">Twitter</option>
+          <option value="linkedin">Linkedin</option>
+          <option value="pinterest">Pinterest</option>
+          <option value="email">Email</option>
+        </select>
+      </div>
+
     </>
   );
 }

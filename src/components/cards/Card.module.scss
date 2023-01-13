@@ -1,10 +1,28 @@
+@import '../../styles/variables.scss';
+
+
 .cards{
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 5% 0;
 }
 .card{
   width: 90%;
-  margin: auto;
+  border-radius: 0.5rem;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  transition: transform 0.02s ease;
+  & img{
+  border-radius: 0.5rem;
+  }
+  &__content{
+    padding: 5%;
+    height: 125px;
+  }
+  &:hover{
+    transform: scale(1.02);
+  }
 }
 
 @media screen and (min-width: 450px) {
@@ -22,5 +40,10 @@
 @media screen and (min-width: 1024px) {
   .card{
     width: 20%;
+  }
+}
+@media screen and (max-width: 600px) {
+  .card{
+    margin: 1rem auto;
   }
 }

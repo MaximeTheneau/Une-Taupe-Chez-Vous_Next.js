@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Image from 'next/image';
+import styles from './Pages.module.scss';
 
 export async function getStaticProps() {
   const responsePage = await fetch('http://localhost:8000/api/pages/Qui-sommes-nous');
@@ -24,22 +25,24 @@ export default function QuiSommesNous({ page }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div>
-        <h1>Qui somme nous</h1>
-        <div>
+      <>
+        <section className={styles.page__image}>
+          <h1>Qui somme nous</h1>
           <Image
             src={page.imgHeader.path}
             alt={page.title}
             width={page.imgHeader.width}
             height={page.imgHeader.height}
           />
-        </div>
-        <h2>{page.subtitle}</h2>
-        <p>
-          {page.contents}
-        </p>
-        {page.contents2 && <p>{page.contents2}</p>}
-      </div>
+        </section>
+        <section>
+          <h2>{page.subtitle}</h2>
+          <p>
+            {page.contents}
+          </p>
+          {page.contents2 && <p>{page.contents2}</p>}
+        </section>
+      </>
     </>
   );
 }

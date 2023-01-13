@@ -23,22 +23,21 @@ export default function Footer() {
         </ul>
         <ul>
           <li>
-            <h2>Contacter</h2>
+            <h2>Contact</h2>
           </li>
           <li>
             <Link href="/page/contact">
-              <i className="icon-linkedin" />
               Contacter nous
             </Link>
           </li>
           <li>
-            <Link href="#zeze">
+            <Link href="https://www.linkedin.com/company/une-taupe-chez-vous" target="_blank">
               <i className="icon-linkedin" />
               Linkedin
             </Link>
           </li>
           <li>
-            <Link href="r#rrr">
+            <Link href="https://www.facebook.com/unetaupechezvous/" target="_blank">
               <i className="icon-facebook" />
               Facebook
             </Link>

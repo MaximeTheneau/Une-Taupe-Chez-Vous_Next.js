@@ -2,8 +2,7 @@
 @font-face {
   font-family: 'iconTheneauM';
   src: url('../asset/font/icon/iconTheneauM.woff2') format('woff2'),
-    url('../asset/font/icon/iconTheneauM.woff?7bufwb') format('woff'),
-    url('../asset/font/icon/iconTheneauM.ttf?7bufwb') format('truetype');
+    url('../asset/font/icon/iconTheneauM.woff?7bufwb') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -20,6 +19,7 @@
   -moz-osx-font-smoothing: grayscale;
   font-size: 1.8rem;
 }
+
 .icon-navbar:before {
   content: "\e900";
 }
@@ -27,15 +27,21 @@
   content: "\e902";
 }
 .icon-facebook:before {
-  content: "\e903";
+  content: "\e1001";
 }
 .icon-instagram:before {
   content: "\e906";
 }
-
-
-.icon-signature:before {
-  content: "\e999";
+.icon-confirmation:before {
+  content: "\e904";
+  color: $color-confirmation;
+}
+.icon-error:before {
+  content: "\e905";
+  color: $color-error;
+}
+.icon-open:before {
+  content: "\e903";
 }
 .icon-paper-plane:before {
   content: "\e901";
@@ -43,32 +49,15 @@
 .icon-phone:before {
   content: "\e907";
 }
+.icon-twitter:before {
+  content: "\e946";
+}
+.icon-linkedin:before {
+  content: "\e94b";
+}
 .icon-location:before {
   content: "\e94c";
 }
-
-//* Message error
-.icon-change:before {
-  opacity: 0.5;
-  content: "\e903";
+.icon-facebook:before {
+  content: "\ea96";
 }
-.icon-confirmation:before {
-  color: $color-green;
-  content: "\e904";
-}
-.icon-error:before {
-  color: $color-red;
-  content: "\e905";
-}
-
-.icon-close:before {
-  color: $font-color;
-  opacity: 0.8;
-  content: "\e905";
-
-}
-.icon-close-white:before {
-  content: "\e905";
-  color: $color-white;
-  text-shadow: 0 4px 30px rgba(0, 0, 0, 1);
-}  

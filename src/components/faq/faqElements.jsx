@@ -1,22 +1,24 @@
+import styles from './Faq.module.scss';
+
 function FaqElements({ faq, toggleFAQ }) {
   return (
-    <>
-      <div
-        onClick={() => toggleFAQ(faq.id)}
-        role="presentation"
-        className="faq-question"
-      >
+    <div
+      className={styles.faqs}
+      onClick={() => toggleFAQ(faq.id)}
+      role="presentation"
+    >
+      <h2 className="faq-question">
         {faq.question}
         {faq.open
           ? <i className="icon-x" />
-          : <i className="icon-facebook" />}
-      </div>
-      <div
+          : <i className="icon-open" />}
+      </h2>
+      <p
         className={`faq-answer ${faq.open ? 'block' : 'none'}`}
       >
         {faq.answer}
-      </div>
-    </>
+      </p>
+    </div>
   );
 }
 

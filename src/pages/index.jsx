@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Cards from '../components/cards/cards';
 import Faq from '../components/faq/faq';
-import styles from '../styles/Home.module.scss';
+import styles from './page/Pages.module.scss';
 
 export async function getStaticProps() {
   const responseAccueil = await fetch('http://localhost:8000/api/pages/Accueil');
@@ -28,7 +28,9 @@ export async function getStaticProps() {
   };
 }
 
-export default function Home({ accueil, services, articles, faq }) {
+export default function Home({
+  accueil, services, articles, faq,
+}) {
   console.log(accueil);
   return (
     <>
@@ -42,14 +44,20 @@ export default function Home({ accueil, services, articles, faq }) {
         <meta property="og:image" content={accueil.imgHeaderJpg} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className={styles.home}>
+      <>
+        <section>
 
-        <h1>{accueil.title}</h1>
-        <h2>{accueil.subtitle}</h2>
+          <h1>{accueil.title}</h1>
+          <h2>{accueil.subtitle}</h2>
 
-        <div
-          className={styles.home_imageAnimation}
-        >
+          <div
+            className={styles.home_imageAnimation}
+          />
+        </section>
+
+        {/* --Services--*/}
+        <section>
+          <h2>Nos services</h2>
           <Image
             src={accueil.imgHeader.path}
             alt={`Image de ${accueil.title}`}
@@ -57,38 +65,35 @@ export default function Home({ accueil, services, articles, faq }) {
             height={accueil.imgHeader.height}
             sizes="100vw"
           />
-        </div>
 
-        {/* --Services--*/}
-        <Cards cards={services} name="services" />
-
-        <Image
-          src={accueil.imgHeader2.path}
-          alt={`Image de ${accueil.title}`}
-          width={accueil.imgHeader2.width}
-          height={accueil.imgHeader2.height}
-        />
+          <Cards cards={services} name="services" />
+        </section>
 
         {/* --Articles--*/}
-        <Cards cards={articles} name="articles" />
-
+        <section>
+          <Image
+            src={accueil.imgHeader2.path}
+            alt={`Image de ${accueil.title}`}
+            width={accueil.imgHeader2.width}
+            height={accueil.imgHeader2.height}
+          />
+          <Cards cards={articles} name="articles" />
+        </section>
 
         {/* --Contact--*/}
-        <h2>Interventions en Yvelynes (78)</h2>
-        <div className="home-map">
-          <div className="home-map_description">
-            <p>
-              Pour tous demande de devis ou demande de renseignement
-              <Link href="/contact">
-                <button type="button">Contactez-nous</button>
-              </Link>
-            </p>
-          </div>
-          <div>
-            <Faq faq={faq} />
-          </div>
-        </div>
-      </div>
+        <section>
+          <Faq faq={faq} />
+        </section>
+        <section>
+          <h2>Interventions en Yvelynes (78)</h2>
+          <p>
+            Pour tous demande de devis ou demande de renseignement
+            <Link href="/contact">
+              <button type="button">Contactez-nous</button>
+            </Link>
+          </p>
+        </section>
+      </>
     </>
   );
 }
