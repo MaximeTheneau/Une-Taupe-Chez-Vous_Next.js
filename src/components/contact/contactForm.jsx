@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { formMiddleware } from '../../middleware/middleware';
 import styles from './Contact.module.scss';
+import AnimationHover from '../../hooks/useHoverAnimation/CloneTextWrapper';
 
 // == Composant
 export default function ContactForm() {
@@ -117,8 +118,10 @@ export default function ContactForm() {
       </div>
       <div className="contact-form_button">
         <button type="submit">
-          <i className="icon-submit" value="send" />
-          Envoyer
+          <AnimationHover>
+            <i className="icon-paper-plane" />
+            Envoyer
+          </AnimationHover>
         </button>
       </div>
     </form>

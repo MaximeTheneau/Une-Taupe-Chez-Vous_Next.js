@@ -1,0 +1,42 @@
+
+.animationText__hover--active{
+    animation: animationText 1s ease;
+    opacity: 0 ;
+  
+}
+  
+@keyframes animationText {
+0%{
+opacity: 0 ;
+}
+100%{
+opacity: 1;
+}
+}
+.animationText__cloned{
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+opacity: 0;
+}
+.animationText__cloned--active{
+animation: animationText__cloned 1s ease;
+}
+
+@keyframes animationText__cloned {
+0%{
+opacity: 0;
+transform: translate(0, 0);
+}
+20%{
+opacity: 0;
+}
+100%{
+opacity:1;
+transform: translate(0, 100%);
+}
+
+
+}

@@ -1,7 +1,7 @@
-import '../styles/globals.scss';
-import Layout from '../components/layout';
-import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import Layout from '../components/layout';
+import '../styles/globals.scss';
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }) {
     setAnimateTransition(true);
     setTimeout(() => {
       setAnimateTransition(false);
-    }, 2000);
+    }, 600);
   }, [router.pathname]);
   console.log(animateTransition);
   return (
