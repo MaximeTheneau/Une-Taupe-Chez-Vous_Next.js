@@ -3,6 +3,7 @@ import { useState } from 'react';
 import styles from './Navbar.module.scss';
 import SvgLogo from '../../asset/svg/logo-une-taupe-chez-vous.svg';
 import AnimationHover from '../../hooks/useHoverAnimation/CloneTextWrapper';
+
 export default function Navbar() {
   const [toggleNav, setToggleNav] = useState(false);
   return (
@@ -44,7 +45,6 @@ export default function Navbar() {
           onClick={() => {
             setToggleNav(!toggleNav);
           }}
-
         >
           {toggleNav ? (
             <i className="icon-x" />
@@ -59,7 +59,7 @@ export default function Navbar() {
             onClick={(() => setTimeout(() => (
               setToggleNav(false)
             ), 500)
-          )}
+            )}
           >
             <Link href="/">
               <li className={styles['navbar__responsive__list-item']}>

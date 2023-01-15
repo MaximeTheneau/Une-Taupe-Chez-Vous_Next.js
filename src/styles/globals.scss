@@ -10,6 +10,7 @@ body {
   margin: 0;
   font-family: 'fontGeneral', sans-serif;
   white-space: pre-line;
+  overflow-x: hidden !important; 
 }
 h1,h2,h3,h4,h5,h6{
   font-family: 'fontTitle', sans-serif;
@@ -29,6 +30,10 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+p{
+  width: 90%;
 }
 
 img{
@@ -153,5 +158,11 @@ select{
   }
   100%{
     opacity: 0;
+  }
+}
+
+@media screen and (min-width: 640px) {
+  p{
+    width: 70%;
   }
 }

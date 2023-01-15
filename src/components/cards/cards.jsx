@@ -1,5 +1,6 @@
 import Card from './card';
 import styles from './Card.module.scss';
+import SlideTransition from '../../hooks/useSlideTransition/SlideTransition';
 
 export default function Cards({ cards, name }) {
   return (

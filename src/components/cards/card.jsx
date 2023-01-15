@@ -1,10 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './Card.module.scss';
+import SlideTransition from '../../hooks/useSlideTransition/SlideTransition';
 
 export default function card({ card, name }) {
   return (
-    <div className={styles.card}>
+    <SlideTransition
+      className={styles.card}
+    >
       <Link href={`${name}/${card.slug}`}>
         <Image
           src={card.imgPost.path}
@@ -17,6 +20,6 @@ export default function card({ card, name }) {
           <p className={styles.card__text}>{card.subtitle}</p>
         </div>
       </Link>
-    </div>
+    </SlideTransition>
   );
 }

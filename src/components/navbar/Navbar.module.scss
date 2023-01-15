@@ -17,9 +17,6 @@ nav.navbar{
     text-align: left;
     & i{
         cursor: pointer;
-        &:hover{
-            color: $color-krea;
-        }
     }
     &__block{
         width: 100%;
@@ -33,9 +30,6 @@ nav.navbar{
         animation: fadeIn 1s ease;
         position: relative;
         &-item{
-            &:hover{
-                color: $color-krea;
-            }
             font-size: 1.5rem;
             cursor: pointer;
             &-social i{

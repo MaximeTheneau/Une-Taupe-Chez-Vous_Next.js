@@ -7,6 +7,7 @@ import Faq from '../components/faq/faq';
 import styles from './page/Pages.module.scss';
 import ScrollParallaxTop from '../hooks/useMovableElement/ScrollParallaxTopWrapper';
 import CloneTextWrapper from '../hooks/useHoverAnimation/CloneTextWrapper';
+import SlideTransition from '../hooks/useSlideTransition/SlideTransition';
 
 export async function getStaticProps() {
   const responseAccueil = await fetch('http://localhost:8000/api/pages/Accueil');
@@ -88,20 +89,22 @@ export default function Home({
           <Faq faq={faq} />
         </section>
         <section>
-          <h2>Interventions en Yvelynes (78)</h2>
-          <p>
-            {accueil.contents2}
-          </p>
-          <Link href="/contact">
-            <button
-              className="button"
-              type="button"
-            >
-              <CloneTextWrapper>
-                Contactez-nous
-              </CloneTextWrapper>
-            </button>
-          </Link>
+          <SlideTransition>
+            <h2>Interventions en Yvelynes (78)</h2>
+            <p>
+              {accueil.contents2}
+            </p>
+            <Link href="/contact">
+              <button
+                className="button"
+                type="button"
+              >
+                <CloneTextWrapper>
+                  Contactez-nous
+                </CloneTextWrapper>
+              </button>
+            </Link>
+          </SlideTransition>
         </section>
       </>
     </>
