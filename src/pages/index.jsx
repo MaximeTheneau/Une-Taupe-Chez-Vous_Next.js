@@ -71,6 +71,7 @@ export default function Home({
         </section>
 
         {/* --Articles--*/}
+
         <section className={styles.home}>
           <ScrollParallaxTop
             src={accueil.imgHeader2.path}
