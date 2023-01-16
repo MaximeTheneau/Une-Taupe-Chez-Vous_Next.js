@@ -2,7 +2,7 @@ import Image from 'next/image';
 import PropTypes from 'prop-types';
 import styleModal from './Modal.module.scss';
 
-export default function confirmation({ onClickConfirmation, image }) {
+export default function confirmation({ onClickConfirmation }) {
   setTimeout(() => {
     onClickConfirmation();
   }, 100000);
