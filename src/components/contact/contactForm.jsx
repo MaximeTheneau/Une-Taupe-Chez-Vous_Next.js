@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { formMiddleware } from '../../middleware/middleware';
-import styles from './Contact.module.scss';
 import AnimationHover from '../../hooks/useHoverAnimation/CloneTextWrapper';
+import Confirmation from '../modal/Confirmation';
 
+import styles from './Contact.module.scss';
+import styleModal from '../modal/Modal.module.scss';
 // == Composant
 export default function ContactForm() {
   const [state, setState] = useState({
@@ -13,10 +15,18 @@ export default function ContactForm() {
       subject: 'Demande de devis',
     },
     textArea: 1,
+    toggleModal: true,
     confirmationName: null,
     confirmationEmail: null,
     confirmationMessage: null,
   });
+
+  const onClickConfirmation = () => {
+    setState({
+      ...state,
+      toggleModal: false,
+    });
+  };
 
   const handleChangeMessage = (e) => {
     const trows = e.target.value.split('\n').length - 1 === 0 ? 1 : e.target.value.split('\n').length - 1;
@@ -39,91 +49,113 @@ export default function ContactForm() {
     }
     return '';
   }
+  const handleResponse = (response) => {
+    setState({
+      ...state,
+      form: {
+        name: '',
+        email: '',
+        message: '',
+        subject: 'Demande de devis',
+      },
+      toggleModal: response,
+    });
+  };
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    formMiddleware(state.form);
+    formMiddleware(state.form, handleResponse);
   };
 
   return (
-    <form className={styles.contact} onSubmit={handleSubmit}>
-      <div className={styles.contact__input}>
-        <select
-          name="subject"
-          id="subject"
-          className="contact-form-input"
-          onChange={(e) => setState(
-            { ...state, form: { ...state.form, subject: e.target.value } },
-          )}
-        >
-          <option value="Demande de devis">Demande de devis</option>
-          <option value="Demande de renseignements">Demande de renseignements</option>
-          <option value="Autre">Autre</option>
-        </select>
-      </div>
-      <div className={styles.contact__input}>
-        {classErrorOrConfirmation(state.confirmationName)}
-        <input
-          type="text"
-          className="contact-form-input"
-          name="user_name"
-          value={state.form.name}
-          onChange={(e) => setState(
-            { ...state, form: { ...state.form, name: e.target.value } },
-          )}
-          onBlur={(e) => (
-            e.target.value.length > 2 && e.target.value.length < 35
-              ? setState({ ...state, confirmationName: true })
-              : setState({ ...state, confirmationName: false })
-          )}
-          placeholder="Nom Prénom / Société"
-          required
-        />
-      </div>
-      <div className={styles.contact__input}>
-        {classErrorOrConfirmation(state.confirmationEmail)}
-        <input
-          type="email"
-          name="email"
-          value={state.form.email}
-          placeholder="exemple@email.fr"
-          required
-          onChange={(e) => setState(
-            { ...state, form: { ...state.form, email: e.target.value } },
-            (e.target.value.length > 2 && e.target.value.length < 35
-              ? setState({ ...state, confirmationEmail: true })
-              : setState({ ...state, confirmationEmail: false })),
-          )}
-          onBlur={(e) => (
-            regex.test(e.target.value)
-              ? setState({ ...state, confirmationEmail: true })
-              : setState({ ...state, confirmationEmail: false })
-          )}
-        />
-      </div>
-      <div className={styles.contact__textarea}>
-        {classErrorOrConfirmation(state.confirmationMessage)}
-        <textarea
-          rows={state.textArea}
-          value={state.form.message}
-          onChange={handleChangeMessage}
-          onBlur={(e) => (e.target.value.length > 2 && e.target.value.length < 250
-            ? setState({ ...state, confirmationMessage: true })
-            : null)}
-          name="message"
-          wrap="off"
-          placeholder="Votre message"
-          required
-        />
-      </div>
-      <div className="contact-form_button">
-        <button type="submit">
-          <AnimationHover>
-            <i className="icon-paper-plane" />
-            Envoyer
-          </AnimationHover>
-        </button>
-      </div>
-    </form>
+    <>
+      {state.toggleModal ? (
+        <>
+          <div className={styleModal.modal__blur} />
+          <Confirmation
+            onClickConfirmation={onClickConfirmation}
+          />
+        </>
+      ) : ''}
+      <form className={styles.contact} onSubmit={handleSubmit}>
+        <div className={styles.contact__input}>
+          <select
+            name="subject"
+            id="subject"
+            className="contact-form-input"
+            onChange={(e) => setState(
+              { ...state, form: { ...state.form, subject: e.target.value } },
+            )}
+          >
+            <option value="Demande de devis">Demande de devis</option>
+            <option value="Demande de renseignements">Demande de renseignements</option>
+            <option value="Autre">Autre</option>
+          </select>
+        </div>
+        <div className={styles.contact__input}>
+          {classErrorOrConfirmation(state.confirmationName)}
+          <input
+            type="text"
+            className="contact-form-input"
+            name="user_name"
+            value={state.form.name}
+            onChange={(e) => setState(
+              { ...state, form: { ...state.form, name: e.target.value } },
+            )}
+            onBlur={(e) => (
+              e.target.value.length > 2 && e.target.value.length < 35
+                ? setState({ ...state, confirmationName: true })
+                : setState({ ...state, confirmationName: false })
+            )}
+            placeholder="Nom Prénom / Société"
+            required
+          />
+        </div>
+        <div className={styles.contact__input}>
+          {classErrorOrConfirmation(state.confirmationEmail)}
+          <input
+            type="email"
+            name="email"
+            value={state.form.email}
+            placeholder="exemple@email.fr"
+            required
+            onChange={(e) => setState(
+              { ...state, form: { ...state.form, email: e.target.value } },
+              (e.target.value.length > 2 && e.target.value.length < 35
+                ? setState({ ...state, confirmationEmail: true })
+                : setState({ ...state, confirmationEmail: false })),
+            )}
+            onBlur={(e) => (
+              regex.test(e.target.value)
+                ? setState({ ...state, confirmationEmail: true })
+                : setState({ ...state, confirmationEmail: false })
+            )}
+          />
+        </div>
+        <div className={styles.contact__textarea}>
+          {classErrorOrConfirmation(state.confirmationMessage)}
+          <textarea
+            rows={state.textArea}
+            value={state.form.message}
+            onChange={handleChangeMessage}
+            onBlur={(e) => (e.target.value.length > 2 && e.target.value.length < 250
+              ? setState({ ...state, confirmationMessage: true })
+              : null)}
+            name="message"
+            wrap="off"
+            placeholder="Votre message"
+            required
+          />
+        </div>
+        <div className="contact-form_button">
+          <button type="submit">
+            <AnimationHover>
+              <i className="icon-paper-plane" />
+              Envoyer
+            </AnimationHover>
+          </button>
+        </div>
+      </form>
+    </>
   );
 }
