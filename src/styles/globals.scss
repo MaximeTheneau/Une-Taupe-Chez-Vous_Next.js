@@ -164,5 +164,18 @@ select{
 @media screen and (min-width: 640px) {
   p{
     width: 70%;
+    margin: 0 auto;
   }
+  h2, h1{
+    margin: 0 auto;
+    width: 70%;
+  }
+  h2.faq-question, p.faq-answer{
+    width: 100%;
+  }
+  h2.title__faqs{
+    width: 100%;
+    margin: 1rem 0 ;
+  }
+  
 }

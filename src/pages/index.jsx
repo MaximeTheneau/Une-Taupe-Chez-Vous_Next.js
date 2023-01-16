@@ -85,7 +85,7 @@ export default function Home({
 
         {/* --Contact--*/}
         <section>
-          <h2>Foire aux questions :</h2>
+          <h2 className="title__faqs">Foire aux questions :</h2>
           <Faq faq={faq} />
         </section>
         <section>
