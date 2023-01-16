@@ -1,14 +1,26 @@
 @use 'reset.scss';
 @use 'fonts.scss';
 @use './icon.scss';
+@use './button.scss';
 @import './variables.scss';
 
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'fontGeneral', sans-serif;
+  white-space: pre-line;
+  overflow-x: hidden !important; 
+}
+h1,h2,h3,h4,h5,h6{
+  font-family: 'fontTitle', sans-serif;
+}
+h1{
+  font-size: $font-size-large;
+}
+h2{
+  font-size: $font-size-medium;
+  margin: 0 0 1rem 0;
 }
 
 a {
@@ -18,6 +30,10 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+p{
+  width: 90%;
 }
 
 img{
@@ -32,17 +48,134 @@ header{
 }
 main{
   min-height: 80vh;
+  width: 90%;
+  margin: 0 auto;
 }
 footer{
   min-height: 10vh;
-}
-footer{
   background: $color-secondary;
 }
+section{
+  margin: 5% 0;
+}
 
+
+//* Form
+input,
+textarea{
+  border: none;
+  border-bottom: 0.5px solid $font-color;
+  font-size: $font-size;
+  font-family: $font-primary;
+  width: 100%;
+  padding: 0.5rem;
+  background: none;
+  &:focus{
+    outline: none;
+    background: none;
+  }
+  &:active{
+    background: none;
+  }
+  &::placeholder{
+    color: $font-color;
+    opacity: 0.5;
+  }
+}
+input:-webkit-autofill{
+  background: #fff;
+}
+select{
+  width: 100%;
+  border: 0.5px solid $font-color;
+  font-size: $font-size;
+  font-family: $font-primary;
+  border-radius: $border-radius;
+  color: $font-color;
+  background: none;
+  padding: 0.5rem;
+  &:focus{
+    outline: none;
+  }
+}
 .none{
   display: none;
 }
 .block{
   display: block;
+  animation: opacity 0.5s ease 0s;
+}
+@keyframes opacity{
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+.w-50{
+  width: 50%;
+}
+.h-30{
+  height: 25vh;
+}
+.m-center{
+  margin: 0 auto;
+}
+.relative{
+  position: relative;
+}
+
+.transition{
+  position: fixed;
+  content: '';
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: $color-white-opacity;
+  z-index: 10;
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  animation: transition 0.5s ease 0s;
+}
+.absoluteTitle{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: $color-white-opacity;
+  width: 90%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes transition{
+  0%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+  }
+}
+
+@media screen and (min-width: 640px) {
+  p{
+    width: 70%;
+    margin: 0 auto;
+  }
+  h2, h1{
+    margin: 0 auto;
+    width: 70%;
+  }
+  h2.faq-question, p.faq-answer{
+    width: 100%;
+  }
+  h2.title__faqs{
+    width: 100%;
+    margin: 1rem 0 ;
+  }
+  
 }

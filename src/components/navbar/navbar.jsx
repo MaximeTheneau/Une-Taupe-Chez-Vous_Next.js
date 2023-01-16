@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import styles from './Navbar.module.scss';
 import SvgLogo from '../../asset/svg/logo-une-taupe-chez-vous.svg';
+import AnimationHover from '../../hooks/useHoverAnimation/CloneTextWrapper';
 
 export default function Navbar() {
   const [toggleNav, setToggleNav] = useState(false);
@@ -16,12 +17,16 @@ export default function Navbar() {
         <ul className={styles.navbar__720__list}>
           <Link href="/page/qui-sommes-nous">
             <li className={styles['navbar__720__list-item']}>
-              <span>Qui-sommes-nous</span>
+              <AnimationHover>
+                Qui-sommes-nous
+              </AnimationHover>
             </li>
           </Link>
           <Link href="/page/contact">
             <li className={styles['navbar__720__list-item']}>
-              <span className={styles['navbar__720__list-item-link']}>Contact</span>
+              <AnimationHover>
+                Contact
+              </AnimationHover>
             </li>
           </Link>
         </ul>
@@ -40,7 +45,6 @@ export default function Navbar() {
           onClick={() => {
             setToggleNav(!toggleNav);
           }}
-
         >
           {toggleNav ? (
             <i className="icon-x" />
@@ -55,7 +59,7 @@ export default function Navbar() {
             onClick={(() => setTimeout(() => (
               setToggleNav(false)
             ), 500)
-          )}
+            )}
           >
             <Link href="/">
               <li className={styles['navbar__responsive__list-item']}>

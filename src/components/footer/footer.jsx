@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styles from './Footer.module.scss';
+import AnimationHover from '../../hooks/useHoverAnimation/CloneTextWrapper';
 
 export default function Footer() {
   return (
@@ -23,24 +24,29 @@ export default function Footer() {
         </ul>
         <ul>
           <li>
-            <h2>Contacter</h2>
+            <h2>Contact</h2>
           </li>
           <li>
             <Link href="/page/contact">
-              <i className="icon-linkedin" />
-              Contacter nous
+              <AnimationHover>
+                Contacter nous
+              </AnimationHover>
             </Link>
           </li>
           <li>
-            <Link href="#zeze">
-              <i className="icon-linkedin" />
-              Linkedin
+            <Link href="https://www.linkedin.com/company/une-taupe-chez-vous" target="_blank">
+              <AnimationHover>
+                <i className="icon-linkedin" />
+                Linkedin
+              </AnimationHover>
             </Link>
           </li>
           <li>
-            <Link href="r#rrr">
-              <i className="icon-facebook" />
-              Facebook
+            <Link href="https://www.facebook.com/unetaupechezvous/" target="_blank">
+              <AnimationHover>
+                <i className="icon-facebook" />
+                Facebook
+              </AnimationHover>
             </Link>
           </li>
         </ul>
@@ -49,19 +55,34 @@ export default function Footer() {
             <h2>Services</h2>
           </li>
           <li>
-            <Link href="/services/Taupe">Taupe</Link>
+            <Link href="/services/Taupe">
+              <AnimationHover>
+                Taupe
+              </AnimationHover>
+            </Link>
           </li>
           <li>
-            <Link href="/services/Fouine">Fouine</Link>
+            <Link href="/services/Fouine">
+              <AnimationHover>
+                Fouine
+              </AnimationHover>
+            </Link>
           </li>
           <li>
-            <Link href="/services/Ragondin">Ragondin</Link>
+            <Link href="/services/Ragondin">
+              <AnimationHover>
+                Ragondin
+              </AnimationHover>
+            </Link>
           </li>
         </ul>
       </div>
       <div className={styles.footer__author}>
-        Site réaliser par
-        <Link href="https://theneaumaxime.fr" target="_blank"> Maxime Theneau</Link>
+        <Link href="https://theneaumaxime.fr" target="_blank">
+          <AnimationHover>
+            Site réaliser par Maxime Theneau
+          </AnimationHover>
+        </Link>
       </div>
     </div>
   );
