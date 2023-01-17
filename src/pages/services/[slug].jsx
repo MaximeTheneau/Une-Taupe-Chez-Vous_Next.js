@@ -1,3 +1,4 @@
+import Router from 'next/router';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 import Image from 'next/image';
@@ -11,15 +12,15 @@ export async function getStaticPaths() {
     };
   }
 
-  const res = await fetch('http://localhost:8000/api/posts');
+  const res = await fetch('https://back.unetaupechezvous.fr/public/api/posts');
   const posts = await res.json();
 
   const paths = posts.map((post) => ({ params: { slug: post.slug } }));
-  return { paths, fallback: false };
+  return { paths, fallback: 'blocking' };
 }
 
 export async function getStaticProps({ params }) {
-  const res = await fetch(`http://localhost:8000/api/posts/${params.slug}`);
+  const res = await fetch(`https://back.unetaupechezvous.fr/public/api/posts/${params.slug}`);
   const post = await res.json();
 
   return { props: { post } };
@@ -29,7 +30,6 @@ export default function Slug({ post }) {
   const descriptionMeta = post.contents === null
     ? `Articles de blog ${post.title}`
     : post.contents.substring(0, 155).replace(/[\r\n]+/gm, '');
-
   const handleChangeShareSocial = (e) => {
     const social = e.target.value;
     if (social === 'facebook') {
@@ -44,6 +44,7 @@ export default function Slug({ post }) {
       window.open(`mailto:?subject=${post.title}&body=https://krea-tout-eure.fr/articles/${post.slug}`, '_blank');
     }
   };
+
   return (
     <>
       <Head>

@@ -3,7 +3,7 @@ import Image from 'next/image';
 import styles from './Pages.module.scss';
 
 export async function getStaticProps() {
-  const responsePage = await fetch('http://localhost:8000/api/pages/Qui-sommes-nous');
+  const responsePage = await fetch('https://back.unetaupechezvous.fr/public/api/pages/Qui-sommes-nous');
   const page = await responsePage.json();
 
   return {
