@@ -9,7 +9,7 @@ export default function Footer() {
         <ul>
           <li>
             <h2>
-              L'entreprise
+              L&apos;entreprise
             </h2>
           </li>
           <li>
@@ -19,7 +19,7 @@ export default function Footer() {
             <Link href="/page/contact">Demande de devis</Link>
           </li>
           <li>
-            <Link href="/page/mention-legal">Mentions légales</Link>
+            <Link href="/page/mentions-legales">Mentions légales</Link>
           </li>
         </ul>
         <ul>

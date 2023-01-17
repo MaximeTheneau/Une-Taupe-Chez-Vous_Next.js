@@ -1,7 +1,7 @@
+/* eslint-disable quote-props */
 import Head from 'next/head';
-import Image from 'next/image';
 import Link from 'next/link';
-import { useRef, useState } from 'react';
+import Script from 'next/script';
 import Cards from '../components/cards/cards';
 import Faq from '../components/faq/faq';
 import styles from './page/Pages.module.scss';
@@ -35,18 +35,39 @@ export async function getStaticProps() {
 export default function Home({
   accueil, services, articles, faq,
 }) {
+  const descriptionMeta = accueil.contents.substring(0, 155).replace(/[\r\n]+/gm, '');
+  const jsonData = { 
+    context: 'https://schema.org',
+    type: 'Organization',
+    name: 'Une taupe chez vous',
+    url: 'https://unetaupechezvous.fr',
+    logo: `${accueil.imgHeaderJpg}`,
+    sameA: [
+      'https://www.facebook.com/Une-Taupe-Chez-Vous',
+      'https://www.linkedin.com/company/unetaupechezvous/',
+    ],
+  };
   return (
     <>
       <Head>
         <title>{accueil.title}</title>
         <meta name="description" content={accueil.subtitle} />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Tererer" />
-        <meta property="og:description" content="rerre" />
+        <meta property="og:title" content="{accueil.title}" />
+        <meta property="og:description" content={descriptionMeta} />
         <meta property="og:site_name" content="https://unetaupechezvous.fr" />
         <meta property="og:image" content={accueil.imgHeaderJpg} />
-        <link rel="icon" href="/favicon.ico" />
+        <link
+          rel="canonical"
+          href="https://unetaupechezvous.fr"
+          key="canonical"
+        />
       </Head>
+      <Script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonData) }}
+        id="jsonld-schema"
+      />
       <>
         <section>
 

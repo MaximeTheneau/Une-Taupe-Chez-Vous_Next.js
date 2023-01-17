@@ -17,12 +17,18 @@ export default function QuiSommesNous({ page }) {
   return (
     <>
       <Head>
-        <title>Qui somme nous</title>
-        <meta name="description" content="Une Taupe Chez Vous, 71 rue Marie Curie, 27780 Garrennes Sur Eure, 0232264958, N° SIRET 39338032400029" />
-        <meta property="og:title" content="Une Taupe Chez Vous, 71 rue Marie Curie, 27780 Garrennes Sur Eure," />
-        <meta property="og:description" content="Une Taupe Chez Vous, 71 rue Marie Curie, 27780 Garrennes Sur Eure, , 0232264958, N° SIRET 39338032400029" />
+        <title>{page.title}</title>
+        <meta name="description" content={page.subtitle} />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="{page.title}" />
+        <meta property="og:description" content={page.subtitle} />
         <meta property="og:site_name" content="https://unetaupechezvous.fr" />
-        <link rel="icon" href="/favicon.ico" />
+        <meta property="og:image" content={page.imgHeaderJpg} />
+        <link
+          rel="canonical"
+          href="https://unetaupechezvous.fr/page/qui-sommes-nous"
+          key="canonical"
+        />
       </Head>
 
       <>
