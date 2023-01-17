@@ -11,7 +11,7 @@ export async function getStaticPaths() {
     };
   }
 
-  const res = await fetch('http://localhost:8000/api/articles');
+  const res = await fetch('https://back.unetaupechezvous.fr/public/api/articles');
   const posts = await res.json();
 
   const paths = posts.map((post) => ({ params: { slug: post.slug } }));
@@ -19,7 +19,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const res = await fetch(`http://localhost:8000/api/articles/${params.slug}`);
+  const res = await fetch(`https://back.unetaupechezvous.fr/public/api/articles/${params.slug}`);
   const post = await res.json();
 
   return { props: { post } };

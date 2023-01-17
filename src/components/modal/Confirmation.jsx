@@ -4,8 +4,8 @@ import styleModal from './Modal.module.scss';
 
 export default function confirmation({ onClickConfirmation }) {
   setTimeout(() => {
-    onClickConfirmation();
-  }, 100000);
+    onClickConfirmation(false);
+  }, 10000);
   return (
     <div className={styleModal.modal}>
 

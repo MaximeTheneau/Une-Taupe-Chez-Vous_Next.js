@@ -3,7 +3,7 @@ import ContactForm from '../../components/contact/contactForm';
 import styles from './Pages.module.scss';
 
 export async function getStaticProps() {
-  const responseContact = await fetch('http://localhost:8000/api/pages/Contact');
+  const responseContact = await fetch('https://back.unetaupechezvous.fr/public/api/pages/Contact');
   const page = await responseContact.json();
 
   return {

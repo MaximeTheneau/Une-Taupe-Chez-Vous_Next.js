@@ -6,7 +6,7 @@ export function formMiddleware(event, handleResponse) {
     headers: { 'Content-Type': 'application/json'},
     body: JSON.stringify(event),
   };
-  fetch('http://localhost:8000/api/contact', requestOptions)
+  fetch('https://back.unetaupechezvous.fr/public/api/contact', requestOptions)
     .finally(() => handleResponse(true))
     .catch((err) => console.log(err));
 

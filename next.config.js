@@ -5,10 +5,10 @@ const nextConfig = {
   images: {
     // unoptimized: true,
     remotePatterns: [{
-      protocol: 'http',
-      hostname: 'localhost',
+      protocol: 'https',
+      hostname: 'back.unetaupechezvous.fr',
       port: '',
-      pathname: '**',
+      pathname: '/public/uploads/images/*',
     }],
   },
   webpack(config) {

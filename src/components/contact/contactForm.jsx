@@ -15,7 +15,7 @@ export default function ContactForm() {
       subject: 'Demande de devis',
     },
     textArea: 1,
-    toggleModal: true,
+    toggleModal: false,
     confirmationName: null,
     confirmationEmail: null,
     confirmationMessage: null,

@@ -10,16 +10,16 @@ import CloneTextWrapper from '../hooks/useHoverAnimation/CloneTextWrapper';
 import SlideTransition from '../hooks/useSlideTransition/SlideTransition';
 
 export async function getStaticProps() {
-  const responseAccueil = await fetch('http://localhost:8000/api/pages/Accueil');
+  const responseAccueil = await fetch('https://back.unetaupechezvous.fr/public/api/pages/Accueil');
   const accueil = await responseAccueil.json();
 
-  const responseServices = await fetch('http://localhost:8000/api/posts');
+  const responseServices = await fetch('https://back.unetaupechezvous.fr/public/api/posts');
   const services = await responseServices.json();
 
-  const responseArticles = await fetch('http://localhost:8000/api/articles');
+  const responseArticles = await fetch('https://back.unetaupechezvous.fr/public/api/articles');
   const articles = await responseArticles.json();
 
-  const responseFaq = await fetch('http://localhost:8000/api/faq');
+  const responseFaq = await fetch('https://back.unetaupechezvous.fr/public/api/faq');
   const faq = await responseFaq.json();
 
   return {

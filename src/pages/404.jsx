@@ -11,7 +11,7 @@ export default function Custom404() {
           href="/"
         >
           <CloneTextWrapper>
-            Page d'accueil
+            Page d&apos;accueil
           </CloneTextWrapper>
         </Link>
       </button>

@@ -3,7 +3,7 @@ import Image from 'next/image';
 import styles from './Pages.module.scss';
 
 export async function getStaticProps() {
-  const responsePage = await fetch('http://localhost:8000/api/pages/Mentions-Legales');
+  const responsePage = await fetch('https://back.unetaupechezvous.fr/public/api/pages/Mentions-Legales');
   const page = await responsePage.json();
 
   return {
