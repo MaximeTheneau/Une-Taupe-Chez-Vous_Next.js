@@ -13,13 +13,25 @@ export default function Footer() {
             </h2>
           </li>
           <li>
-            <Link href="/page/qui-sommes-nous">Qui-sommes-nous</Link>
+            <Link href="/page/qui-sommes-nous">
+              <AnimationHover>
+                Qui-sommes-nous
+              </AnimationHover>
+            </Link>
           </li>
           <li>
-            <Link href="/page/contact">Demande de devis</Link>
+            <Link href="/page/contact">
+              <AnimationHover>
+                Demande de devis
+              </AnimationHover>
+            </Link>
           </li>
           <li>
-            <Link href="/page/mentions-legales">Mentions légales</Link>
+            <Link href="/page/mentions-legales">
+              <AnimationHover>
+                Mentions légales
+              </AnimationHover>
+            </Link>
           </li>
         </ul>
         <ul>

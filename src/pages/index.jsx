@@ -59,7 +59,7 @@ export default function Home({
         <meta property="og:image" content={accueil.imgHeaderJpg} />
         <link
           rel="canonical"
-          href="https://unetaupechezvous.fr"
+          href="https://unetaupechezvous.fr/"
           key="canonical"
         />
       </Head>
