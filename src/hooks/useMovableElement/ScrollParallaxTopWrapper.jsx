@@ -17,6 +17,7 @@ export default function ScrollParallaxTop({
         width={width}
         height={height}
         style={parralax.style}
+        sizes="100vw"
       />
       {children}
     </div>

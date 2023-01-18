@@ -49,6 +49,7 @@ export default function ContactForm() {
     }
     return '';
   }
+
   const handleResponse = (response) => {
     setState({
       ...state,

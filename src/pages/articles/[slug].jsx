@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import Image from 'next/image';
 import Head from 'next/head';
-import styles from '../page/Pages.module.scss';
+import Script from 'next/script';
+import styles from '../../styles/Pages.module.scss';;
 
 export async function getStaticPaths() {
   if (process.env.SKIP_BUILD_STATIC_GENERATION) {
@@ -22,7 +23,7 @@ export async function getStaticProps({ params }) {
   const res = await fetch(`https://back.unetaupechezvous.fr/public/api/articles/${params.slug}`);
   const post = await res.json();
 
-  return { props: { post } };
+  return { props: { post }, revalidate: 1 };
 }
 
 export default function Slug({ post }) {
@@ -44,6 +45,18 @@ export default function Slug({ post }) {
       window.open(`mailto:?subject=${post.title}&body=https://krea-tout-eure.fr/articles/${post.slug}`, '_blank');
     }
   };
+  const jsonData = {
+    context: 'https://schema.org',
+    type: 'BlogPosting',
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://unetaupechezvous/articles/${post.slug}`,
+    },
+    headline: post.title,
+    image: post.imgPost.path,
+    datePublished: post.createdAt,
+    dateModified: post.updatedAt,
+  };
   return (
     <>
       <Head>
@@ -53,38 +66,22 @@ export default function Slug({ post }) {
         <meta property="og:type" content="website" />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={descriptionMeta} />
-        <meta property="og:site_name" content="https://krea-tout-eure.fr" />
+        <meta property="og:site_name" content={`https://unetaupechezvous.fr/articles/${post.slug}`} />
         <meta property="og:image" content={post.imgPost.path} />
-        <script type="application/ld+json">
-          {`{
-            "@context":"https://schema.org/",
-            "@type":"NewsArticle",
-            "name":"${post.title}",
-            "about": "${descriptionMeta}",
-            "author": { "@type": "Person", "name": "Kréa Tout Eure :'Assos" },
-            "datePublished": "${post.createdAt}",
-            "dateModified": "${post.updatedAt}",
-            "description": "${descriptionMeta}",
-            "headline": "${post.title}",
-            "image": [
-              "${post.imgPost.path}",
-              "${post.imgPost2 === null ? '' : post.imgPost2.path}",
-              "${post.imgPost3 === null ? '' : post.imgPost3.path}",
-              "${post.imgPost4 === null ? '' : post.imgPost4.path}"
-            ],
-            "inLanguage": "French",
-            "mainEntityOfPage": "https://krea-tout-eure.fr",
-            "publisher": { "@id": "Kréa Tout Eure" },
-            "sourceOrganization": "Kréa Tout Eure :'Assosiation",
-            "url": "https://krea-tout-eure.fr/articles/${post.slug}"
-          }
-    `}
-
-        </script>
+        <link
+          rel="canonical"
+          href={`https://unetaupechezvous.fr/articles/${post.slug}`}
+          key="canonical"
+        />
       </Head>
+      <Script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonData) }}
+        id="jsonld-schema"
+      />
       <div className={styles.page}>
         <div className={styles.page__image}>
-          <h1>Qui somme nous</h1>
+          <h1>{post.title}</h1>
           <Image
             src={post.imgPost.path}
             alt={post.title}

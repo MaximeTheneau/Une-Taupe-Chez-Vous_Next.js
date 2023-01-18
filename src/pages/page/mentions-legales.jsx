@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import styles from './Pages.module.scss';
+import styles from '../../styles/Pages.module.scss';;
 
 export async function getStaticProps() {
   const responsePage = await fetch('https://back.unetaupechezvous.fr/public/api/pages/Mentions-Legales');
@@ -22,13 +22,17 @@ export default function MentionsLegal({ page }) {
         <meta name="description" content="Une Taupe Chez Vous, 71 rue Marie Curie, 27780 Garrennes Sur Eure, 0232264958, N° SIRET 39338032400029" />
         <meta property="og:title" content="Une Taupe Chez Vous, 71 rue Marie Curie, 27780 Garrennes Sur Eure," />
         <meta property="og:description" content="Une Taupe Chez Vous, 71 rue Marie Curie, 27780 Garrennes Sur Eure, , 0232264958, N° SIRET 39338032400029" />
-        <meta property="og:site_name" content="https://unetaupechezvous.fr" />
-        <link rel="icon" href="/favicon.ico" />
+        <meta property="og:site_name" content="https://unetaupechezvous.fr/page/mentions-legales" />
+        <link
+          rel="canonical"
+          href="https://unetaupechezvous.fr/page/mentions-legales"
+          key="canonical"
+        />
       </Head>
 
       <>
         <section className={styles.page__image}>
-          <h1>Qui somme nous</h1>
+          <h1>Mention Legales</h1>
           <Image
             src={page.imgHeader.path}
             alt={page.title}

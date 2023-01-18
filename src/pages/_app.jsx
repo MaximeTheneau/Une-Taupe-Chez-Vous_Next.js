@@ -12,7 +12,6 @@ function MyApp({ Component, pageProps }) {
       setAnimateTransition(false);
     }, 600);
   }, [router.pathname]);
-  console.log(animateTransition);
   return (
     <Layout {...pageProps}>
       {animateTransition && <div className="transition" />}

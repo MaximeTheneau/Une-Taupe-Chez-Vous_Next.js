@@ -1,15 +1,11 @@
+const path = require('path');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
   swcMinify: true,
   images: {
-    // unoptimized: true,
-    remotePatterns: [{
-      protocol: 'https',
-      hostname: 'back.unetaupechezvous.fr',
-      port: '',
-      pathname: '/public/uploads/images/*',
-    }],
+    unoptimized: true,
+    domains: ['back.unetaupechezvous.fr'],
   },
   webpack(config) {
     config.module.rules.push({
