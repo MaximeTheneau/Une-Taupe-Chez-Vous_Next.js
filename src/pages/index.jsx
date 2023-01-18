@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Script from 'next/script';
 import Cards from '../components/cards/cards';
 import Faq from '../components/faq/faq';
-import styles from './page/Pages.module.scss';
+import styles from '../styles/Pages.module.scss';;
 import ScrollParallaxTop from '../hooks/useMovableElement/ScrollParallaxTopWrapper';
 import CloneTextWrapper from '../hooks/useHoverAnimation/CloneTextWrapper';
 import SlideTransition from '../hooks/useSlideTransition/SlideTransition';
@@ -53,7 +53,7 @@ export default function Home({
         <title>{accueil.title}</title>
         <meta name="description" content={accueil.subtitle} />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="{accueil.title}" />
+        <meta property="og:title" content={accueil.title} />
         <meta property="og:description" content={descriptionMeta} />
         <meta property="og:site_name" content="https://unetaupechezvous.fr" />
         <meta property="og:image" content={accueil.imgHeaderJpg} />

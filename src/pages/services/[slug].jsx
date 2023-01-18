@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import Head from 'next/head';
 import Image from 'next/image';
 import Script from 'next/script';
-import styles from '../page/Pages.module.scss';
+import styles from '../../styles/Pages.module.scss';
 
 export async function getStaticPaths() {
   if (process.env.SKIP_BUILD_STATIC_GENERATION) {
@@ -16,14 +16,14 @@ export async function getStaticPaths() {
   const posts = await res.json();
 
   const paths = posts.map((post) => ({ params: { slug: post.slug } }));
-  return { paths, fallback: 'blocking' };
+  return { paths, fallback: false };
 }
 
 export async function getStaticProps({ params }) {
   const res = await fetch(`https://back.unetaupechezvous.fr/public/api/posts/${params.slug}`);
   const post = await res.json();
 
-  return { props: { post }, notFound: true };
+  return { props: { post }, revalidate: 1 };
 }
 
 export default function Slug({ post }) {

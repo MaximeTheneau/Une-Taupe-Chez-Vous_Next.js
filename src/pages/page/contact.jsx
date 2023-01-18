@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Head from 'next/head';
 import ContactForm from '../../components/contact/contactForm';
-import styles from './Pages.module.scss';
+import styles from '../../styles/Pages.module.scss';
 
 export async function getStaticProps() {
   const responseContact = await fetch('https://back.unetaupechezvous.fr/public/api/pages/Contact');

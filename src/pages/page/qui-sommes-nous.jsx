@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import styles from './Pages.module.scss';
+import styles from '../../styles/Pages.module.scss';;
 
 export async function getStaticProps() {
   const responsePage = await fetch('https://back.unetaupechezvous.fr/public/api/pages/Qui-sommes-nous');

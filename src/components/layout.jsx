@@ -6,9 +6,6 @@ import Footer from './footer/footer';
 export default function Layout({ children }) {
   return (
     <>
-      <Head>
-        <html lang="fr" />
-      </Head>
       <header>
         <Navbar />
       </header>
