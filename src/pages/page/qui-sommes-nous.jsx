@@ -20,13 +20,13 @@ export default function QuiSommesNous({ page }) {
         <title>{page.title}</title>
         <meta name="description" content={page.subtitle} />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="{page.title}" />
+        <meta property="og:title" content={page.title} />
         <meta property="og:description" content={page.subtitle} />
-        <meta property="og:site_name" content="https://unetaupechezvous.fr" />
-        <meta property="og:image" content={page.imgHeaderJpg} />
+        <meta property="og:site_name" content={process.env.NEXT_PUBLIC_URL} />
+        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/qui-sommes-nous.jpg`} />
         <link
           rel="canonical"
-          href="https://unetaupechezvous.fr/page/qui-sommes-nous"
+          href={`${process.env.NEXT_PUBLIC_URL}/page/qui-sommes-nous`}
           key="canonical"
         />
       </Head>
@@ -35,10 +35,11 @@ export default function QuiSommesNous({ page }) {
         <section className={styles.page__image}>
           <h1>Qui somme nous</h1>
           <Image
-            src={page.imgHeader.path}
+            src={`${page.slug}.webp`}
             alt={page.title}
-            width={page.imgHeader.width}
-            height={page.imgHeader.height}
+            width='1080'
+            height='720'
+            sizes='(max-width: 1080px) 100vw, 1080px'
           />
         </section>
         <section>

@@ -19,13 +19,15 @@ export default function MentionsLegal({ page }) {
     <>
       <Head>
         <title>{page.title}</title>
-        <meta name="description" content="Une Taupe Chez Vous, 71 rue Marie Curie, 27780 Garrennes Sur Eure, 0232264958, N° SIRET 39338032400029" />
-        <meta property="og:title" content="Une Taupe Chez Vous, 71 rue Marie Curie, 27780 Garrennes Sur Eure," />
-        <meta property="og:description" content="Une Taupe Chez Vous, 71 rue Marie Curie, 27780 Garrennes Sur Eure, , 0232264958, N° SIRET 39338032400029" />
-        <meta property="og:site_name" content="https://unetaupechezvous.fr/page/mentions-legales" />
+        <meta name="description" content={page.subtitle} />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={page.title} />
+        <meta property="og:description" content={page.subtitle} />
+        <meta property="og:site_name" content={process.env.NEXT_PUBLIC_URL} />
+        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/mentions-legales.jpg`} />
         <link
           rel="canonical"
-          href="https://unetaupechezvous.fr/page/mentions-legales"
+          href={`${process.env.NEXT_PUBLIC_URL}/page/mentions-legales`}
           key="canonical"
         />
       </Head>
@@ -34,10 +36,11 @@ export default function MentionsLegal({ page }) {
         <section className={styles.page__image}>
           <h1>Mention Legales</h1>
           <Image
-            src={page.imgHeader.path}
+            src={`${page.slug}.webp`}
             alt={page.title}
-            width={page.imgHeader.width}
-            height={page.imgHeader.height}
+            width='1080'
+            height='720'
+            sizes='(max-width: 1080px) 100vw, 1080px'
           />
         </section>
         <section>

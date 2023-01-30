@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import useMovableElements from './useMovableElements';
 
 export default function ScrollParallaxTop({
-  children, src, alt, width, height,
+  children, src, alt, width, height, priority,
 }) {
   const elementRef = useRef(null);
 
@@ -17,7 +17,8 @@ export default function ScrollParallaxTop({
         width={width}
         height={height}
         style={parralax.style}
-        sizes="100vw"
+        sizes="(max-width: 768px) 100vw, 768px"
+        priority={priority}
       />
       {children}
     </div>

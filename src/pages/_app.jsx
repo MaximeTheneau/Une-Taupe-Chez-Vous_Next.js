@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }) {
     }, 600);
   }, [router.pathname]);
   return (
-    <Layout {...pageProps}>
+    <Layout {...pageProps} >
       {animateTransition && <div className="transition" />}
       <Component {...pageProps} />
     </Layout>

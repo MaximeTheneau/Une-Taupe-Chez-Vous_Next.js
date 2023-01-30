@@ -10,10 +10,11 @@ export default function card({ card, name }) {
     >
       <Link href={`${name}/${card.slug}`}>
         <Image
-          src={card.imgPost.path}
+          src={`${card.slug}.webp`}
           alt={`Image de ${card.title}`}
-          width={card.imgPost.width}
-          height={card.imgPost.height}
+          width="1080"
+          height="720"
+          sizes='(max-width: 768px) 100vw'
         />
         <div className={styles.card__content}>
           <h3 className={styles.card__title}>{card.title}</h3>

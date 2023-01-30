@@ -3,14 +3,17 @@
   "version": "2.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "export": "next export"
+    "dev": "next",
+    "build": "next build && next export",
+    "preexport": "npm run build",
+    "export": "next export",
+    "prestart": "npm run export",
+    "start": "serve out",
+    "lint": "next lint"
   },
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
     "next": "13.0.0",
     "prop-types": "^15.8.1",
     "react": "18.2.0",
@@ -22,7 +25,7 @@
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-next": "13.0.0",
     "eslint-config-prettier": "^8.5.0",
-    "sass": "^1.57.1",
-    "next-sitemap": "*"
+    "next-sitemap": "*",
+    "sass": "^1.57.1"
   }
 }

@@ -24,11 +24,11 @@ export default function Contact({ page }) {
         <meta property="og:type" content="website" />
         <meta property="og:title" content="{page.title}" />
         <meta property="og:description" content={page.subtitle} />
-        <meta property="og:site_name" content="https://unetaupechezvous.fr/page/contact" />
-        <meta property="og:image" content={page.imgHeaderJpg} />
+        <meta property="og:site_name" content="${process.env.NEXT_PUBLIC_URL}/page/contact" />
+        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/contact.jpg`} />
         <link
           rel="canonical"
-          href="https://unetaupechezvous.fr/page/contact"
+          href={`${process.env.NEXT_PUBLIC_URL}.fr/page/contact.html`}
           key="canonical"
         />
       </Head>
@@ -36,11 +36,12 @@ export default function Contact({ page }) {
       <section className={styles.page__image}>
         <h1>{page.title}</h1>
         <Image
-          src={page.imgHeader.path}
-          alt={page.title}
-          width={page.imgHeader.width}
-          height={page.imgHeader.height}
-        />
+            src={`${page.slug}.webp`}
+            alt={page.title}
+            width='1080'
+            height='720'
+            sizes='(max-width: 1080px) 100vw, 1080px'
+          />
       </section>
       <section>
         <h2>

@@ -2,31 +2,33 @@ import PropTypes from 'prop-types';
 import Image from 'next/image';
 import Head from 'next/head';
 import Script from 'next/script';
-import styles from '../../styles/Pages.module.scss';;
+import styles from '../../styles/Pages.module.scss';
+import Page404 from '../404';
 
 export async function getStaticPaths() {
-  if (process.env.SKIP_BUILD_STATIC_GENERATION) {
-    return {
-      paths: [],
-      fallback: 'blocking',
-    };
-  }
 
   const res = await fetch('https://back.unetaupechezvous.fr/public/api/articles');
   const posts = await res.json();
 
   const paths = posts.map((post) => ({ params: { slug: post.slug } }));
-  return { paths, fallback: false };
+  return { paths , fallback: false};
 }
 
 export async function getStaticProps({ params }) {
   const res = await fetch(`https://back.unetaupechezvous.fr/public/api/articles/${params.slug}`);
   const post = await res.json();
 
-  return { props: { post }, revalidate: 1 };
+  if (!post) {
+    return {
+      notFound: true,
+    }
+  }
+
+  return { props: { post }, };
 }
 
 export default function Slug({ post }) {
+
   const descriptionMeta = post.contents === null
     ? `Articles de blog ${post.title}`
     : post.contents.substring(0, 155).replace(/[\r\n]+/gm, '');
@@ -34,15 +36,15 @@ export default function Slug({ post }) {
   const handleChangeShareSocial = (e) => {
     const social = e.target.value;
     if (social === 'facebook') {
-      window.open(`https://www.facebook.com/sharer/sharer.php?u=https://krea-tout-eure.fr/articles/${post.slug}`, '_blank');
+      window.open(`https://www.facebook.com/sharer/sharer.php?u=${process.env.NEXT_PUBLIC_URL}/articles/${post.slug}`, '_blank');
     } else if (social === 'twitter') {
-      window.open(`https://twitter.com/intent/tweet?url=https://krea-tout-eure.fr/articles/${post.slug}`, '_blank');
+      window.open(`https://twitter.com/intent/tweet?url=${process.env.NEXT_PUBLIC_URL}/articles/${post.slug}`, '_blank');
     } else if (social === 'linkedin') {
-      window.open(`https://www.linkedin.com/sharing/share-offsite/?url=https://krea-tout-eure.fr/articles/${post.slug}`, '_blank');
+      window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${process.env.NEXT_PUBLIC_URL}/articles/${post.slug}`, '_blank');
     } else if (social === 'pinterest') {
-      window.open(`https://pinterest.com/pin/create/button/?url=https://krea-tout-eure.fr/articles/${post.slug}`, '_blank');
+      window.open(`https://pinterest.com/pin/create/button/?url=${process.env.NEXT_PUBLIC_URL}/articles/${post.slug}`, '_blank');
     } else if (social === 'email') {
-      window.open(`mailto:?subject=${post.title}&body=https://krea-tout-eure.fr/articles/${post.slug}`, '_blank');
+      window.open(`mailto:?subject=${post.title}&body=${process.env.NEXT_PUBLIC_URL}/articles/${post.slug}`, '_blank');
     }
   };
   const jsonData = {
@@ -50,10 +52,10 @@ export default function Slug({ post }) {
     type: 'BlogPosting',
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://unetaupechezvous/articles/${post.slug}`,
+      '@id': `${process.env.NEXT_PUBLIC_URL}/articles/${post.slug}`,
     },
     headline: post.title,
-    image: post.imgPost.path,
+    image: `${process.env.NEXT_PUBLIC_URL}/images/${post.slug}.jpg`,
     datePublished: post.createdAt,
     dateModified: post.updatedAt,
   };
@@ -66,11 +68,12 @@ export default function Slug({ post }) {
         <meta property="og:type" content="website" />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={descriptionMeta} />
-        <meta property="og:site_name" content={`https://unetaupechezvous.fr/articles/${post.slug}`} />
-        <meta property="og:image" content={post.imgPost.path} />
+        <meta property="og:site_name" content={`${process.env.NEXT_PUBLIC_URL}/services/${post.slug}`}  />
+        <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/services/${post.slug}`}  />
+        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_URL}/images/${post.slug}.jpg`} />
         <link
           rel="canonical"
-          href={`https://unetaupechezvous.fr/articles/${post.slug}`}
+          href={`${process.env.NEXT_PUBLIC_URL}.fr/articles/${post.slug}.html`}
           key="canonical"
         />
       </Head>
@@ -83,10 +86,11 @@ export default function Slug({ post }) {
         <div className={styles.page__image}>
           <h1>{post.title}</h1>
           <Image
-            src={post.imgPost.path}
+            src={`${post.slug}.webp`}
             alt={post.title}
-            width={post.imgPost.width}
-            height={post.imgPost.height}
+            width='1080'
+            height='720'
+            sizes='(max-width: 1080px) 100vw, 1080px'
           />
         </div>
         <div>

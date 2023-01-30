@@ -3,14 +3,9 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Script from 'next/script';
 import styles from '../../styles/Pages.module.scss';
+import Page404 from '../404';
 
 export async function getStaticPaths() {
-  if (process.env.SKIP_BUILD_STATIC_GENERATION) {
-    return {
-      paths: [],
-      fallback: 'blocking',
-    };
-  }
 
   const res = await fetch('https://back.unetaupechezvous.fr/public/api/posts');
   const posts = await res.json();
@@ -23,23 +18,24 @@ export async function getStaticProps({ params }) {
   const res = await fetch(`https://back.unetaupechezvous.fr/public/api/posts/${params.slug}`);
   const post = await res.json();
 
-  return { props: { post }, revalidate: 1 };
+  return { props: { post },revalidate: 10 };
 }
 
 export default function Slug({ post }) {
+  
+  if(!post) return <Page404 />
+
   const descriptionMeta = post.contents.substring(0, 155).replace(/[\r\n]+/gm, '');
   const handleChangeShareSocial = (e) => {
     const social = e.target.value;
     if (social === 'facebook') {
-      window.open(`https://www.facebook.com/sharer/sharer.php?u=https://krea-tout-eure.fr/articles/${post.slug}`, '_blank');
+      window.open(`https://www.facebook.com/sharer/sharer.php?u=${process.env.NEXT_PUBLIC_URL}/articles/${post.slug}`, '_blank');
     } else if (social === 'twitter') {
-      window.open(`https://twitter.com/intent/tweet?url=https://krea-tout-eure.fr/articles/${post.slug}`, '_blank');
+      window.open(`https://twitter.com/intent/tweet?url=${process.env.NEXT_PUBLIC_URL}/articles/${post.slug}`, '_blank');
     } else if (social === 'linkedin') {
-      window.open(`https://www.linkedin.com/sharing/share-offsite/?url=https://krea-tout-eure.fr/articles/${post.slug}`, '_blank');
-    } else if (social === 'pinterest') {
-      window.open(`https://pinterest.com/pin/create/button/?url=https://krea-tout-eure.fr/articles/${post.slug}`, '_blank');
+      window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${process.env.NEXT_PUBLIC_URL}/articles/${post.slug}`, '_blank');
     } else if (social === 'email') {
-      window.open(`mailto:?subject=${post.title}&body=https://krea-tout-eure.fr/articles/${post.slug}`, '_blank');
+      window.open(`mailto:?subject=${post.title}&body=${process.env.NEXT_PUBLIC_URL}/articles/${post.slug}`, '_blank');
     }
   };
   const jsonData = {
@@ -47,21 +43,20 @@ export default function Slug({ post }) {
     type: 'service',
     name: post.title,
     description: descriptionMeta,
-    image: post.imgPost.path,
-    url: `https://unetaupechezvous.fr/${post.slug}`,
+    image: post.slug+'.jpg',
+    url: `${process.env.NEXT_PUBLIC_URL}/${post.slug}`,
     provider: {
       type: 'Organization',
       name: 'Une taupe chez vous',
-      id: 'https://unetaupechezvous.fr',
-      url: 'https://unetaupechezvous.fr',
+      id: process.env.NEXT_PUBLIC_URL,
+      url: process.env.NEXT_PUBLIC_URL,
     },
     serviceProvider: {
       type: 'Service',
       name: 'Une taupe chez vous',
-      id: `https://unetaupechezvous.fr/${post.slug}`,
+      id: `${process.env.NEXT_PUBLIC_URL}/${post.slug}`,
     },
   };
-
   return (
     <>
       <Head>
@@ -71,11 +66,11 @@ export default function Slug({ post }) {
         <meta property="og:type" content="website" />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={descriptionMeta} />
-        <meta property="og:site_name" content={`https://unetaupechezvous.fr/services/${post.slug}`} />
-        <meta property="og:image" content={post.imgPost.path} />
+        <meta property="og:site_name" content={`${process.env.NEXT_PUBLIC_URL}/services/${post.slug}`} />
+        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.slug}.jpg`} />
         <link
           rel="canonical"
-          href={`https://unetaupechezvous.fr/services/${post.slug}`}
+          href={`${process.env.NEXT_PUBLIC_URL}/services/${post.slug}`}
           key="canonical"
         />
       </Head>
@@ -88,10 +83,11 @@ export default function Slug({ post }) {
         <div className={styles.page__image}>
           <h1>{post.title}</h1>
           <Image
-            src={post.imgPost.path}
+            src={`${post.slug}.webp`}
             alt={post.title}
-            width={post.imgPost.width}
-            height={post.imgPost.height}
+            width='1080'
+            height='720'
+            sizes='(max-width: 1080px) 100vw, 1080px'
           />
         </div>
         <div>
@@ -112,7 +108,6 @@ export default function Slug({ post }) {
           <option value="facebook" data-icon="icon-facebook">Facebook</option>
           <option value="twitter">Twitter</option>
           <option value="linkedin">Linkedin</option>
-          <option value="pinterest">Pinterest</option>
           <option value="email">Email</option>
         </select>
       </div>

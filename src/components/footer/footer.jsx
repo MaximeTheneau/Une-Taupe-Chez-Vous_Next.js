@@ -2,7 +2,7 @@ import Link from 'next/link';
 import styles from './Footer.module.scss';
 import AnimationHover from '../../hooks/useHoverAnimation/CloneTextWrapper';
 
-export default function Footer() {
+export default function Footer({services}) {
   return (
     <div className={styles.footer}>
       <div className={styles.footer__links}>
@@ -67,21 +67,21 @@ export default function Footer() {
             <h2>Services</h2>
           </li>
           <li>
-            <Link href="/services/Taupe">
+            <Link href="/services/La-taupe-a-un-odorat-et-l-ouie-tres-developpes">
               <AnimationHover>
                 Taupe
               </AnimationHover>
             </Link>
           </li>
           <li>
-            <Link href="/services/Fouine">
+            <Link href="/services/La-fouine-aime-les-conduits-electriques-gaines-dans-les-voitures">
               <AnimationHover>
                 Fouine
               </AnimationHover>
             </Link>
           </li>
           <li>
-            <Link href="/services/Ragondin">
+            <Link href="/services/Le-ragondin-detruit-les-berges-et-l-ecosysteme">
               <AnimationHover>
                 Ragondin
               </AnimationHover>
@@ -92,7 +92,7 @@ export default function Footer() {
       <div className={styles.footer__author}>
         <Link href="https://theneaumaxime.fr" target="_blank">
           <AnimationHover>
-            Site réaliser par Maxime Theneau
+            Site réalisé par Maxime Theneau
           </AnimationHover>
         </Link>
       </div>

@@ -40,7 +40,7 @@ export default function Home({
     context: 'https://schema.org',
     type: 'Organization',
     name: 'Une taupe chez vous',
-    url: 'https://unetaupechezvous.fr',
+    url: `${process.env.NEXT_PUBLIC_URL}`,
     logo: `${accueil.imgHeaderJpg}`,
     sameA: [
       'https://www.facebook.com/Une-Taupe-Chez-Vous',
@@ -51,15 +51,16 @@ export default function Home({
     <>
       <Head>
         <title>{accueil.title}</title>
+        <meta lang='fr' />
         <meta name="description" content={accueil.subtitle} />
         <meta property="og:type" content="website" />
         <meta property="og:title" content={accueil.title} />
         <meta property="og:description" content={descriptionMeta} />
-        <meta property="og:site_name" content="https://unetaupechezvous.fr" />
-        <meta property="og:image" content={accueil.imgHeaderJpg} />
+        <meta property="og:site_name" content={process.env.NEXT_PUBLIC_URL} />
+        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/Accueil.jpg`} />
         <link
           rel="canonical"
-          href="https://unetaupechezvous.fr/"
+          href={process.env.NEXT_PUBLIC_URL}
           key="canonical"
         />
       </Head>
@@ -81,10 +82,12 @@ export default function Home({
         {/* --Services--*/}
         <section className={styles.home}>
           <ScrollParallaxTop
-            src={accueil.imgHeader.path}
+            src={`${accueil.slug}.webp`}
             alt={`Image de ${accueil.title}`}
-            width={accueil.imgHeader.width}
-            height={accueil.imgHeader.height}
+            width="1080"
+            height="720"
+            priority={true}
+            fetchpriority={true}
           >
             <h2 className="absoluteTitle">Nos services</h2>
           </ScrollParallaxTop>
@@ -95,10 +98,10 @@ export default function Home({
 
         <section className={styles.home}>
           <ScrollParallaxTop
-            src={accueil.imgHeader2.path}
+            src={`${accueil.slug}-2.webp`}
             alt={`Image de ${accueil.title}`}
-            width={accueil.imgHeader2.width}
-            height={accueil.imgHeader2.height}
+            width="1080"
+            height="720"
           >
             <h2 className="absoluteTitle">{accueil.subtitle}</h2>
           </ScrollParallaxTop>
@@ -116,7 +119,7 @@ export default function Home({
             <p>
               {accueil.contents2}
             </p>
-            <Link href="/contact">
+            <Link href="page/contact">
               <button
                 className="button"
                 type="button"
