@@ -1,14 +1,19 @@
 import styles from './Faq.module.scss';
 
+/**
+Faq element component
+@param {Object} faq - Faq data
+@param {Function} toggleFAQ - Function to toggle faq open state
+@see Faq.module.scss
+*/
 function FaqElements({ faq, toggleFAQ }) {
   return (
-    <div
+    <li
       className={styles.faqs}
       onClick={() => toggleFAQ(faq.id)}
-      role="presentation"
     >
       <h2 className="faq-question">
-        {faq.question}
+        {faq.title}
         {faq.open
           ? <i className="icon-x" />
           : <i className="icon-open" />}
@@ -16,9 +21,9 @@ function FaqElements({ faq, toggleFAQ }) {
       <p
         className={`faq-answer ${faq.open ? 'block' : 'none'}`}
       >
-        {faq.answer}
+        {faq.description}
       </p>
-    </div>
+    </li>
   );
 }
 

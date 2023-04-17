@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build && next export",
+    "sitemap": "next-sitemap",
     "preexport": "npm run build",
     "export": "next export",
     "prestart": "npm run export",
@@ -12,20 +13,21 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@next/font": "^13.3.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "next": "13.0.0",
     "prop-types": "^15.8.1",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "swr": "^2.1.0"
   },
   "devDependencies": {
-    "@svgr/webpack": "^6.5.1",
     "eslint": "8.26.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-next": "13.0.0",
     "eslint-config-prettier": "^8.5.0",
-    "next-sitemap": "*",
+    "next-sitemap": "^4.0.5",
     "sass": "^1.57.1"
   }
 }

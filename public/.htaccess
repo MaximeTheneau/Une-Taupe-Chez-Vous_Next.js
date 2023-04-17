@@ -4,8 +4,23 @@
 RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}.html -f
 RewriteRule !\.\w{2,4}$ %{REQUEST_URI}.html [L]
 
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}.html -f
+RewriteRule !\.\w{2,4}$ %{REQUEST_URI}.html [L]
+
+Redirect 301 /articles/Comprendre-la-difference-entre-une-marte-et-une-fouine /articles/Nuisibles/Comprendre-la-difference-entre-une-marte-et-une-fouine
+Redirect 301 /articles/Que-mangent-les-fouines-regime-alimentaire-et-habitudes-alimentaires /articles/Nuisibles/Que-mangent-les-fouines-regime-alimentaire-et-habitudes-alimentaires
+Redirect 301 /articles/Comment-pieger-les-ragondins-avec-des-boites-cages /articles/Nuisibles/Comment-pieger-les-ragondins-avec-des-boites-cages
+Redirect 301 /articles/Sans-danger-pour-les-animaux-de-compagnie /articles/Nuisibles/Sans-danger-pour-les-animaux-de-compagnie
+Redirect 301 /articles/Sans-danger-pour-l-environnement /articles/Nuisibles/Sans-danger-pour-l-environnement
+Redirect 301 /page/qui-sommes-nous /Taupier-agree-professionnel-depuis-1994
+Redirect 301 /services/taupe /Interventions/Taupe
+Redirect 301 /articles/Piegeur-Agree /articles/Nuisibles/Piegeur-Agree
+
+Redirect 301 /page/contact /contact
+Redirect 301 /services /Interventions
+
 ErrorDocument 404 /404.html
 
 
-
 </IfModule>
+

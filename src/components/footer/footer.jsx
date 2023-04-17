@@ -6,31 +6,63 @@ export default function Footer({services}) {
   return (
     <div className={styles.footer}>
       <div className={styles.footer__links}>
-        <ul>
+      <ul>
           <li>
+
             <h2>
-              L&apos;entreprise
+              <Link href="/Interventions" >
+                Interventions
+              </Link>
             </h2>
           </li>
           <li>
-            <Link href="/page/qui-sommes-nous">
-              <AnimationHover>
+            <Link href="/Interventions/Taupe">
+                Taupe
+            </Link>
+          </li>
+          <li>
+            <Link href="/Interventions/Fouine">
+                Fouine
+            </Link>
+          </li>
+          <li>
+            <Link href="/Interventions/Ragondin">
+                Ragondin
+            </Link>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <h2>
+              Informations
+            </h2>
+          </li>
+          <li>
+            <Link href="/Taupier-agree-professionnel-depuis-1994">
                 Qui-sommes-nous
-              </AnimationHover>
+
             </Link>
           </li>
           <li>
-            <Link href="/page/contact">
-              <AnimationHover>
+            <Link href="/contact">
                 Demande de devis
-              </AnimationHover>
+
             </Link>
           </li>
           <li>
-            <Link href="/page/mentions-legales">
-              <AnimationHover>
+            <Link href="/mentions-legales">
                 Mentions légales
-              </AnimationHover>
+
+            </Link>
+          </li>
+          <li>
+            <Link href="/Foire-aux-questions">
+                Foire aux questions
+            </Link>
+          </li>
+          <li>
+            <Link href="/articles">
+                Articles
             </Link>
           </li>
         </ul>
@@ -39,55 +71,30 @@ export default function Footer({services}) {
             <h2>Contact</h2>
           </li>
           <li>
-            <Link href="/page/contact">
-              <AnimationHover>
-                Contacter nous
-              </AnimationHover>
+            <Link href="/contact">
+                Contact
             </Link>
           </li>
           <li>
             <Link href="https://www.linkedin.com/company/une-taupe-chez-vous" target="_blank">
-              <AnimationHover>
                 <i className="icon-linkedin" />
                 Linkedin
-              </AnimationHover>
+            </Link>
+          </li>
+          <li>
+            <Link href="https://twitter.com/UneTaupe_" target="_blank">
+                <i className="icon-twitter" />
+                Twitter
             </Link>
           </li>
           <li>
             <Link href="https://www.facebook.com/unetaupechezvous/" target="_blank">
-              <AnimationHover>
                 <i className="icon-facebook" />
                 Facebook
-              </AnimationHover>
             </Link>
           </li>
         </ul>
-        <ul>
-          <li>
-            <h2>Services</h2>
-          </li>
-          <li>
-            <Link href="/services/La-taupe-a-un-odorat-et-l-ouie-tres-developpes">
-              <AnimationHover>
-                Taupe
-              </AnimationHover>
-            </Link>
-          </li>
-          <li>
-            <Link href="/services/La-fouine-aime-les-conduits-electriques-gaines-dans-les-voitures">
-              <AnimationHover>
-                Fouine
-              </AnimationHover>
-            </Link>
-          </li>
-          <li>
-            <Link href="/services/Le-ragondin-detruit-les-berges-et-l-ecosysteme">
-              <AnimationHover>
-                Ragondin
-              </AnimationHover>
-            </Link>
-          </li>
-        </ul>
+
       </div>
       <div className={styles.footer__author}>
         <Link href="https://theneaumaxime.fr" target="_blank">

@@ -14,10 +14,13 @@
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   & img{
     border-radius: 0.5rem;
+    max-height: 202px;
+    object-fit: cover;
   }
   &__content{
     padding: 5%;
-    height: 125px;
+    height: 5rem;
+    text-align: center;
   }
   &:hover{
     transform: scale(1.02);
@@ -33,12 +36,14 @@
 @media screen and (min-width: 640px) {
   .card{
     width: 30%;
+    margin: 0 0 1rem 0;
   }
 }
 
 @media screen and (min-width: 1024px) {
   .card{
     width: 20%;
+    margin: 1rem 2rem 0;
   }
 }
 @media screen and (max-width: 600px) {

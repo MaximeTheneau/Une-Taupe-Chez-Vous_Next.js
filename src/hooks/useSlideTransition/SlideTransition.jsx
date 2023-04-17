@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { useRef } from 'react';
 import useSlideTransition from './useSlideTansition';
 import styles from './SlideTransition.module.scss';
@@ -8,11 +7,11 @@ export default function ScrollParallaxLeft({ children, className }) {
   const isInViewport = useSlideTransition(elementRef);
 
   return (
-    <div
+    <li
       ref={elementRef}
       className={`${className}  ${isInViewport ? styles.slideTransition : styles.slideTransition__hidden}`}
     >
       {children}
-    </div>
+    </li>
   );
 }

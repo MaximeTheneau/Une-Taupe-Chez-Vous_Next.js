@@ -21,6 +21,7 @@ h1{
 h2{
   font-size: $font-size-medium;
   margin: 0 0 1rem 0;
+  display: inline-block;
 }
 
 a {
@@ -30,22 +31,20 @@ a {
 
 * {
   box-sizing: border-box;
+  // box-shadow: 0 0 0 3px red !important;
 }
 
 p{
   width: 90%;
+  margin: 0 0 0.5rem 0;
 }
 
 img{
   max-width: 100%;
   max-height: 100%;
-  height: 100%;
-  width: 100%;
+  display: block;
 }
 
-header{
-  min-height: 10vh;
-}
 main{
   min-height: 80vh;
   width: 90%;
@@ -98,8 +97,29 @@ select{
     outline: none;
   }
 }
+.button{
+
+  padding: 0.5rem;
+  border-radius: $border-radius;
+  font-size: $font-size;
+  font-family: $font-primary;
+  background: $color-primary;
+  color: $color-white;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: bold;
+  &:hover{
+  color: $font-color;
+  }
+  &:focus{
+    outline: none;
+  }
+}
 .none{
   display: none;
+}
+iframe {
+  max-width: 100%;
 }
 .block{
   display: block;
@@ -141,6 +161,7 @@ select{
 }
 .absoluteTitle{
   position: absolute;
+  padding: 1rem;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -161,15 +182,19 @@ select{
   }
 }
 
+.notCopie{
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+strong{
+  font-weight: bold;
+}
+
 @media screen and (min-width: 640px) {
-  p{
-    width: 70%;
-    margin: 0 auto;
-  }
-  h2, h1{
-    margin: 0 auto;
-    width: 70%;
-  }
+
+
   h2.faq-question, p.faq-answer{
     width: 100%;
   }

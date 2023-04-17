@@ -3,41 +3,56 @@ import { useState } from 'react';
 import styles from './Navbar.module.scss';
 import SvgLogo from '../../asset/svg/logo-une-taupe-chez-vous.svg';
 import AnimationHover from '../../hooks/useHoverAnimation/CloneTextWrapper';
+import Image from 'next/image';
 
 export default function Navbar() {
   const [toggleNav, setToggleNav] = useState(false);
+
+  const handleMouseLeave = () => {
+      toggleNav === true ? (setTimeout(() => (
+        setToggleNav(false)
+      ), 5500)) : null
+  };
   return (
     <>
-      <nav
-        className={`${styles.navbar__720} ${styles.navbar}`}
-      >
+      { 
+      /**
+       * Navbar for tablet and desktop
+       * @media screen and (min-width: 720px)
+       * @see Navbar.module.scss
+       */ 
+      }
+      <nav className={`${styles.navbar__720} ${styles.navbar}`} >
+        {/** Logo */}
         <Link href="/">
-          <SvgLogo className={styles.navbar__720__logo} />
+          {/* <SvgLogo className={styles.navbar__720__logo} /> */}
+          Accueil
         </Link>
         <ul className={styles.navbar__720__list}>
-          <Link href="/page/qui-sommes-nous">
+          {/** Link */}
             <li className={styles['navbar__720__list-item']}>
-              <AnimationHover>
-                Qui-sommes-nous
-              </AnimationHover>
+              <Link href="/Taupier-agree-professionnel-depuis-1994">
+                  Qui-sommes-nous
+              </Link>
             </li>
-          </Link>
-          <Link href="/page/contact">
+          {/** Link */}
             <li className={styles['navbar__720__list-item']}>
-              <AnimationHover>
-                Contact
-              </AnimationHover>
+              <Link href="/contact">
+                  Contact
+              </Link>
             </li>
-          </Link>
         </ul>
       </nav>
+      {
+        /**
+         * Navbar for mobile
+         * @media screen and (max-width: 720px)
+         * @see Navbar.module.scss
+         */
+       }
       <nav
         className={`${styles.navbar__responsive} ${styles.navbar}`}
-        onMouseLeave={() => (
-          toggleNav === true ? (setTimeout(() => (
-            setToggleNav(false)
-          ), 5500)) : null
-        )}
+        onMouseLeave={handleMouseLeave}
       >
         <div
           aria-hidden="true"
@@ -66,12 +81,12 @@ export default function Navbar() {
                 <span className={styles['navbar__responsive__list-item-link']}>Accueil</span>
               </li>
             </Link>
-            <Link href="/page/qui-sommes-nous">
+            <Link href="/Taupier-agree-professionnel-depuis-1994">
               <li className={styles['navbar__responsive__list-item']}>
                 <span className={styles['navbar__responsive__list-item-link']}>Qui-sommes-nous</span>
               </li>
             </Link>
-            <Link href="/page/contact">
+            <Link href="/contact">
               <li className={styles['navbar__responsive__list-item']}>
                 <span className={styles['navbar__responsive__list-item-link']}>Contact</span>
               </li>
@@ -79,7 +94,6 @@ export default function Navbar() {
           </ul>
         ) : ''}
       </nav>
-      <div className={styles.navbar__responsive__block} />
 
     </>
 

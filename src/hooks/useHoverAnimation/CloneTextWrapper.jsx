@@ -1,5 +1,3 @@
-import PropTypes, { element } from 'prop-types';
-import { useState } from 'react';
 import styles from './CloneTextWrapper.module.scss';
 
 export default function CloneTextWrapper({ children }) {

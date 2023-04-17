@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import useMovableElements from './useMovableElements';
 
 export default function ScrollParallaxTop({
-  children, src, alt, width, height, priority,
+  children, src, alt, width, height, priority, loader, quality,
 }) {
   const elementRef = useRef(null);
 
@@ -14,11 +14,16 @@ export default function ScrollParallaxTop({
       <Image
         src={src}
         alt={alt}
-        width={width}
-        height={height}
+        loader={loader}
+        quality={quality}
+        // width={width}
+        // height={height}
         style={parralax.style}
-        sizes="(max-width: 768px) 100vw, 768px"
         priority={priority}
+        sizes="(max-width: 768px) 100vw,
+        (max-width: 1200px) 50vw,
+        33vw"
+        fill
       />
       {children}
     </div>

@@ -65,6 +65,10 @@ export default function ContactForm() {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
+    setState({
+      ...state,
+      toggleModal: true,
+    });
     formMiddleware(state.form, handleResponse);
   };
 
