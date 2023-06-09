@@ -2,11 +2,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from './Card.module.scss';
 import SlideTransition from '../../hooks/useSlideTransition/SlideTransition';
-import imageLoaderFull from '../../utils/imageLoaderFull';
 import imageThumbnail from '../../utils/imageThumbnail';
 
-export default function card({ card, path }) {
- const pathCard = card.subcategory ? path+'/'+card.subcategory.slug : path;
+export default function Card({ card, path }) {
+  const pathCard = card.subcategory ? `${path}/${card.subcategory.slug}` : path;
   return (
     <SlideTransition
       className={styles.card}
@@ -19,14 +18,13 @@ export default function card({ card, path }) {
           height={310}
           loader={imageThumbnail}
           quality={70}
-          layout="responsive"
           sizes="100vw"
           style={{
-              width: '100%',
-              height: 'auto',
-            }}
+            width: '100%',
+            height: 'auto',
+          }}
         />
-          <h3 className={styles.card__content}>{card.title}</h3>
+        <h3 className={styles.card__content}>{card.title}</h3>
       </Link>
     </SlideTransition>
   );

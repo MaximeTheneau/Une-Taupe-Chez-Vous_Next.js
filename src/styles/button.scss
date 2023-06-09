@@ -3,7 +3,7 @@
 .button{
     margin: 1rem auto;
 }
-button{
+button, .button{
     display: flex;
     justify-content: center;
     font-family: $font-secondary;

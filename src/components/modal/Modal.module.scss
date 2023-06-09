@@ -44,8 +44,8 @@
                 left: 50%;
                 transform: translate(-50%, -50%);
                 border-radius: $border-radius;
-                max-width: $width-general;
-                max-height: $width-general;
+                max-width: $width-desktop;
+                max-height: $width-desktop;
             }
             &__close{
                 margin: auto;
@@ -68,10 +68,10 @@
     z-index: 2;
     line-height: 3rem;
     &__choice{
-        width: $width-general;
+        width: $width-desktop;
         margin: auto;
         &__table{
-            width: $width-general;
+            width: $width-desktop;
             display: flex;
             flex-direction: row;
             justify-content: space-evenly;
@@ -90,7 +90,7 @@
             margin: 0 0 1rem 0;
             transition: all 0.3s easer-in-out; 
             &:hover{
-                background-color: $color-primary-opacity;
+                background-color: $color-primary;
                 transform: scale(1.05);
             }
         }
@@ -128,7 +128,7 @@
 @media screen and (min-width: 720px){
     .cookies{
         &__choice{
-            width: $width-general-720;
+            width: $width-desktop;
         }
         & p{
             font-size: $font-size-small;

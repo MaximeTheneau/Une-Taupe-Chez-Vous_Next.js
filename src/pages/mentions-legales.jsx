@@ -1,7 +1,8 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import styles from '../styles/Pages.module.scss';import imageLoaderFull from '../utils/imageLoaderFull';
-;
+import styles from '../styles/Pages.module.scss';
+import imageLoaderFull from '../utils/imageLoaderFull';
+import Button from '../components/button/button';
 
 export async function getStaticProps() {
   const responsePage = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts/Mentions-Legales`);
@@ -40,8 +41,8 @@ export default function MentionsLegal({ page }) {
           <Image
             src={`${page.slug}.webp`}
             alt={page.altImg || page.title}
-            width='1080'
-            height='720'
+            width="1080"
+            height="720"
             quality={100}
             loader={imageLoaderFull}
             sizes="(max-width: 768px) 100vw,
@@ -54,6 +55,7 @@ export default function MentionsLegal({ page }) {
           <p>
             {page.contents}
           </p>
+          <Button />
         </section>
       </>
     </>

@@ -1,8 +1,10 @@
 import Image from 'next/image';
 import Head from 'next/head';
-import ContactForm from '../components/contact/contactForm';
+import ContactForm from '../components/contact/ContactForm';
 import styles from '../styles/Pages.module.scss';
 import imageLoaderFull from '../utils/imageLoaderFull';
+import NotCopie from '../components/notCopie/NotCopie';
+import Link from 'next/link';
 
 export async function getStaticProps() {
   const responseContact = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts/Contact`);
@@ -37,31 +39,28 @@ export default function Contact({ page }) {
 
       <section className={styles.page} >
         <h1>{page.title}</h1>
-        <Image
-            src={`${page.slug}.webp`}
-            alt={page.altImg || page.title}
-            width='1080'
-            height='720'
-            quality={100}
-            sizes="(max-width: 768px) 100vw,
-            (max-width: 1200px) 50vw,
-            33vw"
-          />
-      </section>
-      <section>
-        <h2>
-          {page.subtitle}
-        </h2>
         <p>
           {page.contents}
         </p>
-        <p>
-          {page.contents2}
-        </p>
-      </section>
-      <section>
-        <h2>Formulaire de Contact</h2>
-        <ContactForm />
+        <h2>Contactez-nous - Devis gratuit</h2>
+        <div className={styles.page__contact}>
+          <div className={styles.page__contact__block} itemscope itemtype="https://schema.org/PostalAdress"> 
+          <p itemProp="address">
+              <strong>Adresse : </strong>
+              <span itemProp="streetAddress">71 Marie Curie </span>
+              <span itemProp="postalCode">27780 </span>
+              <span itemProp="addressLocality">Garrennes-Sur-Eure </span>
+            </p>
+            <p itemProp="telephone">
+              <strong>Téléphone : </strong>
+              <Link href="tel:+33232264958"> +33 2 32 26 49 58</Link>
+            </p>
+            <NotCopie />
+          </div>
+          <div className={styles.page__contact__block}>
+            <ContactForm />
+          </div>
+        </div>
       </section>
     </>
   );

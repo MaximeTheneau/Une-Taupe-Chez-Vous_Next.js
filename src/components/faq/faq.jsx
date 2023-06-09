@@ -27,7 +27,6 @@ export default function Faq({ faq }) {
       }),
     );
   };
-  
   // Render each FAQ as a FaqElements component
   return (
     <ul>

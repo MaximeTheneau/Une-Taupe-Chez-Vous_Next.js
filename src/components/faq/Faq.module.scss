@@ -19,6 +19,15 @@
         padding: 0.5rem 1rem;
         width: 100%;
     }
+    &:hover{
+        background: $color-primary;
+        & h2{
+            color: $color-white;
+        }
+        & p{
+            opacity: 1;
+        }
+    }
 }
 
 @media screen and (min-width: 768px){

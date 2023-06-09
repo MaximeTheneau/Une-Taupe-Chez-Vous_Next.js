@@ -6,7 +6,6 @@ import styles from '../styles/Pages.module.scss';
 import Faq from '../components/faq/faq';
 
 export async function getStaticProps() {
-
   const responseContact = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts/Foire-aux-questions`);
   const post = await responseContact.json();
 
@@ -18,41 +17,10 @@ export async function getStaticProps() {
 }
 
 export default function Slug({ post, desc }) {
-
-
   const descriptionMeta = post.contents === null
     ? `Articles de blog ${post.title}`
     : post.contents.substring(0, 165).replace(/[\r\n]+/gm, '');
 
-
-  // schema.org
-  function addProductJsonLd() {
-    return {
-      __html: `{
-      "@context": "https://schema.org/",
-      "@type": "Article",
-      "name": "${post.title}",
-      "headline": "${post.title}",
-      "description": "${descriptionMeta}",
-      "image": "${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.slug}.jpg",
-      "datePublished": "${post.createdAt}",
-      "dateModified": "${post.updatedAt}",
-      "author": {
-        "@type": "Person",
-        "name": "Laurent THENEAU"
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "Une taupe chez vous",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "${process.env.NEXT_PUBLIC_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/Logo-Une-Taupe-Chez-Vous.jpg"
-        }
-      }
-    }
-  `,
-  };
-  }
   return (
     <>
       <Head>
@@ -63,37 +31,17 @@ export default function Slug({ post, desc }) {
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={descriptionMeta} />
         <meta property="og:site_name" content="Une Taupe Chez Vous" />
-        <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/${post.slug}`}  />
+        <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/${post.slug}`} />
         <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.slug}.jpg`} />
         <link
           rel="canonical"
           href={`${process.env.NEXT_PUBLIC_URL}${post.slug}`}
           key="canonical"
         />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={addProductJsonLd()}
-          key="product-jsonld"
-        />
       </Head>
       <div className={styles.page}>
-        <div className={styles.page__image}>
-          {/* <Image
-            src={`${post.slug}.webp`}
-            alt={post.title}
-            loader={imageLoaderFull}
-            quality={100}
-            width='1080'
-            height='720'
-            sizes="(max-width: 768px) 100vw,
-            (max-width: 1200px) 50vw,
-            33vw"
-            priority
-          /> */}
-        </div>
-
         <div className={styles.page__contents}>
-        <h1>{post.title}</h1>
+          <h1>{post.title}</h1>
           <p>{post.contents}</p>
           <Faq faq={post} />
           {post.paragraphPosts.map((paragraphArticle) => (
@@ -109,24 +57,22 @@ export default function Slug({ post, desc }) {
                       src={`${paragraphArticle.imgPostParagh}.webp`}
                       alt={paragraphArticle.subtitle}
                       quality={100}
-                      width='1080'
-                      height='720'
+                      width="1080"
+                      height="720"
                       sizes="(max-width: 768px) 100vw,
                         (max-width: 1200px) 50vw,
                         33vw"
                     />
                   )}
-                  {paragraphArticle.paragraph}</p>
+                  {paragraphArticle.paragraph}
+
+                </p>
               )}
             </>
           ))}
         </div>
       </div>
-      <div>
-
-      </div>
-
-
+      <div />
 
     </>
   );

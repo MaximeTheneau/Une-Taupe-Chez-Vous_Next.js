@@ -12,12 +12,26 @@ Redirect 301 /articles/Que-mangent-les-fouines-regime-alimentaire-et-habitudes-a
 Redirect 301 /articles/Comment-pieger-les-ragondins-avec-des-boites-cages /articles/Nuisibles/Comment-pieger-les-ragondins-avec-des-boites-cages
 Redirect 301 /articles/Sans-danger-pour-les-animaux-de-compagnie /articles/Nuisibles/Sans-danger-pour-les-animaux-de-compagnie
 Redirect 301 /articles/Sans-danger-pour-l-environnement /articles/Nuisibles/Sans-danger-pour-l-environnement
-Redirect 301 /page/qui-sommes-nous /Taupier-agree-professionnel-depuis-1994
+Redirect 301 /services/taupe /Interventions/Taupe
 Redirect 301 /services/taupe /Interventions/Taupe
 Redirect 301 /articles/Piegeur-Agree /articles/Nuisibles/Piegeur-Agree
 
+Redirect 301 /services/nuisibles/taupe /Interventions/Taupe
+Redirect 301 /services/La-taupe-a-un-odorat-et-l-ouie-tres-developpes /Interventions/Taupe
+Redirect 301 /services/nuisibles/ragondin /Interventions/Ragondin
+Redirect 301 /services/Le-ragondin-detruit-les-berges-et-l-ecosysteme /Interventions/Ragondin
+Redirect 301 /services/La-fouine-aime-les-conduits-electriques-gaines-dans-les-voitures /Interventions/Fouine
+Redirect 301 /services/nuisibles/fouine /Interventions/Fouine
+
+Redirect 301 /mentions-legal  /mentions-legales
+Redirect 301 /Mentions-Legales /mentions-legales
+Redirect 301 /page/qui-sommes-nous /Taupier-agree-professionnel-depuis-1994
+Redirect 301 /Qui-sommes-nous /Taupier-agree-professionnel-depuis-1994
+Redirect 301 /qui-sommes-nous /Taupier-agree-professionnel-depuis-1994
 Redirect 301 /page/contact /contact
 Redirect 301 /services /Interventions
+Redirect 301 /Qui-sommes-nous /Taupier-agree-professionnel-depuis-1994
+Redirect 301 /Contact /contact
 
 ErrorDocument 404 /404.html
 

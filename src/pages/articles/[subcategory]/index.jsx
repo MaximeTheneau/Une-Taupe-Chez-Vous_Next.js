@@ -8,17 +8,16 @@ export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Articles`);
   const posts = await res.json();
 
-  const paths = posts.map((post) => ({ params: { 
-    subcategory: post.subcategory.slug,
-  } }));
+  const paths = posts.map((post) => ({
+    params: {
+      subcategory: post.subcategory.slug,
+    },
+  }));
 
-  return { paths , fallback: 'blocking' };
+  return { paths, fallback: 'blocking' };
 }
 
-
-
 export async function getStaticProps({ params }) {
-   
   const { subcategory } = params;
 
   const responseArticles = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&subcategory=${subcategory}`);
@@ -27,7 +26,7 @@ export async function getStaticProps({ params }) {
   if (!articles) {
     return {
       notFound: true,
-    }
+    };
   }
 
   const responsePage = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts/Subcategory`);
@@ -35,8 +34,8 @@ export async function getStaticProps({ params }) {
 
   return {
     props: {
-      articles: articles,
-      page: page,
+      articles,
+      page,
     },
     revalidate: 10,
   };
@@ -44,7 +43,7 @@ export async function getStaticProps({ params }) {
 
 export default function Home({ articles, page }) {
   const descriptionMeta = page.contents.substring(0, 155).replace(/[\r\n]+/gm, '');
-  const subcategory = articles[0].subcategory;
+  const { subcategory } = articles[0];
   return (
     <>
       <Head>
@@ -52,7 +51,7 @@ export default function Home({ articles, page }) {
         <meta name="description" content={descriptionMeta} />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Sous-categories" />
-        <meta property="og:description" content={descriptionMeta}/>
+        <meta property="og:description" content={descriptionMeta} />
         <meta property="og:site_name" content={process.env.NEXT_PUBLIC_URL} />
         <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/Accueil.jpg`} />
         <link
@@ -66,11 +65,11 @@ export default function Home({ articles, page }) {
         <section>
           <h1>{subcategory.name}</h1>
           <p>{page.contents}</p>
-        </section>  
+        </section>
         {/* --Articles--*/}
         <h2>Les derniers articles :</h2>
         <div className={styles.home}>
-          <Cards cards={articles} path="articles"  />
+          <Cards cards={articles} path="articles" />
         </div>
 
       </>

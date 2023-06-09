@@ -1,33 +1,34 @@
 import Link from 'next/link';
 import styles from './Footer.module.scss';
 import AnimationHover from '../../hooks/useHoverAnimation/CloneTextWrapper';
+import NotCopie from '../notCopie/NotCopie';
 
-export default function Footer({services}) {
+export default function Footer() {
   return (
     <div className={styles.footer}>
       <div className={styles.footer__links}>
-      <ul>
+        <ul>
           <li>
 
             <h2>
-              <Link href="/Interventions" >
+              <Link href="/Interventions">
                 Interventions
               </Link>
             </h2>
           </li>
           <li>
             <Link href="/Interventions/Taupe">
-                Taupe
+              Taupe
             </Link>
           </li>
           <li>
             <Link href="/Interventions/Fouine">
-                Fouine
+              Fouine
             </Link>
           </li>
           <li>
             <Link href="/Interventions/Ragondin">
-                Ragondin
+              Ragondin
             </Link>
           </li>
         </ul>
@@ -39,30 +40,35 @@ export default function Footer({services}) {
           </li>
           <li>
             <Link href="/Taupier-agree-professionnel-depuis-1994">
-                Qui-sommes-nous
+              Qui-sommes-nous
 
             </Link>
           </li>
           <li>
             <Link href="/contact">
-                Demande de devis
+              Demande de devis
 
             </Link>
           </li>
           <li>
             <Link href="/mentions-legales">
-                Mentions légales
+              Mentions légales
 
             </Link>
           </li>
           <li>
             <Link href="/Foire-aux-questions">
-                Foire aux questions
+              Foire aux questions
             </Link>
           </li>
           <li>
             <Link href="/articles">
-                Articles
+              Articles
+            </Link>
+          </li>
+          <li>
+            <Link href="/Annuaire">
+              Annuaire
             </Link>
           </li>
         </ul>
@@ -71,26 +77,32 @@ export default function Footer({services}) {
             <h2>Contact</h2>
           </li>
           <li>
+              <Link href="tel:+33232264958">
+                <i className="icon-phone" />
+                +33 2 32 26 49 58
+              </Link>
+          </li>
+          <li>
             <Link href="/contact">
-                Contact
+              Formulaire de contact
             </Link>
           </li>
           <li>
             <Link href="https://www.linkedin.com/company/une-taupe-chez-vous" target="_blank">
-                <i className="icon-linkedin" />
-                Linkedin
+              <i className="icon-linkedin" />
+              Linkedin
             </Link>
           </li>
           <li>
             <Link href="https://twitter.com/UneTaupe_" target="_blank">
-                <i className="icon-twitter" />
-                Twitter
+              <i className="icon-twitter" />
+              Twitter
             </Link>
           </li>
           <li>
             <Link href="https://www.facebook.com/unetaupechezvous/" target="_blank">
-                <i className="icon-facebook" />
-                Facebook
+              <i className="icon-facebook" />
+              Facebook
             </Link>
           </li>
         </ul>

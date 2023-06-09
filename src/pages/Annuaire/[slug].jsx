@@ -7,7 +7,7 @@ import Page404 from '../404';
 import imageLoaderFull from '../../utils/imageLoaderFull';
 
 export async function getStaticPaths() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Interventions`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`);
   const posts = await res.json();
 
   const paths = posts.map((post) => ({ params: { slug: post.slug } }));
@@ -25,6 +25,24 @@ export default function Slug({ post }) {
   if (!post) return <Page404 />;
 
   const descriptionMeta = post.contents.substring(0, 155).replace(/[\r\n]+/gm, '');
+
+  const postsLinks= post.listPosts.map((post) => ({
+    id: post.id,
+    title: post.title,
+    description: post.description.replace(
+      /Localisation/gi,
+      '<strong>Localisation</strong>'
+    ).replace(
+      /Site web/gi,
+      '<strong>Site web</strong>'
+    ).replace(
+      /Services/gi,
+      '<strong>Services</strong>'
+    ).replace(
+      /(https?:\/\/)([^\s]+)/g,
+      '<a href="$1$2" target="_blank">$2</a>'
+    )
+  }));
 
   // schema.org
   function addProductJsonLd() {
@@ -101,8 +119,22 @@ export default function Slug({ post }) {
               <p>{paragraphPosts.paragraph}</p>
             </>
           ))}
-          <Link href="/contact" className="button">
-            Contactez-nous
+
+          <h2>Listes des Taupiers près de chez vous :</h2>
+          <ul>
+            {postsLinks.map((post) => (
+              <li key={post.id}>
+                <h2>{post.title}</h2>
+                <p dangerouslySetInnerHTML={{ __html: post.description }}></p>
+              </li>
+            ))}
+          </ul>
+          <h2>Référencez-vous gratuitement en tant que professionnel </h2>
+          <p>
+            Vous êtes un professionnel de la taupe et vous souhaitez être référencé gratuitement sur notre site ?
+            </p>            
+          <Link href="/Annuaire/Deposer-une-annonce" className="stronk">
+            Déposer une annonce
           </Link>
         </div>
       </div>

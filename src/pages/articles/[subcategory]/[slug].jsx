@@ -7,46 +7,44 @@ import Category from '../../../components/category/category';
 import imageLoaderFull from '../../../utils/imageLoaderFull';
 
 export async function getStaticPaths() {
-
   // const res = await fetch('https://back.unetaupechezvous.fr/public/api/articles/all');
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Articles`);
 
   const posts = await res.json();
 
-  const paths = posts.map((post) => ({ params: { 
-    subcategory: post.subcategory.slug,
-    slug: post.slug,
-  } }));
+  const paths = posts.map((post) => ({
+    params: {
+      subcategory: post.subcategory.slug,
+      slug: post.slug,
+    },
+  }));
 
-  return { paths , fallback: 'blocking' };
+  return { paths, fallback: 'blocking' };
 }
 
 export async function getStaticProps({ params }) {
-
-const { subcategory, slug } = params;
+  const { subcategory, slug } = params;
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts/${params.slug}`);
   const post = await res.json();
-  
+
   const resDesc = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&filter=desc&category=Articles`);
   const desc = await resDesc.json();
   if (!post) {
     return {
       notFound: true,
-    }
+    };
   }
 
   if (!desc) {
     return {
       notFound: true,
-    }
+    };
   }
 
-  return { props: { post, desc }, revalidate: 10, };
+  return { props: { post, desc }, revalidate: 10 };
 }
 
 export default function Slug({ post, desc }) {
-
-
   const descriptionMeta = post.contents === null
     ? `Articles de blog ${post.title}`
     : post.contents.substring(0, 165).replace(/[\r\n]+/gm, '');
@@ -91,7 +89,7 @@ export default function Slug({ post, desc }) {
       }
     }
   `,
-  };
+    };
   }
   return (
     <>
@@ -102,8 +100,8 @@ export default function Slug({ post, desc }) {
         <meta property="og:type" content="website" />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={descriptionMeta} />
-        <meta property="og:site_name" content={`${process.env.NEXT_PUBLIC_URL}/services/${post.slug}`}  />
-        <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/services/${post.slug}`}  />
+        <meta property="og:site_name" content={`${process.env.NEXT_PUBLIC_URL}/services/${post.slug}`} />
+        <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/services/${post.slug}`} />
         <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.slug}.jpg`} />
         <link
           rel="canonical"
@@ -124,8 +122,8 @@ export default function Slug({ post, desc }) {
             alt={post.altImg || post.title}
             loader={imageLoaderFull}
             quality={100}
-            width='1080'
-            height='720'
+            width="1080"
+            height="720"
             sizes="(max-width: 768px) 100vw,
             (max-width: 1200px) 50vw,
             33vw"
@@ -135,7 +133,7 @@ export default function Slug({ post, desc }) {
 
         <div className={styles.page__contents}>
 
-        <h1>{post.title}</h1>
+          <h1>{post.title}</h1>
           <p>{post.contents}</p>
           {post.paragraphPosts.map((paragraphArticle) => (
             <>
@@ -150,18 +148,20 @@ export default function Slug({ post, desc }) {
                       src={`${paragraphArticle.imgPostParagh}.webp`}
                       alt={paragraphArticle.subtitle}
                       quality={100}
-                      width='1080'
-                      height='720'
+                      width="1080"
+                      height="720"
                       sizes="(max-width: 768px) 100vw,
                         (max-width: 1200px) 50vw,
                         33vw"
                     />
                   )}
-                  {paragraphArticle.paragraph}</p>
+                  {paragraphArticle.paragraph}
+
+                </p>
               )}
             </>
           ))}
-          <ol >
+          <ol>
             {post.listPosts.map((listArticle) => (
               listArticle.title !== null && (
                 <li key={listArticle.title}>
@@ -171,27 +171,25 @@ export default function Slug({ post, desc }) {
                   {listArticle.description && (
                   <p>{listArticle.description}</p>
                   )}
-                  </li>
+                </li>
               )
-              ))}
-            </ol>
+            ))}
+          </ol>
 
-        <select onChange={(e) => handleChangeShareSocial(e)} className="select">
-          <option value="---">Partager sur ...</option>
-          <option value="facebook" data-icon="icon-facebook">Facebook</option>
-          <option value="twitter">Twitter</option>
-          <option value="linkedin">Linkedin</option>
-          <option value="pinterest">Pinterest</option>
-          <option value="email">Email</option>
-        </select>
+          <select onChange={(e) => handleChangeShareSocial(e)} className="select">
+            <option value="---">Partager sur ...</option>
+            <option value="facebook" data-icon="icon-facebook">Facebook</option>
+            <option value="twitter">Twitter</option>
+            <option value="linkedin">Linkedin</option>
+            <option value="pinterest">Pinterest</option>
+            <option value="email">Email</option>
+          </select>
         </div>
-      <div>
-        <h2>Derniers articles</h2>
-        <Cards cards={desc} path="articles"/>
-      </div>
+        <div>
+          <h2>Derniers articles</h2>
+          <Cards cards={desc} path="articles" />
+        </div>
       </section>
-
-
 
     </>
   );
