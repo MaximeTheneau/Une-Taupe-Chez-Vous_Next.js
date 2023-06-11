@@ -12,7 +12,7 @@ export async function getStaticProps() {
 
     const article = await responseArticles.json();
 
-const responsePage = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts/Deposer-une-annonce-gratuitement-faites-connaitre-votre-entreprise`);
+const responsePage = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts/Inscription-annuaire-gratuite`);
 const page = await responsePage.json();
 
 return {
@@ -46,17 +46,6 @@ return (
     <>
         <section className={styles.page}>
         <h1>{page.title}</h1>
-        {/* <Image
-            src={`${page.slug}.webp`}
-            alt={page.altImg || page.title}
-            width="1080"
-            height="720"
-            quality={100}
-            loader={imageLoaderFull}
-            sizes="(max-width: 768px) 100vw,
-            (max-width: 1200px) 50vw,
-            33vw"
-        /> */}
         <p>
             {page.contents}
         </p>

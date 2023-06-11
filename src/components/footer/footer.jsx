@@ -40,7 +40,7 @@ export default function Footer() {
           </li>
           <li>
             <Link href="/Taupier-agree-professionnel-depuis-1994">
-              Qui-sommes-nous
+              Qui sommes-nous
 
             </Link>
           </li>
@@ -62,13 +62,8 @@ export default function Footer() {
             </Link>
           </li>
           <li>
-            <Link href="/articles">
-              Articles
-            </Link>
-          </li>
-          <li>
-            <Link href="/Annuaire">
-              Annuaire
+            <Link href="/Plan-de-site">
+              Plan du site
             </Link>
           </li>
         </ul>
@@ -77,10 +72,10 @@ export default function Footer() {
             <h2>Contact</h2>
           </li>
           <li>
-              <Link href="tel:+33232264958">
-                <i className="icon-phone" />
-                +33 2 32 26 49 58
-              </Link>
+            <Link href="tel:+33232264958">
+              <i className="icon-phone" />
+              +33 2 32 26 49 58
+            </Link>
           </li>
           <li>
             <Link href="/contact">

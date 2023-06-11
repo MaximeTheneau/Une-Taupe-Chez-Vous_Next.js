@@ -1,12 +1,10 @@
 /* eslint-disable quote-props */
 import Head from 'next/head';
 import Cards from '../../components/cards/cards';
-import styles from '../../styles/Pages.module.scss';;
-
+import styles from '../../styles/Pages.module.scss';
 
 export async function getStaticProps() {
   const responseArticles = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Interventions`);
-
   const articles = await responseArticles.json();
 
   const responsePage = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts/Interventions`);
@@ -22,7 +20,7 @@ export async function getStaticProps() {
 
 export default function Home({ articles, page }) {
 //   const descriptionMeta = articles.contents.substring(0, 155).replace(/[\r\n]+/gm, '');
-//   const jsonData = { 
+//   const jsonData = {
 //     context: 'https://schema.org',
 //     type: 'Service',
 //     name: 'Une taupe chez vous',
@@ -43,7 +41,7 @@ export default function Home({ articles, page }) {
         <meta name="description" content="Services : Taupes - Fouines - Ragondins " />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Services de capture et d&apos;aposextermination de taupes, fouines et ragondins. Protégez votre propriété contre les dégâts causés par ces animaux nuisibles." />
-        <meta property="og:description" content="Services de capture et d&apos;aposextermination de taupes, fouines et ragondins. Protégez votre propriété contre les dégâts causés par ces animaux nuisibles."/>
+        <meta property="og:description" content="Services de capture et d&apos;aposextermination de taupes, fouines et ragondins. Protégez votre propriété contre les dégâts causés par ces animaux nuisibles." />
         <meta property="og:site_name" content={process.env.NEXT_PUBLIC_URL} />
         <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/Accueil.jpg`} />
         <link
@@ -59,7 +57,7 @@ export default function Home({ articles, page }) {
           <p>
             {page.contents}
           </p>
-        </section>  
+        </section>
         {/* --Articles--*/}
         <h2>Nos interventions</h2>
         <div className={styles.home}>

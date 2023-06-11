@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import formMiddleware from '../../middleware/middleware';
 import Confirmation from '../modal/Confirmation';
 import styles from './Contact.module.scss';
-import ContactAbout from './ContactAbout';
 import Select from './form/Select';
 import Input from './form/Input';
 
@@ -12,7 +11,7 @@ interface FormState {
   email: string;
   message: string;
   subject: string;
-  codePostal?: string;
+  postalCode: string;
 }
 
 interface ModalState {
@@ -41,7 +40,7 @@ export default function ContactForm() {
       email: '',
       message: '',
       subject: 'Demande de renseignements',
-      codePostal: '',
+      postalCode: '',
     },
     textArea: 1,
     confirmationName: null,
@@ -97,6 +96,7 @@ export default function ContactForm() {
         name: '',
         email: '',
         message: '',
+        postalCode: '',
         subject: 'Demande de devis',
       },
       modal: {

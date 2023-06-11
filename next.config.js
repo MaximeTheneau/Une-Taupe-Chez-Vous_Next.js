@@ -1,10 +1,16 @@
 const path = require('path');
+const fs = require('fs');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
+  // exportPathMap: async function () {
+  //   return {
+  //     
+  //   };
+  // },
   reactStrictMode: true,
   swcMinify: true,
   images: {
@@ -28,18 +34,4 @@ const nextConfig = {
 };
 
 
-module.exports = nextConfig, {
-  async headers() {
-    return [
-      {
-        source: "_next/static/(.*)",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
-      },
-    ];
-  },
-};
+module.exports = nextConfig;

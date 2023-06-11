@@ -6,6 +6,7 @@
     "dev": "next",
     "build": "next build && next export",
     "sitemap": "next-sitemap",
+    "ps": "node scripts/sitemap.script.js",
     "preexport": "npm run build",
     "export": "next export",
     "prestart": "npm run export",
@@ -16,6 +17,8 @@
     "@next/font": "^13.3.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
+    "fs": "^0.0.1-security",
+    "globby": "^13.1.4",
     "next": "13.0.0",
     "prop-types": "^15.8.1",
     "react": "18.2.0",
@@ -23,6 +26,8 @@
     "swr": "^2.1.0"
   },
   "devDependencies": {
+    "@types/node": "20.2.5",
+    "@types/react": "18.2.9",
     "eslint": "8.26.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-next": "13.0.0",

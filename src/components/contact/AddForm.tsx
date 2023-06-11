@@ -3,8 +3,6 @@ import { useRouter } from 'next/router';
 import formMiddleware from '../../middleware/middleware';
 import Confirmation from '../modal/Confirmation';
 import styles from './Contact.module.scss';
-import ContactAbout from './ContactAbout';
-import Select from './form/Select';
 import Input from './form/Input';
 import Button from '../button/button';
 
@@ -28,13 +26,15 @@ type Modal = {
 interface ContactFormState {
   form: Form;
   textArea: number;
-  confirmationName: string | null;
-  confirmationEmail: string | null;
-  confirmationService: string | null;
-  confirmationSubject: string | null;
-  confirmationCodePostal: string | null;
-  confirmationLocation: string | null;
-  confirmationDirectory: string | null;
+  confirmationName: string | null | boolean;
+  confirmationEmail: string | null | boolean;
+  confirmationService: string | null | boolean;
+  confirmationSubject: string | null | boolean;
+  confirmationCodePostal: string | null | boolean;
+  confirmationLocation: string | null | boolean;
+  confirmationDirectory: string | null | boolean;
+  confirmationSiteWeb: string | null | boolean;
+  confirmationForm: boolean;
   
   modal: Modal;
 }
@@ -56,8 +56,10 @@ const initialContactFormState: ContactFormState = {
   confirmationService: null,
   confirmationSubject: null,
   confirmationCodePostal: null,
+  confirmationSiteWeb: null,
   confirmationLocation: null,
   confirmationDirectory: null,
+  confirmationForm: false,
   modal: {
     title: '',
     message: '',
@@ -73,21 +75,9 @@ export default function AddForm({ article }) {
   const router = useRouter();
   const [state, setState] = useState(initialContactFormState);
 
-  const handleChangeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    const trows = e.target.value.split('\n').length - 1 === 0 ? 1 : e.target.value.split('\n').length - 1;
-    setState((prevState) => ({
-      ...prevState,
-      textArea: trows,
-      form: {
-        ...prevState.form,
-        message: e.target.value,
-        confirmationMessage: true,
-      },
-    }));
-  };
-
   const regex = /^(([^<>()[\]\\.,;:\s@\\"]+(\.[^<>()[\]\\.,;:\s@\\"]+)*)|(\\".+\\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   const regexPattern = /^(https:\/\/)/;
+
   function classErrorOrConfirmation(message) {
     if (message === true) {
       return (<i className="icon-confirmation" />);
@@ -95,7 +85,7 @@ export default function AddForm({ article }) {
     if (message === false) {
       return (<i className="icon-error" />);
     }
-    if (message === 'https') {
+    if (message === 'siteWeb') {
       return (<p>
         <i className="icon-error" />
         Veuillez entrer une url valide (https://)
@@ -142,9 +132,13 @@ export default function AddForm({ article }) {
     setState({
       ...state,
       form: {
+        postalCode: '',
+        location: '',
+        siteWeb: '',
+        service: '',
+        directory: null,
         name: '',
         email: '',
-        message: '',
         subject: 'Demande de devis',
       },
       modal: {
@@ -209,26 +203,31 @@ export default function AddForm({ article }) {
           <div className={styles.contact__input}>
             <label htmlFor="email" className={styles.contact__label}>Votre email*</label>
             {classErrorOrConfirmation(state.confirmationEmail)}
-            <Input
+            <input
               type="email"
               title="Email"
+              minLength={2}
+              maxLength={500}
               value={state.form.email}
               placeholder="exemple@email.com"
               onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'email')}
-              onBlur={(e: ChangeEvent<HTMLInputElement>) => (
-                regex.test(e.target.value)
+              onBlur={(e: ChangeEvent<HTMLInputElement>) => {
+               regex.test(e.target.value)
                   ? setState({ ...state, confirmationEmail: true })
                   : setState({ ...state, confirmationEmail: false })
-              )}
+              }}
+              required
             />
           </div>
           {/* --Nom-- */}
           <div className={styles.contact__input}>
             <label htmlFor="name" className={styles.contact__label}>Votre Société/Entreprise*</label>
             {classErrorOrConfirmation(state.confirmationName)}
-            <Input
+            <input
               type="text"
               title="Nom"
+              minLength={2}
+              maxLength={120}
               placeholder="Exemple : Une Taupe Chez Vous"
               value={state.form.name}
               onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'name')}
@@ -243,17 +242,20 @@ export default function AddForm({ article }) {
                   setState({ ...state, confirmationName: true });
                 }
               }}
+              required
             />
           </div>
           {/* --Location-- */}
           <div className={styles.contact__input}>
             <label htmlFor="location" className={styles.contact__label}>Votre localité*</label>
             {classErrorOrConfirmation(state.confirmationLocation)}
-            <Input
+            <input
               type="text"
               title="Location"
               placeholder="Exemple : Paris"
               value={state.form.location}
+              minLength={2}
+              maxLength={120}
               onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'location')}
               onBlur={(e: ChangeEvent<HTMLInputElement>) => {
                 if (e.target.value.length < 2) {
@@ -263,6 +265,7 @@ export default function AddForm({ article }) {
                   setState({ ...state, confirmationLocation: true });
                 }
               }}
+              required
             />
           </div>
               
@@ -274,6 +277,9 @@ export default function AddForm({ article }) {
             type="number"
             className="contact-form-input"
             name="postalCode"
+            title="Code Postal"
+            maxLength={2}
+            minLength={2}
             value={state.form.postalCode}
             onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'postalCode')}
             onBlur={(e: ChangeEvent<HTMLInputElement>) => (
@@ -282,8 +288,10 @@ export default function AddForm({ article }) {
                 : setState({ ...state, confirmationCodePostal: 'postalCode' })
             )}
             placeholder="Exemple : 75"
+            required
           />
-        </div>
+          </div>
+
           {/* --Site Web-- */}
           <div className={styles.contact__input}>
             <label htmlFor="siteWeb" className={styles.contact__label}>Votre site web*</label>
@@ -292,13 +300,26 @@ export default function AddForm({ article }) {
               type="text"
               title="Site Web"
               placeholder="Exemple : https//:une-taupe-chez-vous.fr"
+              maxLength={500}
+              minLength={2}
               value={state.form.siteWeb}
               onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'siteWeb')}
-              onBlur={(e: ChangeEvent<HTMLInputElement>) => (
-                regexPattern.test(e.target.value)
-                  ? setState({ ...state, confirmationSiteWeb: true })
-                  : setState({ ...state, confirmationSiteWeb: 'https' })
-              )}
+              onBlur={(e: ChangeEvent<HTMLInputElement>) => {
+                if (e.target.value.length < 2) {
+                  setState({ ...state, confirmationSiteWeb: 'minLength2' });
+                }
+                if (e.target.value.length >= 500) {
+                  setState({ ...state, confirmationSiteWeb: false });
+                }
+                if (!regexPattern.test(e.target.value)) {
+                  setState({ ...state, confirmationSiteWeb: 'siteWeb' })
+                }
+                else {
+                  setState({ ...state, confirmationSiteWeb: true });
+                }
+              }
+            }
+              required
             />
           </div>
           {/* --Service-- */}
@@ -309,6 +330,8 @@ export default function AddForm({ article }) {
               type="text"
               title="Service"
               placeholder="Exemple : Taupier professionnel, Dératisation, Désinsectisation, Désinfection, ..."
+              maxLength={120}
+              minLength={10}
               value={state.form.service}
               onChange={(e: ChangeEvent<HTMLInputElement>) =>{
                 if (e.target.value.length >= 120) {
@@ -316,6 +339,7 @@ export default function AddForm({ article }) {
                 }
                 else {
                   setState({ ...state, confirmationService: true });
+
                   changeField(e.target.value, 'service');
 
                 }
@@ -332,6 +356,7 @@ export default function AddForm({ article }) {
                   setState({ ...state, confirmationService: true });
                 }
               }}
+              required
             />
           </div>
           {/* --Directory-- */}
@@ -351,8 +376,9 @@ export default function AddForm({ article }) {
                   setState({ ...state, confirmationDirectory: true });
                 }
               }}
+              required
             >
-              <option value="null"> Sélectionner un annuaire</option>
+              <option disabled selected> Sélectionner un annuaire</option>
             {article.map((article) => (
                 <option key={article.id}  value={article.id}>{article.title}</option>
                 ))}

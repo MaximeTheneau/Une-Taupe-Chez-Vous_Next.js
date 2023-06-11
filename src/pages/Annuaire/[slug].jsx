@@ -133,8 +133,8 @@ export default function Slug({ post }) {
           <p>
             Vous êtes un professionnel de la taupe et vous souhaitez être référencé gratuitement sur notre site ?
             </p>            
-          <Link href="/Annuaire/Deposer-une-annonce" className="stronk">
-            Déposer une annonce
+          <Link href="/Annuaire/Inscription-annuaire-gratuite" className="stronk">
+            Inscrivez vôtre entreprise gratuitement
           </Link>
         </div>
       </div>

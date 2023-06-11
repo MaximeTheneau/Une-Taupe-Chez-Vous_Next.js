@@ -1,0 +1,19 @@
+
+.siteMap{
+    &__list{
+        & li, & ul{
+            margin-bottom: 1rem;
+        }
+        list-style-type: disc;
+        margin-left: 1.5rem;
+        &--title{
+            font-weight: bold;
+        }
+        &--secondary{
+            list-style-type: circle;
+            margin-left: 1.5rem;
+            font-weight: normal;
+            margin-top: 1rem;
+        }
+    }
+}
