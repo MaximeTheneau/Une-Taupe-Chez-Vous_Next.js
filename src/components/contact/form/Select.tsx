@@ -10,7 +10,6 @@ export default function Select({ onChange, value }) {
       <option value="Demande de devis">Demande de devis</option>
       <option value="Autre">Autre</option>
       <option value="Webmaster">Webmaster</option>
-
     </select>
   );
 }

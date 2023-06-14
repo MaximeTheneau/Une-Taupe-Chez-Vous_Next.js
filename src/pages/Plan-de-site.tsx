@@ -38,7 +38,7 @@ export default function SiteMapPage({
         <meta property="og:description" content="Mention legales de Une Taupe Chez Vous" />
         <meta property="og:site_name" content="Une Taupe Chez Vous" />
         <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/${page.slug}`} />
-        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${page.slug}.jpg`} />
+        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/Accueil.jpg`} />
         <link
           rel="canonical"
           href={`${process.env.NEXT_PUBLIC_URL}/${page.slug}`}
@@ -74,7 +74,7 @@ export default function SiteMapPage({
                 </Link>
               </li>
               <li>
-                <Link href="/mentions-legales">
+                <Link href="/Mentions-Legales">
                   Mentions légales
                 </Link>
               </li>
@@ -101,7 +101,7 @@ export default function SiteMapPage({
             Contact
             <ul className={styles['siteMap__list--secondary']}>
               <li>
-                <Link href="/contact">
+                <Link href="/Contact">
                   Nous contacter
                 </Link>
               </li>
@@ -128,18 +128,18 @@ export default function SiteMapPage({
             </ul>
           </li>
           <li className={styles['siteMap__list--title']}>
-            <Link href="/articles">
+            <Link href="/Articles">
               Articles
             </Link>
             <ul className={styles['siteMap__list--secondary']}>
               <li>
-                <Link href="/articles">
+                <Link href="/Articles">
                   Tous les articles
                 </Link>
               </li>
               {subcategory.map((category) => (
                 <li key={category.name}>
-                  <Link href={`articles/${category.slug}`}>
+                  <Link href={`Articles/${category.slug}`}>
                     {category.name}
                   </Link>
                 </li>

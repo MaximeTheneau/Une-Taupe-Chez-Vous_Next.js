@@ -56,7 +56,7 @@ export default function Home({ articles, page }) {
         <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/Accueil.jpg`} />
         <link
           rel="canonical"
-          href={`${process.env.NEXT_PUBLIC_URL}/articles/${subcategory.slug}`}
+          href={`${process.env.NEXT_PUBLIC_URL}/Articles/${subcategory.slug}`}
           key="canonical"
         />
       </Head>
@@ -69,7 +69,7 @@ export default function Home({ articles, page }) {
         {/* --Articles--*/}
         <h2>Les derniers articles :</h2>
         <div className={styles.home}>
-          <Cards cards={articles} path="articles" />
+          <Cards cards={articles} path="Articles" />
         </div>
 
       </>

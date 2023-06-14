@@ -6,14 +6,14 @@ export default function Category({ category }) {
     <nav>
       <ul className={styles.category}>
         <li className="button">
-          <Link href="/articles">
+          <Link href="/Articles">
             Articles
           </Link>
         </li>
         {category
             && (
             <li className="button">
-              <Link href={`/articles/${category.slug}`}>
+              <Link href={`/Articles/${category.slug}`}>
                 {category.name}
               </Link>
             </li>

@@ -62,13 +62,13 @@ export default function Slug({ post }) {
         {/* Open Graph */}
         <meta property="og:type" content="website" />
         <meta property="og:title" content={post.title} />
-        <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/services/${post.slug}`} />
+        <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/Interventions/${post.slug}`} />
         <meta property="og:description" content={descriptionMeta} />
-        <meta property="og:site_name" content={`${process.env.NEXT_PUBLIC_URL}/services/${post.slug}`} />
+        <meta property="og:site_name" content={`${process.env.NEXT_PUBLIC_URL}/Interventions/${post.slug}`} />
         <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.slug}.jpg`} />
         <link
           rel="canonical"
-          href={`${process.env.NEXT_PUBLIC_URL}/services/${post.slug}`}
+          href={`${process.env.NEXT_PUBLIC_URL}/Interventions/${post.slug}`}
           key="canonical"
         />
         <script
@@ -101,7 +101,7 @@ export default function Slug({ post }) {
               <p>{paragraphPosts.paragraph}</p>
             </>
           ))}
-          <Link href="/contact" className="button">
+          <Link href="/Contact" className="button">
             Contactez-nous
           </Link>
         </div>

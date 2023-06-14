@@ -15,7 +15,7 @@ const generateSitemap = async () => {
       .map((page) => 
       `<url>
           <loc>${urlFront}${page.slug}</loc>
-          <lastmod>${new Date().toISOString()}</lastmod>
+          <lastmod>${page.updatedAt ? page.updatedAt : page.createdAt}</lastmod>
           <changefreq>daily</changefreq>
           <priority>${priority}</priority>
         </url>`)
@@ -27,7 +27,7 @@ const generateSitemap = async () => {
         ${sitemapXml}
       </urlset>`;
 
-    fs.writeFileSync(`./public/${filename}.xml`, sitemapIndexXml);
+    fs.writeFileSync(`./public/sitemap/${filename}.xml`, sitemapIndexXml);
   };
 
   const generateXmlPages = async (pages, priority, urlFront) => {
@@ -42,8 +42,8 @@ const generateSitemap = async () => {
     const sitemapXml = pages
       .map((page) => 
       `<url>
-          <loc>${urlFront}articles/${page.subcategory.slug}/${page.slug}</loc>
-          <lastmod>${new Date().toISOString()}</lastmod>
+          <loc>${urlFront}Articles/${page.subcategory.slug}/${page.slug}</loc>
+          <lastmod>${page.updatedAt ? page.updatedAt : page.createdAt}</lastmod>
           <changefreq>daily</changefreq>
           <priority>${priority}</priority>
         </url>`)
@@ -55,28 +55,41 @@ const generateSitemap = async () => {
         ${sitemapXml}
       </urlset>`;
 
-    fs.writeFileSync('./public/sitemap-articles.xml', sitemapIndexXml);
+    fs.writeFileSync('./public/sitemap/sitemap-Articles.xml', sitemapIndexXml);
   };
 
+  const responsePages = await fetchJson(`${urlApi}posts&category=Pages`);
   const responseAnuaire = await fetchJson(`${urlApi}posts&category=Annuaire`);
   const responseInterventions = await fetchJson(`${urlApi}posts&category=Interventions`);
   const responseArticles = await fetchJson(`${urlApi}posts&category=Articles`);
 
-  const urlsPriority = [
-    { slug: '' },
-    { slug: 'contact' },
-    { slug: 'Taupier-agree-professionnel-depuis-1994' },
-    { slug: 'Foire-aux-questions' },
-    { slug: 'Interventions' },
-    { slug: 'Plan-de-site' },
-    { slug: 'articles' }
-  ];
+  const urlsPriority = responsePages.filter((page) => [
+    'Accueil',
+    'Contact',
+    'Interventions',
+    'Taupier-agree-professionnel-depuis-1994',
+    'Foire-aux-questions',
+  ].includes(page.slug));
 
-  const urlsNoPriority = [
-    { slug: 'Annuaire' },
-    { slug: 'Annuaire/Inscription-annuaire-gratuite' },
-    { slug: 'mentions-legales' }
-  ];
+  urlsPriority.forEach((page) => {
+    if (page.slug === 'Accueil') {
+      page.slug = '';
+    }
+  });
+
+  const urlsNoPriority = responsePages.filter((page) => [
+    'Articles',
+    'Annuaire',
+    'Inscription-annuaire-gratuite',
+    'Mentions-Legales',
+    'Plan-de-site-Une-Taupe-Chez-Vous',
+  ].includes(page.slug));
+
+  urlsNoPriority.forEach((page) => {
+    if (page.slug === 'Inscription-annuaire-gratuite') {
+      page.slug = 'Annuaire/Inscription-annuaire-gratuite';
+    }
+  });
 
   await generateXmlPages(urlsPriority, 1.0, urlFront);
   await generateXmlPages(urlsNoPriority, 0.6, urlFront);
@@ -87,19 +100,19 @@ const generateSitemap = async () => {
   const sitemapIndexXml = `<?xml version="1.0" encoding="UTF-8"?>
     <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
       <sitemap>
-        <loc>https://unetaupechezvous.fr/sitemap-Annuaire.xml</loc>
+        <loc>${urlFront}/sitemap/sitemap-Annuaire.xml</loc>
       </sitemap>
       <sitemap>
-        <loc>https://unetaupechezvous.fr/sitemap-articles.xml</loc>
+        <loc>${urlFront}/sitemap/sitemap-Articles.xml</loc>
       </sitemap>
       <sitemap>
-        <loc>https://unetaupechezvous.fr/sitemap-Interventions.xml</loc>
+        <loc>${urlFront}/sitemap/sitemap-Interventions.xml</loc>
       </sitemap>
       <sitemap>
-        <loc>https://unetaupechezvous.fr/sitemap-p0.6.xml</loc>
+        <loc>${urlFront}/sitemap/sitemap-p0.6.xml</loc>
       </sitemap>
       <sitemap>
-        <loc>https://unetaupechezvous.fr/sitemap-p1.xml</loc>
+        <loc>${urlFront}/sitemap/sitemap-p1.xml</loc>
       </sitemap>
     </sitemapindex>`;
 
@@ -107,11 +120,16 @@ const generateSitemap = async () => {
     User-agent: *
     allow: /
     
+    disallow: /Interventions/[slug]
+    disallow: /Articles/[subcategory]
+    disallow: /Articles/[subcategory]/[slug]
+    disallow: /Annuaire/[slug]
+
     # Host
-    Host: https://unetaupechezvous.fr
+    Host: ${urlFront}
     
     # Sitemaps
-    Sitemap: https://unetaupechezvous.fr/sitemap.xml
+    Sitemap: ${urlFront}sitemap.xml
     `;
     
   fs.writeFileSync('./public/sitemap.xml', sitemapIndexXml);
@@ -141,7 +159,7 @@ const generateSitemap = async () => {
   console.log('-------------------------');
   console.table(total);
   console.log('-----------------------------------------------------');
-  console.log('  ○ https://unetaupechezvous.fr/sitemap.xml');
+  console.log(`  ○ ${urlFront}sitemap.xml ○`);
   console.log('-----------------------------------------------------');
 
   

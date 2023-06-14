@@ -4,12 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next",
-    "build": "next build && next export",
-    "sitemap": "next-sitemap",
-    "ps": "node scripts/sitemap.script.js",
-    "preexport": "npm run build",
+    "build": "next build",
+    "sitemap": "node scripts/sitemap.script.js",
     "export": "next export",
-    "prestart": "npm run export",
     "start": "serve out",
     "lint": "next lint"
   },

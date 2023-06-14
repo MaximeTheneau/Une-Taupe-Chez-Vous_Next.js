@@ -1,13 +1,14 @@
 import PropTypes from 'prop-types';
 import Image from 'next/image';
 import Head from 'next/head';
+import Link from 'next/link';
 import styles from '../../../styles/Pages.module.scss';
 import Cards from '../../../components/cards/cards';
 import Category from '../../../components/category/category';
 import imageLoaderFull from '../../../utils/imageLoaderFull';
+import TableOfContents from '../../../components/tableOfContents/TableOfContents';
 
 export async function getStaticPaths() {
-  // const res = await fetch('https://back.unetaupechezvous.fr/public/api/articles/all');
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Articles`);
 
   const posts = await res.json();
@@ -27,7 +28,7 @@ export async function getStaticProps({ params }) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts/${params.slug}`);
   const post = await res.json();
 
-  const resDesc = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&filter=desc&category=Articles`);
+  const resDesc = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&filter=desc&category=articles`);
   const desc = await resDesc.json();
   if (!post) {
     return {
@@ -45,6 +46,7 @@ export async function getStaticProps({ params }) {
 }
 
 export default function Slug({ post, desc }) {
+  console.log(post);
   const descriptionMeta = post.contents === null
     ? `Articles de blog ${post.title}`
     : post.contents.substring(0, 165).replace(/[\r\n]+/gm, '');
@@ -52,15 +54,15 @@ export default function Slug({ post, desc }) {
   const handleChangeShareSocial = (e) => {
     const social = e.target.value;
     if (social === 'facebook') {
-      window.open(`https://www.facebook.com/sharer/sharer.php?u=${process.env.NEXT_PUBLIC_URL}/articles/${post.slug}`, '_blank');
+      window.open(`https://www.facebook.com/sharer/sharer.php?u=${process.env.NEXT_PUBLIC_URL}/Articles/${post.slug}`, '_blank');
     } else if (social === 'twitter') {
-      window.open(`https://twitter.com/intent/tweet?url=${process.env.NEXT_PUBLIC_URL}/articles/${post.slug}`, '_blank');
+      window.open(`https://twitter.com/intent/tweet?url=${process.env.NEXT_PUBLIC_URL}/Articles/${post.slug}`, '_blank');
     } else if (social === 'linkedin') {
-      window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${process.env.NEXT_PUBLIC_URL}/articles/${post.slug}`, '_blank');
+      window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${process.env.NEXT_PUBLIC_URL}/Articles/${post.slug}`, '_blank');
     } else if (social === 'pinterest') {
-      window.open(`https://pinterest.com/pin/create/button/?url=${process.env.NEXT_PUBLIC_URL}/articles/${post.slug}`, '_blank');
+      window.open(`https://pinterest.com/pin/create/button/?url=${process.env.NEXT_PUBLIC_URL}/Articles/${post.slug}`, '_blank');
     } else if (social === 'email') {
-      window.open(`mailto:?subject=${post.title}&body=${process.env.NEXT_PUBLIC_URL}/articles/${post.slug}`, '_blank');
+      window.open(`mailto:?subject=${post.title}&body=${process.env.NEXT_PUBLIC_URL}/Articles/${post.slug}`, '_blank');
     }
   };
   // schema.org
@@ -100,12 +102,12 @@ export default function Slug({ post, desc }) {
         <meta property="og:type" content="website" />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={descriptionMeta} />
-        <meta property="og:site_name" content={`${process.env.NEXT_PUBLIC_URL}/services/${post.slug}`} />
-        <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/services/${post.slug}`} />
+        <meta property="og:site_name" content={`${process.env.NEXT_PUBLIC_URL}/Article/${post.subcategory.slug}/${post.slug}`} />
+        <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/Article/${post.subcategory.slug}/${post.slug}`} />
         <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.slug}.jpg`} />
         <link
           rel="canonical"
-          href={`${process.env.NEXT_PUBLIC_URL}/articles/${post.subcategory.name}/${post.slug}`}
+          href={`${process.env.NEXT_PUBLIC_URL}/Articles/${post.subcategory.name}/${post.slug}`}
           key="canonical"
         />
         <script
@@ -134,11 +136,18 @@ export default function Slug({ post, desc }) {
         <div className={styles.page__contents}>
 
           <h1>{post.title}</h1>
+
           <p>{post.contents}</p>
+          <TableOfContents post={post} />
           {post.paragraphPosts.map((paragraphArticle) => (
             <>
               {paragraphArticle.subtitle && (
-                <h2 key={paragraphArticle.id}>{paragraphArticle.subtitle}</h2>
+                <h2
+                  key={paragraphArticle.id}
+                  id={paragraphArticle.slug}
+                >
+                  {paragraphArticle.subtitle}
+                </h2>
               )}
               {paragraphArticle.paragraph && (
                 <p key={paragraphArticle.id} className={styles.page__contents__paragraph}>
@@ -187,7 +196,7 @@ export default function Slug({ post, desc }) {
         </div>
         <div>
           <h2>Derniers articles</h2>
-          <Cards cards={desc} path="articles" />
+          <Cards cards={desc} path="Articles" />
         </div>
       </section>
 

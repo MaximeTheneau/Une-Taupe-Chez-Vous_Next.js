@@ -2,8 +2,13 @@
     User-agent: *
     allow: /
     
+    disallow: /Interventions/[slug]
+    disallow: /Articles/[subcategory]
+    disallow: /Articles/[subcategory]/[slug]
+    disallow: /Annuaire/[slug]
+
     # Host
-    Host: https://unetaupechezvous.fr
+    Host: https://unetaupechezvous.fr/
     
     # Sitemaps
     Sitemap: https://unetaupechezvous.fr/sitemap.xml

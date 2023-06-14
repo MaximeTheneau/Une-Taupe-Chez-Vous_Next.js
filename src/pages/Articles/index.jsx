@@ -57,7 +57,7 @@ export default function Home({ page, articles, subcategory }) {
             <ul className={stylesNav.category}>
               {subcategory.map((category) => (
                 <li className="button" key={category.name}>
-                  <Link href={`articles/${category.slug}`}>
+                  <Link href={`Articles/${category.slug}`}>
                     {category.name}
                   </Link>
                 </li>
@@ -65,7 +65,7 @@ export default function Home({ page, articles, subcategory }) {
             </ul>
           </nav>
           <div className={styles.home}>
-            <Cards cards={articles} path="articles" />
+            <Cards cards={articles} path="Articles" />
           </div>
           {page.paragraphPosts.map((paragraphPosts) => (
             <>
@@ -74,7 +74,7 @@ export default function Home({ page, articles, subcategory }) {
             </>
           ))}
           <div className="button">
-            <Link href="/contact">
+            <Link href="/Contact">
               <AnimationHover>
                 Contactez-nous
               </AnimationHover>

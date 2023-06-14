@@ -26,22 +26,22 @@ export default function Slug({ post }) {
 
   const descriptionMeta = post.contents.substring(0, 155).replace(/[\r\n]+/gm, '');
 
-  const postsLinks= post.listPosts.map((post) => ({
+  const postsLinks = post.listPosts.map((post) => ({
     id: post.id,
     title: post.title,
-    description: post.description.replace(
+    description: post.description?.replace(
       /Localisation/gi,
-      '<strong>Localisation</strong>'
+      '<strong>Localisation</strong>',
     ).replace(
       /Site web/gi,
-      '<strong>Site web</strong>'
+      '<strong>Site web</strong>',
     ).replace(
       /Services/gi,
-      '<strong>Services</strong>'
+      '<strong>Services</strong>',
     ).replace(
       /(https?:\/\/)([^\s]+)/g,
-      '<a href="$1$2" target="_blank">$2</a>'
-    )
+      '<a href="$1$2" target="_blank">$2</a>',
+    ),
   }));
 
   // schema.org
@@ -125,14 +125,14 @@ export default function Slug({ post }) {
             {postsLinks.map((post) => (
               <li key={post.id}>
                 <h2>{post.title}</h2>
-                <p dangerouslySetInnerHTML={{ __html: post.description }}></p>
+                <p dangerouslySetInnerHTML={{ __html: post.description }} />
               </li>
             ))}
           </ul>
           <h2>Référencez-vous gratuitement en tant que professionnel </h2>
           <p>
             Vous êtes un professionnel de la taupe et vous souhaitez être référencé gratuitement sur notre site ?
-            </p>            
+          </p>
           <Link href="/Annuaire/Inscription-annuaire-gratuite" className="stronk">
             Inscrivez vôtre entreprise gratuitement
           </Link>

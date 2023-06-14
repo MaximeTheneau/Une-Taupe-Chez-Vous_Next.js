@@ -1,33 +1,33 @@
-import Head from "next/head";
-import Image from "next/image";
-import styles from "../../styles/Pages.module.scss";
+import Head from 'next/head';
+import Image from 'next/image';
+import Link from 'next/link';
+import styles from '../../styles/Pages.module.scss';
 import imageLoaderFull from '../../utils/imageLoaderFull';
-import Button from "../../components/button/button";
-import AddForm from "../../components/contact/AddForm";
-
+import Button from '../../components/button/button';
+import AddForm from '../../components/contact/AddForm';
+import DirectoryRegistrationForm from '../../components/directoryRegistrationForm/DirectoryRegistrationForm';
 
 export async function getStaticProps() {
+  const responseArticles = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`);
 
-    const responseArticles = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`);
+  const article = await responseArticles.json();
 
-    const article = await responseArticles.json();
+  const responsePage = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts/Inscription-annuaire-gratuite`);
+  const page = await responsePage.json();
 
-const responsePage = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts/Inscription-annuaire-gratuite`);
-const page = await responsePage.json();
-
-return {
+  return {
     props: {
-    page,
-    article,
+      page,
+      article,
     },
-};
+  };
 }
 
 // == Composant
 export default function Page({ page, article }) {
-return (
+  return (
     <>
-    <Head>
+      <Head>
         <title>{page.title}</title>
         <meta name="description" content="Mention legales de Une Taupe Chez Vous" />
         <meta property="og:type" content="website" />
@@ -37,17 +37,16 @@ return (
         <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/${page.slug}`} />
         <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${page.slug}.jpg`} />
         <link
-        rel="canonical"
-        href={`${process.env.NEXT_PUBLIC_URL}/${page.slug}`}
-        key="canonical"
+          rel="canonical"
+          href={`${process.env.NEXT_PUBLIC_URL}/${page.slug}`}
+          key="canonical"
         />
-    </Head>
+      </Head>
 
-    <>
-        <section className={styles.page}>
+      <section className={styles.page}>
         <h1>{page.title}</h1>
         <p>
-            {page.contents}
+          {page.contents}
         </p>
         {page.paragraphPosts.map((paragraphPosts) => (
           <>
@@ -57,16 +56,19 @@ return (
         ))}
 
         <AddForm
-            article={article}
+          article={article}
         />
-          <h2>Pour toutes questions suplémentaire</h2>
-          <p>Contactez le Webmaster du site, via 
-            <a href="/contact"> le formulaire de contact</a>
-          </p>
+        <h2>Pour toutes questions suplémentaire</h2>
+        <p>
+          Contactez le Webmaster du site, via
+          <Link href="/Contact"> le formulaire de contact</Link>
+        </p>
 
-        </section>
+        <DirectoryRegistrationForm
+          article={article}
+        />
+
+      </section>
     </>
-    </>
-);
+  );
 }
-

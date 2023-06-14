@@ -45,13 +45,13 @@ export default function Footer() {
             </Link>
           </li>
           <li>
-            <Link href="/contact">
+            <Link href="/Contact">
               Demande de devis
 
             </Link>
           </li>
           <li>
-            <Link href="/mentions-legales">
+            <Link href="/Mentions-Legales">
               Mentions légales
 
             </Link>
@@ -78,7 +78,7 @@ export default function Footer() {
             </Link>
           </li>
           <li>
-            <Link href="/contact">
+            <Link href="/Contact">
               Formulaire de contact
             </Link>
           </li>

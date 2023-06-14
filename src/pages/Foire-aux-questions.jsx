@@ -35,7 +35,7 @@ export default function Slug({ post, desc }) {
         <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.slug}.jpg`} />
         <link
           rel="canonical"
-          href={`${process.env.NEXT_PUBLIC_URL}${post.slug}`}
+          href={`${process.env.NEXT_PUBLIC_URL}/${post.slug}`}
           key="canonical"
         />
       </Head>

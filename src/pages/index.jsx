@@ -143,7 +143,7 @@ export default function Home({
           <div className={styles.home__category} />
           <div className={styles.home__category__title}>
             <h2>Articles</h2>
-            <Link href="../articles">
+            <Link href="../Articles">
               Voir plus
             </Link>
           </div>
@@ -160,7 +160,7 @@ export default function Home({
               style={{ objectPosition: '0 var(--topImg)' }}
             />
           </ScrollParallaxTop>
-          <Cards cards={articles} path="articles" />
+          <Cards cards={articles} path="Articles" />
         </div>
 
         {/* --Contact--*/}
@@ -191,7 +191,7 @@ export default function Home({
           ))}
 
           <div className="button">
-            <Link href="/contact">
+            <Link href="/Contact">
               <AnimationHover>
                 Contactez-nous
               </AnimationHover>

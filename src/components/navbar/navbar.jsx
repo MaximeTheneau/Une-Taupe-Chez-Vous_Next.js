@@ -34,7 +34,7 @@ export default function Navbar() {
           </li>
           {/** Link */}
           <li className={styles['navbar__720__list-item']}>
-            <Link href="/contact">
+            <Link href="/Contact">
               Contact
             </Link>
           </li>
@@ -83,7 +83,7 @@ export default function Navbar() {
                 <span className={styles['navbar__responsive__list-item-link']}>Qui-sommes-nous</span>
               </li>
             </Link>
-            <Link href="/contact">
+            <Link href="/Contact">
               <li className={styles['navbar__responsive__list-item']}>
                 <span className={styles['navbar__responsive__list-item-link']}>Contact</span>
               </li>

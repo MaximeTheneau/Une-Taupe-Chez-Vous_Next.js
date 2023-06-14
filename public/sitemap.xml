@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
     <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
       <sitemap>
-        <loc>https://unetaupechezvous.fr/sitemap-Annuaire.xml</loc>
+        <loc>https://unetaupechezvous.fr//sitemap/sitemap-Annuaire.xml</loc>
       </sitemap>
       <sitemap>
-        <loc>https://unetaupechezvous.fr/sitemap-articles.xml</loc>
+        <loc>https://unetaupechezvous.fr//sitemap/sitemap-Articles.xml</loc>
       </sitemap>
       <sitemap>
-        <loc>https://unetaupechezvous.fr/sitemap-Interventions.xml</loc>
+        <loc>https://unetaupechezvous.fr//sitemap/sitemap-Interventions.xml</loc>
       </sitemap>
       <sitemap>
-        <loc>https://unetaupechezvous.fr/sitemap-p0.6.xml</loc>
+        <loc>https://unetaupechezvous.fr//sitemap/sitemap-p0.6.xml</loc>
       </sitemap>
       <sitemap>
-        <loc>https://unetaupechezvous.fr/sitemap-p1.xml</loc>
+        <loc>https://unetaupechezvous.fr//sitemap/sitemap-p1.xml</loc>
       </sitemap>
     </sitemapindex>
