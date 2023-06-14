@@ -24,7 +24,7 @@ export async function getStaticProps({ params }) {
 export default function Slug({ post }) {
   if (!post) return <Page404 />;
 
-  const descriptionMeta = post.contents.substring(0, 155).replace(/[\r\n]+/gm, '');
+  const descriptionMeta = post.contents && post.contents.substring(0, 155).replace(/[\r\n]+/gm, '');
 
   // schema.org
   function addProductJsonLd() {

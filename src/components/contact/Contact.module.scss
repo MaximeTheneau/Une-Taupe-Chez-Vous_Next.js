@@ -47,29 +47,6 @@
         font-size: 1rem;
         margin: 1rem;
     }
-    & button{
-
-        width: 20rem;
-        height: 3rem;
-        background-color: $color-primary;
-        color: $font-color;
-        border: none;
-        font-weight: bold;
-        cursor: pointer;
-        transition: all 0.3s ease-in-out;
-        display: flex;
-        align-items: center;
-        & i{
-            margin-left: 1rem;
-            transition: transform 0.3s ease-in-out;
-        }
-        &:hover{
-            & i{
-                transform: translateX(1rem) rotate(-10deg) scale(1.2);
-            }
-            color: $color-white;
-        }
-    }
 }
 
 //* Media Queries

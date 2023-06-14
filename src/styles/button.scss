@@ -2,9 +2,15 @@
 
 .button{
     margin: 1rem auto;
+    
 }
 button, .button{
+
+  width: 20rem;
+  height: 3rem;
+  transition: all 0.3s ease-in-out;
     display: flex;
+    align-items: center;
     justify-content: center;
     font-family: $font-secondary;
     border: none;
@@ -17,6 +23,14 @@ button, .button{
     padding: 0.5rem;
     & i{
       margin: 0 0.5rem 0 0;
+      margin-left: 1rem;
+      transition: transform 0.3s ease-in-out;
     }
   
+    &:hover{
+        & i{
+            transform: translateX(1rem) rotate(-10deg) scale(1.2);
+        }
+        color: $color-white;
+    }
   }

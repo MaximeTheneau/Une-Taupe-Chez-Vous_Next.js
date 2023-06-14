@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styles from './DirectoryRegistration.module.scss';
 
 export default function Step3({ formData, setFormData, onNext }) {
   const [error, setError] = useState(null);
@@ -15,8 +16,9 @@ export default function Step3({ formData, setFormData, onNext }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (regex.test(e.target.value)
-     && e.target.value.length < 500) {
+    const { email } = e.target;
+    if (regex.test(email.value)
+     && email.value.length < 500) {
       setError(false);
       onNext();
     }
@@ -24,8 +26,8 @@ export default function Step3({ formData, setFormData, onNext }) {
   };
 
   return (
-    <div>
-      <h2>Étape 3 : Informations personnelles</h2>
+    <div className={styles.directoryRegistration}>
+      <h2>Étape 3</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="location">
           email
@@ -41,16 +43,17 @@ export default function Step3({ formData, setFormData, onNext }) {
             minLength={2}
             maxLength={500}
             name="email"
-            placeholder="exemple@email.com"
+            placeholder="Exemple: xemple@email.com"
             value={formData.email}
             onChange={handleInputChange}
-            onBlur={(e) => {
-              handleSubmit(e);
-            }}
             required
           />
         </label>
-        {/* Ajoutez d'autres champs de formulaire selon vos besoins */}
+        <div className="contact-form_button">
+          <button type="submit">
+            Suivant
+          </button>
+        </div>
       </form>
 
     </div>

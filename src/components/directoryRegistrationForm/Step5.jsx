@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styles from './DirectoryRegistration.module.scss';
 
 export default function Step5({ formData, setFormData, onNext }) {
   const [error, setError] = useState(null);
@@ -13,8 +14,8 @@ export default function Step5({ formData, setFormData, onNext }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const valueLength = e.target.value.length;
-    if (valueLength >= 10 && valueLength <= 120) {
+    const { service } = e.target;
+    if (service.value.length >= 10 && service.value.length < 120) {
       onNext();
       setError(false);
     }
@@ -23,14 +24,14 @@ export default function Step5({ formData, setFormData, onNext }) {
   };
 
   return (
-    <div>
-      <h2>Étape 5 : Informations personnelles</h2>
+    <div className={styles.directoryRegistration}>
+      <h2>Étape 5</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="location">
           {error && (
           <p>
             <i className="icon-error" />
-            Veuillez selectionner un service
+            Veuillez saisir un service valide (entre 10 et 120 caractères)
           </p>
           )}
           Service
@@ -39,16 +40,18 @@ export default function Step5({ formData, setFormData, onNext }) {
             title="Service"
             name="service"
             placeholder="Exemple : Taupier professionnel, Dératisation, Désinsectisation, Désinfection, ..."
-            // maxLength={120}
-            // minLength={10}
+            maxLength={120}
+            minLength={9}
             value={formData.service}
             onChange={handleInputChange}
-            onBlur={(e) => {
-              handleSubmit(e);
-            }}
             required
           />
         </label>
+        <div className="contact-form_button">
+          <button type="submit">
+            Suivant
+          </button>
+        </div>
       </form>
 
     </div>

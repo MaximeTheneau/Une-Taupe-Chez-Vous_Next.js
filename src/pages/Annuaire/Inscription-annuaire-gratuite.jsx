@@ -4,12 +4,11 @@ import Link from 'next/link';
 import styles from '../../styles/Pages.module.scss';
 import imageLoaderFull from '../../utils/imageLoaderFull';
 import Button from '../../components/button/button';
-import AddForm from '../../components/contact/AddForm';
 import DirectoryRegistrationForm from '../../components/directoryRegistrationForm/DirectoryRegistrationForm';
+import TableOfContents from '../../components/tableOfContents/TableOfContents';
 
 export async function getStaticProps() {
   const responseArticles = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`);
-
   const article = await responseArticles.json();
 
   const responsePage = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts/Inscription-annuaire-gratuite`);
@@ -48,21 +47,13 @@ export default function Page({ page, article }) {
         <p>
           {page.contents}
         </p>
+        <TableOfContents post={page} />
         {page.paragraphPosts.map((paragraphPosts) => (
           <>
             <h2>{paragraphPosts.subtitle}</h2>
             <p>{paragraphPosts.paragraph}</p>
           </>
         ))}
-
-        <AddForm
-          article={article}
-        />
-        <h2>Pour toutes questions suplémentaire</h2>
-        <p>
-          Contactez le Webmaster du site, via
-          <Link href="/Contact"> le formulaire de contact</Link>
-        </p>
 
         <DirectoryRegistrationForm
           article={article}

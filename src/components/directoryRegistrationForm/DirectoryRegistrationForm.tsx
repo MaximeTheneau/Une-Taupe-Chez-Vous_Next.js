@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import styles from './DirectoryRegistration.module.scss';
+
 import Page1 from './Page1';
 import Page2 from './Page2';
 import Step3 from './Step3';
@@ -12,19 +14,15 @@ function FormContainer({ article }) {
   const [formHistory, setFormHistory] = useState([1]);
   const [formData, setFormData] = useState({
     name: '',
+    email: '',
     location: '',
     postalCode: '',
     siteWeb: '',
-    services: '',
-    annuaire: '',
-    email: '',
-    // Initialiser les données du formulaire
-    // ...
+    service: '',
+    subject: 'Webmaster',
+
   });
 
-  // const handleStepClick = (step) => {
-  //   setCurrentStep(step);
-  // };
   const formPages = [
     {
       id: 1,
@@ -62,6 +60,11 @@ function FormContainer({ article }) {
       articles: null,
     },
   ];
+
+  const handleStepClick = (step) => {
+    setCurrentStep(step);
+  };
+
   const handleNext = () => {
     const nextStep = currentStep + 1;
     setFormHistory((prevHistory) => {
@@ -77,50 +80,44 @@ function FormContainer({ article }) {
     setCurrentStep(nextStep);
   };
 
+  console.log(formHistory);
   const handlePrevious = () => {
   };
-
-  const handleStepClick = (step) => {
-    setCurrentStep(step);
-  };
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log(formData);
-
-  //   // Soumettre les données du formulaire
-  //   // ...
-  // };
 
   const currentPage = formPages.find((page) => page.id === currentStep);
 
   return (
-    <div>
+    <>
       {currentPage && (
-      <currentPage.component
-        formData={formData}
-        setFormData={setFormData}
-        onNext={handleNext}
-        onStepClick={handleStepClick}
-        onPrevious={handlePrevious}
-        curentStep={currentPage.id}
-        articles={currentPage.articles}
+        <currentPage.component
+          formData={formData}
+          setFormData={setFormData}
+          onNext={handleNext}
+          curentStep={currentPage.id}
+          articles={currentPage.articles}
 
-      />
+        />
       )}
-      <ul role="menu">
-        {formHistory.map((step, index) => (
-          <li
-            role="menuitem"
-            key={step}
-            className={step === currentStep ? 'active' : ''}
-            onKeyDown={() => handleStepClick(step)}
-            onClick={() => handleStepClick(step)}
-          >
-            {step}
-          </li>
-        ))}
-      </ul>
-    </div>
+      <nav className={styles.directoryRegistration__nav}>
+        <ul role="menu" className={styles.directoryRegistration__nav__list}>
+          {formPages.map((step) => (
+            <li
+              role="menuitem"
+              key={step.id}
+              tabIndex={step.id > currentStep ? -1 : 0}
+              className={`${step.id === currentStep ? styles['directoryRegistration__nav__list--active'] : ''} ${styles['directoryRegistration__nav__list--item']} ${formHistory.includes(step.id) ? styles['directoryRegistration__nav__list--validated'] : ''}`}
+              onKeyDown={() => handleStepClick(step.id)}
+              onClick={() => (
+                formHistory.includes(step.id)
+                  ? handleStepClick(step.id) : null
+              )}
+            >
+              {step.id}
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </>
   );
 }
 

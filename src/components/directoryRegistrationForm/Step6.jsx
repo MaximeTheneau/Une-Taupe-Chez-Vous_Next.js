@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styles from './DirectoryRegistration.module.scss';
 
 export default function Step6({
   formData, setFormData, onNext, articles,
@@ -24,8 +25,8 @@ export default function Step6({
   };
 
   return (
-    <div>
-      <h2>Étape 5 : Informations personnelles</h2>
+    <div className={styles.directoryRegistration}>
+      <h2>Étape 5</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="directory">
           Choisissez un annuaire
@@ -40,22 +41,19 @@ export default function Step6({
             name="directory"
             value={formData.directory}
             onChange={handleInputChange}
-            onBlur={(e) => {
-              handleSubmit(e);
-            }}
             required
+            aria-invalid={error ? 'true' : 'false'}
 
           >
-            <option disabled selected> Sélectionner un annuaire</option>
+            <option value=""> Sélectionner un annuaire</option>
             {articles.map((article) => (
-              <option key={article.id} value={article.id}>{article.title}</option>
+              <option key={article.id} value={article.title}>{article.title}</option>
             ))}
           </select>
         </label>
         <div className="contact-form_button">
           <button type="submit">
-            Envoyer
-            <i className="icon-paper-plane" />
+            Suivant
           </button>
         </div>
       </form>

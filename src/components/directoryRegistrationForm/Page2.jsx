@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styles from './DirectoryRegistration.module.scss';
 
 function Page2({
   formData, setFormData, onNext, onStepClick, curentStep,
@@ -15,16 +16,27 @@ function Page2({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (e.target.value.length !== 2) {
+    const { location, postalCode } = e.target;
+    if (location.value.length > 3 && location.value.length < 120 && postalCode.value.length === 2) {
       onNext();
+      setError(false);
     }
-    setError(false);
+
+    setError(true);
   };
 
   return (
-    <div>
+    <div className={styles.directoryRegistration}>
       <h2>Étape 2 : Informations personnelles</h2>
+
       <form onSubmit={handleSubmit}>
+        {error && (
+        <p>
+          <i className="icon-error" />
+          Veuillez entrez un code postal valide (2 chiffres)
+          et une localisation valide (entre 2 et 120 caractères)
+        </p>
+        )}
         <label htmlFor="location">
           Localisation
           <input
@@ -40,12 +52,7 @@ function Page2({
           />
         </label>
         <label htmlFor="postalCode">
-          {error && (
-          <p>
-            <i className="icon-error" />
-            Veuillez entrez un code postal valide (2 chiffres)
-          </p>
-          )}
+
           Code postal
           <input
             type="text"
@@ -56,17 +63,14 @@ function Page2({
             minLength={2}
             maxLength={2}
             onChange={handleInputChange}
-            onBlur={(e) => {
-              if (e.target.value.length !== 2) {
-                setError(true);
-              } else {
-                setError(false);
-                onNext();
-              }
-            }}
             required
           />
         </label>
+        <div className="contact-form_button">
+          <button type="submit">
+            Suivant
+          </button>
+        </div>
       </form>
     </div>
   );

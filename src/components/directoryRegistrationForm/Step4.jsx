@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styles from './DirectoryRegistration.module.scss';
 
 export default function Step4({ formData, setFormData, onNext }) {
   const [error, setError] = useState(null);
@@ -14,9 +15,10 @@ export default function Step4({ formData, setFormData, onNext }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (e.target.value.length > 2
-       || e.target.value.length < 500
-       || !regexPattern.test(e.target.value)) {
+    const { siteWeb } = e.target;
+    if (siteWeb.value.length > 2
+       && siteWeb.value.length < 500
+       && regexPattern.test(siteWeb.value)) {
       onNext();
       setError(false);
     }
@@ -25,14 +27,14 @@ export default function Step4({ formData, setFormData, onNext }) {
   };
 
   return (
-    <div>
-      <h2>Étape 4 : Informations personnelles</h2>
+    <div className={styles.directoryRegistration}>
+      <h2>Étape 4</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="location">
           {error && (
           <p>
             <i className="icon-error" />
-            Veuillez entrez un lien valide (https://www.exemple.com)
+            Veuillez entrez un lien valide (Exemple : https://www.exemple.com)
           </p>
           )}
           Site web
@@ -42,15 +44,17 @@ export default function Step4({ formData, setFormData, onNext }) {
             name="siteWeb"
             placeholder="Exemple : https://www.exemple.com"
             value={formData.siteWeb}
-            minLength={2}
+            minLength={7}
             maxLength={120}
             onChange={handleInputChange}
-            onBlur={(e) => {
-              handleSubmit(e);
-            }}
             required
           />
         </label>
+        <div className="contact-form_button">
+          <button type="submit">
+            Suivant
+          </button>
+        </div>
       </form>
 
     </div>

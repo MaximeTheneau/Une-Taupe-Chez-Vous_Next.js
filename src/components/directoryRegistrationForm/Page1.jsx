@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
+import styles from './DirectoryRegistration.module.scss';
 
 function Page1({
-  formData, setFormData, onNext, onStepClick, curentStep,
+  formData, setFormData, onNext, curentStep,
 }) {
   const [error, setError] = useState(null);
 
-  console.log(curentStep);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -17,45 +17,43 @@ function Page1({
   const handleSubmit = (e) => {
     e.preventDefault();
     const { name } = e.target;
-    if (name.value.length > 3 || name.value.length < 120) {
+    if (name.value.length >= 2 && name.value.length < 120) {
       onNext();
+      setError(false);
     }
-    setError(false);
-    console.log(error);
+
+    setError(true);
   };
 
   return (
-    <div>
-      <h2>Étape 1 : Informations personnelles</h2>
+    <div className={styles.directoryRegistration}>
+      <h2>Étape 1</h2>
 
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">
           {error && (
           <p>
             <i className="icon-error" />
-            Veuillez entrez un nom d&apos;entreprise valide
+            Veuillez entrez un nom d&apos;entreprise valide (entre 2 et 120 caractères)
           </p>
           )}
           Raison sociale
           <input
-            placeholder="nom de l'entreprise"
+            placeholder="Exemple: Une Taupe Chez Vous"
             type="text"
             id="name"
             name="name"
             value={formData.name}
             onChange={handleInputChange}
             maxLength={120}
-            onBlur={(e) => {
-              if (e.target.value.length < 3 || e.target.value.length >= 120) {
-                console.log('error');
-                setError(true);
-              } else {
-                setError(false);
-                onNext();
-              }
-            }}
+            minLength={2}
           />
         </label>
+        <div className="contact-form_button">
+          <button type="submit">
+            Suivant
+          </button>
+        </div>
       </form>
     </div>
   );
