@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import styles from './Navbar.module.scss';
+import SearchPage from '../search/SearchPage';
 
 export default function Navbar() {
   const [toggleNav, setToggleNav] = useState(false);
@@ -91,7 +92,7 @@ export default function Navbar() {
           </ul>
         ) : ''}
       </nav>
-
+      {/* <SearchPage /> */}
     </>
 
   );

@@ -83,6 +83,9 @@ const generateSitemap = async () => {
     'Inscription-annuaire-gratuite',
     'Mentions-Legales',
     'Plan-de-site-Une-Taupe-Chez-Vous',
+    'Page-de-recherche',
+    'Temoignages',
+    'Tarifs',
   ].includes(page.slug));
 
   urlsNoPriority.forEach((page) => {

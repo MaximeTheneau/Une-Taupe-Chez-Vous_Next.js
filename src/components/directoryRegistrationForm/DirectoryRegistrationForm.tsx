@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import styles from './DirectoryRegistration.module.scss';
 
-import Page1 from './Page1';
-import Page2 from './Page2';
-import Step3 from './Step3';
-import Step4 from './Step4';
-import Step5 from './Step5';
-import Step6 from './Step6';
-import Step7 from './Step7';
+import Step1 from './step/Step1';
+import Step2 from './step/Step2';
+import Step3 from './step/Step3';
+import Step4 from './step/Step4';
+import Step5 from './step/Step5';
+import Step6 from './step/Step6';
+import Step7 from './step/Step7';
 
 function FormContainer({ article }) {
   const [currentStep, setCurrentStep] = useState(1);
@@ -26,12 +26,12 @@ function FormContainer({ article }) {
   const formPages = [
     {
       id: 1,
-      component: Page1,
+      component: Step1,
       articles: null,
     },
     {
       id: 2,
-      component: Page2,
+      component: Step2,
       articles: null,
     },
     {

@@ -29,7 +29,7 @@ export async function getStaticProps({ params }) {
     };
   }
 
-  const responsePage = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts/Subcategory`);
+  const responsePage = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts/Sous-categories`);
   const page = await responsePage.json();
 
   return {

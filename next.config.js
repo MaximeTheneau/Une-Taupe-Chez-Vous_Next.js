@@ -3,14 +3,25 @@ const path = require('path');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async rewrites() {
+    return [
+      {
+        source: '/Page-de-recherche',
+        destination: '/search',
+      },
+      {
+        source: '/Temoignages',
+        destination: '/testimonials',
+      },
+      {
+        source: '/Tarifs',
+        destination: '/pricing',
+      },
+    ];
+  },
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
-  // exportPathMap: async function () {
-  //   return {
-  //     
-  //   };
-  // },
   reactStrictMode: true,
   swcMinify: true,
   images: {

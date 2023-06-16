@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import styles from './DirectoryRegistration.module.scss';
+import styles from '../DirectoryRegistration.module.scss';
 
-function Page1({
+function Step1({
   formData, setFormData, onNext, curentStep,
 }) {
   const [error, setError] = useState(null);
@@ -59,4 +59,4 @@ function Page1({
   );
 }
 
-export default Page1;
+export default Step1;

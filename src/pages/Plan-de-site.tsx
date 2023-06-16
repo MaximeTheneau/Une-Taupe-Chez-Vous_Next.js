@@ -74,6 +74,11 @@ export default function SiteMapPage({
                 </Link>
               </li>
               <li>
+                <Link href="/Tarifs">
+                  Tarifs
+                </Link>
+              </li>
+              <li>
                 <Link href="/Mentions-Legales">
                   Mentions légales
                 </Link>

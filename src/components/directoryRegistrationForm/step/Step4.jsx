@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import styles from './DirectoryRegistration.module.scss';
+import styles from '../DirectoryRegistration.module.scss';
 
-export default function Step3({ formData, setFormData, onNext }) {
+export default function Step4({ formData, setFormData, onNext }) {
   const [error, setError] = useState(null);
 
   const handleInputChange = (e) => {
@@ -11,40 +11,41 @@ export default function Step3({ formData, setFormData, onNext }) {
       [name]: value,
     }));
   };
-
-  const regex = /^(([^<>()[\]\\.,;:\s@\\"]+(\.[^<>()[\]\\.,;:\s@\\"]+)*)|(\\".+\\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const regexPattern = /^(https:\/\/)/;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { email } = e.target;
-    if (regex.test(email.value)
-     && email.value.length < 500) {
-      setError(false);
+    const { siteWeb } = e.target;
+    if (siteWeb.value.length > 2
+       && siteWeb.value.length < 500
+       && regexPattern.test(siteWeb.value)) {
       onNext();
+      setError(false);
     }
+
     setError(true);
   };
 
   return (
     <div className={styles.directoryRegistration}>
-      <h2>Étape 3</h2>
+      <h2>Étape 4</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="location">
-          email
           {error && (
           <p>
             <i className="icon-error" />
-            Veuillez entrez un email valide
+            Veuillez entrez un lien valide (Exemple : https://www.exemple.com)
           </p>
           )}
+          Site web
           <input
-            type="email"
-            title="Email"
-            minLength={2}
-            maxLength={500}
-            name="email"
-            placeholder="Exemple: xemple@email.com"
-            value={formData.email}
+            type="text"
+            title="Location"
+            name="siteWeb"
+            placeholder="Exemple : https://www.exemple.com"
+            value={formData.siteWeb}
+            minLength={7}
+            maxLength={120}
             onChange={handleInputChange}
             required
           />

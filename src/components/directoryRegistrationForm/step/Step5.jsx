@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import styles from './DirectoryRegistration.module.scss';
+import styles from '../DirectoryRegistration.module.scss';
 
-export default function Step6({
-  formData, setFormData, onNext, articles,
-}) {
+export default function Step5({ formData, setFormData, onNext }) {
   const [error, setError] = useState(null);
 
   const handleInputChange = (e) => {
@@ -16,11 +14,12 @@ export default function Step6({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const valueLength = e.target.value;
-    if (articles.filter((article) => article.id === valueLength)) {
+    const { service } = e.target;
+    if (service.value.length >= 10 && service.value.length < 120) {
       onNext();
       setError(false);
     }
+
     setError(true);
   };
 
@@ -28,28 +27,25 @@ export default function Step6({
     <div className={styles.directoryRegistration}>
       <h2>Étape 5</h2>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="directory">
-          Choisissez un annuaire
+        <label htmlFor="location">
           {error && (
           <p>
             <i className="icon-error" />
-            Veuillez choisir un annuaire
+            Veuillez saisir un service valide (entre 10 et 120 caractères)
           </p>
           )}
-          <select
-            className="contact-form-input"
-            name="directory"
-            value={formData.directory}
+          Service
+          <input
+            type="text"
+            title="Service"
+            name="service"
+            placeholder="Exemple : Taupier professionnel, Dératisation, Désinsectisation, Désinfection, ..."
+            maxLength={120}
+            minLength={9}
+            value={formData.service}
             onChange={handleInputChange}
             required
-            aria-invalid={error ? 'true' : 'false'}
-
-          >
-            <option value=""> Sélectionner un annuaire</option>
-            {articles.map((article) => (
-              <option key={article.id} value={article.title}>{article.title}</option>
-            ))}
-          </select>
+          />
         </label>
         <div className="contact-form_button">
           <button type="submit">

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import styles from '../../styles/Pages.module.scss';
 import Page404 from '../404';
 import imageLoaderFull from '../../utils/imageLoaderFull';
+import TableOfContents from '../../components/tableOfContents/TableOfContents';
 
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Interventions`);
@@ -79,7 +80,6 @@ export default function Slug({ post }) {
       </Head>
       <div className={styles.page}>
         <div className={styles.page__image}>
-
           <Image
             src={`${post.slug}.webp`}
             alt={post.altImg || post.title}
@@ -95,6 +95,7 @@ export default function Slug({ post }) {
         <div>
           <h1>{post.title}</h1>
           <p>{post.contents}</p>
+          <TableOfContents post={post}/>
           {post.paragraphPosts.map((paragraphPosts) => (
             <>
               <h2>{paragraphPosts.subtitle}</h2>

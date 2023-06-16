@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import styles from './DirectoryRegistration.module.scss';
+import styles from '../DirectoryRegistration.module.scss';
 
-export default function Step5({ formData, setFormData, onNext }) {
+export default function Step3({ formData, setFormData, onNext }) {
   const [error, setError] = useState(null);
 
   const handleInputChange = (e) => {
@@ -12,37 +12,39 @@ export default function Step5({ formData, setFormData, onNext }) {
     }));
   };
 
+  const regex = /^(([^<>()[\]\\.,;:\s@\\"]+(\.[^<>()[\]\\.,;:\s@\\"]+)*)|(\\".+\\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { service } = e.target;
-    if (service.value.length >= 10 && service.value.length < 120) {
-      onNext();
+    const { email } = e.target;
+    if (regex.test(email.value)
+     && email.value.length < 500) {
       setError(false);
+      onNext();
     }
-
     setError(true);
   };
 
   return (
     <div className={styles.directoryRegistration}>
-      <h2>Étape 5</h2>
+      <h2>Étape 3</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="location">
+          email
           {error && (
           <p>
             <i className="icon-error" />
-            Veuillez saisir un service valide (entre 10 et 120 caractères)
+            Veuillez entrez un email valide
           </p>
           )}
-          Service
           <input
-            type="text"
-            title="Service"
-            name="service"
-            placeholder="Exemple : Taupier professionnel, Dératisation, Désinsectisation, Désinfection, ..."
-            maxLength={120}
-            minLength={9}
-            value={formData.service}
+            type="email"
+            title="Email"
+            minLength={2}
+            maxLength={500}
+            name="email"
+            placeholder="Exemple: xemple@email.com"
+            value={formData.email}
             onChange={handleInputChange}
             required
           />
