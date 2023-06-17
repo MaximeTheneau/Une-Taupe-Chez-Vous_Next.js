@@ -7,6 +7,9 @@ import Cards from '../../../components/cards/cards';
 import Category from '../../../components/category/category';
 import imageLoaderFull from '../../../utils/imageLoaderFull';
 import TableOfContents from '../../../components/tableOfContents/TableOfContents';
+import Page404 from '../../404';
+import { fetcher } from '../../../utils/fetcher';
+import useSWR from 'swr';
 
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Articles`);
@@ -25,28 +28,20 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const { subcategory, slug } = params;
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts/${params.slug}`);
-  const post = await res.json();
+  const responsePost = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/${slug}`);
+  const responseDesc = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&filter=desc&category=articles`);
 
-  const resDesc = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&filter=desc&category=articles`);
-  const desc = await resDesc.json();
-  if (!post) {
-    return {
-      notFound: true,
-    };
-  }
-
-  if (!desc) {
-    return {
-      notFound: true,
-    };
-  }
-
-  return { props: { post, desc }, revalidate: 10 };
+  return { props: { responsePost, responseDesc }, revalidate: 10 };
 }
 
-export default function Slug({ post, desc }) {
-  console.log(post);
+export default function Slug({ responsePost, responseDesc }) {
+
+  const { data: postData } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/${responsePost.slug}`);
+  const { data: descData } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&filter=desc&category=articles`);
+  
+  const post = postData || responsePost;
+  const desc = descData || responseDesc;
+
   const descriptionMeta = post.contents === null
     ? `Articles de blog ${post.title}`
     : post.contents.substring(0, 165).replace(/[\r\n]+/gm, '');

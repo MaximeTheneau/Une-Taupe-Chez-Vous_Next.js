@@ -6,19 +6,24 @@ import imageLoaderFull from '../utils/imageLoaderFull';
 import GoogleMaps from '../components/maps/GoogleMaps';
 import Button from '../components/button/button';
 import NotCopie from '../components/notCopie/NotCopie';
+import { fetcher } from '../utils/fetcher';
+import useSWR from 'swr';
 
 export async function getStaticProps() {
-  const responsePage = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts/Taupier-agree-professionnel-depuis-1994`);
-  const page = await responsePage.json();
+  const responsePage = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Taupier-agree-professionnel-depuis-1994`);
 
   return {
     props: {
-      page,
+      responsePage,
     },
   };
 }
-// == Composant
-export default function QuiSommesNous({ page }) {
+
+export default function TaupierPage({ responsePage }) {
+  const { data: pageSwr } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/Taupier-agree-professionnel-depuis-1994`, fetcher);
+
+  const page = pageSwr || responsePage;
+
   const descriptionMeta = page.contents.substring(0, 165).replace(/[\r\n]+/gm, '');
 
   return (

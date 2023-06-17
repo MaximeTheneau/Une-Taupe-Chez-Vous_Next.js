@@ -6,6 +6,8 @@ import styles from '../../styles/Pages.module.scss';
 import Page404 from '../404';
 import imageLoaderFull from '../../utils/imageLoaderFull';
 import TableOfContents from '../../components/tableOfContents/TableOfContents';
+import useSWR  from 'swr';
+import { fetcher } from '../../utils/fetcher';
 
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Interventions`);
@@ -16,14 +18,15 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts/${params.slug}`);
-  const post = await res.json();
+  const responsePosts = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/${params.slug}`);
 
-  return { props: { post }, revalidate: 10 };
+  return { props: { responsePosts }, revalidate: 10 };
 }
 
-export default function Slug({ post }) {
-  if (!post) return <Page404 />;
+export default function Slug({ responsePosts }) {
+  const { data } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/${responsePosts.slug}`);
+
+  const post = data || responsePosts;
 
   const descriptionMeta = post.contents && post.contents.substring(0, 155).replace(/[\r\n]+/gm, '');
 
@@ -112,26 +115,26 @@ export default function Slug({ post }) {
   );
 }
 
-Slug.propTypes = {
-  post: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    subtitle: PropTypes.string.isRequired,
-    contents: PropTypes.string.isRequired,
-    contents2: PropTypes.string.isRequired,
-    slug: PropTypes.string.isRequired,
-    updatedAt: PropTypes.string.isRequired,
-    createdAt: PropTypes.string.isRequired,
-    imgPost: PropTypes.shape({
-      path: PropTypes.string.isRequired,
-    }),
-    imgPost2: PropTypes.shape({
-      path: PropTypes.string,
-    }),
-    imgPost3: PropTypes.shape({
-      path: PropTypes.string,
-    }),
-    imgPost4: PropTypes.shape({
-      path: PropTypes.string,
-    }),
-  }).isRequired,
-};
+// Slug.propTypes = {
+//   post: PropTypes.shape({
+//     title: PropTypes.string.isRequired,
+//     subtitle: PropTypes.string.isRequired,
+//     contents: PropTypes.string.isRequired,
+//     contents2: PropTypes.string.isRequired,
+//     slug: PropTypes.string.isRequired,
+//     updatedAt: PropTypes.string.isRequired,
+//     createdAt: PropTypes.string.isRequired,
+//     imgPost: PropTypes.shape({
+//       path: PropTypes.string.isRequired,
+//     }),
+//     imgPost2: PropTypes.shape({
+//       path: PropTypes.string,
+//     }),
+//     imgPost3: PropTypes.shape({
+//       path: PropTypes.string,
+//     }),
+//     imgPost4: PropTypes.shape({
+//       path: PropTypes.string,
+//     }),
+//   }).isRequired,
+// };

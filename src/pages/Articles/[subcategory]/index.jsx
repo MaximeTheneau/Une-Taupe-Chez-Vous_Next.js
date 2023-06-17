@@ -3,6 +3,10 @@ import Head from 'next/head';
 import Cards from '../../../components/cards/cards';
 import Category from '../../../components/category/category';
 import styles from '../../../styles/Pages.module.scss';
+import useSWR from 'swr';
+import Page404 from '../../404';
+import { fetcher } from '../../../utils/fetcher';
+
 
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Articles`);
@@ -20,30 +24,31 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const { subcategory } = params;
 
-  const responseArticles = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&subcategory=${subcategory}`);
-  const articles = await responseArticles.json();
-
-  if (!articles) {
-    return {
-      notFound: true,
-    };
-  }
-
-  const responsePage = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts/Sous-categories`);
-  const page = await responsePage.json();
+  const responseArticles = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&subcategory=${subcategory}`);
+  const responsePage = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Sous-categories`);
 
   return {
     props: {
-      articles,
-      page,
+      responseArticles,
+      responsePage,
     },
     revalidate: 10,
   };
 }
 
-export default function Home({ articles, page }) {
+export default function Home({ responseArticles, responsePage }) {
+
+  const { subcategory } = responseArticles[0];
+
+  const { data: articlesData } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts&subcategory=${subcategory.slug}`, fetcher);
+  const { data: pageData } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/Sous-categories`, fetcher);
+
+  const articles = articlesData || responseArticles;
+  const page = pageData || responsePage;
+
+
+
   const descriptionMeta = page.contents.substring(0, 155).replace(/[\r\n]+/gm, '');
-  const { subcategory } = articles[0];
   return (
     <>
       <Head>

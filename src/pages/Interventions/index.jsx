@@ -2,38 +2,27 @@
 import Head from 'next/head';
 import Cards from '../../components/cards/cards';
 import styles from '../../styles/Pages.module.scss';
+import { fetcher } from '../../utils/fetcher';
+import useSWR from 'swr';
 
 export async function getStaticProps() {
-  const responseArticles = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Interventions`);
-  const articles = await responseArticles.json();
-
-  const responsePage = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts/Interventions`);
-  const page = await responsePage.json();
+  const responseArticles = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Interventions`);
+  const responsePage = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Interventions`);
 
   return {
     props: {
-      articles,
-      page,
+      responseArticles,
+      responsePage,
     },
   };
 }
 
-export default function Home({ articles, page }) {
-//   const descriptionMeta = articles.contents.substring(0, 155).replace(/[\r\n]+/gm, '');
-//   const jsonData = {
-//     context: 'https://schema.org',
-//     type: 'Service',
-//     name: 'Une taupe chez vous',
-//     url: `${process.env.NEXT_PUBLIC_URL}`,
-//     description: `${descriptionMeta}`,
-//     category: 'Articles, Taupiers, Destruction de taupes, Taupes',
-//     image: `${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/Accueil.jpg`,
-//     termsOfService: `${process.env.NEXT_PUBLIC_URL}/page/mentions-legales`,
-//     sameA: [
-//       'https://www.facebook.com/Une-Taupe-Chez-Vous',
-//       'https://www.linkedin.com/company/unetaupechezvous/',
-//     ],
-//   };
+export default function Home({ responseArticles, responsePage }) {
+  const { data: articlesSwr } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Interventions`, fetcher);
+  const { data: pageSwr } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/Interventions`, fetcher);
+
+  const page = pageSwr || responsePage;
+  const articles = articlesSwr || responseArticles;
   return (
     <>
       <Head>

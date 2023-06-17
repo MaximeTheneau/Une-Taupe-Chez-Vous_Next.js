@@ -6,26 +6,34 @@ import Category from '../../components/category/category';
 import styles from '../../styles/Pages.module.scss';
 import stylesNav from '../../components/category/Category.module.scss';
 import AnimationHover from '../../hooks/useHoverAnimation/CloneTextWrapper';
+import useSWR from 'swr';
+import Page404 from '../404';
+import { fetcher } from '../../utils/fetcher';
 
 export async function getStaticProps() {
-  const responsePage = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts/Articles`);
-  const page = await responsePage.json();
-
-  const responseArticles = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Articles`);
-  const articles = await responseArticles.json();
-
-  const responseSubcategory = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=subcategory`);
-  const subcategory = await responseSubcategory.json();
+  const responsePage = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Articles`);
+  const responseArticles = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Articles`);
+  const responseSubcategory = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=subcategory`);
+  
   return {
     props: {
-      articles,
-      page,
-      subcategory,
+      responseArticles,
+      responsePage,
+      responseSubcategory,
     },
   };
 }
 
-export default function Home({ page, articles, subcategory }) {
+export default function Home({ responsePage, responseArticles, responseSubcategory }) {
+  const { data: pageData } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/Articles`, fetcher);
+  const { data: articlesData } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Articles`, fetcher);
+  const { data: subcategoryData } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=subcategory`, fetcher);
+
+  const page = pageData || responsePage;
+  const articles = articlesData || responseArticles;
+  const subcategory = subcategoryData || responseSubcategory;
+
+
   const descriptionMeta = page.contents.substring(0, 165).replace(/[\r\n]+/gm, '');
 
   return (

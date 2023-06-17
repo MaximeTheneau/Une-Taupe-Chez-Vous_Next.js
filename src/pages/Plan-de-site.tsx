@@ -1,33 +1,40 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import styles from '../styles/SiteMap.module.scss';
+import { fetcher } from '../utils/fetcher';
+import useSWR from 'swr';
 
 export async function getStaticProps() {
-  const responsePage = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts/Plan-de-site-Une-Taupe-Chez-Vous`);
-  const page = await responsePage.json();
+  const responsePage = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Plan-de-site-Une-Taupe-Chez-Vous`);
+  const responseInterventions = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Interventions`);
+  const responseSubcategory = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=subcategory`);
+  const responseAnnuaire = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`);
 
-  const responseInterventions = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Interventions`);
-  const interventions = await responseInterventions.json();
-
-  const responseSubcategory = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=subcategory`);
-  const subcategory = await responseSubcategory.json();
-
-  const responseAnnuaire = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`);
-  const annuaire = await responseAnnuaire.json();
   return {
     props: {
-      page,
-      interventions,
-      subcategory,
-      annuaire,
+      responsePage,
+      responseInterventions,
+      responseSubcategory,
+      responseAnnuaire,
     },
   };
 }
 
-// == Components
 export default function SiteMapPage({
-  page, interventions, subcategory, annuaire,
+  responsePage,
+  responseInterventions,
+  responseSubcategory,
+  responseAnnuaire,
 }) {
+  const { data: pageSwr } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/Plan-de-site-Une-Taupe-Chez-Vous`, fetcher);
+  const { data: interventionsSwr } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Interventions`, fetcher);
+  const { data: subcategorySwr } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=subcategory`, fetcher);
+  const { data: annuaireSwr } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`, fetcher);
+
+  const page = pageSwr || responsePage;
+  const interventions = interventionsSwr || responseInterventions;
+  const subcategory = subcategorySwr || responseSubcategory;
+  const annuaire = annuaireSwr || responseAnnuaire;
   return (
     <>
       <Head>

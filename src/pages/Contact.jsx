@@ -5,20 +5,23 @@ import styles from '../styles/Pages.module.scss';
 import imageLoaderFull from '../utils/imageLoaderFull';
 import NotCopie from '../components/notCopie/NotCopie';
 import Link from 'next/link';
+import { fetcher } from '../utils/fetcher';
+import useSWR from 'swr';
 
 export async function getStaticProps() {
-  const responseContact = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts/Contact`);
-  const page = await responseContact.json();
+  const responsePage = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Contact`);
 
   return {
     props: {
-      page,
+      responsePage,
     },
   };
 }
 
-// == Composant
-export default function Contact({ page }) {
+export default function Contact({ responsePage }) {
+  const { data: pageSwr } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/Contact`, fetcher);
+
+  const page = pageSwr || responsePage
   return (
     <>
       <Head>

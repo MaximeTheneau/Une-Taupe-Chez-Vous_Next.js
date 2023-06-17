@@ -2,23 +2,27 @@
 import Head from 'next/head';
 import Cards from '../../components/cards/cards';
 import styles from '../../styles/Pages.module.scss';
+import { fetcher } from '../../utils/fetcher';
+import useSWR from 'swr';
 
 export async function getStaticProps() {
-  const responseArticles = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`);
-  const articles = await responseArticles.json();
-
-  const responsePage = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts/Annuaire`);
-  const page = await responsePage.json();
+  const responseArticles = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`);
+  const responsePage = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Annuaire`);
 
   return {
     props: {
-      articles,
-      page,
+      responseArticles,
+      responsePage,
     },
   };
 }
 
-export default function Home({ articles, page }) {
+export default function Home({ responseArticles, responsePage }) {
+  const { data: articlesSwr } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`, fetcher);
+  const { data: pageSwr } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/Annuaire`, fetcher);
+
+const page = pageSwr || responsePage;
+const articles = articlesSwr || responseArticles;
 //   const descriptionMeta = articles.contents.substring(0, 155).replace(/[\r\n]+/gm, '');
 //   const jsonData = {
 //     context: 'https://schema.org',

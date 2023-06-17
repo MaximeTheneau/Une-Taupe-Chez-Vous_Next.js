@@ -6,7 +6,6 @@ export default function middleware(req, apiPath, handleResponse200, handleRespon
     headers: { 'Content-Type': 'application/json'},
     body: JSON.stringify(req),
   };
-  console.log(req);
   fetch(`${process.env.NEXT_PUBLIC_API_URL}${apiPath}`, requestOptions)
   .then((response) => {
     if (response.ok) {

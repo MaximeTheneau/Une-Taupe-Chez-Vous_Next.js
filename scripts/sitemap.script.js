@@ -82,7 +82,7 @@ const generateSitemap = async () => {
     'Annuaire',
     'Inscription-annuaire-gratuite',
     'Mentions-Legales',
-    'Plan-de-site-Une-Taupe-Chez-Vous',
+    'Plan-de-site',
     'Page-de-recherche',
     'Temoignages',
     'Tarifs',

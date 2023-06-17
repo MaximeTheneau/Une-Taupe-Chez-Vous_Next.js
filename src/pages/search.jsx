@@ -23,7 +23,7 @@ export async function getStaticProps() {
   };
 }
 
-export default function Search({ page, articles,  }) {
+export default function search({ page, articles,  }) {
   const [searchValue, setSearchValue] = useState('');
   const handleSearch = (value) => {
     setSearchValue(value);

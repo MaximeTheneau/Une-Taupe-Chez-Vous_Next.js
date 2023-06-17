@@ -5,6 +5,8 @@ import Link from 'next/link';
 import styles from '../../styles/Pages.module.scss';
 import Page404 from '../404';
 import imageLoaderFull from '../../utils/imageLoaderFull';
+import { fetcher } from '../../utils/fetcher';
+import useSWR from 'swr';
 
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`);
@@ -15,14 +17,16 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts/${params.slug}`);
-  const post = await res.json();
+  const postInit = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/${params.slug}`);
 
-  return { props: { post }, revalidate: 10 };
+  return { props: { postInit }, revalidate: 10 };
 }
 
-export default function Slug({ post }) {
-  if (!post) return <Page404 />;
+export default function Slug({ postInit }) {
+  const { data: postData } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/${postInit.slug}`, fetcher);
+
+  const post = postData || postInit;
+  
 
   const descriptionMeta = post.contents.substring(0, 155).replace(/[\r\n]+/gm, '');
 

@@ -8,7 +8,7 @@ export default function TableOfContents({ post }) {
       <ul className={styles.tableOfContents__list}>
         {post.paragraphPosts.map((paragraphArticle) => (
           <li key={paragraphArticle.slug} className={styles.tableOfContents__item}>
-            <a href={`#${paragraphArticle.slug}`} className={styles.tableOfContents__link}>{paragraphArticle.subtitle}</a>
+            <a href={`.#${paragraphArticle.slug}`} className={styles.tableOfContents__link}>{paragraphArticle.subtitle}</a>
           </li>
         ))}
       </ul>

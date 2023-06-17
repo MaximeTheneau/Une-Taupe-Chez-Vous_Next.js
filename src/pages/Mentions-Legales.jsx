@@ -3,20 +3,23 @@ import Image from 'next/image';
 import styles from '../styles/Pages.module.scss';
 import imageLoaderFull from '../utils/imageLoaderFull';
 import Button from '../components/button/button';
+import { fetcher } from '../utils/fetcher';
+import useSWR from 'swr';
 
 export async function getStaticProps() {
-  const responsePage = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts/Mentions-Legales`);
-  const page = await responsePage.json();
+  const responsePage = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Mentions-Legales`);
 
   return {
     props: {
-      page,
+      responsePage,
     },
   };
 }
 
-// == Composant
-export default function MentionsLegal({ page }) {
+export default function MentionsLegal({ responsePage }) {
+  const { data: pageSwr } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/Mentions-Legales`, fetcher);
+
+  const page = pageSwr || responsePage;
   return (
     <>
       <Head>

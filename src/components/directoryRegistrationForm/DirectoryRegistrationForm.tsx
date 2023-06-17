@@ -80,7 +80,6 @@ function FormContainer({ article }) {
     setCurrentStep(nextStep);
   };
 
-  console.log(formHistory);
   const handlePrevious = () => {
   };
 

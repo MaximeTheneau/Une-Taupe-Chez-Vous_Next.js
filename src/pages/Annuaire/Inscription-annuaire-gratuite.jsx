@@ -6,24 +6,28 @@ import imageLoaderFull from '../../utils/imageLoaderFull';
 import Button from '../../components/button/button';
 import DirectoryRegistrationForm from '../../components/directoryRegistrationForm/DirectoryRegistrationForm';
 import TableOfContents from '../../components/tableOfContents/TableOfContents';
+import { fetcher } from '../../utils/fetcher';
+import useSWR from 'swr';
 
 export async function getStaticProps() {
-  const responseArticles = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`);
-  const article = await responseArticles.json();
-
-  const responsePage = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts/Inscription-annuaire-gratuite`);
-  const page = await responsePage.json();
+  const responseArticles = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`);
+  const responsePage = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Inscription-annuaire-gratuite`);
 
   return {
     props: {
-      page,
-      article,
+      responseArticles,
+      responsePage,
     },
   };
 }
 
 // == Composant
-export default function Page({ page, article }) {
+export default function Page({ responsePage, responseArticles }) {
+  const { data: articleSwr } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`, fetcher);
+  const { data: pageSwr } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/Inscription-annuaire-gratuite`, fetcher);
+
+  const page = pageSwr || responsePage;
+  const article = articleSwr || responseArticles;
   return (
     <>
       <Head>

@@ -9,33 +9,50 @@ import ScrollParallaxTop from '../hooks/useMovableElement/ScrollParallaxTopWrapp
 import imageLoaderFull from '../utils/imageLoaderFull';
 import imageThumbnail from '../utils/imageThumbnail';
 import AnimationHover from '../hooks/useHoverAnimation/CloneTextWrapper';
+import useSWR from 'swr';
+import { fetcher } from '../utils/fetcher';
 
 export async function getStaticProps() {
-  const responseAccueil = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts/Accueil`);
-  const accueil = await responseAccueil.json();
-
-  const responseServices = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&category=Interventions`);
-  const services = await responseServices.json();
-
-  const responseArticles = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&category=Articles`);
-  const articles = await responseArticles.json();
-
-  const responseFaq = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts/Foire-aux-questions`);
-  const faq = await responseFaq.json();
+  const accueilInit = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Accueil`);
+  const servicesInit = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&category=Interventions`);
+  const articlesInit = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&category=Articles`);
+  const faqInit = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Foire-aux-questions`);
 
   return {
     props: {
-      accueil,
-      services,
-      articles,
-      faq,
+      accueilInit,
+      servicesInit,
+      articlesInit,
+      faqInit,
     },
   };
 }
 
 export default function Home({
-  accueil, services, articles, faq,
+  accueilInit, servicesInit, articlesInit, faqInit,
 }) {
+
+
+  const { data: accueilSwr } = useSWR(
+    `${process.env.NEXT_PUBLIC_API_URL}posts/Accueil`, fetcher
+  );
+  const { data: servicesSwr } = useSWR(
+    `${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&category=Interventions`,
+    { fetcher }
+  );
+  const { data: articlesSwr } = useSWR(
+    `${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&category=Articles`,
+    { fetcher }
+  );
+  const { data: faqSwr } = useSWR(
+    `${process.env.NEXT_PUBLIC_API_URL}posts/Foire-aux-questions`,
+    { fetcher }
+  );
+  const accueil = accueilSwr || accueilInit;
+  const services = servicesSwr || servicesInit;
+  const articles = articlesSwr || articlesInit;
+  const faq = faqSwr || faqInit;
+
   const descriptionMeta = 'Taupier professionnels agréé de la lutte contre les taupes, fouines et ragondins. Intervention en Eure (27), Yvelines (78) et Essonne (91). Devis gratuit.';
 
   // schema.org

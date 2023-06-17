@@ -4,19 +4,24 @@ import Head from 'next/head';
 import Script from 'next/script';
 import styles from '../styles/Pages.module.scss';
 import Faq from '../components/faq/faq';
+import { fetcher } from '../utils/fetcher';
+import useSWR from 'swr';
 
 export async function getStaticProps() {
-  const responseContact = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts/Foire-aux-questions`);
-  const post = await responseContact.json();
+  const responseContact = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Foire-aux-questions`);
 
   return {
     props: {
-      post,
+      responseContact,
     },
   };
 }
 
-export default function Slug({ post, desc }) {
+export default function Slug({ responseContact }) {
+  const { data: postSwr } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/Foire-aux-questions`, fetcher);
+
+  const post = postSwr || responseContact;
+
   const descriptionMeta = post.contents === null
     ? `Articles de blog ${post.title}`
     : post.contents.substring(0, 165).replace(/[\r\n]+/gm, '');
