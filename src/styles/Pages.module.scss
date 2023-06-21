@@ -54,20 +54,69 @@
   }
 }
 .home{
+  & h1{
+    font-size: calc(70% + 5vw);
+  }
+  &__list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background: $color-primary;
+    padding: 1rem;
+    &__item{
+      list-style: disc;
+      width: 100%;
+      margin: 1rem 0 1rem 3rem;
+      color: $color-white;
+      &__image{
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+      }
+    }
+  }
+  &__testimonials{
+    padding: 1rem;
+    border: $font-color-opacity 1px solid;
+    margin-top: 1rem;
+    & h2{
+      font-size: calc(70% + 3vw);
+      margin: 1rem 0;
+    }
+    & h3{
+      font-size: 1.2rem;
+      margin: 0.5rem 0;
+    }
+    & h4{
+      font-size: 1rem;
+      margin: 0.5rem 0;
+    }
+    & p{
+      font-size: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: $font-color-opacity 1px solid;
+    }
+  }
   &__category{
     &__title{
       background: $color-primary;
       padding: 1rem;
-      display: flex;
-      justify-content: space-between;
-      & a:hover{
-        color: $color-white;
+      & a{
+        display: flex;
+        justify-content: space-between;
+        & h2{
+          font-size: calc(70% + 1vw);
+        }
+        &:hover{
+          color: $color-white;
+        }
+        
       }
     }
     &__image{
-      width: 100%;
-      height: auto;
+      object-position: 0 var(--topImg);
       object-fit: cover;
+
     }
   }
   &__imageLogo{

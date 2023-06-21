@@ -1,8 +1,7 @@
 @import  '../../styles/variables.scss';
 
 nav.navbar{
-	position: -webkit-sticky;
-	position: sticky;
+    position: fixed;
 	top: 0;
     z-index: 1;
     width: 100%;
@@ -11,6 +10,18 @@ nav.navbar{
     background-color: $color-primary;
     box-shadow: $box-shadow;
     color: $color-white;
+    transform: translateY(0);
+    transition: transform 0.5s ease;
+
+    &__logo{
+        width: 20%;
+        & img{
+            width: 100%;
+        }
+    }
+    &--hidden{
+        transform: translateY(-100%);
+    }
 }
 .navbar__720{
     display: none;

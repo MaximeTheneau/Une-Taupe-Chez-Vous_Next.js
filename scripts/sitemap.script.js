@@ -1,6 +1,5 @@
 const fs = require('fs');
 
-
 const generateSitemap = async () => {
   const urlApi = 'https://back.unetaupechezvous.fr/public/api/';
   const urlFront = 'https://unetaupechezvous.fr/';
@@ -12,8 +11,7 @@ const generateSitemap = async () => {
 
   const generateXml = (pages, priority, urlFront, filename) => {
     const sitemapXml = pages
-      .map((page) => 
-      `<url>
+      .map((page) => `<url>
           <loc>${urlFront}${page.slug}</loc>
           <lastmod>${page.updatedAt ? page.updatedAt : page.createdAt}</lastmod>
           <changefreq>daily</changefreq>
@@ -21,8 +19,7 @@ const generateSitemap = async () => {
         </url>`)
       .join('');
 
-    const sitemapIndexXml = 
-    `<?xml version="1.0" encoding="UTF-8"?>
+    const sitemapIndexXml = `<?xml version="1.0" encoding="UTF-8"?>
       <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
         ${sitemapXml}
       </urlset>`;
@@ -40,8 +37,7 @@ const generateSitemap = async () => {
 
   const generateXmlSubcategory = async (pages, priority, urlFront) => {
     const sitemapXml = pages
-      .map((page) => 
-      `<url>
+      .map((page) => `<url>
           <loc>${urlFront}Articles/${page.subcategory.slug}/${page.slug}</loc>
           <lastmod>${page.updatedAt ? page.updatedAt : page.createdAt}</lastmod>
           <changefreq>daily</changefreq>
@@ -49,8 +45,7 @@ const generateSitemap = async () => {
         </url>`)
       .join('');
 
-    const sitemapIndexXml = 
-    `<?xml version="1.0" encoding="UTF-8"?>
+    const sitemapIndexXml = `<?xml version="1.0" encoding="UTF-8"?>
       <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
         ${sitemapXml}
       </urlset>`;
@@ -96,8 +91,8 @@ const generateSitemap = async () => {
 
   await generateXmlPages(urlsPriority, 1.0, urlFront);
   await generateXmlPages(urlsNoPriority, 0.6, urlFront);
-  await generateXmlCategory(responseAnuaire, 'Annuaire', 0.6, urlFront+ 'Annuaire/');
-  await generateXmlCategory(responseInterventions, 'Interventions', 0.8, urlFront + 'Interventions/');
+  await generateXmlCategory(responseAnuaire, 'Annuaire', 0.6, `${urlFront}Annuaire/`);
+  await generateXmlCategory(responseInterventions, 'Interventions', 0.8, `${urlFront}Interventions/`);
   await generateXmlSubcategory(responseArticles, 0.6, urlFront);
 
   const sitemapIndexXml = `<?xml version="1.0" encoding="UTF-8"?>
@@ -128,15 +123,17 @@ const generateSitemap = async () => {
     disallow: /Articles/[subcategory]/[slug]
     disallow: /Annuaire/[slug]
 
+    disallow: /search?*
+
     # Host
     Host: ${urlFront}
     
     # Sitemaps
     Sitemap: ${urlFront}sitemap.xml
     `;
-    
+
   fs.writeFileSync('./public/sitemap.xml', sitemapIndexXml);
-  fs.writeFileSync('./public/robots.txt', robotsTxt );
+  fs.writeFileSync('./public/robots.txt', robotsTxt);
 
   const numPagesPriority = urlsPriority.length;
   const numPagesNoPriority = urlsNoPriority.length;
@@ -154,8 +151,8 @@ const generateSitemap = async () => {
   ];
 
   const total = [
-    {  category: 'total Pages', count: numPages },
-    ];
+    { category: 'total Pages', count: numPages },
+  ];
 
   console.log('Sitemap generated successfully!');
   console.table(pageCounts);
@@ -164,8 +161,6 @@ const generateSitemap = async () => {
   console.log('-----------------------------------------------------');
   console.log(`  ○ ${urlFront}sitemap.xml ○`);
   console.log('-----------------------------------------------------');
-
-  
 };
 
 generateSitemap();

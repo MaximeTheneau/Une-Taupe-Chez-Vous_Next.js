@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import Image from 'next/image';
 import Head from 'next/head';
 import Link from 'next/link';
+import useSWR from 'swr';
 import styles from '../../../styles/Pages.module.scss';
 import Cards from '../../../components/cards/cards';
 import Category from '../../../components/category/category';
@@ -9,7 +10,6 @@ import imageLoaderFull from '../../../utils/imageLoaderFull';
 import TableOfContents from '../../../components/tableOfContents/TableOfContents';
 import Page404 from '../../404';
 import { fetcher } from '../../../utils/fetcher';
-import useSWR from 'swr';
 
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Articles`);
@@ -35,10 +35,9 @@ export async function getStaticProps({ params }) {
 }
 
 export default function Slug({ responsePost, responseDesc }) {
-
   const { data: postData } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/${responsePost.slug}`);
   const { data: descData } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&filter=desc&category=articles`);
-  
+
   const post = postData || responsePost;
   const desc = descData || responseDesc;
 
@@ -69,7 +68,7 @@ export default function Slug({ responsePost, responseDesc }) {
       "name": "${post.title}",
       "headline": "${post.title}",
       "description": "${descriptionMeta}",
-      "image": "${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.slug}.jpg",
+      "image": "${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.imgPost}.jpg",
       "datePublished": "${post.createdAt}",
       "dateModified": "${post.updatedAt}",
       "author": {
@@ -97,12 +96,12 @@ export default function Slug({ responsePost, responseDesc }) {
         <meta property="og:type" content="website" />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={descriptionMeta} />
-        <meta property="og:site_name" content={`${process.env.NEXT_PUBLIC_URL}/Article/${post.subcategory.slug}/${post.slug}`} />
-        <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/Article/${post.subcategory.slug}/${post.slug}`} />
-        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.slug}.jpg`} />
+        <meta property="og:site_name" content={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.subcategory.slug}/${post.slug}`} />
+        <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.subcategory.slug}/${post.slug}`} />
+        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.imgPost}.jpg`} />
         <link
           rel="canonical"
-          href={`${process.env.NEXT_PUBLIC_URL}/Articles/${post.subcategory.slug}/${post.slug}`}
+          href={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.subcategory.slug}/${post.slug}`}
           key="canonical"
         />
         <script
@@ -191,7 +190,7 @@ export default function Slug({ responsePost, responseDesc }) {
         </div>
         <div>
           <h2>Derniers articles</h2>
-          <Cards cards={desc} path="Articles" />
+          <Cards cards={desc} />
         </div>
       </section>
 

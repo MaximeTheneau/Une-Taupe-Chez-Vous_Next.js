@@ -4,15 +4,28 @@ import styles from './Card.module.scss';
 import SlideTransition from '../../hooks/useSlideTransition/SlideTransition';
 import imageThumbnail from '../../utils/imageThumbnail';
 
-export default function Card({ card, path }) {
-  const pathCard = card.subcategory ? `${path}/${card.subcategory.slug}` : path;
+export default function Card({ card }) {
+  let pathCard = '';
+
+  if (card.category.slug === 'Annuaire') {
+    pathCard = `${card.category.slug}/${card.slug}`;
+  } if (card.category.slug === 'Pages' && card.slug !== 'Inscription-annuaire-gratuite') {
+    pathCard = `${card.slug}`;
+  } if (card.slug === 'Inscription-annuaire-gratuite') {
+    pathCard = `Annuaire/${card.slug}`;
+  } if (card.category.slug === 'Articles') {
+    pathCard = `${card.category.slug}/${card.subcategory.slug}/${card.slug}`;
+  } else {
+    pathCard = `${card.category.slug}/${card.slug}`;
+  }
+
   return (
     <SlideTransition
       className={styles.card}
     >
-      <Link href={`/${pathCard}/${card.slug}`}>
+      <Link href={`/${pathCard}`}>
         <Image
-          src={`${card.slug}.webp`}
+          src={`${card.imgPost}.webp`}
           alt={card.altImg || card.title}
           width={330}
           height={310}

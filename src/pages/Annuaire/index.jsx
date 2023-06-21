@@ -1,9 +1,9 @@
 /* eslint-disable quote-props */
 import Head from 'next/head';
+import useSWR from 'swr';
 import Cards from '../../components/cards/cards';
 import styles from '../../styles/Pages.module.scss';
 import { fetcher } from '../../utils/fetcher';
-import useSWR from 'swr';
 
 export async function getStaticProps() {
   const responseArticles = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`);
@@ -21,36 +21,26 @@ export default function Home({ responseArticles, responsePage }) {
   const { data: articlesSwr } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`, fetcher);
   const { data: pageSwr } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/Annuaire`, fetcher);
 
-const page = pageSwr || responsePage;
-const articles = articlesSwr || responseArticles;
-//   const descriptionMeta = articles.contents.substring(0, 155).replace(/[\r\n]+/gm, '');
-//   const jsonData = {
-//     context: 'https://schema.org',
-//     type: 'Service',
-//     name: 'Une taupe chez vous',
-//     url: `${process.env.NEXT_PUBLIC_URL}`,
-//     description: `${descriptionMeta}`,
-//     category: 'Articles, Taupiers, Destruction de taupes, Taupes',
-//     image: `${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/Accueil.jpg`,
-//     termsOfService: `${process.env.NEXT_PUBLIC_URL}/page/mentions-legales`,
-//     sameA: [
-//       'https://www.facebook.com/Une-Taupe-Chez-Vous',
-//       'https://www.linkedin.com/company/unetaupechezvous/',
-//     ],
-//   };
+  const page = pageSwr || responsePage;
+  const articles = articlesSwr || responseArticles;
+
+  const descriptionMeta = page.contents.substring(0, 155).replace(/[\r\n]+/gm, '');
+
   return (
     <>
       <Head>
         <title>{page.title}</title>
-        <meta name="description" content="Services : Taupes - Fouines - Ragondins " />
+        <meta name="description" content={descriptionMeta} />
+        {/* Open Graph */}
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Services de capture et d&apos;aposextermination de taupes, fouines et ragondins. Protégez votre propriété contre les dégâts causés par ces animaux nuisibles." />
-        <meta property="og:description" content="Services de capture et d&apos;aposextermination de taupes, fouines et ragondins. Protégez votre propriété contre les dégâts causés par ces animaux nuisibles." />
-        <meta property="og:site_name" content={process.env.NEXT_PUBLIC_URL} />
-        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/Accueil.jpg`} />
+        <meta property="og:title" content={page.title} />
+        <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/${page.category.slug}/${page.slug}`} />
+        <meta property="og:description" content={descriptionMeta} />
+        <meta property="og:site_name" content={`${process.env.NEXT_PUBLIC_URL}/${page.category.slug}/${page.slug}`} />
+        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${page.imgPost}.jpg`} />
         <link
           rel="canonical"
-          href={`${process.env.NEXT_PUBLIC_URL}/${page.slug}`}
+          href={`${process.env.NEXT_PUBLIC_URL}/${page.category.slug}/${page.slug}`}
           key="canonical"
         />
       </Head>
@@ -65,7 +55,7 @@ const articles = articlesSwr || responseArticles;
         {/* --Articles--*/}
         <h2>Nos Annuaire</h2>
         <div className={styles.home}>
-          <Cards cards={articles} path="Annuaire" />
+          <Cards cards={articles} />
         </div>
 
       </>

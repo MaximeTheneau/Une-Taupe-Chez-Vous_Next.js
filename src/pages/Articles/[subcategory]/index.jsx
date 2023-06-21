@@ -1,12 +1,11 @@
 /* eslint-disable quote-props */
 import Head from 'next/head';
+import useSWR from 'swr';
 import Cards from '../../../components/cards/cards';
 import Category from '../../../components/category/category';
 import styles from '../../../styles/Pages.module.scss';
-import useSWR from 'swr';
 import Page404 from '../../404';
 import { fetcher } from '../../../utils/fetcher';
-
 
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Articles`);
@@ -37,7 +36,6 @@ export async function getStaticProps({ params }) {
 }
 
 export default function Home({ responseArticles, responsePage }) {
-
   const { subcategory } = responseArticles[0];
 
   const { data: articlesData } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts&subcategory=${subcategory.slug}`, fetcher);
@@ -46,22 +44,22 @@ export default function Home({ responseArticles, responsePage }) {
   const articles = articlesData || responseArticles;
   const page = pageData || responsePage;
 
-
-
   const descriptionMeta = page.contents.substring(0, 155).replace(/[\r\n]+/gm, '');
   return (
     <>
       <Head>
-        <title>{subcategory.name}</title>
+        <title>{page.title}</title>
         <meta name="description" content={descriptionMeta} />
+        {/* Open Graph */}
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Sous-categories" />
+        <meta property="og:title" content={page.title} />
+        <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/${page.category.slug}/${page.slug}`} />
         <meta property="og:description" content={descriptionMeta} />
-        <meta property="og:site_name" content={process.env.NEXT_PUBLIC_URL} />
-        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/Accueil.jpg`} />
+        <meta property="og:site_name" content={`${process.env.NEXT_PUBLIC_URL}/${page.category.slug}/${page.slug}`} />
+        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${page.imgPost}.jpg`} />
         <link
           rel="canonical"
-          href={`${process.env.NEXT_PUBLIC_URL}/Articles/${subcategory.slug}`}
+          href={`${process.env.NEXT_PUBLIC_URL}/${page.category.slug}/${page.slug}`}
           key="canonical"
         />
       </Head>
@@ -74,7 +72,7 @@ export default function Home({ responseArticles, responsePage }) {
         {/* --Articles--*/}
         <h2>Les derniers articles :</h2>
         <div className={styles.home}>
-          <Cards cards={articles} path="Articles" />
+          <Cards cards={articles} />
         </div>
 
       </>

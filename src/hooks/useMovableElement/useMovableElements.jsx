@@ -19,5 +19,5 @@ export default function useMovableElements(elementRef) {
     elementRef.current.style.setProperty('--topImg', `${offset}%`);
   }, [elementRef, offset]);
 
-  return { style: { height: '30vw' } };
+  return { style: { height: '30vw', position: 'relative', width: '100%' } };
 }

@@ -6,7 +6,8 @@ export default function Custom404() {
   return (
     <>
       <Head>
-        <meta name="robots" content="noindex"/>
+        <meta name="robots" content="noindex" />
+
       </Head>
       <section>
         <h1>Désolé</h1>

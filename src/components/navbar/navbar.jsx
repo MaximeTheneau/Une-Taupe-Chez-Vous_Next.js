@@ -1,15 +1,42 @@
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import styles from './Navbar.module.scss';
 import SearchPage from '../search/SearchPage';
+import imageThumbnail from '../../utils/imageThumbnail';
 
 export default function Navbar() {
   const [toggleNav, setToggleNav] = useState(false);
+  const [isNavVisible, setIsNavVisible] = useState(true);
+
+  useEffect(() => {
+    let prevScrollY = window.scrollY;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (prevScrollY > currentScrollY) {
+        setIsNavVisible(true);
+      } else {
+        setIsNavVisible(false);
+      }
+
+      prevScrollY = currentScrollY;
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const handleMouseLeave = () => {
-    toggleNav === true ? (setTimeout(() => (
-      setToggleNav(false)
-    ), 5500)) : null;
+    if (toggleNav) {
+      setTimeout(() => {
+        setToggleNav(false);
+      }, 5500);
+    }
   };
   return (
     <>
@@ -20,20 +47,26 @@ export default function Navbar() {
        * @see Navbar.module.scss
        */
       }
-      <nav className={`${styles.navbar__720} ${styles.navbar}`}>
-        {/** Logo */}
-        <Link href="/">
-          {/* <SvgLogo className={styles.navbar__720__logo} /> */}
-          Accueil
+      <nav className={` ${isNavVisible ? ` ${styles.navbar}` : styles['navbar--hidden']} ${styles.navbar__720}`}>
+        <Link href="/" tabIndex={"la page d'accueil"}>
+          <img
+            src={`${process.env.NEXT_PUBLIC_CLOUD_URL}/w_${90},q_${90}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/logo-une-taupe-chez-vous.png`}
+            alt="Logo de l'entreprise Une Taupe Chez Vous"
+            className={styles.home__imageLogo}
+            width={90}
+            height={50}
+            style={{ width: '100%', height: 'auto' }}
+            quality={100}
+
+          />
         </Link>
+        <SearchPage />
         <ul className={styles.navbar__720__list}>
-          {/** Link */}
           <li className={styles['navbar__720__list-item']}>
             <Link href="/Taupier-agree-professionnel-depuis-1994">
               Qui-sommes-nous
             </Link>
           </li>
-          {/** Link */}
           <li className={styles['navbar__720__list-item']}>
             <Link href="/Contact">
               Contact
@@ -41,15 +74,10 @@ export default function Navbar() {
           </li>
         </ul>
       </nav>
-      {
-        /**
-         * Navbar for mobile
-         * @media screen and (max-width: 720px)
-         * @see Navbar.module.scss
-         */
-       }
+
       <nav
-        className={`${styles.navbar__responsive} ${styles.navbar}`}
+        aria-hidden="true"
+        className={`${isNavVisible ? `${styles.navbar}` : styles['navbar--hidden']} ${styles.navbar__responsive}`}
         onMouseLeave={handleMouseLeave}
       >
         <div
@@ -65,7 +93,7 @@ export default function Navbar() {
             <i className="icon-navbar" />
           )}
         </div>
-        {toggleNav ? (
+        {toggleNav && (
           <ul
             className={styles.navbar__responsive__list}
             role="presentation"
@@ -74,25 +102,27 @@ export default function Navbar() {
             ), 500)
             )}
           >
-            <Link href="/">
-              <li className={styles['navbar__responsive__list-item']}>
+            <li className={styles['navbar__responsive__list-item']}>
+              <Link href="/">
                 <span className={styles['navbar__responsive__list-item-link']}>Accueil</span>
-              </li>
-            </Link>
-            <Link href="/Taupier-agree-professionnel-depuis-1994">
-              <li className={styles['navbar__responsive__list-item']}>
+              </Link>
+            </li>
+            <li className={styles['navbar__responsive__list-item']}>
+              <Link href="/Taupier-agree-professionnel-depuis-1994">
                 <span className={styles['navbar__responsive__list-item-link']}>Qui-sommes-nous</span>
-              </li>
-            </Link>
-            <Link href="/Contact">
-              <li className={styles['navbar__responsive__list-item']}>
+              </Link>
+            </li>
+            <li className={styles['navbar__responsive__list-item']}>
+              <Link href="/Contact">
                 <span className={styles['navbar__responsive__list-item-link']}>Contact</span>
-              </li>
-            </Link>
+              </Link>
+            </li>
+            <li className={styles['navbar__responsive__list-item']}>
+              <Link href="/search"> Rechercher</Link>
+            </li>
           </ul>
-        ) : ''}
+        )}
       </nav>
-      {/* <SearchPage /> */}
     </>
 
   );

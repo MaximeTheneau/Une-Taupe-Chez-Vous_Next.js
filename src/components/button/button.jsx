@@ -6,7 +6,7 @@ export default function Button() {
     <div className="button">
       <Link href="/Contact">
         <AnimationHover>
-          Contactez-nous ez &apos; &apos;
+          Contactez-nous
         </AnimationHover>
       </Link>
     </div>

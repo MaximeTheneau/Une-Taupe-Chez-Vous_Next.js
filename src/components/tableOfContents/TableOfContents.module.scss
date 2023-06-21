@@ -19,7 +19,7 @@
         cursor: pointer;
         font-size: $font-size-medium;
         &:hover{
-            font-size: calc(#{$font-size-medium} + 0.2rem);
+            color: $font-color;
         }
     }
 }

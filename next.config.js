@@ -1,14 +1,9 @@
 const path = require('path');
 
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   async rewrites() {
     return [
-      {
-        source: '/Page-de-recherche',
-        destination: '/search',
-      },
       {
         source: '/Temoignages',
         destination: '/testimonials',
@@ -25,7 +20,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   output: 'standalone',
-  
+
   images: {
     loader: 'custom',
     path: '/_next/image',
@@ -41,8 +36,7 @@ const nextConfig = {
     ],
     formats: ['image/avif', 'image/webp'],
     minimumCacheTTL: 60,
-  }
+  },
 };
-
 
 module.exports = nextConfig;

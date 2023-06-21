@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styles from './TableOfContents.module.scss';
 
 export default function TableOfContents({ post }) {
@@ -8,7 +9,7 @@ export default function TableOfContents({ post }) {
       <ul className={styles.tableOfContents__list}>
         {post.paragraphPosts.map((paragraphArticle) => (
           <li key={paragraphArticle.slug} className={styles.tableOfContents__item}>
-            <a href={`.#${paragraphArticle.slug}`} className={styles.tableOfContents__link}>{paragraphArticle.subtitle}</a>
+            <Link href={`#${paragraphArticle.slug}`} className={styles.tableOfContents__link}>{paragraphArticle.subtitle}</Link>
           </li>
         ))}
       </ul>

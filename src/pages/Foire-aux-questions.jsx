@@ -2,10 +2,10 @@ import PropTypes from 'prop-types';
 import Image from 'next/image';
 import Head from 'next/head';
 import Script from 'next/script';
+import useSWR from 'swr';
 import styles from '../styles/Pages.module.scss';
 import Faq from '../components/faq/faq';
 import { fetcher } from '../utils/fetcher';
-import useSWR from 'swr';
 
 export async function getStaticProps() {
   const responseContact = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Foire-aux-questions`);
@@ -22,9 +22,7 @@ export default function Slug({ responseContact }) {
 
   const post = postSwr || responseContact;
 
-  const descriptionMeta = post.contents === null
-    ? `Articles de blog ${post.title}`
-    : post.contents.substring(0, 165).replace(/[\r\n]+/gm, '');
+  const descriptionMeta = post.contents.substring(0, 165).replace(/[\r\n]+/gm, '');
 
   return (
     <>
@@ -34,10 +32,10 @@ export default function Slug({ responseContact }) {
         {/* Open Graph */}
         <meta property="og:type" content="website" />
         <meta property="og:title" content={post.title} />
-        <meta property="og:description" content={descriptionMeta} />
-        <meta property="og:site_name" content="Une Taupe Chez Vous" />
         <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/${post.slug}`} />
-        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.slug}.jpg`} />
+        <meta property="og:description" content={descriptionMeta} />
+        <meta property="og:site_name" content={`${process.env.NEXT_PUBLIC_URL}/${post.slug}`} />
+        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.imgPost}.jpg`} />
         <link
           rel="canonical"
           href={`${process.env.NEXT_PUBLIC_URL}/${post.slug}`}

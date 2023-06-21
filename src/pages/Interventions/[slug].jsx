@@ -2,11 +2,11 @@ import PropTypes from 'prop-types';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+import useSWR from 'swr';
 import styles from '../../styles/Pages.module.scss';
 import Page404 from '../404';
 import imageLoaderFull from '../../utils/imageLoaderFull';
 import TableOfContents from '../../components/tableOfContents/TableOfContents';
-import useSWR  from 'swr';
 import { fetcher } from '../../utils/fetcher';
 
 export async function getStaticPaths() {
@@ -39,7 +39,7 @@ export default function Slug({ responsePosts }) {
     "name": "${post.title}",
     "headline": "${post.title}",
     "description": "${descriptionMeta}",
-    "image": "${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.slug}.jpg",
+    "image": "${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.imgPost}.jpg",
     "datePublished": "${post.createdAt}",
     "dateModified": "${post.updatedAt}",
     "author": {
@@ -66,13 +66,13 @@ export default function Slug({ responsePosts }) {
         {/* Open Graph */}
         <meta property="og:type" content="website" />
         <meta property="og:title" content={post.title} />
-        <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/Interventions/${post.slug}`} />
+        <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`} />
         <meta property="og:description" content={descriptionMeta} />
-        <meta property="og:site_name" content={`${process.env.NEXT_PUBLIC_URL}/Interventions/${post.slug}`} />
-        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.slug}.jpg`} />
+        <meta property="og:site_name" content={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`} />
+        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.imgPost}.jpg`} />
         <link
           rel="canonical"
-          href={`${process.env.NEXT_PUBLIC_URL}/Interventions/${post.slug}`}
+          href={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`}
           key="canonical"
         />
         <script
@@ -98,10 +98,10 @@ export default function Slug({ responsePosts }) {
         <div>
           <h1>{post.title}</h1>
           <p>{post.contents}</p>
-          <TableOfContents post={post}/>
+          <TableOfContents post={post} />
           {post.paragraphPosts.map((paragraphPosts) => (
             <>
-              <h2>{paragraphPosts.subtitle}</h2>
+              <h2 id={paragraphPosts.slug}>{paragraphPosts.subtitle}</h2>
               <p>{paragraphPosts.paragraph}</p>
             </>
           ))}

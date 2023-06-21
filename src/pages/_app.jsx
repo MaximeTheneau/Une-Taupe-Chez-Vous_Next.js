@@ -12,18 +12,18 @@ function MyApp({ Component, pageProps }) {
     setAnimateTransition(true);
     setTimeout(() => {
       setAnimateTransition(false);
-    }, 600);
+    }, 500);
   }, [router.pathname]);
 
   return (
     <>
       <Head />
-      <Script strategy='afterInteractive' src='https://www.googletagmanager.com/gtag/js?id=UA-208648445-2' />
+      <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=UA-208648445-2" />
       <Script
-          id='google-analytics'
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
+        id="google-analytics"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
@@ -31,10 +31,10 @@ function MyApp({ Component, pageProps }) {
                 page_path: window.location.pathname,
               });
             `,
-            }}
-        />
+        }}
+      />
       <Layout {...pageProps}>
-        {animateTransition && <div className="transition" />}
+        {animateTransition && <div className="transition" aria-hidden="true" />}
         <Component {...pageProps} />
       </Layout>
     </>

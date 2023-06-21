@@ -1,164 +1,111 @@
-
 import Head from 'next/head';
-import styles from '../components/cards/Card.module.scss';
 import Image from 'next/image';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import useSWR from 'swr';
+import Router, { useRouter } from 'next/router';
+import styles from '../components/cards/Card.module.scss';
 import imageLoaderFull from '../utils/imageLoaderFull';
 import imageThumbnail from '../utils/imageThumbnail';
-import Link from 'next/link';
 import SlideTransition from '../hooks/useSlideTransition/SlideTransition';
-import { useState } from 'react';
-import SearchBar from '../components/search/SearchBar';
+import { fetcher } from '../utils/fetcher';
+import Cards from '../components/cards/cards';
 
 export async function getStaticProps() {
-  const responseAll = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts/all`);
-  const articles = await responseAll.json();
-  const responsePage = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts/Page-de-recherche`);
-  const page = await responsePage.json();
+  const responsePage = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Page-de-recherche`);
+  const responseArticles = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/all`);
+  const responseDesc = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&filter=desc&category=articles`);
 
   return {
     props: {
-      page,
-      articles,
+      responsePage,
+      responseArticles,
+      responseDesc,
     },
   };
 }
 
-export default function search({ page, articles,  }) {
+export default function Recherche({ responsePage, responseArticles, responseDesc }) {
+  const router = useRouter();
   const [searchValue, setSearchValue] = useState('');
+  const [articles, setArticles] = useState([]);
+  const { data: dataPage } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/Page-de-recherche`, fetcher);
+  const { data: dataArticles } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/all`, fetcher);
+  const { data: dataDesc } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&filter=desc&category=articles`, fetcher);
+
+  const page = dataPage || responsePage;
+  const articlesInit = dataArticles || responseArticles;
+  const desc = dataDesc || responseDesc;
+
+  const descriptionMeta = page.contents.substring(0, 165).replace(/[\r\n]+/gm, '');
+
+  useEffect(() => {
+    setArticles(articlesInit);
+    setSearchValue(router.query.q);
+
+  }, [router.query.q]);
+
   const handleSearch = (value) => {
     setSearchValue(value);
   };
-  const filteredArticles = articles.filter((article) => {
-    return article.title.toLowerCase().includes(searchValue.toLowerCase());
+
+  const filteredArticles = articles?.filter((article) => {
+    const searchLowerCase = searchValue?.toLowerCase();
+    return (
+      searchLowerCase?.length >= 2
+      && article?.title.toLowerCase().includes(searchLowerCase)
+    );
   });
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    Router.push(`/search/?q=${encodeURIComponent(searchValue)}`);
+  };
 
   return (
     <>
       <Head>
         <title>{page.title}</title>
-        <meta name="description" content="Mention legales de Une Taupe Chez Vous" />
+        <meta name="robots" content="noindex,nofollow" />
+        <meta name="googlebot" content="noindex,nofollow" />
+        <meta name="description" content={descriptionMeta} />
         <meta property="og:type" content="website" />
         <meta property="og:title" content={page.title} />
-        <meta property="og:description" content="Mention legales de Une Taupe Chez Vous" />
+        <meta property="og:description" content={descriptionMeta} />
         <meta property="og:site_name" content="Une Taupe Chez Vous" />
-        <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/${page.slug}`} />
+        <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/search`} />
         <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${page.imgPosts}.jpg`} />
         <link
           rel="canonical"
-          href={`${process.env.NEXT_PUBLIC_URL}/${page.slug}`}
+          href={`${process.env.NEXT_PUBLIC_URL}/search`}
           key="canonical"
         />
       </Head>
 
-      <>
       <section className={styles.page__contents}>
-          <h1>{page.title}</h1>
-          <p>{page.contents}</p>
-          <SearchBar onSearch={setSearchValue} />
-
-          <div className={styles.page__contents__cards}>
-            {filteredArticles.length === 0 && (
-              <p className={styles.page__contents__cards__noResult}>
-                Aucun résultat pour votre recherche
-              </p>
-            )}
-            <ul className={styles.cards}>
-            {filteredArticles
-              .filter((article) => article.category.name === 'Interventions')
-              .map((article) => (
-                <SlideTransition className={styles.card} >
-                <Link href={`/Annuaire/${article.slug}`}>
-                  <Image
-                    src={`${article.imgPost}.webp`}
-                    alt={article.altImg || article.title}
-                    width={330}
-                    height={310}
-                    loader={imageThumbnail}
-                    quality={70}
-                    sizes="100vw"
-                    style={{
-                      width: '100%',
-                      height: 'auto',
-                    }}
-                  />
-                  <h3 className={styles.card__content}>{article.title}</h3>
-                </Link>
-              </SlideTransition>
-              ))
-              }
-            {filteredArticles
-            .filter((article) => article.category.name === 'Articles')
-            .map((article) => (
-              <SlideTransition className={styles.card} >
-              <Link href={`/${article.category.slug}/${article.subcategory.slug}/${article.slug}`}>
-                <Image
-                  src={`${article.imgPost}.webp`}
-                  alt={article.altImg || article.title}
-                  width={330}
-                  height={310}
-                  loader={imageThumbnail}
-                  quality={70}
-                  sizes="100vw"
-                  style={{
-                    width: '100%',
-                    height: 'auto',
-                  }}
-                />
-                <h3 className={styles.card__content}>{article.title}</h3>
-              </Link>
-            </SlideTransition>
-            ))}
-            {filteredArticles
-              .filter((article) => article.category.name === 'Pages' && article.slug !== 'Inscription-annuaire-gratuite')
-              .map((article) => (
-                <SlideTransition className={styles.card} >
-                <Link href={`/${article.slug}`}>
-                  <Image
-                    src={`${article.imgPost}.webp`}
-                    alt={article.altImg || article.title}
-                    width={330}
-                    height={310}
-                    loader={imageThumbnail}
-                    quality={70}
-                    sizes="100vw"
-                    style={{
-                      width: '100%',
-                      height: 'auto',
-                    }}
-                  />
-                  <h3 className={styles.card__content}>{article.title}</h3>
-                </Link>
-              </SlideTransition>
-              ))
-            }
-            {filteredArticles
-              .filter((article) => article.category.name === 'Annuaire' || article.slug === 'Inscription-annuaire-gratuite' )
-              .map((article) => (
-                <SlideTransition className={styles.card} >
-                <Link href={`/Annuaire/${article.slug}`}>
-                  <Image
-                    src={`${article.imgPost}.webp`}
-                    alt={article.altImg || article.title}
-                    width={330}
-                    height={310}
-                    loader={imageThumbnail}
-                    quality={70}
-                    sizes="100vw"
-                    style={{
-                      width: '100%',
-                      height: 'auto',
-                    }}
-                  />
-                  <h3 className={styles.card__content}>{article.title}</h3>
-                </Link>
-              </SlideTransition>
-              ))
-              }
-            </ul>
-          </div>        
+        <h1>{page.title}</h1>
+        <p>{page.contents}</p>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Rechercher..."
+            onChange={(event) => handleSearch(event.target.value)}
+            value={searchValue}
+            onBlur={() => setTimeout(() => setArticles([null]), 200)}
+          />
+          <button type="submit">Rechercher</button>
+        </form>
+        {(filteredArticles.length === 0) && (
+        <>
+          <h2>Aucun résultat</h2>
+          <h3>Retrouvez les derniers articles :</h3>
+          <Cards cards={desc} />
+        </>
+        )}
+        {filteredArticles.length >= 2 && (
+        <Cards cards={filteredArticles} />
+        )}
       </section>
-      </>
     </>
   );
 }

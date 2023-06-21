@@ -1,13 +1,13 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+import useSWR from 'swr';
 import styles from '../../styles/Pages.module.scss';
 import imageLoaderFull from '../../utils/imageLoaderFull';
 import Button from '../../components/button/button';
 import DirectoryRegistrationForm from '../../components/directoryRegistrationForm/DirectoryRegistrationForm';
 import TableOfContents from '../../components/tableOfContents/TableOfContents';
 import { fetcher } from '../../utils/fetcher';
-import useSWR from 'swr';
 
 export async function getStaticProps() {
   const responseArticles = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`);
@@ -28,20 +28,23 @@ export default function Page({ responsePage, responseArticles }) {
 
   const page = pageSwr || responsePage;
   const article = articleSwr || responseArticles;
+
+  const descriptionMeta = page.contents.replace(/(<([^>]+)>)/gi, '').substring(0, 150);
   return (
     <>
       <Head>
         <title>{page.title}</title>
-        <meta name="description" content="Mention legales de Une Taupe Chez Vous" />
+        <meta name="description" content={descriptionMeta} />
+        {/* Open Graph */}
         <meta property="og:type" content="website" />
         <meta property="og:title" content={page.title} />
-        <meta property="og:description" content="Mention legales de Une Taupe Chez Vous" />
-        <meta property="og:site_name" content="Une Taupe Chez Vous" />
-        <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/${page.slug}`} />
-        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/Accueil.jpg`} />
+        <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/${page.category.slug}/${page.slug}`} />
+        <meta property="og:description" content={descriptionMeta} />
+        <meta property="og:site_name" content={`${process.env.NEXT_PUBLIC_URL}/${page.category.slug}/${page.slug}`} />
+        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${page.imgPost}.jpg`} />
         <link
           rel="canonical"
-          href={`${process.env.NEXT_PUBLIC_URL}/${page.slug}`}
+          href={`${process.env.NEXT_PUBLIC_URL}/${page.category.slug}/${page.slug}`}
           key="canonical"
         />
       </Head>

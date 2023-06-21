@@ -1,11 +1,11 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import useSWR from 'swr';
 import styles from '../styles/SiteMap.module.scss';
 import { fetcher } from '../utils/fetcher';
-import useSWR from 'swr';
 
 export async function getStaticProps() {
-  const responsePage = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Plan-de-site-Une-Taupe-Chez-Vous`);
+  const responsePage = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Plan-de-site`);
   const responseInterventions = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Interventions`);
   const responseSubcategory = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=subcategory`);
   const responseAnnuaire = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`);
@@ -26,7 +26,7 @@ export default function SiteMapPage({
   responseSubcategory,
   responseAnnuaire,
 }) {
-  const { data: pageSwr } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/Plan-de-site-Une-Taupe-Chez-Vous`, fetcher);
+  const { data: pageSwr } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/Plan-de-site`, fetcher);
   const { data: interventionsSwr } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Interventions`, fetcher);
   const { data: subcategorySwr } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=subcategory`, fetcher);
   const { data: annuaireSwr } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`, fetcher);
@@ -35,17 +35,21 @@ export default function SiteMapPage({
   const interventions = interventionsSwr || responseInterventions;
   const subcategory = subcategorySwr || responseSubcategory;
   const annuaire = annuaireSwr || responseAnnuaire;
+
+  const descriptionMeta = page.contents.replace(/(<([^>]+)>)/gi, '').substring(0, 160);
+
   return (
     <>
       <Head>
         <title>{page.title}</title>
-        <meta name="description" content="Mention legales de Une Taupe Chez Vous" />
+        <meta name="description" content={descriptionMeta} />
+        {/* Open Graph */}
         <meta property="og:type" content="website" />
         <meta property="og:title" content={page.title} />
-        <meta property="og:description" content="Mention legales de Une Taupe Chez Vous" />
-        <meta property="og:site_name" content="Une Taupe Chez Vous" />
         <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/${page.slug}`} />
-        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/Accueil.jpg`} />
+        <meta property="og:description" content={descriptionMeta} />
+        <meta property="og:site_name" content={`${process.env.NEXT_PUBLIC_URL}/${page.slug}`} />
+        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${page.imgPost}.jpg`} />
         <link
           rel="canonical"
           href={`${process.env.NEXT_PUBLIC_URL}/${page.slug}`}
@@ -83,6 +87,11 @@ export default function SiteMapPage({
               <li>
                 <Link href="/Tarifs">
                   Tarifs
+                </Link>
+              </li>
+              <li>
+                <Link href="/Temoignages">
+                  Témoignages
                 </Link>
               </li>
               <li>
