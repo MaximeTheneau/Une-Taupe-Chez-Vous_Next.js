@@ -1,0 +1,82 @@
+@import  '../../styles/variables.scss';
+
+.search {
+    --background: 1rem 1rem 0vh 100vh #0b0c0e60;
+    position: relative;
+    transform: scale(1);
+    animation: myAnimation 1s;
+    width: 40%;
+    &__form{
+        background-color: $color-primary;
+        display: flex;
+        width: 100%;
+        & input{
+            border-radius: 1px;
+            background: $color-white;
+            border: none;
+            border-radius: 0;
+            color: $font-color;
+            transition: all .2s;
+            width: 90%;
+            border-right: rgba($font-color, 0.1) 0.1px solid;
+            &:focus {
+                background: $color-white;
+                box-shadow:  1rem 1rem 0vh 100vh #0b0c0e60;
+            }
+            &::placeholder {
+                color: $font-color !important;
+            }
+            &:focus:invalid {
+                border-bottom: 1px solid $color-secondary;
+            }
+            &::-webkit-input-placeholder {
+                color: $color-grey;
+            }
+        }
+        & button{
+            background: $color-white !important;
+            color: $font-color !important;
+            border-radius: 0 !important;
+            font-size: 1rem;
+            border: 0;
+            width: 10%;
+            padding: 1.5rem;
+            &:hover{
+                & i{
+                    transform: rotate(10deg) scale(1.1);
+                }
+            }
+            
+        }
+        &__list{
+            position: absolute;
+            background: $color-white;
+            color: $font-color;
+            width: 100%;
+            padding: 1rem;
+            & strong{
+                font-size: 0.9rem;
+                color: $color-primary;
+            }
+            & li{
+                list-style: none;
+                padding: 0.5rem;
+                font-size: 1rem;
+                &:hover{
+                    background: $color-grey;
+                    color: $color-white;
+                }
+            }
+        }
+    }
+
+
+}
+@keyframes myAnimation {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(var(--focus-scale));
+    }
+  }

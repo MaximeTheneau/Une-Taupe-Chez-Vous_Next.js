@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import PropTypes from 'prop-types';
 import Navbar from './navbar/navbar';
 import Footer from './footer/footer';

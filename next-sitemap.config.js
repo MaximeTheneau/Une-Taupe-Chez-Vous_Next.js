@@ -11,9 +11,8 @@ const config = {
       priority: 0.7,
       sitemapSize: 7000,
       exclude: ['/'],
-      },
-      ],
-
-}
+    },
+  ],
+};
 
 module.exports = config;

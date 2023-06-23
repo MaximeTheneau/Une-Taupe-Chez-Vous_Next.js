@@ -1,0 +1,25 @@
+@import  '../../styles/variables.scss';
+
+.tableOfContents{
+    background: $color-primary;
+    color: $color-white;
+    margin: 1rem 0;
+    &__title{
+        font-size: $font-size-large;
+        font-weight: $font-size-bold;
+        padding: 1rem 0 0 3rem  !important;
+    }
+    &__list{
+
+        padding: 0 0 1rem 3rem;
+        list-style: disc;
+    }
+    &__item{
+        margin: 0 0 0 1rem;
+        cursor: pointer;
+        font-size: $font-size-medium;
+        &:hover{
+            color: $font-color;
+        }
+    }
+}

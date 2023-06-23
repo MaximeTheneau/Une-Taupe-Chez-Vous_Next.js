@@ -1,9 +1,24 @@
 {
-  "extends": ["next/core-web-vitals", "plugin:react/recommended"],
+  "extends": ["next/core-web-vitals", "airbnb"],
   "rules": {
-    // suppress errors for missing 'import React' in files
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+   ],
+   "react/jsx-props-no-spreading": ["error", {
+    "html": "ignore" ,
+    "custom": "ignore" ,
+    "explicitSpread": "ignore" ,
+    "exceptions": ["_app"]
+}],
    "react/react-in-jsx-scope": "off",
-   "react/prop-types": "off"
-
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", "ts", "tsx"] }],
+    "react/prop-types": "off"
   }
 }

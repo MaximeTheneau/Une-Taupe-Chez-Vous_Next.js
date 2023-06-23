@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Layout from '../components/layout';
@@ -10,13 +11,19 @@ function MyApp({ Component, pageProps }) {
     setAnimateTransition(true);
     setTimeout(() => {
       setAnimateTransition(false);
-    }, 600);
+    }, 500);
   }, [router.pathname]);
+
   return (
-    <Layout {...pageProps}>
-      {animateTransition && <div className="transition" />}
-      <Component {...pageProps} />
-    </Layout>
+    <>
+      <Head>
+        <meta name="google-site-verification" content="yObJd5noBtjUBky_GRbOOETV42Q9qAHf7w00PPz1-ss" />
+      </Head>
+      <Layout {...pageProps}>
+        {animateTransition && <div className="transition" aria-hidden="true" />}
+        <Component {...pageProps} />
+      </Layout>
+    </>
   );
 }
 

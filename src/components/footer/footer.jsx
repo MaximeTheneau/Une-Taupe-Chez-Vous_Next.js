@@ -8,29 +8,61 @@ export default function Footer() {
       <div className={styles.footer__links}>
         <ul>
           <li>
+
             <h2>
-              L&apos;entreprise
+              <Link href="/Interventions">
+                Interventions
+              </Link>
             </h2>
           </li>
           <li>
-            <Link href="/page/qui-sommes-nous">
-              <AnimationHover>
-                Qui-sommes-nous
-              </AnimationHover>
+            <Link href="/Interventions/Taupe">
+              Taupe
             </Link>
           </li>
           <li>
-            <Link href="/page/contact">
-              <AnimationHover>
-                Demande de devis
-              </AnimationHover>
+            <Link href="/Interventions/Fouine">
+              Fouine
             </Link>
           </li>
           <li>
-            <Link href="/page/mentions-legales">
-              <AnimationHover>
-                Mentions légales
-              </AnimationHover>
+            <Link href="/Interventions/Ragondin">
+              Ragondin
+            </Link>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <h2>
+              Informations
+            </h2>
+          </li>
+          <li>
+            <Link href="/Taupier-agree-professionnel-depuis-1994">
+              Qui sommes-nous
+
+            </Link>
+          </li>
+          <li>
+            <Link href="/Contact">
+              Demande de devis
+
+            </Link>
+          </li>
+          <li>
+            <Link href="/Mentions-Legales">
+              Mentions légales
+
+            </Link>
+          </li>
+          <li>
+            <Link href="/Foire-aux-questions">
+              Foire aux questions
+            </Link>
+          </li>
+          <li>
+            <Link href="/Plan-de-site">
+              Plan du site
             </Link>
           </li>
         </ul>
@@ -39,60 +71,41 @@ export default function Footer() {
             <h2>Contact</h2>
           </li>
           <li>
-            <Link href="/page/contact">
-              <AnimationHover>
-                Contacter nous
-              </AnimationHover>
+            <Link href="tel:+33232264958">
+              <i className="icon-phone" />
+              +33 2 32 26 49 58
+            </Link>
+          </li>
+          <li>
+            <Link href="/Contact">
+              Formulaire de contact
             </Link>
           </li>
           <li>
             <Link href="https://www.linkedin.com/company/une-taupe-chez-vous" target="_blank">
-              <AnimationHover>
-                <i className="icon-linkedin" />
-                Linkedin
-              </AnimationHover>
+              <i className="icon-linkedin" />
+              Linkedin
+            </Link>
+          </li>
+          <li>
+            <Link href="https://twitter.com/UneTaupe_" target="_blank">
+              <i className="icon-twitter" />
+              Twitter
             </Link>
           </li>
           <li>
             <Link href="https://www.facebook.com/unetaupechezvous/" target="_blank">
-              <AnimationHover>
-                <i className="icon-facebook" />
-                Facebook
-              </AnimationHover>
+              <i className="icon-facebook" />
+              Facebook
             </Link>
           </li>
         </ul>
-        <ul>
-          <li>
-            <h2>Services</h2>
-          </li>
-          <li>
-            <Link href="/services/Taupe">
-              <AnimationHover>
-                Taupe
-              </AnimationHover>
-            </Link>
-          </li>
-          <li>
-            <Link href="/services/Fouine">
-              <AnimationHover>
-                Fouine
-              </AnimationHover>
-            </Link>
-          </li>
-          <li>
-            <Link href="/services/Ragondin">
-              <AnimationHover>
-                Ragondin
-              </AnimationHover>
-            </Link>
-          </li>
-        </ul>
+
       </div>
       <div className={styles.footer__author}>
         <Link href="https://theneaumaxime.fr" target="_blank">
           <AnimationHover>
-            Site réaliser par Maxime Theneau
+            Site réalisé par Maxime Theneau
           </AnimationHover>
         </Link>
       </div>

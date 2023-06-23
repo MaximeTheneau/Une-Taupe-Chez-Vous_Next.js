@@ -1,0 +1,12 @@
+
+@import '../../styles/variables.scss';
+
+
+.category{
+  display: flex;
+  margin: 1rem 0 0 0;
+  & li{
+    margin: 0 0.5rem 0 0;
+}
+
+}

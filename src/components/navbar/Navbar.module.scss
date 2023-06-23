@@ -2,6 +2,7 @@
 
 nav.navbar{
     position: fixed;
+	top: 0;
     z-index: 1;
     width: 100%;
     font-family: $font-primary;
@@ -9,9 +10,35 @@ nav.navbar{
     background-color: $color-primary;
     box-shadow: $box-shadow;
     color: $color-white;
+    transform: translateY(0);
+    transition: transform 0.5s ease;
+
+    &__logo{
+        width: 20%;
+        & img{
+            width: 100%;
+        }
+    }
+    &--hidden{
+        transform: translateY(-100%);
+    }
 }
 .navbar__720{
     display: none;
+    justify-content: space-between;
+    font-size: 1.5rem;
+    &__logo{
+        width: 20%;
+    }
+    &__list{
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+        &-item{
+            margin: 0 0 0 1rem;
+            cursor: pointer;
+        }
+    }
 }
 .navbar__responsive{
     text-align: left;
@@ -53,28 +80,15 @@ nav.navbar{
     }
   }
 
-//* Media Queries
-
+/*
+* Media Queries for tablet and desktop
+*/
 @media screen and (min-width: 720px) {
     .navbar__responsive{
         display: none;
     }
     .navbar__720{
         display: flex;
-        justify-content: space-between;
-        font-size: 1.5rem;
-        &__logo{
-            width: 20%;
-        }
-        &__list{
-            display: flex;
-            flex-direction: row-reverse;
-            align-items: center;
-            &-item{
-                margin: 0 0 0 1rem;
-                cursor: pointer;
-            }
-        }
     }
   }
   
