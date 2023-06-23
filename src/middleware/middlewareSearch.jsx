@@ -1,6 +1,5 @@
 export default function middlewareSearch(req, apiPath, handleResponse200, handleResponseError) {
-
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}${query}`)
+  fetch(`${process.env.NEXT_PUBLIC_API_URL}${apiPath}`)
     .then((response) => {
       if (response.ok) {
         handleResponse200();
@@ -12,5 +11,4 @@ export default function middlewareSearch(req, apiPath, handleResponse200, handle
         });
       }
     });
-  }
-  
+}

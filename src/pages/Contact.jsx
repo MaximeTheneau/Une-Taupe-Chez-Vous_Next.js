@@ -1,12 +1,10 @@
-import Image from 'next/image';
 import Head from 'next/head';
 import Link from 'next/link';
 import useSWR from 'swr';
 import ContactForm from '../components/contact/ContactForm';
 import styles from '../styles/Pages.module.scss';
-import imageLoaderFull from '../utils/imageLoaderFull';
 import NotCopie from '../components/notCopie/NotCopie';
-import { fetcher } from '../utils/fetcher';
+import fetcher from '../utils/fetcher';
 
 export async function getStaticProps() {
   const responsePage = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Contact`);

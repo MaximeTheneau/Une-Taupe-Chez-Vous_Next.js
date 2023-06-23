@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image';
 import styles from '../styles/Pages.module.scss';
 
 export async function getStaticProps() {
@@ -55,7 +56,9 @@ export default function pricing({ page }) {
             <p>{paragraphPosts.paragraph}</p>
             <p>
               <Link href="/Contact">Contactez-nous</Link>
-              maintenant pour planifier une intervention ou pour obtenir plus d'informations sur nos tarifs compétitifs et nos services de lutte contre les nuisibles.
+              maintenant pour planifier une intervention ou pour obtenir plus
+              d&apos;informations sur nos tarifs compétitifs et nos services
+              de lutte contre les nuisibles.
             </p>
           </>
         ))}

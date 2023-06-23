@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import useSWR from 'swr';
 import styles from '../styles/SiteMap.module.scss';
-import { fetcher } from '../utils/fetcher';
+import fetcher from '../utils/fetcher';
 
 export async function getStaticProps() {
   const responsePage = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Plan-de-site`);

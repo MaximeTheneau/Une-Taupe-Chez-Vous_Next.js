@@ -1,13 +1,11 @@
-import PropTypes from 'prop-types';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import useSWR from 'swr';
 import styles from '../../styles/Pages.module.scss';
-import Page404 from '../404';
 import imageLoaderFull from '../../utils/imageLoaderFull';
 import TableOfContents from '../../components/tableOfContents/TableOfContents';
-import { fetcher } from '../../utils/fetcher';
+import fetcher from '../../utils/fetcher';
 
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Interventions`);

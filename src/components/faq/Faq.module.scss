@@ -2,7 +2,7 @@
 
 .faqs{
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    padding: 1rem 0.5rem;
+
     z-index: 0;
     cursor: pointer;
     & h2{
@@ -19,13 +19,29 @@
         padding: 0.5rem 1rem;
         width: 100%;
     }
-    &:hover{
-        background: $color-primary;
-        & h2{
-            color: $color-white;
+    &:hover button{
+        background: $color-primary !important;
+        color: $color-white;
+    }
+}
+
+.faq{
+    &__question{
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        background: none;
+        width: 100%;
+        padding: 1rem 0.5rem;
+        & i{
+            font-size: 1rem;
         }
-        & p{
-            opacity: 1;
+        &:hover{
+            color: $color-white !important;
+        }
+        &:focus{
+            outline: none;
+            background: none;
         }
     }
 }

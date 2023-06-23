@@ -1,15 +1,10 @@
 import Head from 'next/head';
-import Image from 'next/image';
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 import Router, { useRouter } from 'next/router';
-import styles from '../components/cards/Card.module.scss';
-import imageLoaderFull from '../utils/imageLoaderFull';
-import imageThumbnail from '../utils/imageThumbnail';
-import SlideTransition from '../hooks/useSlideTransition/SlideTransition';
-import { fetcher } from '../utils/fetcher';
+import fetcher from '../utils/fetcher';
 import Cards from '../components/cards/cards';
+import styles from '../components/search/Search.module.scss';
 
 export async function getStaticProps() {
   const responsePage = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Page-de-recherche`);
@@ -42,7 +37,6 @@ export default function Recherche({ responsePage, responseArticles, responseDesc
   useEffect(() => {
     setArticles(articlesInit);
     setSearchValue(router.query.q);
-
   }, [router.query.q]);
 
   const handleSearch = (value) => {
@@ -85,15 +79,22 @@ export default function Recherche({ responsePage, responseArticles, responseDesc
       <section className={styles.page__contents}>
         <h1>{page.title}</h1>
         <p>{page.contents}</p>
-        <form onSubmit={handleSubmit}>
+        <form className={styles.search} onSubmit={handleSubmit}>
           <input
             type="text"
             placeholder="Rechercher..."
             onChange={(event) => handleSearch(event.target.value)}
             value={searchValue}
-            onBlur={() => setTimeout(() => setArticles([null]), 200)}
+
           />
-          <button type="submit">Rechercher</button>
+          <button
+            id="button"
+            type="submit"
+            tabIndex={0}
+            aria-label="Rechercher une page ou un article"
+          >
+            <i className="icon-paper-plane" />
+          </button>
         </form>
         {(filteredArticles.length === 0) && (
         <>

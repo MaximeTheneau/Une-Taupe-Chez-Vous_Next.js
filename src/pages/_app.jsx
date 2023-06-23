@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Layout from '../components/layout';
 import '../styles/globals.scss';
-import Script from 'next/script';
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -17,22 +16,9 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      <Head />
-      <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=UA-208648445-2" />
-      <Script
-        id="google-analytics"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'UA-208648445-2', {
-                page_path: window.location.pathname,
-              });
-            `,
-        }}
-      />
+      <Head>
+        <meta name="google-site-verification" content="yObJd5noBtjUBky_GRbOOETV42Q9qAHf7w00PPz1-ss" />
+      </Head>
       <Layout {...pageProps}>
         {animateTransition && <div className="transition" aria-hidden="true" />}
         <Component {...pageProps} />

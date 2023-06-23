@@ -4,8 +4,7 @@ import useSWR from 'swr';
 import Cards from '../../../components/cards/cards';
 import Category from '../../../components/category/category';
 import styles from '../../../styles/Pages.module.scss';
-import Page404 from '../../404';
-import { fetcher } from '../../../utils/fetcher';
+import fetcher from '../../../utils/fetcher';
 
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Articles`);

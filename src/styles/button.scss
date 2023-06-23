@@ -1,11 +1,14 @@
 @import './variables.scss';
 
-.button{
-    margin: 1rem auto;
-    
+button{
+  display: inline-block;
+  border: none;
+  background: none;
+  cursor: pointer;
 }
-button, .button{
 
+.button{
+  margin: 1rem auto;
   width: 20rem;
   height: 3rem;
   transition: all 0.3s ease-in-out;

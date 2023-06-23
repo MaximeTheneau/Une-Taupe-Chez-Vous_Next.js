@@ -7,8 +7,7 @@ import Category from '../../components/category/category';
 import styles from '../../styles/Pages.module.scss';
 import stylesNav from '../../components/category/Category.module.scss';
 import AnimationHover from '../../hooks/useHoverAnimation/CloneTextWrapper';
-import Page404 from '../404';
-import { fetcher } from '../../utils/fetcher';
+import fetcher from '../../utils/fetcher';
 
 export async function getStaticProps() {
   const responsePage = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Articles`);

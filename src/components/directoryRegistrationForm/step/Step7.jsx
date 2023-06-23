@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 
 import formMiddleware from '../../../middleware/middleware';
 import Confirmation from '../../modal/Confirmation';
 import styles from '../DirectoryRegistration.module.scss';
 
 export default function Step7({
-  formData, setFormData, onNext, articles, onStepClick,
+  formData, setFormData,
 }) {
   const router = useRouter();
 
@@ -76,9 +75,7 @@ export default function Step7({
       <div className={styles.directoryRegistration}>
         <h2>Confirmation</h2>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="confirmation">
-            Confirmation de votre inscription
-          </label>
+          <h2>Confirmation de votre inscription</h2>
           <h3>
             Entreprise :
             <span className={styles.companyName}>
@@ -119,7 +116,7 @@ export default function Step7({
             <br />
           </p>
           <div className="contact-form_button">
-            <button type="submit" title="Envoyer l'inscription">
+            <button id="confirmation" type="submit" title="Envoyer l'inscription">
               Envoyer
               <i className="icon-paper-plane" />
             </button>

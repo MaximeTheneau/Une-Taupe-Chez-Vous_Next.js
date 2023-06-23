@@ -1,7 +1,6 @@
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Cards from '../cards/cards';
 import styles from './Search.module.scss';
 
 function SearchPage() {
@@ -16,12 +15,6 @@ function SearchPage() {
 
   const handleFocus = async (event) => {
     event.preventDefault();
-    const { parentNode } = event.target;
-    parentNode.parentNode.style.setProperty('--focus-scale', '1.1');
-    document.body.style.setProperty('overflow-y', 'hidden', 'important');
-    parentNode.parentNode.style.setProperty('box-shadow', 'var(--background)');
-    document.documentElement.style.setProperty('overflow-y', 'hidden', 'important');
-
     if (!searchValue) {
       const responseAll = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts/all`);
       const articleResponse = await responseAll.json();
@@ -30,20 +23,8 @@ function SearchPage() {
     return null;
   };
 
-  const handleBlur = (event) => {
-    event.preventDefault();
-    const { parentNode } = event.target;
-    parentNode.parentNode.style.setProperty('--focus-scale', '1');
-    document.body.style.removeProperty('overflow-y');
-    document.documentElement.style.removeProperty('overflow-y');
-    parentNode.parentNode.style.removeProperty('box-shadow');
-    setTimeout(() => {
-      setSearchValue('');
-    }, 1000);
-  };
-
   const handleSearch = (target) => {
-    if (target.name === 'search'){
+    if (target.name === 'search') {
       setSearchValue(target.value);
     }
   };
@@ -65,15 +46,13 @@ function SearchPage() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log('submit', searchValue);
     Router.push(`/search/?q=${encodeURIComponent(searchValue)}`);
-    document.body.style.removeProperty('overflow-y');
-    document.documentElement.style.removeProperty('overflow-y');
     setOnPage(false);
     setSearchValue('');
   };
 
   useEffect(() => {
+    setSearchValue('');
     if (Router.pathname === '/search') {
       setOnPage(false);
     } else {
@@ -81,23 +60,8 @@ function SearchPage() {
     }
   }, [Router.pathname]);
 
-  const handleLiClick = (event) => {
-    event.preventDefault(); 
-    const { parentNode } = event.target;
-    const link = event.target.getAttribute('href');
-    console.log(link);
-    setSearchValue('');
-    parentNode?.parentNode.style.setProperty('--focus-scale', '1');
-    document.body.style.removeProperty('overflow-y');
-    document.body.style.removeProperty('overflow-y');
-    document.documentElement.style.removeProperty('overflow-y');
-    Router.push(`${link}`);
-  };
-
-
   function getPathCard(articlesLink) {
     let pathCard = '';
-    console.log(articlesLink);
     if (articlesLink.category.slug === 'Annuaire') {
       pathCard = `${articlesLink.category.slug}/${articlesLink.slug}`;
     } else if (articlesLink.category.slug === 'Pages' && articlesLink.slug !== 'Inscription-annuaire-gratuite') {
@@ -108,18 +72,16 @@ function SearchPage() {
       pathCard = `${articlesLink.category.slug}/${articlesLink.subcategory.slug}/${articlesLink.slug}`;
     } if (articlesLink.category.slug === 'Interventions') {
       pathCard = `${articlesLink.category.slug}/${articlesLink.slug}`;
-    }     
+    }
     return pathCard;
   }
-  
+
   const filteredArticlesByCategory = filteredArticles.filter((article) => article.category.slug === 'Articles');
   return onPage && (
     <div
       className={styles.search}
       onFocus={handleFocus}
-      onBlur={handleBlur}
-      // onMouseOut={hanleMouseClick}
-      tabIndex={0}
+      role="menu"
     >
       <form
         onSubmit={handleSubmit}
@@ -127,16 +89,16 @@ function SearchPage() {
       >
         <input
           type="text"
-          name='search'
+          name="search"
           placeholder="Rechercher..."
           onChange={(event) => handleSearch(event.target)}
           value={searchValue}
-          autoComplete='off'
+          autoComplete="off"
         />
-        {/* <SearchBar value={searchValue} handleChange={handleSearch} /> */}
         <button
           id="button"
           type="submit"
+          tabIndex={0}
           aria-label="Rechercher une page ou un article"
         >
           <i className="icon-paper-plane" />
@@ -145,8 +107,6 @@ function SearchPage() {
       { searchValue.length > 2 && (
       <ul
         className={styles.search__form__list}
-        role="menu"
-
       >
         {(filteredArticles.length === 0 && searchValue.length >= 1) && (
         <li>Aucun résultat</li>
@@ -159,17 +119,14 @@ function SearchPage() {
         )}
         {filteredArticles.map((result) => result.category.slug === 'Interventions' && (
         <li
-          role="menuitem"
           key={result.title}
-          onClick={handleLiClick}
-          onKeyDown={(event) => {
-            if (event.key === 'Enter') {
-              handleLiClick(event);
-            }
-          }}
-          tabIndex={1}
+          role="menuitem"
         >
-          <Link href={`/${getPathCard(result)}`}>{result.title}</Link>
+          <Link
+            href={`/${getPathCard(result)}`}
+          >
+            {result.title}
+          </Link>
         </li>
         ))}
         {filteredArticles.map((result) => {
@@ -181,14 +138,6 @@ function SearchPage() {
               <li
                 role="menuitem"
                 key={result.title}
-                onClick={handleLiClick}
-                onKeyDown={(event) => {
-                  if (event.key === 'Enter') {
-                    handleLiClick(event);
-                  }
-                }}
-                tabIndex={0}
-
               >
                 <Link href={`/${getPathCard(result)}`}>{result.title}</Link>
               </li>
@@ -203,14 +152,6 @@ function SearchPage() {
             <li
               key={article.id}
               role="menuitem"
-              // onClick={() => searchValue('')}
-              onKeyDown={(event) => {
-                if (event.key === 'Enter') {
-                  handleLiClick(event);
-                  
-                }
-              }}
-              tabIndex={0}
             >
               <Link href={`/${getPathCard(article)}`}>{article.title}</Link>
             </li>

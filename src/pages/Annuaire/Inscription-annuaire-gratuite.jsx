@@ -1,13 +1,9 @@
 import Head from 'next/head';
-import Image from 'next/image';
-import Link from 'next/link';
 import useSWR from 'swr';
 import styles from '../../styles/Pages.module.scss';
-import imageLoaderFull from '../../utils/imageLoaderFull';
-import Button from '../../components/button/button';
 import DirectoryRegistrationForm from '../../components/directoryRegistrationForm/DirectoryRegistrationForm';
 import TableOfContents from '../../components/tableOfContents/TableOfContents';
-import { fetcher } from '../../utils/fetcher';
+import fetcher from '../../utils/fetcher';
 
 export async function getStaticProps() {
   const responseArticles = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`);

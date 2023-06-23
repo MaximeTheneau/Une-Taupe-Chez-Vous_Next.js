@@ -200,24 +200,24 @@ export default function ContactForm() {
             />
           </div>
           <div className={styles.contact__input}>
-          {classErrorOrConfirmation(state.confirmationCodePostal)}
-          <input
-            type="number"
-            className="contact-form-input"
-            name="postalCode"
-            value={state.form.postalCode}
-            onChange={(e) => setState(
-              { ...state, form: { ...state.form, postalCode: e.target.value } },
-            )}
-            onBlur={(e) => (
-              e.target.value.length === 5
-                ? setState({ ...state, confirmationCodePostal: true })
-                : setState({ ...state, confirmationCodePostal: false })
-            )}
-            placeholder="Code postal"
-            required
-          />
-        </div>
+            {classErrorOrConfirmation(state.confirmationCodePostal)}
+            <input
+              type="number"
+              className="contact-form-input"
+              name="postalCode"
+              value={state.form.postalCode}
+              onChange={(e) => setState(
+                { ...state, form: { ...state.form, postalCode: e.target.value } },
+              )}
+              onBlur={(e) => (
+                e.target.value.length === 5
+                  ? setState({ ...state, confirmationCodePostal: true })
+                  : setState({ ...state, confirmationCodePostal: false })
+              )}
+              placeholder="Code postal"
+              required
+            />
+          </div>
           <div className={styles.contact__input}>
             {classErrorOrConfirmation(state.confirmationEmail)}
             <Input

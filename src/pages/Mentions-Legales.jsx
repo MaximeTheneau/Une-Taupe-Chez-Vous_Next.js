@@ -4,7 +4,7 @@ import useSWR from 'swr';
 import styles from '../styles/Pages.module.scss';
 import imageLoaderFull from '../utils/imageLoaderFull';
 import Button from '../components/button/button';
-import { fetcher } from '../utils/fetcher';
+import fetcher from '../utils/fetcher';
 
 export async function getStaticProps() {
   const responsePage = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Mentions-Legales`);

@@ -1,9 +1,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
 import styles from './Navbar.module.scss';
 import SearchPage from '../search/SearchPage';
-import imageThumbnail from '../../utils/imageThumbnail';
 
 export default function Navbar() {
   const [toggleNav, setToggleNav] = useState(false);
@@ -56,8 +54,6 @@ export default function Navbar() {
             width={90}
             height={50}
             style={{ width: '100%', height: 'auto' }}
-            quality={100}
-
           />
         </Link>
         <SearchPage />

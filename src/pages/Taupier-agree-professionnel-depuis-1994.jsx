@@ -7,7 +7,7 @@ import imageLoaderFull from '../utils/imageLoaderFull';
 import GoogleMaps from '../components/maps/GoogleMaps';
 import Button from '../components/button/button';
 import NotCopie from '../components/notCopie/NotCopie';
-import { fetcher } from '../utils/fetcher';
+import fetcher from '../utils/fetcher';
 
 export async function getStaticProps() {
   const responsePage = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Taupier-agree-professionnel-depuis-1994`);

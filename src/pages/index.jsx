@@ -1,4 +1,3 @@
-/* eslint-disable quote-props */
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -8,9 +7,8 @@ import Faq from '../components/faq/faq';
 import styles from '../styles/Pages.module.scss';
 import ScrollParallaxTop from '../hooks/useMovableElement/ScrollParallaxTopWrapper';
 import imageLoaderFull from '../utils/imageLoaderFull';
-import imageThumbnail from '../utils/imageThumbnail';
 import AnimationHover from '../hooks/useHoverAnimation/CloneTextWrapper';
-import { fetcher } from '../utils/fetcher';
+import fetcher from '../utils/fetcher';
 
 export async function getStaticProps() {
   const accueilInit = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Accueil`);
@@ -36,19 +34,19 @@ export default function Home({
   const { data: accueilSwr } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/Accueil`, fetcher);
   const { data: servicesSwr } = useSWR(
     `${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&category=Interventions`,
-    { fetcher },
+    fetcher,
   );
   const { data: articlesSwr } = useSWR(
     `${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&category=Articles`,
-    { fetcher },
+    fetcher,
   );
   const { data: faqSwr } = useSWR(
     `${process.env.NEXT_PUBLIC_API_URL}posts/Foire-aux-questions`,
-    { fetcher },
+    fetcher,
   );
   const { data: testimonialsSwr } = useSWR(
     `${process.env.NEXT_PUBLIC_API_URL}posts/Temoignages`,
-    { fetcher },
+    fetcher,
   );
 
   const testimonials = testimonialsSwr || testimonialsInit;
@@ -56,8 +54,6 @@ export default function Home({
   const services = servicesSwr || servicesInit;
   const articles = articlesSwr || articlesInit;
   const faq = faqSwr || faqInit;
-
-  console.log('accueil', testimonials);
 
   const descriptionMeta = 'Taupier professionnels agréé de la lutte contre les taupes, fouines et ragondins. Intervention en Eure (27), Yvelines (78) et Essonne (91). Devis gratuit.';
 
@@ -144,7 +140,6 @@ export default function Home({
                 loader={imageLoaderFull}
                 quality={100}
                 fill
-                
                 className={styles.home__category__image}
               />
             </ScrollParallaxTop>
@@ -221,8 +216,6 @@ export default function Home({
             </div>
             )
           ))}
-
-          
 
           <div className="button">
             <Link href="/Contact">

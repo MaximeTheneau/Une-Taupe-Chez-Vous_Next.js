@@ -80,9 +80,6 @@ function FormContainer({ article }) {
     setCurrentStep(nextStep);
   };
 
-  const handlePrevious = () => {
-  };
-
   const currentPage = formPages.find((page) => page.id === currentStep);
 
   return (

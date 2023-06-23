@@ -9,15 +9,20 @@ Faq element component
 function FaqElements({ faq, toggleFAQ }) {
   return (
     <li
+      key={faq.id}
+      role="menuitem"
       className={styles.faqs}
-      onClick={() => toggleFAQ(faq.id)}
     >
-      <h2 className="faq-question">
+      <button
+        type="button"
+        onClick={() => toggleFAQ(faq.id)}
+        className={styles.faq__question}
+      >
         {faq.title}
         {faq.open
           ? <i className="icon-x" />
           : <i className="icon-open" />}
-      </h2>
+      </button>
       <p
         className={`faq-answer ${faq.open ? 'block' : 'none'}`}
       >

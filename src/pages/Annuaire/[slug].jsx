@@ -4,9 +4,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import useSWR from 'swr';
 import styles from '../../styles/Pages.module.scss';
-import Page404 from '../404';
 import imageLoaderFull from '../../utils/imageLoaderFull';
-import { fetcher } from '../../utils/fetcher';
+import fetcher from '../../utils/fetcher';
 import TableOfContents from '../../components/tableOfContents/TableOfContents';
 
 export async function getStaticPaths() {
@@ -27,14 +26,13 @@ export default function Slug({ postInit }) {
   const { data: postData } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/${postInit.slug}`, fetcher);
 
   const post = postData || postInit;
-  console.log(post);
 
   const descriptionMeta = post.contents.substring(0, 155).replace(/[\r\n]+/gm, '');
 
-  const postsLinks = post.listPosts.map((post) => ({
-    id: post.id,
-    title: post.title,
-    description: post.description?.replace(
+  const postsLinks = post.listPosts.map((postItem) => ({
+    id: postItem.id,
+    title: postItem.title,
+    description: postItem.description?.replace(
       /Localisation/gi,
       '<strong>Localisation</strong>',
     ).replace(
@@ -128,16 +126,17 @@ export default function Slug({ postInit }) {
 
           <h2>Listes des Taupiers près de chez vous :</h2>
           <ul>
-            {postsLinks.map((post) => (
-              <li key={post.id}>
-                <h2>{post.title}</h2>
-                <p dangerouslySetInnerHTML={{ __html: post.description }} />
+            {postsLinks.map((item) => (
+              <li key={item.id}>
+                <h2>{item.title}</h2>
+                <p dangerouslySetInnerHTML={{ __html: item.description }} />
               </li>
             ))}
           </ul>
           <h2>Référencez-vous gratuitement en tant que professionnel </h2>
           <p>
-            Vous êtes un professionnel de la taupe et vous souhaitez être référencé gratuitement sur notre site ?
+            Vous êtes un professionnel de la taupe et vous souhaitez être référencé
+            gratuitement sur notre site ?
           </p>
           <Link href="/Annuaire/Inscription-annuaire-gratuite" className="stronk">
             Inscrivez vôtre entreprise gratuitement

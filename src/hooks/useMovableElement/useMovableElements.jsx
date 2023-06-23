@@ -7,7 +7,7 @@ export default function useMovableElements(elementRef) {
       if (!elementRef.current) return;
       if (elementRef.current) {
         const { top } = elementRef.current.getBoundingClientRect();
-        setOffset(top < 0 ? 0 : top / window.innerHeight * 100);
+        setOffset(top < 0 ? 0 : (top / window.innerHeight) * 100);
       }
     };
     window.addEventListener('scroll', handleScroll);

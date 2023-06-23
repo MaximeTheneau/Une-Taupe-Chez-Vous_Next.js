@@ -16,22 +16,16 @@ export default function Faq({ faq }) {
    * @returns {void}
    */
   const toggleFAQ = (index) => {
-    setFaqs(
-      faqs.map((faq) => {
-        if (faq.id === index) {
-          faq.open = !faq.open;
-        } else {
-          faq.open = false;
-        }
-        return faq;
-      }),
-    );
+    setFaqs((prevFaqs) => prevFaqs.map((item, i) => ({
+      ...item,
+      open: i === index - 1 ? !item.open : false,
+    })));
   };
   // Render each FAQ as a FaqElements component
   return (
-    <ul>
-      {faqs.map((faq) => (
-        <FaqElements faq={faq} index={faq.id} key={faq.id} toggleFAQ={toggleFAQ} />
+    <ul role="menu">
+      {faqs.map((item) => (
+        <FaqElements faq={item} index={item.id} key={item.id} toggleFAQ={toggleFAQ} />
       ))}
     </ul>
   );

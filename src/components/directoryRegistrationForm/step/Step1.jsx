@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from '../DirectoryRegistration.module.scss';
 
 function Step1({
-  formData, setFormData, onNext, curentStep,
+  formData, setFormData, onNext,
 }) {
   const [error, setError] = useState(null);
 

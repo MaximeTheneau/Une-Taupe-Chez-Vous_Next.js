@@ -1,15 +1,13 @@
 import PropTypes from 'prop-types';
 import Image from 'next/image';
 import Head from 'next/head';
-import Link from 'next/link';
 import useSWR from 'swr';
 import styles from '../../../styles/Pages.module.scss';
 import Cards from '../../../components/cards/cards';
 import Category from '../../../components/category/category';
 import imageLoaderFull from '../../../utils/imageLoaderFull';
 import TableOfContents from '../../../components/tableOfContents/TableOfContents';
-import Page404 from '../../404';
-import { fetcher } from '../../../utils/fetcher';
+import fetcher from '../../../utils/fetcher';
 
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Articles`);
@@ -27,7 +25,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const { subcategory, slug } = params;
+  const { slug } = params;
   const responsePost = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/${slug}`);
   const responseDesc = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&filter=desc&category=articles`);
 

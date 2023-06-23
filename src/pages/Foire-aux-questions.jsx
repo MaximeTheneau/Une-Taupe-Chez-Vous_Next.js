@@ -1,11 +1,10 @@
 import PropTypes from 'prop-types';
 import Image from 'next/image';
 import Head from 'next/head';
-import Script from 'next/script';
 import useSWR from 'swr';
 import styles from '../styles/Pages.module.scss';
 import Faq from '../components/faq/faq';
-import { fetcher } from '../utils/fetcher';
+import fetcher from '../utils/fetcher';
 
 export async function getStaticProps() {
   const responseContact = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Foire-aux-questions`);

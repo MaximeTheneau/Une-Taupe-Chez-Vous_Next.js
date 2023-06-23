@@ -3,7 +3,7 @@
 .search {
     --background: 1rem 1rem 0vh 100vh #0b0c0e60;
     position: relative;
-    transform: scale(var(--focus-scale));
+    transform: scale(1);
     animation: myAnimation 1s;
     width: 40%;
     &__form{
@@ -21,7 +21,7 @@
             border-right: rgba($font-color, 0.1) 0.1px solid;
             &:focus {
                 background: $color-white;
-                columns: $font-color;
+                box-shadow:  1rem 1rem 0vh 100vh #0b0c0e60;
             }
             &::placeholder {
                 color: $font-color !important;
