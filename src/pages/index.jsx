@@ -7,7 +7,6 @@ import Faq from '../components/faq/faq';
 import styles from '../styles/Pages.module.scss';
 import ScrollParallaxTop from '../hooks/useMovableElement/ScrollParallaxTopWrapper';
 import imageLoaderFull from '../utils/imageLoaderFull';
-import AnimationHover from '../hooks/useHoverAnimation/CloneTextWrapper';
 import fetcher from '../utils/fetcher';
 
 export async function getStaticProps() {
@@ -123,29 +122,29 @@ export default function Home({
           </>
         ))}
         {/* --Services--*/}
-        <div>
-          <div className={styles.home__category}>
-            <div className={styles.home__category__title}>
-              <Link href="../Interventions">
-                <h2>Interventions</h2>
-                <span>
-                  Voir plus
-                </span>
-              </Link>
-            </div>
-            <ScrollParallaxTop>
-              <Image
-                src={`${accueil.slug}.webp`}
-                alt={accueil.altImg || accueil.title}
-                loader={imageLoaderFull}
-                quality={100}
-                fill
-                className={styles.home__category__image}
-              />
-            </ScrollParallaxTop>
+
+        <div className={styles.home__category}>
+          <div className={styles.home__category__title}>
+            <Link href="../Interventions">
+              <h2>Interventions</h2>
+              <span>
+                Voir plus
+              </span>
+            </Link>
           </div>
-          <Cards cards={services} />
+          <ScrollParallaxTop>
+            <Image
+              src={`${accueil.slug}.webp`}
+              alt={accueil.altImg || accueil.title}
+              loader={imageLoaderFull}
+              quality={100}
+              fill
+              className={styles.home__category__image}
+            />
+          </ScrollParallaxTop>
         </div>
+        <Cards cards={services} />
+
         <div className={styles.home__list}>
           <h2>
             Taupier professionnel certifié depuis près de 30 ans,
@@ -163,12 +162,10 @@ export default function Home({
           </ul>
         </div>
 
-        <div>
-          <Link href={faq.slug}>
-            <h2 className="title__faqs">{faq.title}</h2>
-          </Link>
-          <Faq faq={faq} />
-        </div>
+        <Link href={faq.slug}>
+          <h2 className="title__faqs">{faq.title}</h2>
+        </Link>
+        <Faq faq={faq} />
         <div className={styles.home__testimonials}>
           <h2>
             <Link href={testimonials.slug}>
@@ -196,35 +193,24 @@ export default function Home({
             Découvrez les avis de nos clients
           </Link>
         </div>
-
-        <div>
-          {accueil.paragraphPosts.map((paragraphArticle) => (
-            <>
-              <h2>{paragraphArticle.title}</h2>
-              <p>{paragraphArticle.description}</p>
-            </>
-          ))}
-          {accueil.listPosts.map((listArticle) => (
-            listArticle.title !== null && (
+        {accueil.listPosts.map((listArticle) => (
+          listArticle.title !== null && (
             <div key={listArticle.title}>
               {listArticle.title && (
-              <h3>{listArticle.title}</h3>
+              <h2>{listArticle.title}</h2>
               )}
               {listArticle.description && (
               <p>{listArticle.description}</p>
               )}
             </div>
-            )
-          ))}
+          )
+        ))}
 
-          <div className="button">
-            <Link href="/Contact">
-              <AnimationHover>
-                Contactez-nous
-              </AnimationHover>
-            </Link>
-          </div>
-        </div>
+        <button type="button" className="button">
+          <Link href="/Contact">
+            Contactez-nous
+          </Link>
+        </button>
       </section>
     </>
   );

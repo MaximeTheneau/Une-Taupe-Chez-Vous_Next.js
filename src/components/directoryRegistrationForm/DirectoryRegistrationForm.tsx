@@ -89,7 +89,6 @@ function FormContainer({ article }) {
           formData={formData}
           setFormData={setFormData}
           onNext={handleNext}
-          curentStep={currentPage.id}
           articles={currentPage.articles}
 
         />

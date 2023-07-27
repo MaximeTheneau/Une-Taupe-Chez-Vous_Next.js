@@ -1,13 +1,14 @@
-import PropTypes from 'prop-types';
 import Image from 'next/image';
 import Head from 'next/head';
 import useSWR from 'swr';
+import Link from 'next/link';
 import styles from '../../../styles/Pages.module.scss';
 import Cards from '../../../components/cards/cards';
 import Category from '../../../components/category/category';
 import imageLoaderFull from '../../../utils/imageLoaderFull';
 import TableOfContents from '../../../components/tableOfContents/TableOfContents';
 import fetcher from '../../../utils/fetcher';
+
 
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Articles`);
@@ -26,9 +27,10 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const { slug } = params;
+  
   const responsePost = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/${slug}`);
   const responseDesc = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&filter=desc&category=articles`);
-
+  
   return { props: { responsePost, responseDesc }, revalidate: 10 };
 }
 
@@ -39,6 +41,8 @@ export default function Slug({ responsePost, responseDesc }) {
   const post = postData || responsePost;
   const desc = descData || responseDesc;
 
+  const urlPost = `${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.subcategory.slug}/${post.slug}`;
+
   const descriptionMeta = post.contents === null
     ? `Articles de blog ${post.title}`
     : post.contents.substring(0, 165).replace(/[\r\n]+/gm, '');
@@ -46,15 +50,15 @@ export default function Slug({ responsePost, responseDesc }) {
   const handleChangeShareSocial = (e) => {
     const social = e.target.value;
     if (social === 'facebook') {
-      window.open(`https://www.facebook.com/sharer/sharer.php?u=${process.env.NEXT_PUBLIC_URL}/Articles/${post.slug}`, '_blank');
+      window.open(`https://www.facebook.com/sharer/sharer.php?u=${urlPost}`, '_blank');
     } else if (social === 'twitter') {
-      window.open(`https://twitter.com/intent/tweet?url=${process.env.NEXT_PUBLIC_URL}/Articles/${post.slug}`, '_blank');
+      window.open(`https://twitter.com/intent/tweet?url=${urlPost}`, '_blank');
     } else if (social === 'linkedin') {
-      window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${process.env.NEXT_PUBLIC_URL}/Articles/${post.slug}`, '_blank');
+      window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${urlPost}`, '_blank');
     } else if (social === 'pinterest') {
-      window.open(`https://pinterest.com/pin/create/button/?url=${process.env.NEXT_PUBLIC_URL}/Articles/${post.slug}`, '_blank');
+      window.open(`https://pinterest.com/pin/create/button/?url=${urlPost}`, '_blank');
     } else if (social === 'email') {
-      window.open(`mailto:?subject=${post.title}&body=${process.env.NEXT_PUBLIC_URL}/Articles/${post.slug}`, '_blank');
+      window.open(`mailto:?subject=${post.title}&body=${urlPost}`, '_blank');
     }
   };
   // schema.org
@@ -94,12 +98,26 @@ export default function Slug({ responsePost, responseDesc }) {
         <meta property="og:type" content="website" />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={descriptionMeta} />
-        <meta property="og:site_name" content={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.subcategory.slug}/${post.slug}`} />
-        <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.subcategory.slug}/${post.slug}`} />
+        <meta property="og:site_name" content={urlPost} />
+        <meta property="og:url" content={urlPost} />
         <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.imgPost}.jpg`} />
+        <meta property="og:image:width" content="1024" />
+        <meta property="og:image:height" content="720" />
+        <meta property="article:published_time" content={post.createdAt} />
+        <meta property="article:modified_time" content={post.updatedAt} />
+        <meta property="article:section" content={post.subcategory.name} />
+        <meta property="twitter:card" content="summary" />
+        <meta property="twitter:title" content={post.title} />
+        <meta property="twitter:description" content={descriptionMeta} />
+        <meta property="twitter:site" content="@UneTaupe_" />
+        <meta property="twitter:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.imgPost}.jpg`} />
+        <meta property="twitter:creator" content="@UneTaupe_" />
+        <meta property="twitter:image:alt" content={post.altImg || post.title} />
+        <meta property="twitter:domain" content={urlPost} />
+        <meta property="twitter:url" content={urlPost} />
         <link
           rel="canonical"
-          href={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.subcategory.slug}/${post.slug}`}
+          href={urlPost}
           key="canonical"
         />
         <script
@@ -108,22 +126,28 @@ export default function Slug({ responsePost, responseDesc }) {
           key="product-jsonld"
         />
       </Head>
-      <Category category={post.subcategory} />
       <section className={styles.page}>
         <div className={styles.page__image}>
           <Image
-            src={`${post.slug}.webp`}
+            src={`${post.imgPost}.webp`}
             alt={post.altImg || post.title}
             loader={imageLoaderFull}
-            quality={100}
-            width="1080"
-            height="720"
-            sizes="(max-width: 768px) 100vw,
-            (max-width: 1200px) 50vw,
-            33vw"
+            quality={90}
+            width={1080}
+            height={608}
+            sizes="(max-width: 640px) 100vw,
+            (max-width: 750px) 100vw,
+            (max-width: 828px) 100vw,
+            (max-width: 1080px) 100vw,
+            100vw"
+            style={{
+              width: '100%',
+              height: 'auto',
+            }}
             priority
           />
         </div>
+        <Category category={post.subcategory} />
 
         <div className={styles.page__contents}>
 
@@ -132,35 +156,31 @@ export default function Slug({ responsePost, responseDesc }) {
           <p>{post.contents}</p>
           <TableOfContents post={post} />
           {post.paragraphPosts.map((paragraphArticle) => (
-            <>
+            <div key={paragraphArticle.id}>
               {paragraphArticle.subtitle && (
-                <h2
-                  key={paragraphArticle.id}
-                  id={paragraphArticle.slug}
-                >
-                  {paragraphArticle.subtitle}
-                </h2>
+              <h2 id={paragraphArticle.slug}>
+                {paragraphArticle.subtitle}
+              </h2>
               )}
               {paragraphArticle.paragraph && (
-                <p key={paragraphArticle.id} className={styles.page__contents__paragraph}>
-                  {paragraphArticle.imgPostParagh && (
-                    <Image
-                      className={styles.page__contents__paragraph}
-                      src={`${paragraphArticle.imgPostParagh}.webp`}
-                      alt={paragraphArticle.subtitle}
-                      quality={100}
-                      width="1080"
-                      height="720"
-                      sizes="(max-width: 768px) 100vw,
-                        (max-width: 1200px) 50vw,
-                        33vw"
-                    />
-                  )}
-                  {paragraphArticle.paragraph}
-
-                </p>
+              <p key={paragraphArticle.id} className={styles.page__contents__paragraph}>
+                {paragraphArticle.imgPostParagh && (
+                <Image
+                  className={styles.page__contents__paragraph}
+                  src={`${paragraphArticle.imgPostParagh}.webp`}
+                  alt={paragraphArticle.subtitle}
+                  quality={100}
+                  width="1080"
+                  height="720"
+                  sizes="(max-width: 768px) 100vw,
+                  (max-width: 1200px) 50vw,
+                  33vw"
+                />
+                )}
+                {paragraphArticle.paragraph}
+              </p>
               )}
-            </>
+            </div>
           ))}
           <ol>
             {post.listPosts.map((listArticle) => (
@@ -176,6 +196,12 @@ export default function Slug({ responsePost, responseDesc }) {
               )
             ))}
           </ol>
+
+          {post.links && (
+          <Link href={post.links}>
+            {post.textLinks}
+          </Link>
+          )}
 
           <select onChange={(e) => handleChangeShareSocial(e)} className="select">
             <option value="---">Partager sur ...</option>
@@ -195,27 +221,3 @@ export default function Slug({ responsePost, responseDesc }) {
     </>
   );
 }
-
-Slug.propTypes = {
-  post: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    subtitle: PropTypes.string.isRequired,
-    contents: PropTypes.string.isRequired,
-    contents2: PropTypes.string.isRequired,
-    slug: PropTypes.string.isRequired,
-    updatedAt: PropTypes.string.isRequired,
-    createdAt: PropTypes.string.isRequired,
-    imgPost: PropTypes.shape({
-      path: PropTypes.string.isRequired,
-    }),
-    imgPost2: PropTypes.shape({
-      path: PropTypes.string,
-    }),
-    imgPost3: PropTypes.shape({
-      path: PropTypes.string,
-    }),
-    imgPost4: PropTypes.shape({
-      path: PropTypes.string,
-    }),
-  }).isRequired,
-};

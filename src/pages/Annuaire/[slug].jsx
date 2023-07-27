@@ -117,10 +117,10 @@ export default function Slug({ postInit }) {
           <h1>{post.title}</h1>
           <p>{post.contents}</p>
           <TableOfContents post={post} />
-          {post.paragraphPosts.map((paragraphPosts) => (
+          {post.paragraphPosts.map((paragraphs) => (
             <>
-              <h2 id={paragraphPosts.slug}>{paragraphPosts.subtitle}</h2>
-              <p>{paragraphPosts.paragraph}</p>
+              <h2 key={paragraphs} id={paragraphs.slug}>{paragraphs.subtitle}</h2>
+              <p>{paragraphs.paragraph}</p>
             </>
           ))}
 

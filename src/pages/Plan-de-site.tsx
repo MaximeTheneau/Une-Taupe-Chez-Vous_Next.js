@@ -100,7 +100,7 @@ export default function SiteMapPage({
                 </Link>
               </li>
               <li>
-                <Link href="/plan-de-site">
+                <Link href="/Plan-de-site">
                   Plan du site
                 </Link>
               </li>

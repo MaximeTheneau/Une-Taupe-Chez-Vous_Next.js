@@ -5,6 +5,7 @@ import Cards from '../../components/cards/cards';
 import styles from '../../styles/Pages.module.scss';
 import fetcher from '../../utils/fetcher';
 
+
 export async function getStaticProps() {
   const responseArticles = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`);
   const responsePage = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Annuaire`);
@@ -34,13 +35,13 @@ export default function Home({ responseArticles, responsePage }) {
         {/* Open Graph */}
         <meta property="og:type" content="website" />
         <meta property="og:title" content={page.title} />
-        <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/${page.category.slug}/${page.slug}`} />
+        <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/${page.slug}`} />
         <meta property="og:description" content={descriptionMeta} />
-        <meta property="og:site_name" content={`${process.env.NEXT_PUBLIC_URL}/${page.category.slug}/${page.slug}`} />
+        <meta property="og:site_name" content={`${process.env.NEXT_PUBLIC_URL}`} />
         <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${page.imgPost}.jpg`} />
         <link
           rel="canonical"
-          href={`${process.env.NEXT_PUBLIC_URL}/${page.category.slug}/${page.slug}`}
+          href={`${process.env.NEXT_PUBLIC_URL}/${page.slug}`}
           key="canonical"
         />
       </Head>

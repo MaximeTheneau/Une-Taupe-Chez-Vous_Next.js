@@ -5,25 +5,26 @@ import SlideTransition from '../../hooks/useSlideTransition/SlideTransition';
 import imageThumbnail from '../../utils/imageThumbnail';
 
 export default function Card({ card }) {
-  let pathCard = '';
-
-  if (card.category.slug === 'Annuaire') {
-    pathCard = `${card.category.slug}/${card.slug}`;
-  } if (card.category.slug === 'Pages' && card.slug !== 'Inscription-annuaire-gratuite') {
-    pathCard = `${card.slug}`;
-  } if (card.slug === 'Inscription-annuaire-gratuite') {
-    pathCard = `Annuaire/${card.slug}`;
-  } if (card.category.slug === 'Articles') {
-    pathCard = `${card.category.slug}/${card.subcategory.slug}/${card.slug}`;
-  } else {
-    pathCard = `${card.category.slug}/${card.slug}`;
+  function getPathCard(articlesLink) {
+    let pathCard = '';
+    if (articlesLink.category.slug === 'Annuaire') {
+      pathCard = `${articlesLink.category.slug}/${articlesLink.slug}`;
+    } else if (articlesLink.category.slug === 'Pages' && articlesLink.slug !== 'Inscription-annuaire-gratuite') {
+      pathCard = `${articlesLink.slug}`;
+    } if (articlesLink.slug === 'Inscription-annuaire-gratuite') {
+      pathCard = `Annuaire/${articlesLink.slug}`;
+    } if (articlesLink.category.slug === 'Articles') {
+      pathCard = `${articlesLink.category.slug}/${articlesLink.subcategory.slug}/${articlesLink.slug}`;
+    } if (articlesLink.category.slug === 'Interventions') {
+      pathCard = `${articlesLink.category.slug}/${articlesLink.slug}`;
+    }
+    return pathCard;
   }
-
   return (
     <SlideTransition
       className={styles.card}
     >
-      <Link href={`/${pathCard}`}>
+      <Link href={`/${getPathCard(card)}`}>
         <Image
           src={`${card.imgPost}.webp`}
           alt={card.altImg || card.title}

@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import styles from './Footer.module.scss';
-import AnimationHover from '../../hooks/useHoverAnimation/CloneTextWrapper';
 
 export default function Footer() {
   return (
@@ -68,7 +67,9 @@ export default function Footer() {
         </ul>
         <ul>
           <li>
-            <h2>Contact</h2>
+            <Link href="/Contact">
+              <h2>Contact</h2>
+            </Link>
           </li>
           <li>
             <Link href="tel:+33232264958">
@@ -78,7 +79,7 @@ export default function Footer() {
           </li>
           <li>
             <Link href="/Contact">
-              Formulaire de contact
+              Devis gratuit | Contactez-nous !
             </Link>
           </li>
           <li>
@@ -104,9 +105,7 @@ export default function Footer() {
       </div>
       <div className={styles.footer__author}>
         <Link href="https://theneaumaxime.fr" target="_blank">
-          <AnimationHover>
-            Site réalisé par Maxime Theneau
-          </AnimationHover>
+          Site réalisé par Maxime Theneau
         </Link>
       </div>
     </div>

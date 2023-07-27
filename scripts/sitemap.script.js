@@ -1,4 +1,5 @@
 const fs = require('fs');
+import fetcher from '../../../utils/fetcher';
 
 const generateSitemap = async () => {
   const urlApi = 'https://back.unetaupechezvous.fr/public/api/';
@@ -98,19 +99,19 @@ const generateSitemap = async () => {
   const sitemapIndexXml = `<?xml version="1.0" encoding="UTF-8"?>
     <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
       <sitemap>
-        <loc>${urlFront}/sitemap/sitemap-Annuaire.xml</loc>
+        <loc>${urlFront}sitemap/sitemap-Annuaire.xml</loc>
       </sitemap>
       <sitemap>
-        <loc>${urlFront}/sitemap/sitemap-Articles.xml</loc>
+        <loc>${urlFront}sitemap/sitemap-Articles.xml</loc>
       </sitemap>
       <sitemap>
-        <loc>${urlFront}/sitemap/sitemap-Interventions.xml</loc>
+        <loc>${urlFront}sitemap/sitemap-Interventions.xml</loc>
       </sitemap>
       <sitemap>
-        <loc>${urlFront}/sitemap/sitemap-p0.6.xml</loc>
+        <loc>${urlFront}sitemap/sitemap-p0.6.xml</loc>
       </sitemap>
       <sitemap>
-        <loc>${urlFront}/sitemap/sitemap-p1.xml</loc>
+        <loc>${urlFront}sitemap/sitemap-p1.xml</loc>
       </sitemap>
     </sitemapindex>`;
 

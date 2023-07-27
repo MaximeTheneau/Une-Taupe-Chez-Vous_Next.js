@@ -24,16 +24,12 @@
 
   &__image{
     position: relative;
-
     height: 100%;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    & img{
-      max-width: 70%;
-      max-height: 50vh;
-      object-fit: contain;
-    }
+
     & h1{
       position: absolute;
       top: 50%;
@@ -57,17 +53,21 @@
   & h1{
     font-size: calc(70% + 5vw);
   }
+  & h2{
+    font-size: calc(70% + 3vw);
+    margin: 1rem 0;
+  }
   &__list{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     background: $color-primary;
     padding: 1rem;
+    color: $color-white;
     &__item{
       list-style: disc;
       width: 100%;
       margin: 1rem 0 1rem 3rem;
-      color: $color-white;
       &__image{
         width: 100%;
         height: auto;
@@ -101,6 +101,7 @@
     &__title{
       background: $color-primary;
       padding: 1rem;
+      color: $color-white;
       & a{
         display: flex;
         justify-content: space-between;
@@ -108,7 +109,7 @@
           font-size: calc(70% + 1vw);
         }
         &:hover{
-          color: $color-white;
+          color: $font-color;
         }
         
       }
@@ -130,6 +131,10 @@
 
 @media screen and (min-width: 768px){
   .page{
+    &__image{
+    width: 50%;
+    margin: 0 auto;
+    }
     &__contact{
       display: flex;
       &__block{

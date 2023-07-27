@@ -52,13 +52,13 @@ export default function Home({ responseArticles, responsePage }) {
         {/* Open Graph */}
         <meta property="og:type" content="website" />
         <meta property="og:title" content={page.title} />
-        <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/${page.category.slug}/${page.slug}`} />
+        <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/Articles/${subcategory.slug}`} />
         <meta property="og:description" content={descriptionMeta} />
-        <meta property="og:site_name" content={`${process.env.NEXT_PUBLIC_URL}/${page.category.slug}/${page.slug}`} />
-        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${page.imgPost}.jpg`} />
+        <meta property="og:site_name" content={`${process.env.NEXT_PUBLIC_URL}`} />
+        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/Accueil.jpg`} />
         <link
           rel="canonical"
-          href={`${process.env.NEXT_PUBLIC_URL}/${page.category.slug}/${page.slug}`}
+          href={`${process.env.NEXT_PUBLIC_URL}/Articles/${subcategory.slug}`}
           key="canonical"
         />
       </Head>

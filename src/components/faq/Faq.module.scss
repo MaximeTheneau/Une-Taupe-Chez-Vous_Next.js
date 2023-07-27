@@ -33,15 +33,16 @@
         background: none;
         width: 100%;
         padding: 1rem 0.5rem;
+        color: $font-color;
+        &:focus{
+            outline: solid 1px $font-color;
+            background: none;
+        }
         & i{
             font-size: 1rem;
         }
         &:hover{
             color: $color-white !important;
-        }
-        &:focus{
-            outline: none;
-            background: none;
         }
     }
 }

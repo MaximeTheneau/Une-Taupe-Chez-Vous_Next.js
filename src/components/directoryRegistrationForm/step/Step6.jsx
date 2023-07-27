@@ -47,7 +47,7 @@ export default function Step6({
           >
             <option value=""> Sélectionner un annuaire</option>
             {articles.map((article) => (
-              <option key={article.id} value={article.title}>{article.title}</option>
+              <option key={article.id} value={article.id}>{article.title}</option>
             ))}
           </select>
         </label>

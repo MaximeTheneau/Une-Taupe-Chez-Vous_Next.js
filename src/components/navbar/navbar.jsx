@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import styles from './Navbar.module.scss';
 import SearchPage from '../search/SearchPage';
 
@@ -47,9 +48,10 @@ export default function Navbar() {
       }
       <nav className={` ${isNavVisible ? ` ${styles.navbar}` : styles['navbar--hidden']} ${styles.navbar__720}`}>
         <Link href="/" tabIndex={"la page d'accueil"}>
-          <img
-            src={`${process.env.NEXT_PUBLIC_CLOUD_URL}/w_${90},q_${90}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/logo-une-taupe-chez-vous.png`}
+          <Image
+            src="logo-une-taupe-chez-vous.png"
             alt="Logo de l'entreprise Une Taupe Chez Vous"
+            quality={80}
             className={styles.home__imageLogo}
             width={90}
             height={50}
