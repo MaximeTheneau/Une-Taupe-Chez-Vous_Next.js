@@ -1,6 +1,5 @@
-
 function escapeXmlSpecialCharacters(str) {
-  return str.replace(/[&<>'"]/g, match => {
+  return str.replace(/[&<>'"]/g, (match) => {
     switch (match) {
       case '&': return '&amp;';
       case '<': return '&lt;';
@@ -13,23 +12,24 @@ function escapeXmlSpecialCharacters(str) {
 }
 
 function generateSiteMap(posts) {
-
   return `<?xml version="1.0" encoding="UTF-8"?>
    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
      <!--We manually set the two URLs we know already-->
      ${posts
-      .map(({ slug, priority, updatedAt, createdAt }) => {
-        const escapedSlug = escapeXmlSpecialCharacters(slug);
-         return `
+    .map(({
+      slug, priority, updatedAt, createdAt,
+    }) => {
+      const escapedSlug = escapeXmlSpecialCharacters(slug);
+      return `
        <url>
            <loc>${`${process.env.NEXT_PUBLIC_URL}/${escapedSlug}`}</loc>
             <changefreq>daily</changefreq>
             <priority>${priority}</priority>
-            <lastmod>${updatedAt ? updatedAt : createdAt}</lastmod>
+            <lastmod>${updatedAt || createdAt}</lastmod>
        </url>
     `;
-      })
-      .join('')}
+    })
+    .join('')}
    </urlset>
  `;
 }

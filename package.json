@@ -6,8 +6,8 @@
     "build": "next build",
     "sitemap": "node scripts/sitemap.script.js",
     "export": "next export",
-    "start": "node server.js",
-    "dev": "next dev --hostname localhost --port 3000",
+    "start": "next start -H localhost -p 3000",
+    "dev": "next dev --hostname back.theneaumaxime.fr --port 3000",
     "lint": "next lint"
   },
   "dependencies": {
