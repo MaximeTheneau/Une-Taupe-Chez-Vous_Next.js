@@ -9,6 +9,7 @@ export default function Custom404() {
         <meta name="robots" content="noindex" />
 
       </Head>
+      
       <section>
         <h1>Désolé</h1>
         <p>Oups la page que vous recherche est innaccessible</p>
@@ -25,3 +26,4 @@ export default function Custom404() {
     </>
   );
 }
+

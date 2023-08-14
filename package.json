@@ -1,14 +1,14 @@
 {
   "name": "une_taupe_chez_vous__nextjs",
   "version": "2.1.0",
-  "private": true,
   "scripts": {
     "build": "next build",
     "sitemap": "node scripts/sitemap.script.js",
     "export": "next export",
     "start": "next start -H localhost -p 3000",
-    "dev": "next dev --hostname back.theneaumaxime.fr --port 3000",
-    "lint": "next lint"
+    "dev": "next dev --hostname localhost --port 3000",
+    "lint": "next lint",
+    "clean:all": "rm -rf public node_modules yarn.lock package-lock.json"
   },
   "dependencies": {
     "@next/font": "^13.3.0",
@@ -32,6 +32,7 @@
     "eslint-config-next": "13.0.0",
     "eslint-config-prettier": "^8.5.0",
     "next-sitemap": "^4.0.5",
-    "sass": "^1.57.1"
+    "sass": "^1.57.1",
+    "typescript": "5.1.6"
   }
 }

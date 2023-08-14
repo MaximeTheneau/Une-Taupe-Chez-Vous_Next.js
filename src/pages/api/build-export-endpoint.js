@@ -4,9 +4,6 @@ export default async function handler(req, res) {
     const { exec } = require('child_process');
     exec('npm run build && npm run export');
 
-    // Vous pouvez également ajouter un traitement supplémentaire si nécessaire.
-    // ...
-
     res.status(200).json({ message: 'Build and export triggered successfully.' });
   } catch (error) {
     console.error(error);
