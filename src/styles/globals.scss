@@ -17,6 +17,7 @@ h1,h2,h3,h4,h5,h6{
 }
 h1{
   font-size: $font-size-large;
+  padding: 0.5rem 0;
 }
 h2{
   font-size: $font-size-medium;
@@ -26,10 +27,7 @@ h2{
 a {
   color: inherit;
 }
-* {
-  box-sizing: border-box;
-  // box-shadow: 0 0 0 3px red !important;
-}
+
 
 p{
   width: 90%;
@@ -38,7 +36,12 @@ p{
 
 img{
   max-width: 100%;
-  max-height: 100%;
+  margin: 0;
+  height: auto;
+  object-fit: contain;
+  position: relative;
+  box-sizing: border-box;
+  contain: strict;
   display: block;
 }
 

@@ -172,9 +172,7 @@ export default function Slug({ responsePost, responseDesc }) {
                   quality={100}
                   width="1080"
                   height="720"
-                  sizes="(max-width: 768px) 100vw,
-                  (max-width: 1200px) 50vw,
-                  33vw"
+                  sizes="(max-width: 640px) 100vw, (max-width: 750px) 750px, (max-width: 828px) 828px, 1080px"
                 />
                 )}
                 {paragraphArticle.paragraph}
@@ -182,6 +180,7 @@ export default function Slug({ responsePost, responseDesc }) {
               )}
             </div>
           ))}
+          
           <ol>
             {post.listPosts.map((listArticle) => (
               listArticle.title !== null && (

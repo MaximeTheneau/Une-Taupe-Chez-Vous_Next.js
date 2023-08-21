@@ -36,15 +36,8 @@
         & button{
             background: $color-white !important;
             color: $font-color !important;
-            border-radius: 0 !important;
             font-size: 1rem;
-            border: 0;
-            width: 10%;
-            &:hover{
-                & i{
-                    transform: rotate(10deg) scale(1.1);
-                }
-            }
+
             
         }
         &__list{

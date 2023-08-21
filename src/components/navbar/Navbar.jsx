@@ -55,7 +55,6 @@ export default function Navbar() {
             className={styles.home__imageLogo}
             width={90}
             height={50}
-            style={{ width: '100%', height: 'auto' }}
           />
         </Link>
         <SearchPage />

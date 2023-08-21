@@ -50,8 +50,8 @@ export default function TaupierPage({ responsePage }) {
           className={styles.page__image}
           src={`${page.imgPost}.webp`}
           alt={page.altImg || page.title}
-          width="1080"
-          height="720"
+          width={1080}
+          height={720}
           loader={imageLoaderFull}
           quality={100}
           sizes="(max-width: 768px) 100vw,
@@ -62,7 +62,9 @@ export default function TaupierPage({ responsePage }) {
         <section className={styles.page}>
           <h1>{page.title}</h1>
           {page.paragraphPosts.map((paragraphPosts) => (
-            <>
+            <div 
+              key={paragraphPosts.subtitle}
+            >
               <p className={styles.page__contents__paragraph}>
                 {paragraphPosts.imgPostParagh && (
                   <Image
@@ -78,7 +80,7 @@ export default function TaupierPage({ responsePage }) {
               </p>
               <h2>{paragraphPosts.subtitle}</h2>
               <p>{paragraphPosts.paragraph}</p>
-            </>
+            </div>
           ))}
           <div itemScope itemType="https://schema.org/PostalAdress">
             <p itemProp="address">

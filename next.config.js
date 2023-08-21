@@ -5,10 +5,7 @@ const nextConfig = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
-  reactStrictMode: true,
   swcMinify: true,
-  output: 'standalone',
-
   images: {
     loader: 'custom',
     path: '/_next/image',

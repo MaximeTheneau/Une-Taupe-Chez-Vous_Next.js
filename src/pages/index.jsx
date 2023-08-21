@@ -116,10 +116,12 @@ export default function Home({
         <h1>{accueil.title}</h1>
         <p>{accueil.contents}</p>
         {accueil.paragraphPosts.map((paragraphPosts) => (
-          <>
+          <div 
+            key={paragraphPosts.subtitle}
+          >
             <h2>{paragraphPosts.subtitle}</h2>
             <p>{paragraphPosts.paragraph}</p>
-          </>
+          </div>
         ))}
         {/* --Services--*/}
 
@@ -138,7 +140,9 @@ export default function Home({
               alt={accueil.altImg || accueil.title}
               loader={imageLoaderFull}
               quality={100}
-              fill
+              width={1080}
+              height={720}
+              sizes="(max-width: 640px) 100vw, (max-width: 750px) 750px, (max-width: 828px) 828px, 1080px"
               className={styles.home__category__image}
             />
           </ScrollParallaxTop>
@@ -174,7 +178,9 @@ export default function Home({
           </h2>
           <ul>
             {testimonials.paragraphPosts.map((paragraphTestimonial) => (
-              <li>
+              <li
+                key={paragraphTestimonial.subtitle}
+              >
                 <h3>
                   De :
                   {paragraphTestimonial.subtitle}

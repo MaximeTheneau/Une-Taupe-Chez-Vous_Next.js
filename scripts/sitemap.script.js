@@ -1,8 +1,8 @@
 const fs = require('fs');
-import fetcher from '../../../utils/fetcher';
+
 
 const generateSitemap = async () => {
-  const urlApi = 'https://back.unetaupechezvous.fr/public/api/';
+  const urlApi = 'https://back.unetaupechezvous.fr/api/';
   const urlFront = 'https://unetaupechezvous.fr/';
 
   const fetchJson = async (url) => {
@@ -10,13 +10,13 @@ const generateSitemap = async () => {
     return response.json();
   };
 
-  const generateXml = (pages, priority, urlFront, filename) => {
+  const generateXml = (pages, urlFront) => {
     const sitemapXml = pages
       .map((page) => `<url>
           <loc>${urlFront}${page.slug}</loc>
           <lastmod>${page.updatedAt ? page.updatedAt : page.createdAt}</lastmod>
           <changefreq>daily</changefreq>
-          <priority>${priority}</priority>
+          <priority>${page.priority}</priority>
         </url>`)
       .join('');
 
@@ -25,41 +25,17 @@ const generateSitemap = async () => {
         ${sitemapXml}
       </urlset>`;
 
-    fs.writeFileSync(`./public/sitemap/${filename}.xml`, sitemapIndexXml);
+    fs.writeFileSync('./public/sitemap.xml', sitemapIndexXml);
   };
 
-  const generateXmlPages = async (pages, priority, urlFront) => {
-    generateXml(pages, priority, urlFront, `sitemap-p${priority}`);
-  };
-
-  const generateXmlCategory = async (pages, name, priority, urlFront) => {
-    generateXml(pages, priority, urlFront, `sitemap-${name}`);
-  };
-
-  const generateXmlSubcategory = async (pages, priority, urlFront) => {
-    const sitemapXml = pages
-      .map((page) => `<url>
-          <loc>${urlFront}Articles/${page.subcategory.slug}/${page.slug}</loc>
-          <lastmod>${page.updatedAt ? page.updatedAt : page.createdAt}</lastmod>
-          <changefreq>daily</changefreq>
-          <priority>${priority}</priority>
-        </url>`)
-      .join('');
-
-    const sitemapIndexXml = `<?xml version="1.0" encoding="UTF-8"?>
-      <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-        ${sitemapXml}
-      </urlset>`;
-
-    fs.writeFileSync('./public/sitemap/sitemap-Articles.xml', sitemapIndexXml);
-  };
-
+  // Fetch data from API
   const responsePages = await fetchJson(`${urlApi}posts&category=Pages`);
   const responseAnuaire = await fetchJson(`${urlApi}posts&category=Annuaire`);
   const responseInterventions = await fetchJson(`${urlApi}posts&category=Interventions`);
   const responseArticles = await fetchJson(`${urlApi}posts&category=Articles`);
 
-  const urlsPriority = responsePages.filter((page) => [
+  // Define page priorities and filter URLs
+  const pagesWithPriority = responsePages.filter((page) => [
     'Accueil',
     'Contact',
     'Interventions',
@@ -67,13 +43,7 @@ const generateSitemap = async () => {
     'Foire-aux-questions',
   ].includes(page.slug));
 
-  urlsPriority.forEach((page) => {
-    if (page.slug === 'Accueil') {
-      page.slug = '';
-    }
-  });
-
-  const urlsNoPriority = responsePages.filter((page) => [
+  const pagesWithoutPriority = responsePages.filter((page) => [
     'Articles',
     'Annuaire',
     'Inscription-annuaire-gratuite',
@@ -84,84 +54,55 @@ const generateSitemap = async () => {
     'Tarifs',
   ].includes(page.slug));
 
-  urlsNoPriority.forEach((page) => {
+  // Set priorities for pages
+  pagesWithPriority.forEach((page) => {
+    if (page.slug === 'Accueil') {
+      page.slug = '';
+    }
+    page.priority = 1.0;
+  });
+
+  pagesWithoutPriority.forEach((page) => {
     if (page.slug === 'Inscription-annuaire-gratuite') {
       page.slug = 'Annuaire/Inscription-annuaire-gratuite';
     }
+    page.priority = 0.6;
   });
 
-  await generateXmlPages(urlsPriority, 1.0, urlFront);
-  await generateXmlPages(urlsNoPriority, 0.6, urlFront);
-  await generateXmlCategory(responseAnuaire, 'Annuaire', 0.6, `${urlFront}Annuaire/`);
-  await generateXmlCategory(responseInterventions, 'Interventions', 0.8, `${urlFront}Interventions/`);
-  await generateXmlSubcategory(responseArticles, 0.6, urlFront);
+  responseArticles.forEach((page) => {
+    page.slug = `Articles/${page.subcategory.slug}/${page.slug}`;
+    page.priority = 0.6;
+  });
+  
+  responseInterventions.forEach((page) => {
+    page.slug = `Interventions/${page.slug}`;
+    page.priority = 0.8;
+  });
 
-  const sitemapIndexXml = `<?xml version="1.0" encoding="UTF-8"?>
-    <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-      <sitemap>
-        <loc>${urlFront}sitemap/sitemap-Annuaire.xml</loc>
-      </sitemap>
-      <sitemap>
-        <loc>${urlFront}sitemap/sitemap-Articles.xml</loc>
-      </sitemap>
-      <sitemap>
-        <loc>${urlFront}sitemap/sitemap-Interventions.xml</loc>
-      </sitemap>
-      <sitemap>
-        <loc>${urlFront}sitemap/sitemap-p0.6.xml</loc>
-      </sitemap>
-      <sitemap>
-        <loc>${urlFront}sitemap/sitemap-p1.xml</loc>
-      </sitemap>
-    </sitemapindex>`;
+  responseAnuaire.forEach((page) => {
+    page.slug = `Annuaire/${page.slug}`;
+    page.priority = 0.6;
+  });
 
-  const robotsTxt = `
-    User-agent: *
-    allow: /
-    
-    disallow: /Interventions/[slug]
-    disallow: /Articles/[subcategory]
-    disallow: /Articles/[subcategory]/[slug]
-    disallow: /Annuaire/[slug]
 
-    disallow: /search?*
-
-    # Host
-    Host: ${urlFront}
-    
-    # Sitemaps
-    Sitemap: ${urlFront}sitemap.xml
-    `;
-
-  fs.writeFileSync('./public/sitemap.xml', sitemapIndexXml);
-  fs.writeFileSync('./public/robots.txt', robotsTxt);
-
-  const numPagesPriority = urlsPriority.length;
-  const numPagesNoPriority = urlsNoPriority.length;
-  const numPagesAnnuaire = responseAnuaire.length;
-  const numPagesInterventions = responseInterventions.length;
-  const numPagesArticles = responseArticles.length;
-  const numPages = numPagesPriority + numPagesNoPriority + numPagesAnnuaire + numPagesInterventions + numPagesArticles;
-
-  const pageCounts = [
-    { category: 'Priority Pages', count: numPagesPriority },
-    { category: 'Non-Priority Pages', count: numPagesNoPriority },
-    { category: 'Annuaire Pages', count: numPagesAnnuaire },
-    { category: 'Interventions Pages', count: numPagesInterventions },
-    { category: 'Articles Pages', count: numPagesArticles },
+  // Generate sitemap with pages
+  const allPages = [
+    ...pagesWithPriority,
+    ...pagesWithoutPriority,
+    ...responseAnuaire,
+    ...responseInterventions,
+    ...responseArticles,
   ];
 
-  const total = [
-    { category: 'total Pages', count: numPages },
-  ];
+  generateXml(allPages, urlFront);
+
+  // Generate sitemap index (if needed)
+  // ...
+  const totalNumPages = allPages.length;
+  console.log(`Total number of pages in the sitemap: ${totalNumPages}`);
+
 
   console.log('Sitemap generated successfully!');
-  console.table(pageCounts);
-  console.log('-------------------------');
-  console.table(total);
-  console.log('-----------------------------------------------------');
-  console.log(`  ○ ${urlFront}sitemap.xml ○`);
-  console.log('-----------------------------------------------------');
 };
 
 generateSitemap();

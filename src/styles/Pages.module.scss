@@ -117,6 +117,9 @@
     &__image{
       object-position: 0 var(--topImg);
       object-fit: cover;
+      contain: initial;
+      height: 100%;
+      width: 100%;
 
     }
   }
@@ -150,6 +153,7 @@
     &__contents{
       &__paragraph{
         float: left;
+
         & img{
           padding: 0 1rem 0 0; 
         }

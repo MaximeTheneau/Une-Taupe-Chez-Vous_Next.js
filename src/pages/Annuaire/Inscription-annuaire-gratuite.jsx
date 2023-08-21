@@ -50,17 +50,17 @@ export default function Page({ responsePage, responseArticles }) {
         <p>
           {page.contents}
         </p>
+        <DirectoryRegistrationForm
+          article={article}
+        />
         <TableOfContents post={page} />
         {page.paragraphPosts.map((paragraphPosts) => (
           <>
-            <h2>{paragraphPosts.subtitle}</h2>
+            <h2 id={paragraphPosts.slug}>{paragraphPosts.subtitle}</h2>
             <p>{paragraphPosts.paragraph}</p>
           </>
         ))}
 
-        <DirectoryRegistrationForm
-          article={article}
-        />
 
       </section>
     </>
