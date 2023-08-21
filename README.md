@@ -1,6 +1,6 @@
 # Maxime Theneau - Une Taupe Chez Vous Next.js
 
-Application avec back-office (symfony) et front réalisé avec Next.js.
+Application avec Back-office (Symfony) et partie Front-end réalisé avec Next.js.
 
 ---
 
