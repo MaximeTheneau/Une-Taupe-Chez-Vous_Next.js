@@ -116,7 +116,7 @@ export default function Home({
         <h1>{accueil.title}</h1>
         <p>{accueil.contents}</p>
         {accueil.paragraphPosts.map((paragraphPosts) => (
-          <div 
+          <div
             key={paragraphPosts.subtitle}
           >
             <h2>{paragraphPosts.subtitle}</h2>

@@ -62,7 +62,7 @@ export default function TaupierPage({ responsePage }) {
         <section className={styles.page}>
           <h1>{page.title}</h1>
           {page.paragraphPosts.map((paragraphPosts) => (
-            <div 
+            <div
               key={paragraphPosts.subtitle}
             >
               <p className={styles.page__contents__paragraph}>

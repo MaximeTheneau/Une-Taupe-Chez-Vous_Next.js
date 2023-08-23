@@ -9,7 +9,6 @@ import imageLoaderFull from '../../../utils/imageLoaderFull';
 import TableOfContents from '../../../components/tableOfContents/TableOfContents';
 import fetcher from '../../../utils/fetcher';
 
-
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Articles`);
 
@@ -27,10 +26,10 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const { slug } = params;
-  
+
   const responsePost = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/${slug}`);
   const responseDesc = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&filter=desc&category=articles`);
-  
+
   return { props: { responsePost, responseDesc }, revalidate: 10 };
 }
 
@@ -180,7 +179,6 @@ export default function Slug({ responsePost, responseDesc }) {
               )}
             </div>
           ))}
-          
           <ol>
             {post.listPosts.map((listArticle) => (
               listArticle.title !== null && (

@@ -1,6 +1,7 @@
 // pages/api/build-export-endpoint.js
 export default async function handler(req, res) {
   try {
+    // eslint-disable-next-line global-require
     const { exec } = require('child_process');
     exec('npm run build && npm run export');
 

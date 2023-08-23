@@ -60,8 +60,6 @@ export default function Page({ responsePage, responseArticles }) {
             <p>{paragraphPosts.paragraph}</p>
           </>
         ))}
-
-
       </section>
     </>
   );

@@ -5,7 +5,6 @@ import Cards from '../../components/cards/cards';
 import styles from '../../styles/Pages.module.scss';
 import fetcher from '../../utils/fetcher';
 
-
 export async function getStaticProps() {
   const responseArticles = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`);
   const responsePage = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Annuaire`);
