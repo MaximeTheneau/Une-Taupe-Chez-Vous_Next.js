@@ -2,7 +2,6 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import styles from './Navbar.module.scss';
-import SearchPage from '../search/SearchPage';
 
 export default function Navbar() {
   const [toggleNav, setToggleNav] = useState(false);
@@ -14,12 +13,12 @@ export default function Navbar() {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
+      if (currentScrollY === 0) setIsNavVisible(true);
       if (prevScrollY > currentScrollY) {
         setIsNavVisible(true);
       } else {
         setIsNavVisible(false);
       }
-
       prevScrollY = currentScrollY;
     };
 
@@ -47,21 +46,17 @@ export default function Navbar() {
        */
       }
       <nav className={` ${isNavVisible ? ` ${styles.navbar}` : styles['navbar--hidden']} ${styles.navbar__720}`}>
-        <Link href="/" tabIndex={"la page d'accueil"}>
-          <Image
-            src="logo-une-taupe-chez-vous.png"
-            alt="Logo de l'entreprise Une Taupe Chez Vous"
-            quality={80}
-            className={styles.home__imageLogo}
-            width={90}
-            height={50}
-          />
-        </Link>
-        <SearchPage />
         <ul className={styles.navbar__720__list}>
           <li className={styles['navbar__720__list-item']}>
-            <Link href="/Taupier-agree-professionnel-depuis-1994">
-              Qui-sommes-nous
+            <Link href="/">
+              <Image
+                src="logo-une-taupe-chez-vous.png"
+                alt="Logo de l'entreprise Une Taupe Chez Vous"
+                quality={80}
+                className={styles.home__imageLogo}
+                width={90}
+                height={50}
+              />
             </Link>
           </li>
           <li className={styles['navbar__720__list-item']}>
@@ -69,7 +64,17 @@ export default function Navbar() {
               Contact
             </Link>
           </li>
+          <li className={styles['navbar__720__list-item']}>
+            <Link href="/Taupier-agree-professionnel-depuis-1994">
+              Qui-sommes-nous
+            </Link>
+          </li>
+          <li className={styles['navbar__720__list-item']}>
+            <Link href="/search"> Rechercher</Link>
+          </li>
         </ul>
+        <Link href="/" tabIndex={"la page d'accueil"} />
+
       </nav>
 
       <nav

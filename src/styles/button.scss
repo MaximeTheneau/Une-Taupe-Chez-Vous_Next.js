@@ -12,14 +12,13 @@ button{
   width: 20rem;
   height: 3rem;
   transition: all 0.3s ease-in-out;
-    display: flex;
+  display: flex;
     align-items: center;
     justify-content: center;
     font-family: $font-secondary;
     border: none;
     font-size: 1.2rem;
     background: $color-primary !important;
-    color: $color-white;
     cursor: pointer;
     font-weight: bold;
     border-radius: 0.2rem;
@@ -34,6 +33,5 @@ button{
         & i{
             transform: translateX(1rem) rotate(-10deg) scale(1.2);
         }
-        color: $color-white;
     }
   }

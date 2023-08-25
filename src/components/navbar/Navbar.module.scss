@@ -1,17 +1,20 @@
 @import  '../../styles/variables.scss';
 
-nav.navbar{
+.navbar{
     position: fixed;
 	top: 0;
+    left: 50%;
+    width: $width-general;
     z-index: 1;
-    width: 100%;
-    font-family: $font-primary;
+    margin: 1rem auto;
     padding:  0.5rem 2% 0.5rem 2%;
-    background-color: $color-primary;
+    background-color: $color-white;
     box-shadow: $box-shadow;
-    color: $color-white;
-    transform: translateY(0);
+    color: $font-color;
+    transform: translate(-50%, 0%);
     transition: transform 0.5s ease;
+    border-radius: 1rem;
+
 
     &__logo{
         width: 20%;
@@ -20,7 +23,7 @@ nav.navbar{
         }
     }
     &--hidden{
-        transform: translateY(-100%);
+        transform: translate(-50%, -50%);
     }
 }
 .navbar__720{
@@ -32,7 +35,6 @@ nav.navbar{
     }
     &__list{
         display: flex;
-        flex-direction: row-reverse;
         align-items: center;
         &-item{
             margin: 0 0 0 1rem;

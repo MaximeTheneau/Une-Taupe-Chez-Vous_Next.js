@@ -45,20 +45,60 @@
   }
 }
 .home{
-  & h1{
-    font-size: calc(70% + 5vw);
-  }
   & h2{
-    font-size: calc(70% + 3vw);
+    font-size: calc(1rem + ((2vw - 0.48rem) * 1.3889));
     margin: 1rem 0;
+  }
+  & h3{
+    font-size: 2vw;
+    margin: 1rem 0;
+  }
+  &__imagesFull{
+    position: relative;
+    height: 100%;
+    width: 100%;
+    &__image{
+      object-position: 0 var(--topImg);
+      object-fit: cover;
+      contain: initial;
+      height: 100%;
+      min-height: 25vh;
+      width: 100%;
+      opacity: 0.4;
+      filter: blur(0.3rem);
+    }
+    &__text{
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      left: 50%;
+      padding: 1rem;
+      transform: translate(-50%, -50%);
+      & h1{
+        font-size: calc(1rem + ((4vw - 0.48rem) * 1.3889));
+        margin: 1rem 0;
+      }
+      & p{
+
+        font-size: 1rem;
+        width: 80%;
+      }
+    }
+    
+    
+
+  }
+  &__faq{
+    width: 50%;
+    margin: 0 auto;
   }
   &__list{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    background: $color-primary;
     padding: 1rem;
-    color: $color-white;
+    margin: 0 0 1rem 0;
+    background: $color-primary;
     &__item{
       list-style: disc;
       width: 100%;
@@ -69,11 +109,16 @@
         object-fit: cover;
       }
     }
+    
+    & h2 {
+    width: 100%;
+  }
   }
   &__testimonials{
     padding: 1rem;
     border: $font-color-opacity 1px solid;
-    margin-top: 1rem;
+    margin: 1rem auto;
+    width: 90%;
     & h2{
       font-size: calc(70% + 3vw);
       margin: 1rem 0;
@@ -91,43 +136,51 @@
       padding-bottom: 0.5rem;
       border-bottom: $font-color-opacity 1px solid;
     }
+    a {
+      &:hover{
+        color: $color-primary;
+      }
+    }
   }
   &__category{
+    margin: 1rem 0;
     &__title{
-      background: $color-primary;
       padding: 1rem;
-      color: $color-white;
+      & h2{
+        font-size: calc(70% + 2vw);
+      }
       & a{
         display: flex;
         justify-content: space-between;
-        & h2{
-          font-size: calc(70% + 1vw);
-        }
+        align-items: center;
         &:hover{
           color: $font-color;
         }
         
       }
     }
-    &__image{
-      object-position: 0 var(--topImg);
-      object-fit: cover;
-      contain: initial;
-      height: 100%;
-      width: 100%;
 
-    }
   }
-  &__imageLogo{
-    width: 170px !important;
-    height: auto;
-    float: left;
-    margin: 1rem 1rem 0 0;
+  &__contact{
+    width: 90%;
+    margin: 0 auto;
+    & a{
+      color: $color-primary;
+      &:hover{
+        color: $font-color;
+      }
+    }
+    & button a{
+      color: $color-white ;
+      &:hover{
+        color: $font-color;
+      }
+    }
   }
   
 }
 
-@media screen and (min-width: 768px){
+@media screen and (max-width: 768px){
   .page{
     &__image{
     width: 50%;
@@ -142,22 +195,43 @@
         justify-content: center;
       }
     }
-    & h1 {
-      font-size: calc(70% + 1vw);
-    }
     &__contents{
       &__paragraph{
         float: left;
-
         & img{
           padding: 0 1rem 0 0; 
         }
       }
     }
   }
+  
+  .home{
+    &__imagesFull{
+      &__image{
+        object-position: 0 var(--topImg);
+        object-fit: cover;
+        contain: initial;
+        height: 100%;
+        min-height: 50vh;
+      }
+      &__text{
+        & h1{
+          font-size: calc(1rem + ((4vw - 0.48rem) * 1.3889));
+          margin: 0;
+        }
+        & h2{
+          font-size: calc(1rem + ((2vw - 0.48rem) * 1.3889));
+        }
+      }
+    }
+    &__faq{
+      width: 90%;
+      margin: 0 auto;
+    }
+  }
 }
 @media screen and (min-width: 1020px){
-  .page{
+  .pages{
     &__contents{
       &__paragraph{
         float: left;

@@ -1,10 +1,11 @@
 @import '../../styles/variables.scss';
 
 .footer{
+  min-height: 10vh;
+  background: $color-primary;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  color: $color-white;
   &__links{
     display: flex;
     flex-direction: column;
@@ -31,8 +32,7 @@
     opacity: 0.8;
     margin: 1rem auto;
   }
-  & a:hover{
-    color: $font-color;}
+
 
 }
 

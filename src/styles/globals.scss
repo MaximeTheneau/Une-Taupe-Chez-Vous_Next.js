@@ -14,6 +14,7 @@ body {
 }
 h1,h2,h3,h4,h5,h6{
   font-family: 'fontTitle', sans-serif;
+  color: $font-color;
 }
 h1{
   font-size: $font-size-large;
@@ -30,6 +31,8 @@ a {
 
 
 p{
+  font-family: 'fontGeneral', sans-serif;
+  color: $font-color;
   width: 90%;
   margin: 0 0 0.5rem 0;
 }
@@ -47,19 +50,25 @@ img{
 
 main{
   min-height: 80vh;
-  width: 90%;
-  margin: 0 auto;
-}
-footer{
-  min-height: 10vh;
-  background: $color-secondary;
 }
 header{
-  min-height: 45px;
-  margin-bottom: 1rem;
+  min-height: 10vh;
 }
 
+a {
+  text-decoration: none;
+  color: $font-color;
 
+  &:hover{
+    color: $color-white;
+    text-decoration: underline;
+    transition: all 0.3s ease-in-out;
+  }
+}
+header a:hover{
+  color: $color-primary;
+  text-decoration: none;
+}
 //* Form
 input,
 textarea{
@@ -98,24 +107,7 @@ select{
     outline: none;
   }
 }
-.button{
 
-  padding: 0.5rem;
-  border-radius: $border-radius;
-  font-size: $font-size;
-  font-family: $font-primary;
-  background: $color-primary;
-  color: $color-white;
-  cursor: pointer;
-  display: inline-block;
-  font-weight: bold;
-  &:hover{
-  color: $font-color;
-  }
-  &:focus{
-    outline: none;
-  }
-}
 .none{
   display: none;
 }
@@ -172,17 +164,6 @@ iframe {
   }
 }
 
-// @keyframes opacity{
-//   0%{
-//     opacity: 0.5;
-//   }
-//   50%{
-//     opacity: 1;
-//   }
-//   100%{
-//     opacity: 0;
-//   }
-// }
 
 .notCopie{
   -webkit-user-select: none;
@@ -192,14 +173,4 @@ iframe {
 }
 strong{
   font-weight: bold;
-}
-
-@media screen and (min-width: 640px) {
-
-  header{
-    min-height: 66px;
-    margin-bottom: 1rem;
-  }
-
-  
 }

@@ -5,7 +5,6 @@ import useSWR from 'swr';
 import Cards from '../components/cards/cards';
 import Faq from '../components/faq/faq';
 import styles from '../styles/Pages.module.scss';
-import ScrollParallaxTop from '../hooks/useMovableElement/ScrollParallaxTopWrapper';
 import imageLoaderFull from '../utils/imageLoaderFull';
 import fetcher from '../utils/fetcher';
 
@@ -111,18 +110,25 @@ export default function Home({
           key="product-jsonld"
         />
       </Head>
-      <section className={styles.home}>
 
-        <h1>{accueil.title}</h1>
-        <p>{accueil.contents}</p>
-        {accueil.paragraphPosts.map((paragraphPosts) => (
-          <div
-            key={paragraphPosts.subtitle}
-          >
-            <h2>{paragraphPosts.subtitle}</h2>
-            <p>{paragraphPosts.paragraph}</p>
+      <section className={styles.home}>
+        <div className={styles.home__imagesFull}>
+          <Image
+            src={`${accueil.slug}.webp`}
+            alt={accueil.altImg || accueil.title}
+            loader={imageLoaderFull}
+            quality={100}
+            width={1080}
+            height={720}
+            sizes="(max-width: 640px) 100vw, (max-width: 750px) 750px, (max-width: 828px) 828px, 1080px"
+            className={styles.home__imagesFull__image}
+          />
+          <div className={styles.home__imagesFull__text}>
+            <h1>{accueil.title}</h1>
+            <h2>{accueil.contents}</h2>
           </div>
-        ))}
+        </div>
+
         {/* --Services--*/}
 
         <div className={styles.home__category}>
@@ -134,27 +140,11 @@ export default function Home({
               </span>
             </Link>
           </div>
-          <ScrollParallaxTop>
-            <Image
-              src={`${accueil.slug}.webp`}
-              alt={accueil.altImg || accueil.title}
-              loader={imageLoaderFull}
-              quality={100}
-              width={1080}
-              height={720}
-              sizes="(max-width: 640px) 100vw, (max-width: 750px) 750px, (max-width: 828px) 828px, 1080px"
-              className={styles.home__category__image}
-            />
-          </ScrollParallaxTop>
+
         </div>
         <Cards cards={services} />
-
         <div className={styles.home__list}>
-          <h2>
-            Taupier professionnel certifié depuis près de 30 ans,
-            spécialisé dans la lutte contre les nuisibles tels que
-            les taupes, les fouines et les ragondins.
-          </h2>
+          <h2>Chasseur de taupe professionnel</h2>
           <ul>
             {articles.map((article) => (
               <li key={article.title} className={styles.home__list__item}>
@@ -164,12 +154,21 @@ export default function Home({
               </li>
             ))}
           </ul>
+          {accueil.paragraphPosts.map((paragraphPosts) => (
+            <div
+              key={paragraphPosts.subtitle}
+            >
+              <h3>{paragraphPosts.subtitle}</h3>
+              <p>{paragraphPosts.paragraph}</p>
+            </div>
+          ))}
         </div>
-
-        <Link href={faq.slug}>
-          <h2 className="title__faqs">{faq.title}</h2>
-        </Link>
-        <Faq faq={faq} />
+        <div className={styles.home__faq}>
+          <Link href={faq.slug}>
+            <h2>{faq.title}</h2>
+          </Link>
+          <Faq faq={faq} />
+        </div>
         <div className={styles.home__testimonials}>
           <h2>
             <Link href={testimonials.slug}>
@@ -199,24 +198,26 @@ export default function Home({
             Découvrez les avis de nos clients
           </Link>
         </div>
-        {accueil.listPosts.map((listArticle) => (
-          listArticle.title !== null && (
-            <div key={listArticle.title}>
-              {listArticle.title && (
-              <h2>{listArticle.title}</h2>
-              )}
-              {listArticle.description && (
-              <p>{listArticle.description}</p>
-              )}
-            </div>
-          )
-        ))}
+        <div className={styles.home__contact}>
+          {accueil.listPosts.map((listArticle) => (
+            listArticle.title !== null && (
+              <div key={listArticle.title}>
+                {listArticle.title && (
+                <h2>{listArticle.title}</h2>
+                )}
+                {listArticle.description && (
+                <div dangerouslySetInnerHTML={{ __html: listArticle.description }} />
+                )}
+              </div>
+            )
+          ))}
 
-        <button type="button" className="button">
-          <Link href="/Contact">
-            Contactez-nous
-          </Link>
-        </button>
+          <button type="button" className="button">
+            <Link href="/Contact">
+              Contactez-nous
+            </Link>
+          </button>
+        </div>
       </section>
     </>
   );

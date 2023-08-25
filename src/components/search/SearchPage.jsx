@@ -9,10 +9,6 @@ function SearchPage() {
   const [articles, setArticles] = useState([]);
   const Router = useRouter();
 
-  //   const filteredResults = results.filter((result) =>
-  //   result.title.toLowerCase().includes(query.toLowerCase())
-  // );
-
   const handleFocus = async (event) => {
     event.preventDefault();
     if (!searchValue) {
@@ -92,6 +88,7 @@ function SearchPage() {
           name="search"
           placeholder="Rechercher..."
           onChange={(event) => handleSearch(event.target)}
+          onBlur={() => setTimeout(() => setSearchValue(''), 200)}
           value={searchValue}
           autoComplete="off"
         />
