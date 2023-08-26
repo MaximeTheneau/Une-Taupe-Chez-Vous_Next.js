@@ -25,19 +25,21 @@ export default function Card({ card }) {
       className={styles.card}
     >
       <Link href={`/${getPathCard(card)}`}>
-        <Image
-          src={`${card.imgPost}.webp`}
-          alt={card.altImg || card.title}
-          width={330}
-          height={310}
-          loader={imageThumbnail}
-          quality={70}
-          sizes="100vw"
-          style={{
-            width: '100%',
-            height: 'auto',
-          }}
-        />
+        <div className={styles.card__img}>
+          <Image
+            src={`${card.imgPost}.webp`}
+            alt={card.altImg || card.title}
+            width={330}
+            height={310}
+            loader={imageThumbnail}
+            quality={70}
+            sizes="100vw"
+            style={{
+              width: '100%',
+              height: 'auto',
+            }}
+          />
+        </div>
         <h3 className={styles.card__content}>{card.title}</h3>
       </Link>
     </SlideTransition>

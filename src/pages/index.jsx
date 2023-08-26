@@ -111,7 +111,7 @@ export default function Home({
         />
       </Head>
 
-      <section className={styles.home}>
+      <div className={styles.home}>
         <div className={styles.home__imagesFull}>
           <Image
             src={`${accueil.slug}.webp`}
@@ -218,7 +218,7 @@ export default function Home({
             </Link>
           </button>
         </div>
-      </section>
+      </div>
     </>
   );
 }

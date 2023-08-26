@@ -95,6 +95,16 @@ export default function Slug({ responsePosts }) {
         </div>
         <div>
           <h1>{post.title}</h1>
+          <table className={styles.page__table}>
+            <tbody>
+              {post.listPosts.map((listArticle) => listArticle.title !== null && (
+              <tr key={listArticle.id}>
+                {listArticle.title && <th>{listArticle.title}</th>}
+                {listArticle.description && <td>{listArticle.description}</td>}
+              </tr>
+              ))}
+            </tbody>
+          </table>
           <p>{post.contents}</p>
           <TableOfContents post={post} />
           {post.paragraphPosts.map((paragraphPosts) => (
@@ -112,27 +122,3 @@ export default function Slug({ responsePosts }) {
     </>
   );
 }
-
-// Slug.propTypes = {
-//   post: PropTypes.shape({
-//     title: PropTypes.string.isRequired,
-//     subtitle: PropTypes.string.isRequired,
-//     contents: PropTypes.string.isRequired,
-//     contents2: PropTypes.string.isRequired,
-//     slug: PropTypes.string.isRequired,
-//     updatedAt: PropTypes.string.isRequired,
-//     createdAt: PropTypes.string.isRequired,
-//     imgPost: PropTypes.shape({
-//       path: PropTypes.string.isRequired,
-//     }),
-//     imgPost2: PropTypes.shape({
-//       path: PropTypes.string,
-//     }),
-//     imgPost3: PropTypes.shape({
-//       path: PropTypes.string,
-//     }),
-//     imgPost4: PropTypes.shape({
-//       path: PropTypes.string,
-//     }),
-//   }).isRequired,
-// };

@@ -29,7 +29,10 @@ a {
   color: inherit;
 }
 
-
+section{
+  width: 90%;
+  margin: 0 auto;
+}
 p{
   font-family: 'fontGeneral', sans-serif;
   color: $font-color;
@@ -39,13 +42,8 @@ p{
 
 img{
   max-width: 100%;
-  margin: 0;
   height: auto;
   object-fit: contain;
-  position: relative;
-  box-sizing: border-box;
-  contain: strict;
-  display: block;
 }
 
 main{

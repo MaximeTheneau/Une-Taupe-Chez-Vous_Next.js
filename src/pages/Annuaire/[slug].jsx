@@ -123,8 +123,6 @@ export default function Slug({ postInit }) {
               <p>{paragraphs.paragraph}</p>
             </>
           ))}
-
-          <h2>Listes des Taupiers près de chez vous :</h2>
           <ul>
             {postsLinks.map((item) => (
               <li key={item.id}>
@@ -133,7 +131,7 @@ export default function Slug({ postInit }) {
               </li>
             ))}
           </ul>
-          <h2>Référencez-vous gratuitement en tant que professionnel </h2>
+          <h3>Référencez-vous gratuitement en tant que professionnel </h3>
           <p>
             Vous êtes un professionnel de la taupe et vous souhaitez être référencé
             gratuitement sur notre site ?

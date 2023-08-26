@@ -6,6 +6,7 @@
     transform: scale(1);
     animation: myAnimation 1s;
     width: 40%;
+    display: flex;
     &__form{
         background-color: $color-primary;
         display: flex;

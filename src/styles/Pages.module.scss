@@ -1,7 +1,10 @@
 @import './variables.scss';
 
 .page{
+  width: 90%;
+  margin: 1rem auto 0 auto;
   &__contents{
+  width: 90%;
     display: flex;
     flex-direction: column;
     & h1, h2, h4, h5, h6{
@@ -16,7 +19,6 @@
       margin: 1rem 0 0 0;
     }
   }
-
   &__image{
     position: relative;
     height: 100%;
@@ -42,6 +44,27 @@
   }
   & a{
     font-weight: bold;
+  }
+  &__table{
+    width: 100%;
+    margin: 1rem auto;
+    & tr{
+      border: $font-color-opacity 1px solid;
+      & th{
+        font-weight: bold;
+      }
+      & td{
+        border: $font-color-opacity 1px solid;
+        padding: 0.5rem;
+      }
+    }
+
+
+  }
+  & img{
+    max-width: 1080px;
+    max-height: 608px;
+    
   }
 }
 .home{
