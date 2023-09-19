@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useState } from 'react';
 import { useRouter } from 'next/router';
-import formMiddleware from '../../middleware/middleware';
+import FormMiddleware from '../../middleware/FormMiddleware';
 import Confirmation from '../modal/Confirmation';
 import styles from './Contact.module.scss';
 import Select from './form/Select';
@@ -147,7 +147,7 @@ export default function ContactForm() {
     });
     const req = state.form;
     const apiPath = 'contact';
-    formMiddleware(req, apiPath, handleResponse200, handleResponseError);
+    FormMiddleware(req, apiPath, handleResponse200, handleResponseError);
   };
 
   return (
@@ -251,7 +251,7 @@ export default function ContactForm() {
             />
           </div>
           <div className="contact-form_button">
-            <button type="submit">
+            <button type="submit" className="button">
               Envoyer
               <i className="icon-paper-plane" />
             </button>

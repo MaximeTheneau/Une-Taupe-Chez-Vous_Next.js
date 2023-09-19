@@ -85,12 +85,19 @@ export default function Slug({ responsePosts }) {
             src={`${post.slug}.webp`}
             alt={post.altImg || post.title}
             loader={imageLoaderFull}
-            quality={100}
-            width="1080"
-            height="720"
-            sizes="(max-width: 768px) 100vw,
-            (max-width: 1200px) 50vw,
-            33vw"
+            quality={90}
+            width={1080}
+            height={608}
+            sizes="(max-width: 640px) 100vw,
+            (max-width: 750px) 100vw,
+            (max-width: 828px) 100vw,
+            (max-width: 1080px) 100vw,
+            100vw"
+            style={{
+              width: '100%',
+              height: 'auto',
+            }}
+            priority
           />
         </div>
         <div>
@@ -117,6 +124,17 @@ export default function Slug({ responsePosts }) {
             Contactez-nous
           </Link>
         </div>
+        {/* <div className={styles.page__comments}>
+          <h2
+            onClick={() => {
+              AuthMiddleware('get-token');
+            }}
+          >
+            Commentaires
+
+          </h2>
+          <Comments />
+        </div> */}
       </div>
 
     </>

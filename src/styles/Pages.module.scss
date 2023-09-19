@@ -4,9 +4,14 @@
   width: 90%;
   margin: 1rem auto 0 auto;
   &__contents{
-  width: 90%;
+    width: 90%;
     display: flex;
     flex-direction: column;
+    & img { 
+      width: 50%;
+      float: left;
+      margin: 0 1rem 1rem 0;
+    }
     & h1, h2, h4, h5, h6{
       padding: 1rem 0;
     }
@@ -26,7 +31,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
+    margin: 0 auto;
     & h1{
       position: absolute;
       top: 50%;
@@ -45,18 +50,20 @@
   & a{
     font-weight: bold;
   }
-  &__table{
+  & table{
     width: 100%;
     margin: 1rem auto;
-    & tr{
-      border: $font-color-opacity 1px solid;
-      & th{
-        font-weight: bold;
-      }
-      & td{
-        border: $font-color-opacity 1px solid;
-        padding: 0.5rem;
-      }
+    border-collapse: collapse;
+    & td:first-child { 
+      font-weight: bold;
+    }
+    & th { 
+      font-weight: bold; 
+    }
+    & td, th { 
+      padding: 6px; 
+      border: 1px solid #ccc; 
+      text-align: left; 
     }
 
 
@@ -68,12 +75,13 @@
   }
 }
 .home{
+  margin: 0 0 1rem 0;
+
   & h2{
     font-size: calc(1rem + ((2vw - 0.48rem) * 1.3889));
     margin: 1rem 0;
   }
   & h3{
-    font-size: 2vw;
     margin: 1rem 0;
   }
   &__imagesFull{
@@ -86,6 +94,7 @@
       contain: initial;
       height: 100%;
       min-height: 25vh;
+      max-width: 100%;
       width: 100%;
       opacity: 0.4;
       filter: blur(0.3rem);
@@ -211,8 +220,9 @@
     }
     &__contact{
       display: flex;
+      flex-direction: column;
       &__block{
-        width: 50%;
+        width: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -220,11 +230,34 @@
     }
     &__contents{
       &__paragraph{
-        float: left;
         & img{
-          padding: 0 1rem 0 0; 
+          margin: 0 auto 1rem auto;
+          width: 100%;
         }
       }
+    }
+    & table{
+      display: block;
+      & thead, tbody, th, td, tr { 
+        display: block; 
+        word-wrap: break-word;   
+
+      }
+      & thead tr { 
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+      }
+      & tr { border: 1px solid #ccc; }
+      & td { 
+        /* Behave  like a "row" */
+        border: none;
+        border-bottom: 1px solid #eee; 
+        position: relative;
+      }
+
+
+
     }
   }
   

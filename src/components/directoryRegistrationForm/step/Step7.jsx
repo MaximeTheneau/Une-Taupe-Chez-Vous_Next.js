@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 
-import formMiddleware from '../../../middleware/middleware';
+import formMiddleware from '../../../middleware/Middleware';
 import Confirmation from '../../modal/Confirmation';
 import styles from '../DirectoryRegistration.module.scss';
 

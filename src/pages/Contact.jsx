@@ -46,6 +46,10 @@ export default function Contact({ responsePage }) {
         <h2>Contactez-nous - Devis gratuit</h2>
         <div className={styles.page__contact}>
           <div className={styles.page__contact__block} itemScope itemType="https://schema.org/PostalAdress">
+            <p>
+              <strong>Société : </strong>
+              <span itemProp="name">Une Taupe Chez Vous</span>
+            </p>
             <p itemProp="address">
               <strong>Adresse : </strong>
               <span itemProp="streetAddress">71 Marie Curie </span>

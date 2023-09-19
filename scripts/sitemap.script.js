@@ -1,6 +1,5 @@
 const fs = require('fs');
 
-
 const generateSitemap = async () => {
   const urlApi = 'https://back.unetaupechezvous.fr/api/';
   const urlFront = 'https://unetaupechezvous.fr/';
@@ -49,7 +48,6 @@ const generateSitemap = async () => {
     'Inscription-annuaire-gratuite',
     'Mentions-Legales',
     'Plan-de-site',
-    'Page-de-recherche',
     'Temoignages',
     'Tarifs',
   ].includes(page.slug));
@@ -73,7 +71,7 @@ const generateSitemap = async () => {
     page.slug = `Articles/${page.subcategory.slug}/${page.slug}`;
     page.priority = 0.6;
   });
-  
+
   responseInterventions.forEach((page) => {
     page.slug = `Interventions/${page.slug}`;
     page.priority = 0.8;
@@ -83,7 +81,6 @@ const generateSitemap = async () => {
     page.slug = `Annuaire/${page.slug}`;
     page.priority = 0.6;
   });
-
 
   // Generate sitemap with pages
   const allPages = [
@@ -100,7 +97,6 @@ const generateSitemap = async () => {
   // ...
   const totalNumPages = allPages.length;
   console.log(`Total number of pages in the sitemap: ${totalNumPages}`);
-
 
   console.log('Sitemap generated successfully!');
 };

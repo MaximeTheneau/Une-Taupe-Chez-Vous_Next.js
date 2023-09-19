@@ -66,12 +66,13 @@ export default function SiteMapPage({
             <ul className={styles['siteMap__list--secondary']}>
               <li>
                 <Link href="/">
-                  Page d&apos;accueil
+                  Page d&apos;accueil de Une Taupe Chez Vous !
                 </Link>
               </li>
               <li>
                 <Link href="/Taupier-agree-professionnel-depuis-1994">
-                  Qui sommes-nous ?
+                  Qui sommes-nous ? Une présentation de notre entreprise,
+                  de notre histoire et de notre équipe dédiée.
                 </Link>
               </li>
             </ul>
@@ -81,27 +82,34 @@ export default function SiteMapPage({
             <ul className={styles['siteMap__list--secondary']}>
               <li>
                 <Link href="/Taupier-agree-professionnel-depuis-1994">
-                  Taupier agréé professionnel depuis 1994
+                  Nos valeurs : Découvrez nos valeurs fondamentales
+                  qui guident notre travail au quotidien.
                 </Link>
               </li>
               <li>
                 <Link href="/Tarifs">
-                  Tarifs
+                  Tarifs : Découvrez nos tarifs pour nos prestations
                 </Link>
               </li>
               <li>
                 <Link href="/Temoignages">
-                  Témoignages
+                  Témoignages : Découvrez les témoignages de nos clients
                 </Link>
               </li>
               <li>
                 <Link href="/Mentions-Legales">
-                  Mentions légales
+                  Mentions légales : Informations juridiques sur Notre
+                  Entreprise, y compris les détails de l&apos;entreprise et les réglementations.
                 </Link>
               </li>
               <li>
-                <Link href="/Plan-de-site">
-                  Plan du site
+                <Link href="/Contact">
+                  Nous contacter, obtenir un devis gratuit ou prendre rendez-vous avec nous.
+                </Link>
+              </li>
+              <li>
+                <Link href="/Foire-aux-questions">
+                  Foire aux questions : Retrouvez les questions les plus fréquentes
                 </Link>
               </li>
             </ul>
@@ -119,75 +127,43 @@ export default function SiteMapPage({
             </ul>
           </li>
           <li className={styles['siteMap__list--title']}>
-            Contact
-            <ul className={styles['siteMap__list--secondary']}>
-              <li>
-                <Link href="/Contact">
-                  Nous contacter
-                </Link>
-              </li>
-              <li>
-                <Link href="tel:+33232264958">
-                  +33 2 32 26 49 58
-                </Link>
-              </li>
-              <li>
-                <Link href="https://www.linkedin.com/company/une-taupe-chez-vous" target="_blank">
-                  Linkedin
-                </Link>
-              </li>
-              <li>
-                <Link href="https://twitter.com/UneTaupe_" target="_blank">
-                  Twitter
-                </Link>
-              </li>
-              <li>
-                <Link href="https://www.facebook.com/unetaupechezvous/" target="_blank">
-                  Facebook
-                </Link>
-              </li>
-            </ul>
-          </li>
-          <li className={styles['siteMap__list--title']}>
             <Link href="/Articles">
               Articles
             </Link>
             <ul className={styles['siteMap__list--secondary']}>
               <li>
                 <Link href="/Articles">
-                  Tous les articles
+                  Retrouvez tous nos articles sur les taupes, ragondins, fouines, etc.
                 </Link>
               </li>
               {subcategory.map((category) => (
                 <li key={category.name}>
                   <Link href={`Articles/${category.slug}`}>
+                    Articles :
+                    {' '}
                     {category.name}
                   </Link>
                 </li>
               ))}
             </ul>
           </li>
-          <li className={styles['siteMap__list--title']}>
-            <Link href="/Foire-aux-questions">
-              Foire aux questions
-            </Link>
-          </li>
+
           {/* <li className={styles['siteMap__list--title']}>
             <Link href="/Temoignages">
               Témoignages
             </Link>
           </li> */}
           <li className={styles['siteMap__list--title']}>
-            Liste des ressources
+            Annuaires
             <ul className={styles['siteMap__list--secondary']}>
               <li>
                 <Link href="/Annuaire">
-                  Toutes les ressources
+                  Retrouvez tous les annuaires
                 </Link>
               </li>
               <li>
                 <Link href="/Annuaire/Inscription-annuaire-gratuite">
-                  Ajouter mon site
+                  Ajouter mon site à l&apos;annuaire gratuitement !
                 </Link>
               </li>
               {annuaire.map((annuaires) => (

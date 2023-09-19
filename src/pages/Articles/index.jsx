@@ -52,43 +52,40 @@ export default function Home({ responsePage, responseArticles, responseSubcatego
           key="canonical"
         />
       </Head>
-      <>
+      <section>
         <Category category={null} />
-
-        <section>
-          <h1>{page.title}</h1>
-          <p>{page.contents}</p>
-          {/* --Articles--*/}
-          <h2>Les derniers articles :</h2>
-          <nav>
-            <ul className={stylesNav.category}>
-              {subcategory.map((category) => (
-                <li className="button" key={category.name}>
-                  <Link href={`Articles/${category.slug}`}>
-                    {category.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-          <div className={styles.home}>
-            <Cards cards={articles} />
-          </div>
-          {page.paragraphPosts.map((paragraphPosts) => (
-            <>
-              <h2>{paragraphPosts.subtitle}</h2>
-              <p>{paragraphPosts.paragraph}</p>
-            </>
-          ))}
-          <div className="button">
-            <Link href="/Contact">
-              <AnimationHover>
-                Contactez-nous
-              </AnimationHover>
-            </Link>
-          </div>
-        </section>
-      </>
+        <h1>{page.title}</h1>
+        <p>{page.contents}</p>
+        {/* --Articles--*/}
+        <h2>Les derniers articles :</h2>
+        <nav>
+          <ul className={stylesNav.category}>
+            {subcategory.map((category) => (
+              <li key={category.name}>
+                <Link href={`Articles/${category.slug}`} className="button">
+                  {category.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <div className={styles.home}>
+          <Cards cards={articles} />
+        </div>
+        {page.paragraphPosts.map((paragraphPosts) => (
+          <>
+            <h2>{paragraphPosts.subtitle}</h2>
+            <p>{paragraphPosts.paragraph}</p>
+          </>
+        ))}
+        <div className="button">
+          <Link href="/Contact">
+            <AnimationHover>
+              Contactez-nous
+            </AnimationHover>
+          </Link>
+        </div>
+      </section>
     </>
   );
 }

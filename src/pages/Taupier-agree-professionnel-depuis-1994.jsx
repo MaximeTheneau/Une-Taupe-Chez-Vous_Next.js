@@ -63,21 +63,20 @@ export default function TaupierPage({ responsePage }) {
           <h1>{page.title}</h1>
           {page.paragraphPosts.map((paragraphPosts) => (
             <div
+              className={styles.page__contents__paragraph}
               key={paragraphPosts.subtitle}
             >
-              <p className={styles.page__contents__paragraph}>
-                {paragraphPosts.imgPostParagh && (
-                  <Image
-                    className={styles.page__contents__paragraph}
-                    src={`${paragraphPosts.imgPostParagh}.webp`}
-                    alt={paragraphPosts.altImg || paragraphPosts.subtitle}
-                    width={330}
-                    height={310}
-                    quality={70}
-                  />
-                )}
-                {page.contents}
-              </p>
+              {paragraphPosts.imgPostParagh && (
+              <Image
+                className={styles.page__contents__paragraph}
+                src={`${paragraphPosts.imgPostParagh}.webp`}
+                alt={paragraphPosts.altImg || paragraphPosts.subtitle}
+                width={330}
+                height={310}
+                quality={70}
+              />
+              )}
+              <p>{page.contents}</p>
               <h2>{paragraphPosts.subtitle}</h2>
               <p>{paragraphPosts.paragraph}</p>
             </div>

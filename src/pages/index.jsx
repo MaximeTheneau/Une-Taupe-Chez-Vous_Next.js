@@ -60,10 +60,11 @@ export default function Home({
     return {
       __html: `{
       "@context": "https://schema.org/",
-      "@type": "LocalBusiness",
+      "@type": "Taupier",
       "name": "${accueil.title}",
       "image": "${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/Accueil.jpg",
       "description": "${descriptionMeta}",
+      "logo": "${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/logo-une-taupe-chez-vous.png",
       "potentialAction": {
         "@type": "SearchAction",
         "target": "${process.env.NEXT_PUBLIC_URL}/search?q={search_term_string}",
@@ -82,7 +83,15 @@ export default function Home({
         "https://www.facebook.com/unetaupechezvous/",
         "https://twitter.com/UneTaupe_",
         "https://www.linkedin.com/company/une-taupe-chez-vous"
-      ]      
+      ],
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "${process.env.NEXT_PUBLIC_URL}/search?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      },    
     }
   `,
     };
@@ -122,6 +131,7 @@ export default function Home({
             height={720}
             sizes="(max-width: 640px) 100vw, (max-width: 750px) 750px, (max-width: 828px) 828px, 1080px"
             className={styles.home__imagesFull__image}
+            priority
           />
           <div className={styles.home__imagesFull__text}>
             <h1>{accueil.title}</h1>
@@ -144,7 +154,7 @@ export default function Home({
         </div>
         <Cards cards={services} />
         <div className={styles.home__list}>
-          <h2>Chasseur de taupe professionnel</h2>
+          <h2>Taupier au Service de la Nature</h2>
           <ul>
             {articles.map((article) => (
               <li key={article.title} className={styles.home__list__item}>

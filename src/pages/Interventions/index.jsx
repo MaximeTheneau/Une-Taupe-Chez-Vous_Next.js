@@ -4,6 +4,7 @@ import useSWR from 'swr';
 import Cards from '../../components/cards/cards';
 import styles from '../../styles/Pages.module.scss';
 import fetcher from '../../utils/fetcher';
+import TableOfContents from '../../components/tableOfContents/TableOfContents';
 
 export async function getStaticProps() {
   const responseArticles = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Interventions`);
@@ -51,12 +52,19 @@ export default function Home({ responseArticles, responsePage }) {
           <p>
             {page.contents}
           </p>
+          <h2>Nos interventions</h2>
+          <div className={styles.home}>
+            <Cards cards={articles} />
+          </div>
+          <TableOfContents post={page} />
+          {page.paragraphPosts.map((paragraphPosts) => (
+            <>
+              <h2 id={paragraphPosts.slug}>{paragraphPosts.subtitle}</h2>
+              <p>{paragraphPosts.paragraph}</p>
+            </>
+          ))}
         </section>
         {/* --Articles--*/}
-        <h2>Nos interventions</h2>
-        <div className={styles.home}>
-          <Cards cards={articles} />
-        </div>
 
       </>
     </>

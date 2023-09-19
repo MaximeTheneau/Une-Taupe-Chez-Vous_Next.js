@@ -18,8 +18,8 @@
         margin: 0.5rem 0 0 1rem;
         cursor: pointer;
         font-size: $font-size-medium;
-        &:hover{
-            color: $font-color;
+        & a:hover{
+            color: $color-white;
         }
     }
 }

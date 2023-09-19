@@ -31,7 +31,7 @@ a {
 
 section{
   width: 90%;
-  margin: 0 auto;
+  margin: 0 auto 1rem auto;
 }
 p{
   font-family: 'fontGeneral', sans-serif;
@@ -41,7 +41,7 @@ p{
 }
 
 img{
-  max-width: 100%;
+  max-width: 1020px;
   height: auto;
   object-fit: contain;
 }
@@ -58,7 +58,7 @@ a {
   color: $font-color;
 
   &:hover{
-    color: $color-white;
+    color: $color-primary;
     text-decoration: underline;
     transition: all 0.3s ease-in-out;
   }
@@ -105,7 +105,18 @@ select{
     outline: none;
   }
 }
+ol {
+  padding-left: 20px; 
+}
 
+ol li {
+  margin-bottom: 8px; 
+  list-style-type: decimal; 
+}
+
+li li {
+  margin-left: 20px !important; 
+}
 .none{
   display: none;
 }

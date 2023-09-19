@@ -32,7 +32,9 @@
     opacity: 0.8;
     margin: 1rem auto;
   }
-
+  & a:hover{
+    color: $color-white;
+  }
 
 }
 

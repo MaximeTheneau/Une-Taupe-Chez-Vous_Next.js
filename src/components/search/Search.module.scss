@@ -1,46 +1,51 @@
 @import  '../../styles/variables.scss';
 
 .search {
-    --background: 1rem 1rem 0vh 100vh #0b0c0e60;
+
+    background: $font-color-opacity;
     position: relative;
+    padding: 0.3rem;
+    border-radius: 0.2rem;
     transform: scale(1);
-    animation: myAnimation 1s;
-    width: 40%;
+    width: 50%;
+    margin: 0 auto;
     display: flex;
+    & input{
+        border: none;
+        border-radius: 0;
+        color: $font-color;
+        transition: all .2s;
+        width: 90%;
+        border-bottom: none !important;
+        padding: 0.5rem;
+        &:focus{
+            padding: 1rem;
+            font-weight: bold;
+        }
+        &::placeholder {
+            color: $font-color !important;
+        }
+        &:focus:invalid {
+            border-bottom: 1px solid $color-secondary;
+        }
+        &::-webkit-input-placeholder {
+            color: $color-grey;
+        }
+    }
+    & button{
+        color: $font-color !important;
+        font-size: 1rem;
+        &:hover{
+            color: $color-primary !important; 
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        
+    }
     &__form{
-        background-color: $color-primary;
         display: flex;
         width: 100%;
-        & input{
-            border-radius: 1px;
-            background: $color-white;
-            border: none;
-            border-radius: 0;
-            color: $font-color;
-            transition: all .2s;
-            width: 90%;
-            border-right: rgba($font-color, 0.1) 0.1px solid;
-            &:focus {
-                background: $color-white;
-                box-shadow:  1rem 1rem 0vh 100vh #0b0c0e60;
-            }
-            &::placeholder {
-                color: $font-color !important;
-            }
-            &:focus:invalid {
-                border-bottom: 1px solid $color-secondary;
-            }
-            &::-webkit-input-placeholder {
-                color: $color-grey;
-            }
-        }
-        & button{
-            background: $color-white !important;
-            color: $font-color !important;
-            font-size: 1rem;
-
-            
-        }
+        
         &__list{
             position: absolute;
             background: $color-white;
@@ -71,5 +76,11 @@
     }
     to {
       transform: scale(var(--focus-scale));
+    }
+  }
+
+  @media screen and (max-width: 768px){
+    .search{
+        width: 100%;
     }
   }

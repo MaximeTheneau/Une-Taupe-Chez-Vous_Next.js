@@ -2,6 +2,8 @@ import Image from 'next/image';
 import Head from 'next/head';
 import useSWR from 'swr';
 import Link from 'next/link';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import styles from '../../../styles/Pages.module.scss';
 import Cards from '../../../components/cards/cards';
 import Category from '../../../components/category/category';
@@ -60,6 +62,7 @@ export default function Slug({ responsePost, responseDesc }) {
       window.open(`mailto:?subject=${post.title}&body=${urlPost}`, '_blank');
     }
   };
+
   // schema.org
   function addProductJsonLd() {
     return {
@@ -74,15 +77,12 @@ export default function Slug({ responsePost, responseDesc }) {
       "dateModified": "${post.updatedAt}",
       "author": {
         "@type": "Person",
-        "name": "Laurent THENEAU"
+        "name": "Laurent THENEAU",
+        "url": "${process.env.NEXT_PUBLIC_URL}/",
       },
       "publisher": {
         "@type": "Organization",
-        "name": "Une taupe chez vous",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "${process.env.NEXT_PUBLIC_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/Logo-Une-Taupe-Chez-Vous.jpg"
-        }
+        "name": "Une Taupe Chez Vous",
       }
     }
   `,
@@ -127,24 +127,27 @@ export default function Slug({ responsePost, responseDesc }) {
       </Head>
       <section className={styles.page}>
         <div className={styles.page__image}>
-          <Image
-            src={`${post.imgPost}.webp`}
-            alt={post.altImg || post.title}
-            loader={imageLoaderFull}
-            quality={90}
-            width={1080}
-            height={608}
-            sizes="(max-width: 640px) 100vw,
+          <figure>
+
+            <Image
+              src={`${post.imgPost}.webp`}
+              alt={post.altImg || post.title}
+              loader={imageLoaderFull}
+              quality={90}
+              width={1080}
+              height={608}
+              sizes="(max-width: 640px) 100vw,
             (max-width: 750px) 100vw,
             (max-width: 828px) 100vw,
             (max-width: 1080px) 100vw,
             100vw"
-            style={{
-              width: '100%',
-              height: 'auto',
-            }}
-            priority
-          />
+              style={{
+                width: '100%',
+                height: 'auto',
+              }}
+              priority
+            />
+          </figure>
         </div>
         <Category category={post.subcategory} />
 
@@ -152,7 +155,9 @@ export default function Slug({ responsePost, responseDesc }) {
 
           <h1>{post.title}</h1>
 
-          <p>{post.contents}</p>
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>
+            {post.contents}
+          </ReactMarkdown>
           <TableOfContents post={post} />
           {post.paragraphPosts.map((paragraphArticle) => (
             <div key={paragraphArticle.id}>
@@ -162,7 +167,11 @@ export default function Slug({ responsePost, responseDesc }) {
               </h2>
               )}
               {paragraphArticle.paragraph && (
-              <p key={paragraphArticle.id} className={styles.page__contents__paragraph}>
+              <div
+                key={paragraphArticle.id}
+                className={styles.page__contents__paragraph}
+
+              >
                 {paragraphArticle.imgPostParagh && (
                 <Image
                   className={styles.page__contents__paragraph}
@@ -174,8 +183,10 @@ export default function Slug({ responsePost, responseDesc }) {
                   sizes="(max-width: 640px) 100vw, (max-width: 750px) 750px, (max-width: 828px) 828px, 1080px"
                 />
                 )}
-                {paragraphArticle.paragraph}
-              </p>
+                <ReactMarkdown>
+                  {paragraphArticle.paragraph}
+                </ReactMarkdown>
+              </div>
               )}
             </div>
           ))}

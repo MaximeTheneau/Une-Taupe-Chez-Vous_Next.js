@@ -54,14 +54,14 @@ export default function pricing({ page }) {
             </p>
             <h2>{paragraphPosts.subtitle}</h2>
             <p>{paragraphPosts.paragraph}</p>
-            <p>
-              <Link href="/Contact">Contactez-nous</Link>
-              maintenant pour planifier une intervention ou pour obtenir plus
-              d&apos;informations sur nos tarifs compétitifs et nos services
-              de lutte contre les nuisibles.
-            </p>
           </>
         ))}
+        <p>
+          <Link href="/Contact">Contactez-nous </Link>
+          maintenant pour planifier une intervention ou pour obtenir plus
+          d&apos;informations sur nos tarifs compétitifs et nos services
+          de lutte contre les nuisibles.
+        </p>
       </section>
     </>
   );

@@ -29,24 +29,36 @@ export default function Slug({ postInit }) {
 
   const descriptionMeta = post.contents.substring(0, 155).replace(/[\r\n]+/gm, '');
 
-  const postsLinks = post.listPosts.map((postItem) => ({
-    id: postItem.id,
-    title: postItem.title,
-    description: postItem.description?.replace(
-      /Localisation/gi,
-      '<strong>Localisation</strong>',
-    ).replace(
-      /Site web/gi,
-      '<strong>Site web</strong>',
-    ).replace(
-      /Services/gi,
-      '<strong>Services</strong>',
-    ).replace(
-      /(https?:\/\/)([^\s]+)/g,
-      '<a href="$1$2" target="_blank">$2</a>',
-    ),
-  }));
+  function extractInfo(description) {
+    const info = {
+      localisation: '',
+      siteWeb: '',
+      services: '',
+    };
 
+    if (description) {
+      const matches = description.match(/Localisation : (.*?)Site web : (.*?)Services : (.*)/s);
+
+      if (matches) {
+        info.localisation = `${matches[1].trim()}`;
+        const cleanLink = matches[2].trim().replace(/^(https?:\/\/)?(www\.)?/, '');
+        info.siteWeb = `<a href="${matches[2].trim()}" target="_blank">${cleanLink}</a>`;
+        info.services = `${matches[3].trim()}`;
+      }
+    }
+
+    return info;
+  }
+
+  const postsLinks = post.listPosts.map((postItem) => {
+    const descriptionInfo = extractInfo(postItem.description);
+
+    return {
+      id: postItem.id,
+      title: postItem.title,
+      description: descriptionInfo,
+    };
+  });
   // schema.org
   function addProductJsonLd() {
     return {
@@ -105,17 +117,45 @@ export default function Slug({ postInit }) {
             src={`${post.slug}.webp`}
             alt={post.altImg || post.title}
             loader={imageLoaderFull}
-            quality={100}
-            width="1080"
-            height="720"
-            sizes="(max-width: 768px) 100vw,
-            (max-width: 1200px) 50vw,
-            33vw"
+            quality={90}
+            width={1080}
+            height={608}
+            sizes="(max-width: 640px) 100vw,
+            (max-width: 750px) 100vw,
+            (max-width: 828px) 100vw,
+            (max-width: 1080px) 100vw,
+            100vw"
+            style={{
+              width: '100%',
+              height: 'auto',
+            }}
+            priority
           />
         </div>
         <div>
           <h1>{post.title}</h1>
           <p>{post.contents}</p>
+
+          <table className={styles.page__table}>
+            <thead>
+              <tr>
+                <th scope="col">Entreprise</th>
+                <th scope="col">Localisation</th>
+                <th scope="col">Services</th>
+                <th scope="col">Contact</th>
+              </tr>
+            </thead>
+            <tbody>
+              {postsLinks.map((item) => (
+                <tr key={item.id}>
+                  <td aria-label="Entreprise">{item.title}</td>
+                  <td aria-label="Localisation" dangerouslySetInnerHTML={{ __html: item.description.localisation }} />
+                  <td aria-label="Services" dangerouslySetInnerHTML={{ __html: item.description.services }} />
+                  <td aria-label="Site web" dangerouslySetInnerHTML={{ __html: item.description.siteWeb }} />
+                </tr>
+              ))}
+            </tbody>
+          </table>
           <TableOfContents post={post} />
           {post.paragraphPosts.map((paragraphs) => (
             <>
@@ -123,18 +163,28 @@ export default function Slug({ postInit }) {
               <p>{paragraphs.paragraph}</p>
             </>
           ))}
-          <ul>
-            {postsLinks.map((item) => (
-              <li key={item.id}>
-                <h2>{item.title}</h2>
-                <p dangerouslySetInnerHTML={{ __html: item.description }} />
-              </li>
-            ))}
-          </ul>
+
           <h3>Référencez-vous gratuitement en tant que professionnel </h3>
           <p>
-            Vous êtes un professionnel de la taupe et vous souhaitez être référencé
-            gratuitement sur notre site ?
+            Le référencement gratuit, c&apos;est comme une publicité gratuite en continu pour
+            votre entreprise. Vous pouvez apparaître dans les résultats de recherche lorsque
+            les clients potentiels cherchent des services dans votre domaine. Et devinez quoi
+            ? Vous pouvez le faire sans débourser un centime !
+          </p>
+          <p>
+            Alors, comment ça marche ? Vous pouvez vous inscrire sur des plateformes en ligne
+            qui offrent des profils professionnels gratuits. Remplissez votre profil avec soin,
+            en utilisant des mots clés pertinents pour votre domaine. Parlez de votre localisation,
+            de vos services, et site web.
+          </p>
+          <p>
+            Alors, n&apos;attendez plus ! Profitez de cette opportunité pour vous référencer
+            gratuitement en tant que professionnel. C&apos;est comme si vous attrapiez le
+            Saint-Graal des clients potentiels sans dépenser un centime. Que vous soyez un
+            piégeur agréé ou un expert dans la luttes contre les nuisibles, le référencement gratuit
+            est votre allié pour briller en ligne.
+            Allez-y, faites de votre présence en ligne un succès retentissant !
+
           </p>
           <Link href="/Annuaire/Inscription-annuaire-gratuite" className="stronk">
             Inscrivez vôtre entreprise gratuitement

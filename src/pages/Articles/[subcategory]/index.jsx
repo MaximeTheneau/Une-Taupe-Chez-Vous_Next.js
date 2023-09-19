@@ -63,17 +63,18 @@ export default function Home({ responseArticles, responsePage }) {
         />
       </Head>
       <>
-        <Category category={subcategory} />
         <section>
+          <Category category={subcategory} />
           <h1>{subcategory.name}</h1>
           <p>{page.contents}</p>
         </section>
-        {/* --Articles--*/}
-        <h2>Les derniers articles :</h2>
-        <div className={styles.home}>
-          <Cards cards={articles} />
-        </div>
-
+        <section>
+          {/* --Articles--*/}
+          <h2>Les derniers articles :</h2>
+          <div className={styles.home}>
+            <Cards cards={articles} />
+          </div>
+        </section>
       </>
     </>
   );
