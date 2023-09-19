@@ -10,6 +10,8 @@ import Category from '../../../components/category/category';
 import imageLoaderFull from '../../../utils/imageLoaderFull';
 import TableOfContents from '../../../components/tableOfContents/TableOfContents';
 import fetcher from '../../../utils/fetcher';
+import ArticleJsonLd from '../../../components/jsonLd/ArticleJsonLd';
+import BreadcrumbJsonLd from '../../../components/jsonLd/BreadcrumbJsonLd';
 
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Articles`);
@@ -63,31 +65,6 @@ export default function Slug({ responsePost, responseDesc }) {
     }
   };
 
-  // schema.org
-  function addProductJsonLd() {
-    return {
-      __html: `{
-      "@context": "https://schema.org/",
-      "@type": "Article",
-      "name": "${post.title}",
-      "headline": "${post.title}",
-      "description": "${descriptionMeta}",
-      "image": "${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.imgPost}.jpg",
-      "datePublished": "${post.createdAt}",
-      "dateModified": "${post.updatedAt}",
-      "author": {
-        "@type": "Person",
-        "name": "Laurent THENEAU",
-        "url": "${process.env.NEXT_PUBLIC_URL}/",
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "Une Taupe Chez Vous",
-      }
-    }
-  `,
-    };
-  }
   return (
     <>
       <Head>
@@ -119,16 +96,13 @@ export default function Slug({ responsePost, responseDesc }) {
           href={urlPost}
           key="canonical"
         />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={addProductJsonLd()}
-          key="product-jsonld"
-        />
       </Head>
+      {/* Schema.org */}
+      <ArticleJsonLd post={post} urlPost={urlPost} />
+      <BreadcrumbJsonLd paragraphPosts={post.paragraphPosts} urlPost={urlPost} />
       <section className={styles.page}>
         <div className={styles.page__image}>
           <figure>
-
             <Image
               src={`${post.imgPost}.webp`}
               alt={post.altImg || post.title}

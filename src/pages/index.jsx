@@ -7,6 +7,9 @@ import Faq from '../components/faq/faq';
 import styles from '../styles/Pages.module.scss';
 import imageLoaderFull from '../utils/imageLoaderFull';
 import fetcher from '../utils/fetcher';
+import LocalBusinessJsonLd from '../components/jsonLd/LocalBusinessJsonLd';
+import SearchJsonLd from '../components/jsonLd/SearchJsonLd';
+import LogoJsonLd from '../components/jsonLd/LogoJsonLd';
 
 export async function getStaticProps() {
   const accueilInit = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Accueil`);
@@ -62,36 +65,15 @@ export default function Home({
       "@context": "https://schema.org/",
       "@type": "Taupier",
       "name": "${accueil.title}",
-      "image": "${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/Accueil.jpg",
+      
       "description": "${descriptionMeta}",
       "logo": "${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/logo-une-taupe-chez-vous.png",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "${process.env.NEXT_PUBLIC_URL}/search?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      },
-      "address": {
-        "@type": "PostalAddress",
-        "addressCountry": "FR",
-        "postalCode": "27780",
-        "streetAddress": "71 rue marie curie",
-        "addressLocality": "Garrenne sur Eure"
-      },
       "url": "${process.env.NEXT_PUBLIC_URL}",
-      "telephone": "+33232264958",
       "sameAs": [
         "https://www.facebook.com/unetaupechezvous/",
         "https://twitter.com/UneTaupe_",
         "https://www.linkedin.com/company/une-taupe-chez-vous"
       ],
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": {
-          "@type": "EntryPoint",
-          "urlTemplate": "${process.env.NEXT_PUBLIC_URL}/search?q={search_term_string}"
-        },
-        "query-input": "required name=search_term_string"
-      },    
     }
   `,
     };
@@ -119,6 +101,13 @@ export default function Home({
           key="product-jsonld"
         />
       </Head>
+      <LocalBusinessJsonLd descriptionMeta={descriptionMeta} />
+      <SearchJsonLd />
+      <LogoJsonLd
+        name="Une taupe chez vous"
+        url={process.env.NEXT_PUBLIC_URL}
+        logoUrl={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/logo-une-taupe-chez-vous.png`}
+      />
 
       <div className={styles.home}>
         <div className={styles.home__imagesFull}>
