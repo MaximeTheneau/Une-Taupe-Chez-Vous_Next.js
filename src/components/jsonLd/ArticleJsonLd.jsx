@@ -10,9 +10,9 @@ export default function ArticleJsonLd({ post, urlPost }) {
     datePublished: post.createdAt,
     ...(post.updatedAt && { dateModified: post.updatedAt }),
     url: urlPost,
-    articleSection: `${post.subcategory.name}, ${post.category.name}`,
+    articleSection: `${post.subcategory ? `${post.subcategory.name},` : ''} ${post.category.name}`,
     isAccessibleForFree: 'True',
-    keywords: `${post.title}, ${post.category.name}, ${post.subcategory.name}`,
+    keywords: `${post.title}, ${post.category.name}${post.subcategory ? `, ${post.subcategory.name}` : ''}`,
     articleBody: post.contents,
     image: {
       '@type': 'ImageObject',
@@ -32,10 +32,6 @@ export default function ArticleJsonLd({ post, urlPost }) {
     publisher: {
       '@type': 'Organization',
       name: 'Une taupe chez vous',
-      logo: {
-        '@type': 'ImageObject',
-        url: `${process.env.NEXT_PUBLIC_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/Logo-Une-Taupe-Chez-Vous.jpg`,
-      },
     },
   };
 

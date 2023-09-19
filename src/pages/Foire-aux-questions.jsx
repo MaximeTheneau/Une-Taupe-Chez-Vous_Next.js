@@ -5,7 +5,7 @@ import useSWR from 'swr';
 import styles from '../styles/Pages.module.scss';
 import Faq from '../components/faq/faq';
 import fetcher from '../utils/fetcher';
-import FaqJsonLd from '../components/JsonLd/FaqJsonLd';
+import FaqJsonLd from '../components/jsonLd/FaqJsonLd';
 
 export async function getStaticProps() {
   const responseContact = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Foire-aux-questions`);

@@ -58,27 +58,6 @@ export default function Home({
 
   const descriptionMeta = 'Taupier professionnels agréé de la lutte contre les taupes, fouines et ragondins. Intervention en Eure (27), Yvelines (78) et Essonne (91). Devis gratuit.';
 
-  // schema.org
-  function addProductJsonLd() {
-    return {
-      __html: `{
-      "@context": "https://schema.org/",
-      "@type": "Taupier",
-      "name": "${accueil.title}",
-      
-      "description": "${descriptionMeta}",
-      "logo": "${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/logo-une-taupe-chez-vous.png",
-      "url": "${process.env.NEXT_PUBLIC_URL}",
-      "sameAs": [
-        "https://www.facebook.com/unetaupechezvous/",
-        "https://twitter.com/UneTaupe_",
-        "https://www.linkedin.com/company/une-taupe-chez-vous"
-      ],
-    }
-  `,
-    };
-  }
-
   return (
     <>
       <Head>
@@ -94,11 +73,6 @@ export default function Home({
           rel="canonical"
           href={process.env.NEXT_PUBLIC_URL}
           key="canonical"
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={addProductJsonLd()}
-          key="product-jsonld"
         />
       </Head>
       <LocalBusinessJsonLd descriptionMeta={descriptionMeta} />
