@@ -7,6 +7,8 @@ import styles from '../../styles/Pages.module.scss';
 import imageLoaderFull from '../../utils/imageLoaderFull';
 import fetcher from '../../utils/fetcher';
 import TableOfContents from '../../components/tableOfContents/TableOfContents';
+import ArticleJsonLd from '../../components/jsonLd/ArticleJsonLd';
+import BreadcrumbJsonLd from '../../components/jsonLd/BreadcrumbJsonLd';
 
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`);
@@ -59,34 +61,6 @@ export default function Slug({ postInit }) {
       description: descriptionInfo,
     };
   });
-  // schema.org
-  function addProductJsonLd() {
-    return {
-      __html: `{
-    "@context": "https://schema.org/",
-    "@type": "Article",
-    "name": "${post.title}",
-    "headline": "${post.title}",
-    "description": "${descriptionMeta}",
-    "image": "${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.imgPost}.jpg",
-    "datePublished": "${post.createdAt}",
-    "dateModified": "${post.updatedAt}",
-    "author": {
-      "@type": "Person",
-      "name": "Laurent THENEAU"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Une taupe chez vous",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "${process.env.NEXT_PUBLIC_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/Logo-Une-Taupe-Chez-Vous.jpg"
-      }
-    }
-  }
-`,
-    };
-  }
   return (
     <>
       <Head>
@@ -104,12 +78,10 @@ export default function Slug({ postInit }) {
           href={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`}
           key="canonical"
         />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={addProductJsonLd()}
-          key="product-jsonld"
-        />
       </Head>
+      {/* Schema.org */}
+      <ArticleJsonLd post={post} urlPost={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`} />
+      <BreadcrumbJsonLd paragraphPosts={post.paragraphPosts} urlPost={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`} />
       <div className={styles.page}>
         <div className={styles.page__image}>
 

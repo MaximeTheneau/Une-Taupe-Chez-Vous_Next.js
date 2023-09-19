@@ -5,6 +5,7 @@ import useSWR from 'swr';
 import styles from '../styles/Pages.module.scss';
 import Faq from '../components/faq/faq';
 import fetcher from '../utils/fetcher';
+import FaqJsonLd from '../components/jsonLd/FaqJsonLd';
 
 export async function getStaticProps() {
   const responseContact = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Foire-aux-questions`);
@@ -23,29 +24,6 @@ export default function Slug({ responseContact }) {
 
   const descriptionMeta = post.contents.substring(0, 165).replace(/[\r\n]+/gm, '');
 
-  // schema.org
-  function addProductJsonLd() {
-    const jsonLdData = {
-      '@context': 'https://schema.org/',
-      '@type': 'FAQPage',
-      mainEntity: post.listPosts.map((liste) => ({
-        '@type': 'Question',
-        name: liste.title,
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: liste.description,
-        },
-      })),
-    };
-
-    // Convertissez l'objet JSON en une chaîne JSON valide
-    const jsonString = JSON.stringify(jsonLdData);
-
-    return {
-      __html: jsonString,
-    };
-  }
-
   return (
     <>
       <Head>
@@ -63,12 +41,8 @@ export default function Slug({ responseContact }) {
           href={`${process.env.NEXT_PUBLIC_URL}/${post.slug}`}
           key="canonical"
         />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={addProductJsonLd()}
-          key="product-jsonld"
-        />
       </Head>
+      <FaqJsonLd listPosts={post.listPosts} />
       <div className={styles.page}>
         <div className={styles.page__contents}>
           <h1>{post.title}</h1>

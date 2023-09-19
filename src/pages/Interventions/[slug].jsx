@@ -6,6 +6,8 @@ import styles from '../../styles/Pages.module.scss';
 import imageLoaderFull from '../../utils/imageLoaderFull';
 import TableOfContents from '../../components/tableOfContents/TableOfContents';
 import fetcher from '../../utils/fetcher';
+import BreadcrumbJsonLd from '../../components/jsonLd/BreadcrumbJsonLd';
+import ArticleJsonLd from '../../components/jsonLd/ArticleJsonLd';
 
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Interventions`);
@@ -28,34 +30,6 @@ export default function Slug({ responsePosts }) {
 
   const descriptionMeta = post.contents && post.contents.substring(0, 155).replace(/[\r\n]+/gm, '');
 
-  // schema.org
-  function addProductJsonLd() {
-    return {
-      __html: `{
-    "@context": "https://schema.org/",
-    "@type": "Article",
-    "name": "${post.title}",
-    "headline": "${post.title}",
-    "description": "${descriptionMeta}",
-    "image": "${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.imgPost}.jpg",
-    "datePublished": "${post.createdAt}",
-    "dateModified": "${post.updatedAt}",
-    "author": {
-      "@type": "Person",
-      "name": "Laurent THENEAU"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Une taupe chez vous",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "${process.env.NEXT_PUBLIC_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/Logo-Une-Taupe-Chez-Vous.jpg"
-      }
-    }
-  }
-`,
-    };
-  }
   return (
     <>
       <Head>
@@ -73,12 +47,9 @@ export default function Slug({ responsePosts }) {
           href={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`}
           key="canonical"
         />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={addProductJsonLd()}
-          key="product-jsonld"
-        />
       </Head>
+      <BreadcrumbJsonLd paragraphPosts={post.paragraphPosts} urlPost={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`} />
+      <ArticleJsonLd post={post} />
       <div className={styles.page}>
         <div className={styles.page__image}>
           <Image
