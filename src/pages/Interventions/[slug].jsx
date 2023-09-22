@@ -8,6 +8,8 @@ import TableOfContents from '../../components/tableOfContents/TableOfContents';
 import fetcher from '../../utils/fetcher';
 import BreadcrumbJsonLd from '../../components/jsonLd/BreadcrumbJsonLd';
 import ArticleJsonLd from '../../components/jsonLd/ArticleJsonLd';
+import Comments from '../../components/comments/Comments';
+import AuthMiddleware from '../../middleware/AuthMiddleware';
 
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Interventions`);
@@ -18,7 +20,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const responsePosts = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/${params.slug}`);
+  const responsePosts = await fetcher(`http://localhost:8000/api/posts/${params.slug}`);
 
   return { props: { responsePosts }, revalidate: 10 };
 }
@@ -50,7 +52,7 @@ export default function Slug({ responsePosts }) {
       </Head>
       <BreadcrumbJsonLd paragraphPosts={post.paragraphPosts} urlPost={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`} />
       <ArticleJsonLd post={post} />
-      <div className={styles.page}>
+      <section className={styles.page}>
         <div className={styles.page__image}>
           <Image
             src={`${post.slug}.webp`}
@@ -95,19 +97,8 @@ export default function Slug({ responsePosts }) {
             Contactez-nous
           </Link>
         </div>
-        {/* <div className={styles.page__comments}>
-          <h2
-            onClick={() => {
-              AuthMiddleware('get-token');
-            }}
-          >
-            Commentaires
-
-          </h2>
-          <Comments />
-        </div> */}
-      </div>
-
+      </section>
+      <Comments posts={post} />
     </>
   );
 }

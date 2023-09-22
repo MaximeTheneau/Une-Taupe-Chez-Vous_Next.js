@@ -53,7 +53,6 @@ export default function Home({ responsePage, responseArticles, responseSubcatego
         />
       </Head>
       <section>
-        <Category category={null} />
         <h1>{page.title}</h1>
         <p>{page.contents}</p>
         {/* --Articles--*/}

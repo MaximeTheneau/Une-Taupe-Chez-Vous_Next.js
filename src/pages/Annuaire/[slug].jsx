@@ -9,6 +9,7 @@ import fetcher from '../../utils/fetcher';
 import TableOfContents from '../../components/tableOfContents/TableOfContents';
 import ArticleJsonLd from '../../components/jsonLd/ArticleJsonLd';
 import BreadcrumbJsonLd from '../../components/jsonLd/BreadcrumbJsonLd';
+import Comments from '../../components/comments/Comments';
 
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`);
@@ -82,9 +83,8 @@ export default function Slug({ postInit }) {
       {/* Schema.org */}
       <ArticleJsonLd post={post} urlPost={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`} />
       <BreadcrumbJsonLd paragraphPosts={post.paragraphPosts} urlPost={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`} />
-      <div className={styles.page}>
+      <section className={styles.page}>
         <div className={styles.page__image}>
-
           <Image
             src={`${post.slug}.webp`}
             alt={post.altImg || post.title}
@@ -104,7 +104,6 @@ export default function Slug({ postInit }) {
             priority
           />
         </div>
-        <div>
           <h1>{post.title}</h1>
           <p>{post.contents}</p>
 
@@ -161,8 +160,8 @@ export default function Slug({ postInit }) {
           <Link href="/Annuaire/Inscription-annuaire-gratuite" className="stronk">
             Inscrivez vôtre entreprise gratuitement
           </Link>
-        </div>
-      </div>
+        </section>
+        <Comments posts={post} />
 
     </>
   );

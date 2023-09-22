@@ -12,6 +12,7 @@ import TableOfContents from '../../../components/tableOfContents/TableOfContents
 import fetcher from '../../../utils/fetcher';
 import ArticleJsonLd from '../../../components/jsonLd/ArticleJsonLd';
 import BreadcrumbJsonLd from '../../../components/jsonLd/BreadcrumbJsonLd';
+import Comments from '../../../components/comments/Comments';
 
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Articles`);
@@ -194,10 +195,9 @@ export default function Slug({ responsePost, responseDesc }) {
             <option value="email">Email</option>
           </select>
         </div>
-        <div>
           <h2>Derniers articles</h2>
           <Cards cards={desc} />
-        </div>
+          <Comments posts={post} />
       </section>
 
     </>
