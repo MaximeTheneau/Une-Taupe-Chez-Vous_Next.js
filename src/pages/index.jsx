@@ -155,6 +155,7 @@ export default function Home({
               >
                 <h3>
                   De :
+                  {' '}
                   {paragraphTestimonial.subtitle}
                 </h3>
                 <h4>Notes : ⭐⭐⭐⭐⭐</h4>
@@ -162,6 +163,7 @@ export default function Home({
                   <strong>
                     Avis :
                   </strong>
+                  {' '}
                   {paragraphTestimonial.paragraph}
                 </p>
               </li>

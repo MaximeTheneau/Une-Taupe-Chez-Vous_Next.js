@@ -1,5 +1,5 @@
 export default function AuthMiddleware(apiPath, emailValue) {
-  return fetch(`http://localhost:8000/api/${apiPath}`, {
+  return fetch(`${process.env.NEXT_PUBLIC_API_URL}${apiPath}`, {
     method: 'POST',
     body: JSON.stringify({
       email: emailValue,

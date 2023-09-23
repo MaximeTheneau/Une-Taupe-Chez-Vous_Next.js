@@ -3,7 +3,7 @@ export default function middleware(req, apiPath) {
     method: 'POST',
     body: JSON.stringify(req),
   };
-  fetch(`http://localhost:8000/api/${apiPath}`, requestOptions)
+  fetch(`${process.env.NEXT_PUBLIC_API_URL}${apiPath}`, requestOptions)
     .then((response) => {
       console.log(response);
     }).catch((error) => {

@@ -9,13 +9,17 @@ import LoaderSvg from '../svg/LoaderSvg';
 export default function Comments({ posts }) {
   const [state, setState] = useState({
     responses: {
-      error: '',
+      error: false,
+      confirmEmail: false,
       confirm: false,
+      message: '',
+      messageComment: '',
+      isLoading: false,
     },
     form: {
       user: '',
       email: '',
-      comment: 'test',
+      comment: '',
       posts: posts.id,
     },
   });
@@ -23,7 +27,7 @@ export default function Comments({ posts }) {
 
   const handleBlur = (e) => {
     if (!e.target.value) return;
-    fetch('http://localhost:8000/api/comments/verify_email', {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}comments/verify_email`, {
       method: 'POST',
       body: JSON.stringify({
         email: e.target.value,
@@ -37,8 +41,8 @@ export default function Comments({ posts }) {
             ...state,
             responses: {
               ...state.responses,
-              confirm: data.message,
-              error: '',
+              confirmEmail: data.message,
+              messageComment: '',
             },
           });
         } else {
@@ -47,8 +51,8 @@ export default function Comments({ posts }) {
             ...state,
             responses: {
               ...state.responses,
-              confirm: false,
-              error: errorData.message,
+              messageComment: errorData.message,
+              confirmEmail: false,
             },
           });
         }
@@ -68,6 +72,64 @@ export default function Comments({ posts }) {
     };
     return date.toLocaleDateString('fr-FR', options);
   }
+
+  
+  const emojis = ['😀', '😯', '🙁', '🕳️', '🦡', '🌱', '🍂', '🪱', '🏡', '🚫', '💪'];
+
+  const handleEmojiClick = (emoji) => {
+    setState({
+      ...state,
+      form: {
+        ...state.form,
+        comment: state.form.comment + emoji,
+      },
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setState({
+      ...state,
+      responses: {
+        ...state.responses,
+        isLoading: true,
+      },
+    });
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}comments`, {
+      method: 'POST',
+      credentials: 'include',
+      body: JSON.stringify(state.form),
+    }).then(async (response) => {
+      if (response.ok) {
+        const data = await response.json();
+        setState({
+          ...state,
+          form: {
+            user: '',
+            email: '',
+            comment: '',
+            posts: posts.id,
+          },
+          responses: {
+            ...state.responses,
+            message: data.message,
+          },
+        });
+      } else {
+        const errorData = await response.json();
+        setState({
+          ...state,
+          responses: {
+            ...state.responses,
+            error: true,
+            message: errorData.message,
+          },
+        });
+      }
+    })
+  }
+
+
   return (
     <section className={styles.comments}>
       {posts.comments?.length > 0 && (
@@ -100,26 +162,13 @@ export default function Comments({ posts }) {
       )}
 
       <h3>Postez un commentaire !</h3>
-      <form
-        onSubmit={
-          (event) => {
-            event.preventDefault();
-            console.log(JSON.stringify(state.form));
-            fetch('http://localhost:8000/api/comments', {
-            method: 'POST',
-            credentials: 'include',
-            body: JSON.stringify(state.form),
-          }).then(async (response) => {
-            console.log(response);
-          });
-          }
-            }
-      >
+      <form onSubmit={(e) => handleSubmit(e)}>
         <label htmlFor="name">Prénom ou pseudo (obligatoire)</label>
         <input
           type="text"
           id="user"
           name="user"
+          value={state.form.user}
           onChange={(e) => setState({
             ...state,
             form: {
@@ -145,15 +194,24 @@ export default function Comments({ posts }) {
           })}
           onBlur={(e) => handleBlur(e)}
         />
-        {state.responses && (
-        <div>
-          {state.responses.error}
-        </div>
+        {state.responses.messageComment && (
+        <p className='error'>
+          {state.responses.messageComment}
+        </p>
         )}
         <label htmlFor="comment">Commentaire (obligatoire)</label>
+        <div>
+           {emojis.map((emoji, index) => (
+            <button type='button' key={index} onClick={() => handleEmojiClick(emoji)}>
+              {emoji}
+            </button>
+          ))}
+        </div>
+
         <textarea
           id="comment"
           name="comment"
+          value={state.form.comment}
           onChange={(e) => setState({
             ...state,
             form: {
@@ -162,13 +220,24 @@ export default function Comments({ posts }) {
             },
           })}
         />
-        {isFormValid && state.responses?.confirm ? (
+        {state.responses.isLoading ? (
+          <p>Envoie en     cours...
+            {' '}
+            <LoaderSvg />
+          </p>
+        ) : (
+          <p className='error'>
+            {state.responses.message && (
+              state.responses.message
+            )}
+          </p>
+        )}
+        {isFormValid && state.responses.confirmEmail ? (
           <button
             className="button"
             type="submit"
           >
             Envoyer
-
           </button>
         ) : (
           <button

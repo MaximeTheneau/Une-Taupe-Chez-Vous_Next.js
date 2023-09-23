@@ -20,7 +20,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const responsePosts = await fetcher(`http://localhost:8000/api/posts/${params.slug}`);
+  const responsePosts = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/${params.slug}`);
 
   return { props: { responsePosts }, revalidate: 10 };
 }
