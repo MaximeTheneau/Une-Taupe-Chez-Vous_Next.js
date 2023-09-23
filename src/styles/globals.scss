@@ -105,6 +105,15 @@ select{
     outline: none;
   }
 }
+
+.error{
+  color: red;
+  font-size: $font-size;
+  font-family: $font-primary;
+  margin: 0.5rem 0;
+  display: block;
+}
+
 ol {
   padding-left: 20px; 
 }

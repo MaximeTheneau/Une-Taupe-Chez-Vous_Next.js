@@ -83,7 +83,7 @@ export default function Home({
         logoUrl={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/logo-une-taupe-chez-vous.png`}
       />
 
-      <div className={styles.home}>
+      <section className={styles.home}>
         <div className={styles.home__imagesFull}>
           <Image
             src={`${accueil.slug}.webp`}
@@ -155,6 +155,7 @@ export default function Home({
               >
                 <h3>
                   De :
+                  {' '}
                   {paragraphTestimonial.subtitle}
                 </h3>
                 <h4>Notes : ⭐⭐⭐⭐⭐</h4>
@@ -162,6 +163,7 @@ export default function Home({
                   <strong>
                     Avis :
                   </strong>
+                  {' '}
                   {paragraphTestimonial.paragraph}
                 </p>
               </li>
@@ -191,7 +193,7 @@ export default function Home({
             </Link>
           </button>
         </div>
-      </div>
+      </section>
     </>
   );
 }

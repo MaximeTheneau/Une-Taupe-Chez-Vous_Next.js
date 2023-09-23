@@ -43,7 +43,7 @@ export default function Slug({ responseContact }) {
         />
       </Head>
       <FaqJsonLd listPosts={post.listPosts} />
-      <div className={styles.page}>
+      <section className={styles.page}>
         <div className={styles.page__contents}>
           <h1>{post.title}</h1>
           <p>{post.contents}</p>
@@ -75,9 +75,7 @@ export default function Slug({ responseContact }) {
             </>
           ))}
         </div>
-      </div>
-      <div />
-
+      </section>
     </>
   );
 }
