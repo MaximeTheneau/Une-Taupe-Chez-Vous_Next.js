@@ -56,7 +56,7 @@ export default function Home({
   const articles = articlesSwr || articlesInit;
   const faq = faqSwr || faqInit;
 
-  const descriptionMeta = 'Taupier professionnels agréé de la lutte contre les taupes, fouines et ragondins. Intervention en Eure (27), Yvelines (78) et Essonne (91). Devis gratuit.';
+  const descriptionMeta = 'Taupier - piégeur expert professionnel agréé contre nuisible comme la taupe, fouine et ragondin en Eure (27), Yvelines (78) et Essonne (91) - Devis gratuit.';
 
   return (
     <>

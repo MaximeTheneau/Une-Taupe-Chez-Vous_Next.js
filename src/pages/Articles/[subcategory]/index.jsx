@@ -64,11 +64,11 @@ export default function Home({ responseArticles, responsePage }) {
       </Head>
       <>
         <section>
+          <Category category={false} subcategoryPost={subcategory.name} />
           <h1>{subcategory.name}</h1>
           <p>{page.contents}</p>
         </section>
         <section>
-          <Category category={subcategory} />
           {/* --Articles--*/}
           <h2>Les derniers articles :</h2>
           <div className={styles.home}>

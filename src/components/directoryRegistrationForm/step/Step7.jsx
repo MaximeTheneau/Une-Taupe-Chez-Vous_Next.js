@@ -118,7 +118,6 @@ export default function Step7({
           <div className="contact-form_button">
             <button id="confirmation" type="submit" title="Envoyer l'inscription">
               Envoyer
-              <i className="icon-paper-plane" />
             </button>
           </div>
         </form>

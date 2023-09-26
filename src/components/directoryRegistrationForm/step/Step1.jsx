@@ -4,10 +4,18 @@ import styles from '../DirectoryRegistration.module.scss';
 function Step1({
   formData, setFormData, onNext,
 }) {
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(false);
 
   const handleInputChange = (e) => {
+    
     const { name, value } = e.target;
+    console.log(name, value);
+    if (value.length < 120) {
+      setError(false);
+    } else {
+      setError(true);
+    }
+
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -44,13 +52,13 @@ function Step1({
             id="name"
             name="name"
             value={formData.name}
-            onChange={handleInputChange}
+            onChange={(e) => handleInputChange(e)}
             maxLength={120}
             minLength={2}
           />
         </label>
         <div className="contact-form_button">
-          <button type="submit">
+          <button  type="submit" >
             Suivant
           </button>
         </div>

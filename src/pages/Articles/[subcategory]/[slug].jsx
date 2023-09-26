@@ -124,16 +124,15 @@ export default function Slug({ responsePost, responseDesc }) {
             />
           </figure>
         </div>
-        <Category category={post.subcategory} />
+        <Category category={false} subcategoryPost={post.subcategory.name}  />
 
         <div className={styles.page__contents}>
-
           <h1>{post.title}</h1>
 
           <ReactMarkdown remarkPlugins={[remarkGfm]}>
             {post.contents}
-          </ReactMarkdown>
           <TableOfContents post={post} />
+          </ReactMarkdown>
           {post.paragraphPosts.map((paragraphArticle) => (
             <div key={paragraphArticle.id}>
               {paragraphArticle.subtitle && (
@@ -158,7 +157,7 @@ export default function Slug({ responsePost, responseDesc }) {
                   sizes="(max-width: 640px) 100vw, (max-width: 750px) 750px, (max-width: 828px) 828px, 1080px"
                 />
                 )}
-                <ReactMarkdown>
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
                   {paragraphArticle.paragraph}
                 </ReactMarkdown>
               </div>

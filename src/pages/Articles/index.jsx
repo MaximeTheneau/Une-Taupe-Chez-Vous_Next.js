@@ -12,13 +12,11 @@ import fetcher from '../../utils/fetcher';
 export async function getStaticProps() {
   const responsePage = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Articles`);
   const responseArticles = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Articles`);
-  const responseSubcategory = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=subcategory`);
 
   return {
     props: {
       responseArticles,
       responsePage,
-      responseSubcategory,
     },
   };
 }
@@ -26,11 +24,9 @@ export async function getStaticProps() {
 export default function Home({ responsePage, responseArticles, responseSubcategory }) {
   const { data: pageData } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/Articles`, fetcher);
   const { data: articlesData } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Articles`, fetcher);
-  const { data: subcategoryData } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=subcategory`, fetcher);
 
   const page = pageData || responsePage;
   const articles = articlesData || responseArticles;
-  const subcategory = subcategoryData || responseSubcategory;
 
   const descriptionMeta = page.contents.substring(0, 165).replace(/[\r\n]+/gm, '');
 
@@ -53,21 +49,12 @@ export default function Home({ responsePage, responseArticles, responseSubcatego
         />
       </Head>
       <section>
+        <Category category />
         <h1>{page.title}</h1>
         <p>{page.contents}</p>
         {/* --Articles--*/}
         <h2>Les derniers articles :</h2>
-        <nav>
-          <ul className={stylesNav.category}>
-            {subcategory.map((category) => (
-              <li key={category.name}>
-                <Link href={`Articles/${category.slug}`} className="button">
-                  {category.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+
         <div className={styles.home}>
           <Cards cards={articles} />
         </div>

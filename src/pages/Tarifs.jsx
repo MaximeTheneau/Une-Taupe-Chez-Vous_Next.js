@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from '../styles/Pages.module.scss';
+import ReactMarkdown from 'react-markdown';
 
 export async function getStaticProps() {
   const responsePage = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts/Tarifs`);
@@ -37,31 +38,18 @@ export default function pricing({ page }) {
       </Head>
       <section className={styles.page}>
         <h1>{page.title}</h1>
+              <ReactMarkdown>
+              {page.contents}
+              </ReactMarkdown>
         {page.paragraphPosts.map((paragraphPosts) => (
           <>
-            <p className={styles.page__contents__paragraph}>
-              {paragraphPosts.imgPostParagh && (
-              <Image
-                className={styles.page__contents__paragraph}
-                src={`${paragraphPosts.imgPostParagh}.webp`}
-                alt={paragraphPosts.altImg || paragraphPosts.subtitle}
-                width={330}
-                height={310}
-                quality={70}
-              />
-              )}
-              {page.contents}
-            </p>
+
             <h2>{paragraphPosts.subtitle}</h2>
-            <p>{paragraphPosts.paragraph}</p>
+            <ReactMarkdown>
+              {paragraphPosts.paragraph}
+            </ReactMarkdown>
           </>
         ))}
-        <p>
-          <Link href="/Contact">Contactez-nous </Link>
-          maintenant pour planifier une intervention ou pour obtenir plus
-          d&apos;informations sur nos tarifs compétitifs et nos services
-          de lutte contre les nuisibles.
-        </p>
       </section>
     </>
   );

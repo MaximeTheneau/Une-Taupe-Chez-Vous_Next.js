@@ -58,7 +58,6 @@ export default function Recherche({ responsePage, responseArticles, responseDesc
     setArticles(filteredArticles);
   };
 
-  console.log(articles);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -95,6 +94,7 @@ export default function Recherche({ responsePage, responseArticles, responseDesc
             onChange={(e) => {
               handleChange(e.target.value);
             }}
+            onClick={() => setSearchValue('')}
             value={searchValue}
 
           />
