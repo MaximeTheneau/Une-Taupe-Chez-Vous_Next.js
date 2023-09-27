@@ -37,27 +37,8 @@
     }
   }
   &__image{
-    position: relative;
-    height: 100%;
-    width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
-    & h1{
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: $color-white-opacity;
-      width: 100%;
-      font-size: 1rem;
-      text-align: center;
-      height: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+
   }
   & a{
     font-weight: bold;
@@ -225,7 +206,6 @@
 @media screen and (max-width: 768px){
   .page{
     &__image{
-    width: 50%;
     margin: 0 auto;
     }
     &__contact{

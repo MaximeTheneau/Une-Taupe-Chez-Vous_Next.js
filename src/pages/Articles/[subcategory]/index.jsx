@@ -2,9 +2,9 @@
 import Head from 'next/head';
 import useSWR from 'swr';
 import Cards from '../../../components/cards/cards';
-import Category from '../../../components/category/category';
 import styles from '../../../styles/Pages.module.scss';
 import fetcher from '../../../utils/fetcher';
+import CategoryPage from '../../../components/category/CategoryPage';
 
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Articles`);
@@ -42,7 +42,7 @@ export default function Home({ responseArticles, responsePage }) {
 
   const articles = articlesData || responseArticles;
   const page = pageData || responsePage;
-
+  console.log(page);
   const descriptionMeta = page.contents.substring(0, 155).replace(/[\r\n]+/gm, '');
   return (
     <>
@@ -64,9 +64,9 @@ export default function Home({ responseArticles, responsePage }) {
       </Head>
       <>
         <section>
-          <Category category={false} subcategoryPost={subcategory.name} />
           <h1>{subcategory.name}</h1>
           <p>{page.contents}</p>
+          <CategoryPage category={false} subcategoryPost={subcategory.name} />
         </section>
         <section>
           {/* --Articles--*/}

@@ -14,7 +14,7 @@ export async function getStaticProps() {
 }
 
 
-export default function Category({ category, responseSubcategory, subcategoryPost }) {
+export default function CategoryPage({ category, responseSubcategory, subcategoryPost }) {
   const { data: subcategoryData } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=subcategory`, fetcher);
   const subcategory = subcategoryData || responseSubcategory;
   console.log(subcategoryPost);

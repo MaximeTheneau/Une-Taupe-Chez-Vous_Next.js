@@ -3,15 +3,16 @@ import Head from 'next/head';
 import Link from 'next/link';
 import useSWR from 'swr';
 import Cards from '../../components/cards/cards';
-import Category from '../../components/category/category';
 import styles from '../../styles/Pages.module.scss';
 import stylesNav from '../../components/category/Category.module.scss';
 import AnimationHover from '../../hooks/useHoverAnimation/CloneTextWrapper';
 import fetcher from '../../utils/fetcher';
+import CategoryPage from '../../components/category/CategoryPage';
 
 export async function getStaticProps() {
   const responsePage = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Articles`);
   const responseArticles = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Articles`);
+  
 
   return {
     props: {
@@ -49,9 +50,9 @@ export default function Home({ responsePage, responseArticles, responseSubcatego
         />
       </Head>
       <section>
-        <Category category />
         <h1>{page.title}</h1>
         <p>{page.contents}</p>
+        <CategoryPage category/>
         {/* --Articles--*/}
         <h2>Les derniers articles :</h2>
 

@@ -38,8 +38,11 @@ p{
   color: $font-color;
   width: 90%;
   margin: 0 0 0.5rem 0;
+  font-size: $font-size;
 }
-
+em {
+  font-style: italic;
+}
 img{
   max-width: 1020px;
   height: auto;
@@ -117,6 +120,14 @@ select{
 .f-jc{
   justify-content: center;
 }
+.m-b-1{
+  margin-bottom: 1rem;
+}
+
+.date{
+  width: 100%;
+  color: $font-color-light;
+}
 
 .radio {
   border: 0.5px solid $font-color;
@@ -145,6 +156,11 @@ select{
   display: block;
 }
 
+.caption{
+  color: $font-color-light;
+  font-size: $font-size-small;
+  margin-bottom: 1rem;
+}
 ol {
   padding-left: 20px; 
 }

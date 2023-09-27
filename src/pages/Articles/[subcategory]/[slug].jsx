@@ -6,7 +6,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import styles from '../../../styles/Pages.module.scss';
 import Cards from '../../../components/cards/cards';
-import Category from '../../../components/category/category';
+import Category from '../../../components/category/Category';
 import imageLoaderFull from '../../../utils/imageLoaderFull';
 import TableOfContents from '../../../components/tableOfContents/TableOfContents';
 import fetcher from '../../../utils/fetcher';
@@ -49,8 +49,8 @@ export default function Slug({ responsePost, responseDesc }) {
 
   const descriptionMeta = post.contents === null
     ? `Articles de blog ${post.title}`
-    : post.contents.substring(0, 165).replace(/[\r\n]+/gm, '');
-
+    : post.contents.substring(0, 165).replace(/[\r\n*_]+/gm, '');
+    
   const handleChangeShareSocial = (e) => {
     const social = e.target.value;
     if (social === 'facebook') {
@@ -66,6 +66,42 @@ export default function Slug({ responsePost, responseDesc }) {
     }
   };
 
+  function formatDate({ post }) {
+    const formatDate = (dateString) => {
+      const date = new Date(dateString);
+      const now = new Date();
+      const diffInMinutes = Math.floor((now - date) / (1000 * 60));
+  
+      if (diffInMinutes < 1) {
+        return "à l'instant";
+      } else {
+        return `${date.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })}`;
+      }
+    };
+  
+    const formattedPubDate = formatDate(post.createdAt);
+    const formattedMajDate = formatDate(post.updatedAt);
+    
+    return (
+      <div className="m-b-1 date">
+        <span className="fig-content-metas__pub-date fig-content-metas__pub-date--hide-small">
+          Publié le 
+          {' '}
+          <time dateTime={post.createdAt}>{formattedPubDate}</time>.
+        </span>
+        {post.updatedAt && (
+        <>
+          {' '}
+          <span className="fig-content-metas__pub-maj-date">
+            Mis à jour le 
+            {' '}
+            <time dateTime={post.updatedAt}>{formattedMajDate}</time>.
+          </span>
+        </>
+        )}
+      </div>
+    );
+  }
   return (
     <>
       <Head>
@@ -102,7 +138,11 @@ export default function Slug({ responsePost, responseDesc }) {
       <ArticleJsonLd post={post} urlPost={urlPost} />
       <BreadcrumbJsonLd paragraphPosts={post.paragraphPosts} urlPost={urlPost} />
       <section className={styles.page}>
-        <div className={styles.page__image}>
+        <Category category={false} subcategoryName={post.subcategory.name} subcategorySlug={post.subcategory.slug}  />
+        <div className={styles.page__contents}>
+          <h1>{post.title}</h1>
+          {formatDate({ post })}
+          <div className={styles.page__image}>
           <figure>
             <Image
               src={`${post.imgPost}.webp`}
@@ -112,27 +152,27 @@ export default function Slug({ responsePost, responseDesc }) {
               width={1080}
               height={608}
               sizes="(max-width: 640px) 100vw,
-            (max-width: 750px) 100vw,
-            (max-width: 828px) 100vw,
-            (max-width: 1080px) 100vw,
-            100vw"
+                (max-width: 750px) 100vw,
+                (max-width: 828px) 100vw,
+                (max-width: 1080px) 100vw,
+                100vw"
               style={{
                 width: '100%',
                 height: 'auto',
               }}
               priority
             />
+            {post.title !== post.altImg  && (
+              <figcaption className='caption'>
+                {post.altImg}
+              </figcaption>
+            )}
           </figure>
-        </div>
-        <Category category={false} subcategoryPost={post.subcategory.name}  />
-
-        <div className={styles.page__contents}>
-          <h1>{post.title}</h1>
-
+        </div>          
           <ReactMarkdown remarkPlugins={[remarkGfm]}>
             {post.contents}
-          <TableOfContents post={post} />
           </ReactMarkdown>
+          <TableOfContents post={post} />
           {post.paragraphPosts.map((paragraphArticle) => (
             <div key={paragraphArticle.id}>
               {paragraphArticle.subtitle && (

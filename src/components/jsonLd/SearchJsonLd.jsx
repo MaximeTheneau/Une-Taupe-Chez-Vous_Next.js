@@ -10,6 +10,7 @@ export default function SearchJsonLd() {
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'WebSite',
+            url: `${process.env.NEXT_PUBLIC_URL}/search`,
             potentialAction: {
               '@type': 'SearchAction',
               target: `${process.env.NEXT_PUBLIC_URL}/search?q={search_term_string}`,
