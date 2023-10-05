@@ -10,6 +10,10 @@ import BreadcrumbJsonLd from '../../components/jsonLd/BreadcrumbJsonLd';
 import ArticleJsonLd from '../../components/jsonLd/ArticleJsonLd';
 import Comments from '../../components/comments/Comments';
 import AuthMiddleware from '../../middleware/AuthMiddleware';
+import Cards from '../../components/cards/cards';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+
 
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Interventions`);
@@ -20,18 +24,60 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const responsePosts = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/${params.slug}`);
 
-  return { props: { responsePosts }, revalidate: 10 };
+
+  const responsePosts = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/${params.slug}`);
+  const responseDesc = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=keyword&limit=3&id=${responsePosts.id}`);
+
+
+  return { props: { responsePosts, responseDesc }, revalidate: 10 };
 }
 
-export default function Slug({ responsePosts }) {
-  const { data } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/${responsePosts.slug}`);
+export default function Slug({ responsePosts, responseDesc }) {
 
-  const post = data || responsePosts;
+
+  const { data: postData  } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/${responsePosts.slug}`);
+  const { data: descData } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&filter=desc&category=articles`);
+
+  const post = postData || responsePosts;
+  const desc = descData || responseDesc;
 
   const descriptionMeta = post.contents && post.contents.substring(0, 155).replace(/[\r\n]+/gm, '');
-
+  function formatDate({ post }) {
+    const formatDate = (dateString) => {
+      const date = new Date(dateString);
+      const now = new Date();
+      const diffInMinutes = Math.floor((now - date) / (1000 * 60));
+  
+      if (diffInMinutes < 1) {
+        return "à l'instant";
+      } else {
+        return `${date.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })}`;
+      }
+    };
+    const formattedPubDate = formatDate(post.createdAt);
+    const formattedMajDate = formatDate(post.updatedAt);
+    
+    return (
+      <div className="m-b-1 date">
+        <span className="fig-content-metas__pub-date fig-content-metas__pub-date--hide-small">
+          Publié le 
+          {' '}
+          <time dateTime={post.createdAt}>{formattedPubDate}</time>.
+        </span>
+        {post.updatedAt && (
+        <>
+          {' '}
+          <span className="fig-content-metas__pub-maj-date">
+            Mis à jour le 
+            {' '}
+            <time dateTime={post.updatedAt}>{formattedMajDate}</time>.
+          </span>
+        </>
+        )}
+      </div>
+    );
+  }
   return (
     <>
       <Head>
@@ -53,28 +99,40 @@ export default function Slug({ responsePosts }) {
       <BreadcrumbJsonLd paragraphPosts={post.paragraphPosts} urlPost={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`} />
       <ArticleJsonLd post={post} />
       <section className={styles.page}>
-        <div className={styles.page__image}>
-          <Image
-            src={`${post.slug}.webp`}
-            alt={post.altImg || post.title}
-            loader={imageLoaderFull}
-            quality={90}
-            width={1080}
-            height={608}
-            sizes="(max-width: 640px) 100vw,
-            (max-width: 750px) 100vw,
-            (max-width: 828px) 100vw,
-            (max-width: 1080px) 100vw,
-            100vw"
-            style={{
-              width: '100%',
-              height: 'auto',
-            }}
-            priority
-          />
-        </div>
-        <div>
-          <h1>{post.title}</h1>
+        <div className={styles.page__contents}>
+        <h1>{post.title}</h1>
+          {formatDate({ post })}
+          <div className={styles.page__image}>
+          <figure>
+            <Image
+              src={`${post.imgPost}.webp`}
+              alt={post.altImg || post.title}
+              loader={imageLoaderFull}
+              quality={90}
+              width={1080}
+              height={608}
+              sizes="(max-width: 640px) 100vw,
+                (max-width: 750px) 100vw,
+                (max-width: 828px) 100vw,
+                (max-width: 1080px) 100vw,
+                100vw"
+              style={{
+                width: '100%',
+                height: 'auto',
+              }}
+              priority
+            />
+            {post.title !== post.altImg  && (
+              <figcaption className='caption'>
+                {post.altImg}
+              </figcaption>
+            )}
+          </figure>
+        </div>          
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>
+            {post.contents}
+          </ReactMarkdown> 
+
           <table className={styles.page__table}>
             <tbody>
               {post.listPosts.map((listArticle) => listArticle.title !== null && (
@@ -85,12 +143,22 @@ export default function Slug({ responsePosts }) {
               ))}
             </tbody>
           </table>
-          <p>{post.contents}</p>
           <TableOfContents post={post} />
           {post.paragraphPosts.map((paragraphPosts) => (
             <>
               <h2 id={paragraphPosts.slug}>{paragraphPosts.subtitle}</h2>
-              <p>{paragraphPosts.paragraph}</p>
+              <ReactMarkdown>{paragraphPosts.paragraph}</ReactMarkdown>
+              {paragraphPosts.link && (
+                  <div className={styles.page__contents__paragraph__links}>
+                    <span className={styles.page__contents__paragraph__links__link}>
+                      → A lire aussi : 
+                      <a href={paragraphPosts.link}>
+                        {' '}
+                        {paragraphPosts.linkSubtitle}
+                      </a>
+                    </span>
+                    </div>
+                )}
             </>
           ))}
           <Link href="/Contact" className="button">
@@ -98,7 +166,11 @@ export default function Slug({ responsePosts }) {
           </Link>
         </div>
       </section>
-      <Comments posts={post} />
+      <section>
+        <h2>Retrouver nos derniers articles :</h2>
+        <Cards cards={desc} />
+        <Comments posts={post} />
+      </section>
     </>
   );
 }

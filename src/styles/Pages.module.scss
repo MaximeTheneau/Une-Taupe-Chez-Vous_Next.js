@@ -10,11 +10,29 @@
     &__paragraph{
       width: 100%;
       margin: 1rem auto;
-      & img{
+      &__figure{
         width: 50%;
         float: left;
         margin: 0 1rem 1rem 0;
+        & img{
+          width: 100% !important;
+        }
       }
+      &__links{
+        background: $color-link-opacity;
+        padding: 1rem;
+        margin: 1rem 0;
+        color: $color-link;
+        font-weight: bold;
+        display: inline-block;
+        & a{
+          color: $font-color;
+          &:hover{
+            color: $color-primary;
+          }
+        }
+      }
+
       & p{
         width: 100%;
       }
@@ -32,8 +50,12 @@
       margin: 1rem auto;
     }
     & li{
-      width: 90%;
-      margin: 1rem 0 0 0;
+      margin: 0;
+      list-style: disc;
+      margin: 0 2rem 0 1rem;
+      & p{
+        margin: 0;
+      }
     }
   }
   &__image{
@@ -126,6 +148,11 @@
       list-style: disc;
       width: 100%;
       margin: 1rem 0 1rem 3rem;
+      color: $color-white;
+        & a:hover{
+          color: $font-color;
+      }
+      
       &__image{
         width: 100%;
         height: auto;
@@ -187,8 +214,9 @@
   &__contact{
     width: 90%;
     margin: 0 auto;
+    
     & a{
-      color: $color-primary;
+      color: $color-link;
       &:hover{
         color: $font-color;
       }
@@ -220,8 +248,7 @@
     }
     &__contents{
       &__paragraph{
-        & img{
-          margin: 0 auto 1rem auto;
+        &__figure{
           width: 100%;
         }
       }

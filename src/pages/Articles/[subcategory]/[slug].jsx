@@ -25,7 +25,6 @@ export async function getStaticPaths() {
       slug: post.slug,
     },
   }));
-
   return { paths, fallback: 'blocking' };
 }
 
@@ -33,7 +32,11 @@ export async function getStaticProps({ params }) {
   const { slug } = params;
 
   const responsePost = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/${slug}`);
-  const responseDesc = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&filter=desc&category=articles`);
+  const responseDesc = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=keyword&limit=3&id=${responsePost.id}`);
+  
+
+  console.log(responsePost.id);
+  
 
   return { props: { responsePost, responseDesc }, revalidate: 10 };
 }
@@ -78,7 +81,6 @@ export default function Slug({ responsePost, responseDesc }) {
         return `${date.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })}`;
       }
     };
-  
     const formattedPubDate = formatDate(post.createdAt);
     const formattedMajDate = formatDate(post.updatedAt);
     
@@ -181,25 +183,38 @@ export default function Slug({ responsePost, responseDesc }) {
               </h2>
               )}
               {paragraphArticle.paragraph && (
-              <div
-                key={paragraphArticle.id}
-                className={styles.page__contents__paragraph}
-
-              >
+              <div key={paragraphArticle.id} className={styles.page__contents__paragraph} >
                 {paragraphArticle.imgPostParagh && (
-                <Image
-                  className={styles.page__contents__paragraph}
-                  src={`${paragraphArticle.imgPostParagh}.webp`}
-                  alt={paragraphArticle.subtitle}
-                  quality={100}
-                  width="1080"
-                  height="720"
-                  sizes="(max-width: 640px) 100vw, (max-width: 750px) 750px, (max-width: 828px) 828px, 1080px"
-                />
+                <figure className={styles.page__contents__paragraph__figure}>
+                  <Image
+                    src={`${paragraphArticle.imgPostParagh}.webp`}
+                    alt={paragraphArticle.subtitle}
+                    quality={100}
+                    width="1080"
+                    height="720"
+                    sizes="(max-width: 640px) 100vw, (max-width: 750px) 750px, (max-width: 828px) 828px, 1080px"
+                  />
+                  {paragraphArticle.subtitle !== paragraphArticle.altImgParagh && (
+                  <figcaption className='caption'>
+                    {paragraphArticle.altImg}
+                  </figcaption>
+                  )}
+                </figure>
                 )}
                 <ReactMarkdown remarkPlugins={[remarkGfm]}>
                   {paragraphArticle.paragraph}
                 </ReactMarkdown>
+                {paragraphArticle.link && (
+                  <div className={styles.page__contents__paragraph__links}>
+                    <span className={styles.page__contents__paragraph__links__link}>
+                      → A lire aussi : 
+                      <a href={paragraphArticle.link}>
+                        {' '}
+                        {paragraphArticle.linkSubtitle}
+                      </a>
+                    </span>
+                    </div>
+                )}
               </div>
               )}
             </div>

@@ -104,7 +104,7 @@ export default function Footer() {
 
       </div>
       <div className={styles.footer__author}>
-        <Link href="https://theneaumaxime.fr" target="_blank" rel="nofollow">
+        <Link href="https://theneau-maxime.fr" target="_blank" rel="nofollow">
           Site réalisé par Maxime Theneau
         </Link>
       </div>

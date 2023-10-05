@@ -17,16 +17,13 @@ export default function Card({ card }) {
       pathCard = `Annuaire/${articlesLink.slug}`;
     } if (articlesLink.category && articlesLink.category.name === 'Articles') {
       pathCard = `${articlesLink.category.name}/${articlesLink.subcategory.slug}/${articlesLink.slug}`;
-    } if (articlesLink.category && articlesLink.category.slug === 'Interventions') {
-      pathCard = `${articlesLink.category.slug}/${articlesLink.slug}`;
+    } if (articlesLink.category && articlesLink.category.name === 'Interventions') {
+      pathCard = `${articlesLink.category.name}/${articlesLink.slug}`;
     }
     return pathCard;
   }
   return (
-  // <SlideTransition
-  //
-  // >
-    <div className={styles.card}>
+    <li className={styles.card}>
       <Link href={`/${getPathCard(card)}`} className={styles.card__img}>
         <Image
           src={`${card.imgPost}.webp`}
@@ -47,7 +44,7 @@ export default function Card({ card }) {
         />
         <h3 className={styles.card__content}>{card.title}</h3>
       </Link>
-    </div>
+    </li>
   // </SlideTransition>
   );
 }

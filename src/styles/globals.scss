@@ -15,6 +15,8 @@ body {
 h1,h2,h3,h4,h5,h6{
   font-family: 'fontTitle', sans-serif;
   color: $font-color;
+  width: 100%;
+  display: inline-block;
 }
 h1{
   font-size: $font-size-large;
