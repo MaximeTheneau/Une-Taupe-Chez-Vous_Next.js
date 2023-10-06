@@ -8,10 +8,8 @@ button{
 }
 
 .button{
-  width: 100%;
   margin: 1rem auto 0 auto;
-  width: 20rem;
-  height: 3rem;
+  min-width: 8rem;
   transition: all 0.3s ease-in-out;
   display: flex;
   align-items: center;

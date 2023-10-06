@@ -2,8 +2,8 @@ import Image from 'next/image';
 import Head from 'next/head';
 import useSWR from 'swr';
 import Link from 'next/link';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
+// import ReactMarkdown from 'react-markdown';
+// import remarkGfm from 'remark-gfm';
 import styles from '../../../styles/Pages.module.scss';
 import Cards from '../../../components/cards/cards';
 import Category from '../../../components/category/Category';
@@ -33,9 +33,6 @@ export async function getStaticProps({ params }) {
 
   const responsePost = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/${slug}`);
   const responseDesc = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=keyword&limit=3&id=${responsePost.id}`);
-  
-
-  console.log(responsePost.id);
   
 
   return { props: { responsePost, responseDesc }, revalidate: 10 };
@@ -159,10 +156,10 @@ export default function Slug({ responsePost, responseDesc }) {
                 (max-width: 1080px) 100vw,
                 100vw"
               style={{
-                width: '100%',
+                width: 'auto',
                 height: 'auto',
               }}
-              priority
+              priority={true}
             />
             {post.title !== post.altImg  && (
               <figcaption className='caption'>
@@ -171,9 +168,9 @@ export default function Slug({ responsePost, responseDesc }) {
             )}
           </figure>
         </div>          
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          {/* <ReactMarkdown remarkPlugins={[remarkGfm]}> */}
             {post.contents}
-          </ReactMarkdown>
+          {/* </ReactMarkdown> */}
           <TableOfContents post={post} />
           {post.paragraphPosts.map((paragraphArticle) => (
             <div key={paragraphArticle.id}>
@@ -201,9 +198,9 @@ export default function Slug({ responsePost, responseDesc }) {
                   )}
                 </figure>
                 )}
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                {/* <ReactMarkdown remarkPlugins={[remarkGfm]}> */}
                   {paragraphArticle.paragraph}
-                </ReactMarkdown>
+                {/* </ReactMarkdown> */}
                 {paragraphArticle.link && (
                   <div className={styles.page__contents__paragraph__links}>
                     <span className={styles.page__contents__paragraph__links__link}>

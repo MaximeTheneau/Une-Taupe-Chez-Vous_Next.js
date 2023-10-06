@@ -163,7 +163,7 @@ export default function Comments({ posts }) {
 
       <h3>Postez un commentaire !</h3>
       <form onSubmit={(e) => handleSubmit(e)}>
-        <label htmlFor="name">Prénom ou pseudo (obligatoire)</label>
+        <label htmlFor="user">Prénom ou pseudo (obligatoire)</label>
         <input
           type="text"
           id="user"

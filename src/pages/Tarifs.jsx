@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from '../styles/Pages.module.scss';
-import ReactMarkdown from 'react-markdown';
+// import ReactMarkdown from 'react-markdown';
 
 export async function getStaticProps() {
   const responsePage = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts/Tarifs`);
@@ -38,16 +38,16 @@ export default function pricing({ page }) {
       </Head>
       <section className={styles.page}>
         <h1>{page.title}</h1>
-              <ReactMarkdown>
+              {/* <ReactMarkdown> */}
               {page.contents}
-              </ReactMarkdown>
+              {/* </ReactMarkdown> */}
         {page.paragraphPosts.map((paragraphPosts) => (
           <>
 
             <h2>{paragraphPosts.subtitle}</h2>
-            <ReactMarkdown>
+            {/* <ReactMarkdown> */}
               {paragraphPosts.paragraph}
-            </ReactMarkdown>
+            {/* </ReactMarkdown> */}
           </>
         ))}
       </section>
