@@ -56,16 +56,14 @@ export default function Home({
   const articles = articlesSwr || articlesInit;
   const faq = faqSwr || faqInit;
 
-  const descriptionMeta = 'Taupier - piégeur expert professionnel agréé contre nuisible comme la taupe, fouine et ragondin en Eure (27), Yvelines (78) et Essonne (91) - Devis gratuit.';
-
   return (
     <>
       <Head>
         <title>{accueil.title}</title>
-        <meta name="description" content={descriptionMeta} />
+        <meta name="description" content={accueil.metaDescription} />
         <meta property="og:type" content="website" />
         <meta property="og:title" content={accueil.title} />
-        <meta property="og:description" content={descriptionMeta} />
+        <meta property="og:description" content={accueil.metaDescription} />
         <meta property="og:url" content={process.env.NEXT_PUBLIC_URL} />
         <meta property="og:site_name" content={process.env.NEXT_PUBLIC_URL} />
         <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/Accueil.jpg`} />
@@ -75,7 +73,7 @@ export default function Home({
           key="canonical"
         />
       </Head>
-      <LocalBusinessJsonLd descriptionMeta={descriptionMeta} />
+      <LocalBusinessJsonLd descriptionMeta={accueil.metaDescription} />
       <SearchJsonLd />
       <LogoJsonLd
         name="Une taupe chez vous"

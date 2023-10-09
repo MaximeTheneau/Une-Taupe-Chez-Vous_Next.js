@@ -32,8 +32,6 @@ export default function Recherche({ responsePage, responseArticles, responseDesc
   const articlesInit = dataArticles || responseArticles;
   const desc = dataDesc || responseDesc;
 
-  const descriptionMeta = page.contents.substring(0, 165).replace(/[\r\n]+/gm, '');
-
   useEffect(() => {
     setArticles(articlesInit);
     setSearchValue(router.query.q || 'taupe');
@@ -70,10 +68,10 @@ export default function Recherche({ responsePage, responseArticles, responseDesc
         <title>{page.title}</title>
         <meta name="robots" content="noindex,nofollow" />
         <meta name="googlebot" content="noindex,nofollow" />
-        <meta name="description" content={descriptionMeta} />
+        <meta name="description" content={page.metaDescription} />
         <meta property="og:type" content="website" />
         <meta property="og:title" content={page.title} />
-        <meta property="og:description" content={descriptionMeta} />
+        <meta property="og:description" content={page.metaDescription} />
         <meta property="og:site_name" content="Une Taupe Chez Vous" />
         <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/search`} />
         <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${page.imgPosts}.jpg`} />

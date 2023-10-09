@@ -148,6 +148,27 @@ export default function ContactForm() {
     const req = state.form;
     const apiPath = 'contact';
     FormMiddleware(req, apiPath, handleResponse200, handleResponseError);
+    setTimeout(
+      () => {
+        setState({
+          ...state,
+          form: {
+            name: '',
+            email: '',
+            message: '',
+            postalCode: '',
+            subject: 'Demande de devis',
+          },
+          modal: {
+            title: 'Merci !',
+            message: 'On vous répondra au plus vite',
+            toggleModal: true,
+          },
+        });
+        router.push('/');
+      },
+      3000,
+    );
   };
 
   return (

@@ -6,7 +6,7 @@ export default function ArticleJsonLd({ post, urlPost }) {
     '@type': 'Article',
     name: post.title,
     headline: post.title,
-    description: post.descriptionMeta,
+    description: post.metaDescription,
     datePublished: post.createdAt,
     ...(post.updatedAt && { dateModified: post.updatedAt }),
     url: urlPost,

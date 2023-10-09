@@ -11,6 +11,7 @@ import ArticleJsonLd from '../../components/jsonLd/ArticleJsonLd';
 import Comments from '../../components/comments/Comments';
 import AuthMiddleware from '../../middleware/AuthMiddleware';
 import Cards from '../../components/cards/cards';
+import Markdown from '../../components/markdown/Markdown';
 // import ReactMarkdown from 'react-markdown';
 // import remarkGfm from 'remark-gfm';
 
@@ -42,52 +43,16 @@ export default function Slug({ responsePosts, responseDesc }) {
   const post = postData || responsePosts;
   const desc = descData || responseDesc;
 
-  const descriptionMeta = post.contents && post.contents.substring(0, 155).replace(/[\r\n]+/gm, '');
-  function formatDate({ post }) {
-    const formatDate = (dateString) => {
-      const date = new Date(dateString);
-      const now = new Date();
-      const diffInMinutes = Math.floor((now - date) / (1000 * 60));
-  
-      if (diffInMinutes < 1) {
-        return "à l'instant";
-      } else {
-        return `${date.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })}`;
-      }
-    };
-    const formattedPubDate = formatDate(post.createdAt);
-    const formattedMajDate = formatDate(post.updatedAt);
-    
-    return (
-      <div className="m-b-1 date">
-        <span className="fig-content-metas__pub-date fig-content-metas__pub-date--hide-small">
-          Publié le 
-          {' '}
-          <time dateTime={post.createdAt}>{formattedPubDate}</time>.
-        </span>
-        {post.updatedAt && (
-        <>
-          {' '}
-          <span className="fig-content-metas__pub-maj-date">
-            Mis à jour le 
-            {' '}
-            <time dateTime={post.updatedAt}>{formattedMajDate}</time>.
-          </span>
-        </>
-        )}
-      </div>
-    );
-  }
   return (
     <>
       <Head>
         <title>{post.title}</title>
-        <meta name="description" content={descriptionMeta} />
+        <meta name="description" content={post.metaDescription} />
         {/* Open Graph */}
         <meta property="og:type" content="website" />
         <meta property="og:title" content={post.title} />
         <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`} />
-        <meta property="og:description" content={descriptionMeta} />
+        <meta property="og:description" content={post.metaDescription} />
         <meta property="og:site_name" content={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`} />
         <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.imgPost}.jpg`} />
         <link
@@ -101,7 +66,9 @@ export default function Slug({ responsePosts, responseDesc }) {
       <section className={styles.page}>
         <div className={styles.page__contents}>
         <h1>{post.title}</h1>
-          {formatDate({ post })}
+        <p className={styles.page__contents__date}>
+          {post.formattedDate}
+        </p>
           <div className={styles.page__image}>
           <figure>
             <Image
@@ -129,10 +96,9 @@ export default function Slug({ responsePosts, responseDesc }) {
             )}
           </figure>
         </div>          
-          {/* <ReactMarkdown remarkPlugins={[remarkGfm]}> */}
-            {post.contents}
-          {/* </ReactMarkdown>  */}
-
+          <p>
+            <em dangerouslySetInnerHTML={{ __html: post.contents }} />
+          </p>
           <table className={styles.page__table}>
             <tbody>
               {post.listPosts.map((listArticle) => listArticle.title !== null && (
@@ -147,9 +113,7 @@ export default function Slug({ responsePosts, responseDesc }) {
           {post.paragraphPosts.map((paragraphPosts) => (
             <>
               <h2 id={paragraphPosts.slug}>{paragraphPosts.subtitle}</h2>
-              {/* <ReactMarkdown> */}
-                {paragraphPosts.paragraph}
-                {/* </ReactMarkdown> */}
+              <div dangerouslySetInnerHTML={{ __html: paragraphPosts.paragraph }} />
               {paragraphPosts.linkSubtitle && (
                   <div className={styles.page__contents__paragraph__links}>
                     <span className={styles.page__contents__paragraph__links__link}>
