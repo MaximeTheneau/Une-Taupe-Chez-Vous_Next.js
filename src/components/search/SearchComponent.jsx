@@ -17,8 +17,6 @@ export default function SearchComponent({ responsePage, responseArticles, respon
   const articlesInit = dataArticles || responseArticles;
   const desc = dataDesc || responseDesc;
 
-  const descriptionMeta = page.contents.substring(0, 165).replace(/[\r\n]+/gm, '');
-
   useEffect(() => {
     setArticles(articlesInit);
     setSearchValue(router.query.q || 'taupe');

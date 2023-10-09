@@ -24,18 +24,16 @@ export default function Home({ responseArticles, responsePage }) {
   const page = pageSwr || responsePage;
   const articles = articlesSwr || responseArticles;
 
-  const descriptionMeta = page.contents.substring(0, 155).replace(/[\r\n]+/gm, '');
-
   return (
     <>
       <Head>
         <title>{page.title}</title>
-        <meta name="description" content={descriptionMeta} />
+        <meta name="description" content={page.metaDescription} />
         {/* Open Graph */}
         <meta property="og:type" content="website" />
         <meta property="og:title" content={page.title} />
         <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/${page.slug}`} />
-        <meta property="og:description" content={descriptionMeta} />
+        <meta property="og:description" content={page.metaDescription} />
         <meta property="og:site_name" content={`${process.env.NEXT_PUBLIC_URL}`} />
         <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${page.imgPost}.jpg`} />
         <link
