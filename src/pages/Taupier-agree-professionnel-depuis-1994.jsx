@@ -110,9 +110,8 @@ export default function TaupierPage({ responsePage }) {
                 quality={70}
               />
               )}
-              <p>{page.contents}</p>
               <h2>{paragraphPosts.subtitle}</h2>
-              <p>{paragraphPosts.paragraph}</p>
+              <div dangerouslySetInnerHTML={{ __html: paragraphPosts.paragraph }} />
             </div>
           ))}
          

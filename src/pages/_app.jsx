@@ -17,7 +17,6 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <meta name="google-site-verification" content="yObJd5noBtjUBky_GRbOOETV42Q9qAHf7w00PPz1-ss" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
-
       </Head>
       <Layout {...pageProps}>
         {/* {animateTransition && <div className="transition" aria-hidden="true" />} */}

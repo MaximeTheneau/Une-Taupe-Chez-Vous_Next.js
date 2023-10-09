@@ -38,16 +38,11 @@ export default function pricing({ page }) {
       </Head>
       <section className={styles.page}>
         <h1>{page.title}</h1>
-              {/* <ReactMarkdown> */}
-              {page.contents}
-              {/* </ReactMarkdown> */}
+        <div dangerouslySetInnerHTML={{ __html: page.contents }} />
         {page.paragraphPosts.map((paragraphPosts) => (
           <>
-
             <h2>{paragraphPosts.subtitle}</h2>
-            {/* <ReactMarkdown> */}
-              {paragraphPosts.paragraph}
-            {/* </ReactMarkdown> */}
+            <div dangerouslySetInnerHTML={{ __html: paragraphPosts.paragraph }} />
           </>
         ))}
       </section>

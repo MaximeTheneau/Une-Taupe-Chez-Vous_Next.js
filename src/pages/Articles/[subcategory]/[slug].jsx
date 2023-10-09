@@ -46,70 +46,15 @@ export default function Slug({ responsePost, responseDesc }) {
   const desc = descData || responseDesc;
 
   const urlPost = `${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.subcategory.slug}/${post.slug}`;
-
-  const descriptionMeta = post.contents === null
-    ? `Articles de blog ${post.title}`
-    : post.contents.substring(0, 165).replace(/[\r\n*_]+/gm, '');
-    
-  const handleChangeShareSocial = (e) => {
-    const social = e.target.value;
-    if (social === 'facebook') {
-      window.open(`https://www.facebook.com/sharer/sharer.php?u=${urlPost}`, '_blank');
-    } else if (social === 'twitter') {
-      window.open(`https://twitter.com/intent/tweet?url=${urlPost}`, '_blank');
-    } else if (social === 'linkedin') {
-      window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${urlPost}`, '_blank');
-    } else if (social === 'pinterest') {
-      window.open(`https://pinterest.com/pin/create/button/?url=${urlPost}`, '_blank');
-    } else if (social === 'email') {
-      window.open(`mailto:?subject=${post.title}&body=${urlPost}`, '_blank');
-    }
-  };
-
-  function formatDate({ post }) {
-    const formatDate = (dateString) => {
-      const date = new Date(dateString);
-      const now = new Date();
-      const diffInMinutes = Math.floor((now - date) / (1000 * 60));
-  
-      if (diffInMinutes < 1) {
-        return "à l'instant";
-      } else {
-        return `${date.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })}`;
-      }
-    };
-    const formattedPubDate = formatDate(post.createdAt);
-    const formattedMajDate = formatDate(post.updatedAt);
-    
-    return (
-      <div className="m-b-1 date">
-        <span className="fig-content-metas__pub-date fig-content-metas__pub-date--hide-small">
-          Publié le 
-          {' '}
-          <time dateTime={post.createdAt}>{formattedPubDate}</time>.
-        </span>
-        {post.updatedAt && (
-        <>
-          {' '}
-          <span className="fig-content-metas__pub-maj-date">
-            Mis à jour le 
-            {' '}
-            <time dateTime={post.updatedAt}>{formattedMajDate}</time>.
-          </span>
-        </>
-        )}
-      </div>
-    );
-  }
   return (
     <>
       <Head>
         <title>{post.title}</title>
-        <meta name="description" content={descriptionMeta} />
+        <meta name="description" content={post.metaDescription} />
         {/* Open Graph */}
         <meta property="og:type" content="website" />
         <meta property="og:title" content={post.title} />
-        <meta property="og:description" content={descriptionMeta} />
+        <meta property="og:description" content={post.metaDescription} />
         <meta property="og:site_name" content={urlPost} />
         <meta property="og:url" content={urlPost} />
         <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.imgPost}.jpg`} />
@@ -120,7 +65,7 @@ export default function Slug({ responsePost, responseDesc }) {
         <meta property="article:section" content={post.subcategory.name} />
         <meta property="twitter:card" content="summary" />
         <meta property="twitter:title" content={post.title} />
-        <meta property="twitter:description" content={descriptionMeta} />
+        <meta property="twitter:description" content={post.metaDescription} />
         <meta property="twitter:site" content="@UneTaupe_" />
         <meta property="twitter:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.imgPost}.jpg`} />
         <meta property="twitter:creator" content="@UneTaupe_" />
@@ -137,10 +82,12 @@ export default function Slug({ responsePost, responseDesc }) {
       <ArticleJsonLd post={post} urlPost={urlPost} />
       <BreadcrumbJsonLd paragraphPosts={post.paragraphPosts} urlPost={urlPost} />
       <section className={styles.page}>
+        <h1>{post.title}</h1>
         <Category category={false} subcategoryName={post.subcategory.name} subcategorySlug={post.subcategory.slug}  />
         <div className={styles.page__contents}>
-          <h1>{post.title}</h1>
-          {formatDate({ post })}
+          <p className={styles.page__contents__date}>
+            {post.formattedDate}
+          </p>
           <div className={styles.page__image}>
           <figure>
             <Image
@@ -168,9 +115,7 @@ export default function Slug({ responsePost, responseDesc }) {
             )}
           </figure>
         </div>          
-          {/* <ReactMarkdown remarkPlugins={[remarkGfm]}> */}
-            {post.contents}
-          {/* </ReactMarkdown> */}
+            <div dangerouslySetInnerHTML={{ __html: post.contents }} />
           <TableOfContents post={post} />
           {post.paragraphPosts.map((paragraphArticle) => (
             <div key={paragraphArticle.id}>
@@ -198,9 +143,7 @@ export default function Slug({ responsePost, responseDesc }) {
                   )}
                 </figure>
                 )}
-                {/* <ReactMarkdown remarkPlugins={[remarkGfm]}> */}
-                  {paragraphArticle.paragraph}
-                {/* </ReactMarkdown> */}
+              <div dangerouslySetInnerHTML={{ __html: paragraphArticle.paragraph }} />
                 {paragraphArticle.link && (
                   <div className={styles.page__contents__paragraph__links}>
                     <span className={styles.page__contents__paragraph__links__link}>
@@ -237,14 +180,6 @@ export default function Slug({ responsePost, responseDesc }) {
           </Link>
           )}
 
-          <select onChange={(e) => handleChangeShareSocial(e)} className="select">
-            <option value="---">Partager sur ...</option>
-            <option value="facebook" data-icon="icon-facebook">Facebook</option>
-            <option value="twitter">Twitter</option>
-            <option value="linkedin">Linkedin</option>
-            <option value="pinterest">Pinterest</option>
-            <option value="email">Email</option>
-          </select>
         </div>
           <h2>Derniers articles</h2>
           <Cards cards={desc} />

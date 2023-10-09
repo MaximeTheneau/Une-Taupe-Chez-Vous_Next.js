@@ -11,6 +11,7 @@ import ArticleJsonLd from '../../components/jsonLd/ArticleJsonLd';
 import Comments from '../../components/comments/Comments';
 import AuthMiddleware from '../../middleware/AuthMiddleware';
 import Cards from '../../components/cards/cards';
+import Markdown from '../../components/markdown/Markdown';
 // import ReactMarkdown from 'react-markdown';
 // import remarkGfm from 'remark-gfm';
 
@@ -129,10 +130,9 @@ export default function Slug({ responsePosts, responseDesc }) {
             )}
           </figure>
         </div>          
-          {/* <ReactMarkdown remarkPlugins={[remarkGfm]}> */}
-            {post.contents}
-          {/* </ReactMarkdown>  */}
-
+          <p>
+            <em dangerouslySetInnerHTML={{ __html: post.contents }} />
+          </p>
           <table className={styles.page__table}>
             <tbody>
               {post.listPosts.map((listArticle) => listArticle.title !== null && (
@@ -147,9 +147,7 @@ export default function Slug({ responsePosts, responseDesc }) {
           {post.paragraphPosts.map((paragraphPosts) => (
             <>
               <h2 id={paragraphPosts.slug}>{paragraphPosts.subtitle}</h2>
-              {/* <ReactMarkdown> */}
-                {paragraphPosts.paragraph}
-                {/* </ReactMarkdown> */}
+              <div dangerouslySetInnerHTML={{ __html: paragraphPosts.paragraph }} />
               {paragraphPosts.linkSubtitle && (
                   <div className={styles.page__contents__paragraph__links}>
                     <span className={styles.page__contents__paragraph__links__link}>
