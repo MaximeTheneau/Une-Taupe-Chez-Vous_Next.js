@@ -44,41 +44,7 @@ export default function Slug({ responsePosts, responseDesc }) {
   const desc = descData || responseDesc;
 
   const descriptionMeta = post.contents && post.contents.substring(0, 155).replace(/[\r\n]+/gm, '');
-  function formatDate({ post }) {
-    const formatDate = (dateString) => {
-      const date = new Date(dateString);
-      const now = new Date();
-      const diffInMinutes = Math.floor((now - date) / (1000 * 60));
-  
-      if (diffInMinutes < 1) {
-        return "à l'instant";
-      } else {
-        return `${date.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })}`;
-      }
-    };
-    const formattedPubDate = formatDate(post.createdAt);
-    const formattedMajDate = formatDate(post.updatedAt);
-    
-    return (
-      <div className="m-b-1 date">
-        <span className="fig-content-metas__pub-date fig-content-metas__pub-date--hide-small">
-          Publié le 
-          {' '}
-          <time dateTime={post.createdAt}>{formattedPubDate}</time>.
-        </span>
-        {post.updatedAt && (
-        <>
-          {' '}
-          <span className="fig-content-metas__pub-maj-date">
-            Mis à jour le 
-            {' '}
-            <time dateTime={post.updatedAt}>{formattedMajDate}</time>.
-          </span>
-        </>
-        )}
-      </div>
-    );
-  }
+
   return (
     <>
       <Head>
@@ -102,7 +68,9 @@ export default function Slug({ responsePosts, responseDesc }) {
       <section className={styles.page}>
         <div className={styles.page__contents}>
         <h1>{post.title}</h1>
-          {formatDate({ post })}
+        <p className={styles.page__contents__date}>
+          {post.formattedDate}
+        </p>
           <div className={styles.page__image}>
           <figure>
             <Image
