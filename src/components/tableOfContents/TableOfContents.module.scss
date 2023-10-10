@@ -14,8 +14,8 @@
         padding: 0 0 1rem 3rem;
         list-style: disc;
     }
-    &__item{
-        margin: 0.5rem 0 0 1rem;
+    &__item {
+        margin: 1rem 0 0 1rem !important;
         cursor: pointer;
         font-size: $font-size-medium;
         & a:hover{

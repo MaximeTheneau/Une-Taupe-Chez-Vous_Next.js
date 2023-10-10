@@ -96,9 +96,7 @@ export default function Slug({ responsePosts, responseDesc }) {
             )}
           </figure>
         </div>          
-          <p>
-            <em dangerouslySetInnerHTML={{ __html: post.contents }} />
-          </p>
+          <div dangerouslySetInnerHTML={{ __html: post.contents }} />
           <table className={styles.page__table}>
             <tbody>
               {post.listPosts.map((listArticle) => listArticle.title !== null && (

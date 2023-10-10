@@ -9,14 +9,13 @@
     flex-direction: column;
     &__paragraph{
       width: 100%;
+      display: flex;
+      flex-wrap: wrap;
       margin: 1rem auto;
       &__figure{
-        width: 50%;
-        float: left;
-        margin: 0 1rem 1rem 0;
-        & img{
-          width: 100% !important;
-        }
+      }
+      &__text{
+        width: 100%;
       }
       &__links{
         background: $color-link-opacity;
@@ -25,6 +24,7 @@
         color: $color-link;
         font-weight: bold;
         display: inline-block;
+        width: 100%;
         & a{
           color: $font-color;
           &:hover{
@@ -37,11 +37,7 @@
         width: 100%;
       }
     }
-    & img { 
-      width: 50%;
-      float: left;
-      margin: 0 1rem 1rem 0;
-    }
+
     & h1, h2, h4, h5, h6{
       padding: 1rem 0;
     }
@@ -65,29 +61,8 @@
   & a{
     font-weight: bold;
   }
-  & table{
-    width: 100%;
-    margin: 1rem auto;
-    border-collapse: collapse;
-    & td:first-child { 
-      font-weight: bold;
-    }
-    & th { 
-      font-weight: bold; 
-    }
-    & td, th { 
-      padding: 6px; 
-      border: 1px solid #ccc; 
-      text-align: left; 
-    }
 
 
-  }
-  & img{
-    max-width: 1080px;
-    max-height: 608px;
-    
-  }
 }
 .home{
   & h2{
@@ -233,9 +208,7 @@
 
 @media screen and (max-width: 768px){
   .page{
-    &__image{
-    margin: 0 auto;
-    }
+
     &__contact{
       display: flex;
       flex-direction: column;
@@ -253,29 +226,7 @@
         }
       }
     }
-    & table{
-      display: block;
-      & thead, tbody, th, td, tr { 
-        display: block; 
-        word-wrap: break-word;   
 
-      }
-      & thead tr { 
-        position: absolute;
-        top: -9999px;
-        left: -9999px;
-      }
-      & tr { border: 1px solid #ccc; }
-      & td { 
-        /* Behave  like a "row" */
-        border: none;
-        border-bottom: 1px solid #eee; 
-        position: relative;
-      }
-
-
-
-    }
   }
   
   .home{

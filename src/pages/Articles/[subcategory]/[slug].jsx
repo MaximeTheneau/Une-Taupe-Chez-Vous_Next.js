@@ -81,14 +81,12 @@ export default function Slug({ responsePost, responseDesc }) {
       {/* Schema.org */}
       <ArticleJsonLd post={post} urlPost={urlPost} />
       <BreadcrumbJsonLd paragraphPosts={post.paragraphPosts} urlPost={urlPost} />
-      <section className={styles.page}>
+      <section >
         <h1>{post.title}</h1>
         <Category category={false} subcategoryName={post.subcategory.name} subcategorySlug={post.subcategory.slug}  />
-        <div className={styles.page__contents}>
           <p className={styles.page__contents__date}>
             {post.formattedDate}
           </p>
-          <div className={styles.page__image}>
           <figure>
             <Image
               src={`${post.imgPost}.webp`}
@@ -97,16 +95,12 @@ export default function Slug({ responsePost, responseDesc }) {
               quality={90}
               width={1080}
               height={608}
-              sizes="(max-width: 640px) 100vw,
-                (max-width: 750px) 100vw,
-                (max-width: 828px) 100vw,
-                (max-width: 1080px) 100vw,
-                100vw"
+              sizes="(max-width: 640px) 100vw, (max-width: 750px) 750px, (max-width: 828px) 828px, 1080px"
               style={{
-                width: 'auto',
+                width: '100%',
                 height: 'auto',
               }}
-              priority={true}
+              priority
             />
             {post.title !== post.altImg  && (
               <figcaption className='caption'>
@@ -114,7 +108,6 @@ export default function Slug({ responsePost, responseDesc }) {
               </figcaption>
             )}
           </figure>
-        </div>          
             <div dangerouslySetInnerHTML={{ __html: post.contents }} />
           <TableOfContents post={post} />
           {post.paragraphPosts.map((paragraphArticle) => (
@@ -135,6 +128,10 @@ export default function Slug({ responsePost, responseDesc }) {
                     width="1080"
                     height="720"
                     sizes="(max-width: 640px) 100vw, (max-width: 750px) 750px, (max-width: 828px) 828px, 1080px"
+                    style={{
+                      width: '100%',
+                      height: 'auto',
+                    }}
                   />
                   {paragraphArticle.subtitle !== paragraphArticle.altImgParagh && (
                   <figcaption className='caption'>
@@ -143,7 +140,7 @@ export default function Slug({ responsePost, responseDesc }) {
                   )}
                 </figure>
                 )}
-              <div dangerouslySetInnerHTML={{ __html: paragraphArticle.paragraph }} />
+              <div className={styles.page__contents__paragraph__text} dangerouslySetInnerHTML={{ __html: paragraphArticle.paragraph }} />
                 {paragraphArticle.link && (
                   <div className={styles.page__contents__paragraph__links}>
                     <span className={styles.page__contents__paragraph__links__link}>
@@ -180,7 +177,6 @@ export default function Slug({ responsePost, responseDesc }) {
           </Link>
           )}
 
-        </div>
           <h2>Derniers articles</h2>
           <Cards cards={desc} />
           <Comments posts={post} />

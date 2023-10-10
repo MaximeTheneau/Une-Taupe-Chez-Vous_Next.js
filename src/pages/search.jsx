@@ -7,7 +7,7 @@ import Cards from '../components/cards/cards';
 import styles from '../components/search/Search.module.scss';
 
 export async function getStaticProps() {
-  const responsePage = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Page-de-recherche`);
+  const responsePage = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/search`);
   const responseArticles = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/all`);
   const responseDesc = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&filter=desc&category=articles`);
 

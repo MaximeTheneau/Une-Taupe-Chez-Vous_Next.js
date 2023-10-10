@@ -91,6 +91,10 @@ export default function Home({
             width={1080}
             height={720}
             sizes="(max-width: 640px) 100vw, (max-width: 750px) 750px, (max-width: 828px) 828px, 1080px"
+            style={{
+              width: '100%',
+              height: 'auto',
+            }}
             className={styles.home__imagesFull__image}
             priority
           />
