@@ -6,6 +6,7 @@
     "sitemap": "node scripts/sitemap.script.js",
     "export": "next export",
     "start": "next start -H localhost -p 3000",
+    "startpm2": "next start -H unetaupechezvous.fr -p 3000",
     "lint": "next lint",
     "dev": "next dev",
     "analyze": "ANALYZE=true next build",
