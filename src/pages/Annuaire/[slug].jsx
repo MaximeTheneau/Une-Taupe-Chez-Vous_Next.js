@@ -64,12 +64,12 @@ export default function Slug({ postInit }) {
     <>
       <Head>
         <title>{post.title}</title>
-        <meta name="description" content={page.metaDescription} />
+        <meta name="description" content={post.metaDescription} />
         {/* Open Graph */}
         <meta property="og:type" content="website" />
         <meta property="og:title" content={post.title} />
         <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`} />
-        <meta property="og:description" content={page.metaDescription} />
+        <meta property="og:description" content={post.metaDescription} />
         <meta property="og:site_name" content={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`} />
         <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.imgPost}.jpg`} />
         <link
@@ -90,11 +90,6 @@ export default function Slug({ postInit }) {
             quality={90}
             width={1080}
             height={608}
-            sizes="(max-width: 640px) 100vw,
-            (max-width: 750px) 100vw,
-            (max-width: 828px) 100vw,
-            (max-width: 1080px) 100vw,
-            100vw"
             style={{
               width: '100%',
               height: 'auto',

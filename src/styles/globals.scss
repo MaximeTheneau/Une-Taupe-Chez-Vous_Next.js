@@ -162,6 +162,27 @@ select{
   color: $font-color-light;
   font-size: $font-size-small;
   margin-bottom: 1rem;
+  width: 100%;
+  display: inline-block;
+}
+
+table{
+  width: 100%;
+  margin: 1rem auto;
+  border-collapse: collapse;
+  & td:first-child { 
+    font-weight: bold;
+  }
+  & th { 
+    font-weight: bold; 
+  }
+  & td, th { 
+    padding: 6px; 
+    border: 1px solid #ccc; 
+    text-align: left; 
+  }
+
+
 }
 ol {
   padding-left: 20px; 
