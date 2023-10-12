@@ -154,6 +154,7 @@ export default function Slug({ postInit }) {
             <>
               <h2 key={paragraphs} id={paragraphs.slug}>{paragraphs.subtitle}</h2>
               <p>{paragraphs.paragraph}</p>
+              <div dangerouslySetInnerHTML={{ __html: paragraphs.paragraph }} />
             </>
           ))}
 
@@ -163,25 +164,10 @@ export default function Slug({ postInit }) {
             votre entreprise. Vous pouvez apparaître dans les résultats de recherche lorsque
             les clients potentiels cherchent des services dans votre domaine. Et devinez quoi
             ? Vous pouvez le faire sans débourser un centime !
-          </p>
-          <p>
-            Alors, comment ça marche ? Vous pouvez vous inscrire sur des plateformes en ligne
-            qui offrent des profils professionnels gratuits. Remplissez votre profil avec soin,
-            en utilisant des mots clés pertinents pour votre domaine. Parlez de votre localisation,
-            de vos services, et site web.
-          </p>
-          <p>
-            Alors, n&apos;attendez plus ! Profitez de cette opportunité pour vous référencer
-            gratuitement en tant que professionnel. C&apos;est comme si vous attrapiez le
-            Saint-Graal des clients potentiels sans dépenser un centime. Que vous soyez un
-            piégeur agréé ou un expert dans la luttes contre les nuisibles, le référencement gratuit
-            est votre allié pour briller en ligne.
-            Allez-y, faites de votre présence en ligne un succès retentissant !
-
-          </p>
-          <Link href="/Annuaire/Inscription-annuaire-gratuite" className="stronk">
+            <Link href="/Annuaire/Inscription-annuaire-gratuite" className="stronk">
             Inscrivez vôtre entreprise gratuitement
           </Link>
+          </p>
         </section>
         <Comments posts={post} />
 
