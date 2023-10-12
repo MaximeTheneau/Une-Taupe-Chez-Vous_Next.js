@@ -153,7 +153,6 @@ export default function Slug({ postInit }) {
           {post.paragraphPosts.map((paragraphs) => (
             <>
               <h2 key={paragraphs} id={paragraphs.slug}>{paragraphs.subtitle}</h2>
-              <p>{paragraphs.paragraph}</p>
               <div dangerouslySetInnerHTML={{ __html: paragraphs.paragraph }} />
             </>
           ))}
