@@ -2,17 +2,20 @@
   "name": "une_taupe_chez_vous__nextjs",
   "version": "2.1.0",
   "scripts": {
-    "build": "next build && node scripts/sitemap.script.js",
+    "build": "next build && next export",
     "sitemap": "node scripts/sitemap.script.js",
     "export": "next export",
-    "startpm2": "pm2 start npm --name 'next' -- start -- -p 3000",
+    "start": "next start",
+    "startpm2": "pm2 start npm --name 'next' -- start -- -p 3000 -- -H localhost.fr",
     "lint": "next lint",
     "dev": "next dev",
     "analyze": "ANALYZE=true next build",
     "clean:all": "rm -rf public node_modules yarn.lock package-lock.json"
   },
   "dependencies": {
+    "@builder.io/partytown": "^0.8.1",
     "@next/font": "^13.3.0",
+    "child_process": "^1.0.2",
     "express": "^4.18.2",
     "fs": "^0.0.1-security",
     "fs-extra": "^11.1.1",

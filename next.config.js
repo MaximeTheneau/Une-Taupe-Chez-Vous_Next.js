@@ -6,10 +6,14 @@ const path = require('path');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  sassOptions: {
-    includePaths: [path.join(__dirname, 'styles')],
+  experimental: {
+    nextScriptWorkers: true,
   },
+  reactStrictMode: true,
   swcMinify: true,
+  // compiler: {
+  //   removeConsole: true,
+  // },
   images: {
     loader: 'custom',
     loaderFile: './src/utils/imageLoaderFull.jsx',

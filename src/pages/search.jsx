@@ -24,7 +24,7 @@ export default function Recherche({ responsePage, responseArticles, responseDesc
   const router = useRouter();
   const [searchValue, setSearchValue] = useState('');
   const [articles, setArticles] = useState(['']);
-  const { data: dataPage } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/Page-de-recherche`, fetcher);
+  const { data: dataPage } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/search`, fetcher);
   const { data: dataArticles } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/all`, fetcher);
   const { data: dataDesc } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&filter=desc&category=articles`, fetcher);
 

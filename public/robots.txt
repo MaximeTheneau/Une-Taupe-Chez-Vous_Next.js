@@ -6,6 +6,8 @@
     disallow: /Articles/[subcategory]
     disallow: /Articles/[subcategory]/[slug]
     disallow: /Annuaire/[slug]
+    disallow: /api/*
+
 
     disallow: /search?*
 

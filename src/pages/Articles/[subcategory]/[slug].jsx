@@ -92,15 +92,21 @@ export default function Slug({ responsePost, responseDesc }) {
               src={`${post.imgPost}.webp`}
               alt={post.altImg || post.title}
               loader={imageLoaderFull}
-              quality={90}
+              quality={75}
               width={1080}
-              height={608}
+              height={100}
               sizes="(max-width: 640px) 100vw, (max-width: 750px) 750px, (max-width: 828px) 828px, 1080px"
               style={{
                 width: '100%',
                 height: 'auto',
               }}
               priority
+              onLoad={(event) => {
+                const image = event.target; // L'élément Image
+                const width = image.width;
+                const height = image.height;
+                console.log(`Largeur : ${width}, Hauteur : ${height}`);
+              }}
             />
             {post.title !== post.altImg  && (
               <figcaption className='caption'>
@@ -124,10 +130,9 @@ export default function Slug({ responsePost, responseDesc }) {
                   <Image
                     src={`${paragraphArticle.imgPostParagh}.webp`}
                     alt={paragraphArticle.subtitle}
-                    quality={100}
-                    width="1080"
-                    height="720"
-                    sizes="(max-width: 640px) 100vw, (max-width: 750px) 750px, (max-width: 828px) 828px, 1080px"
+                    quality={75}
+                    width={1080}
+                    height={1080}
                     style={{
                       width: '100%',
                       height: 'auto',

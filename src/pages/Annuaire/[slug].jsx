@@ -29,6 +29,7 @@ export default function Slug({ postInit }) {
   const { data: postData } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/${postInit.slug}`, fetcher);
 
   const post = postData || postInit;
+  const urlPost = `${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`;
 
   function extractInfo(description) {
     const info = {
@@ -68,10 +69,24 @@ export default function Slug({ postInit }) {
         {/* Open Graph */}
         <meta property="og:type" content="website" />
         <meta property="og:title" content={post.title} />
-        <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`} />
         <meta property="og:description" content={post.metaDescription} />
-        <meta property="og:site_name" content={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`} />
+        <meta property="og:site_name" content={urlPost} />
+        <meta property="og:url" content={urlPost} />
         <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.imgPost}.jpg`} />
+        <meta property="og:image:width" content="1024" />
+        <meta property="og:image:height" content="720" />
+        <meta property="article:published_time" content={post.createdAt} />
+        <meta property="article:modified_time" content={post.updatedAt} />
+        <meta property="article:section" content={post.category.name} />
+        <meta property="twitter:card" content="summary" />
+        <meta property="twitter:title" content={post.title} />
+        <meta property="twitter:description" content={post.metaDescription} />
+        <meta property="twitter:site" content="@UneTaupe_" />
+        <meta property="twitter:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.imgPost}.jpg`} />
+        <meta property="twitter:creator" content="@UneTaupe_" />
+        <meta property="twitter:image:alt" content={post.altImg || post.title} />
+        <meta property="twitter:domain" content={urlPost} />
+        <meta pr property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.imgPost}.jpg`} />
         <link
           rel="canonical"
           href={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`}
@@ -81,25 +96,39 @@ export default function Slug({ postInit }) {
       {/* Schema.org */}
       <ArticleJsonLd post={post} urlPost={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`} />
       <BreadcrumbJsonLd paragraphPosts={post.paragraphPosts} urlPost={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`} />
-      <section className={styles.page}>
-        <div className={styles.page__image}>
-          <Image
-            src={`${post.slug}.webp`}
-            alt={post.altImg || post.title}
-            loader={imageLoaderFull}
-            quality={90}
-            width={1080}
-            height={608}
-            style={{
-              width: '100%',
-              height: 'auto',
-            }}
-            priority
-          />
-        </div>
-          <h1>{post.title}</h1>
-          <p>{post.contents}</p>
-
+      <section>
+      <h1>{post.title}</h1>
+          <p className={styles.page__contents__date}>
+            {post.formattedDate}
+          </p>
+          <figure>
+            <Image
+              src={`${post.imgPost}.webp`}
+              alt={post.altImg || post.title}
+              loader={imageLoaderFull}
+              quality={75}
+              width={1080}
+              height={100}
+              sizes="(max-width: 640px) 100vw, (max-width: 750px) 750px, (max-width: 828px) 828px, 1080px"
+              style={{
+                width: '100%',
+                height: 'auto',
+              }}
+              priority
+              onLoad={(event) => {
+                const image = event.target; // L'élément Image
+                const width = image.width;
+                const height = image.height;
+                console.log(`Largeur : ${width}, Hauteur : ${height}`);
+              }}
+            />
+            {post.title !== post.altImg  && (
+              <figcaption className='caption'>
+                {post.altImg}
+              </figcaption>
+            )}
+          </figure>
+          <div dangerouslySetInnerHTML={{ __html: post.contents }} />
           <table className={styles.page__table}>
             <thead>
               <tr>

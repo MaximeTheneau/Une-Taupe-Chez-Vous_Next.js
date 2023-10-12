@@ -9,12 +9,8 @@ import fetcher from '../../utils/fetcher';
 import BreadcrumbJsonLd from '../../components/jsonLd/BreadcrumbJsonLd';
 import ArticleJsonLd from '../../components/jsonLd/ArticleJsonLd';
 import Comments from '../../components/comments/Comments';
-import AuthMiddleware from '../../middleware/AuthMiddleware';
 import Cards from '../../components/cards/cards';
-import Markdown from '../../components/markdown/Markdown';
-// import ReactMarkdown from 'react-markdown';
-// import remarkGfm from 'remark-gfm';
-
+import { useState } from 'react';
 
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Interventions`);
@@ -42,6 +38,8 @@ export default function Slug({ responsePosts, responseDesc }) {
 
   const post = postData || responsePosts;
   const desc = descData || responseDesc;
+
+  const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0 });
 
   return (
     <>
@@ -75,9 +73,9 @@ export default function Slug({ responsePosts, responseDesc }) {
               src={`${post.imgPost}.webp`}
               alt={post.altImg || post.title}
               loader={imageLoaderFull}
-              quality={90}
+              quality={75}
               width={1080}
-              height={608}
+              height={810}
               sizes="(max-width: 640px) 100vw,
                 (max-width: 750px) 100vw,
                 (max-width: 828px) 100vw,
@@ -87,7 +85,8 @@ export default function Slug({ responsePosts, responseDesc }) {
                 width: '100%',
                 height: 'auto',
               }}
-              priority
+              priority={true}
+              
             />
             {post.title !== post.altImg  && (
               <figcaption className='caption'>

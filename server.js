@@ -29,3 +29,15 @@ app
     console.error(ex.stack);
     process.exit(1);
   });
+
+
+app.get('/api/build-export-endpoint', async (req, res) => {
+  try {
+    const { exec } = require('child_process');
+    exec('npm run build');
+    res.status(200).json({ message: 'Yep' });  
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Failed to trigger build and export.' });
+  }
+});
