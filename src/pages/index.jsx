@@ -18,7 +18,7 @@ export async function getStaticProps() {
   const articlesInit = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&category=Articles`);
   const faqInit = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Foire-aux-questions`);
   const testimonialsInit = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Temoignages`);
-  const keywordInit = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=keyword&limit=3&id=8 `);
+  const keywordInit = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=keyword&limit=3&id=17 `);
 
 
   return {
