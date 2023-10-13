@@ -108,25 +108,37 @@
     
 
   }
-  &__faq{
-    width: 50%;
-    margin: 0 auto;
-  }
+
   &__list{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     padding: 1rem;
     margin: 0 0 1rem 0;
-    background: $color-primary;
     &__item{
-      list-style: disc;
-      width: 100%;
-      margin: 1rem 0 1rem 3rem;
+      border: $border;
+      width: 30%;
       color: $color-white;
-        & a:hover{
-          color: $font-color;
-      }
+      padding: 1rem;
+        & span{
+          font-weight: bold ;
+          padding: 1rem 0;
+        }
+        & a{
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+          align-items: center;
+          align-content: center;
+          justify-content: space-around;
+          text-align: center;
+          &:hover{
+            color: $color-primary;
+            & img{
+              transform: translateX(1rem) rotate(-10deg) scale(1.1);
+            }
+        }
+        }
       
       &__image{
         width: 100%;

@@ -10,6 +10,7 @@ import fetcher from '../utils/fetcher';
 import LocalBusinessJsonLd from '../components/jsonLd/LocalBusinessJsonLd';
 import SearchJsonLd from '../components/jsonLd/SearchJsonLd';
 import LogoJsonLd from '../components/jsonLd/LogoJsonLd';
+import Icon from '../components/svg/Icon';
 
 export async function getStaticProps() {
   const accueilInit = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Accueil`);
@@ -17,6 +18,8 @@ export async function getStaticProps() {
   const articlesInit = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&category=Articles`);
   const faqInit = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Foire-aux-questions`);
   const testimonialsInit = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Temoignages`);
+  const keywordInit = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=keyword&limit=3&id=8 `);
+
 
   return {
     props: {
@@ -25,12 +28,13 @@ export async function getStaticProps() {
       articlesInit,
       faqInit,
       testimonialsInit,
+      keywordInit,
     },
   };
 }
 
 export default function Home({
-  accueilInit, servicesInit, articlesInit, faqInit, testimonialsInit,
+  accueilInit, servicesInit, articlesInit, faqInit, testimonialsInit, keywordInit
 }) {
   const { data: accueilSwr } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/Accueil`, fetcher);
   const { data: servicesSwr } = useSWR(
@@ -49,6 +53,12 @@ export default function Home({
     `${process.env.NEXT_PUBLIC_API_URL}posts/Temoignages`,
     fetcher,
   );
+  const { data: keywordSwr } = useSWR(
+    `${process.env.NEXT_PUBLIC_API_URL}posts&filter=keyword&limit=3&id=17 `,
+    fetcher,
+  );
+
+  const keyword = keywordSwr || keywordInit;
 
   const testimonials = testimonialsSwr || testimonialsInit;
   const accueil = accueilSwr || accueilInit;
@@ -118,13 +128,22 @@ export default function Home({
 
         </div>
         <Cards cards={services} />
-        <div className={styles.home__list}>
           <h2>Taupier au Service de la Nature</h2>
-          <ul>
+          <ul className={styles.home__list}>
             {articles.map((article) => (
               <li key={article.title} className={styles.home__list__item}>
                 <Link href={`/${article.category.slug}/${article.subcategory.slug}/${article.slug}`}>
-                  {article.title}
+                  <Image
+                    src={`/svg/${article.slug}.svg`}
+                    unoptimized={true}
+                    alt="icone"
+                    width={100}
+                    height={100}
+                    className={styles.home__list__item__icon}
+                  />
+                 <span>
+                    {article.title}
+                 </span>
                 </Link>
               </li>
             ))}
@@ -137,13 +156,14 @@ export default function Home({
               <p>{paragraphPosts.paragraph}</p>
             </div>
           ))}
-        </div>
         <div className={styles.home__faq}>
           <Link href={faq.slug}>
             <h2>{faq.title}</h2>
           </Link>
           <Faq faq={faq} />
         </div>
+        <h3>Retrouver nos derniers articles :</h3>
+        <Cards cards={keyword} />
         <div className={styles.home__testimonials}>
           <h2>
             <Link href={testimonials.slug}>
@@ -175,7 +195,6 @@ export default function Home({
             Découvrez les avis de nos clients
           </Link>
         </div>
-        <div className={styles.home__contact}>
           {accueil.listPosts.map((listArticle) => (
             listArticle.title !== null && (
               <div key={listArticle.title}>
@@ -194,7 +213,7 @@ export default function Home({
               Contactez-nous
             </Link>
           </button>
-        </div>
+
       </section>
     </>
   );

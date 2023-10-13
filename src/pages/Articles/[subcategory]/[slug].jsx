@@ -40,7 +40,7 @@ export async function getStaticProps({ params }) {
 
 export default function Slug({ responsePost, responseDesc }) {
   const { data: postData } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/${responsePost.slug}`);
-  const { data: descData } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&filter=desc&category=articles`);
+  const { data: descData } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=keyword&limit=3&id=${responsePost.id}`);
 
   const post = postData || responsePost;
   const desc = descData || responseDesc;
@@ -175,7 +175,6 @@ export default function Slug({ responsePost, responseDesc }) {
               )
             ))}
           </ol>
-
           {post.links && (
           <Link href={post.links}>
             {post.textLinks}

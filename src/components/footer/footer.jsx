@@ -64,6 +64,11 @@ export default function Footer() {
               Plan du site
             </Link>
           </li>
+          <li>
+            <Link href="/Articles">
+              Blog
+            </Link>
+          </li>
         </ul>
         <ul>
           <li>

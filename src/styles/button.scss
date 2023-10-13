@@ -21,7 +21,7 @@ button{
   cursor: pointer;
   font-weight: bold;
   border-radius: 0.2rem;
-  padding: 0.5rem;
+  padding: 1rem 1.5rem;
   & i{
     margin: 0 0.5rem 0 0;
     margin-left: 1rem;
@@ -29,6 +29,9 @@ button{
   }
 
   &:hover{
+    & a{
+      color: $font-color;
+    }
       & i{
           transform: translateX(1rem) rotate(-10deg) scale(1.2);
       }
