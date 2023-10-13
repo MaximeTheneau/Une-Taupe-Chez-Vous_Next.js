@@ -2,7 +2,7 @@
   "name": "une_taupe_chez_vous__nextjs",
   "version": "2.1.0",
   "scripts": {
-    "build": "next build && next export",
+    "build": "next build && next export && pm2 restart next",
     "sitemap": "node scripts/sitemap.script.js",
     "export": "next export",
     "start": "next start",
