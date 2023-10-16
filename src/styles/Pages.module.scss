@@ -132,6 +132,7 @@
           align-content: center;
           justify-content: space-around;
           text-align: center;
+
           &:hover{
             color: $color-primary;
             & img{
@@ -242,6 +243,12 @@
   }
   
   .home{
+    &__list{
+      &__item{
+        width: 100%;
+        margin: 1rem 0;
+      }
+    }
     &__imagesFull{
       &__image{
         object-position: 0 var(--topImg);
