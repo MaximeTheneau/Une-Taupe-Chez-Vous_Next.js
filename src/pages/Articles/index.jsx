@@ -12,12 +12,14 @@ import CategoryPage from '../../components/category/CategoryPage';
 export async function getStaticProps() {
   const responsePage = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Articles`);
   const responseArticles = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Articles`);
+  const responseSubcategory = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=subcategory`);
   
 
   return {
     props: {
       responseArticles,
       responsePage,
+      responseSubcategory,
     },
   };
 }
@@ -25,10 +27,11 @@ export async function getStaticProps() {
 export default function Home({ responsePage, responseArticles, responseSubcategory }) {
   const { data: pageData } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/Articles`, fetcher);
   const { data: articlesData } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Articles`, fetcher);
+  const { data: subcategoryData } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=subcategory`, fetcher);
 
   const page = pageData || responsePage;
   const articles = articlesData || responseArticles;
-
+  const subcategoryList = subcategoryData || responseSubcategory;
   return (
     <>
       <Head>
@@ -49,7 +52,7 @@ export default function Home({ responsePage, responseArticles, responseSubcatego
       </Head>
       <section>
         <h1>{page.title}</h1>
-        <CategoryPage category/>
+        <CategoryPage category subcategoryList={subcategoryList}/>
         {/* --Articles--*/}
         <h2>Les derniers articles :</h2>
 
