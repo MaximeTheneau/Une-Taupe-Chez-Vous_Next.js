@@ -42,7 +42,6 @@ export default function TaupierPage({ responsePage }) {
           key="canonical"
         />
       </Head>
-
       <section>
         <figure>
             <Image
