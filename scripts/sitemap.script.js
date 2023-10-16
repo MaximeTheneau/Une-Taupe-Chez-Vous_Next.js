@@ -90,6 +90,13 @@ const generateSitemap = async () => {
     page.priority = 0.6;
   });
 
+  const addPages = [
+    { slug: 'Articles/Nuisbles', priority: 1.0 },
+    { slug: 'Articles/Jardin-et-Maison', priority: 1.0 },
+    { slug: 'Articles/Piege', priority: 1.0 },
+  ];
+
+
   // Generate sitemap with pages
   const allPages = [
     ...pagesWithPriority,
@@ -97,6 +104,7 @@ const generateSitemap = async () => {
     ...responseAnuaire,
     ...responseInterventions,
     ...responseArticles,
+    ...addPages,
   ];
 
   generateXml(allPages, urlFront);
