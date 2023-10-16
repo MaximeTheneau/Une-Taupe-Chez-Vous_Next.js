@@ -12,7 +12,7 @@ export async function getStaticPaths() {
 
   const paths = posts.map((post) => ({
     params: {
-      subcategory: post.subcategory ? post.subcategory.slug : '',
+      subcategory: post.subcategory.slug,
     },
   }));
 
@@ -43,11 +43,9 @@ export default function Home({ responseArticles, responsePage, responseSubcatego
   const { data: pageData } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/Sous-categories`, fetcher);
   const { data: subcategoryData } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=subcategory`, fetcher);
 
-
   const articles = articlesData || responseArticles;
   const page = pageData || responsePage;
   const subcategoryList = subcategoryData || responseSubcategory;
-
   return (
     <>
       <Head>
@@ -69,7 +67,8 @@ export default function Home({ responseArticles, responsePage, responseSubcatego
       <>
         <section>
           <h1>{subcategory.name}</h1>
-          <CategoryPage category={false} subcategoryList={subcategoryList} subcategoryName={subcategory} />
+          <p>{page.contents}</p>
+          <CategoryPage category={false} subcategoryPost={subcategory.name} subcategoryList={subcategoryList}/>
         </section>
         <section>
           {/* --Articles--*/}

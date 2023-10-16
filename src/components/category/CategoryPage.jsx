@@ -4,7 +4,10 @@ import useSWR from 'swr';
 import fetcher from '../../utils/fetcher';
 
 
-export default function CategoryPage({ category, subcategoryList, subcategoryName }) {
+
+
+export default function CategoryPage({ category, subcategoryPost, subcategoryList }) {
+  console.log(subcategoryList);
   return (
     <nav>
       <ul className={styles.category}>
@@ -14,11 +17,11 @@ export default function CategoryPage({ category, subcategoryList, subcategoryNam
           </Link>
         </li>
 
-        {subcategoryList.map((category) => (
+        { subcategoryList?.map((category) => (
                 <li key={category.id}>
                   <Link
                     href={`/Articles/${category.slug}`}
-                    className={`button ${subcategoryName && category.name === subcategoryName.name  && 'button--disabled'}`}>
+                    className={`button ${category.name === subcategoryPost  && 'button--disabled'}`}>
                     {category.name}
                   </Link>
                 </li>
