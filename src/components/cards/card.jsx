@@ -16,7 +16,12 @@ export default function Card({ card }) {
     } if (articlesLink.category && articlesLink.slug === 'Inscription-annuaire-gratuite') {
       pathCard = `Annuaire/${articlesLink.slug}`;
     } if (articlesLink.category && articlesLink.category.name === 'Articles') {
-      pathCard = `${articlesLink.category.name}/${articlesLink.subcategory.slug}/${articlesLink.slug}`;
+      if ( articlesLink.subcategory === null){
+        pathCard = `${articlesLink.category.name}/${articlesLink.slug}`;
+        }
+      else{
+        pathCard = `${articlesLink.category.name}/${articlesLink.subcategory.slug}/${articlesLink.slug}`;
+      }
     } if (articlesLink.category && articlesLink.category.name === 'Interventions') {
       pathCard = `${articlesLink.category.name}/${articlesLink.slug}`;
     }
@@ -45,6 +50,5 @@ export default function Card({ card }) {
         <h3 className={styles.card__content}>{card.title}</h3>
       </Link>
     </li>
-  // </SlideTransition>
   );
 }

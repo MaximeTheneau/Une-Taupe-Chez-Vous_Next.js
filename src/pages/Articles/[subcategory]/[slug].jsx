@@ -21,7 +21,7 @@ export async function getStaticPaths() {
 
   const paths = posts.map((post) => ({
     params: {
-      subcategory: post.subcategory.slug,
+      subcategory: post.subcategory ? post.subcategory.slug : '',
       slug: post.slug,
     },
   }));

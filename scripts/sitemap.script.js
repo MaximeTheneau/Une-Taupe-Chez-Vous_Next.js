@@ -29,6 +29,7 @@ const generateSitemap = async () => {
 
   // Fetch data from API
   const responsePages = await fetchJson(`${urlApi}posts&category=Pages`);
+  const responseAll = await fetchJson(`${urlApi}posts/all`);
   const responseAnuaire = await fetchJson(`${urlApi}posts&category=Annuaire`);
   const responseInterventions = await fetchJson(`${urlApi}posts&category=Interventions`);
   const responseArticles = await fetchJson(`${urlApi}posts&category=Articles`);
@@ -68,8 +69,15 @@ const generateSitemap = async () => {
   });
 
   responseArticles.forEach((page) => {
-    page.slug = `Articles/${page.subcategory.slug}/${page.slug}`;
-    page.priority = 0.6;
+    if ( page.subcategory === null){
+      page.slug = `Articles/${page.slug}`;
+      page.priority = 0.6;
+      }
+    else{
+      page.slug = `Articles/${page.subcategory.slug}/${page.slug}`;
+      page.priority = 0.6;
+    }
+
   });
 
   responseInterventions.forEach((page) => {
