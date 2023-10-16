@@ -18,7 +18,7 @@ export default function CategoryPage({ category, subcategoryList, subcategoryNam
                 <li key={category.id}>
                   <Link
                     href={`/Articles/${category.slug}`}
-                    className={`button ${category.name === subcategoryName?.name  && 'button--disabled'}`}>
+                    className={`button ${subcategoryName && category.name === subcategoryName.name  && 'button--disabled'}`}>
                     {category.name}
                   </Link>
                 </li>
