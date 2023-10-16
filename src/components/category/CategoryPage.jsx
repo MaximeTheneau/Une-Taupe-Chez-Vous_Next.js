@@ -7,7 +7,6 @@ import fetcher from '../../utils/fetcher';
 
 
 export default function CategoryPage({ category, subcategoryPost, subcategoryList }) {
-  console.log(subcategoryList);
   return (
     <nav>
       <ul className={styles.category}>

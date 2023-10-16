@@ -67,7 +67,6 @@ export default function Home({ responseArticles, responsePage, responseSubcatego
       <>
         <section>
           <h1>{subcategory.name}</h1>
-          <p>{page.contents}</p>
           <CategoryPage category={false} subcategoryPost={subcategory.name} subcategoryList={subcategoryList}/>
         </section>
         <section>
