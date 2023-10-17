@@ -166,6 +166,9 @@ select{
   display: inline-block;
 }
 
+.stronk{
+  font-weight: bold;
+}
 table{
   width: 100%;
   margin: 1rem auto;
@@ -272,7 +275,7 @@ strong{
   font-weight: bold;
 }
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: 900px){
  
   table{
     & thead{

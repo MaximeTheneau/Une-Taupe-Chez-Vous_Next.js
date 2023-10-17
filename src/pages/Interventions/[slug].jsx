@@ -97,13 +97,18 @@ export default function Slug({ responsePosts, responseDesc }) {
         </div>          
           <div dangerouslySetInnerHTML={{ __html: post.contents }} />
           <table className={styles.page__table}>
+            <thead>
+              <tr>
+              {post.listPosts.map((listArticle) => listArticle.title !== null && 
+                listArticle.title && <th>{listArticle.title}</th>
+              )}
+                </tr>
+              
+            </thead>
             <tbody>
-              {post.listPosts.map((listArticle) => listArticle.title !== null && (
-              <tr key={listArticle.id}>
-                {listArticle.title && <th>{listArticle.title}</th>}
-                {listArticle.description && <td>{listArticle.description}</td>}
-              </tr>
-              ))}
+              <tr >
+              {post.listPosts.map((listArticle) => listArticle.title !== null && listArticle.description && <td>{listArticle.description}</td>)}
+                </tr>
             </tbody>
           </table>
           <TableOfContents post={post} />
