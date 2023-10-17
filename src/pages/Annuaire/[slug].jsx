@@ -148,6 +148,17 @@ export default function Slug({ postInit }) {
             <>
               <h2 key={paragraphs} id={paragraphs.slug}>{paragraphs.subtitle}</h2>
               <div dangerouslySetInnerHTML={{ __html: paragraphs.paragraph }} />
+              {paragraphs.linkSubtitle && (
+                  <div className={styles.page__contents__paragraph__links}>
+                    <span className={styles.page__contents__paragraph__links__link}>
+                      → A lire aussi : 
+                      <a href={paragraphs.link}>
+                        {' '}
+                        {paragraphs.linkSubtitle}
+                      </a>
+                    </span>
+                    </div>
+                )}
             </>
           ))}
 
