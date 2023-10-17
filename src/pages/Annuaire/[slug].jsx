@@ -115,12 +115,6 @@ export default function Slug({ postInit }) {
                 height: 'auto',
               }}
               priority
-              onLoad={(event) => {
-                const image = event.target; // L'élément Image
-                const width = image.width;
-                const height = image.height;
-                console.log(`Largeur : ${width}, Hauteur : ${height}`);
-              }}
             />
             {post.title !== post.altImg  && (
               <figcaption className='caption'>
@@ -139,7 +133,7 @@ export default function Slug({ postInit }) {
               </tr>
             </thead>
             <tbody>
-              {postsLinks.map((item) => (
+              {postsLinks.map((item) => item.description.localisation && (
                 <tr key={item.id}>
                   <td aria-label="Entreprise">{item.title}</td>
                   <td aria-label="Localisation" dangerouslySetInnerHTML={{ __html: item.description.localisation }} />
