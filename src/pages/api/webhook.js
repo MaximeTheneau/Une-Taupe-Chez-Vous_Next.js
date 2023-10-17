@@ -38,6 +38,15 @@ export default async function handler(req, res) {
     if (code === 0) {
       console.log('Git pull successful :).');
       res.status(200).send('Git pull successful :).');
+      const { exec } = require('child_process');
+      exec('npm run build', (error, stdout, stderr) => {
+        if (error) {
+          console.error(`Error running npm run build: ${error}`);
+          return;
+        }
+        console.log(`npm run build output: ${stdout}`);
+      });
+      
 
     } else {
       console.error(`Git pull failed with code ${code}`);
