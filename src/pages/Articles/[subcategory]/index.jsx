@@ -46,17 +46,36 @@ export default function Home({ responseArticles, responsePage, responseSubcatego
   const articles = articlesData || responseArticles;
   const page = pageData || responsePage;
   const subcategoryList = subcategoryData || responseSubcategory;
+
+  console.log(page)
+  const urlPost = `${process.env.NEXT_PUBLIC_URL}/${page.category.slug}/${subcategory.slug}`;
+
   return (
     <>
       <Head>
-        <title>{page.title}</title>
-        <meta name="description" content={page.metaDescription} />
+        <title>{subcategory.name}</title>
+        <meta name="description" content={`${subcategory.name} : ${page.metaDescription}`} />
         {/* Open Graph */}
         <meta property="og:type" content="website" />
-        <meta property="og:title" content={page.title} />
-        <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/Articles/${subcategory.slug}`} />
-        <meta property="og:description" content={page.metaDescription} />
-        <meta property="og:site_name" content={`${process.env.NEXT_PUBLIC_URL}`} />
+        <meta property="og:title" content={subcategory.name} />
+        <meta property="og:description" content={`${subcategory.name} : ${page.metaDescription}`} />
+        <meta property="og:site_name" content={urlPost} />
+        <meta property="og:url" content={urlPost} />
+        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${page.imgPost}.jpg`} />
+        <meta property="og:image:width" content="1024" />
+        <meta property="og:image:height" content="720" />
+        <meta property="article:published_time" content={page.createdAt} />
+        <meta property="article:modified_time" content={page.updatedAt} />
+        <meta property="article:section" content={subcategory.name} />
+        <meta property="twitter:card" content="summary" />
+        <meta property="twitter:title" content={subcategory.name} />
+        <meta property="twitter:description" content={page.metaDescription} />
+        <meta property="twitter:site" content="@UneTaupe_" />
+        <meta property="twitter:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${page.imgPost}.jpg`} />
+        <meta property="twitter:creator" content="@UneTaupe_" />
+        <meta property="twitter:image:alt" content={page.altImg || page.title} />
+        <meta property="twitter:domain" content={urlPost} />
+        <meta property="twitter:url" content={urlPost} />
         <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/Accueil.jpg`} />
         <link
           rel="canonical"
