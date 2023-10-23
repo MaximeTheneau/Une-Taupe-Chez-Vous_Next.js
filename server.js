@@ -41,3 +41,10 @@ app.get('/api/build-export-endpoint', async (req, res) => {
     res.status(500).json({ message: 'Failed to trigger build and export.' });
   }
 });
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'https://unetaupechezvous.fr');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
