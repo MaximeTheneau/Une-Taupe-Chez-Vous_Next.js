@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 const path = require('path');
 // const withBundleAnalyzer = require('@next/bundle-analyzer')({
 //   enabled: process.env.ANALYZE === 'true',
@@ -6,9 +7,6 @@ const path = require('path');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    nextScriptWorkers: true,
-  },
   reactStrictMode: true,
   swcMinify: true,
   // compiler: {
