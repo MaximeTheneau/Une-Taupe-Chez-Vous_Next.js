@@ -7,6 +7,9 @@ export default function middleware(req, apiPath, handleResponse200, handleRespon
   };
   fetch(`${process.env.NEXT_PUBLIC_API_URL}${apiPath}`, requestOptions)
     .then((response) => {
-console.log('response', response);
+      if (response.ok) {
+        return handleResponse200();
+      }
+      throw new Error('Une erreur est survenue');
     });
 }
