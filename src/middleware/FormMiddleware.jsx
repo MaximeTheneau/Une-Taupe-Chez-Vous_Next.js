@@ -1,7 +1,7 @@
 export default function middleware(req, apiPath, handleResponse200, handleResponseError) {
   const requestOptions = {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'https://unetaupechezvous.fr' },
+    headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'https://back.unetaupechezvous.fr' },
     credentials: 'include',
     body: JSON.stringify(req),
   };
