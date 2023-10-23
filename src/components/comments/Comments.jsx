@@ -1,9 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useState } from 'react';
-import { Cookies } from 'next/dist/server/web/spec-extension/cookies';
-import Middleware from '../../middleware/Middleware';
 import styles from './Comments.module.scss';
-import AuthMiddleware from '../../middleware/AuthMiddleware';
 import LoaderSvg from '../svg/LoaderSvg';
 
 export default function Comments({ posts }) {
@@ -23,7 +20,6 @@ export default function Comments({ posts }) {
       posts: posts.id,
     },
   });
-
 
   const handleBlur = (e) => {
     if (!e.target.value) return;
@@ -57,13 +53,11 @@ export default function Comments({ posts }) {
           });
         }
       });
-
   };
 
   const isFormValid = state.form.email
     && state.form.user
     && state.form.comment;
-  
 
   function formattedDate(isoDate) {
     const date = new Date(isoDate);
@@ -73,7 +67,6 @@ export default function Comments({ posts }) {
     return date.toLocaleDateString('fr-FR', options);
   }
 
-  
   const emojis = ['😀', '😯', '🙁', '🕳️', '🦡', '🌱', '🍂', '🪱', '🏡', '🚫', '💪'];
 
   const handleEmojiClick = (emoji) => {
@@ -126,9 +119,8 @@ export default function Comments({ posts }) {
           },
         });
       }
-    })
-  }
-
+    });
+  };
 
   return (
     <section className={styles.comments}>
@@ -195,14 +187,14 @@ export default function Comments({ posts }) {
           onBlur={(e) => handleBlur(e)}
         />
         {state.responses.messageComment && (
-        <p className='error'>
+        <p className="error">
           {state.responses.messageComment}
         </p>
         )}
         <label htmlFor="comment">Commentaire (obligatoire)</label>
         <div>
-           {emojis.map((emoji, index) => (
-            <button type='button' key={index} onClick={() => handleEmojiClick(emoji)}>
+          {emojis.map((emoji) => (
+            <button type="button" key={1} onClick={() => handleEmojiClick(emoji)}>
               {emoji}
             </button>
           ))}
@@ -221,12 +213,13 @@ export default function Comments({ posts }) {
           })}
         />
         {state.responses.isLoading ? (
-          <p>Envoie en     cours...
+          <p>
+            Envoie en     cours...
             {' '}
             <LoaderSvg />
           </p>
         ) : (
-          <p className='error'>
+          <p className="error">
             {state.responses.message && (
               state.responses.message
             )}

@@ -75,7 +75,11 @@ export default function Home({ articles, page, subcategoryList }) {
       <>
         <section>
           <h1>{subcategory.name}</h1>
-          <CategoryPage category={false} subcategoryPost={subcategory.name} subcategoryList={subcategoryList}/>
+          <CategoryPage
+            category={false}
+            subcategoryPost={subcategory.name}
+            subcategoryList={subcategoryList}
+          />
         </section>
         <section>
           {/* --Articles--*/}

@@ -7,9 +7,7 @@ function Step1({
   const [error, setError] = useState(false);
 
   const handleInputChange = (e) => {
-    
     const { name, value } = e.target;
-    console.log(name, value);
     if (value.length < 120) {
       setError(false);
     } else {
@@ -58,7 +56,7 @@ function Step1({
           />
         </label>
         <div className="contact-form_button">
-          <button  type="submit" >
+          <button type="submit">
             Suivant
           </button>
         </div>

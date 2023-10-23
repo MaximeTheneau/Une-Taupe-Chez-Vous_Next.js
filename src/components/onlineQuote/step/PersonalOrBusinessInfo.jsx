@@ -5,9 +5,17 @@ export default function PersonalOrBusinessInfo({
 }) {
   return (
     <>
-      <h2>Informations {userType === 'individual' ? 'Personnelles' : 'd\'Entreprise'}</h2>
+      <h2>
+        Informations
+        {' '}
+        {userType === 'individual' ? 'Personnelles' : 'd\'Entreprise'}
+      </h2>
       <div className="form-group">
-        <label>Nom {userType === 'individual' ? 'Complet' : 'de l\'Entreprise'}</label>
+        <label htmlFor="name">
+          Nom
+          {' '}
+          {userType === 'individual' ? 'Complet' : 'de l\'Entreprise'}
+        </label>
         <input
           type="text"
           name="name"
@@ -17,17 +25,23 @@ export default function PersonalOrBusinessInfo({
       </div>
       {userType !== 'individual' && (
         <div className="form-group">
-          <label>Numéro de SIRET</label>
-          <input
-            type="text"
-            name="siret"
-            value={formData.siret}
-            onChange={onChange}
-          />
+          <label htmlFor="siret">
+            Numéro de SIRET
+            <input
+              type="text"
+              name="siret"
+              value={formData.siret}
+              onChange={onChange}
+            />
+          </label>
         </div>
-        )}
+      )}
       <div className="form-group">
-        <label>Adresse {userType === 'individual' ? 'Personnelle' : 'de l\'Entreprise'}</label>
+        <label htmlFor="adress">
+          Adresse
+          {' '}
+          {userType === 'individual' ? 'Personnelle' : 'de l\'Entreprise'}
+        </label>
         <input
           type="text"
           name="address"
@@ -35,42 +49,50 @@ export default function PersonalOrBusinessInfo({
           onChange={onChange}
         />
       </div>
-        <div className="form-group">
-            <label>Code Postal</label>
-            <input
+      <div className="form-group">
+        <label htmlFor="zipCode">
+          Code Postal
+          <input
             type="text"
             name="zipCode"
             value={formData.zipCode}
             onChange={onChange}
-            />
-        </div>
-        <div className="form-group">
-            <label>Ville</label>
-            <input
+          />
+        </label>
+      </div>
+      <div className="form-group">
+        <label htmlFor="city">
+          Ville
+          <input
             type="text"
             name="city"
             value={formData.city}
             onChange={onChange}
-            />
-        </div>
-        <div className="form-group">
-            <label>Téléphone</label>
-            <input
+          />
+        </label>
+      </div>
+      <div className="form-group">
+        <label htmlFor="phone">
+          Téléphone
+          <input
             type="tel"
             name="phone"
             value={formData.phone}
             onChange={onChange}
-            />
-        </div>
-        <div className="form-group">
-            <label>Email</label>
-            <input
+          />
+        </label>
+      </div>
+      <div className="form-group">
+        <label htmlFor="email">
+          Email
+          <input
             type="email"
             name="email"
             value={formData.email}
             onChange={onChange}
-            />
-        </div>
+          />
+        </label>
+      </div>
     </>
   );
 }

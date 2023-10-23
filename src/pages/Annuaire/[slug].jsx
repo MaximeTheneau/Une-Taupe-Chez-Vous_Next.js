@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -82,7 +81,7 @@ export default function Slug({ post }) {
         <meta property="twitter:creator" content="@UneTaupe_" />
         <meta property="twitter:image:alt" content={post.altImg || post.title} />
         <meta property="twitter:domain" content={urlPost} />
-        <meta pr property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.imgPost}.jpg`} />
+        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.imgPost}.jpg`} />
         <link
           rel="canonical"
           href={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`}
@@ -93,108 +92,84 @@ export default function Slug({ post }) {
       <ArticleJsonLd post={post} urlPost={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`} />
       <BreadcrumbJsonLd paragraphPosts={post.paragraphPosts} urlPost={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`} />
       <section>
-      <h1>{post.title}</h1>
-          <p className={styles.page__contents__date}>
-            {post.formattedDate}
-          </p>
-          <figure>
-            <Image
-              src={`${post.imgPost}.webp`}
-              alt={post.altImg || post.title}
-              loader={imageLoaderFull}
-              quality={75}
-              width={1080}
-              height={100}
-              sizes="(max-width: 640px) 100vw, (max-width: 750px) 750px, (max-width: 828px) 828px, 1080px"
-              style={{
-                width: '100%',
-                height: 'auto',
-              }}
-              priority
-            />
-            {post.title !== post.altImg  && (
-              <figcaption className='caption'>
-                {post.altImg}
-              </figcaption>
+        <h1>{post.title}</h1>
+        <p className={styles.page__contents__date}>
+          {post.formattedDate}
+        </p>
+        <figure>
+          <Image
+            src={`${post.imgPost}.webp`}
+            alt={post.altImg || post.title}
+            loader={imageLoaderFull}
+            quality={75}
+            width={1080}
+            height={100}
+            sizes="(max-width: 640px) 100vw, (max-width: 750px) 750px, (max-width: 828px) 828px, 1080px"
+            style={{
+              width: '100%',
+              height: 'auto',
+            }}
+            priority
+          />
+          {post.title !== post.altImg && (
+          <figcaption className="caption">
+            {post.altImg}
+          </figcaption>
+          )}
+        </figure>
+        <div dangerouslySetInnerHTML={{ __html: post.contents }} />
+        <table className={styles.page__table}>
+          <thead>
+            <tr>
+              <th scope="col">Entreprise</th>
+              <th scope="col">Localisation</th>
+              <th scope="col">Services</th>
+              <th scope="col">Contact</th>
+            </tr>
+          </thead>
+          <tbody>
+            {postsLinks.map((item) => item.description.localisation && (
+            <tr key={item.id}>
+              <td aria-label="Entreprise">{item.title}</td>
+              <td aria-label="Localisation" dangerouslySetInnerHTML={{ __html: item.description.localisation }} />
+              <td aria-label="Services" dangerouslySetInnerHTML={{ __html: item.description.services }} />
+              <td aria-label="Site web" dangerouslySetInnerHTML={{ __html: item.description.siteWeb }} />
+            </tr>
+            ))}
+          </tbody>
+        </table>
+        <TableOfContents post={post} />
+        {post.paragraphPosts.map((paragraphs) => (
+          <>
+            <h2 key={paragraphs} id={paragraphs.slug}>{paragraphs.subtitle}</h2>
+            <div dangerouslySetInnerHTML={{ __html: paragraphs.paragraph }} />
+            {paragraphs.linkSubtitle && (
+              <div className={styles.page__contents__paragraph__links}>
+                <span className={styles.page__contents__paragraph__links__link}>
+                  → A lire aussi :
+                  <a href={paragraphs.link}>
+                    {' '}
+                    {paragraphs.linkSubtitle}
+                  </a>
+                </span>
+              </div>
             )}
-          </figure>
-          <div dangerouslySetInnerHTML={{ __html: post.contents }} />
-          <table className={styles.page__table}>
-            <thead>
-              <tr>
-                <th scope="col">Entreprise</th>
-                <th scope="col">Localisation</th>
-                <th scope="col">Services</th>
-                <th scope="col">Contact</th>
-              </tr>
-            </thead>
-            <tbody>
-              {postsLinks.map((item) => item.description.localisation && (
-                <tr key={item.id}>
-                  <td aria-label="Entreprise">{item.title}</td>
-                  <td aria-label="Localisation" dangerouslySetInnerHTML={{ __html: item.description.localisation }} />
-                  <td aria-label="Services" dangerouslySetInnerHTML={{ __html: item.description.services }} />
-                  <td aria-label="Site web" dangerouslySetInnerHTML={{ __html: item.description.siteWeb }} />
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <TableOfContents post={post} />
-          {post.paragraphPosts.map((paragraphs) => (
-            <>
-              <h2 key={paragraphs} id={paragraphs.slug}>{paragraphs.subtitle}</h2>
-              <div dangerouslySetInnerHTML={{ __html: paragraphs.paragraph }} />
-              {paragraphs.linkSubtitle && (
-                  <div className={styles.page__contents__paragraph__links}>
-                    <span className={styles.page__contents__paragraph__links__link}>
-                      → A lire aussi : 
-                      <a href={paragraphs.link}>
-                        {' '}
-                        {paragraphs.linkSubtitle}
-                      </a>
-                    </span>
-                    </div>
-                )}
-            </>
-          ))}
+          </>
+        ))}
 
-          <h3>Référencez-vous gratuitement en tant que professionnel </h3>
-          <p>
-            Le référencement gratuit, c&apos;est comme une publicité gratuite en continu pour
-            votre entreprise. Vous pouvez apparaître dans les résultats de recherche lorsque
-            les clients potentiels cherchent des services dans votre domaine. Et devinez quoi
-            ? Vous pouvez le faire sans débourser un centime ! 
-          </p>
-            <Link href="/Annuaire/Inscription-annuaire-gratuite" className="stronk">
-            Inscrivez vôtre entreprise gratuitement
-          </Link>
-        </section>
-        <Comments posts={post} />
+        <h3>Référencez-vous gratuitement en tant que professionnel </h3>
+        <p>
+          Le référencement gratuit, c&apos;est comme une publicité gratuite en continu pour
+          votre entreprise. Vous pouvez apparaître dans les résultats de recherche lorsque
+          les clients potentiels cherchent des services dans votre domaine. Et devinez quoi
+          ? Vous pouvez le faire sans débourser un centime !
+        </p>
+        <Link href="/Annuaire/Inscription-annuaire-gratuite" className="stronk">
+          Inscrivez vôtre entreprise gratuitement
+        </Link>
+      </section>
+      <Comments posts={post} />
 
     </>
   );
 }
-
-Slug.propTypes = {
-  post: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    subtitle: PropTypes.string.isRequired,
-    contents: PropTypes.string.isRequired,
-    contents2: PropTypes.string.isRequired,
-    slug: PropTypes.string.isRequired,
-    updatedAt: PropTypes.string.isRequired,
-    createdAt: PropTypes.string.isRequired,
-    imgPost: PropTypes.shape({
-      path: PropTypes.string.isRequired,
-    }),
-    imgPost2: PropTypes.shape({
-      path: PropTypes.string,
-    }),
-    imgPost3: PropTypes.shape({
-      path: PropTypes.string,
-    }),
-    imgPost4: PropTypes.shape({
-      path: PropTypes.string,
-    }),
-  }).isRequired,
-};
