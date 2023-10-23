@@ -1,8 +1,5 @@
 import Head from 'next/head';
-import Link from 'next/link';
-import Image from 'next/image';
 import styles from '../styles/Pages.module.scss';
-// import ReactMarkdown from 'react-markdown';
 
 export async function getStaticProps() {
   const responsePage = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts/Tarifs`);
@@ -16,7 +13,6 @@ export async function getStaticProps() {
 }
 // == Composant
 export default function pricing({ page }) {
-
   return (
     <>
       <Head>

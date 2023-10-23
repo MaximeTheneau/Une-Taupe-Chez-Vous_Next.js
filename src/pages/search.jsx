@@ -1,36 +1,28 @@
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
-import useSWR from 'swr';
 import Router, { useRouter } from 'next/router';
 import fetcher from '../utils/fetcher';
 import Cards from '../components/cards/cards';
-import styles from '../components/search/Search.module.scss';
+import styles from '../styles/Pages.module.scss';
 
 export async function getStaticProps() {
-  const responsePage = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/search`);
-  const responseArticles = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/all`);
-  const responseDesc = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&filter=desc&category=articles`);
+  const page = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/search`);
+  const articlesInit = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/all`);
+  const desc = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&filter=desc&category=articles`);
 
   return {
     props: {
-      responsePage,
-      responseArticles,
-      responseDesc,
+      page,
+      articlesInit,
+      desc,
     },
   };
 }
 
-export default function Recherche({ responsePage, responseArticles, responseDesc }) {
+export default function Recherche({ page, articlesInit, desc }) {
   const router = useRouter();
   const [searchValue, setSearchValue] = useState('');
   const [articles, setArticles] = useState(['']);
-  const { data: dataPage } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/search`, fetcher);
-  const { data: dataArticles } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/all`, fetcher);
-  const { data: dataDesc } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&filter=desc&category=articles`, fetcher);
-
-  const page = dataPage || responsePage;
-  const articlesInit = dataArticles || responseArticles;
-  const desc = dataDesc || responseDesc;
 
   useEffect(() => {
     setArticles(articlesInit);
@@ -55,7 +47,6 @@ export default function Recherche({ responsePage, responseArticles, responseDesc
     });
     setArticles(filteredArticles);
   };
-
 
   const handleSubmit = (event) => {
     event.preventDefault();

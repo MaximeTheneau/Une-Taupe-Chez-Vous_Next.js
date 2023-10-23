@@ -1,6 +1,5 @@
 /* eslint-disable quote-props */
 import Head from 'next/head';
-import useSWR from 'swr';
 import Cards from '../../../components/cards/cards';
 import styles from '../../../styles/Pages.module.scss';
 import fetcher from '../../../utils/fetcher';
@@ -22,34 +21,24 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const { subcategory } = params;
 
-  const responseArticles = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&subcategory=${subcategory}`);
-  const responsePage = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Sous-categories`);
-  const responseSubcategory = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=subcategory`);
+  const articles = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&subcategory=${subcategory}`);
+  const page = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Sous-categories`);
+  const subcategoryList = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=subcategory`);
 
   return {
     props: {
-      responseArticles,
-      responsePage,
-      responseSubcategory,
+      articles,
+      page,
+      subcategoryList,
     },
     revalidate: 10,
   };
 }
 
-export default function Home({ responseArticles, responsePage, responseSubcategory }) {
-  const { subcategory } = responseArticles[0];
+export default function Home({ articles, page, subcategoryList }) {
+  const { subcategory } = articles[0];
 
-  const { data: articlesData } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts&subcategory=${subcategory.slug}`, fetcher);
-  const { data: pageData } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/Sous-categories`, fetcher);
-  const { data: subcategoryData } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=subcategory`, fetcher);
-
-  const articles = articlesData || responseArticles;
-  const page = pageData || responsePage;
-  const subcategoryList = subcategoryData || responseSubcategory;
-
-  console.log(page)
   const urlPost = `${process.env.NEXT_PUBLIC_URL}/${page.category.slug}/${subcategory.slug}`;
-
   return (
     <>
       <Head>

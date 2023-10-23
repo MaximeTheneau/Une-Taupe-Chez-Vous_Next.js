@@ -1,29 +1,21 @@
 /* eslint-disable quote-props */
 import Head from 'next/head';
-import useSWR from 'swr';
 import Cards from '../../components/cards/cards';
 import styles from '../../styles/Pages.module.scss';
 import fetcher from '../../utils/fetcher';
 
 export async function getStaticProps() {
-  const responseArticles = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`);
-  const responsePage = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Annuaire`);
-
+  const articles = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`);
+  const page = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Annuaire`);
   return {
     props: {
-      responseArticles,
-      responsePage,
+      articles,
+      page,
     },
   };
 }
 
-export default function Home({ responseArticles, responsePage }) {
-  const { data: articlesSwr } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`, fetcher);
-  const { data: pageSwr } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/Annuaire`, fetcher);
-
-  const page = pageSwr || responsePage;
-  const articles = articlesSwr || responseArticles;
-
+export default function Home({ page, articles }) {
   return (
     <>
       <Head>

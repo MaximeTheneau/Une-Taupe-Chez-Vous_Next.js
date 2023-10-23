@@ -1,37 +1,27 @@
 /* eslint-disable quote-props */
 import Head from 'next/head';
 import Link from 'next/link';
-import useSWR from 'swr';
 import Cards from '../../components/cards/cards';
 import styles from '../../styles/Pages.module.scss';
-import stylesNav from '../../components/category/Category.module.scss';
 import AnimationHover from '../../hooks/useHoverAnimation/CloneTextWrapper';
 import fetcher from '../../utils/fetcher';
 import CategoryPage from '../../components/category/CategoryPage';
 
 export async function getStaticProps() {
-  const responsePage = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Articles`);
-  const responseArticles = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Articles`);
-  const responseSubcategory = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=subcategory`);
-  
+  const page = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Articles`);
+  const articles = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Articles`);
+  const subcategoryList = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=subcategory`);
 
   return {
     props: {
-      responseArticles,
-      responsePage,
-      responseSubcategory,
+      articles,
+      page,
+      subcategoryList,
     },
   };
 }
 
-export default function Home({ responsePage, responseArticles, responseSubcategory }) {
-  const { data: pageData } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/Articles`, fetcher);
-  const { data: articlesData } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Articles`, fetcher);
-  const { data: subcategoryData } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=subcategory`, fetcher);
-
-  const page = pageData || responsePage;
-  const articles = articlesData || responseArticles;
-  const subcategoryList = subcategoryData || responseSubcategory;
+export default function Home({ page, articles, subcategoryList }) {
   return (
     <>
       <Head>
@@ -52,7 +42,7 @@ export default function Home({ responsePage, responseArticles, responseSubcatego
       </Head>
       <section>
         <h1>{page.title}</h1>
-        <CategoryPage category subcategoryList={subcategoryList}/>
+        <CategoryPage category subcategoryList={subcategoryList} />
         {/* --Articles--*/}
         <h2>Les derniers articles :</h2>
 

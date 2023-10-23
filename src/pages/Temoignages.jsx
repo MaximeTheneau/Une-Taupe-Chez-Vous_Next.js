@@ -14,7 +14,6 @@ export async function getStaticProps() {
 }
 // == Composant
 export default function testimonials({ page }) {
-
   return (
     <>
       <Head>

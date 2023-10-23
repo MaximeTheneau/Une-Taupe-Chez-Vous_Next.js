@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
-import useSWR from 'swr';
 import Cards from '../components/cards/cards';
 import Faq from '../components/faq/faq';
 import styles from '../styles/Pages.module.scss';
@@ -10,62 +9,30 @@ import fetcher from '../utils/fetcher';
 import LocalBusinessJsonLd from '../components/jsonLd/LocalBusinessJsonLd';
 import SearchJsonLd from '../components/jsonLd/SearchJsonLd';
 import LogoJsonLd from '../components/jsonLd/LogoJsonLd';
-import Icon from '../components/svg/Icon';
 
 export async function getStaticProps() {
-  const accueilInit = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Accueil`);
-  const servicesInit = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&category=Interventions`);
-  const articlesInit = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&category=Articles`);
-  const faqInit = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Foire-aux-questions`);
-  const testimonialsInit = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Temoignages`);
-  const keywordInit = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=keyword&limit=3&id=17 `);
-
+  const accueil = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Accueil`);
+  const services = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&category=Interventions`);
+  const articles = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&category=Articles`);
+  const faq = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Foire-aux-questions`);
+  const testimonials = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Temoignages`);
+  const keyword = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=keyword&limit=3&id=17 `);
 
   return {
     props: {
-      accueilInit,
-      servicesInit,
-      articlesInit,
-      faqInit,
-      testimonialsInit,
-      keywordInit,
+      accueil,
+      services,
+      articles,
+      faq,
+      testimonials,
+      keyword,
     },
   };
 }
 
 export default function Home({
-  accueilInit, servicesInit, articlesInit, faqInit, testimonialsInit, keywordInit
+  accueil, services, articles, faq, testimonials, keyword,
 }) {
-  const { data: accueilSwr } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/Accueil`, fetcher);
-  const { data: servicesSwr } = useSWR(
-    `${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&category=Interventions`,
-    fetcher,
-  );
-  const { data: articlesSwr } = useSWR(
-    `${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&category=Articles`,
-    fetcher,
-  );
-  const { data: faqSwr } = useSWR(
-    `${process.env.NEXT_PUBLIC_API_URL}posts/Foire-aux-questions`,
-    fetcher,
-  );
-  const { data: testimonialsSwr } = useSWR(
-    `${process.env.NEXT_PUBLIC_API_URL}posts/Temoignages`,
-    fetcher,
-  );
-  const { data: keywordSwr } = useSWR(
-    `${process.env.NEXT_PUBLIC_API_URL}posts&filter=keyword&limit=3&id=17 `,
-    fetcher,
-  );
-
-  const keyword = keywordSwr || keywordInit;
-
-  const testimonials = testimonialsSwr || testimonialsInit;
-  const accueil = accueilSwr || accueilInit;
-  const services = servicesSwr || servicesInit;
-  const articles = articlesSwr || articlesInit;
-  const faq = faqSwr || faqInit;
-
   return (
     <>
       <Head>
@@ -110,7 +77,7 @@ export default function Home({
           />
           <div className={styles.home__imagesFull__text}>
             <h1>{accueil.title}</h1>
-            <h2>{accueil.contents}</h2>
+            <div dangerouslySetInnerHTML={{ __html: accueil.contents }} />
           </div>
         </div>
 
@@ -128,34 +95,35 @@ export default function Home({
 
         </div>
         <Cards cards={services} />
-          <h2>Taupier au Service de la Nature</h2>
-          <ul className={styles.home__list}>
-            {articles.map((article) => (
-              <li key={article.title} className={styles.home__list__item}>
-                <Link href={`/${article.category.slug}/${article.subcategory.slug}/${article.slug}`}>
-                  <Image
-                    src={`/svg/${article.slug}.svg`}
-                    unoptimized={true}
-                    alt="icone"
-                    width={100}
-                    height={100}
-                    className={styles.home__list__item__icon}
-                  />
-                 <span>
-                    {article.title}
-                 </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-          {accueil.paragraphPosts.map((paragraphPosts) => (
-            <div
-              key={paragraphPosts.subtitle}
-            >
-              <h3>{paragraphPosts.subtitle}</h3>
-              <p>{paragraphPosts.paragraph}</p>
-            </div>
+        <h2>Taupier au Service de la Nature</h2>
+        <ul className={styles.home__list}>
+          {articles.map((article) => (
+            <li key={article.title} className={styles.home__list__item}>
+              <Link href={`/${article.category.slug}/${article.subcategory.slug}/${article.slug}`}>
+                <Image
+                  src={`/svg/${article.slug}.svg`}
+                  unoptimized
+                  alt="icone"
+                  width={100}
+                  height={100}
+                  className={styles.home__list__item__icon}
+                />
+                <span>
+                  {article.title}
+                </span>
+              </Link>
+            </li>
           ))}
+        </ul>
+        {accueil.paragraphPosts.map((paragraphPosts) => (
+          <div
+            key={paragraphPosts.subtitle}
+          >
+            <h3>{paragraphPosts.subtitle}</h3>
+            <div dangerouslySetInnerHTML={{ __html: paragraphPosts.paragraph }} />
+
+          </div>
+        ))}
         <div className={styles.home__faq}>
           <Link href={faq.slug}>
             <h2>{faq.title}</h2>
@@ -195,24 +163,24 @@ export default function Home({
             Découvrez les avis de nos clients
           </Link>
         </div>
-          {accueil.listPosts.map((listArticle) => (
-            listArticle.title !== null && (
-              <div key={listArticle.title}>
-                {listArticle.title && (
-                <h2>{listArticle.title}</h2>
-                )}
-                {listArticle.description && (
-                <div dangerouslySetInnerHTML={{ __html: listArticle.description }} />
-                )}
-              </div>
-            )
-          ))}
+        {accueil.listPosts.map((listArticle) => (
+          listArticle.title !== null && (
+          <div key={listArticle.title}>
+            {listArticle.title && (
+            <h2>{listArticle.title}</h2>
+            )}
+            {listArticle.description && (
+            <div dangerouslySetInnerHTML={{ __html: listArticle.description }} />
+            )}
+          </div>
+          )
+        ))}
 
-          <button type="button" className="button">
-            <Link href="/Contact">
-              Contactez-nous
-            </Link>
-          </button>
+        <button type="button" className="button">
+          <Link href="/Contact">
+            Contactez-nous
+          </Link>
+        </button>
 
       </section>
     </>

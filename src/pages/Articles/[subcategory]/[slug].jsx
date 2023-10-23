@@ -1,9 +1,6 @@
 import Image from 'next/image';
 import Head from 'next/head';
-import useSWR from 'swr';
 import Link from 'next/link';
-// import ReactMarkdown from 'react-markdown';
-// import remarkGfm from 'remark-gfm';
 import styles from '../../../styles/Pages.module.scss';
 import Cards from '../../../components/cards/cards';
 import Category from '../../../components/category/Category';
@@ -31,20 +28,13 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const { slug } = params;
 
-  const responsePost = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/${slug}`);
-  const responseDesc = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=keyword&limit=3&id=${responsePost.id}`);
-  
+  const post = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/${slug}`);
+  const desc = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=keyword&limit=3&id=${post.id}`);
 
-  return { props: { responsePost, responseDesc }, revalidate: 10 };
+  return { props: { post, desc }, revalidate: 10 };
 }
 
-export default function Slug({ responsePost, responseDesc }) {
-  const { data: postData } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/${responsePost.slug}`);
-  const { data: descData } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=keyword&limit=3&id=${responsePost.id}`);
-
-  const post = postData || responsePost;
-  const desc = descData || responseDesc;
-
+export default function Slug({ post, desc }) {
   const urlPost = `${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.subcategory.slug}/${post.slug}`;
   return (
     <>
@@ -81,50 +71,48 @@ export default function Slug({ responsePost, responseDesc }) {
       {/* Schema.org */}
       <ArticleJsonLd post={post} urlPost={urlPost} />
       <BreadcrumbJsonLd paragraphPosts={post.paragraphPosts} urlPost={urlPost} />
-      <section >
+      <section>
         <h1>{post.title}</h1>
-        <Category category={false} subcategoryName={post.subcategory.name} subcategorySlug={post.subcategory.slug}  />
-          <p className={styles.page__contents__date}>
-            {post.formattedDate}
-          </p>
-          <figure>
-            <Image
-              src={`${post.imgPost}.webp`}
-              alt={post.altImg || post.title}
-              loader={imageLoaderFull}
-              quality={75}
-              width={1080}
-              height={100}
-              sizes="(max-width: 640px) 100vw, (max-width: 750px) 750px, (max-width: 828px) 828px, 1080px"
-              style={{
-                width: '100%',
-                height: 'auto',
-              }}
-              priority
-              onLoad={(event) => {
-                const image = event.target; // L'élément Image
-                const width = image.width;
-                const height = image.height;
-                console.log(`Largeur : ${width}, Hauteur : ${height}`);
-              }}
-            />
-            {post.title !== post.altImg  && (
-              <figcaption className='caption'>
-                {post.altImg}
-              </figcaption>
-            )}
-          </figure>
-            <div dangerouslySetInnerHTML={{ __html: post.contents }} />
-          <TableOfContents post={post} />
-          {post.paragraphPosts.map((paragraphArticle) => (
-            <div key={paragraphArticle.id}>
-              {paragraphArticle.subtitle && (
+        <Category
+          category={false}
+          subcategoryName={post.subcategory.name}
+          subcategorySlug={post.subcategory.slug}
+        />
+        <p className={styles.page__contents__date}>
+          {post.formattedDate}
+        </p>
+        <figure>
+          <Image
+            src={`${post.imgPost}.webp`}
+            alt={post.altImg || post.title}
+            loader={imageLoaderFull}
+            quality={75}
+            width={1080}
+            height={100}
+            sizes="(max-width: 640px) 100vw, (max-width: 750px) 750px, (max-width: 828px) 828px, 1080px"
+            style={{
+              width: '100%',
+              height: 'auto',
+            }}
+            priority
+          />
+          {post.title !== post.altImg && (
+          <figcaption className="caption">
+            {post.altImg}
+          </figcaption>
+          )}
+        </figure>
+        <div dangerouslySetInnerHTML={{ __html: post.contents }} />
+        <TableOfContents post={post} />
+        {post.paragraphPosts.map((paragraphArticle) => (
+          <div key={paragraphArticle.id}>
+            {paragraphArticle.subtitle && (
               <h2 id={paragraphArticle.slug}>
                 {paragraphArticle.subtitle}
               </h2>
-              )}
-              {paragraphArticle.paragraph && (
-              <div key={paragraphArticle.id} className={styles.page__contents__paragraph} >
+            )}
+            {paragraphArticle.paragraph && (
+              <div key={paragraphArticle.id} className={styles.page__contents__paragraph}>
                 {paragraphArticle.imgPostParagh && (
                 <figure className={styles.page__contents__paragraph__figure}>
                   <Image
@@ -139,51 +127,54 @@ export default function Slug({ responsePost, responseDesc }) {
                     }}
                   />
                   {paragraphArticle.subtitle !== paragraphArticle.altImgParagh && (
-                  <figcaption className='caption'>
+                  <figcaption className="caption">
                     {paragraphArticle.altImg}
                   </figcaption>
                   )}
                 </figure>
                 )}
-              <div className={styles.page__contents__paragraph__text} dangerouslySetInnerHTML={{ __html: paragraphArticle.paragraph }} />
+                <div
+                  className={styles.page__contents__paragraph__text}
+                  dangerouslySetInnerHTML={{ __html: paragraphArticle.paragraph }}
+                />
                 {paragraphArticle.link && (
                   <div className={styles.page__contents__paragraph__links}>
                     <span className={styles.page__contents__paragraph__links__link}>
-                      → A lire aussi : 
+                      → A lire aussi :
                       <a href={paragraphArticle.link}>
                         {' '}
                         {paragraphArticle.linkSubtitle}
                       </a>
                     </span>
-                    </div>
+                  </div>
                 )}
               </div>
+            )}
+          </div>
+        ))}
+        <ol>
+          {post.listPosts.map((listArticle) => (
+            listArticle.title !== null && (
+            <li key={listArticle.title}>
+              {listArticle.title && (
+              <h3>{listArticle.title}</h3>
               )}
-            </div>
+              {listArticle.description && (
+              <p>{listArticle.description}</p>
+              )}
+            </li>
+            )
           ))}
-          <ol>
-            {post.listPosts.map((listArticle) => (
-              listArticle.title !== null && (
-                <li key={listArticle.title}>
-                  {listArticle.title && (
-                  <h3>{listArticle.title}</h3>
-                  )}
-                  {listArticle.description && (
-                  <p>{listArticle.description}</p>
-                  )}
-                </li>
-              )
-            ))}
-          </ol>
-          {post.links && (
+        </ol>
+        {post.links && (
           <Link href={post.links}>
             {post.textLinks}
           </Link>
-          )}
+        )}
 
-          <h2>Derniers articles</h2>
-          <Cards cards={desc} />
-          <Comments posts={post} />
+        <h2>Derniers articles</h2>
+        <Cards cards={desc} />
+        <Comments posts={post} />
       </section>
 
     </>

@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import useSWR from 'swr';
 import styles from '../../styles/Pages.module.scss';
 import imageLoaderFull from '../../utils/imageLoaderFull';
 import TableOfContents from '../../components/tableOfContents/TableOfContents';
@@ -10,7 +9,6 @@ import BreadcrumbJsonLd from '../../components/jsonLd/BreadcrumbJsonLd';
 import ArticleJsonLd from '../../components/jsonLd/ArticleJsonLd';
 import Comments from '../../components/comments/Comments';
 import Cards from '../../components/cards/cards';
-import { useState } from 'react';
 
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Interventions`);
@@ -21,26 +19,13 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
+  const post = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/${params.slug}`);
+  const desc = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=keyword&limit=3&id=${post.id}`);
 
-
-  const responsePosts = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/${params.slug}`);
-  const responseDesc = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=keyword&limit=3&id=${responsePosts.id}`);
-
-
-  return { props: { responsePosts, responseDesc }, revalidate: 10 };
+  return { props: { desc, post }, revalidate: 10 };
 }
 
-export default function Slug({ responsePosts, responseDesc }) {
-
-
-  const { data: postData  } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/${responsePosts.slug}`);
-  const { data: descData } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&filter=desc&category=articles`);
-
-  const post = postData || responsePosts;
-  const desc = descData || responseDesc;
-
-  const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0 });
-
+export default function Slug({ desc, post }) {
   return (
     <>
       <Head>
@@ -61,13 +46,12 @@ export default function Slug({ responsePosts, responseDesc }) {
       </Head>
       <BreadcrumbJsonLd paragraphPosts={post.paragraphPosts} urlPost={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`} />
       <ArticleJsonLd post={post} />
-      <section className={styles.page}>
-        <div className={styles.page__contents}>
+      <section>
         <h1>{post.title}</h1>
         <p className={styles.page__contents__date}>
           {post.formattedDate}
         </p>
-          <div className={styles.page__image}>
+        <div className={styles.page__image}>
           <figure>
             <Image
               src={`${post.imgPost}.webp`}
@@ -85,54 +69,56 @@ export default function Slug({ responsePosts, responseDesc }) {
                 width: '100%',
                 height: 'auto',
               }}
-              priority={true}
-              
+              priority
             />
-            {post.title !== post.altImg  && (
-              <figcaption className='caption'>
+            {post.title !== post.altImg && (
+              <figcaption className="caption">
                 {post.altImg}
               </figcaption>
             )}
           </figure>
-        </div>          
-          <div dangerouslySetInnerHTML={{ __html: post.contents }} />
-          <table className={styles.page__table}>
-            <thead>
-              <tr>
-              {post.listPosts.map((listArticle) => listArticle.title !== null && 
-                listArticle.title && <th>{listArticle.title}</th>
-              )}
-                </tr>
-              
-            </thead>
-            <tbody>
-              <tr >
-              {post.listPosts.map((listArticle) => listArticle.title !== null && listArticle.description && <td>{listArticle.description}</td>)}
-                </tr>
-            </tbody>
-          </table>
-          <TableOfContents post={post} />
-          {post.paragraphPosts.map((paragraphPosts) => (
-            <>
-              <h2 id={paragraphPosts.slug}>{paragraphPosts.subtitle}</h2>
-              <div dangerouslySetInnerHTML={{ __html: paragraphPosts.paragraph }} />
-              {paragraphPosts.linkSubtitle && (
-                  <div className={styles.page__contents__paragraph__links}>
-                    <span className={styles.page__contents__paragraph__links__link}>
-                      → A lire aussi : 
-                      <a href={paragraphPosts.link}>
-                        {' '}
-                        {paragraphPosts.linkSubtitle}
-                      </a>
-                    </span>
-                    </div>
-                )}
-            </>
-          ))}
-          <Link href="/Contact" className="button">
-            Contactez-nous
-          </Link>
         </div>
+        <div dangerouslySetInnerHTML={{ __html: post.contents }} />
+        <table className={styles.page__table}>
+          <thead>
+            <tr>
+              {post.listPosts.map((listArticle) => listArticle.title !== null
+                && listArticle.title && <th>{listArticle.title}</th>)}
+            </tr>
+
+          </thead>
+          <tbody>
+            <tr>
+              {
+                  post.listPosts.map(
+                    (listArticle) => listArticle.title !== null
+                      && listArticle.description && <td>{listArticle.description}</td>,
+                  )
+                }
+            </tr>
+          </tbody>
+        </table>
+        <TableOfContents post={post} />
+        {post.paragraphPosts.map((paragraphPosts) => (
+          <>
+            <h2 id={paragraphPosts.slug}>{paragraphPosts.subtitle}</h2>
+            <div dangerouslySetInnerHTML={{ __html: paragraphPosts.paragraph }} />
+            {paragraphPosts.linkSubtitle && (
+              <div className={styles.page__contents__paragraph__links}>
+                <span className={styles.page__contents__paragraph__links__link}>
+                  → A lire aussi :
+                  <a href={paragraphPosts.link}>
+                    {' '}
+                    {paragraphPosts.linkSubtitle}
+                  </a>
+                </span>
+              </div>
+            )}
+          </>
+        ))}
+        <Link href="/Contact" className="button">
+          Contactez-nous
+        </Link>
       </section>
       <section>
         <h2>Retrouver nos derniers articles :</h2>

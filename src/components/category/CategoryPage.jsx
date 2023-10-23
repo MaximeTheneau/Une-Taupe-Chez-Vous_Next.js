@@ -1,10 +1,5 @@
 import Link from 'next/link';
 import styles from './Category.module.scss';
-import useSWR from 'swr';
-import fetcher from '../../utils/fetcher';
-
-
-
 
 export default function CategoryPage({ category, subcategoryPost, subcategoryList }) {
   return (
@@ -16,16 +11,16 @@ export default function CategoryPage({ category, subcategoryPost, subcategoryLis
           </Link>
         </li>
 
-        { subcategoryList?.map((category) => (
-                <li key={category.id}>
-                  <Link
-                    href={`/Articles/${category.slug}`}
-                    className={`button ${category.name === subcategoryPost  && 'button--disabled'}`}>
-                    {category.name}
-                  </Link>
-                </li>
-              ))
-            }
+        { subcategoryList?.map((categories) => (
+          <li key={categories.id}>
+            <Link
+              href={`/Articles/${categories.slug}`}
+              className={`button ${categories.name === subcategoryPost && 'button--disabled'}`}
+            >
+              {categories.name}
+            </Link>
+          </li>
+        ))}
       </ul>
     </nav>
 

@@ -1,27 +1,21 @@
-import PropTypes from 'prop-types';
 import Image from 'next/image';
 import Head from 'next/head';
-import useSWR from 'swr';
 import styles from '../styles/Pages.module.scss';
 import Faq from '../components/faq/faq';
 import fetcher from '../utils/fetcher';
 import FaqJsonLd from '../components/jsonLd/FaqJsonLd';
 
 export async function getStaticProps() {
-  const responseContact = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Foire-aux-questions`);
+  const post = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Foire-aux-questions`);
 
   return {
     props: {
-      responseContact,
+      post,
     },
   };
 }
 
-export default function Slug({ responseContact }) {
-  const { data: postSwr } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/Foire-aux-questions`, fetcher);
-
-  const post = postSwr || responseContact;
-
+export default function Slug({ post }) {
   return (
     <>
       <Head>
@@ -77,27 +71,3 @@ export default function Slug({ responseContact }) {
     </>
   );
 }
-
-Slug.propTypes = {
-  post: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    subtitle: PropTypes.string.isRequired,
-    contents: PropTypes.string.isRequired,
-    contents2: PropTypes.string.isRequired,
-    slug: PropTypes.string.isRequired,
-    updatedAt: PropTypes.string.isRequired,
-    createdAt: PropTypes.string.isRequired,
-    imgPost: PropTypes.shape({
-      path: PropTypes.string.isRequired,
-    }),
-    imgPost2: PropTypes.shape({
-      path: PropTypes.string,
-    }),
-    imgPost3: PropTypes.shape({
-      path: PropTypes.string,
-    }),
-    imgPost4: PropTypes.shape({
-      path: PropTypes.string,
-    }),
-  }).isRequired,
-};

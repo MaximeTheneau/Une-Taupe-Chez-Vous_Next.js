@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import useSWR from 'swr';
 import styles from '../../styles/Pages.module.scss';
 import imageLoaderFull from '../../utils/imageLoaderFull';
 import fetcher from '../../utils/fetcher';
@@ -20,15 +19,12 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const postInit = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/${params.slug}`);
+  const post = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/${params.slug}`);
 
-  return { props: { postInit }, revalidate: 10 };
+  return { props: { post }, revalidate: 10 };
 }
 
-export default function Slug({ postInit }) {
-  const { data: postData } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/${postInit.slug}`, fetcher);
-
-  const post = postData || postInit;
+export default function Slug({ post }) {
   const urlPost = `${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`;
 
   function extractInfo(description) {

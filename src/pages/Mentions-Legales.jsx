@@ -1,26 +1,20 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import useSWR from 'swr';
-import styles from '../styles/Pages.module.scss';
 import imageLoaderFull from '../utils/imageLoaderFull';
 import Button from '../components/button/button';
 import fetcher from '../utils/fetcher';
 
 export async function getStaticProps() {
-  const responsePage = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Mentions-Legales`);
+  const page = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Mentions-Legales`);
 
   return {
     props: {
-      responsePage,
+      page,
     },
   };
 }
 
-export default function MentionsLegal({ responsePage }) {
-  const { data: pageSwr } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/Mentions-Legales`, fetcher);
-
-  const page = pageSwr || responsePage;
-
+export default function MentionsLegal({ page }) {
   return (
     <>
       <Head>
@@ -41,25 +35,51 @@ export default function MentionsLegal({ responsePage }) {
       </Head>
 
       <>
-        <section className={styles.page__image}>
-          <h1>Mention Legales</h1>
-          <Image
-            src={`${page.slug}.webp`}
-            alt={page.altImg || page.title}
-            width="1080"
-            height="720"
-            quality={100}
-            loader={imageLoaderFull}
-            sizes="(max-width: 768px) 100vw,
-            (max-width: 1200px) 50vw,
-            33vw"
+        <Head>
+          <title>{page.title}</title>
+          <meta name="description" content={page.metaDescription} />
+          {/* Open Graph */}
+          <meta property="og:type" content="website" />
+          <meta property="og:title" content={page.title} />
+          <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/${page.slug}`} />
+          <meta property="og:description" content={page.metaDescription} />
+          <meta property="og:site_name" content={`${process.env.NEXT_PUBLIC_URL}/${page.slug}`} />
+          <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${page.imgPost}.jpg`} />
+          <link
+            rel="canonical"
+            href={`${process.env.NEXT_PUBLIC_URL}/${page.slug}`}
+            key="canonical"
           />
-        </section>
+        </Head>
         <section>
+          <figure>
+            <Image
+              src={`${page.imgPost}.webp`}
+              alt={page.altImg || page.title}
+              loader={imageLoaderFull}
+              quality={90}
+              width={1080}
+              height={608}
+              sizes="(max-width: 640px) 100vw,
+                (max-width: 750px) 100vw,
+                (max-width: 828px) 100vw,
+                (max-width: 1080px) 100vw,
+                100vw"
+              style={{
+                width: '100%',
+                height: 'auto',
+              }}
+              priority
+            />
+            {page.title !== page.altImg && (
+            <figcaption className="caption">
+              {page.altImg}
+            </figcaption>
+            )}
+          </figure>
+          <h1>{page.title}</h1>
           <h2>{page.subtitle}</h2>
-          <p>
-            {page.contents}
-          </p>
+          <div dangerouslySetInnerHTML={{ __html: page.contents }} />
           <Button />
         </section>
       </>

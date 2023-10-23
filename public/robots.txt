@@ -2,14 +2,7 @@
     User-agent: *
     allow: /
     
-    disallow: /Interventions/[slug]
-    disallow: /Articles/[subcategory]
-    disallow: /Articles/[subcategory]/[slug]
-    disallow: /Annuaire/[slug]
-    disallow: /api/*
-
-
-    disallow: /search?*
+    disallow: /api/
 
     # Host
     Host: https://unetaupechezvous.fr/

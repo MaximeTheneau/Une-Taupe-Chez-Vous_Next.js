@@ -1,25 +1,21 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import useSWR from 'swr';
 import ContactForm from '../components/contact/ContactForm';
 import styles from '../styles/Pages.module.scss';
 import NotCopie from '../components/notCopie/NotCopie';
 import fetcher from '../utils/fetcher';
 
 export async function getStaticProps() {
-  const responsePage = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Contact`);
+  const page = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Contact`);
 
   return {
     props: {
-      responsePage,
+      page,
     },
   };
 }
 
-export default function Contact({ responsePage }) {
-  const { data: pageSwr } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/Contact`, fetcher);
-
-  const page = pageSwr || responsePage;
+export default function Contact({ page }) {
   return (
     <>
       <Head>
@@ -40,9 +36,8 @@ export default function Contact({ responsePage }) {
 
       <section className={styles.page}>
         <h1>{page.title}</h1>
-        <p>
-          {page.contents}
-        </p>
+        <div dangerouslySetInnerHTML={{ __html: page.contents }} />
+
         <h2>Contactez-nous - Devis gratuit</h2>
         <div className={styles.page__contact}>
           <div className={styles.page__contact__block} itemScope itemType="https://schema.org/PostalAdress">

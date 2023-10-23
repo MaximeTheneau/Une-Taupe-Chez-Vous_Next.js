@@ -71,8 +71,7 @@
         width: $width-desktop;
         margin: auto;
         &__table{
-            width: $width-desktop;
-            display: flex;
+            width: 100%;
             flex-direction: row;
             justify-content: space-evenly;
             font-weight: 900;

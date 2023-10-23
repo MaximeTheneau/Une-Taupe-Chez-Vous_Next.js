@@ -1,30 +1,23 @@
 import Head from 'next/head';
-import useSWR from 'swr';
 import styles from '../../styles/Pages.module.scss';
 import DirectoryRegistrationForm from '../../components/directoryRegistrationForm/DirectoryRegistrationForm';
 import TableOfContents from '../../components/tableOfContents/TableOfContents';
 import fetcher from '../../utils/fetcher';
 
 export async function getStaticProps() {
-  const responseArticles = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`);
-  const responsePage = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Inscription-annuaire-gratuite`);
+  const article = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`);
+  const page = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Inscription-annuaire-gratuite`);
 
   return {
     props: {
-      responseArticles,
-      responsePage,
+      article,
+      page,
     },
   };
 }
 
 // == Composant
-export default function Page({ responsePage, responseArticles }) {
-  const { data: articleSwr } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`, fetcher);
-  const { data: pageSwr } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/Inscription-annuaire-gratuite`, fetcher);
-
-  const page = pageSwr || responsePage;
-  const article = articleSwr || responseArticles;
-
+export default function Page({ page, article }) {
   return (
     <>
       <Head>

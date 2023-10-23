@@ -16,10 +16,9 @@ export default function Card({ card }) {
     } if (articlesLink.category && articlesLink.slug === 'Inscription-annuaire-gratuite') {
       pathCard = `Annuaire/${articlesLink.slug}`;
     } if (articlesLink.category && articlesLink.category.name === 'Articles') {
-      if ( articlesLink.subcategory === null){
+      if (articlesLink.subcategory === null) {
         pathCard = `${articlesLink.category.name}/${articlesLink.slug}`;
-        }
-      else{
+      } else {
         pathCard = `${articlesLink.category.name}/${articlesLink.subcategory.slug}/${articlesLink.slug}`;
       }
     } if (articlesLink.category && articlesLink.category.name === 'Interventions') {

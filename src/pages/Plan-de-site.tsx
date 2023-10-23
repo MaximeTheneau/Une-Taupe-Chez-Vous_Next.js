@@ -1,41 +1,30 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import useSWR from 'swr';
 import styles from '../styles/SiteMap.module.scss';
 import fetcher from '../utils/fetcher';
 
 export async function getStaticProps() {
-  const responsePage = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Plan-de-site`);
-  const responseInterventions = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Interventions`);
-  const responseSubcategory = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=subcategory`);
-  const responseAnnuaire = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`);
+  const page = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Plan-de-site`);
+  const interventions = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Interventions`);
+  const subcategory = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=subcategory`);
+  const annuaire = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`);
 
   return {
     props: {
-      responsePage,
-      responseInterventions,
-      responseSubcategory,
-      responseAnnuaire,
+      page,
+      interventions,
+      subcategory,
+      annuaire,
     },
   };
 }
 
 export default function SiteMapPage({
-  responsePage,
-  responseInterventions,
-  responseSubcategory,
-  responseAnnuaire,
+  page,
+  interventions,
+  subcategory,
+  annuaire,
 }) {
-  const { data: pageSwr } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts/Plan-de-site`, fetcher);
-  const { data: interventionsSwr } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Interventions`, fetcher);
-  const { data: subcategorySwr } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=subcategory`, fetcher);
-  const { data: annuaireSwr } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`, fetcher);
-
-  const page = pageSwr || responsePage;
-  const interventions = interventionsSwr || responseInterventions;
-  const subcategory = subcategorySwr || responseSubcategory;
-  const annuaire = annuaireSwr || responseAnnuaire;
-
   return (
     <>
       <Head>
