@@ -1,18 +1,9 @@
 export default function formMiddleware(req, apiPath, handleResponse200, handleResponseError) {
-  const path = `${process.env.NEXT_PUBLIC_API_URL}${apiPath}`;
-
-  console.log('path', path);
   const requestOptions = {
     method: 'POST',
-    headers: { 
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'Access-Control-Allow-Origin': 'https://unetaupechezvous.fr',
-    },
     body: JSON.stringify(req),
-    credentials: 'include',
   };
-  fetch(path, requestOptions)
+  fetch(`${process.env.NEXT_PUBLIC_API_URL}${apiPath}`, requestOptions)
   .then((response) => {
     if (response.ok) {
       handleResponse200();
