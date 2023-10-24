@@ -1,10 +1,14 @@
 export default function formMiddleware(req, apiPath, handleResponse200, handleResponseError) {
+  const path = `${process.env.NEXT_PUBLIC_API_URL}${apiPath}`;
+
+  console.log('path', path);
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(req),
+    credentials: 'include',
   };
-  fetch(`${process.env.NEXT_PUBLIC_API_URL}${apiPath}`, requestOptions)
+  fetch(path, requestOptions)
   .then((response) => {
     if (response.ok) {
       handleResponse200();

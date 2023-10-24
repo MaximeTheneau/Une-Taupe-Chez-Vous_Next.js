@@ -123,20 +123,12 @@ export default function ContactForm() {
         toggleModal: true,
       },
     });
-
-    // setState((prevState) => {
-    //   const updatedState = {
-    //     ...prevState,
-    //     modal: {
-    //       title: 'Oups !',
-    //       message: error,
-    //       toggleModal: true,
-    //     },
-    //   };
   };
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
+    const req = state.form;
+    FormMiddleware(req, 'contact', handleResponse200, handleResponseError);
     setState({
       ...state,
       modal: {
@@ -145,8 +137,6 @@ export default function ContactForm() {
         toggleModal: true,
       },
     });
-    const req = state.form;
-    FormMiddleware(req, handleResponse200, handleResponseError);
   };
 
 
