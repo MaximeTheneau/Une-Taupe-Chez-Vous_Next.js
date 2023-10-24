@@ -3,7 +3,7 @@ export default function formMiddleware(req, apiPath, handleResponse200, handleRe
     method: 'POST',
     headers: { 
       'Content-Type': 'application/json', 
-      'Access-Control-Allow-Origin': 'https://unetaupechezvous.fr"'
+      'Access-Control-Allow-Origin': 'https://unetaupechezvous.fr',
      },
     body: JSON.stringify(req),
   };
