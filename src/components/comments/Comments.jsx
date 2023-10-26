@@ -89,6 +89,7 @@ export default function Comments({ posts }) {
     });
     fetch(`${process.env.NEXT_PUBLIC_API_URL}comments`, {
       method: 'POST',
+      credentials: 'include',
       body: JSON.stringify(state.form),
     }).then(async (response) => {
       if (response.ok) {
