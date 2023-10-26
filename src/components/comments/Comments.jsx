@@ -28,7 +28,6 @@ export default function Comments({ posts }) {
       body: JSON.stringify({
         email: e.target.value,
       }),
-      credentials: 'include',
     })
       .then(async (response) => {
         if (response.ok) {
@@ -90,7 +89,6 @@ export default function Comments({ posts }) {
     });
     fetch(`${process.env.NEXT_PUBLIC_API_URL}comments`, {
       method: 'POST',
-      credentials: 'include',
       body: JSON.stringify(state.form),
     }).then(async (response) => {
       if (response.ok) {

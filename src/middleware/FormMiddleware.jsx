@@ -2,7 +2,6 @@ export default function formMiddleware(req, apiPath, handleResponse200, handleRe
   const requestOptions = {
     method: 'POST',
     body: JSON.stringify(req),
-    credentials: 'include',
   };
   fetch(`${process.env.NEXT_PUBLIC_API_URL}${apiPath}`, requestOptions)
   .then((response) => {
