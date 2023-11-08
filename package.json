@@ -6,7 +6,7 @@
     "sitemap": "node scripts/sitemap.script.js",
     "export": "next export",
     "start": "next start -p 3001",
-    "startpm2": "pm2 start npm --name 'next' -- start -- -p 3000 -- -H localhost.fr",
+    "pm2": "pm2 start ecosystem.config.js",
     "lint": "next lint",
     "dev": "next dev",
     "analyze": "ANALYZE=true next build",

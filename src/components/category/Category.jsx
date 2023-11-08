@@ -5,10 +5,11 @@ export default function Category({ subcategoryName, subcategorySlug }) {
   return (
     <nav>
       <ul className={styles.category}>
-        <Link href="/Articles">
-          Articles
-        </Link>
-        <li />
+        <li>
+          <Link href="/Articles">
+            Articles
+          </Link>
+        </li>
 
         {subcategoryName
             && (

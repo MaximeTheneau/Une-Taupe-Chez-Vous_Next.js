@@ -7,6 +7,7 @@ import GoogleMaps from '../components/maps/GoogleMaps';
 import Button from '../components/button/button';
 import NotCopie from '../components/notCopie/NotCopie';
 import fetcher from '../utils/fetcher';
+import TableOfContents from '../components/tableOfContents/TableOfContents';
 
 export async function getStaticProps() {
   const page = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Taupier-agree-professionnel-depuis-1994`);
@@ -65,6 +66,7 @@ export default function TaupierPage({ page }) {
         </figure>
         <h1>{page.title}</h1>
         <div itemScope itemType="https://schema.org/PostalAdress">
+
           <p itemProp="name">
             <strong>Entreprise : </strong>
             <span itemProp="name">Une Taupe Chez Vous</span>
@@ -85,29 +87,60 @@ export default function TaupierPage({ page }) {
             {' '}
             39338032400029
           </p>
+        <GoogleMaps />
+        <div dangerouslySetInnerHTML={{ __html: page.contents }} />
+        <TableOfContents post={page} />
         </div>
-        {page.paragraphPosts.map((paragraphPosts) => (
-          <div
-            className={styles.page__contents__paragraph}
-            key={paragraphPosts.subtitle}
-          >
-            {paragraphPosts.imgPostParagh && (
-              <Image
-                className={styles.page__contents__paragraph}
-                src={`${paragraphPosts.imgPostParagh}.webp`}
-                alt={paragraphPosts.altImg || paragraphPosts.subtitle}
-                width={330}
-                height={310}
-                quality={70}
-              />
+        {page.paragraphPosts.map((paragraphArticle) => (
+          <div key={paragraphArticle.id}>
+            {paragraphArticle.subtitle && (
+              <h2 id={paragraphArticle.slug}>
+                {paragraphArticle.subtitle}
+              </h2>
             )}
-            <h2>{paragraphPosts.subtitle}</h2>
-            <div dangerouslySetInnerHTML={{ __html: paragraphPosts.paragraph }} />
+            {paragraphArticle.paragraph && (
+              <div key={paragraphArticle.id} className={styles.page__contents__paragraph}>
+                {paragraphArticle.imgPostParagh && (
+                <figure className={styles.page__contents__paragraph__figure}>
+                  <Image
+                    src={`${paragraphArticle.imgPostParagh}.webp`}
+                    alt={paragraphArticle.subtitle}
+                    quality={75}
+                    width={500}
+                    height={50}
+                    style={{
+                        maxWidth: '100%',
+                        height: 'auto',
+                        display: 'inline-block',
+                    }}
+                  />
+                  {paragraphArticle.subtitle !== paragraphArticle.altImgParagh && (
+                  <figcaption className="caption">
+                    {paragraphArticle.altImg}
+                  </figcaption>
+                  )}
+                </figure>
+                )}
+                <div
+                  className={styles.page__contents__paragraph__text}
+                  dangerouslySetInnerHTML={{ __html: paragraphArticle.paragraph }}
+                />
+                {paragraphArticle.link && (
+                  <div className={styles.page__contents__paragraph__links}>
+                    <span className={styles.page__contents__paragraph__links__link}>
+                      → A lire aussi :
+                      <a href={paragraphArticle.link}>
+                        {' '}
+                        {paragraphArticle.linkSubtitle}
+                      </a>
+                    </span>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         ))}
-
         <Button />
-        <GoogleMaps />
       </section>
     </>
   );

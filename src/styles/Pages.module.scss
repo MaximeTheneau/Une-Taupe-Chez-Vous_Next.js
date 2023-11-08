@@ -9,13 +9,10 @@
     flex-direction: column;
     &__paragraph{
       width: 100%;
-      display: flex;
-      flex-wrap: wrap;
       margin: 1rem auto;
       &__figure{
-      }
-      &__text{
-        width: 100%;
+        margin: 0 1rem 0 0;
+        float: left;
       }
       &__links{
         background: $color-link-opacity;
