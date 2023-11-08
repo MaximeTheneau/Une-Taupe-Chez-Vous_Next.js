@@ -132,37 +132,12 @@ export default function Home({
         </div>
         <h3>Retrouver nos derniers articles :</h3>
         <Cards cards={keyword} />
-        <div className={styles.home__testimonials}>
           <h2>
             <Link href={testimonials.slug}>
               {testimonials.title}
             </Link>
           </h2>
-          <ul>
-            {testimonials.paragraphPosts.map((paragraphTestimonial) => (
-              <li
-                key={paragraphTestimonial.subtitle}
-              >
-                <h3>
-                  De :
-                  {' '}
-                  {paragraphTestimonial.subtitle}
-                </h3>
-                <h4>Notes : ⭐⭐⭐⭐⭐</h4>
-                <p>
-                  <strong>
-                    Avis :
-                  </strong>
-                  {' '}
-                  {paragraphTestimonial.paragraph}
-                </p>
-              </li>
-            ))}
-          </ul>
-          <Link href="https://goo.gl/maps/8Q9vNCtioX7Nz1BLA" target="_blank">
-            Découvrez les avis de nos clients
-          </Link>
-        </div>
+          <div dangerouslySetInnerHTML={{ __html:testimonials.paragraphPosts[0].paragraph}} />
         {accueil.listPosts.map((listArticle) => (
           listArticle.title !== null && (
           <div key={listArticle.title}>
