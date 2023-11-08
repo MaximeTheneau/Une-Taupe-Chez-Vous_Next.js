@@ -16,25 +16,20 @@ export async function getStaticPaths() {
 
   const posts = await res.json();
 
-  if (!posts) {
-    return {
-      notFound: true,
-    };
-  }
-
   const paths = posts.map((post) => ({
     params: {
       subcategory: post.subcategory.slug,
       slug: post.slug,
     },
   }));
-  return { paths, fallback: 'blocking' };
+  return { paths, fallback: false };
 }
 
 export async function getStaticProps({ params }) {
   const { slug } = params;
 
   const post = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/${slug}`);
+
   const desc = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=keyword&limit=3&id=${post.id}`);
 
   return { props: { post, desc }, revalidate: 10 };
@@ -94,7 +89,7 @@ export default function Slug({ post, desc }) {
             loader={imageLoaderFull}
             quality={75}
             width={1080}
-            height={100}
+            height={700}
             sizes="(max-width: 640px) 100vw, (max-width: 750px) 750px, (max-width: 828px) 828px, 1080px"
             style={{
               width: '100%',
