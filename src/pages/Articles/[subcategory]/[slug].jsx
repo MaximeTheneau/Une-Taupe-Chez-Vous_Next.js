@@ -16,6 +16,12 @@ export async function getStaticPaths() {
 
   const posts = await res.json();
 
+  if (!posts) {
+    return {
+      notFound: true,
+    };
+  }
+
   const paths = posts.map((post) => ({
     params: {
       subcategory: post.subcategory.slug,
