@@ -156,7 +156,6 @@ export default function Home({
             Contactez-nous
           </Link>
         </button>
-
       </section>
     </>
   );
