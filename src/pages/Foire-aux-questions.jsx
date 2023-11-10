@@ -38,7 +38,7 @@ export default function Slug({ post }) {
       <section className={styles.page}>
         <div className={styles.page__contents}>
           <h1>{post.title}</h1>
-          <div dangerouslySetInnerHTML={{ __html: page.contents }} />
+          <div dangerouslySetInnerHTML={{ __html: post.contents }} />
           <Faq faq={post} />
           {post.paragraphPosts.map((paragraphArticle) => (
             <>
