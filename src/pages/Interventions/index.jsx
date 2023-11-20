@@ -40,9 +40,7 @@ export default function Home({ articles, page }) {
         <section>
 
           <h1>{page.title}</h1>
-          <p>
-            {page.contents}
-          </p>
+          <div dangerouslySetInnerHTML={{ __html: page.contents }} />
           <h2>Nos interventions</h2>
           <div className={styles.home}>
             <Cards cards={articles} />
@@ -51,7 +49,7 @@ export default function Home({ articles, page }) {
           {page.paragraphPosts.map((paragraphPosts) => (
             <>
               <h2 id={paragraphPosts.slug}>{paragraphPosts.subtitle}</h2>
-              <p>{paragraphPosts.paragraph}</p>
+              <div dangerouslySetInnerHTML={{ __html: paragraphPosts.paragraph }} />
             </>
           ))}
         </section>

@@ -121,7 +121,6 @@ export default function Home({
           >
             <h3>{paragraphPosts.subtitle}</h3>
             <div dangerouslySetInnerHTML={{ __html: paragraphPosts.paragraph }} />
-
           </div>
         ))}
         <div className={styles.home__faq}>

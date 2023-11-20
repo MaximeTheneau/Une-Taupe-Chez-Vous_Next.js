@@ -52,7 +52,7 @@ export default function Home({ page, articles, subcategoryList }) {
         {page.paragraphPosts.map((paragraphPosts) => (
           <>
             <h2>{paragraphPosts.subtitle}</h2>
-            <p>{paragraphPosts.paragraph}</p>
+            <div dangerouslySetInnerHTML={{ __html: paragraphPosts.paragraph }} />
           </>
         ))}
         <div className="button">

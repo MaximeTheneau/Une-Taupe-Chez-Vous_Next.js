@@ -147,10 +147,10 @@ export default function Slug({ post }) {
               <div className={styles.page__contents__paragraph__links}>
                 <span className={styles.page__contents__paragraph__links__link}>
                   → A lire aussi :
-                  <a href={paragraphs.link}>
+                  <Link href={paragraphs.link}>
                     {' '}
                     {paragraphs.linkSubtitle}
-                  </a>
+                  </Link>
                 </span>
               </div>
             )}

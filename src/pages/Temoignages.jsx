@@ -73,10 +73,10 @@ export default function testimonials({ page }) {
                   <div className={styles.page__contents__paragraph__links}>
                     <span className={styles.page__contents__paragraph__links__link}>
                       → A lire aussi :
-                      <a href={paragraphArticle.link}>
+                      <Link href={paragraphArticle.link}>
                         {' '}
                         {paragraphArticle.linkSubtitle}
-                      </a>
+                      </Link>
                     </span>
                   </div>
                 )}
