@@ -38,7 +38,7 @@ export async function getStaticProps({ params }) {
 export default function Home({ articles, page, subcategoryList }) {
   const { subcategory } = articles[0];
 
-  const urlPost = `${process.env.NEXT_PUBLIC_URL}/${page.category.slug}/${subcategory.slug}`;
+  const urlPost = `${process.env.NEXT_PUBLIC_URL}/Articles/${subcategory.slug}`;
   return (
     <>
       <Head>
