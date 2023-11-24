@@ -38,16 +38,14 @@ export default function Home({ page, articles }) {
         <section>
 
           <h1>{page.title}</h1>
-          <p>
-            {page.contents}
-          </p>
+          <div dangerouslySetInnerHTML={{ __html: page.contents }} />
+
         </section>
         {/* --Articles--*/}
         <h2>Nos Annuaire</h2>
         <div className={styles.home}>
           <Cards cards={articles} />
         </div>
-
       </>
     </>
   );
