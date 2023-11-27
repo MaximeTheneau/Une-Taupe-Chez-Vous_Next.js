@@ -22,10 +22,9 @@ export async function getStaticProps() {
 export default function Recherche({ page, articlesInit, desc }) {
   const router = useRouter();
   const [searchValue, setSearchValue] = useState('');
-  const [articles, setArticles] = useState(['']);
+  const [articles, setArticles] = useState(articlesInit);
 
   useEffect(() => {
-    setArticles(articlesInit);
     setSearchValue(router.query.q || 'taupe');
   }, [router.query.q]);
 
@@ -36,7 +35,6 @@ export default function Recherche({ page, articlesInit, desc }) {
 
   const handleChange = (event) => {
     setSearchValue(event);
-    console.log(removeAccents(event.toLowerCase()));
     const filteredArticles = articlesInit.filter((article) => {
       const searchLowerCase = removeAccents(event.toLowerCase());
       const lowerCaseTitle = removeAccents(article.title.toLowerCase());
@@ -53,12 +51,11 @@ export default function Recherche({ page, articlesInit, desc }) {
     Router.push(`/search/?q=${encodeURIComponent(searchValue)}`);
   };
 
+  console.log(articles.length > 0);
   return (
     <>
       <Head>
         <title>{page.title}</title>
-        <meta name="robots" content="noindex,nofollow" />
-        <meta name="googlebot" content="noindex,nofollow" />
         <meta name="description" content={page.metaDescription} />
         <meta property="og:type" content="website" />
         <meta property="og:title" content={page.title} />
@@ -96,17 +93,19 @@ export default function Recherche({ page, articlesInit, desc }) {
             <i className="icon-paper-plane" />
           </button>
         </form>
-
-        {articles.length ? (
-          <Cards cards={articles} />
-        ) : (
-          <>
-            <h2>Aucun résultat</h2>
-            <h3>Les derniers articles :</h3>
-            <Cards cards={desc} />
-          </>
-        )}
-      </section>
+        </section>
+        <section>
+        {articles && (
+            <Cards cards={articles} />
+          )}
+        {!articles && (
+            <>
+              <h2>Aucun résultat</h2>
+              <h3>Les derniers articles :</h3>
+              <Cards cards={desc} />
+            </>
+          )}
+        </section>
     </>
   );
 }
