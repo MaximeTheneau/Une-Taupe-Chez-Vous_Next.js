@@ -25,7 +25,7 @@ export default function Recherche({ page, articlesInit, desc }) {
   const [articles, setArticles] = useState(articlesInit);
 
   useEffect(() => {
-    setSearchValue(router.query.q || 'taupe');
+    setSearchValue(router.query.q);
   }, [router.query.q]);
 
   const removeAccents = (str) => str
@@ -80,9 +80,8 @@ export default function Recherche({ page, articlesInit, desc }) {
             onChange={(e) => {
               handleChange(e.target.value);
             }}
-            onClick={() => setSearchValue('')}
+            // onClick={() => setSearchValue('')}
             value={searchValue}
-
           />
           <button
             id="button"
@@ -95,16 +94,17 @@ export default function Recherche({ page, articlesInit, desc }) {
         </form>
         </section>
         <section>
-        {articles && (
-            <Cards cards={articles} />
-          )}
-        {!articles && (
-            <>
-              <h2>Aucun résultat</h2>
-              <h3>Les derniers articles :</h3>
-              <Cards cards={desc} />
-            </>
-          )}
+          <h2>Résultats de la recherche :</h2>
+          {articles && (
+              <Cards cards={articles} />
+            )}
+          {articles.length === 0 && (
+              <>
+                <h2>Aucun résultat</h2>
+                <h3>Les derniers articles :</h3>
+                <Cards cards={desc} />
+              </>
+            )}
         </section>
     </>
   );

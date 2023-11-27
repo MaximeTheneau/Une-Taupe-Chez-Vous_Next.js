@@ -6,13 +6,13 @@ export default function Custom404() {
   return (
     <>
       <Head>
-        <meta name="robots" content="noindex" />
-
+      <title>Page introuvable</title>
+      <meta name="robots" content="noindex, follow" />
       </Head>
       <section>
-        <h1>Désolé</h1>
-        <p>Oups la page que vous recherche est innaccessible</p>
-        <button type="button">
+        <h1>Page introuvable</h1>
+        <p>La page que vous recherchez n'existe pas.</p>
+        <button type="button" className='button'>
           <Link
             href="/"
           >
