@@ -51,7 +51,6 @@ export default function Recherche({ page, articlesInit, desc }) {
     Router.push(`/search/?q=${encodeURIComponent(searchValue)}`);
   };
 
-  console.log(articles.length > 0);
   return (
     <>
       <Head>
