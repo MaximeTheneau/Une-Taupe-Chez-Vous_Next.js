@@ -5,30 +5,9 @@ import styles from './Card.module.scss';
 import imageThumbnail from '../../utils/imageThumbnail';
 
 export default function Card({ card }) {
-  function getPathCard(articlesLink) {
-    let pathCard = '';
-    if (articlesLink === null) {
-      pathCard = '';
-    } else if (articlesLink.category && articlesLink.category.name === 'Annuaire') {
-      pathCard = `${articlesLink.category.name}/${articlesLink.slug}`;
-    } else if (articlesLink.category && articlesLink.category.slug === 'Pages' && articlesLink.slug !== 'Inscription-annuaire-gratuite') {
-      pathCard = `${articlesLink.slug}`;
-    } if (articlesLink.category && articlesLink.slug === 'Inscription-annuaire-gratuite') {
-      pathCard = `Annuaire/${articlesLink.slug}`;
-    } if (articlesLink.category && articlesLink.category.name === 'Articles') {
-      if (articlesLink.subcategory === null) {
-        pathCard = `${articlesLink.category.name}/${articlesLink.slug}`;
-      } else {
-        pathCard = `${articlesLink.category.name}/${articlesLink.subcategory.slug}/${articlesLink.slug}`;
-      }
-    } if (articlesLink.category && articlesLink.category.name === 'Interventions') {
-      pathCard = `${articlesLink.category.name}/${articlesLink.slug}`;
-    }
-    return pathCard;
-  }
   return (
     <li className={styles.card}>
-      <Link href={`/${getPathCard(card)}`} className={styles.card__img}>
+      <Link href={card.url} className={styles.card__img}>
         <Image
           src={`${card.imgPost}.webp`}
           alt={card.altImg || card.title}

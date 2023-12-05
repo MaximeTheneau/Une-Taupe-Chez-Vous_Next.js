@@ -24,7 +24,7 @@ const generateSitemap = async () => {
         ${sitemapXml}
       </urlset>`;
 
-    fs.writeFileSync('./public/sitemap.xml', sitemapIndexXml);
+    fs.writeFileSync('./public/sitemap_all_links.xml', sitemapIndexXml);
   };
 
   // Fetch data from API

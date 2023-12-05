@@ -2,8 +2,8 @@
   "name": "une_taupe_chez_vous__nextjs",
   "version": "2.1.0",
   "scripts": {
-    "build": "next build && node scripts/sitemap.script.js && next export && pm2 restart all",
-    "sitemap": "node scripts/sitemap.script.js",
+    "build": "next build && npm run generate-sitemap && next export && pm2 restart all",
+    "generate-sitemap": "node scripts/sitemap.script.js && node scripts/sitemapIndex.script.js && node scripts/sitemapImage.script.js",
     "export": "next export",
     "start": "next start -p 3001",
     "pm2": "pm2 start ecosystem.config.js",
