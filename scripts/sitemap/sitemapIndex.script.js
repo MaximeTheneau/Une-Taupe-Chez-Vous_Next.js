@@ -13,7 +13,7 @@ const generateSitemapIndex = () => {
       <!-- Ajoutez d'autres sitemaps ici -->
     </sitemapindex>`;
 
-  fs.writeFileSync('./public/sitemap_index.xml', sitemapIndex);
+  fs.writeFileSync('./public/sitemap/sitemap_index.xml', sitemapIndex);
 };
 
 generateSitemapIndex();

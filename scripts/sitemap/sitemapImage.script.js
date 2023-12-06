@@ -35,7 +35,7 @@ const generateSitemapImages = async () => {
         ${sitemapXmlWithImages}
       </urlset>`;
 
-    fs.writeFileSync('./public/sitemap_images.xml', sitemapIndexXmlWithImages);
+    fs.writeFileSync('./public/sitemap/sitemap_images.xml', sitemapIndexXmlWithImages);
   };
 
   generateXmlWithImages(responseAll);
