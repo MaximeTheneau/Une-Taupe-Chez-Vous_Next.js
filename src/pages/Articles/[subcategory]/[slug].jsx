@@ -10,6 +10,7 @@ import fetcher from '../../../utils/fetcher';
 import ArticleJsonLd from '../../../components/jsonLd/ArticleJsonLd';
 import BreadcrumbJsonLd from '../../../components/jsonLd/BreadcrumbJsonLd';
 import Comments from '../../../components/comments/Comments';
+import fetcherImage from '../../../utils/fetcherImage';
 
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Articles`);
@@ -29,14 +30,15 @@ export async function getStaticProps({ params }) {
   const { slug } = params;
 
   const post = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/${slug}`);
-
   const desc = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=keyword&limit=3&id=${post.id}`);
+  const image = await fetcherImage(post.imgPost);
 
-  return { props: { post, desc } };
+  return { props: { post, desc, image: image.input } };
 }
 
-export default function Slug({ post, desc }) {
+export default function Slug({ post, desc, image }) {
   const urlPost = `${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.subcategory.slug}/${post.slug}`;
+
   return (
     <>
       <Head>
@@ -49,8 +51,8 @@ export default function Slug({ post, desc }) {
         <meta property="og:site_name" content={urlPost} />
         <meta property="og:url" content={urlPost} />
         <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.imgPost}.jpg`} />
-        <meta property="og:image:width" content="1024" />
-        <meta property="og:image:height" content="720" />
+        <meta property="og:image:width" content={image.width} />
+        <meta property="og:image:height" content={image.height} />
         <meta property="article:published_time" content={post.createdAt} />
         <meta property="article:modified_time" content={post.updatedAt} />
         <meta property="article:section" content={post.subcategory.name} />
@@ -88,8 +90,8 @@ export default function Slug({ post, desc }) {
             alt={post.altImg || post.title}
             loader={imageLoaderFull}
             quality={75}
-            width={1080}
-            height={700}
+            width={image.width}
+            height={image.height}
             sizes="(max-width: 640px) 100vw, (max-width: 750px) 750px, (max-width: 828px) 828px, 1080px"
             style={{
               width: '100%',

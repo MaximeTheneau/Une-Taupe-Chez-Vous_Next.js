@@ -8,18 +8,21 @@ import Button from '../components/button/button';
 import NotCopie from '../components/notCopie/NotCopie';
 import fetcher from '../utils/fetcher';
 import TableOfContents from '../components/tableOfContents/TableOfContents';
+import fetcherImage from '../utils/fetcherImage';
 
 export async function getStaticProps() {
   const page = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Taupier-agree-professionnel-depuis-1994`);
+  const image = await fetcherImage(page.imgPost);
 
   return {
     props: {
       page,
+      image: image.input,
     },
   };
 }
 
-export default function TaupierPage({ page }) {
+export default function TaupierPage({ page, image }) {
   return (
     <>
       <Head>
@@ -45,8 +48,8 @@ export default function TaupierPage({ page }) {
             alt={page.altImg || page.title}
             loader={imageLoaderFull}
             quality={90}
-            width={1080}
-            height={608}
+            width={image.width}
+            height={image.height}
             sizes="(max-width: 640px) 100vw,
                 (max-width: 750px) 100vw,
                 (max-width: 828px) 100vw,

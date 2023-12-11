@@ -9,6 +9,7 @@ import BreadcrumbJsonLd from '../../components/jsonLd/BreadcrumbJsonLd';
 import ArticleJsonLd from '../../components/jsonLd/ArticleJsonLd';
 import Comments from '../../components/comments/Comments';
 import Cards from '../../components/cards/cards';
+import fetcherImage from '../../utils/fetcherImage';
 
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Interventions`);
@@ -21,11 +22,12 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const post = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/${params.slug}`);
   const desc = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=keyword&limit=3&id=${post.id}`);
+  const image = await fetcherImage(post.imgPost);
 
-  return { props: { desc, post }, revalidate: 10 };
+  return { props: { desc, post, image: image.input }, revalidate: 10 };
 }
 
-export default function Slug({ desc, post }) {
+export default function Slug({ desc, post, image }) {
   return (
     <>
       <Head>
@@ -58,8 +60,8 @@ export default function Slug({ desc, post }) {
               alt={post.altImg || post.title}
               loader={imageLoaderFull}
               quality={75}
-              width={1080}
-              height={810}
+              width={image.width}
+              height={image.height}
               sizes="(max-width: 640px) 100vw,
                 (max-width: 750px) 100vw,
                 (max-width: 828px) 100vw,

@@ -39,9 +39,7 @@ export default function Page({ page, article }) {
 
       <section className={styles.page}>
         <h1>{page.title}</h1>
-        <p>
-          {page.contents}
-        </p>
+        <div dangerouslySetInnerHTML={{ __html: page.contents }} />
         <DirectoryRegistrationForm
           article={article}
         />
@@ -49,7 +47,7 @@ export default function Page({ page, article }) {
         {page.paragraphPosts.map((paragraphPosts) => (
           <>
             <h2 id={paragraphPosts.slug}>{paragraphPosts.subtitle}</h2>
-            <p>{paragraphPosts.paragraph}</p>
+            <div dangerouslySetInnerHTML={{ __html: paragraphPosts.paragraph }} />
           </>
         ))}
       </section>

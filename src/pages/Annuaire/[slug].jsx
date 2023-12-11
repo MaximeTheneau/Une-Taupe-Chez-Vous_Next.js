@@ -8,6 +8,7 @@ import TableOfContents from '../../components/tableOfContents/TableOfContents';
 import ArticleJsonLd from '../../components/jsonLd/ArticleJsonLd';
 import BreadcrumbJsonLd from '../../components/jsonLd/BreadcrumbJsonLd';
 import Comments from '../../components/comments/Comments';
+import fetcherImage from '../../utils/fetcherImage';
 
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`);
@@ -19,11 +20,12 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const post = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/${params.slug}`);
+  const image = await fetcherImage(post.imgPost);
 
-  return { props: { post }, revalidate: 10 };
+  return { props: { post, image }, revalidate: 10 };
 }
 
-export default function Slug({ post }) {
+export default function Slug({ post, image }) {
   const urlPost = `${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`;
 
   function extractInfo(description) {
@@ -102,8 +104,8 @@ export default function Slug({ post }) {
             alt={post.altImg || post.title}
             loader={imageLoaderFull}
             quality={75}
-            width={1080}
-            height={100}
+            width={image.width}
+            height={image.height}
             sizes="(max-width: 640px) 100vw, (max-width: 750px) 750px, (max-width: 828px) 828px, 1080px"
             style={{
               width: '100%',

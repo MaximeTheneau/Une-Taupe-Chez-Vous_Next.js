@@ -9,6 +9,7 @@ import fetcher from '../utils/fetcher';
 import LocalBusinessJsonLd from '../components/jsonLd/LocalBusinessJsonLd';
 import SearchJsonLd from '../components/jsonLd/SearchJsonLd';
 import LogoJsonLd from '../components/jsonLd/LogoJsonLd';
+import fetcherImage from '../utils/fetcherImage';
 
 export async function getStaticProps() {
   const accueil = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Accueil`);
@@ -17,6 +18,7 @@ export async function getStaticProps() {
   const faq = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Foire-aux-questions`);
   const testimonials = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Temoignages`);
   const keyword = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=keyword&limit=3&id=17 `);
+  const image = await fetcherImage(accueil.imgPost);
 
   return {
     props: {
@@ -26,12 +28,13 @@ export async function getStaticProps() {
       faq,
       testimonials,
       keyword,
+      image: image.input,
     },
   };
 }
 
 export default function Home({
-  accueil, services, articles, faq, testimonials, keyword,
+  accueil, services, articles, faq, testimonials, keyword, image,
 }) {
   return (
     <>
@@ -65,8 +68,8 @@ export default function Home({
             alt={accueil.altImg || accueil.title}
             loader={imageLoaderFull}
             quality={100}
-            width={1080}
-            height={720}
+            width={image.width}
+            height={image.height}
             sizes="(max-width: 640px) 100vw, (max-width: 750px) 750px, (max-width: 828px) 828px, 1080px"
             style={{
               width: '100%',
