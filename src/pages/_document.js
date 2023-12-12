@@ -34,12 +34,6 @@ export default function Document() {
           type='font/woff2'
           crossOrigin="anonymous"
         />
-        
-        <link 
-  rel="stylesheet" 
-  href="/font.css" 
-/>
-
         </Head>
       <body>
         <Main />
