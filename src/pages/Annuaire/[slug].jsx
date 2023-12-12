@@ -14,7 +14,9 @@ export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`);
   const posts = await res.json();
 
-  const paths = posts.map((post) => ({ params: { slug: post.slug } }));
+  const filteredPosts = posts.filter((post) => post.slug !== 'Inscription-annuaire-gratuite');
+
+  const paths = filteredPosts.map((post) => ({ params: { slug: post.slug } }));
   return { paths, fallback: false };
 }
 
@@ -22,7 +24,7 @@ export async function getStaticProps({ params }) {
   const post = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/${params.slug}`);
   const image = await fetcherImage(post.imgPost);
 
-  return { props: { post, image }, revalidate: 10 };
+  return { props: { post, image: image.input }, revalidate: 10 };
 }
 
 export default function Slug({ post, image }) {

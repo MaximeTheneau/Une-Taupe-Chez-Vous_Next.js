@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
       <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
         <url>
+                  <loc>https://unetaupechezvous.fr/Annuaire/Inscription-annuaire-gratuite</loc>
+                  <image:image>
+                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Inscription-annuaire-gratuite.jpg</image:loc>
+                  </image:image>
+                  
+                </url><url>
+                  <loc>https://unetaupechezvous.fr/Articles/Piege/Piegeage-des-Taupes-et-Animaux-Fouisseurs-Optez-pour-le-Fusil-Trap</loc>
+                  <image:image>
+                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Fusil-a-taupes-a-taupes-et-animaux-fouisseurs-trap.jpg</image:loc>
+                  </image:image>
+                  
+                </url><url>
                   <loc>https://unetaupechezvous.fr/Articles/Nuisibles/Sans-danger-pour-l-environnement</loc>
                   <image:image>
                     <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Sans-danger-pour-l-environnement.jpg</image:loc>
@@ -44,12 +56,6 @@
                   <loc>https://unetaupechezvous.fr/Articles/Nuisibles/Rats-Taupiers-Indesirables-Methodes-de-Controle</loc>
                   <image:image>
                     <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Rats-Taupiers-Indesirables-Methodes-de-Controle.jpg</image:loc>
-                  </image:image>
-                  
-                </url><url>
-                  <loc>https://unetaupechezvous.fr/Articles/Piege/Piegeage-des-Taupes-et-Animaux-Fouisseurs-Optez-pour-le-Fusil-Trap</loc>
-                  <image:image>
-                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Fusil-a-taupes-a-taupes-et-animaux-fouisseurs-trap.jpg</image:loc>
                   </image:image>
                   
                 </url><url>
@@ -325,12 +331,6 @@
                   </image:image>
                   
                 </url><url>
-                  <loc>https://unetaupechezvous.fr/Sous-Categories</loc>
-                  <image:image>
-                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Articles.jpg</image:loc>
-                  </image:image>
-                  
-                </url><url>
                   <loc>https://unetaupechezvous.fr/search</loc>
                   <image:image>
                     <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Page-de-recherche.jpg</image:loc>
@@ -442,12 +442,6 @@
                   <loc>https://unetaupechezvous.fr/Articles/Nuisibles/Consultation-Publique-ESOD-Projet-pour-reguler-les-nuisibles</loc>
                   <image:image>
                     <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Consultation-Publique-ESOD-Projet-pour-reguler-les-nuisibles.jpg</image:loc>
-                  </image:image>
-                  
-                </url><url>
-                  <loc>https://unetaupechezvous.fr/Inscription-annuaire-gratuite</loc>
-                  <image:image>
-                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Inscription-annuaire-gratuite.jpg</image:loc>
                   </image:image>
                   
                 </url><url>

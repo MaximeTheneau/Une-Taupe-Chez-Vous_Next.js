@@ -8,5 +8,5 @@
     Host: https://unetaupechezvous.fr/
     
     # Sitemaps
-    Sitemap: https://unetaupechezvous.fr/sitemap.xml
+    Sitemap: https://unetaupechezvous.fr/sitemap/sitemap_index.xml
     

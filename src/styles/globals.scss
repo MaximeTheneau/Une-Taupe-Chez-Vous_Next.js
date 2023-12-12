@@ -1,5 +1,4 @@
 @use 'reset.scss';
-@use 'fonts.scss';
 @use './icon.scss';
 @use './button.scss';
 @import './variables.scss';
@@ -8,7 +7,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'fontGeneral', sans-serif;
+  font-family: 'fontGeneral';
   white-space: pre-line;
   overflow-x: hidden !important; 
 }
@@ -36,9 +35,7 @@ section{
   margin: 0 auto 1rem auto;
 }
 p{
-  font-family: 'fontGeneral', sans-serif;
   color: $font-color;
-  width: 90%;
   margin: 0 0 0.5rem 0;
   font-size: $font-size;
 }
