@@ -66,7 +66,6 @@ export default function Home({
           <Image
             src={`${accueil.slug}.webp`}
             alt={accueil.altImg || accueil.title}
-            loader={imageLoaderFull}
             quality={100}
             width={image.width}
             height={image.height}
