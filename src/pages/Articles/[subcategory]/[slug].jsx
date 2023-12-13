@@ -88,11 +88,10 @@ export default function Slug({ post, desc, image }) {
           <Image
             src={`${post.imgPost}.webp`}
             alt={post.altImg || post.title}
-            loader={imageLoaderFull}
             quality={75}
             width={image.width}
             height={image.height}
-            sizes="(max-width: 640px) 100vw, (max-width: 750px) 750px, (max-width: 828px) 828px, 1080px"
+            sizes="100vw"
             style={{
               width: '100%',
               height: 'auto',

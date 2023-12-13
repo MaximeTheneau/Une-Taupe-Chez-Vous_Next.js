@@ -50,7 +50,7 @@ export default function Navbar() {
           <li className={styles['navbar__720__list-item']}>
             <Link href="/">
               <Image
-                src="logo-une-taupe-chez-vous.png"
+                src={`${process.env.NEXT_PUBLIC_CLOUD_URL}/w_${90},q_${75}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/logo-une-taupe-chez-vous.png`}
                 alt="Logo de l'entreprise Une Taupe Chez Vous"
                 quality={80}
                 className={styles.home__imageLogo}

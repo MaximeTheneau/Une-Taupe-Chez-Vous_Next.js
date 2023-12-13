@@ -7,6 +7,7 @@ const path = require('path');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // output: 'export',
   reactStrictMode: true,
   swcMinify: true,
   // compiler: {
@@ -15,7 +16,8 @@ const nextConfig = {
   images: {
     loader: 'custom',
     loaderFile: './src/utils/imageLoaderFull.jsx',
-    deviceSizes: [640, 750, 828, 1080],
+    deviceSizes: [640, 750, 828, 1000],
+    domains: ['localhost', 'res.cloudinary.com'],
     formats: ['image/avif', 'image/webp'],
     minimumCacheTTL: 60,
   },
