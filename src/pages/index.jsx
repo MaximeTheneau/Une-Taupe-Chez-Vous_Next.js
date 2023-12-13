@@ -105,7 +105,7 @@ export default function Home({
                 <Image
                   src={`/svg/${article.slug}.svg`}
                   unoptimized
-                  alt="icone"
+                  alt="icon de l'article"
                   width={100}
                   height={100}
                   className={styles.home__list__item__icon}
