@@ -192,14 +192,6 @@ export default function Comments({ posts }) {
         </p>
         )}
         <label htmlFor="comment">Commentaire (obligatoire)</label>
-        <div>
-          {emojis.map((emoji) => (
-            <button type="button" key={1} onClick={() => handleEmojiClick(emoji)}>
-              {emoji}
-            </button>
-          ))}
-        </div>
-
         <textarea
           id="comment"
           name="comment"

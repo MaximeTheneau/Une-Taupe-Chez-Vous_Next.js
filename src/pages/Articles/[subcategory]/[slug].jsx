@@ -157,7 +157,7 @@ export default function Slug({ post, desc, image }) {
         <ol>
           {post.listPosts.map((listArticle) => (
             listArticle.title !== null && (
-            <li key={listArticle.title}>
+            <li key={listArticle.slug}>
               {listArticle.title && (
               <h3>{listArticle.title}</h3>
               )}
