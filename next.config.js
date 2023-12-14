@@ -7,7 +7,7 @@ const path = require('path');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // output: 'export',
+  output: 'export',
   reactStrictMode: true,
   swcMinify: true,
   // compiler: {

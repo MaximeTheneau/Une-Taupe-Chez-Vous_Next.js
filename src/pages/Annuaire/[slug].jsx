@@ -24,7 +24,7 @@ export async function getStaticProps({ params }) {
   const post = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/${params.slug}`);
   const image = await fetcherImage(post.imgPost);
 
-  return { props: { post, image: image.input }, revalidate: 10 };
+  return { props: { post, image: image.input } };
 }
 
 export default function Slug({ post, image }) {
