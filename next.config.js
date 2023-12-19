@@ -8,8 +8,19 @@ const path = require('path');
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
+  optimization: {
+    minimize: true,
+    minimizer: [
+      // eslint-disable-next-line global-require
+      // '...',
+      // new CssMinimizerPlugin(),
+    ],
+  },  
   reactStrictMode: true,
   swcMinify: true,
+  sassOptions: {
+    includePaths: [path.join(__dirname, 'styles')],
+  },
   // compiler: {
   //   removeConsole: true,
   // },

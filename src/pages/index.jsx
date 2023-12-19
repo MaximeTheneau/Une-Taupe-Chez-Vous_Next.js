@@ -125,20 +125,23 @@ export default function Home({
             <div dangerouslySetInnerHTML={{ __html: paragraphPosts.paragraph }} />
           </div>
         ))}
-        <div className={styles.home__faq}>
+        {/* <div className={styles.home__faq}>
           <Link href={faq.slug}>
             <h2>{faq.title}</h2>
           </Link>
           <Faq faq={faq} />
-        </div>
-        <h3>Retrouver nos derniers articles :</h3>
-        <Cards cards={keyword} />
+        </div> */}
+
           <h2>
             <Link href={testimonials.slug}>
               {testimonials.title}
             </Link>
           </h2>
           <div dangerouslySetInnerHTML={{ __html:testimonials.paragraphPosts[0].paragraph}} />
+        
+        <h2>Découvrez aussi :</h2>
+          <Cards cards={keyword} />
+        
         {accueil.listPosts.map((listArticle) => (
           listArticle.title !== null && (
           <div key={listArticle.title}>
