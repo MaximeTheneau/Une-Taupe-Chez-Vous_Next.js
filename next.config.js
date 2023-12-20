@@ -7,15 +7,7 @@ const path = require('path');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
-  optimization: {
-    minimize: true,
-    minimizer: [
-      // eslint-disable-next-line global-require
-      // '...',
-      // new CssMinimizerPlugin(),
-    ],
-  },  
+  // output: 'standalone',
   reactStrictMode: true,
   swcMinify: true,
   sassOptions: {

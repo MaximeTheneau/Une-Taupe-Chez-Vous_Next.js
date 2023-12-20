@@ -1,4 +1,3 @@
-// pages/api/build-export-endpoint.js
 export default async function handler(req, res) {
   try {
     console.log(req);
