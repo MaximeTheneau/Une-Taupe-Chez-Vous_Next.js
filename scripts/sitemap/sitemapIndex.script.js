@@ -12,7 +12,7 @@ const generateSitemapIndex = () => {
       </sitemap>
     </sitemapindex>`;
 
-  fs.writeFileSync('./public/sitemap/sitemap_index.xml', sitemapIndex);
+  fs.writeFileSync('./public/sitemap_index.xml', sitemapIndex);
 };
 
 generateSitemapIndex();

@@ -19,7 +19,7 @@ const generateSitemapImages = async () => {
         return `<url>
                   <loc>${urlFront}${page.url}</loc>
                   <image:image>
-                    <image:loc>${urlCdn}${page.imgPost}.jpg</image:loc>
+                    <image:loc>${urlCdn}${page.imgPost}.webp</image:loc>
                   </image:image>
                   ${page.paragraphPosts.map((paragraph) => {
                     return paragraph.imgPostParagh &&
