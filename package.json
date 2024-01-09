@@ -7,7 +7,7 @@
     "export": "next export",
     "start": "next start -p 3001",
     "serve": "npx serve -s out",
-    "pm2": "pm2 serve out 3001 --spa --name une-taupe-chez-vous",
+    "pm2": "pm2 serve out 3001 -f --name une-taupe-chez-vous",
     "lint": "next lint",
     "dev": "next dev",
     "analyze": "ANALYZE=true next build",
