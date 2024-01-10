@@ -46,7 +46,7 @@ export default function SiteMapPage({
 
       <section className={styles.siteMap}>
         <h1>{page.title}</h1>
-        <div dangerouslySetInnerHTML={{ __html: page.contents }} />
+        <div dangerouslySetInnerHTML={{ __html: page.contentsHTML }} />
         <ul className={styles.siteMap__list}>
           <li className={styles['siteMap__list--title']}>
             Accueil

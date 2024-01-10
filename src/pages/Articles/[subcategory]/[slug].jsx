@@ -38,7 +38,6 @@ export async function getStaticProps({ params }) {
 
 export default function Slug({ post, desc, image }) {
   const urlPost = `${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.subcategory.slug}/${post.slug}`;
-
   return (
     <>
       <Head>
@@ -104,7 +103,7 @@ export default function Slug({ post, desc, image }) {
           </figcaption>
           )}
         </figure>
-        <div dangerouslySetInnerHTML={{ __html: post.contents }} />
+        <div dangerouslySetInnerHTML={{ __html: post.contentsHTML }} />
         <TableOfContents post={post} />
         {post.paragraphPosts.map((paragraphArticle) => (
           <div key={paragraphArticle.id}>

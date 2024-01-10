@@ -91,7 +91,7 @@ export default function TaupierPage({ page, image }) {
             39338032400029
           </p>
         <GoogleMaps />
-        <div dangerouslySetInnerHTML={{ __html: page.contents }} />
+        <div dangerouslySetInnerHTML={{ __html: page.contentsHTML }} />
         <TableOfContents post={page} />
         </div>
         {page.paragraphPosts.map((paragraphArticle) => (

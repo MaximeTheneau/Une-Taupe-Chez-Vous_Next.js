@@ -71,7 +71,7 @@ export default function Recherche({ page, articlesInit, desc }) {
 
       <section className={styles.page__contents}>
         <h1>{page.title}</h1>
-        <div dangerouslySetInnerHTML={{ __html: page.contents }} />
+        <div dangerouslySetInnerHTML={{ __html: page.contentsHTML }} />
         <form className={styles.search} onSubmit={handleSubmit}>
           <input
             type="text"

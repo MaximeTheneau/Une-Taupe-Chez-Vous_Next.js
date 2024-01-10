@@ -34,7 +34,7 @@ export default function testimonials({ page }) {
       </Head>
       <section className={styles.page}>
         <h1>{page.title}</h1>
-        <div dangerouslySetInnerHTML={{ __html: page.contents }} />
+        <div dangerouslySetInnerHTML={{ __html: page.contentsHTML }} />
           {page.paragraphPosts.map((paragraphArticle) => (
           <div key={paragraphArticle.id}>
             {paragraphArticle.subtitle && (

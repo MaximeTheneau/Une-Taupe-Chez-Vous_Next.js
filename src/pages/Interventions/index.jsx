@@ -40,7 +40,7 @@ export default function Home({ articles, page }) {
         <section>
 
           <h1>{page.title}</h1>
-          <div dangerouslySetInnerHTML={{ __html: page.contents }} />
+          <div dangerouslySetInnerHTML={{ __html: page.contentsHTML }} />
           <h2>Nos interventions</h2>
           <div className={styles.home}>
             <Cards cards={articles} />

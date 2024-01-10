@@ -39,7 +39,7 @@ export default function Page({ page, article }) {
 
       <section className={styles.page}>
         <h1>{page.title}</h1>
-        <div dangerouslySetInnerHTML={{ __html: page.contents }} />
+        <div dangerouslySetInnerHTML={{ __html: page.contentsHTML }} />
         <DirectoryRegistrationForm
           article={article}
         />

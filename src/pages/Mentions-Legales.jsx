@@ -79,7 +79,7 @@ export default function MentionsLegal({ page }) {
           </figure>
           <h1>{page.title}</h1>
           <h2>{page.subtitle}</h2>
-          <div dangerouslySetInnerHTML={{ __html: page.contents }} />
+          <div dangerouslySetInnerHTML={{ __html: page.contentsHTML }} />
           <Button />
         </section>
       </>

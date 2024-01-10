@@ -120,7 +120,7 @@ export default function Slug({ post, image }) {
           </figcaption>
           )}
         </figure>
-        <div dangerouslySetInnerHTML={{ __html: post.contents }} />
+        <div dangerouslySetInnerHTML={{ __html: post.contentsHTML }} />
         <table className={styles.page__table}>
           <thead>
             <tr>

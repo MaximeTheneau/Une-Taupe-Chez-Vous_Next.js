@@ -36,6 +36,7 @@ export async function getStaticProps() {
 export default function Home({
   accueil, services, articles, faq, testimonials, keyword, image,
 }) {
+
   return (
     <>
       <Head>
@@ -79,7 +80,7 @@ export default function Home({
           />
           <div className={styles.home__imagesFull__text}>
             <h1>{accueil.title}</h1>
-            <div dangerouslySetInnerHTML={{ __html: accueil.contents }} />
+            <div dangerouslySetInnerHTML={{ __html: accueil.contentsHTML }} />
           </div>
         </div>
 

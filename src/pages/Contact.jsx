@@ -36,7 +36,7 @@ export default function Contact({ page }) {
 
       <section className={styles.page}>
         <h1>{page.title}</h1>
-        <div dangerouslySetInnerHTML={{ __html: page.contents }} />
+        <div dangerouslySetInnerHTML={{ __html: page.contentsHTML }} />
 
         <h2>Contactez-nous - Devis gratuit</h2>
         <div className={styles.page__contact}>

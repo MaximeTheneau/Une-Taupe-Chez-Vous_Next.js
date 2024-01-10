@@ -38,7 +38,7 @@ export default function Home({ page, articles }) {
         <section>
 
           <h1>{page.title}</h1>
-          <div dangerouslySetInnerHTML={{ __html: page.contents }} />
+          <div dangerouslySetInnerHTML={{ __html: page.contentsHTML }} />
 
         </section>
         {/* --Articles--*/}

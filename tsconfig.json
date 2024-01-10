@@ -30,7 +30,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-, "src/pages/api/build-export-endpoint.js"  ],
+, "src/api/build-export-endpoint.js"  ],
   "exclude": [
     "node_modules"
   ]

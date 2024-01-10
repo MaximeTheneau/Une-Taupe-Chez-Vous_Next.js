@@ -80,7 +80,7 @@ export default function Slug({ desc, post, image }) {
             )}
           </figure>
         </div>
-        <div dangerouslySetInnerHTML={{ __html: post.contents }} />
+        <div dangerouslySetInnerHTML={{ __html: post.contentsHTML }} />
         <table className={styles.page__table}>
           <thead>
             <tr>
