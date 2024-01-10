@@ -199,7 +199,11 @@
   &__contact{
     width: 90%;
     margin: 0 auto;
-    
+    & h2 {
+      font-size: $font-size-large;
+      font-weight: $font-size-bold;
+      margin: 1rem !important;
+  }
     & a{
       color: $color-link;
       &:hover{

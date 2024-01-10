@@ -12,6 +12,8 @@ interface FormState {
   message: string;
   subject: string;
   postalCode: string;
+  phone?: string;
+  emailReturn?: boolean;
 }
 
 interface ModalState {
@@ -41,8 +43,10 @@ export default function ContactForm() {
       message: '',
       subject: 'Demande de renseignements',
       postalCode: '',
+      phone: '',
+      emailReturn: true,
     },
-    textArea: 1,
+    textArea: 3,
     confirmationName: null,
     confirmationEmail: null,
     confirmationMessage: null,
@@ -98,6 +102,8 @@ export default function ContactForm() {
         message: '',
         postalCode: '',
         subject: 'Demande de devis',
+        phone: '',
+        emailReturn: true,
       },
       modal: {
         title: 'Merci !',
@@ -166,31 +172,31 @@ export default function ContactForm() {
             />
           </div>
           <div className={styles.contact__input}>
-            {classErrorOrConfirmation(state.confirmationName)}
             <Input
               type="text"
               title="Nom"
-              placeholder="Nom Prénom / Société"
+              placeholder="Nom Prénom / Société*"
               value={state.form.name}
               onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'name')}
               onBlur={(e: ChangeEvent<HTMLInputElement>) => {
                 setState((prevState) => {
                   const newState = { ...prevState, isFocused: true };
-
                   if (e.target.value.length > 2 && e.target.value.length < 35) {
                     newState.confirmationName = true;
                   } else {
                     newState.confirmationName = false;
                   }
-
                   return newState;
                 });
               }}
-
             />
+            {state.confirmationName === false &&
+              <span className={styles.contact__input__error}>
+                Veuillez renseigner votre nom / société (entre 3 et 35 caractères)
+              </span>
+            }
           </div>
           <div className={styles.contact__input}>
-            {classErrorOrConfirmation(state.confirmationCodePostal)}
             <input
               type="number"
               className="contact-form-input"
@@ -204,17 +210,21 @@ export default function ContactForm() {
                   ? setState({ ...state, confirmationCodePostal: true })
                   : setState({ ...state, confirmationCodePostal: false })
               )}
-              placeholder="Code postal"
+              placeholder="Code postal*"
               required
             />
+              {state.confirmationCodePostal === false &&
+                <span className={styles.contact__input__error}>
+                  Veuillez renseigner votre code postal (5 chiffres)
+                </span>
+              }
           </div>
           <div className={styles.contact__input}>
-            {classErrorOrConfirmation(state.confirmationEmail)}
             <Input
               type="email"
               title="Email"
               value={state.form.email}
-              placeholder="exemple@email.fr"
+              placeholder="Email*"
               onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'email')}
               onBlur={(e: ChangeEvent<HTMLInputElement>) => (
                 regex.test(e.target.value)
@@ -222,9 +232,23 @@ export default function ContactForm() {
                   : setState({ ...state, confirmationEmail: false })
               )}
             />
+              {state.confirmationEmail === false &&
+                <span className={styles.contact__input__error}>
+                  Veuillez renseigner votre adresse email
+                </span>
+              }
           </div>
-          <div className={styles.contact__textarea}>
-            {classErrorOrConfirmation(state.confirmationMessage)}
+          <div className={styles.contact__input}>
+            <input 
+              type="text"
+              name="phone"
+              placeholder="Téléphone"
+              value={state.form.phone}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'phone')}
+
+            />
+          </div>
+          <div className={styles.contact__input}>
             <textarea
               rows={state.textArea}
               title="Message"
@@ -236,10 +260,27 @@ export default function ContactForm() {
                   : setState({ ...state, confirmationMessage: false }))}
               name="message"
               wrap="off"
-              placeholder="Votre message"
+              placeholder="Message*"
               required
             />
+              {state.confirmationMessage === false &&
+                <span className={styles.contact__input__error}>
+                  Veuillez renseigner votre message (entre 5 et 500 caractères)
+                </span>
+              }
           </div>
+          <div className={styles.contact__input__chekbox}>
+            <input
+              type="checkbox"
+              name="emailReturn"
+              id="emailReturn"
+              checked={state.form.emailReturn}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.checked, 'emailReturn')}
+            />
+            <label htmlFor="emailReturn">
+              Recevoir une copie de cet email
+            </label>
+          </div> 
           <div className="contact-form_button">
             <button type="submit" className="button">
               Envoyer

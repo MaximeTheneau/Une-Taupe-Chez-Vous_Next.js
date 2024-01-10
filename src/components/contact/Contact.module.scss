@@ -2,40 +2,46 @@
 
 .contact{
     width: 100%;
-    margin: 0 auto 1rem;
-    &__input{
-        margin: 1.5rem 0;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        flex-wrap: wrap;
-        & > input{
-            width: 90%;
-        }
-        & > p {
-            width: 100%;
-            margin: 1rem 0;
-            font-size: 1rem;
-            color: $color-error;
-            display: flex;
-            align-items: center;
-            & > i{
-                margin-right: 0.5rem;
-            }
 
+    &__input{
+        & input, textarea, select {
+            width: 100%;
+            border: 1px solid $font-color-light !important;
+            border-radius: 12px;
+            padding: 1rem 0.5rem;
+            font-weight: bold;
+            font-size: $font-size-small !important;
+            margin: 1rem 0 0 0;
+            &:focus{
+                outline: none;
+                border: 6px solid $color-primary !important;
+                color: $font-color !important;
+            }
         }
-    }
-    &__textarea{
-        margin: 1.5rem 0;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        & textarea{
-            margin: 1rem 0;
-            overflow-y: hidden;
-            
+        &__chekbox{
+            display: inline;
+            & label{
+                font-size: $font-size-small;
+                font-weight: bold;
+                margin: 0 1rem;
+            }
+            & input{
+                width:$font-size-small;
+                height: $font-size-small;
+                margin: 1rem 0;
+            }
         }
+        & select {
+            border: none;
+        }
+        &__error{
+            color: $color-error;
+            width: 100%;
+            display: inline-block;
+        }
+
     }
+
     &__label{
         font-size: 1rem;
         font-weight: bold;
@@ -53,6 +59,15 @@
 
 @media screen and (min-width: 720px) {
     .contact{
+        width: 100%;
+        &__input{
+            & input, textarea, select {
+                width: 70%;
+                font-size: $font-size-medium !important;
+                border: 1px solid $font-color-light !important;
+            }
+        }
+
     }
 
 

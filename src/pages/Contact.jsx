@@ -38,8 +38,8 @@ export default function Contact({ page }) {
         <h1>{page.title}</h1>
         <div dangerouslySetInnerHTML={{ __html: page.contentsHTML }} />
 
-        <h2>Contactez-nous - Devis gratuit</h2>
         <div className={styles.page__contact}>
+        <h2>Contactez-nous - Devis gratuit</h2>
           <div className={styles.page__contact__block} itemScope itemType="https://schema.org/PostalAdress">
             <p>
               <strong>Société : </strong>
