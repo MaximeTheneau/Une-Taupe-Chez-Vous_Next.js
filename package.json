@@ -2,6 +2,7 @@
   "name": "une_taupe_chez_vous__nextjs",
   "version": "2.1.0",
   "scripts": {
+    
     "build": "next build && npm run generate-sitemap && npm run pm2:reload",
     "generate-sitemap": "node scripts/sitemap/runAllScripts.script.js",
     "export": "next build",
