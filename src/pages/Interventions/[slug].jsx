@@ -101,22 +101,53 @@ export default function Slug({ desc, post, image }) {
           </tbody>
         </table>
         <TableOfContents post={post} />
-        {post.paragraphPosts.map((paragraphPosts) => (
-          <>
-            <h2 id={paragraphPosts.slug}>{paragraphPosts.subtitle}</h2>
-            <div dangerouslySetInnerHTML={{ __html: paragraphPosts.paragraph }} />
-            {paragraphPosts.linkSubtitle && (
-              <div className={styles.page__contents__paragraph__links}>
-                <span className={styles.page__contents__paragraph__links__link}>
-                  → A lire aussi :
-                  <Link href={paragraphPosts.link}>
-                    {' '}
-                    {paragraphPosts.linkSubtitle}
-                  </Link>
-                </span>
+        {post.paragraphPosts.map((paragraphArticle) => (
+          <div key={paragraphArticle.id}>
+            {paragraphArticle.subtitle && (
+              <h2 id={paragraphArticle.slug}>
+                {paragraphArticle.subtitle}
+              </h2>
+            )}
+            {paragraphArticle.paragraph && (
+              <div key={paragraphArticle.id} className={styles.page__contents__paragraph}>
+                {paragraphArticle.imgPostParagh && (
+                <figure className={styles.page__contents__paragraph__figure}>
+                  <Image
+                    src={`${paragraphArticle.imgPostParagh}.webp`}
+                    alt={paragraphArticle.subtitle}
+                    quality={75}
+                    width={1080}
+                    height={1080}
+                    style={{
+                      width: '100%',
+                      height: 'auto',
+                    }}
+                  />
+                  {paragraphArticle.subtitle !== paragraphArticle.altImgParagh && (
+                  <figcaption className="caption">
+                    {paragraphArticle.altImg}
+                  </figcaption>
+                  )}
+                </figure>
+                )}
+                <div
+                  className={styles.page__contents__paragraph__text}
+                  dangerouslySetInnerHTML={{ __html: paragraphArticle.paragraph }}
+                />
+                {paragraphArticle.link && (
+                  <div className={styles.page__contents__paragraph__links}>
+                    <span className={styles.page__contents__paragraph__links__link}>
+                      → A lire aussi :
+                      <Link href={paragraphArticle.link}>
+                        {' '}
+                        {paragraphArticle.linkSubtitle}
+                      </Link>
+                    </span>
+                  </div>
+                )}
               </div>
             )}
-          </>
+          </div>
         ))}
         <Link href="/Contact" className="button">
           Contactez-nous

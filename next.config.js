@@ -6,6 +6,7 @@ const path = require('path');
 // module.exports = withBundleAnalyzer({})
 
 /** @type {import('next').NextConfig} */
+
 const nextConfig = {
   output: process.env.NODE_ENV === 'production' ? 'export' : undefined,
   reactStrictMode: true,
