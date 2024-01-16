@@ -2,6 +2,10 @@ export default function formMiddleware(req, apiPath, handleResponse200, handleRe
   const requestOptions = {
     method: 'POST',
     body: JSON.stringify(req),
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'https://unetaupechezvous.fr',
+    },
   };
   fetch(`${process.env.NEXT_PUBLIC_API_URL}${apiPath}`, requestOptions)
   .then((response) => {

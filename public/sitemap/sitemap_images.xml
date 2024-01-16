@@ -5,7 +5,9 @@
                   <image:image>
                     <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Ragondin.webp</image:loc>
                   </image:image>
-                  
+                  <image:image>
+                         <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Pieges-a-Ragondins-Attrapez-le</image:loc>
+                       </image:image>
                 </url><url>
                   <loc>https://unetaupechezvous.fr/Articles/Nuisibles/30-ans-au-service-de-la-lutte-contre-les-nuisibles</loc>
                   <image:image>
@@ -164,12 +166,6 @@
                   <loc>https://unetaupechezvous.fr/Articles/Nuisibles/Rat-taupier-ou-taupe-comment-les-differencier-et-les-eliminer</loc>
                   <image:image>
                     <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Rat-taupier-ou-taupe-comment-les-differencier-et-les-eliminer.webp</image:loc>
-                  </image:image>
-                  
-                </url><url>
-                  <loc>https://unetaupechezvous.fr/Articles/Nuisibles/Comprendre-la-difference-entre-une-marte-et-une-fouine</loc>
-                  <image:image>
-                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Comprendre-la-difference-entre-une-marte-et-une-fouine.webp</image:loc>
                   </image:image>
                   
                 </url><url>
