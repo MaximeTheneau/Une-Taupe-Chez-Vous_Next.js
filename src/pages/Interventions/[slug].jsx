@@ -153,11 +153,11 @@ export default function Slug({ desc, post, image }) {
           Contactez-nous
         </Link>
       </section>
-      <section>
+      {/* <section>
         <h2>Retrouver nos derniers articles :</h2>
         <Cards cards={desc} />
         <Comments posts={post} />
-      </section>
+      </section> */}
     </>
   );
 }
