@@ -45,10 +45,10 @@ export default function Page({ page, article }) {
         />
         <TableOfContents post={page} />
         {page.paragraphPosts.map((paragraphPosts) => (
-          <>
+          <div key={paragraphPosts.id}>
             <h2 id={paragraphPosts.slug}>{paragraphPosts.subtitle}</h2>
             <div dangerouslySetInnerHTML={{ __html: paragraphPosts.paragraph }} />
-          </>
+          </div>
         ))}
       </section>
     </>
