@@ -1,16 +1,16 @@
 import Head from 'next/head';
 import Layout from '../components/layout';
 import '../styles/globals.scss';
-// import CookiesModal from '../components/modal/cookies/Cookies';
+import CookiesModal from '../components/modal/cookies/Cookies';
 
 function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <meta name="google-site-verification" content="yObJd5noBtjUBky_GRbOOETV42Q9qAHf7w00PPz1-ss" />
+        <meta name="google-site-verification" content={process.env.NEXT_PUBLIC_GOOGLE_WEBMASTER_ID} />
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </Head>
-      {/* <CookiesModal /> */}
+      <CookiesModal />
       <Layout {...pageProps}>
         <Component {...pageProps} />
       </Layout>
