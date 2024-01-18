@@ -14,9 +14,10 @@ export default function CookiesModal() {
 
   useEffect(() => {
     const cookiesModalParam = window.localStorage.getItem('cookiesModal');
-    if (cookiesModalParam === null) {
+    if (!cookiesModalParam ) {
       setTimeout(() => {
         setCookiesModal(true);
+        window.localStorage.setItem('cookiesModal', true);
       }, 1000);
     } else if (cookiesModalParam === true) {
       setCookiesModal(false);
@@ -41,7 +42,8 @@ export default function CookiesModal() {
   };
   const handleAcceptCookies = () => {
     setCookiesModal(false);
-    window.localStorage.setItem('cookiesModal', false);
+    window.localStorage.setItem('cookiesModal', state);
+    window.localStorage.setItem('cookiesGoogle', state.cookiesGoogle);
   };
   return (
     <>
@@ -58,8 +60,8 @@ export default function CookiesModal() {
         </Script>
       </>
       )}
-
-      <div className={`modal ${style.cookies__modal} ${cookiesModal ? style.cookies__modal__active : 'none'}`}>
+      {cookiesModal && (
+      <div className={`modal ${style.cookies__modal} `}>
         <div className={style.cookies}>
           {state.cookiesChoice ? (
             <div className={`card ${style.cookies__choice}`}>
@@ -129,7 +131,8 @@ export default function CookiesModal() {
                   type="button"
                   className="button-glass"
                   onClick={() => {
-                    window.localStorage.setItem('cookiesModal', true);
+                    window.localStorage.setItem('cookiesModal', false);
+                    setCookiesModal(false)
                     window.localStorage.setItem('cookiesGoogle', true);
                   }}
                 >
@@ -140,6 +143,7 @@ export default function CookiesModal() {
           )}
         </div>
       </div>
+      )}
     </>
 
   );
