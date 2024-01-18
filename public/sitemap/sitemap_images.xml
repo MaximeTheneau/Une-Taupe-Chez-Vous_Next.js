@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
       <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
         <url>
+                  <loc>https://unetaupechezvous.fr/Articles/Nuisibles/Les-taupes-albinos-des-animaux-fascinants-mais-fragiles</loc>
+                  <image:image>
+                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Les-taupes-albinos-des-animaux-fascinants-mais-fragiles.webp</image:loc>
+                  </image:image>
+                  
+                </url><url>
+                  <loc>https://unetaupechezvous.fr/Interventions/Taupe</loc>
+                  <image:image>
+                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Taupe.webp</image:loc>
+                  </image:image>
+                  
+                </url><url>
+                  <loc>https://unetaupechezvous.fr/Articles/Piege/Comment-poser-un-piege-a-taupe</loc>
+                  <image:image>
+                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Comment-poser-un-piege-a-taupe.webp</image:loc>
+                  </image:image>
+                  
+                </url><url>
+                  <loc>https://unetaupechezvous.fr/Annuaire</loc>
+                  <image:image>
+                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Accueil.webp</image:loc>
+                  </image:image>
+                  
+                </url><url>
+                  <loc>https://unetaupechezvous.fr/Interventions/Fouine</loc>
+                  <image:image>
+                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Fouine.webp</image:loc>
+                  </image:image>
+                  
+                </url><url>
                   <loc>https://unetaupechezvous.fr/Interventions/Ragondin</loc>
                   <image:image>
                     <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Ragondin.webp</image:loc>
@@ -12,12 +42,6 @@
                   <loc>https://unetaupechezvous.fr/Articles/Nuisibles/Sans-danger-pour-l-environnement</loc>
                   <image:image>
                     <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Sans-danger-pour-l-environnement.webp</image:loc>
-                  </image:image>
-                  
-                </url><url>
-                  <loc>https://unetaupechezvous.fr/Interventions/Fouine</loc>
-                  <image:image>
-                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Fouine.webp</image:loc>
                   </image:image>
                   
                 </url><url>
@@ -52,16 +76,6 @@
                     <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Qu-est-ce-qu-une-taupe-mange-Decouvrez-l-alimentation-des-taupes.webp</image:loc>
                   </image:image>
                   
-                </url><url>
-                  <loc>https://unetaupechezvous.fr/Articles/Piege/Comment-poser-un-piege-a-taupe</loc>
-                  <image:image>
-                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Comment-poser-un-piege-a-taupe.webp</image:loc>
-                  </image:image>
-                  <image:image>
-                         <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Les-differents-types-de-pieges</image:loc>
-                       </image:image><image:image>
-                         <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Outils-et-Materiaux-Necessaire</image:loc>
-                       </image:image>
                 </url><url>
                   <loc>https://unetaupechezvous.fr/Articles/Nuisibles/Tout-savoir-sur-les-taupinieres</loc>
                   <image:image>
@@ -271,12 +285,6 @@
                   </image:image>
                   
                 </url><url>
-                  <loc>https://unetaupechezvous.fr/Articles/Nuisibles/Les-taupes-albinos-des-animaux-fascinants-mais-fragiles</loc>
-                  <image:image>
-                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Les-taupes-albinos-des-animaux-fascinants-mais-fragiles.webp</image:loc>
-                  </image:image>
-                  
-                </url><url>
                   <loc>https://unetaupechezvous.fr/Articles/Nuisibles/Comment-identifier-les-excrements-de-renard-dans-votre-jardin</loc>
                   <image:image>
                     <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Comment-identifier-les-excrements-de-renard-dans-votre-jardin.webp</image:loc>
@@ -307,12 +315,6 @@
                   </image:image>
                   
                 </url><url>
-                  <loc>https://unetaupechezvous.fr/Interventions/Taupe</loc>
-                  <image:image>
-                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Taupe.webp</image:loc>
-                  </image:image>
-                  
-                </url><url>
                   <loc>https://unetaupechezvous.fr/Contact</loc>
                   <image:image>
                     <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Contact.webp</image:loc>
@@ -332,12 +334,6 @@
                   
                 </url><url>
                   <loc>https://unetaupechezvous.fr/Tarifs</loc>
-                  <image:image>
-                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Accueil.webp</image:loc>
-                  </image:image>
-                  
-                </url><url>
-                  <loc>https://unetaupechezvous.fr/Annuaire</loc>
                   <image:image>
                     <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Accueil.webp</image:loc>
                   </image:image>
