@@ -4,7 +4,6 @@ export default function formMiddleware(req, apiPath, handleResponse200, handleRe
     body: JSON.stringify(req),
     headers: {
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': 'https://unetaupechezvous.fr',
     },
   };
   fetch(`${process.env.NEXT_PUBLIC_API_URL}${apiPath}`, requestOptions)
