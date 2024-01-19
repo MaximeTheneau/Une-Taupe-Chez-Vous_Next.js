@@ -88,19 +88,19 @@ export default function Footer() {
             </Link>
           </li>
           <li>
-            <Link href="https://www.linkedin.com/company/une-taupe-chez-vous" target="_blank" rel="nofollow">
+            <Link href="https://www.linkedin.com/company/une-taupe-chez-vous" target="_blank">
               <i className="icon-linkedin" />
               Linkedin
             </Link>
           </li>
           <li>
-            <Link href="https://twitter.com/UneTaupe_" target="_blank" rel="nofollow">
+            <Link href="https://twitter.com/UneTaupe_" target="_blank">
               <i className="icon-twitter" />
               Twitter
             </Link>
           </li>
           <li>
-            <Link href="https://www.facebook.com/unetaupechezvous/" target="_blank" rel="nofollow">
+            <Link href="https://www.facebook.com/unetaupechezvous/" target="_blank">
               <i className="icon-facebook" />
               Facebook
             </Link>
@@ -109,7 +109,7 @@ export default function Footer() {
 
       </div>
       <div className={styles.footer__author}>
-        <Link href="https://theneaumaxime.fr" target="_blank" rel="nofollow">
+        <Link href="https://theneaumaxime.fr" target="_blank">
           Site réalisé par Maxime Theneau
         </Link>
       </div>

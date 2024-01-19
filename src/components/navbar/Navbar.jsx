@@ -48,7 +48,7 @@ export default function Navbar() {
       <nav className={` ${isNavVisible ? ` ${styles.navbar}` : styles['navbar--hidden']} ${styles.navbar__720}`}>
         <ul className={styles.navbar__720__list}>
           <li className={styles['navbar__720__list-item']}>
-            <Link href="/">
+            <Link href="/" aria-label="Page d'acceuil 'Une Taupe Chez Vous'">
               <Image
                 src="logo-une-taupe-chez-vous.png"
                 alt="Logo de l'entreprise Une Taupe Chez Vous"

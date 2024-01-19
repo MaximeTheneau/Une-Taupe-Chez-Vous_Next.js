@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import Script from 'next/script';
 import style from '../Modal.module.scss';
 import CookieChoice from './CookieChoice';
+import { GoogleTagManager } from '@next/third-parties/google'
 
 export default function CookiesModal() {
-  const [cookiesModal, setCookiesModal] = useState(false);
+  const [cookiesModal, setCookiesModal] = useState(null);
   const [state, setState] = useState({
     cookiesGoogle: false,
     cookiesWebmaster: false,
@@ -14,14 +15,12 @@ export default function CookiesModal() {
 
   useEffect(() => {
     const cookiesModalParam = window.localStorage.getItem('cookiesModal');
-    if (!cookiesModalParam ) {
+    if (cookiesModalParam === null ) {
       setTimeout(() => {
         setCookiesModal(true);
         window.localStorage.setItem('cookiesModal', true);
       }, 1000);
-    } else if (cookiesModalParam === true) {
-      setCookiesModal(false);
-    }
+    } 
 
     const cookiesGoogleParam = window.localStorage.getItem('cookiesGoogle');
 
@@ -42,26 +41,24 @@ export default function CookiesModal() {
   };
   const handleAcceptCookies = () => {
     setCookiesModal(false);
-    window.localStorage.setItem('cookiesModal', state);
+
+    window.localStorage.setItem('cookiesModal', cookiesModal);
     window.localStorage.setItem('cookiesGoogle', state.cookiesGoogle);
   };
+
+  const handleRefuseCookies = () => {
+    setCookiesModal(false);
+    window.localStorage.setItem('cookiesModal', cookiesModal);
+    window.localStorage.setItem('cookiesGoogle', false);
+  }
+
   return (
     <>
       {state.cookiesGoogle && (
-      <>
-        <Script strategy="worker" src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`} />
-        <Script id="google-analytics" strategy="worker">
-          {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}');
-        `}
-        </Script>
-      </>
+        <GoogleTagManager gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID} />
       )}
       {cookiesModal && (
-      <div className={`modal ${style.cookies__modal} `}>
+      <div className={`modal ${style.cookies__modal}`}>
         <div className={style.cookies}>
           {state.cookiesChoice ? (
             <div className={`card ${style.cookies__choice}`}>
@@ -132,7 +129,8 @@ export default function CookiesModal() {
                   className="button-glass"
                   onClick={() => {
                     window.localStorage.setItem('cookiesModal', false);
-                    setCookiesModal(false)
+                    setState({ ...state, cookiesChoice: true });
+                    setCookiesModal(false);
                     window.localStorage.setItem('cookiesGoogle', true);
                   }}
                 >
