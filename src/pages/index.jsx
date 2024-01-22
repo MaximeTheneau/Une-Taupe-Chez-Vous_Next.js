@@ -157,7 +157,6 @@ export default function Home({
           </div>
           )
         ))}
-
         <button type="button" className="button">
           <Link href="/Contact">
             Contactez-nous
