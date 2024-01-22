@@ -54,7 +54,7 @@ export default function Recherche({ page, articlesInit, desc }) {
   return (
     <>
       <Head>
-        <title>{page.title}</title>
+        <title>{page.heading}</title>
         <meta name="description" content={page.metaDescription} />
         <meta property="og:type" content="website" />
         <meta property="og:title" content={page.title} />

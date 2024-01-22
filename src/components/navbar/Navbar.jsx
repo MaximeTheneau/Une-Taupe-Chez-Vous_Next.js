@@ -74,9 +74,7 @@ export default function Navbar() {
           </li>
         </ul>
         <Link href="/" tabIndex={"la page d'accueil"} />
-
       </nav>
-
       <nav
         aria-hidden="true"
         className={`${isNavVisible ? `${styles.navbar}` : styles['navbar--hidden']} ${styles.navbar__responsive}`}

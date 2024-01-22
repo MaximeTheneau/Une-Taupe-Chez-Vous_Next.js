@@ -40,7 +40,7 @@ export default function Home({
   return (
     <>
       <Head>
-        <title>{accueil.title}</title>
+        <title>{accueil.heading}</title>
         <meta name="description" content={accueil.metaDescription} />
         <meta property="og:type" content="website" />
         <meta property="og:title" content={accueil.title} />

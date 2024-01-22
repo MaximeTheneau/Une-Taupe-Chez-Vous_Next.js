@@ -41,7 +41,7 @@ export default function Slug({ post, desc, image }) {
   return (
     <>
       <Head>
-        <title>{post.title}</title>
+        <title>{post.heading}</title>
         <meta name="description" content={post.metaDescription} />
         {/* Open Graph */}
         <meta property="og:type" content="website" />

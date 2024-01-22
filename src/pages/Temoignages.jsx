@@ -17,7 +17,7 @@ export default function testimonials({ page }) {
   return (
     <>
       <Head>
-        <title>{page.title}</title>
+        <title>{page.heading}</title>
         <meta name="description" content={page.metaDescription} />
         {/* Open Graph */}
         <meta property="og:type" content="website" />

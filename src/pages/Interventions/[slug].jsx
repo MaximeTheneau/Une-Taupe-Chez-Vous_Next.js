@@ -31,7 +31,7 @@ export default function Slug({ desc, post, image }) {
   return (
     <>
       <Head>
-        <title>{post.title}</title>
+        <title>{post.heading}</title>
         <meta name="description" content={post.metaDescription} />
         {/* Open Graph */}
         <meta property="og:type" content="website" />
@@ -50,6 +50,15 @@ export default function Slug({ desc, post, image }) {
       <ArticleJsonLd post={post} />
       <section>
         <h1>{post.title}</h1>
+        <nav>
+          <ul className={styles.page__category}>
+            <li>
+              <Link href="/Interventions">
+              Interventions
+              </Link>
+            </li>
+          </ul>
+        </nav>
         <p className={styles.page__contents__date}>
           {post.formattedDate}
         </p>

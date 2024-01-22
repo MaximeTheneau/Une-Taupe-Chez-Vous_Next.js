@@ -3,6 +3,9 @@
 .page{
   width: 90%;
   margin: 1rem auto;
+  &__category{
+    margin: 0.5rem 0;
+  }
   &__contents{
     width: 90%;
     display: flex;
@@ -220,7 +223,6 @@
   
 }
 .search {
-
     background: $font-color-opacity;
     position: relative;
     padding: 0.3rem;
