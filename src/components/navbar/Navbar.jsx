@@ -73,7 +73,6 @@ export default function Navbar() {
             <Link href="/search"> Rechercher</Link>
           </li>
         </ul>
-        <Link href="/" tabIndex={"la page d'accueil"} />
       </nav>
       <nav
         aria-hidden="true"
@@ -103,7 +102,7 @@ export default function Navbar() {
             )}
           >
             <li className={styles['navbar__responsive__list-item']}>
-              <Link href="/">
+              <Link href="/" aria-label="Page d'acceuil 'Une Taupe Chez Vous'">
                 <span className={styles['navbar__responsive__list-item-link']}>Accueil</span>
               </Link>
             </li>
