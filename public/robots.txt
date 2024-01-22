@@ -4,6 +4,9 @@
     
     disallow: /api/
 
+    #INTERNAL SEARCH
+    Disallow: /search?q=*
+
     # Host
     Host: https://unetaupechezvous.fr/
     

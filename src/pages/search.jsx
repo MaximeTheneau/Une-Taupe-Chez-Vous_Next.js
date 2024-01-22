@@ -62,13 +62,14 @@ export default function Recherche({ page, articlesInit, desc }) {
         <meta property="og:site_name" content="Une Taupe Chez Vous" />
         <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/search`} />
         <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${page.imgPost}.jpg`} />
+        <meta name="robots" content="noindex,nofollow"/>
+        <meta name="googlebot" content="noindex,nofollow"/>
         <link
           rel="canonical"
           href={`${process.env.NEXT_PUBLIC_URL}/search`}
           key="canonical"
         />
       </Head>
-
       <section className={styles.page__contents}>
         <h1>{page.title}</h1>
         <div dangerouslySetInnerHTML={{ __html: page.contentsHTML }} />
