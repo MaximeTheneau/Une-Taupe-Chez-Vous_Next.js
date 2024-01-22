@@ -122,7 +122,7 @@ export default function Home({
           <div
             key={paragraphPosts.subtitle}
           >
-            <h3>{paragraphPosts.subtitle}</h3>
+            <h2>{paragraphPosts.subtitle}</h2>
             <div dangerouslySetInnerHTML={{ __html: paragraphPosts.paragraph }} />
           </div>
         ))}
@@ -135,13 +135,15 @@ export default function Home({
 
           <h2>
             <Link href={testimonials.slug}>
-              {testimonials.title}
+              {testimonials.title} de Clients Satisfaits
             </Link>
           </h2>
+          <p>Chez <strong>Une Taupe Chez Vous</strong>, la satisfaction de nos clients est notre plus grande récompense.
+          Découvrez ce que nos clients ont à dire sur notre service de lutte antinuisible, dirigé par l'expert taupier
+          piégeur, <strong>Laurent Theneau</strong>.</p>
           <div dangerouslySetInnerHTML={{ __html:testimonials.paragraphPosts[0].paragraph}} />
         
-        <h2>Découvrez aussi :</h2>
-          <Cards cards={keyword} />
+
         
         {accueil.listPosts.map((listArticle) => (
           listArticle.title !== null && (
@@ -161,6 +163,10 @@ export default function Home({
             Contactez-nous
           </Link>
         </button>
+      </section>
+      <section>
+        <h2>Découvrez aussi nos articles :</h2>
+        <Cards cards={keyword} />
       </section>
     </>
   );
