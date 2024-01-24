@@ -61,7 +61,6 @@ export default function Home({
         url={process.env.NEXT_PUBLIC_URL}
         logoUrl={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/logo-une-taupe-chez-vous.png`}
       />
-
       <section className={styles.home}>
         <div className={styles.home__imagesFull}>
           <Image
@@ -132,7 +131,6 @@ export default function Home({
           </Link>
           <Faq faq={faq} />
         </div> */}
-
           <h2>
             <Link href={testimonials.slug}>
               {testimonials.title} de Clients Satisfaits
@@ -142,9 +140,6 @@ export default function Home({
           Découvrez ce que nos clients ont à dire sur notre service de lutte antinuisible, dirigé par l'expert taupier
           piégeur, <strong>Laurent Theneau</strong>.</p>
           <div dangerouslySetInnerHTML={{ __html:testimonials.paragraphPosts[0].paragraph}} />
-        
-
-        
         {accueil.listPosts.map((listArticle) => (
           listArticle.title !== null && (
           <div key={listArticle.title}>

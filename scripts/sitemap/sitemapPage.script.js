@@ -32,7 +32,6 @@ const generateSitemap = async () => {
   const responseAll = await fetchJson(`${urlApi}posts/all`);
   const responseAnuaire = await fetchJson(`${urlApi}posts&category=Annuaire`);
   const responseInterventions = await fetchJson(`${urlApi}posts&category=Interventions`);
-  const responseArticles = await fetchJson(`${urlApi}posts&category=Articles`);
 
   // Define page priorities and filter URLs
   const pagesWithPriority = responsePages.filter((page) => [
@@ -68,18 +67,6 @@ const generateSitemap = async () => {
     page.priority = 0.6;
   });
 
-  responseArticles.forEach((page) => {
-    if ( page.subcategory === null){
-      page.slug = `Articles/${page.slug}`;
-      page.priority = 0.6;
-      }
-    else{
-      page.slug = `Articles/${page.subcategory.slug}/${page.slug}`;
-      page.priority = 0.6;
-    }
-
-  });
-
   responseInterventions.forEach((page) => {
     page.slug = `Interventions/${page.slug}`;
     page.priority = 0.8;
@@ -103,7 +90,6 @@ const generateSitemap = async () => {
     ...pagesWithoutPriority,
     ...responseAnuaire,
     ...responseInterventions,
-    ...responseArticles,
     ...addPages,
   ];
 

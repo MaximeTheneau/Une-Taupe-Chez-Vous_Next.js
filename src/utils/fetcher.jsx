@@ -1,6 +1,8 @@
 const fetcher = async (url) => {
   const response = await fetch(url);
   if (!response.ok) {
+    console.error(`Erreur lors de la requête à ${url}: ${response.status} ${response.statusText}`);
+
     throw new Error('Une erreur est survenue');
 
   }
