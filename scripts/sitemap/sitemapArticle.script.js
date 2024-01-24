@@ -3,7 +3,6 @@ const fs = require('fs');
 const generateNewsSitemap = async () => {
   const urlApi = 'https://back.unetaupechezvous.fr/api/';
   const urlFront = 'https://unetaupechezvous.fr';
-  const urlCdn = 'https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/';
 
   const fetchJson = async (url) => {
     const response = await fetch(url);
@@ -13,17 +12,11 @@ const generateNewsSitemap = async () => {
   const generateXml = (articles, urlFront) => {
     const sitemapXml = articles
       .map((article) => `<url>
-          <loc>${urlFront}${article.url}</loc>
-          <news:news>
-            <news:publication>
-              <news:name>${article.title}</news:name>
-              <news:language>fr</news:language>
-            </news:publication>
-            <news:publication_date>${article.updatedAt ? article.updatedAt : article.createdAt}</news:publication_date>
-            <news:title>${article.title}</news:title>
-            <news:keywords>${article.subcategory.name}</news:keywords>
-          </news:news>
-        </url>`)
+        <loc>${urlFront}${article.url}</loc>
+        <lastmod>${article.updatedAt ? article.updatedAt : article.createdAt}</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+      </url>`)
       .join('');
 
     const sitemapIndexXml = `<?xml version="1.0" encoding="UTF-8"?>
