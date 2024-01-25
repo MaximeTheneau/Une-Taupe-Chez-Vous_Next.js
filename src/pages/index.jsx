@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Cards from '../components/cards/cards';
 import Faq from '../components/faq/faq';
-import styles from '../styles/Pages.module.scss';
+import styles from '../styles/Home.module.scss';
 import imageLoaderFull from '../utils/imageLoaderFull';
 import fetcher from '../utils/fetcher';
 import LocalBusinessJsonLd from '../components/jsonLd/LocalBusinessJsonLd';
@@ -61,10 +61,9 @@ export default function Home({
         url={process.env.NEXT_PUBLIC_URL}
         logoUrl={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/logo-une-taupe-chez-vous.png`}
       />
-      <section className={styles.home}>
-        <div className={styles.home__imagesFull}>
+      <div className={styles.home__imagesFull}>
           <Image
-            src={`${accueil.slug}.webp`}
+            src={`Accueil.webp`}
             alt={accueil.altImg || accueil.title}
             loader={imageLoaderFull}
             quality={100}
@@ -87,9 +86,8 @@ export default function Home({
             <div dangerouslySetInnerHTML={{ __html: accueil.contentsHTML }} />
           </div>
         </div>
-
+      <section className={styles.home}>
         {/* --Services--*/}
-
         <div className={styles.home__category}>
           <div className={styles.home__category__title}>
             <Link href="../Interventions">
