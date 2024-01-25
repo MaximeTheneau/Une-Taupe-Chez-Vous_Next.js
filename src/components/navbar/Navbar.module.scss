@@ -51,6 +51,7 @@
     &__list{
         line-height: 1.8;
         flex-direction: column;
+        justify-content: center;
         animation: fadeIn 1s ease;
         position: relative;
         &-item{
