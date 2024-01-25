@@ -8,7 +8,6 @@ function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <meta name="google-site-verification" content={process.env.NEXT_PUBLIC_GOOGLE_WEBMASTER_ID} />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </Head>
       {/* <CookiesModal /> */}

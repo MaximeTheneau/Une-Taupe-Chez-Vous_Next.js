@@ -11,15 +11,12 @@ export default function Card({ card }) {
         <Image
           src={`${card.imgPost}.webp`}
           alt={card.altImg || card.title}
-          width={330}
-          height={310}
           loader={imageThumbnail}
           quality={70}
-          sizes="(max-width: 640px) 100vw,
-          (max-width: 750px) 100vw,
-          (max-width: 828px) 100vw,
-          (max-width: 1080px) 100vw,
-          100vw"
+          width={330}
+          height={330}
+          objectFit="cover"
+          sizes='(min-width: 360px) 320px, (min-width: 0px) 260px, 100vw'
           style={{
             width: '100%',
             height: 'auto',

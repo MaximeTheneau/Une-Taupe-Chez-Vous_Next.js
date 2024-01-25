@@ -50,11 +50,11 @@ export default function Navbar() {
           <li className={styles['navbar__720__list-item']}>
             <Link href="/" aria-label="Page d'acceuil 'Une Taupe Chez Vous'">
               <Image
-                src="logo-une-taupe-chez-vous.png"
+                src="logo-une-taupe-chez-vous.webp"
                 alt="Logo de l'entreprise Une Taupe Chez Vous"
                 quality={80}
                 className={styles.home__imageLogo}
-                width={90}
+                width={70}
                 height={50}
               />
             </Link>

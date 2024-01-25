@@ -66,10 +66,15 @@ export default function Home({
           <Image
             src={`${accueil.slug}.webp`}
             alt={accueil.altImg || accueil.title}
+            loader={imageLoaderFull}
             quality={100}
             width={image.width}
             height={image.height}
-            sizes="100vw"
+            sizes="(max-width: 640px) 100vw,
+              (max-width: 750px) 100vw,
+              (max-width: 828px) 100vw,
+              (max-width: 1080px) 100vw,
+              100vw"
             style={{
               width: '100%',
               height: 'auto',
