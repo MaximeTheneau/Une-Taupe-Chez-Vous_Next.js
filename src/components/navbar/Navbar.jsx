@@ -60,7 +60,9 @@ export default function Navbar() {
           </div>
         </div>
         <div className={`${toggleNav ? styles.navbar : styles['navbar__menu--hidden']} ${styles.navbar__menu}`}>
-          <ul className={styles.navbar__list}>
+          <ul className={styles.navbar__list}             onClick={() => {
+              setToggleNav(!toggleNav);
+            }}>
             <li className={styles['navbar__menu__list-item']}>
               <Link href="/Contact">
                 Contact
