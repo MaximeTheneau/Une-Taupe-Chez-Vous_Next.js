@@ -15,7 +15,6 @@ export default function Card({ card }) {
           quality={70}
           width={330}
           height={330}
-          objectFit="cover"
           sizes='(min-width: 360px) 320px, (min-width: 0px) 260px, 100vw'
           style={{
             width: '100%',

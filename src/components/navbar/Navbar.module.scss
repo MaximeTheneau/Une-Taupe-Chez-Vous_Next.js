@@ -1,70 +1,73 @@
 @import  '../../styles/variables.scss';
 
 .navbar{
+    font-family: 'fontTitle', sans-serif;
     position: fixed;
-	top: 0;
-    left: 50%;
-    width: $width-general;
-    z-index: 1;
-    margin: 1rem auto;
-    padding:  0.5rem 2% 0.5rem 2%;
-    background-color: $color-white;
-    box-shadow: $box-shadow;
+    width: 100%;
+    z-index: 2;
+    background-color: #ffffff0a;
     color: $font-color;
-    transform: translate(-50%, 0%);
-    transition: transform 0.5s ease;
-    border-radius: 1rem;
-
-
-    &__logo{
-        width: 20%;
-        & img{
-            width: 100%;
-        }
-    }
-    &--hidden{
-        transform: translate(-50%, -50%);
-    }
-}
-.navbar__720{
-    display: none;
+    backdrop-filter: blur(6px);
+    display: flex;
     justify-content: space-between;
-    font-size: 1.5rem;
+    align-items: center;
+    padding: 1rem;
     &__logo{
-        width: 20%;
-    }
-    &__list{
-        display: flex;
-        align-items: center;
-        &-item{
-            margin: 0 0 0 1rem;
-            cursor: pointer;
-        }
-    }
-}
-.navbar__responsive{
-    text-align: left;
-    & i{
+        font-size: calc(1rem + ((2vw - 0.48rem) * 1.3889));
+        font-weight: bold;
         cursor: pointer;
     }
+    & i{
+        background: $font-color;
+        color: $color-white;
+        padding: 0.5rem;
+        border-radius: 25%;
+        cursor: pointer;
+        &:hover{
+            background: $color-grey;
+            color: $color-primary;
+        }
+    }
+}
+.navbar__menu{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    padding-top: 6vh;
+    z-index: 1;
+    top: 0%;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #fff;
+    animation: menu 0.5s ease;
+    visibility: visible;
+    overflow: hidden !important;
     &__block{
         width: 100%;
         height: 4rem;
     }
     &__list{
         line-height: 1.8;
-        display: flex;
         flex-direction: column;
-        align-items: flex-start;
         animation: fadeIn 1s ease;
         position: relative;
         &-item{
             font-size: 1.5rem;
             cursor: pointer;
+            padding: 1rem;
+            text-align: center;
             &-social i{
                 margin: 0 0.5rem;
             }
         }
+    }
+    &--hidden{
+        display: none;
+        visibility: hidden;
+        transition: opacity 0.5s ease;
+
     }
 }
 //* Animation
@@ -82,17 +85,22 @@
     }
   }
 
+@keyframes menu {
+    0% {
+        top: -100%;
+    }
+    100% {
+        top: 0;
+
+    }
+  }
+
 /*
 * Media Queries for tablet and desktop
 */
 @media screen and (min-width: 720px) {
-    .navbar__responsive{
-        display: none;
-    }
-    .navbar__720{
-        display: flex;
-        align-items: center;
-    }
+
+
   }
   
   

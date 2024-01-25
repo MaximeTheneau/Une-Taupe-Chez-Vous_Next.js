@@ -5,76 +5,82 @@ import styles from './Navbar.module.scss';
 
 export default function Navbar() {
   const [toggleNav, setToggleNav] = useState(false);
-  const [isNavVisible, setIsNavVisible] = useState(true);
+  // const [isNavVisible, setIsNavVisible] = useState(true);
 
-  useEffect(() => {
-    let prevScrollY = window.scrollY;
+  // useEffect(() => {
+  //   let prevScrollY = window.scrollY;
 
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
+  //   const handleScroll = () => {
+  //     const currentScrollY = window.scrollY;
 
-      if (currentScrollY === 0) setIsNavVisible(true);
-      if (prevScrollY > currentScrollY) {
-        setIsNavVisible(true);
-      } else {
-        setIsNavVisible(false);
-      }
-      prevScrollY = currentScrollY;
-    };
+  //     if (currentScrollY === 0) setIsNavVisible(true);
+  //     if (prevScrollY > currentScrollY) {
+  //       setIsNavVisible(true);
+  //     } else {
+  //       setIsNavVisible(false);
+  //     }
+  //     prevScrollY = currentScrollY;
+  //   };
 
-    window.addEventListener('scroll', handleScroll);
+  //   window.addEventListener('scroll', handleScroll);
 
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener('scroll', handleScroll);
+  //   };
+  // }, []);
 
-  const handleMouseLeave = () => {
-    if (toggleNav) {
-      setTimeout(() => {
-        setToggleNav(false);
-      }, 5500);
-    }
-  };
+  // const handleMouseLeave = () => {
+  //   if (toggleNav) {
+  //     setTimeout(() => {
+  //       setToggleNav(false);
+  //     }, 5500);
+  //   }
+  // };
   return (
     <>
-      {
-      /**
-       * Navbar for tablet and desktop
-       * @media screen and (min-width: 720px)
-       * @see Navbar.module.scss
-       */
-      }
-      <nav className={` ${isNavVisible ? ` ${styles.navbar}` : styles['navbar--hidden']} ${styles.navbar__720}`}>
-        <ul className={styles.navbar__720__list}>
-          <li className={styles['navbar__720__list-item']}>
-            <Link href="/" aria-label="Page d'acceuil 'Une Taupe Chez Vous'">
-              <Image
-                src="logo-une-taupe-chez-vous.webp"
-                alt="Logo de l'entreprise Une Taupe Chez Vous"
-                quality={80}
-                className={styles.home__imageLogo}
-                width={70}
-                height={50}
-              />
-            </Link>
-          </li>
-          <li className={styles['navbar__720__list-item']}>
-            <Link href="/Contact">
-              Contact
-            </Link>
-          </li>
-          <li className={styles['navbar__720__list-item']}>
-            <Link href="/Taupier-agree-professionnel-depuis-1994">
-              Qui-sommes-nous
-            </Link>
-          </li>
-          <li className={styles['navbar__720__list-item']}>
-            <Link href="/search"> Rechercher</Link>
-          </li>
-        </ul>
+      <nav>
+        <div className={styles.navbar} >
+          <Link href="/"
+              className={styles.navbar__logo}
+          >
+            Une Taupe Chez Vous
+          </Link>
+          <div
+            aria-hidden="true"
+            className={styles.navbar__responsive__toggle}
+            onClick={() => {
+              setToggleNav(!toggleNav);
+            }}
+          >
+            {toggleNav ? (
+              <i className="icon-x" />
+            ) : (
+              <i className="icon-navbar" />
+            )}
+          </div>
+        </div>
+        <div className={`${toggleNav ? styles.navbar : styles['navbar__menu--hidden']} ${styles.navbar__menu}`}>
+          <ul className={styles.navbar__list}>
+            <li className={styles['navbar__menu__list-item']}>
+              <Link href="/Contact">
+                Contact
+              <div className={styles['navbar__menu__list-item-divider']} />
+              </Link>
+            </li>
+            <li className={styles['navbar__menu__list-item']}>
+              <Link href="/Taupier-agree-professionnel-depuis-1994">
+                Qui-sommes-nous
+              <div className={styles['navbar__menu__list-item-divider']} />
+              </Link>
+            </li>
+
+            {/* <li className={styles['navbar__menu__list-item']}>
+              <Link href="/search"> Rechercher</Link>
+            </li> */}
+          </ul>
+        </div>
       </nav>
-      <nav
+      {/* <nav
         aria-hidden="true"
         className={`${isNavVisible ? `${styles.navbar}` : styles['navbar--hidden']} ${styles.navbar__responsive}`}
         onMouseLeave={handleMouseLeave}
@@ -121,7 +127,7 @@ export default function Navbar() {
             </li>
           </ul>
         )}
-      </nav>
+      </nav> */}
     </>
 
   );
