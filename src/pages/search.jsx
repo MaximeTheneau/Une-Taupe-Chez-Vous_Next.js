@@ -3,7 +3,8 @@ import { useEffect, useState } from 'react';
 import Router, { useRouter } from 'next/router';
 import fetcher from '../utils/fetcher';
 import Cards from '../components/cards/cards';
-import styles from '../styles/Pages.module.scss';
+import styles from '../components/search/Search.module.scss';
+import Search from '../components/search/Search';
 
 export async function getStaticProps() {
   const page = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/search`);
@@ -24,32 +25,25 @@ export default function Recherche({ page, articlesInit, desc }) {
   const [searchValue, setSearchValue] = useState('');
   const [articles, setArticles] = useState(articlesInit);
 
-  useEffect(() => {
-    setSearchValue(router.query.q);
-  }, [router.query.q]);
+
 
   const removeAccents = (str) => str
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
     .toLowerCase();
 
-  const handleChange = (event) => {
-    setSearchValue(event);
-    const filteredArticles = articlesInit.filter((article) => {
-      const searchLowerCase = removeAccents(event.toLowerCase());
-      const lowerCaseTitle = removeAccents(article.title.toLowerCase());
-      return (
-        searchLowerCase.length > 0
-        && lowerCaseTitle.includes(searchLowerCase)
-      );
-    });
-    setArticles(filteredArticles);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    Router.push(`/search/?q=${encodeURIComponent(searchValue)}`);
-  };
+    const handleChange = (event) => {
+      setSearchValue(event);
+      const filteredArticles = articlesInit.filter((article) => {
+        const searchLowerCase = removeAccents(event.toLowerCase());
+        const lowerCaseTitle = removeAccents(article.title.toLowerCase());
+        return (
+          searchLowerCase.length > 0
+          && lowerCaseTitle.includes(searchLowerCase)
+        );
+      });
+      setArticles(filteredArticles);
+    };
 
   return (
     <>
@@ -73,25 +67,7 @@ export default function Recherche({ page, articlesInit, desc }) {
       <section className={styles.page__contents}>
         <h1>{page.title}</h1>
         <div dangerouslySetInnerHTML={{ __html: page.contentsHTML }} />
-        <form className={styles.search} onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Rechercher..."
-            onChange={(e) => {
-              handleChange(e.target.value);
-            }}
-            // onClick={() => setSearchValue('')}
-            value={searchValue}
-          />
-          <button
-            id="button"
-            type="submit"
-            tabIndex={0}
-            aria-label="Rechercher une page ou un article"
-          >
-            <i className="icon-paper-plane" />
-          </button>
-        </form>
+        <Search searchValue={searchValue} setSearchValue={setSearchValue} setArticles={setArticles} articlesInit={articlesInit}  />
         </section>
         <section>
           <h2>Résultats de la recherche :</h2>

@@ -2,9 +2,12 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import styles from './Navbar.module.scss';
+import Search from '../search/Search';
 
 export default function Navbar() {
   const [toggleNav, setToggleNav] = useState(false);
+  const [articles, setArticles] = useState([]);
+  const [searchValue, setSearchValue] = useState('');
   // const [isNavVisible, setIsNavVisible] = useState(true);
 
   // useEffect(() => {
@@ -36,6 +39,9 @@ export default function Navbar() {
   //     }, 5500);
   //   }
   // };
+  const closeNav = () => {
+    setToggleNav(false);
+  }
   return (
     <>
       <nav>
@@ -60,22 +66,25 @@ export default function Navbar() {
           </div>
         </div>
         <div className={`${toggleNav ? styles.navbar : styles['navbar__menu--hidden']} ${styles.navbar__menu}`}>
-          <ul className={styles.navbar__list}             onClick={() => {
-              setToggleNav(!toggleNav);
-            }}>
+          <ul className={styles.navbar__list} >
             <li className={styles['navbar__menu__list-item']}>
-              <Link href="/Contact">
+              <Search searchValue={searchValue} setSearchValue={setSearchValue} setArticles={setArticles} articlesInit={[]} closeNav={closeNav} />
+            </li>
+            <li className={styles['navbar__menu__list-item']}>
+              <Link href="/Interventions" onClick={() => closeNav()}>
+                Interventions
+              </Link>
+            </li>
+            <li className={styles['navbar__menu__list-item']}>
+              <Link href="/Contact" onClick={() => closeNav()}>
                 Contact
-              <div className={styles['navbar__menu__list-item-divider']} />
               </Link>
             </li>
             <li className={styles['navbar__menu__list-item']}>
-              <Link href="/Taupier-agree-professionnel-depuis-1994">
+              <Link href="/Taupier-agree-professionnel-depuis-1994" onClick={() => closeNav()}>
                 Qui-sommes-nous
-              <div className={styles['navbar__menu__list-item-divider']} />
               </Link>
             </li>
-
             {/* <li className={styles['navbar__menu__list-item']}>
               <Link href="/search"> Rechercher</Link>
             </li> */}

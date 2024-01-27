@@ -7,56 +7,28 @@ export default function Footer() {
       <div className={styles.footer__links}>
         <ul>
           <li>
-
-            <h2>
-              <Link href="/Interventions">
-                Interventions
-              </Link>
-            </h2>
-          </li>
-          <li>
-            <Link href="/Interventions/Taupe">
-              Taupe
+            <Link href="/Interventions">
+              Interventions
             </Link>
-          </li>
-          <li>
-            <Link href="/Interventions/Fouine">
-              Fouine
-            </Link>
-          </li>
-          <li>
-            <Link href="/Interventions/Ragondin">
-              Ragondin
-            </Link>
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <h2>
-              Informations
-            </h2>
           </li>
           <li>
             <Link href="/Taupier-agree-professionnel-depuis-1994">
               Qui sommes-nous
-
             </Link>
           </li>
           <li>
             <Link href="/Contact">
-              Demande de devis
-
+              Contact
             </Link>
           </li>
           <li>
             <Link href="/Mentions-Legales">
               Mentions légales
-
             </Link>
           </li>
           <li>
             <Link href="/Foire-aux-questions">
-              Foire aux questions
+              Question fréquentes (FAQ)
             </Link>
           </li>
           <li>
@@ -64,27 +36,12 @@ export default function Footer() {
               Plan du site
             </Link>
           </li>
-          <li>
-            <Link href="/Articles">
-              Blog
-            </Link>
-          </li>
+          
         </ul>
         <ul>
           <li>
             <Link href="/Contact">
-              <h2>Contact</h2>
-            </Link>
-          </li>
-          <li>
-            <Link href="tel:+33232264958">
-              <i className="icon-phone" />
-              +33 2 32 26 49 58
-            </Link>
-          </li>
-          <li>
-            <Link href="/Contact">
-              Devis gratuit | Contactez-nous !
+              Contactez-nous !
             </Link>
           </li>
           <li>
