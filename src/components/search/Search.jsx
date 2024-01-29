@@ -29,21 +29,23 @@ export default function Search({ closeNav, onSearch  }) {
   
 
   return (
-      <form className={styles.search} onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Rechercher..."
-          onChange={handleChange}
-          value={searchValue}
-        />
-        <button
-          id="button"
-          type="submit"
-          tabIndex={0}
-          aria-label="Rechercher une page ou un article"
-        >
-          <i className="icon-paper-plane" />
-        </button>
+      <form className={styles.search__form} onSubmit={handleSubmit}>
+        <div className={styles.search__form__input}>
+          <input
+            type="text"
+            placeholder="Rechercher..."
+            onChange={handleChange}
+            value={searchValue}
+          />
+          <button
+            id="button"
+            type="submit"
+            tabIndex={0}
+            aria-label="Rechercher une page ou un article"
+          >
+            <i className="icon-paper-plane" />
+          </button>
+        </div>
       </form>
   )
 }

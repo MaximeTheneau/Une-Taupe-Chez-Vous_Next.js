@@ -275,9 +275,15 @@ p a {
 strong{
   font-weight: bold;
 }
-
+form {
+  width: 50% !important;
+}
 @media screen and (max-width: 900px){
  
+  form {
+    width: 100% !important;
+  }
+
   table{
     & thead{
       border: none;

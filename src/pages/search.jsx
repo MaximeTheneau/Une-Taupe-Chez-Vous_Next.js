@@ -24,6 +24,7 @@ export default function Recherche({ page, articlesInit, desc }) {
   const router = useRouter();
   const [articles, setArticles] = useState(articlesInit);
   const [searchValue, setSearchValue] = useState('');
+
   const handleSearch = (searchTerm) => {
     setSearchValue(searchTerm);
     const filteredArticles = articlesInit.filter((article) => {
@@ -66,20 +67,17 @@ export default function Recherche({ page, articlesInit, desc }) {
           key="canonical"
         />
       </Head>
-      <section className={styles.page__contents}>
-        <h1>{page.title}</h1>
-        <div dangerouslySetInnerHTML={{ __html: page.contentsHTML }} />
+      <section className={styles.search}>
         <Search
           onSearch={handleSearch}
         />
         </section>
         <section>
-          <h2>Résultats de la recherche :</h2>
+          <h2>{articles.length} résultat(s)</h2>
           {articles.length > 0 ? (
             <Cards cards={articles} />
             ) : (
             <>
-              <h2>Aucun résultat</h2>
               <h3>Les derniers articles :</h3>
               <Cards cards={desc} />
             </>
