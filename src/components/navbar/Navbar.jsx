@@ -68,7 +68,7 @@ export default function Navbar() {
         <div className={`${toggleNav ? styles.navbar : styles['navbar__menu--hidden']} ${styles.navbar__menu}`}>
           <ul className={styles.navbar__list} >
             <li className={styles['navbar__menu__list-item']}>
-              <Search searchValue={searchValue} setSearchValue={setSearchValue} setArticles={setArticles} articlesInit={[]} closeNav={closeNav} />
+              <Search  closeNav={closeNav} />
             </li>
             <li className={styles['navbar__menu__list-item']}>
               <Link href="/Interventions" onClick={() => closeNav()}>

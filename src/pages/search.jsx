@@ -22,29 +22,31 @@ export async function getStaticProps() {
 
 export default function Recherche({ page, articlesInit, desc }) {
   const router = useRouter();
-  const [searchValue, setSearchValue] = useState('');
   const [articles, setArticles] = useState(articlesInit);
+  const [searchValue, setSearchValue] = useState('');
+  const handleSearch = (searchTerm) => {
+    setSearchValue(searchTerm);
+    const filteredArticles = articlesInit.filter((article) => {
+      const searchLowerCase = removeAccents(searchTerm.toLowerCase());
+      const lowerCaseTitle = removeAccents(article.title.toLowerCase());
+      return lowerCaseTitle.includes(searchLowerCase);
+    });
+  
+    setArticles(filteredArticles);
+  };
+  useEffect(() => {
+    setSearchValue((prevSearchValue) => {
+      const querySearchValue = router.query.q || '';
+      handleSearch(querySearchValue);
+      return querySearchValue;
+    });
+  }, [router.query.q, articlesInit]);
+  
+  console.log(searchValue);
 
-
-
-  const removeAccents = (str) => str
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .toLowerCase();
-
-    const handleChange = (event) => {
-      setSearchValue(event);
-      const filteredArticles = articlesInit.filter((article) => {
-        const searchLowerCase = removeAccents(event.toLowerCase());
-        const lowerCaseTitle = removeAccents(article.title.toLowerCase());
-        return (
-          searchLowerCase.length > 0
-          && lowerCaseTitle.includes(searchLowerCase)
-        );
-      });
-      setArticles(filteredArticles);
-    };
-
+  const removeAccents = (str) => {
+    return str ? str.normalize('NFD').replace(/[\u0300-\u036f]/g, '') : '';
+  };
   return (
     <>
       <Head>
@@ -67,20 +69,22 @@ export default function Recherche({ page, articlesInit, desc }) {
       <section className={styles.page__contents}>
         <h1>{page.title}</h1>
         <div dangerouslySetInnerHTML={{ __html: page.contentsHTML }} />
-        <Search searchValue={searchValue} setSearchValue={setSearchValue} setArticles={setArticles} articlesInit={articlesInit}  />
+        <Search
+          onSearch={handleSearch}
+        />
         </section>
         <section>
           <h2>Résultats de la recherche :</h2>
-          {articles && (
-              <Cards cards={articles} />
-            )}
-          {articles.length === 0 && (
-              <>
-                <h2>Aucun résultat</h2>
-                <h3>Les derniers articles :</h3>
-                <Cards cards={desc} />
-              </>
-            )}
+          {articles.length > 0 ? (
+            <Cards cards={articles} />
+            ) : (
+            <>
+              <h2>Aucun résultat</h2>
+              <h3>Les derniers articles :</h3>
+              <Cards cards={desc} />
+            </>
+          )}
+
         </section>
     </>
   );
