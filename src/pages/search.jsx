@@ -82,7 +82,6 @@ export default function Recherche({ page, articlesInit, desc }) {
               <Cards cards={desc} />
             </>
           )}
-
         </section>
     </>
   );

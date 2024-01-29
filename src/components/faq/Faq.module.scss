@@ -2,20 +2,23 @@
 
 .faqs{
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-
+    border: 1px solid $font-color-light !important;
     z-index: 0;
     cursor: pointer;
-    & h2{
+    margin: 1rem 0;
+    border-radius: 12px;
+    & a{
+        color: $color-link;
         display: flex;
         justify-content: space-between;
-        align-items: flex-start;
-        & i{
+        align-items: center;
+        width: 100%;
+        & i {
             font-size: 1rem;
         }
     }
     & p{
         transition: opacity 3s ease;
-        margin: 1rem 0 0 0;
         padding: 0.5rem 1rem;
         width: 100%;
     }
@@ -27,6 +30,7 @@
 
 .faq{
     &__question{
+        color: $color-link;
         display: flex;
         justify-content: space-between;
         align-items: flex-start;

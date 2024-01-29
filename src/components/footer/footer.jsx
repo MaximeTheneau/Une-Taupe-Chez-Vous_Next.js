@@ -1,11 +1,15 @@
 import Link from 'next/link';
 import styles from './Footer.module.scss';
+import Search from '../search/Search';
 
 export default function Footer() {
   return (
     <div className={styles.footer}>
       <div className={styles.footer__links}>
         <ul>
+          <li>
+            <Search />
+          </li>
           <li>
             <Link href="/Interventions">
               Interventions
@@ -36,7 +40,6 @@ export default function Footer() {
               Plan du site
             </Link>
           </li>
-          
         </ul>
         <ul>
           <li>

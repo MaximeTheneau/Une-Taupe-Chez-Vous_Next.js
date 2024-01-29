@@ -33,7 +33,7 @@ export default function Search({ closeNav, onSearch  }) {
         <div className={styles.search__form__input}>
           <input
             type="text"
-            placeholder="Rechercher..."
+            placeholder="Rechercher un article, un sujet ou un nuisibles"
             onChange={handleChange}
             value={searchValue}
           />

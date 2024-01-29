@@ -36,7 +36,6 @@ export default function Slug({ post }) {
       </Head>
       <FaqJsonLd listPosts={post.listPosts} />
       <section className={styles.page}>
-        <div className={styles.page__contents}>
           <h1>{post.title}</h1>
           <div dangerouslySetInnerHTML={{ __html: post.contentsHTML }} />
           <Faq faq={post} />
@@ -66,7 +65,6 @@ export default function Slug({ post }) {
               )}
             </>
           ))}
-        </div>
       </section>
     </>
   );

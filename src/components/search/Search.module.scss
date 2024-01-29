@@ -9,7 +9,7 @@
             width: 100%;
             border: 1px solid $font-color-light !important;
             border-radius: 12px;
-            padding: 1rem 0.5rem;
+            padding: 0.5rem 0.5rem;
             font-weight: bold;
             font-size: $font-size-small !important;
             margin: 1rem 0 0 0;
@@ -22,14 +22,12 @@
                 outline: none;
                 border-color: $color-primary !important;
                 color: $font-color;
-                font-size: $font-size-medium;
             }
         }
         & button{
           color: $font-color !important;
           font-size: 1rem;
           &:hover{
-              color: $color-primary !important; 
               transform: scale(1.2) rotate(10deg);
           }
   
