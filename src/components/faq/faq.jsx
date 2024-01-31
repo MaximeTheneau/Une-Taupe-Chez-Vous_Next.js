@@ -7,7 +7,6 @@ import FaqElements from './faqElements';
  * @returns {JSX.Element} - Returns a JSX element representing the list of FAQs
  */
 export default function Faq({ faq }) {
-  // Set initial state for the list of FAQs
   const [faqs, setFaqs] = useState(faq.listPosts);
 
   /**
@@ -21,7 +20,6 @@ export default function Faq({ faq }) {
       open: i === index - 1 ? !item.open : false,
     })));
   };
-  // Render each FAQ as a FaqElements component
   return (
     <ul role="menu">
       {faqs.map((item) => (

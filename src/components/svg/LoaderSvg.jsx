@@ -6,5 +6,3 @@ export default function LoaderSvg() {
       </circle>
     </svg>
   );
-}
-//

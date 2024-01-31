@@ -25,8 +25,6 @@ export default function Search({ closeNav, onSearch  }) {
       return newValue;
     });
   };
-  
-  
 
   return (
       <form className={styles.search__form} onSubmit={handleSubmit}>

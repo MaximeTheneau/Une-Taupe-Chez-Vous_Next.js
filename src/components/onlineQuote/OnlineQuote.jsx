@@ -2,9 +2,6 @@ import { useState } from 'react';
 import UserTypeSelection from './step/UserTypeSelection';
 import PersonalOrBusinessInfo from './step/PersonalOrBusinessInfo';
 import AdditionalInfo from './step/AdditionalInfo';
-// import UserTypeSelection from "./UserTypeSelection";
-// import PersonalOrBusinessInfo from "./PersonalOrBusinessInfo";
-// import AdditionalInfo from "./AdditionalInfo";
 
 export default function OnlineQuoteRequest() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -43,14 +40,8 @@ export default function OnlineQuoteRequest() {
     } = event.target;
 
     if (currentStep === 1) {
-      // Utilisez la logique spécifique à l'étape 1 ici
       setUserType(type === 'checkbox' ? checked : value);
-    } else if (currentStep === 2) {
-      // Utilisez la logique spécifique à l'étape 2 ici
-      // Assurez-vous d'utiliser le bon état ou les bonnes fonctions
     } else if (currentStep === 3) {
-      // Utilisez la logique spécifique à l'étape 3 ici
-      // Assurez-vous d'utiliser le bon état ou les bonnes fonctions
       setContactInfo((prevState) => ({
         ...prevState,
         form: {
@@ -85,7 +76,6 @@ export default function OnlineQuoteRequest() {
             formData={userType === 'individual' ? individualInfo : businessInfo}
           />
         )}
-
         {currentStep === 3 && (
           <AdditionalInfo
             formData={contactInfo}
@@ -94,7 +84,6 @@ export default function OnlineQuoteRequest() {
             setTypeService={setContactInfo}
           />
         )}
-
         {/* Boutons de navigation entre les étapes */}
         {currentStep > 1 && (
           <button type="button" onClick={handlePreviousStep}>

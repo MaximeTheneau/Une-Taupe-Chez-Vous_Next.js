@@ -10,9 +10,7 @@ export default function Category({ subcategoryName, subcategorySlug }) {
             Articles
           </Link>
         </li>
-
-        {subcategoryName
-            && (
+        {subcategoryName && (
             <li>
               {' '}
               &gt;
@@ -21,7 +19,6 @@ export default function Category({ subcategoryName, subcategorySlug }) {
                 {subcategoryName}
               </Link>
             </li>
-
             )}
       </ul>
     </nav>

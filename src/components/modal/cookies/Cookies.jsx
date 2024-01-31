@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Script from 'next/script';
 import style from '../Modal.module.scss';
 import CookieChoice from './CookieChoice';
 import { GoogleTagManager } from '@next/third-parties/google'
@@ -95,17 +94,6 @@ export default function CookiesModal() {
                   />
                 </tbody>
               </table>
-              {/* <div className={`card ${style.cookies__choice__table}`}>
-              <div className={style.cookies__choice__table__row}>
-              Google Maps et Google Analytics</div>
-              <div className={style.cookies__choice__table__row}>
-                <i
-                  className={`icon-${cookiesGoogle ? 'confirmation' : 'error'}`}
-                  onClick={toggleCookiesGoogle}
-                  role="presentation"
-                />
-              </div>
-            </div> */}
               <div className={style.cookies__close}>
                 <button type="button" onClick={handleAcceptCookies}>
                   Je valide
@@ -143,6 +131,5 @@ export default function CookiesModal() {
       </div>
       )}
     </>
-
   );
 }

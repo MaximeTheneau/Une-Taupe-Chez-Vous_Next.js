@@ -144,8 +144,6 @@ export default function ContactForm() {
       },
     });
   };
-
-
   return (
     <>
       <Confirmation

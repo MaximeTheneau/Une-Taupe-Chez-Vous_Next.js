@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './Card.module.scss';
-// import SlideTransition from '../../hooks/useSlideTransition/SlideTransition';
 import imageThumbnail from '../../utils/imageThumbnail';
 
 export default function Card({ card }) {

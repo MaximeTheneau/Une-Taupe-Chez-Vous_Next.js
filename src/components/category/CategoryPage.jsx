@@ -10,7 +10,6 @@ export default function CategoryPage({ category, subcategoryPost, subcategoryLis
             Articles
           </Link>
         </li>
-
         { subcategoryList?.map((categories) => (
           <li key={categories.id}>
             <Link
