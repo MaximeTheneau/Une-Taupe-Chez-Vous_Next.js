@@ -20,7 +20,7 @@ const nextConfig = {
   images: {
     loader: 'custom',
     loaderFile: './src/utils/imageLoaderFull.jsx',
-    deviceSizes: [640, 750, 828, 1000],
+    deviceSizes: [320, 420, 768, 1024],
     domains: ['localhost', 'res.cloudinary.com'],
     formats: ['image/avif', 'image/webp'],
     minimumCacheTTL: 60,

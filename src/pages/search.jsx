@@ -43,7 +43,6 @@ export default function Recherche({ page, articlesInit, desc }) {
     });
   }, [router.query.q, articlesInit]);
   
-  console.log(searchValue);
 
   const removeAccents = (str) => {
     return str ? str.normalize('NFD').replace(/[\u0300-\u036f]/g, '') : '';

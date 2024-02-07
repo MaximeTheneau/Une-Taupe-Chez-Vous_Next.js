@@ -21,7 +21,7 @@ export async function getStaticProps({ params }) {
   const post = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/${params.slug}`);
   const desc = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=keyword&limit=3&id=${post.id}`);
   const image = await fetcherImage(post.imgPost);
-
+  
   return { props: { desc, post, image: image.input }};
 }
 
@@ -68,11 +68,7 @@ export default function Slug({ desc, post, image }) {
               loader={imageLoaderFull}
               width={image.width}
               height={image.height}
-              sizes="
-              (min-width: 77.5em) 750px,
-              (min-width: 62em) calc(100vw - 330px),
-              90vw
-            "
+              sizes={`max-width: ${image.width}px 100vw, ${image.width}px`}
               priority
             />
             {post.title !== post.altImg && (

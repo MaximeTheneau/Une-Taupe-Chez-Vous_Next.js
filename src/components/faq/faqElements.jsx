@@ -8,7 +8,6 @@ Faq element component
 @see Faq.module.scss
 */
 function FaqElements({ faq, toggleFAQ }) {
-  console.log(faq);
   return (
     <li
       key={faq.id}
