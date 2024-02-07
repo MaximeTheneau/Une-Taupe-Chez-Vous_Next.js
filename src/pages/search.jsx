@@ -21,27 +21,8 @@ export async function getStaticProps() {
 }
 
 export default function Recherche({ page, articlesInit, desc }) {
-  const router = useRouter();
   const [articles, setArticles] = useState(articlesInit);
-  const [searchValuePage, setSearchValuePage] = useState('');
-
-  useEffect(() => {
-    if (router.query.q !== undefined && router.query.q !== searchValuePage) {
-      setSearchValuePage(router.query.q);
-    }
-  }, [router.query.q]);
-
-  const handleSearch = (searchTerm) => {
-    const filteredArticles = articlesInit.filter((article) => {
-      const removeAccents = (str) => (str ? str.normalize('NFD').replace(/[\u0300-\u036f]/g, '') : '');
-      const searchLowerCase = removeAccents(searchTerm.toLowerCase());
-      const lowerCaseTitle = removeAccents(article.title.toLowerCase());
-      return lowerCaseTitle.includes(searchLowerCase);
-    });
-
-    setArticles(filteredArticles);
-  };
-
+  const [filteredArticles, setFilteredArticles] = useState(articlesInit);
   return (
     <>
       <Head>
@@ -63,17 +44,18 @@ export default function Recherche({ page, articlesInit, desc }) {
       </Head>
       <section className={styles.search}>
         <Search
-          onSearch={handleSearch}
+          articles={articles}
+          setFilteredArticles={setFilteredArticles}
         />
       </section>
       <section>
         <h2>
-          {articles.length}
+          {filteredArticles.length}
           {' '}
           résultat(s)
         </h2>
-        {articles.length > 0 ? (
-          <Cards cards={articles} />
+        {filteredArticles.length > 0 ? (
+          <Cards cards={filteredArticles} />
         ) : (
           <>
             <h3>Les derniers articles :</h3>

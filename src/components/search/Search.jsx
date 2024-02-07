@@ -2,34 +2,45 @@ import { useEffect, useState } from 'react';
 import Router, { useRouter } from 'next/router';
 import styles from './Search.module.scss';
 
-export default function Search({ closeNav, onSearch }) {
-  const [searchValue, setSearchValue] = useState('');
+export default function Search({
+  closeNav, articles, setFilteredArticles,
+}) {
   const router = useRouter();
-  useEffect(() => {
-    setSearchValue(router.query.q);
-  }, [router.query.q]);
+  const [filter, setFilter] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    Router.push(`/search/?q=${encodeURIComponent(searchValue)}`);
+    Router.push(`/search/?q=${encodeURIComponent(filter.trim())}`);
     if (closeNav) closeNav();
-    if (onSearch) onSearch(searchValue);
   };
-  const handleChange = (event) => {
-    const newValue = event.target.value;
-    setSearchValue(newValue);
-    if (typeof onSearch === 'function') {
-      onSearch(newValue);
-    }
+  const handleFilterChange = (event) => {
+    const value = event.target.value.toLowerCase();
+    setFilter(value);
+    if (!articles) return;
+    const filtered = articles.filter(
+      (article) => article.title.toLowerCase().includes(value),
+    );
+    setFilteredArticles(filtered);
   };
+
+  useEffect(() => {
+    handleFilterChange(
+      {
+        target: {
+          value: router.query.q || '',
+        },
+      },
+    );
+  }, [router.query.q]);
+
   return (
     <form className={styles.search__form} onSubmit={handleSubmit}>
       <div className={styles.search__form__input}>
         <input
           type="text"
           placeholder="Rechercher un article, un sujet ou un nuisibles"
-          onChange={handleChange}
-          value={searchValue}
+          onChange={handleFilterChange}
+          value={filter || ''}
         />
         <button
           id="button"
