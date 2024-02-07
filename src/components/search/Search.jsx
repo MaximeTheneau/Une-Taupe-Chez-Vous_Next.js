@@ -15,17 +15,13 @@ export default function Search({ closeNav, onSearch }) {
     if (closeNav) closeNav();
     if (onSearch) onSearch(searchValue);
   };
-
   const handleChange = (event) => {
-    setSearchValue(() => {
-      const newValue = event.target.value;
-      if (typeof onSearch === 'function') {
-        onSearch(newValue);
-      }
-      return newValue;
-    });
+    const newValue = event.target.value;
+    setSearchValue(newValue);
+    if (typeof onSearch === 'function') {
+      onSearch(newValue);
+    }
   };
-
   return (
     <form className={styles.search__form} onSubmit={handleSubmit}>
       <div className={styles.search__form__input}>

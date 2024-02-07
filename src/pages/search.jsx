@@ -23,10 +23,15 @@ export async function getStaticProps() {
 export default function Recherche({ page, articlesInit, desc }) {
   const router = useRouter();
   const [articles, setArticles] = useState(articlesInit);
-  const [setSearchValue] = useState('');
+  const [searchValuePage, setSearchValuePage] = useState('');
+
+  useEffect(() => {
+    if (router.query.q !== undefined && router.query.q !== searchValuePage) {
+      setSearchValuePage(router.query.q);
+    }
+  }, [router.query.q]);
 
   const handleSearch = (searchTerm) => {
-    setSearchValue(searchTerm);
     const filteredArticles = articlesInit.filter((article) => {
       const removeAccents = (str) => (str ? str.normalize('NFD').replace(/[\u0300-\u036f]/g, '') : '');
       const searchLowerCase = removeAccents(searchTerm.toLowerCase());
@@ -36,13 +41,6 @@ export default function Recherche({ page, articlesInit, desc }) {
 
     setArticles(filteredArticles);
   };
-  useEffect(() => {
-    setSearchValue(() => {
-      const querySearchValue = router.query.q || '';
-      handleSearch(querySearchValue);
-      return querySearchValue;
-    });
-  }, [router.query.q, articlesInit]);
 
   return (
     <>

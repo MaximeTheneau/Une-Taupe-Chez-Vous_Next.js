@@ -6,7 +6,7 @@ export default function Cards({ cards }) {
     <ul className={styles.cards}>
       {cards.map((card) => (
         <Card
-          key={card.id}
+          key={card.title}
           card={card}
         />
       ))}
