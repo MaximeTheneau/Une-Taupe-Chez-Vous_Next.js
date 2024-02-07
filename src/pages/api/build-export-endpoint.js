@@ -2,7 +2,6 @@ import { spawn } from 'child_process';
 
 export default async function handler(req, res) {
   // const authToken = process.env.AUTH_TOKEN;
-
   // const signature = req.headers['x-hub-signature-256'];
   // const body = JSON.stringify(req.body);
 
