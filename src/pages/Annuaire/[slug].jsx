@@ -112,7 +112,8 @@ export default function Slug({ post, image }) {
             (max-width: 750px) 100vw,
             (max-width: 828px) 100vw,
             (max-width: 1080px) 100vw,
-            100vw"            style={{
+            100vw"
+            style={{
               width: '100%',
               height: 'auto',
             }}
@@ -125,26 +126,28 @@ export default function Slug({ post, image }) {
           )}
         </figure>
         <div dangerouslySetInnerHTML={{ __html: post.contentsHTML }} />
-        <table className={styles.page__table}>
-          <thead>
-            <tr>
-              <th scope="col">Entreprise</th>
-              <th scope="col">Localisation</th>
-              <th scope="col">Services</th>
-              <th scope="col">Contact</th>
-            </tr>
-          </thead>
-          <tbody>
-            {postsLinks.map((item) => item.description.localisation && (
-            <tr key={item.id}>
-              <td aria-label="Entreprise">{item.title}</td>
-              <td aria-label="Localisation" dangerouslySetInnerHTML={{ __html: item.description.localisation }} />
-              <td aria-label="Services" dangerouslySetInnerHTML={{ __html: item.description.services }} />
-              <td aria-label="Site web" dangerouslySetInnerHTML={{ __html: item.description.siteWeb }} />
-            </tr>
-            ))}
-          </tbody>
-        </table>
+        <div className="overflow-x-auto">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Entreprise</th>
+                <th scope="col">Localisation</th>
+                <th scope="col">Services</th>
+                <th scope="col">Contact</th>
+              </tr>
+            </thead>
+            <tbody>
+              {postsLinks.map((item) => item.description.localisation && (
+              <tr key={item.id}>
+                <td aria-label="Entreprise">{item.title}</td>
+                <td aria-label="Localisation" dangerouslySetInnerHTML={{ __html: item.description.localisation }} />
+                <td aria-label="Services" dangerouslySetInnerHTML={{ __html: item.description.services }} />
+                <td aria-label="Site web" dangerouslySetInnerHTML={{ __html: item.description.siteWeb }} />
+              </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
         <TableOfContents post={post} />
         {post.paragraphPosts.map((paragraphs) => (
           <>

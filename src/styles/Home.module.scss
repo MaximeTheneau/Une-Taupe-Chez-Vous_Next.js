@@ -39,31 +39,13 @@
     
 
   }
-
   &__list{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 1rem;
-    margin: 0 0 1rem 0;
+    list-style: disc;
+    padding-left: 2rem;
     &__item{
-      border: $border;
-      width: 30%;
-      color: $color-white;
-      padding: 1rem;
-        & span{
-          font-weight: bold ;
-          padding: 1rem 0;
-        }
-        & a{
-          display: flex;
-          flex-direction: column;
-          height: 100%;
-          align-items: center;
-          align-content: center;
-          justify-content: space-around;
-          text-align: center;
-
+      margin: 1rem 0;
+      & a{
+        color: $color-link;
           &:hover{
             color: $color-primary;
             & img{

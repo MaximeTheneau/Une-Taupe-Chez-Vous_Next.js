@@ -36,7 +36,6 @@ export async function getStaticProps() {
 export default function Home({
   accueil, services, articles, faq, testimonials, keyword, image,
 }) {
-
   return (
     <>
       <Head>
@@ -62,25 +61,25 @@ export default function Home({
         logoUrl={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/logo-une-taupe-chez-vous.png`}
       />
       <div className={styles.home__imagesFull}>
-          <Image
-            src={`Accueil.webp`}
-            alt={accueil.altImg || accueil.title}
-            loader={imageLoaderFull}
-            quality={80}
-            width={image.width}
-            height={image.height}
-            style={{
-              width: '100%',
-              height: 'auto',
-            }}
-            className={styles.home__imagesFull__image}
-            priority
-          />
-          <div className={styles.home__imagesFull__text}>
-            <h1>{accueil.title}</h1>
-            <div dangerouslySetInnerHTML={{ __html: accueil.contentsHTML }} />
-          </div>
+        <Image
+          src="Accueil.webp"
+          alt={accueil.altImg || accueil.title}
+          loader={imageLoaderFull}
+          quality={80}
+          width={image.width}
+          height={image.height}
+          style={{
+            width: '100%',
+            height: 'auto',
+          }}
+          className={styles.home__imagesFull__image}
+          priority
+        />
+        <div className={styles.home__imagesFull__text}>
+          <h1>{accueil.title}</h1>
+          <div dangerouslySetInnerHTML={{ __html: accueil.contentsHTML }} />
         </div>
+      </div>
       <section className={styles.home}>
         {/* --Services--*/}
         <div className={styles.home__category}>
@@ -96,21 +95,18 @@ export default function Home({
         </div>
         <Cards cards={services} />
         <h2>Taupier au Service de la Nature</h2>
+        <p>
+          Optez pour un piégeur agréé qui œuvre en harmonie avec la nature.
+          Nos interventions sont conçues pour être sans danger pour
+          l&apos;environnement et respectueuses des animaux de compagnie.
+          Faites confiance à notre expertise pour préserver la biodiversité
+          de votre jardin tout en assurant un contrôle efficace des taupes.
+        </p>
         <ul className={styles.home__list}>
           {articles.map((article) => (
             <li key={article.title} className={styles.home__list__item}>
               <Link href={`/${article.category.slug}/${article.subcategory.slug}/${article.slug}`}>
-                <Image
-                  src={`/svg/${article.slug}.svg`}
-                  unoptimized
-                  alt="icon de l'article"
-                  width={100}
-                  height={100}
-                  className={styles.home__list__item__icon}
-                />
-                <span>
-                  {article.title}
-                </span>
+                {article.title}
               </Link>
             </li>
           ))}
@@ -129,15 +125,24 @@ export default function Home({
           </Link>
           <Faq faq={faq} />
         </div> */}
-          <h2>
-            <Link href={testimonials.slug}>
-              {testimonials.title} de Clients Satisfaits
-            </Link>
-          </h2>
-          <p>Chez <strong>Une Taupe Chez Vous</strong>, la satisfaction de nos clients est notre plus grande récompense.
-          Découvrez ce que nos clients ont à dire sur notre service de lutte antinuisible, dirigé par l'expert taupier
-          piégeur, <strong>Laurent Theneau</strong>.</p>
-          <div dangerouslySetInnerHTML={{ __html:testimonials.paragraphPosts[0].paragraph}} />
+        <h2>
+          <Link href={testimonials.slug}>
+            {testimonials.title}
+            {' '}
+            de Clients Satisfaits
+          </Link>
+        </h2>
+        <p>
+          Chez
+          <strong>Une Taupe Chez Vous</strong>
+          , la satisfaction de nos clients est notre plus grande récompense.
+          Découvrez ce que nos clients ont à dire sur notre service de lutte
+          antinuisible, dirigé par l&apos;expert taupier
+          piégeur,
+          <strong>Laurent Theneau</strong>
+          .
+        </p>
+        <div dangerouslySetInnerHTML={{ __html: testimonials.paragraphPosts[0].paragraph }} className="overflow-x-auto" />
         {accueil.listPosts.map((listArticle) => (
           listArticle.title !== null && (
           <div key={listArticle.title}>

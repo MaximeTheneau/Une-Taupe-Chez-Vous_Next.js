@@ -21,8 +21,8 @@ export async function getStaticProps({ params }) {
   const post = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/${params.slug}`);
   const desc = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=keyword&limit=3&id=${post.id}`);
   const image = await fetcherImage(post.imgPost);
-  
-  return { props: { desc, post, image: image.input }};
+
+  return { props: { desc, post, image: image.input } };
 }
 
 export default function Slug({ desc, post, image }) {
@@ -52,7 +52,7 @@ export default function Slug({ desc, post, image }) {
           <ul className={styles.page__category}>
             <li>
               <Link href="/Interventions">
-              Interventions
+                Interventions
               </Link>
             </li>
           </ul>
@@ -79,25 +79,27 @@ export default function Slug({ desc, post, image }) {
           </figure>
         </div>
         <div dangerouslySetInnerHTML={{ __html: post.contentsHTML }} />
-        <table className={styles.page__table}>
-          <thead>
-            <tr>
-              {post.listPosts.map((listArticle) => listArticle.title !== null
-                && listArticle.title && <th>{listArticle.title}</th>)}
-            </tr>
+        <div className="overflow-x-auto">
+          <table className={styles.page__table}>
+            <thead>
+              <tr>
+                {post.listPosts.map((listArticle) => listArticle.title !== null
+                  && listArticle.title && <th>{listArticle.title}</th>)}
+              </tr>
 
-          </thead>
-          <tbody>
-            <tr>
-              {
-                  post.listPosts.map(
-                    (listArticle) => listArticle.title !== null
-                      && listArticle.description && <td>{listArticle.description}</td>,
-                  )
-                }
-            </tr>
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              <tr>
+                {
+                    post.listPosts.map(
+                      (listArticle) => listArticle.title !== null
+                        && listArticle.description && <td>{listArticle.description}</td>,
+                    )
+                  }
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <TableOfContents post={post} />
         {post.paragraphPosts.map((paragraphArticle) => (
           <div key={paragraphArticle.id}>

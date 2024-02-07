@@ -88,18 +88,9 @@ export default function Slug({ post, desc, image }) {
             src={`${post.imgPost}.webp`}
             alt={post.altImg || post.title}
             loader={imageLoaderFull}
-            quality={75}
             width={image.width}
             height={image.height}
-            sizes="(max-width: 640px) 100vw,
-            (max-width: 750px) 100vw,
-            (max-width: 828px) 100vw,
-            (max-width: 1080px) 100vw,
-            100vw"
-            style={{
-              width: '100%',
-              height: 'auto',
-            }}
+            sizes={`max-width: ${image.width}px 100vw, ${image.width}px`}
             priority
           />
           {post.title !== post.altImg && (
@@ -124,13 +115,8 @@ export default function Slug({ post, desc, image }) {
                   <Image
                     src={`${paragraphArticle.imgPostParagh}.webp`}
                     alt={paragraphArticle.subtitle}
-                    quality={75}
                     width={1080}
                     height={1080}
-                    style={{
-                      width: '100%',
-                      height: 'auto',
-                    }}
                   />
                   {paragraphArticle.subtitle !== paragraphArticle.altImgParagh && (
                   <figcaption className="caption">

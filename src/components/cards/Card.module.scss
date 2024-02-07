@@ -13,7 +13,6 @@
   margin: 1rem 2rem;
   &__img{
     object-fit: cover;
-    
     &:hover img{
         filter: blur(0.5px);
         opacity: 0.8;
@@ -26,7 +25,6 @@
     }
   }
   &__content{
-    min-height: 5rem;
     text-align: center;
   }
 
