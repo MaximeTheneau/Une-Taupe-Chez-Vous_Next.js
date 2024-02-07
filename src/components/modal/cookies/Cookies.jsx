@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { GoogleTagManager } from '@next/third-parties/google';
 import style from '../Modal.module.scss';
 import CookieChoice from './CookieChoice';
-import { GoogleTagManager } from '@next/third-parties/google'
 
 export default function CookiesModal() {
   const [cookiesModal, setCookiesModal] = useState(null);
@@ -14,12 +14,12 @@ export default function CookiesModal() {
 
   useEffect(() => {
     const cookiesModalParam = window.localStorage.getItem('cookiesModal');
-    if (cookiesModalParam === null ) {
+    if (cookiesModalParam === null) {
       setTimeout(() => {
         setCookiesModal(true);
         window.localStorage.setItem('cookiesModal', true);
       }, 1000);
-    } 
+    }
 
     const cookiesGoogleParam = window.localStorage.getItem('cookiesGoogle');
 
@@ -45,11 +45,11 @@ export default function CookiesModal() {
     window.localStorage.setItem('cookiesGoogle', state.cookiesGoogle);
   };
 
-  const handleRefuseCookies = () => {
-    setCookiesModal(false);
-    window.localStorage.setItem('cookiesModal', cookiesModal);
-    window.localStorage.setItem('cookiesGoogle', false);
-  }
+  // const handleRefuseCookies = () => {
+  //   setCookiesModal(false);
+  //   window.localStorage.setItem('cookiesModal', cookiesModal);
+  //   window.localStorage.setItem('cookiesGoogle', false);
+  // };
 
   return (
     <>

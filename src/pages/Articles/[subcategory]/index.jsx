@@ -28,7 +28,7 @@ export async function getStaticProps({ params }) {
     props: {
       articles,
       subcategoryList,
-    }
+    },
   };
 }
 

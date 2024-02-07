@@ -65,17 +65,17 @@ export default function Comments({ posts }) {
     return date.toLocaleDateString('fr-FR', options);
   }
 
-  const emojis = ['😀', '😯', '🙁', '🕳️', '🦡', '🌱', '🍂', '🪱', '🏡', '🚫', '💪'];
+  // const emojis = ['😀', '😯', '🙁', '🕳️', '🦡', '🌱', '🍂', '🪱', '🏡', '🚫', '💪'];
 
-  const handleEmojiClick = (emoji) => {
-    setState({
-      ...state,
-      form: {
-        ...state.form,
-        comment: state.form.comment + emoji,
-      },
-    });
-  };
+  // const handleEmojiClick = (emoji) => {
+  //   setState({
+  //     ...state,
+  //     form: {
+  //       ...state.form,
+  //       comment: state.form.comment + emoji,
+  //     },
+  //   });
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -146,11 +146,10 @@ export default function Comments({ posts }) {
               </p>
               <p className={`${styles['comments__list__item--text']}`}>{comment.comment}</p>
               {comment.replies?.length > 0 && (
-              <>
-                <ul className={styles.comments__list__responses}>
-                  <li className={styles.comments__list__responses__item}>
-                    <h4>Réponses :</h4>
-                  </li>
+              <ul className={styles.comments__list__responses}>
+                <li className={styles.comments__list__responses__item}>
+                  <h4>Réponses :</h4>
+                </li>
                   {comment.replies?.map((response) => (
                     <li className={styles.comments__list__responses__item} key={response.id}>
                       <p className={`${styles['comments__list__item--user']}`}>
@@ -163,13 +162,14 @@ export default function Comments({ posts }) {
                       <p className={`${styles['comments__list__item--user']}`}>
                         le
                         {' '}
-                        <time dateTime={response.createdAt}>{formattedDate(response.createdAt)}</time>
+                        <time dateTime={response.createdAt}>
+                          {formattedDate(response.createdAt)}
+                        </time>
                       </p>
                       <p className={`${styles['comments__list__item--text']}`}>{response.comment}</p>
                     </li>
                   ))}
-                </ul>
-              </>
+              </ul>
               )}
             </li>
           ))}

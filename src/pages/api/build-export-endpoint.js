@@ -1,5 +1,4 @@
 import { spawn } from 'child_process';
-import { createHmac } from 'crypto';
 
 export default async function handler(req, res) {
   // const authToken = process.env.AUTH_TOKEN;
@@ -16,8 +15,6 @@ export default async function handler(req, res) {
 
   //   return;
   // }
-
-  res = await res; 
 
   const branch = 'main';
   const gitStash = spawn('git', ['stash']);

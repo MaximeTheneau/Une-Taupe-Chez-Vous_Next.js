@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
-import Router, { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import fetcher from '../utils/fetcher';
 import Cards from '../components/cards/cards';
 import styles from '../components/search/Search.module.scss';
@@ -23,30 +23,27 @@ export async function getStaticProps() {
 export default function Recherche({ page, articlesInit, desc }) {
   const router = useRouter();
   const [articles, setArticles] = useState(articlesInit);
-  const [searchValue, setSearchValue] = useState('');
+  const [setSearchValue] = useState('');
 
   const handleSearch = (searchTerm) => {
     setSearchValue(searchTerm);
     const filteredArticles = articlesInit.filter((article) => {
+      const removeAccents = (str) => (str ? str.normalize('NFD').replace(/[\u0300-\u036f]/g, '') : '');
       const searchLowerCase = removeAccents(searchTerm.toLowerCase());
       const lowerCaseTitle = removeAccents(article.title.toLowerCase());
       return lowerCaseTitle.includes(searchLowerCase);
     });
-  
+
     setArticles(filteredArticles);
   };
   useEffect(() => {
-    setSearchValue((prevSearchValue) => {
+    setSearchValue(() => {
       const querySearchValue = router.query.q || '';
       handleSearch(querySearchValue);
       return querySearchValue;
     });
   }, [router.query.q, articlesInit]);
-  
 
-  const removeAccents = (str) => {
-    return str ? str.normalize('NFD').replace(/[\u0300-\u036f]/g, '') : '';
-  };
   return (
     <>
       <Head>
@@ -58,8 +55,8 @@ export default function Recherche({ page, articlesInit, desc }) {
         <meta property="og:site_name" content="Une Taupe Chez Vous" />
         <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/search`} />
         <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${page.imgPost}.jpg`} />
-        <meta name="robots" content="noindex,nofollow"/>
-        <meta name="googlebot" content="noindex,nofollow"/>
+        <meta name="robots" content="noindex,nofollow" />
+        <meta name="googlebot" content="noindex,nofollow" />
         <link
           rel="canonical"
           href={`${process.env.NEXT_PUBLIC_URL}/search`}
@@ -70,18 +67,22 @@ export default function Recherche({ page, articlesInit, desc }) {
         <Search
           onSearch={handleSearch}
         />
-        </section>
-        <section>
-          <h2>{articles.length} résultat(s)</h2>
-          {articles.length > 0 ? (
-            <Cards cards={articles} />
-            ) : (
-            <>
-              <h3>Les derniers articles :</h3>
-              <Cards cards={desc} />
-            </>
-          )}
-        </section>
+      </section>
+      <section>
+        <h2>
+          {articles.length}
+          {' '}
+          résultat(s)
+        </h2>
+        {articles.length > 0 ? (
+          <Cards cards={articles} />
+        ) : (
+          <>
+            <h3>Les derniers articles :</h3>
+            <Cards cards={desc} />
+          </>
+        )}
+      </section>
     </>
   );
 }

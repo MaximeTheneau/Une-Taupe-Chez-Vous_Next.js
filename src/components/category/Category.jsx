@@ -11,15 +11,15 @@ export default function Category({ subcategoryName, subcategorySlug }) {
           </Link>
         </li>
         {subcategoryName && (
-            <li>
-              {' '}
-              &gt;
-              {' '}
-              <Link href={`/Articles/${subcategorySlug}`}>
-                {subcategoryName}
-              </Link>
-            </li>
-            )}
+        <li>
+          {' '}
+          &gt;
+          {' '}
+          <Link href={`/Articles/${subcategorySlug}`}>
+            {subcategoryName}
+          </Link>
+        </li>
+        )}
       </ul>
     </nav>
 

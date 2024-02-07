@@ -18,14 +18,15 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
+// const desc = await fetcher(
+// `${process.env.NEXT_PUBLIC_API_URL}posts&filter=keyword&limit=3&id=${post.id}`);
   const post = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/${params.slug}`);
-  const desc = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=keyword&limit=3&id=${post.id}`);
   const image = await fetcherImage(post.imgPost);
 
-  return { props: { desc, post, image: image.input } };
+  return { props: { post, image: image.input } };
 }
 
-export default function Slug({ desc, post, image }) {
+export default function Slug({ post, image }) {
   return (
     <>
       <Head>

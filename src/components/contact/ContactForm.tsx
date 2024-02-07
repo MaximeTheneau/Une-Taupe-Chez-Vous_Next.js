@@ -74,14 +74,14 @@ export default function ContactForm() {
 
   const regex = /^(([^<>()[\]\\.,;:\s@\\"]+(\.[^<>()[\]\\.,;:\s@\\"]+)*)|(\\".+\\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-  function classErrorOrConfirmation(message) {
-    if (message === true) {
-      return (<i className="icon-confirmation" />);
-    } if (message === false) {
-      return (<i className="icon-error" />);
-    }
-    return '';
-  }
+  // function classErrorOrConfirmation(message) {
+  //   if (message === true) {
+  //     return (<i className="icon-confirmation" />);
+  //   } if (message === false) {
+  //     return (<i className="icon-error" />);
+  //   }
+  //   return '';
+  // }
 
   const changeField = (value, field) => {
     setState((prevState) => ({
@@ -188,11 +188,12 @@ export default function ContactForm() {
                 });
               }}
             />
-            {state.confirmationName === false &&
+            {state.confirmationName === false
+              && (
               <span className={styles.contact__input__error}>
                 Veuillez renseigner votre nom / société (entre 3 et 35 caractères)
               </span>
-            }
+              )}
           </div>
           <div className={styles.contact__input}>
             <input
@@ -211,11 +212,12 @@ export default function ContactForm() {
               placeholder="Code postal*"
               required
             />
-              {state.confirmationCodePostal === false &&
+            {state.confirmationCodePostal === false
+                && (
                 <span className={styles.contact__input__error}>
                   Veuillez renseigner votre code postal (5 chiffres)
                 </span>
-              }
+                )}
           </div>
           <div className={styles.contact__input}>
             <Input
@@ -230,14 +232,15 @@ export default function ContactForm() {
                   : setState({ ...state, confirmationEmail: false })
               )}
             />
-              {state.confirmationEmail === false &&
+            {state.confirmationEmail === false
+                && (
                 <span className={styles.contact__input__error}>
                   Veuillez renseigner votre adresse email
                 </span>
-              }
+                )}
           </div>
           <div className={styles.contact__input}>
-            <input 
+            <input
               type="text"
               name="phone"
               placeholder="Téléphone"
@@ -261,24 +264,25 @@ export default function ContactForm() {
               placeholder="Message*"
               required
             />
-              {state.confirmationMessage === false &&
+            {state.confirmationMessage === false
+                && (
                 <span className={styles.contact__input__error}>
                   Veuillez renseigner votre message (entre 5 et 500 caractères)
                 </span>
-              }
+                )}
           </div>
           <div className={styles.contact__input__chekbox}>
-            <input
-              type="checkbox"
-              name="emailReturn"
-              id="emailReturn"
-              checked={state.form.emailReturn}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.checked, 'emailReturn')}
-            />
             <label htmlFor="emailReturn">
+              <input
+                type="checkbox"
+                name="emailReturn"
+                id="emailReturn"
+                checked={state.form.emailReturn}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.checked, 'emailReturn')}
+              />
               Recevoir une copie de cet email
             </label>
-          </div> 
+          </div>
           <div className="contact-form_button">
             <button type="submit" className="button">
               Envoyer

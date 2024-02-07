@@ -1,16 +1,18 @@
-import Head from "next/head";
+// eslint-disable react/no-unknown-property
+import Head from 'next/head';
 
-const FontPreload = () => (
-    <>
-        <Head>
-        <link
-            rel="preload"
-            href="https://res.cloudinary.com/dsn2zwbis/raw/upload/v1702379223/unetaupechezvous/taupe.woff2"
-            as="font"
-            type="font/woff2"
-            crossOrigin="anonymous"
-        />
-        <style jsx global>{`
+function FontPreload() {
+  return (
+    <Head>
+      <link
+        rel="preload"
+        href="https://res.cloudinary.com/dsn2zwbis/raw/upload/v1702379223/unetaupechezvous/taupe.woff2"
+        as="font"
+        type="font/woff2"
+        crossOrigin="anonymous"
+      />
+      <style jsx global>
+        {`
         @font-face {
             font-family: 'fontTitle', sans-serif;
             src: 
@@ -25,9 +27,10 @@ const FontPreload = () => (
         body {
             font-family: 'fontTitle', sans-serif;
         }
-        `}</style>
-        </Head>
-    </>
-);
+        `}
+      </style>
+    </Head>
+  );
+}
 
 export default FontPreload;

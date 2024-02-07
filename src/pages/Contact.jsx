@@ -39,7 +39,7 @@ export default function Contact({ page }) {
         <div dangerouslySetInnerHTML={{ __html: page.contentsHTML }} />
 
         <div className={styles.page__contact}>
-        <h2>Contactez-nous - Devis gratuit</h2>
+          <h2>Contactez-nous - Devis gratuit</h2>
           <div className={styles.page__contact__block} itemScope itemType="https://schema.org/">
             <p>
               <strong>Société : </strong>

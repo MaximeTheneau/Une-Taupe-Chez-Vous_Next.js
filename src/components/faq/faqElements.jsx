@@ -14,23 +14,22 @@ function FaqElements({ faq, toggleFAQ }) {
       role="menuitem"
       className={styles.faqs}
     >
-      <h2
-        className={styles.faq__question}
+      <Link
+        role="button"
+        href={`/Foire-aux-questions#${faq.id}`}
+        aria-expanded={faq.open}
         onClick={() => toggleFAQ(faq.id)}
       >
-        <Link 
-          href={`/Foire-aux-questions#${faq.id}`} 
-          role='button'
-          aria-expanded={faq.open}
-          >
-            <span>
-              {faq.title}
-            </span>
-        {faq.open
-          ? <i className="icon-x" />
-          : <i className="icon-open" />}
-        </Link>
-      </h2>
+
+        <h2 className={styles.faq__question}>
+          <span>
+            {faq.title}
+          </span>
+          {faq.open
+            ? <i className="icon-x" />
+            : <i className="icon-open" />}
+        </h2>
+      </Link>
       <p
         className={`faq-answer ${faq.open ? 'block' : 'none'}`}
       >

@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image';
 import styles from '../styles/Pages.module.scss';
 
 export async function getStaticProps() {
@@ -35,7 +36,7 @@ export default function testimonials({ page }) {
       <section className={styles.page}>
         <h1>{page.title}</h1>
         <div dangerouslySetInnerHTML={{ __html: page.contentsHTML }} />
-          {page.paragraphPosts.map((paragraphArticle) => (
+        {page.paragraphPosts.map((paragraphArticle) => (
           <div key={paragraphArticle.id}>
             {paragraphArticle.subtitle && (
               <h2 id={paragraphArticle.slug}>
@@ -53,9 +54,9 @@ export default function testimonials({ page }) {
                     width={500}
                     height={50}
                     style={{
-                        maxWidth: '100%',
-                        height: 'auto',
-                        display: 'inline-block',
+                      maxWidth: '100%',
+                      height: 'auto',
+                      display: 'inline-block',
                     }}
                   />
                   {paragraphArticle.subtitle !== paragraphArticle.altImgParagh && (

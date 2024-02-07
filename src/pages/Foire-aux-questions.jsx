@@ -36,35 +36,35 @@ export default function Slug({ post }) {
       </Head>
       <FaqJsonLd listPosts={post.listPosts} />
       <section className={styles.page}>
-          <h1>{post.title}</h1>
-          <div dangerouslySetInnerHTML={{ __html: post.contentsHTML }} />
-          <Faq faq={post} />
-          {post.paragraphPosts.map((paragraphArticle) => (
-            <>
-              {paragraphArticle.subtitle && (
-                <h2 key={paragraphArticle.id}>{paragraphArticle.subtitle}</h2>
-              )}
-              {paragraphArticle.paragraph && (
-                <p key={paragraphArticle.id} className={styles.page__contents__paragraph}>
-                  {paragraphArticle.imgPostParagh && (
-                    <Image
-                      className={styles.page__contents__paragraph}
-                      src={`${paragraphArticle.imgPostParagh}.webp`}
-                      alt={paragraphArticle.subtitle}
-                      quality={100}
-                      width="1080"
-                      height="720"
-                      sizes="(max-width: 768px) 100vw,
+        <h1>{post.title}</h1>
+        <div dangerouslySetInnerHTML={{ __html: post.contentsHTML }} />
+        <Faq faq={post} />
+        {post.paragraphPosts.map((paragraphArticle) => (
+          <>
+            {paragraphArticle.subtitle && (
+            <h2 key={paragraphArticle.id}>{paragraphArticle.subtitle}</h2>
+            )}
+            {paragraphArticle.paragraph && (
+            <p key={paragraphArticle.id} className={styles.page__contents__paragraph}>
+              {paragraphArticle.imgPostParagh && (
+              <Image
+                className={styles.page__contents__paragraph}
+                src={`${paragraphArticle.imgPostParagh}.webp`}
+                alt={paragraphArticle.subtitle}
+                quality={100}
+                width="1080"
+                height="720"
+                sizes="(max-width: 768px) 100vw,
                         (max-width: 1200px) 50vw,
                         33vw"
-                    />
-                  )}
-                  {paragraphArticle.paragraph}
-
-                </p>
+              />
               )}
-            </>
-          ))}
+              {paragraphArticle.paragraph}
+
+            </p>
+            )}
+          </>
+        ))}
       </section>
     </>
   );

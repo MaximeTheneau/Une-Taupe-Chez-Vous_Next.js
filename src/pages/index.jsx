@@ -2,7 +2,6 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import Cards from '../components/cards/cards';
-import Faq from '../components/faq/faq';
 import styles from '../styles/Home.module.scss';
 import imageLoaderFull from '../utils/imageLoaderFull';
 import fetcher from '../utils/fetcher';
@@ -34,7 +33,7 @@ export async function getStaticProps() {
 }
 
 export default function Home({
-  accueil, services, articles, faq, testimonials, keyword, image,
+  accueil, services, articles, testimonials, keyword, image,
 }) {
   return (
     <>

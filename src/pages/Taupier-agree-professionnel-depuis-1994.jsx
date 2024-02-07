@@ -90,9 +90,9 @@ export default function TaupierPage({ page, image }) {
             {' '}
             39338032400029
           </p>
-        <GoogleMaps />
-        <div dangerouslySetInnerHTML={{ __html: page.contentsHTML }} />
-        <TableOfContents post={page} />
+          <GoogleMaps />
+          <div dangerouslySetInnerHTML={{ __html: page.contentsHTML }} />
+          <TableOfContents post={page} />
         </div>
         {page.paragraphPosts.map((paragraphArticle) => (
           <div key={paragraphArticle.id}>
@@ -112,9 +112,9 @@ export default function TaupierPage({ page, image }) {
                     width={500}
                     height={50}
                     style={{
-                        maxWidth: '100%',
-                        height: 'auto',
-                        display: 'inline-block',
+                      maxWidth: '100%',
+                      height: 'auto',
+                      display: 'inline-block',
                     }}
                   />
                   {paragraphArticle.subtitle !== paragraphArticle.altImgParagh && (

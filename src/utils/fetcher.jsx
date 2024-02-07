@@ -4,7 +4,6 @@ const fetcher = async (url) => {
     console.error(`Erreur lors de la requête à ${url}: ${response.status} ${response.statusText}`);
 
     throw new Error('Une erreur est survenue');
-
   }
   const data = await response.json();
   return data;

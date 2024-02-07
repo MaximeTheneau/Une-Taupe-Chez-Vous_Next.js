@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import Layout from '../components/layout';
 import '../styles/globals.scss';
-import CookiesModal from '../components/modal/cookies/Cookies';
 
 function MyApp({ Component, pageProps }) {
   return (
