@@ -1,6 +1,5 @@
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import { useState } from 'react';
 import fetcher from '../utils/fetcher';
 import Cards from '../components/cards/cards';
 import styles from '../components/search/Search.module.scss';
@@ -21,7 +20,7 @@ export async function getStaticProps() {
 }
 
 export default function Recherche({ page, articlesInit, desc }) {
-  const [articles, setArticles] = useState(articlesInit);
+  const [articles] = useState(articlesInit);
   const [filteredArticles, setFilteredArticles] = useState(articlesInit);
   return (
     <>
