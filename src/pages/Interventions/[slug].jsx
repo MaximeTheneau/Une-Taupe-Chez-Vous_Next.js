@@ -7,8 +7,6 @@ import TableOfContents from '../../components/tableOfContents/TableOfContents';
 import fetcher from '../../utils/fetcher';
 import BreadcrumbJsonLd from '../../components/jsonLd/BreadcrumbJsonLd';
 import ArticleJsonLd from '../../components/jsonLd/ArticleJsonLd';
-import Comments from '../../components/comments/Comments';
-import Cards from '../../components/cards/cards';
 import fetcherImage from '../../utils/fetcherImage';
 
 export async function getStaticPaths() {
@@ -68,18 +66,13 @@ export default function Slug({ desc, post, image }) {
               src={`${post.imgPost}.webp`}
               alt={post.altImg || post.title}
               loader={imageLoaderFull}
-              quality={75}
               width={image.width}
               height={image.height}
-              sizes="(max-width: 640px) 100vw,
-                (max-width: 750px) 100vw,
-                (max-width: 828px) 100vw,
-                (max-width: 1080px) 100vw,
-                100vw"
-              style={{
-                width: '100%',
-                height: 'auto',
-              }}
+              sizes="
+              (min-width: 77.5em) 750px,
+              (min-width: 62em) calc(100vw - 330px),
+              90vw
+            "
               priority
             />
             {post.title !== post.altImg && (

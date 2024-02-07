@@ -40,7 +40,7 @@ export default function Contact({ page }) {
 
         <div className={styles.page__contact}>
         <h2>Contactez-nous - Devis gratuit</h2>
-          <div className={styles.page__contact__block} itemScope itemType="https://schema.org/PostalAdress">
+          <div className={styles.page__contact__block} itemScope itemType="https://schema.org/">
             <p>
               <strong>Société : </strong>
               <span itemProp="name">Une Taupe Chez Vous</span>

@@ -17,6 +17,8 @@ export default async function handler(req, res) {
   //   return;
   // }
 
+  res = await res; 
+
   const branch = 'main';
   const gitStash = spawn('git', ['stash']);
 
