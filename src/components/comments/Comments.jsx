@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useState } from 'react';
 import styles from './Comments.module.scss';
-import LoaderSvg from '../svg/LoaderSvg';
 
 export default function Comments({ posts }) {
   const [state, setState] = useState({
@@ -233,7 +232,6 @@ export default function Comments({ posts }) {
           <p>
             Envoie en     cours...
             {' '}
-            <LoaderSvg />
           </p>
         ) : (
           <p className="error">
