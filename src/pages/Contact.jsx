@@ -49,11 +49,11 @@ export default function Contact({ page }) {
               <strong>Adresse : </strong>
               <span itemProp="streetAddress">71 Marie Curie </span>
               <span itemProp="postalCode">27780 </span>
-              <span itemProp="addressLocality">Garrennes-Sur-Eure </span>
+              <span itemProp="addressLocality">Garennes-Sur-Eure </span>
             </p>
             <p itemProp="telephone">
               <strong>Téléphone : </strong>
-              <Link href="tel:+33232264958"> +33 2 32 26 49 58</Link>
+              <Link href="tel:+33232264958"> 02 32 26 49 58</Link>
             </p>
             <NotCopie />
           </div>
