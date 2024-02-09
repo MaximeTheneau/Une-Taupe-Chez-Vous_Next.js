@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import imageLoaderFull from '../utils/imageLoaderFull';
-import Button from '../components/button/button';
+import Link from 'next/link';
 import fetcher from '../utils/fetcher';
+import styles from '../styles/Pages.module.scss';
 
 export async function getStaticProps() {
   const page = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Mentions-Legales`);
@@ -52,35 +52,58 @@ export default function MentionsLegal({ page }) {
           />
         </Head>
         <section>
-          <figure>
-            <Image
-              src={`${page.imgPost}.webp`}
-              alt={page.altImg || page.title}
-              loader={imageLoaderFull}
-              quality={90}
-              width={1080}
-              height={608}
-              sizes="(max-width: 640px) 100vw,
-                (max-width: 750px) 100vw,
-                (max-width: 828px) 100vw,
-                (max-width: 1080px) 100vw,
-                100vw"
-              style={{
-                width: '100%',
-                height: 'auto',
-              }}
-              priority
-            />
-            {page.title !== page.altImg && (
-            <figcaption className="caption">
-              {page.altImg}
-            </figcaption>
-            )}
-          </figure>
           <h1>{page.title}</h1>
           <h2>{page.subtitle}</h2>
           <div dangerouslySetInnerHTML={{ __html: page.contentsHTML }} />
-          <Button />
+          {page.paragraphPosts.map((paragraphArticle) => (
+            <div key={paragraphArticle.id}>
+              {paragraphArticle.subtitle && (
+              <h2 id={paragraphArticle.slug}>
+                {paragraphArticle.subtitle}
+              </h2>
+              )}
+              {paragraphArticle.paragraph && (
+              <div key={paragraphArticle.id} className={styles.page__contents__paragraph}>
+                {paragraphArticle.imgPostParagh && (
+                <figure className={styles.page__contents__paragraph__figure}>
+                  <Image
+                    src={`${paragraphArticle.imgPostParagh}.webp`}
+                    alt={paragraphArticle.subtitle}
+                    quality={75}
+                    width={500}
+                    height={50}
+                    style={{
+                      maxWidth: '100%',
+                      height: 'auto',
+                      display: 'inline-block',
+                    }}
+                  />
+                  {paragraphArticle.subtitle !== paragraphArticle.altImgParagh && (
+                  <figcaption className="caption">
+                    {paragraphArticle.altImg}
+                  </figcaption>
+                  )}
+                </figure>
+                )}
+                <div
+                  className={styles.page__contents__paragraph__text}
+                  dangerouslySetInnerHTML={{ __html: paragraphArticle.paragraph }}
+                />
+                {paragraphArticle.link && (
+                  <div className={styles.page__contents__paragraph__links}>
+                    <span className={styles.page__contents__paragraph__links__link}>
+                      → A lire aussi :
+                      <Link href={paragraphArticle.link}>
+                        {' '}
+                        {paragraphArticle.linkSubtitle}
+                      </Link>
+                    </span>
+                  </div>
+                )}
+              </div>
+              )}
+            </div>
+          ))}
         </section>
       </>
     </>

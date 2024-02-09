@@ -13,6 +13,7 @@ interface FormState {
   subject: string;
   postalCode: string;
   phone?: string;
+  status?: string;
   emailReturn?: boolean;
 }
 
@@ -41,10 +42,11 @@ export default function ContactForm() {
       name: '',
       email: '',
       message: '',
-      subject: 'Demande de renseignements',
+      subject: 'Demande de devis',
       postalCode: '',
       phone: '',
       emailReturn: true,
+      status: '',
     },
     textArea: 3,
     confirmationName: null,
@@ -169,11 +171,53 @@ export default function ContactForm() {
               )}
             />
           </div>
+          {/* { state.form.subject === 'Demande de devis' && (
+          <>
+            <div className={styles.contact__input}>
+              <label htmlFor="Société">
+                <input
+                  type="radio"
+                  name="status"
+                  value="society"
+                  onChange={
+                    (e: ChangeEvent<HTMLInputElement>) =>
+                    changeField(e.target.value, 'status')}
+                />
+                Société
+              </label>
+              <label htmlFor="Particulier">
+                <input
+                  type="radio"
+                  name="status"
+                  value="particular"
+                  onChange={
+                    (e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'status')
+                  }
+                />
+                Particulier
+              </label>
+            </div>
+            {state.form.status === 'society' && (
+            <div className={styles.contact__input}>
+              <input
+                type="text"
+                title="Société"
+                placeholder="Nom de la société*"
+                value={state.form.status}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(
+                  e.target.value,
+                  'status',
+                )}
+              />
+            </div>
+            )}
+          </>
+          )} */}
           <div className={styles.contact__input}>
             <Input
               type="text"
               title="Nom"
-              placeholder="Nom Prénom / Société*"
+              placeholder="Nom Prénom"
               value={state.form.name}
               onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'name')}
               onBlur={(e: ChangeEvent<HTMLInputElement>) => {

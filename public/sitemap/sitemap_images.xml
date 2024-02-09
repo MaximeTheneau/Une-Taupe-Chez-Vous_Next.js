@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
       <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
         <url>
+                  <loc>https://unetaupechezvous.fr/Mentions-Legales</loc>
+                  <image:image>
+                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Mentions-Legales.webp</image:loc>
+                  </image:image>
+                  
+                </url><url>
                   <loc>https://unetaupechezvous.fr/Articles/Nuisibles/30-ans-au-service-de-la-lutte-contre-les-nuisibles</loc>
                   <image:image>
                     <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/30-ans-au-service-de-la-lutte-contre-les-nuisibles.webp</image:loc>
@@ -376,12 +382,6 @@
                   <loc>https://unetaupechezvous.fr/Articles/Nuisibles/Consultation-Publique-ESOD-Projet-pour-reguler-les-nuisibles</loc>
                   <image:image>
                     <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Consultation-Publique-ESOD-Projet-pour-reguler-les-nuisibles.webp</image:loc>
-                  </image:image>
-                  
-                </url><url>
-                  <loc>https://unetaupechezvous.fr/Mentions-Legales</loc>
-                  <image:image>
-                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Mentions-Legales.webp</image:loc>
                   </image:image>
                   
                 </url>
