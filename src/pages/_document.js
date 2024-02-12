@@ -5,9 +5,7 @@ import {
 export default function Document() {
   return (
     <Html lang="fr">
-
       <Head>
-
         <link
           rel="preload"
           href="https://res.cloudinary.com/dsn2zwbis/raw/upload/unetaupechezvous/taupe.woff2"

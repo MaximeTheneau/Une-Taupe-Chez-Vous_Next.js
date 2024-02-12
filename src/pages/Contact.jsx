@@ -36,27 +36,26 @@ export default function Contact({ page }) {
 
       <section className={styles.page}>
         <h1>{page.title}</h1>
+        <div className={styles.page__contact__block} itemScope itemType="https://schema.org/">
+          <p>
+            <strong>Société : </strong>
+            <span itemProp="name">Une Taupe Chez Vous</span>
+          </p>
+          <p itemProp="address">
+            <strong>Adresse : </strong>
+            <span itemProp="streetAddress">71 Marie Curie </span>
+            <span itemProp="postalCode">27780 </span>
+            <span itemProp="addressLocality">Garennes-Sur-Eure </span>
+          </p>
+          <p itemProp="telephone">
+            <strong>Téléphone : </strong>
+            <Link href="tel:+33232264958"> 02 32 26 49 58</Link>
+          </p>
+          <NotCopie />
+        </div>
         <div dangerouslySetInnerHTML={{ __html: page.contentsHTML }} />
-
         <div className={styles.page__contact}>
-          <h2>Contactez-nous - Devis gratuit</h2>
-          <div className={styles.page__contact__block} itemScope itemType="https://schema.org/">
-            <p>
-              <strong>Société : </strong>
-              <span itemProp="name">Une Taupe Chez Vous</span>
-            </p>
-            <p itemProp="address">
-              <strong>Adresse : </strong>
-              <span itemProp="streetAddress">71 Marie Curie </span>
-              <span itemProp="postalCode">27780 </span>
-              <span itemProp="addressLocality">Garennes-Sur-Eure </span>
-            </p>
-            <p itemProp="telephone">
-              <strong>Téléphone : </strong>
-              <Link href="tel:+33232264958"> 02 32 26 49 58</Link>
-            </p>
-            <NotCopie />
-          </div>
+          <h2>Contactez-nous</h2>
           <div className={styles.page__contact__block}>
             <ContactForm />
           </div>

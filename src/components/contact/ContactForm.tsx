@@ -15,6 +15,7 @@ interface FormState {
   phone?: string;
   status?: string;
   emailReturn?: boolean;
+  image?: File | null;
 }
 
 interface ModalState {
@@ -85,7 +86,7 @@ export default function ContactForm() {
   //   return '';
   // }
 
-  const changeField = (value, field) => {
+  const changeField = (value: string | boolean, field: string) => {
     setState((prevState) => ({
       ...prevState,
       form: {
@@ -93,6 +94,26 @@ export default function ContactForm() {
         [field]: value,
       },
     }));
+  };
+
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files && e.target.files[0];
+    if (file) {
+      // Check if it's an image and has a valid extension
+      const validExtensions = ['jpg', 'png', 'avif', 'webp'];
+      const extension = file.name.split('.').pop()?.toLowerCase();
+      if (extension && validExtensions.includes(extension)) {
+        setState((prevState) => ({
+          ...prevState,
+          form: {
+            ...prevState.form,
+            image: file,
+          },
+        }));
+      } else {
+        console.error('Invalid file type. Only JPG, PNG, AVIF, and WEBP files are allowed.');
+      }
+    }
   };
 
   const handleResponse200 = () => {
@@ -314,6 +335,18 @@ export default function ContactForm() {
                   Veuillez renseigner votre message (entre 5 et 500 caractères)
                 </span>
                 )}
+          </div>
+          <div className={styles.contact__input}>
+            <label htmlFor="image">
+              Image (JPG, PNG, AVIF, WEBP)
+              <input
+                type="file"
+                id="image"
+                name="image"
+                accept="image/jpeg, image/png, image/avif, image/webp"
+                onChange={handleFileChange}
+              />
+            </label>
           </div>
           <div className={styles.contact__input__chekbox}>
             <label htmlFor="emailReturn">
