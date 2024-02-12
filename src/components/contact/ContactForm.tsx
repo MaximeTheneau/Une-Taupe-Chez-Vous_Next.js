@@ -343,7 +343,7 @@ export default function ContactForm() {
                 type="file"
                 id="image"
                 name="image"
-                accept="image/jpeg, image/png, image/avif, image/webp"
+                accept="image/jpeg, image/jpg, image/png, image/avif, image/webp"
                 onChange={handleFileChange}
               />
             </label>
