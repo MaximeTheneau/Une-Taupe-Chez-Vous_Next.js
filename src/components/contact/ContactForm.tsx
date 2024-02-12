@@ -345,7 +345,6 @@ export default function ContactForm() {
                 name="image"
                 accept="image/jpeg, image/jpg, image/png, image/avif, image/webp"
                 onChange={handleFileChange}
-                capture
               />
             </label>
           </div>
