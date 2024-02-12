@@ -5,8 +5,22 @@ import {
 export default function Document() {
   return (
     <Html lang="fr">
-      <Head>
 
+      <Head>
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', ${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID});
+              `,
+          }}
+        />
         <link
           rel="preload"
           href="https://res.cloudinary.com/dsn2zwbis/raw/upload/unetaupechezvous/taupe.woff2"
@@ -40,6 +54,7 @@ export default function Document() {
         <Main />
         <NextScript />
       </body>
+
     </Html>
   );
 }
