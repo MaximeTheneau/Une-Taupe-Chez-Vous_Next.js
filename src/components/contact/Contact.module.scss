@@ -7,10 +7,11 @@
         width: 100%;
         border: 1px solid $font-color-light !important;
         border-radius: 12px;
-        font-weight: bold;
-        font-size: $font-size-small !important;
         margin: 1rem 0 0 0;
-        & input, textarea, select {
+        & input[type="*"], textarea, select {
+            font-size: $font-size-small !important;
+            font-weight: bold;
+            color: $font-color !important;
             border: none;
             outline: none;
             // &:focus{

@@ -51,6 +51,7 @@ export default function ContactForm() {
       date: null,
       emailReturn: true,
       status: '',
+      image: null,
     },
     textArea: 3,
     confirmationName: null,
@@ -103,10 +104,8 @@ export default function ContactForm() {
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
     if (file) {
-      // Check if it's an image and has a valid extension
-      const validExtensions = ['jpg', 'png', 'avif', 'webp'];
-      const extension = file.name.split('.').pop()?.toLowerCase();
-      if (extension && validExtensions.includes(extension)) {
+      const validMimeTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/avif', 'image/webp'];
+      if (validMimeTypes.includes(file.type)) {
         setState((prevState) => ({
           ...prevState,
           form: {
@@ -134,6 +133,7 @@ export default function ContactForm() {
         subject: 'Demande de devis',
         phone: '',
         emailReturn: true,
+        image: null,
       },
       modal: {
         title: 'Merci !',
@@ -384,7 +384,7 @@ export default function ContactForm() {
                 type="file"
                 id="image"
                 name="image"
-                accept="image/jpeg, image/jpg, image/png, image/avif, image/webp"
+                accept="image/*"
                 onChange={handleFileChange}
               />
             </label>
