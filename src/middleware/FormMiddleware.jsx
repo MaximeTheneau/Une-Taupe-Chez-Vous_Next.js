@@ -18,7 +18,7 @@ export default function formMiddleware(req, apiPath, handleResponse200, handleRe
         handleResponse200();
         return response.json();
       }
-      throw new Error('Erreur de requête');
+      handleResponseError(response);
     })
     .catch((error) => {
       handleResponseError(error);
