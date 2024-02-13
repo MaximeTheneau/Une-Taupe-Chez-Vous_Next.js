@@ -1,6 +1,7 @@
-export default function Select({ onChange, value }) {
+export default function Select({ onChange, value, id }) {
   return (
     <select
+      id={id}
       title="Sujet"
       name="subject"
       value={value}

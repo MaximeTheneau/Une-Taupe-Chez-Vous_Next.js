@@ -69,8 +69,12 @@ header a:hover{
   text-decoration: none;
 }
 //* Form
+
 input,
-textarea{
+textarea,
+select
+{
+  font-size: $font-size;
   border: none;
   border-bottom: none !important;
   font-family: $font-primary;

@@ -2,28 +2,29 @@
 
 .contact{
     width: 100%;
-
+    
     &__input{
         width: 100%;
-        border: 1px solid $font-color-light !important;
-        border-radius: 12px;
         margin: 1rem 0 0 0;
-        & input[type="*"], textarea, select {
-            font-size: $font-size-small !important;
+        & input, textarea, select {
+            border: 1px solid $font-color-light !important;
+            border-radius: 12px;
             font-weight: bold;
             color: $font-color !important;
             border: none;
             outline: none;
-            // &:focus{
-            //     outline: none;
-            //     color: $font-color !important;
-            // }
         }
-        & label {
-            font-size: $font-size-medium;
-            padding: 1rem;
+        &__label{
+            font-size: $font-size;
+            font-weight: bold;
+            color: $font-color;
+            display: block;
+            &__alert{
+                color: $color-error;
+                font-weight: 900;
+            }
+        }
 
-        }
         &__chekbox{
             & label span {
                 font-size: $font-size-small;
@@ -35,6 +36,44 @@
                 margin: 1rem 0;
             }
             display: inline;
+        }
+        &__radio{
+            width: 100%;
+            border: 1px solid $font-color-light !important;
+            border-radius: 12px;
+            margin: 1rem 0 0 0;
+            padding: 0 0.5rem;
+            & h2 {
+                margin: 1rem 0 0 0;
+            }
+            & label {
+                padding: 0 0.5rem;
+                
+                display: inline-block;
+                & span {
+                    padding: 0 0.5rem;
+                }
+            }
+            & input{
+                width:$font-size-small;
+                height: $font-size-small;
+                margin: 1rem 0;
+            }
+
+        }
+        &__range{
+            width: 100%;
+            border: 1px solid $font-color-light !important;
+            border-radius: 12px;
+            margin: 1rem 0 0 0;
+            padding: 1rem 0.5rem 0 0;
+
+            & label {
+                padding: 0 0.5rem;
+                & span {
+                    margin: 5rem 0;
+                }
+            }
         }
 
         &__error{
@@ -63,7 +102,6 @@
     .contact{
         width: 100%;
         &__input{
-
         }
 
     }

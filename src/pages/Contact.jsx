@@ -55,7 +55,6 @@ export default function Contact({ page }) {
         </div>
         <div dangerouslySetInnerHTML={{ __html: page.contentsHTML }} />
         <div className={styles.page__contact}>
-          <h2>Contactez-nous</h2>
           <div className={styles.page__contact__block}>
             <ContactForm />
           </div>
