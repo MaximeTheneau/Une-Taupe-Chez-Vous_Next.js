@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState } from 'react';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 import FormMiddleware from '../../middleware/FormMiddleware';
 import Confirmation from '../modal/Confirmation';
 import styles from './Contact.module.scss';
@@ -16,6 +16,7 @@ interface FormState {
   status?: string;
   emailReturn?: boolean;
   image?: File | null;
+  date?: string | null;
 }
 
 interface ModalState {
@@ -32,12 +33,13 @@ interface ContactFormState {
   confirmationMessage: boolean | null;
   confirmationSubject?: boolean | null;
   confirmationCodePostal?: boolean | null;
+  confirmationImage?: boolean | null;
   modal: ModalState;
 }
 
 // == Composant
 export default function ContactForm() {
-  const router = useRouter();
+  // const router = useRouter();
   const [state, setState] = useState<ContactFormState>({
     form: {
       name: '',
@@ -46,6 +48,7 @@ export default function ContactForm() {
       subject: 'Demande de devis',
       postalCode: '',
       phone: '',
+      date: null,
       emailReturn: true,
       status: '',
     },
@@ -55,6 +58,7 @@ export default function ContactForm() {
     confirmationMessage: null,
     confirmationSubject: null,
     confirmationCodePostal: null,
+    confirmationImage: null,
     modal: {
       title: '',
       message: '',
@@ -111,7 +115,10 @@ export default function ContactForm() {
           },
         }));
       } else {
-        console.error('Invalid file type. Only JPG, PNG, AVIF, and WEBP files are allowed.');
+        setState((prevState) => ({
+          ...prevState,
+          confirmationImage: false,
+        }));
       }
     }
   };
@@ -137,7 +144,24 @@ export default function ContactForm() {
 
     setTimeout(
       () => {
-        router.push('/');
+        // router.push('/');
+        setState({
+          ...state,
+          form: {
+            name: '',
+            email: '',
+            message: '',
+            postalCode: '',
+            subject: 'Demande de devis',
+            phone: '',
+            emailReturn: true,
+          },
+          modal: {
+            title: '',
+            message: '',
+            toggleModal: false,
+          },
+        });
       },
       3000,
     );
@@ -238,7 +262,7 @@ export default function ContactForm() {
             <Input
               type="text"
               title="Nom"
-              placeholder="Nom Prénom"
+              placeholder="Nom Prénom*"
               value={state.form.name}
               onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'name')}
               onBlur={(e: ChangeEvent<HTMLInputElement>) => {
@@ -275,6 +299,7 @@ export default function ContactForm() {
                   : setState({ ...state, confirmationCodePostal: false })
               )}
               placeholder="Code postal*"
+              minLength={2}
               required
             />
             {state.confirmationCodePostal === false
@@ -311,13 +336,27 @@ export default function ContactForm() {
               placeholder="Téléphone"
               value={state.form.phone}
               onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'phone')}
-
             />
           </div>
+          {state.form.phone && (
+          <div className={styles.contact__input}>
+            <label htmlFor="date">
+              Etre rappelé le
+              <input
+                type="datetime-local"
+                name="date"
+                value={state.form.date || ''}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'date')}
+                min={`${new Date().toISOString().split('T')[0]}T09:00`}
+                max={`${new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]}T20:00`}
+              />
+            </label>
+          </div>
+          )}
           <div className={styles.contact__input}>
             <textarea
               rows={state.textArea}
-              title="Message"
+              title="Message*"
               value={state.form.message}
               onChange={handleChangeMessage}
               onBlur={(e: React.FocusEvent<HTMLTextAreaElement>) => (
@@ -338,7 +377,9 @@ export default function ContactForm() {
           </div>
           <div className={styles.contact__input}>
             <label htmlFor="image">
-              Image (JPG, PNG, AVIF, WEBP)
+              <span>
+                Ajouter une image
+              </span>
               <input
                 type="file"
                 id="image"
@@ -347,6 +388,12 @@ export default function ContactForm() {
                 onChange={handleFileChange}
               />
             </label>
+            {state.confirmationImage === false
+                && (
+                <span className={styles.contact__input__error}>
+                  Image non valide (JPG, PNG, AVIF, WEBP)
+                </span>
+                )}
           </div>
           <div className={styles.contact__input__chekbox}>
             <label htmlFor="emailReturn">
@@ -357,7 +404,9 @@ export default function ContactForm() {
                 checked={state.form.emailReturn}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.checked, 'emailReturn')}
               />
-              Recevoir une copie de cet email
+              <span>
+                Recevoir une copie de cet email
+              </span>
             </label>
           </div>
           <div className="contact-form_button">
