@@ -3,7 +3,6 @@ import React, { ChangeEvent, useState } from 'react';
 import FormMiddleware from '../../middleware/FormMiddleware';
 import Confirmation from '../modal/Confirmation';
 import styles from './Contact.module.scss';
-import Select from './form/Select';
 import Input from './form/Input';
 
 interface FormState {
@@ -13,6 +12,7 @@ interface FormState {
   subject: string;
   postalCode: string;
   phone?: string;
+  adress?: string;
   status?: string;
   emailReturn?: boolean;
   image?: File | null;
@@ -51,6 +51,7 @@ export default function DevisForm() {
       phone: '',
       date: '',
       surface: 0,
+      adress: '',
       emailReturn: true,
       status: '',
       image: null,
@@ -290,7 +291,7 @@ export default function DevisForm() {
               type="text"
               name="address"
               placeholder="Adresse"
-              value={state.form.address}
+              value={state.form.adress}
               onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'address')}
             />
           </div>
