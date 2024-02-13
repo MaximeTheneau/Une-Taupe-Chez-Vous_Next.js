@@ -16,9 +16,9 @@ export default function formMiddleware(req, apiPath, handleResponse200, handleRe
     .then((response) => {
       if (response.ok) {
         handleResponse200();
-        return response.json();
+      } else {
+        handleResponseError(); // Ajoutez une gestion d'erreur ici si nécessaire
       }
-      handleResponseError(response);
     })
     .catch((error) => {
       handleResponseError(error);
