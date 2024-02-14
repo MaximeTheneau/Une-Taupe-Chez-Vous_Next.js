@@ -492,7 +492,6 @@ export default function DevisForm() {
                   )}
                   {' '}
                   m²
-
                 </span>
                 <input
                   type="range"

@@ -1,4 +1,5 @@
 import { spawn } from 'child_process';
+/* eslint-disable no-console */
 
 export default async function handler(req, res) {
   // const authToken = process.env.AUTH_TOKEN;

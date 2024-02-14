@@ -25,7 +25,7 @@
       left: 50%;
       transform: translate(-50%, -50%);
       background: rgba(255, 255, 255, 0.85);
-      & h1, div{
+      & h1, div, button{
         text-align: center;
         margin: 0 auto 1rem auto;
       }

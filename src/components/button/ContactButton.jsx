@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import AnimationHover from '../../hooks/useHoverAnimation/CloneTextWrapper';
 
-export default function Button() {
+export default function ContactButton() {
   return (
     <div className="button">
       <Link href="/Contact">

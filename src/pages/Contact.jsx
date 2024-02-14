@@ -4,6 +4,7 @@ import ContactForm from '../components/contact/ContactForm';
 import styles from '../styles/Pages.module.scss';
 import NotCopie from '../components/notCopie/NotCopie';
 import fetcher from '../utils/fetcher';
+import DevisButton from '../components/button/DevisButton';
 
 export async function getStaticProps() {
   const page = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Contact`);
@@ -54,6 +55,7 @@ export default function Contact({ page }) {
           <NotCopie />
         </div>
         <div dangerouslySetInnerHTML={{ __html: page.contentsHTML }} />
+        <DevisButton />
         <div className={styles.page__contact}>
           <div className={styles.page__contact__block}>
             <ContactForm />

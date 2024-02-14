@@ -4,11 +4,11 @@ import Link from 'next/link';
 import styles from '../styles/Pages.module.scss';
 import imageLoaderFull from '../utils/imageLoaderFull';
 import GoogleMaps from '../components/maps/GoogleMaps';
-import Button from '../components/button/button';
 import NotCopie from '../components/notCopie/NotCopie';
 import fetcher from '../utils/fetcher';
 import TableOfContents from '../components/tableOfContents/TableOfContents';
 import fetcherImage from '../utils/fetcherImage';
+import ContactButton from '../components/button/ContactButton';
 
 export async function getStaticProps() {
   const page = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Taupier-agree-professionnel-depuis-1994`);
@@ -143,7 +143,7 @@ export default function TaupierPage({ page, image }) {
             )}
           </div>
         ))}
-        <Button />
+        <ContactButton />
       </section>
     </>
   );

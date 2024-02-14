@@ -38,6 +38,11 @@ export default function Navbar() {
             <Search closeNav={closeNav} />
           </li>
           <li className={styles['navbar__menu__list-item']}>
+            <Link href="/Devis-en-ligne" onClick={() => closeNav()}>
+              Devis en ligne
+            </Link>
+          </li>
+          <li className={styles['navbar__menu__list-item']}>
             <Link href="/Interventions" onClick={() => closeNav()}>
               Interventions
             </Link>

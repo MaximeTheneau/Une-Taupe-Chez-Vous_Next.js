@@ -9,6 +9,7 @@ import LocalBusinessJsonLd from '../components/jsonLd/LocalBusinessJsonLd';
 import SearchJsonLd from '../components/jsonLd/SearchJsonLd';
 import LogoJsonLd from '../components/jsonLd/LogoJsonLd';
 import fetcherImage from '../utils/fetcherImage';
+import DevisButton from '../components/button/DevisButton';
 
 export async function getStaticProps() {
   const accueil = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Accueil`);
@@ -76,7 +77,10 @@ export default function Home({
         />
         <div className={styles.home__imagesFull__text}>
           <h1>{accueil.title}</h1>
-          <div dangerouslySetInnerHTML={{ __html: accueil.contentsHTML }} />
+          <div>
+            <div dangerouslySetInnerHTML={{ __html: accueil.contentsHTML }} />
+            <DevisButton />
+          </div>
         </div>
       </div>
       <section className={styles.home}>
@@ -90,7 +94,6 @@ export default function Home({
               </span>
             </Link>
           </div>
-
         </div>
         <Cards cards={services} />
         <h2>Taupier au Service de la Nature</h2>
@@ -154,11 +157,7 @@ export default function Home({
           </div>
           )
         ))}
-        <button type="button" className="button">
-          <Link href="/Contact">
-            Contactez-nous
-          </Link>
-        </button>
+        <DevisButton />
       </section>
       <section>
         <h2>Découvrez aussi nos articles :</h2>

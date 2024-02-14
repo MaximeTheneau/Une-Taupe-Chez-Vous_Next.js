@@ -1,5 +1,6 @@
 import { spawn } from 'child_process';
 import { createHmac } from 'crypto';
+/* eslint-disable no-console */
 
 export default async function handler(req, res) {
   const authToken = process.env.AUTH_TOKEN;

@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
       <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
         <url>
+                  <loc>https://unetaupechezvous.fr/Devis-en-ligne</loc>
+                  <image:image>
+                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Accueil.webp</image:loc>
+                  </image:image>
+                  
+                </url><url>
+                  <loc>https://unetaupechezvous.fr/Articles/Nuisibles/Ragondin-Que-mange-t-il-vraiment-Decouvrez-leur-menu</loc>
+                  <image:image>
+                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Ragondin-Que-mange-t-il-vraiment-Decouvrez-leur-menu.webp</image:loc>
+                  </image:image>
+                  <image:image>
+                         <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Ragondin-Pourquoi-ses-dents-so</image:loc>
+                       </image:image>
+                </url><url>
+                  <loc>https://unetaupechezvous.fr/Annuaire/Fouines-dans-votre-propriete-Trouvez-un-piegeur-agree</loc>
+                  <image:image>
+                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Fouines-dans-votre-propriete-Trouvez-un-piegeur-agree.webp</image:loc>
+                  </image:image>
+                  
+                </url><url>
                   <loc>https://unetaupechezvous.fr/Articles/Nuisibles/Renards-et-Poules-Comment-les-Renards-Escaladent-les-Clotures</loc>
                   <image:image>
                     <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Renards-et-Poules-Comment-les-Renards-Escaladent-les-Clotures.webp</image:loc>
@@ -193,12 +213,6 @@
                   </image:image>
                   
                 </url><url>
-                  <loc>https://unetaupechezvous.fr/Articles/Nuisibles/Ragondin-Que-mange-t-il-vraiment-Decouvrez-leur-menu</loc>
-                  <image:image>
-                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Ragondin-Que-mange-t-il-vraiment-Decouvrez-leur-menu.webp</image:loc>
-                  </image:image>
-                  
-                </url><url>
                   <loc>https://unetaupechezvous.fr/Articles/Nuisibles/Decouvrez-la-couleur-taupe</loc>
                   <image:image>
                     <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Decouvrez-la-couleur-taupe.webp</image:loc>
@@ -278,12 +292,6 @@
                   <loc>https://unetaupechezvous.fr/Articles/Jardin-et-Maison/Comment-se-debarrasser-d-un-nid-de-fouine-dans-votre-chaumiere</loc>
                   <image:image>
                     <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Comment-se-debarrasser-d-un-nid-de-fouine-dans-votre-chaumiere.webp</image:loc>
-                  </image:image>
-                  
-                </url><url>
-                  <loc>https://unetaupechezvous.fr/Annuaire/Fouines-dans-votre-propriete-Trouvez-un-piegeur-agree</loc>
-                  <image:image>
-                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Fouines-dans-votre-propriete-Trouvez-un-piegeur-agree.webp</image:loc>
                   </image:image>
                   
                 </url><url>
