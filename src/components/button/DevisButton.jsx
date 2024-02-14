@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styles from './DevisButton.module.scss';
+import AnimationHover from '../../hooks/useHoverAnimation/CloneTextWrapper';
 
 export default function DevisButton() {
   return (
@@ -9,7 +10,9 @@ export default function DevisButton() {
       role="link"
     >
       <Link href="/Devis-en-ligne">
-        Demandez un devis
+        <AnimationHover>
+          Demandez un devis
+        </AnimationHover>
       </Link>
     </button>
   );
