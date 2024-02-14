@@ -54,8 +54,8 @@ export default function Contact({ page }) {
           </p>
           <NotCopie />
         </div>
-        <div dangerouslySetInnerHTML={{ __html: page.contentsHTML }} />
         <DevisButton />
+        <div dangerouslySetInnerHTML={{ __html: page.contentsHTML }} />
         <div className={styles.page__contact}>
           <div className={styles.page__contact__block}>
             <ContactForm />

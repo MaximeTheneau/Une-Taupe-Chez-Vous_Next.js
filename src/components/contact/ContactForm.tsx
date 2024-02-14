@@ -43,7 +43,7 @@ export default function ContactForm() {
       name: '',
       email: '',
       message: '',
-      subject: 'Demande de devis',
+      subject: 'Demande de renseignements',
       postalCode: '',
       phone: '',
       date: '',
@@ -222,7 +222,6 @@ export default function ContactForm() {
                 )}
               >
                 <option value="Demande de renseignements">Demande de renseignements</option>
-                <option value="Demande de devis">Demande de devis</option>
                 <option value="Autre">Autre</option>
                 <option value="Webmaster">Webmaster</option>
               </select>
