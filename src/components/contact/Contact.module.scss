@@ -2,7 +2,6 @@
 
 .contact{
     width: 100%;
-    
     &__input{
         width: 100%;
         margin: 1rem 0 0 0;
@@ -24,7 +23,6 @@
                 font-weight: 900;
             }
         }
-
         &__chekbox{
             & label span {
                 font-size: $font-size-small;
@@ -39,26 +37,27 @@
         }
         &__radio{
             width: 100%;
-            border: 1px solid $font-color-light !important;
             border-radius: 12px;
             margin: 1rem 0 0 0;
+            border: 1px solid $font-color-light !important;
             padding: 0 0.5rem;
+            display: flex;
+            flex-wrap: wrap;
             & h2 {
                 margin: 1rem 0 0 0;
             }
+            & input {
+                margin: 0 0 1rem 0;
+            }
             & label {
                 padding: 0 0.5rem;
-                
-                display: inline-block;
+                display: flex;
+                padding: 1rem 0 0 0;
                 & span {
                     padding: 0 0.5rem;
                 }
             }
-            & input{
-                width:$font-size-small;
-                height: $font-size-small;
-                margin: 1rem 0;
-            }
+
 
         }
         &__range{
@@ -74,6 +73,7 @@
                     margin: 5rem 0;
                 }
             }
+
         }
 
         &__error{

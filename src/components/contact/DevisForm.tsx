@@ -7,12 +7,16 @@ import Input from './form/Input';
 
 interface FormState {
   name: string;
+  nameSociety?: string;
+  siret?: string;
   email: string;
   message: string;
   subject: string;
   postalCode: string;
   phone?: string;
   adress?: string;
+  intervention?: string;
+  interventionOther?: string;
   status?: string;
   emailReturn?: boolean;
   image?: File | null;
@@ -44,6 +48,8 @@ export default function DevisForm() {
   const [state, setState] = useState<ContactFormState>({
     form: {
       name: '',
+      nameSociety: '',
+      siret: '',
       email: '',
       message: '',
       subject: 'Demande de devis',
@@ -52,6 +58,8 @@ export default function DevisForm() {
       date: '',
       surface: 0,
       adress: '',
+      intervention: '',
+      interventionOther: '',
       emailReturn: true,
       status: '',
       image: null,
@@ -135,6 +143,7 @@ export default function DevisForm() {
         postalCode: '',
         subject: 'Demande de devis',
         phone: '',
+        intervention: '',
         emailReturn: true,
         image: null,
         date: '',
@@ -212,31 +221,38 @@ export default function DevisForm() {
       />
       <div className={styles.contact}>
         <form className={styles.contact__block} onSubmit={handleSubmit}>
-          <div className={styles.contact__input__radio}>
-            <label htmlFor="statusParticular">
-              <input
-                id="statusParticular"
-                type="radio"
-                value="Particulier"
-                name="status"
-                onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'status')}
-              />
-              <span>
-                Particulier
-              </span>
-            </label>
-            <label htmlFor="statusSociety">
-              <input
-                id="statusSociety"
-                type="radio"
-                value="Société"
-                name="status"
-                onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'status')}
-              />
-              <span>
-                Société
-              </span>
-            </label>
+          <div className={styles.contact__input}>
+
+            <p className={styles.contact__input__label}>
+              Vous êtes
+              <span className={styles.contact__input__label__alert}>*</span>
+            </p>
+            <div className={styles.contact__input__radio}>
+              <label htmlFor="statusParticular">
+                <input
+                  id="statusParticular"
+                  type="radio"
+                  value="Particulier"
+                  name="status"
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'status')}
+                />
+                <span>
+                  Particulier
+                </span>
+              </label>
+              <label htmlFor="statusSociety">
+                <input
+                  id="statusSociety"
+                  type="radio"
+                  value="Société"
+                  name="status"
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'status')}
+                />
+                <span>
+                  Société
+                </span>
+              </label>
+            </div>
           </div>
           { state.form.status === 'Société' && (
           <>
@@ -245,7 +261,7 @@ export default function DevisForm() {
                 type="text"
                 title="Société"
                 placeholder="Nom de la société"
-                value={state.form.name}
+                value={state.form.nameSociety}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'nameSociety')}
               />
             </div>
@@ -254,17 +270,21 @@ export default function DevisForm() {
                 type="text"
                 title="Siret"
                 placeholder="Siret"
-                value={state.form.name}
+                value={state.form.siret}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'siret')}
               />
             </div>
           </>
           )}
           <div className={styles.contact__input}>
+            <p className={styles.contact__input__label}>
+              Nom
+              <span className={styles.contact__input__label__alert}>*</span>
+            </p>
             <Input
               type="text"
               title="Nom"
-              placeholder="Nom Prénom*"
+              placeholder="Nom Prénom"
               value={state.form.name}
               onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'name')}
               onBlur={(e: ChangeEvent<HTMLInputElement>) => {
@@ -282,37 +302,47 @@ export default function DevisForm() {
             {state.confirmationName === false
               && (
               <span className={styles.contact__input__error}>
-                Veuillez renseigner votre nom / société (entre 3 et 35 caractères)
+                Veuillez renseigner votre nom (entre 3 et 35 caractères)
               </span>
               )}
           </div>
           <div className={styles.contact__input}>
+            <p className={styles.contact__input__label}>
+              Adresse
+            </p>
             <input
               type="text"
               name="address"
               placeholder="Adresse"
               value={state.form.adress}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'address')}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'adress')}
             />
           </div>
           <div className={styles.contact__input}>
-            <input
-              type="number"
-              className="contact-form-input"
-              name="postalCode"
-              value={state.form.postalCode}
-              onChange={(e) => setState(
-                { ...state, form: { ...state.form, postalCode: e.target.value } },
-              )}
-              onBlur={(e) => (
-                e.target.value.length === 5
-                  ? setState({ ...state, confirmationCodePostal: true })
-                  : setState({ ...state, confirmationCodePostal: false })
-              )}
-              placeholder="Code postal*"
-              minLength={2}
-              required
-            />
+            <label htmlFor="postalcode">
+              <p className={styles.contact__input__label}>
+                Code postal
+                <span className={styles.contact__input__label__alert}>*</span>
+              </p>
+              <input
+                id="postalcode"
+                type="number"
+                className="contact-form-input"
+                name="postalCode"
+                value={state.form.postalCode}
+                onChange={(e) => setState(
+                  { ...state, form: { ...state.form, postalCode: e.target.value } },
+                )}
+                onBlur={(e) => (
+                  e.target.value.length === 5
+                    ? setState({ ...state, confirmationCodePostal: true })
+                    : setState({ ...state, confirmationCodePostal: false })
+                )}
+                placeholder="Code postal*"
+                minLength={2}
+                required
+              />
+            </label>
             {state.confirmationCodePostal === false
                 && (
                 <span className={styles.contact__input__error}>
@@ -321,18 +351,25 @@ export default function DevisForm() {
                 )}
           </div>
           <div className={styles.contact__input}>
-            <Input
-              type="email"
-              title="Email"
-              value={state.form.email}
-              placeholder="Email*"
-              onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'email')}
-              onBlur={(e: ChangeEvent<HTMLInputElement>) => (
-                regex.test(e.target.value)
-                  ? setState({ ...state, confirmationEmail: true })
-                  : setState({ ...state, confirmationEmail: false })
-              )}
-            />
+            <label htmlFor="email">
+              <p className={styles.contact__input__label}>
+                Email
+                <span className={styles.contact__input__label__alert}>*</span>
+              </p>
+              <input
+                id="email"
+                type="email"
+                title="Email"
+                value={state.form.email}
+                placeholder="exemple@mail.com"
+                onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'email')}
+                onBlur={(e: ChangeEvent<HTMLInputElement>) => (
+                  regex.test(e.target.value)
+                    ? setState({ ...state, confirmationEmail: true })
+                    : setState({ ...state, confirmationEmail: false })
+                )}
+              />
+            </label>
             {state.confirmationEmail === false
                 && (
                 <span className={styles.contact__input__error}>
@@ -341,22 +378,33 @@ export default function DevisForm() {
                 )}
           </div>
           <div className={styles.contact__input}>
-            <input
-              type="text"
-              name="phone"
-              placeholder="Téléphone"
-              value={state.form.phone}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'phone')}
-            />
+            <label htmlFor="phone">
+              <p className={styles.contact__input__label}>
+                Téléphone
+                <span className={styles.contact__input__label__alert}>
+                  *
+                </span>
+              </p>
+              <input
+                id="phone"
+                type="text"
+                name="phone"
+                placeholder="Téléphone"
+                value={state.form.phone}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'phone')}
+              />
+            </label>
           </div>
           {state.form.phone && (
           <div className={styles.contact__input}>
             <label htmlFor="date">
-              Etre rappelé le
+              <p className={styles.contact__input__label}>
+                Etre rappelé le
+              </p>
               <input
                 type="datetime-local"
                 name="date"
-                value={state.form.date || ''}
+                value={state.form.date}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'date')}
                 min={`${new Date().toISOString().split('T')[0]}T09:00`}
                 max={`${new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]}T20:00`}
@@ -364,69 +412,105 @@ export default function DevisForm() {
             </label>
           </div>
           )}
-          <div className={styles.contact__input__radio}>
-            <h2>
-              Quels sont vos besoins ?
-            </h2>
-            <label htmlFor="Taupe">
-              <input
-                type="radio"
-                name="intervention"
-                id="Taupe"
-                value="Taupe"
-                onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'intervention')}
-              />
-              <span>
-                Taupe
-              </span>
-            </label>
-            <label htmlFor="Ragondin">
-              <input
-                type="radio"
-                name="intervention"
-                id="Ragondin"
-                value="Ragondin"
-                onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'intervention')}
-              />
-              <span>
-                Ragondin
-              </span>
-            </label>
-            <label htmlFor="Fouines">
-              <input
-                type="radio"
-                name="intervention"
-                id="Fouines"
-                value="Fouines"
-                onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'intervention')}
-              />
-              <span>
-                Fouines
-              </span>
-            </label>
-          </div>
-          <div className={styles.contact__input__range}>
-            <label htmlFor="surface">
-              <span>
-                Surface
-                {' '}
-                {state.form.surface}
-                m²
-              </span>
-              <input
-                type="range"
-                id="surface"
-                name="surface"
-                min="0"
-                max="1000"
-                step="10"
-                value={state.form.surface}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'surface')}
-              />
-            </label>
-          </div>
-
           <div className={styles.contact__input}>
+            <p className={styles.contact__input__label}>
+              Quels sont vos besoins ?
+            </p>
+            <div className={styles.contact__input__radio}>
+              <label htmlFor="Taupe">
+                <input
+                  type="radio"
+                  name="intervention"
+                  id="Taupe"
+                  value="Taupe"
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'intervention')}
+                />
+                <span>
+                  Taupe
+                </span>
+              </label>
+              <label htmlFor="Ragondin">
+                <input
+                  type="radio"
+                  name="intervention"
+                  id="Ragondin"
+                  value="Ragondin"
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'intervention')}
+                />
+                <span>
+                  Ragondin
+                </span>
+              </label>
+              <label htmlFor="Fouines">
+                <input
+                  type="radio"
+                  name="intervention"
+                  id="Fouines"
+                  value="Fouines"
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'intervention')}
+                />
+                <span>
+                  Fouines
+                </span>
+              </label>
+              <label htmlFor="Autre">
+                <input
+                  type="radio"
+                  name="intervention"
+                  id="Autre"
+                  value="Autre"
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'intervention')}
+                />
+                <span>
+                  Autre
+                </span>
+              </label>
+              {state.form.intervention === 'Autre' && (
+              <div className={styles.contact__input}>
+                <input
+                  type="text"
+                  title="Autre"
+                  placeholder="Précisez si possible le type d'intervention souhaité"
+                  value={state.form.interventionOther}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'interventionOther')}
+                />
+              </div>
+              )}
+            </div>
+          </div>
+          <div className={styles.contact__input}>
+            <p className={styles.contact__input__label}>
+              Surface à traiter
+            </p>
+            <div className={styles.contact__input__range}>
+              <label htmlFor="surface">
+                <span>
+                  {' '}
+                  {state.form.surface && (state.form.surface >= 1000
+                    ? `Plus de ${state.form.surface}`
+                    : `Environs ${state.form.surface}`
+                  )}
+                  {' '}
+                  m²
+
+                </span>
+                <input
+                  type="range"
+                  id="surface"
+                  name="surface"
+                  min="0"
+                  max="1000"
+                  step="10"
+                  value={state.form.surface}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'surface')}
+                />
+              </label>
+            </div>
+          </div>
+          <div className={styles.contact__input}>
+            <p className={styles.contact__input__label}>
+              Ajouter un message
+            </p>
             <textarea
               rows={state.textArea}
               title="Message"
@@ -443,9 +527,9 @@ export default function DevisForm() {
           </div>
           <div className={styles.contact__input}>
             <label htmlFor="image">
-              <span>
+              <p className={styles.contact__input__label}>
                 Ajouter une image
-              </span>
+              </p>
               <input
                 type="file"
                 id="image"

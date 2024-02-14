@@ -17,10 +17,10 @@ export default function formMiddleware(req, apiPath, handleResponse200, handleRe
       if (response.ok) {
         handleResponse200();
       } else {
-        handleResponseError(); // Ajoutez une gestion d'erreur ici si nécessaire
+        response.json().then((data) => {
+          console.log(data);
+          handleResponseError(data.erreur);
+        });
       }
-    })
-    .catch((error) => {
-      handleResponseError(error);
     });
 }
