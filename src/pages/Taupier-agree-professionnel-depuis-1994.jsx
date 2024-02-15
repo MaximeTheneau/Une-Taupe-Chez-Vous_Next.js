@@ -47,18 +47,14 @@ export default function TaupierPage({ page, image }) {
             src={`${page.imgPost}.webp`}
             alt={page.altImg || page.title}
             loader={imageLoaderFull}
-            quality={90}
             width={image.width}
             height={image.height}
-            sizes="(max-width: 640px) 100vw,
-                (max-width: 750px) 100vw,
-                (max-width: 828px) 100vw,
-                (max-width: 1080px) 100vw,
-                100vw"
-            style={{
-              width: '100%',
-              height: 'auto',
-            }}
+            sizes="(max-width: 300px) 100vw,
+            (max-width: 500px) 100vw,
+            (max-width: 800px) 100vw,
+            (max-width: 1200px) 100vw,
+            100vw"
+            layout="responsive"
             priority
           />
           {page.title !== page.altImg && (
@@ -110,10 +106,9 @@ export default function TaupierPage({ page, image }) {
                     alt={paragraphArticle.subtitle}
                     quality={75}
                     width={500}
-                    height={50}
+                    height={500}
                     style={{
                       maxWidth: '100%',
-                      height: 'auto',
                       display: 'inline-block',
                     }}
                   />
