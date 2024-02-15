@@ -54,7 +54,6 @@ export default function TaupierPage({ page, image }) {
             (max-width: 800px) 100vw,
             (max-width: 1200px) 100vw,
             100vw"
-            layout="responsive"
             priority
           />
           {page.title !== page.altImg && (
