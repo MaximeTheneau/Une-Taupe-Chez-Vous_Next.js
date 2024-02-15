@@ -43,7 +43,6 @@ export default function Search({
           value={filter || ''}
         />
         <button
-          id="button"
           type="submit"
           tabIndex={0}
           aria-label="Rechercher une page ou un article"

@@ -10,16 +10,12 @@
     margin: 1rem 0;
   }
   &__imagesFull{
-    position: relative;
+    background: $color-primary;
     &__image{
+      width: 40%;
     }
     &__text{
-      position: absolute;
-      top: 50%;
       width: 100%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(255, 255, 255, 0.85);
       display: flex;
       text-align: center;
       flex-direction: column;
@@ -148,7 +144,7 @@
     }
     &__imagesFull{
       &__image{
-        object-fit: cover;
+        width: 100%;
       }
       &__text{
         & h1{

@@ -61,28 +61,26 @@ export default function Home({
         logoUrl={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/logo-une-taupe-chez-vous.png`}
       />
       <div className={styles.home__imagesFull}>
-        <Image
-          src="Accueil.webp"
-          alt={accueil.altImg || accueil.title}
-          loader={imageLoaderFull}
-          quality={80}
-          width={image.width}
-          height={image.height}
-          sizes="(max-width: 300px) 100vw,
+
+        <div className={styles.home__imagesFull__text}>
+          <Image
+            src="Accueil.webp"
+            alt={accueil.altImg || accueil.title}
+            loader={imageLoaderFull}
+            width={image.width}
+            height={image.height}
+            sizes="(max-width: 300px) 100vw,
           (max-width: 500px) 100vw,
           (max-width: 800px) 100vw,
           (max-width: 1200px) 100vw,
           100vw"
-          className={styles.home__imagesFull__image}
-          style={{
-            minHeight: image.height,
-            objectFit: 'cover',
-            width: '100%',
-          }}
-          priority
-        />
-        <div className={styles.home__imagesFull__text}>
-          <h1>{accueil.title}</h1>
+            className={styles.home__imagesFull__image}
+            as="picture"
+            priority
+          />
+          <h1>
+            {accueil.title}
+          </h1>
           <div className={styles['home__imagesFull__text--paragraph']} dangerouslySetInnerHTML={{ __html: accueil.contentsHTML }} />
           <DevisButton />
         </div>
