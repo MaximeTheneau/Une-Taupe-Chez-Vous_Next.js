@@ -74,6 +74,11 @@ export default function Home({
           (max-width: 1200px) 100vw,
           100vw"
           className={styles.home__imagesFull__image}
+          style={{
+            minHeight: image.height,
+            objectFit: 'cover',
+            width: '100%',
+          }}
           priority
         />
         <div className={styles.home__imagesFull__text}>
