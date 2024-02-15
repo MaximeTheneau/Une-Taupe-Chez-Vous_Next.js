@@ -22,9 +22,7 @@
         padding: 0.5rem;
         border-radius: 25%;
         cursor: pointer;
-        &:hover{
-            color: $color-primary;
-        }
+
     }
 }
 .navbar__menu{
@@ -72,6 +70,13 @@
         visibility: hidden;
         transition: opacity 0.5s ease;
 
+    }
+    & a{
+        color: $font-color;
+        text-decoration: none;
+        &:hover{
+            color: $color-link;
+        }
     }
 }
 //* Animation

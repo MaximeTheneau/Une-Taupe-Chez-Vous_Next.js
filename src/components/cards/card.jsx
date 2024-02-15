@@ -4,6 +4,7 @@ import styles from './Card.module.scss';
 import imageThumbnail from '../../utils/imageThumbnail';
 
 export default function Card({ card }) {
+  console.log(card);
   return (
     <li className={styles.card}>
       <Link href={card.url} className={styles.card__img}>

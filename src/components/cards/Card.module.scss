@@ -11,6 +11,10 @@
   width: 20%;
   height: 100%;
   margin: 1rem 2rem;
+  &:hover  h3{
+    color: $color-blue !important;
+    text-decoration: underline;
+  }
   &__img{
     object-fit: cover;
     &:hover img{
@@ -27,6 +31,7 @@
   &__content{
     text-align: center;
   }
+
 
 }
 

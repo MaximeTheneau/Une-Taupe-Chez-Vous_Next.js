@@ -8,6 +8,12 @@ export default function Footer() {
       <div className={styles.footer__links}>
         <div>
           <p className={styles['footer__links--title']}>
+            Rechercher
+          </p>
+          <Search />
+        </div>
+        <div>
+          <p className={styles['footer__links--title']}>
             Services
           </p>
           <ul>
@@ -58,12 +64,7 @@ export default function Footer() {
             </li>
           </ul>
         </div>
-        <div>
-          <p className={styles['footer__links--title']}>
-            Rechercher
-          </p>
-          <Search />
-        </div>
+
       </div>
       <div className={styles.footer__lower}>
         <p>
