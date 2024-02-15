@@ -68,10 +68,11 @@ export default function Home({
           quality={80}
           width={image.width}
           height={image.height}
-          style={{
-            width: '100%',
-            height: 'auto',
-          }}
+          sizes="(max-width: 300px) 100vw,
+          (max-width: 500px) 100vw,
+          (max-width: 800px) 100vw,
+          (max-width: 1200px) 100vw,
+          100vw"
           className={styles.home__imagesFull__image}
           priority
         />
