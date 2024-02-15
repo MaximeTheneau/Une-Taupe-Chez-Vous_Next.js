@@ -46,6 +46,8 @@ em {
 }
 img{
   background: $color-primary;
+  max-width: 100%;
+  height: auto;
   display: block;
 }
 
