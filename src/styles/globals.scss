@@ -28,10 +28,6 @@ h2{
   display: inline-block;
 }
 
-a {
-  color: inherit;
-}
-
 section{
   width: 90%;
   margin: 0 auto 1rem auto;
@@ -56,12 +52,11 @@ main{
   padding-top: 3em;
 }
 
-a {
+p a {
   text-decoration: none;
-  color: $font-color;
-
+  color: $color-link;
+  font-weight: bold;
   &:hover{
-    color: $color-primary;
     text-decoration: underline;
   }
 }
@@ -222,9 +217,7 @@ iframe {
   display: block;
   animation: opacity 0.5s ease 0s;
 }
-p a {
-  color: $color-link;
-}
+
 @keyframes opacity{
   0%{
     opacity: 0;

@@ -41,16 +41,6 @@
     padding-left: 2rem;
     &__item{
       margin: 1rem 0;
-      & a{
-        color: $color-link;
-          &:hover{
-            color: $color-primary;
-            & img{
-              transform: translateX(1rem) rotate(-10deg) scale(1.1);
-            }
-        }
-        }
-      
       &__image{
         width: 100%;
         height: auto;

@@ -2,7 +2,7 @@
 
 .tableOfContents{
     background: $color-primary;
-    color: $color-white;
+    color: $font-color;
     margin: 1rem 0;
     &__title{
         font-size: $font-size-large;
@@ -10,7 +10,6 @@
         padding: 1rem 0 0 3rem  !important;
     }
     &__list{
-
         padding: 0 0 1rem 3rem;
         list-style: disc;
     }
