@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Script from 'next/script';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import Layout from '../components/layout';
 import '../styles/globals.scss';
