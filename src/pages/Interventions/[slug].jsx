@@ -65,9 +65,8 @@ export default function Slug({ post, image }) {
         <div className={styles.page__image}>
           <figure>
             <Image
-              src={`${post.imgPost}.webp`}
+              src={`${post.imgPost}`}
               alt={post.altImg || post.title}
-              loader={imageLoaderFull}
               width={image.width}
               height={image.height}
               priority
