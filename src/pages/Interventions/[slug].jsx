@@ -68,6 +68,11 @@ export default function Slug({ post, image }) {
               alt={post.altImg || post.title}
               width={image.width}
               height={image.height}
+              sizes="(max-width: 300px) 100vw,
+              (max-width: 500px) 100vw,
+              (max-width: 800px) 100vw,
+              (max-width: 1200px) 100vw,
+              100vw"
               priority
             />
             {post.title !== post.altImg && (
