@@ -329,6 +329,7 @@ export default function ContactForm() {
                 Téléphone
               </p>
               <input
+                id="phone"
                 type="text"
                 name="phone"
                 placeholder="Téléphone"
