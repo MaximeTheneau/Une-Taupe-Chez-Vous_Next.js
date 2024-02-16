@@ -8,6 +8,7 @@ import fetcher from '../../utils/fetcher';
 import BreadcrumbJsonLd from '../../components/jsonLd/BreadcrumbJsonLd';
 import ArticleJsonLd from '../../components/jsonLd/ArticleJsonLd';
 import fetcherImage from '../../utils/fetcherImage';
+import ContactButton from '../../components/button/ContactButton';
 
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Interventions`);
@@ -154,15 +155,8 @@ export default function Slug({ post, image }) {
             )}
           </div>
         ))}
-        <Link href="/Contact" className="button">
-          Contactez-nous
-        </Link>
+        <ContactButton />
       </section>
-      {/* <section>
-        <h2>Retrouver nos derniers articles :</h2>
-        <Cards cards={desc} />
-        <Comments posts={post} />
-      </section> */}
     </>
   );
 }

@@ -1,11 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
       <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
         <url>
-                  <loc>https://unetaupechezvous.fr/Devis-en-ligne</loc>
+                  <loc>https://unetaupechezvous.fr/Articles/Jardin-et-Maison/Les-Salamandres-des-Yvelines-Faune-Locale-a-Preserver</loc>
                   <image:image>
-                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Accueil.webp</image:loc>
+                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Les-Salamandres-des-Yvelines-Faune-Locale-a-Preserver.webp</image:loc>
                   </image:image>
-                  
+                  <image:image>
+                         <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Menaces-pesant-sur-les-salaman</image:loc>
+                       </image:image>
+                </url><url>
+                  <loc>https://unetaupechezvous.fr/Articles/Nuisibles/Comment-le-ragondin-est-arrive-en-France-Decouvrez-ces-origines</loc>
+                  <image:image>
+                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Comment-le-ragondin-est-arrive-en-France-Decouvrez-ces-origines.webp</image:loc>
+                  </image:image>
+                  <image:image>
+                         <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Les-degats-du-ragondin-sur-l-e</image:loc>
+                       </image:image>
+                </url><url>
+                  <loc>https://unetaupechezvous.fr/Articles/Nuisibles/Les-Ragondins-comme-Vecteurs-Potentiels-de-Maladies</loc>
+                  <image:image>
+                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Les-Ragondins-comme-Vecteurs-Potentiels-de-Maladies.webp</image:loc>
+                  </image:image>
+                  <image:image>
+                         <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Ragondin-Impact-sur-l-Ecosyste</image:loc>
+                       </image:image>
                 </url><url>
                   <loc>https://unetaupechezvous.fr/Articles/Nuisibles/Ragondin-Que-mange-t-il-vraiment-Decouvrez-leur-menu</loc>
                   <image:image>
@@ -13,7 +31,45 @@
                   </image:image>
                   <image:image>
                          <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Ragondin-Pourquoi-ses-dents-so</image:loc>
+                       </image:image><image:image>
+                         <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Impact-Environnemental-Le-Rago</image:loc>
                        </image:image>
+                </url><url>
+                  <loc>https://unetaupechezvous.fr/Interventions/Ragondin</loc>
+                  <image:image>
+                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Ragondin.webp</image:loc>
+                  </image:image>
+                  <image:image>
+                         <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Identification-des-Ragondins-D</image:loc>
+                       </image:image><image:image>
+                         <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Pieges-a-Ragondins-Attrapez-le</image:loc>
+                       </image:image>
+                </url><url>
+                  <loc>https://unetaupechezvous.fr/Interventions/Taupe</loc>
+                  <image:image>
+                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Taupe.webp</image:loc>
+                  </image:image>
+                  <image:image>
+                         <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Elimination-des-Taupes-Decrypt</image:loc>
+                       </image:image>
+                </url><url>
+                  <loc>https://unetaupechezvous.fr/Articles/Nuisibles/Taupe-en-Anglais-Comment-le-Dire-et-l-Ecrire</loc>
+                  <image:image>
+                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Taupe-en-Anglais-Comment-le-Dire-et-l-Ecrire.webp</image:loc>
+                  </image:image>
+                  
+                </url><url>
+                  <loc>https://unetaupechezvous.fr/</loc>
+                  <image:image>
+                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Une-Taupe-Chez-Vous-Taupier-piegeur-professionnel-agree-depuis-30-ans.webp</image:loc>
+                  </image:image>
+                  
+                </url><url>
+                  <loc>https://unetaupechezvous.fr/Devis-en-ligne</loc>
+                  <image:image>
+                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Accueil.webp</image:loc>
+                  </image:image>
+                  
                 </url><url>
                   <loc>https://unetaupechezvous.fr/Annuaire/Fouines-dans-votre-propriete-Trouvez-un-piegeur-agree</loc>
                   <image:image>
@@ -28,12 +84,6 @@
                   <image:image>
                          <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Signes-d-activite-des-renards-</image:loc>
                        </image:image>
-                </url><url>
-                  <loc>https://unetaupechezvous.fr/</loc>
-                  <image:image>
-                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Une-Taupe-Chez-Vous-Taupier-piegeur-professionnel-agree-depuis-30-ans.webp</image:loc>
-                  </image:image>
-                  
                 </url><url>
                   <loc>https://unetaupechezvous.fr/Contact</loc>
                   <image:image>
@@ -70,12 +120,6 @@
                   <loc>https://unetaupechezvous.fr/Articles/Nuisibles/Comment-identifier-les-excrements-de-renard-dans-votre-jardin</loc>
                   <image:image>
                     <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Comment-identifier-les-excrements-de-renard-dans-votre-jardin.webp</image:loc>
-                  </image:image>
-                  
-                </url><url>
-                  <loc>https://unetaupechezvous.fr/Interventions/Taupe</loc>
-                  <image:image>
-                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Taupe.webp</image:loc>
                   </image:image>
                   
                 </url><url>
@@ -130,18 +174,6 @@
                   <loc>https://unetaupechezvous.fr/Articles/Nuisibles/Rats-Taupiers-Indesirables-Methodes-de-Controle</loc>
                   <image:image>
                     <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Rats-Taupiers-Indesirables-Methodes-de-Controle.webp</image:loc>
-                  </image:image>
-                  
-                </url><url>
-                  <loc>https://unetaupechezvous.fr/Articles/Nuisibles/Les-Ragondins-comme-Vecteurs-Potentiels-de-Maladies</loc>
-                  <image:image>
-                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Les-Ragondins-comme-Vecteurs-Potentiels-de-Maladies.webp</image:loc>
-                  </image:image>
-                  
-                </url><url>
-                  <loc>https://unetaupechezvous.fr/Articles/Nuisibles/Taupe-en-Anglais-Comment-le-Dire-et-l-Ecrire</loc>
-                  <image:image>
-                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Taupe-en-Anglais-Comment-le-Dire-et-l-Ecrire.webp</image:loc>
                   </image:image>
                   
                 </url><url>
@@ -275,14 +307,6 @@
                   </image:image>
                   
                 </url><url>
-                  <loc>https://unetaupechezvous.fr/Interventions/Ragondin</loc>
-                  <image:image>
-                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Ragondin.webp</image:loc>
-                  </image:image>
-                  <image:image>
-                         <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Pieges-a-Ragondins-Attrapez-le</image:loc>
-                       </image:image>
-                </url><url>
                   <loc>https://unetaupechezvous.fr/Interventions/Fouine</loc>
                   <image:image>
                     <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Fouine.webp</image:loc>
@@ -352,12 +376,6 @@
                   <image:image>
                          <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Comment-fonctionne-le-piege-Pu</image:loc>
                        </image:image>
-                </url><url>
-                  <loc>https://unetaupechezvous.fr/Articles/Nuisibles/Comment-le-ragondin-est-arrive-en-France-Decouvrez-ces-origines</loc>
-                  <image:image>
-                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Comment-le-ragondin-est-arrive-en-France-Decouvrez-ces-origines.webp</image:loc>
-                  </image:image>
-                  
                 </url><url>
                   <loc>https://unetaupechezvous.fr/Articles/Nuisibles/Taupe-quand-sort-elle-de-sa-taupiere-Decouvrez-tous-les-secrets</loc>
                   <image:image>
