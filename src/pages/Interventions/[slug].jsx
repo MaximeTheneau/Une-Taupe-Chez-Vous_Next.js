@@ -2,7 +2,6 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from '../../styles/Pages.module.scss';
-import imageLoaderFull from '../../utils/imageLoaderFull';
 import TableOfContents from '../../components/tableOfContents/TableOfContents';
 import fetcher from '../../utils/fetcher';
 import BreadcrumbJsonLd from '../../components/jsonLd/BreadcrumbJsonLd';
