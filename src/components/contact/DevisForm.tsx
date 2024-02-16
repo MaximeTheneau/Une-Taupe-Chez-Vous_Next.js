@@ -4,6 +4,7 @@ import FormMiddleware from '../../middleware/FormMiddleware';
 import Confirmation from '../modal/Confirmation';
 import styles from './Contact.module.scss';
 import Input from './form/Input';
+import Button from '../button/Button';
 
 interface FormState {
   name: string;
@@ -559,10 +560,7 @@ export default function DevisForm() {
             </label>
           </div>
           <div className="contact-form_button">
-            <button type="submit" className="button">
-              Envoyer
-              <i className="icon-paper-plane" />
-            </button>
+            <Button text="Envoyer " icon="icon-paper-plane" />
           </div>
         </form>
       </div>

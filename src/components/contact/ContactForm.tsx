@@ -3,6 +3,7 @@ import React, { ChangeEvent, useState } from 'react';
 import FormMiddleware from '../../middleware/FormMiddleware';
 import Confirmation from '../modal/Confirmation';
 import styles from './Contact.module.scss';
+import Button from '../button/Button';
 
 interface FormState {
   name: string;
@@ -416,12 +417,7 @@ export default function ContactForm() {
               </span>
             </label>
           </div>
-          <div className="contact-form_button">
-            <button type="submit" className="button">
-              Envoyer
-              <i className="icon-paper-plane" />
-            </button>
-          </div>
+          <Button text="Envoyer" icon="icon-paper-plane" />
         </form>
       </div>
     </>
