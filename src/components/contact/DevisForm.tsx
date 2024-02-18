@@ -560,7 +560,10 @@ export default function DevisForm() {
             </label>
           </div>
           <div className="contact-form_button">
-            <Button text="Envoyer " icon="icon-paper-plane" />
+            <button type="submit" className="button">
+              Envoyer
+              <i className="icon-paper-plane" />
+            </button>
           </div>
         </form>
       </div>

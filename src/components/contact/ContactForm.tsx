@@ -418,7 +418,12 @@ export default function ContactForm() {
               </span>
             </label>
           </div>
-          <Button text="Envoyer" icon="icon-paper-plane" />
+          <div className="contact-form_button">
+            <button type="submit" className="button">
+              Envoyer
+              <i className="icon-paper-plane" />
+            </button>
+          </div>
         </form>
       </div>
     </>
