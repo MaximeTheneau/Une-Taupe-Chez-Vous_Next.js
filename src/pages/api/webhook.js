@@ -12,11 +12,11 @@ export default async function handler(req, res) {
   hmac.update(body);
   const calculatedSignature = `sha256=${hmac.digest('hex')}`;
 
-  // if (signature !== calculatedSignature) {
-  //   res.status(401).send(signature, calculatedSignature);
-
-  //   return;
-  // }
+  if (signature !== calculatedSignature) {
+    console.error('Invalid signature.');
+    res.status(401).send(`Invalid signature${signature} ${calculatedSignature}`);
+    return;
+  }
 
   const branch = 'main';
   const gitStash = spawn('git', ['stash']);
