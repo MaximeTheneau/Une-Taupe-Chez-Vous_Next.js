@@ -236,6 +236,7 @@ export default function DevisForm() {
                   value="Particulier"
                   name="status"
                   onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'status')}
+                  required
                 />
                 <span>
                   Particulier
@@ -248,6 +249,7 @@ export default function DevisForm() {
                   value="Société"
                   name="status"
                   onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'status')}
+                  required
                 />
                 <span>
                   Société
@@ -382,9 +384,6 @@ export default function DevisForm() {
             <label htmlFor="phone">
               <p className={styles.contact__input__label}>
                 Téléphone
-                <span className={styles.contact__input__label__alert}>
-                  *
-                </span>
               </p>
               <input
                 id="phone"
@@ -425,6 +424,7 @@ export default function DevisForm() {
                   id="Taupe"
                   value="Taupe"
                   onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'intervention')}
+                  required
                 />
                 <span>
                   Taupe
@@ -437,6 +437,7 @@ export default function DevisForm() {
                   id="Ragondin"
                   value="Ragondin"
                   onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'intervention')}
+                  required
                 />
                 <span>
                   Ragondin
@@ -449,6 +450,7 @@ export default function DevisForm() {
                   id="Fouines"
                   value="Fouines"
                   onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'intervention')}
+                  required
                 />
                 <span>
                   Fouines
@@ -461,6 +463,7 @@ export default function DevisForm() {
                   id="Autre"
                   value="Autre"
                   onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'intervention')}
+                  required
                 />
                 <span>
                   Autre
@@ -482,6 +485,7 @@ export default function DevisForm() {
           <div className={styles.contact__input}>
             <p className={styles.contact__input__label}>
               Surface à traiter
+              <span className={styles.contact__input__label__alert}>*</span>
             </p>
             <div className={styles.contact__input__range}>
               <label htmlFor="surface">
@@ -522,13 +526,13 @@ export default function DevisForm() {
                   : setState({ ...state, confirmationMessage: false }))}
               name="message"
               wrap="off"
-              placeholder="Message*"
+              placeholder="Message"
             />
           </div>
           <div className={styles.contact__input}>
             <label htmlFor="image">
               <p className={styles.contact__input__label}>
-                Ajouter une image
+                Ajouter une image (facultatif)
               </p>
               <input
                 type="file"
