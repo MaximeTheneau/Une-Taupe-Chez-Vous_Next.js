@@ -1,12 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
       <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
         <url>
+                  <loc>https://unetaupechezvous.fr/Articles/Jardin-et-Maison/Eaque-assumenda-totam-ratione-duis</loc>
+                  <image:image>
+                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Accueil.webp</image:loc>
+                  </image:image>
+                  
+                </url><url>
+                  <loc>https://unetaupechezvous.fr/Annuaire/Jardin-et-Maison/Maxime-alias-exercitationem-magni-molestiae-opt</loc>
+                  <image:image>
+                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Accueil.webp</image:loc>
+                  </image:image>
+                  
+                </url><url>
                   <loc>https://unetaupechezvous.fr/Articles/Jardin-et-Maison/Les-Salamandres-des-Yvelines-Faune-Locale-a-Preserver</loc>
                   <image:image>
                     <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Les-Salamandres-des-Yvelines-Faune-Locale-a-Preserver.webp</image:loc>
                   </image:image>
                   <image:image>
                          <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Menaces-pesant-sur-les-salaman</image:loc>
+                       </image:image>
+                </url><url>
+                  <loc>https://unetaupechezvous.fr/Annuaire/Listes-des-meilleurs-experts-Anti-Nuisibles-a-Paris</loc>
+                  <image:image>
+                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Listes-des-meilleurs-experts-Anti-Nuisibles-a-Paris.webp</image:loc>
+                  </image:image>
+                  
+                </url><url>
+                  <loc>https://unetaupechezvous.fr/</loc>
+                  <image:image>
+                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Une-Taupe-Chez-Vous-Taupier-piegeur-professionnel-agree-depuis-30-ans.webp</image:loc>
+                  </image:image>
+                  
+                </url><url>
+                  <loc>https://unetaupechezvous.fr/Interventions/Taupe</loc>
+                  <image:image>
+                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Taupe.webp</image:loc>
+                  </image:image>
+                  <image:image>
+                         <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Elimination-des-Taupes-Decrypt</image:loc>
                        </image:image>
                 </url><url>
                   <loc>https://unetaupechezvous.fr/Articles/Nuisibles/Comment-le-ragondin-est-arrive-en-France-Decouvrez-ces-origines</loc>
@@ -45,23 +77,9 @@
                          <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Pieges-a-Ragondins-Attrapez-le</image:loc>
                        </image:image>
                 </url><url>
-                  <loc>https://unetaupechezvous.fr/Interventions/Taupe</loc>
-                  <image:image>
-                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Taupe.webp</image:loc>
-                  </image:image>
-                  <image:image>
-                         <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Elimination-des-Taupes-Decrypt</image:loc>
-                       </image:image>
-                </url><url>
                   <loc>https://unetaupechezvous.fr/Articles/Nuisibles/Taupe-en-Anglais-Comment-le-Dire-et-l-Ecrire</loc>
                   <image:image>
                     <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Taupe-en-Anglais-Comment-le-Dire-et-l-Ecrire.webp</image:loc>
-                  </image:image>
-                  
-                </url><url>
-                  <loc>https://unetaupechezvous.fr/</loc>
-                  <image:image>
-                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Une-Taupe-Chez-Vous-Taupier-piegeur-professionnel-agree-depuis-30-ans.webp</image:loc>
                   </image:image>
                   
                 </url><url>
@@ -380,12 +398,6 @@
                   <loc>https://unetaupechezvous.fr/Articles/Nuisibles/Taupe-quand-sort-elle-de-sa-taupiere-Decouvrez-tous-les-secrets</loc>
                   <image:image>
                     <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Taupe-quand-sort-elle-de-sa-taupiere-Decouvrez-tous-les-secrets.webp</image:loc>
-                  </image:image>
-                  
-                </url><url>
-                  <loc>https://unetaupechezvous.fr/Annuaire/Listes-des-meilleurs-experts-Anti-Nuisibles-a-Paris</loc>
-                  <image:image>
-                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Listes-des-meilleurs-experts-Anti-Nuisibles-a-Paris.webp</image:loc>
                   </image:image>
                   
                 </url><url>
