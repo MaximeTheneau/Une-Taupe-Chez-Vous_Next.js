@@ -44,7 +44,6 @@ export default async function handler(req, res) {
       exec('npm run build', (error, stdout) => {
         if (error) {
           console.error(`Error running npm run build: ${error}`);
-
           return;
         }
         console.log(`npm run build output: ${stdout}`);
