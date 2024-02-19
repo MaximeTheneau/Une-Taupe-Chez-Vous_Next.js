@@ -15,6 +15,7 @@ export default async function handler(req, res) {
   if (signature !== calculatedSignature) {
     console.error('Invalid signature.');
     res.status(401).send(`Invalid signature${signature} ${calculatedSignature}`);
+
     return;
   }
 
