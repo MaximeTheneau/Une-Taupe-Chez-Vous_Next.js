@@ -14,7 +14,7 @@ export default async function handler(req, res) {
 
   if (`sha256=${signature}` !== calculatedSignature) {
     console.error('Invalid signature.');
-    res.status(401).send(`Invalid signature${signature} ${calculatedSignature}`);
+    res.status(401).send(`sha256=${signature}` !== calculatedSignature);
 
     return;
   }
