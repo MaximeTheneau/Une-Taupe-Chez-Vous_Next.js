@@ -10,11 +10,11 @@ export default async function handler(req, res) {
 
   const hmac = createHmac('sha256', authToken);
   hmac.update(body);
-  const calculatedSignature = hmac.digest('hex');
+  const calculatedSignature = `sha256=${hmac.digest('hex')}`;
 
-  if (`sha256=${signature}` !== calculatedSignature) {
+  if (signature !== calculatedSignature) {
     console.error('Invalid signature.');
-    res.status(401).send(`sha256=${signature}` !== calculatedSignature);
+    res.status(401).send(`Invalid signature${signature} ${calculatedSignature}`);
     return;
   }
 
