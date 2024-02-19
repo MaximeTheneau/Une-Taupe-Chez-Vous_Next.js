@@ -14,7 +14,6 @@ export default async function handler(req, res) {
 
   if (signature !== calculatedSignature) {
     res.status(401).send('Unauthorized request!');
-
     return;
   }
 
