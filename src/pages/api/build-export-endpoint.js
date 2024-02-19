@@ -1,20 +1,21 @@
 import { spawn } from 'child_process';
+import { createHmac } from 'crypto';
 /* eslint-disable no-console */
 
 export default async function handler(req, res) {
-  // const authToken = process.env.AUTH_TOKEN;
-  // const signature = req.headers['x-hub-signature-256'];
-  // const body = JSON.stringify(req.body);
+  const authToken = process.env.AUTH_TOKEN;
+  const signature = req.headers['x-hub-signature-256'];
+  const body = JSON.stringify(req.body);
 
-  // const hmac = createHmac('sha256', authToken);
-  // hmac.update(body);
-  // const calculatedSignature = `sha256=${hmac.digest('hex')}`;
+  const hmac = createHmac('sha256', authToken);
+  hmac.update(body);
+  const calculatedSignature = `sha256=${hmac.digest('hex')}`;
 
-  // if (signature !== calculatedSignature) {
-  //   res.status(401).send('Unauthorized request!');
+  if (signature !== calculatedSignature) {
+    res.status(401).send('Unauthorized request!');
 
-  //   return;
-  // }
+    return;
+  }
 
   const branch = 'main';
   const gitStash = spawn('git', ['stash']);
