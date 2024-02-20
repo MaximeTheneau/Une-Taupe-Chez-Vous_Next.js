@@ -7,14 +7,12 @@ export async function getStaticProps() {
   const page = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Plan-de-site`);
   const interventions = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Interventions`);
   const subcategory = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=subcategory`);
-  const annuaire = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`);
 
   return {
     props: {
       page,
       interventions,
       subcategory,
-      annuaire,
     },
   };
 }
@@ -23,7 +21,6 @@ export default function SiteMapPage({
   page,
   interventions,
   subcategory,
-  annuaire,
 }) {
   return (
     <>
@@ -53,50 +50,32 @@ export default function SiteMapPage({
             <ul className={styles['siteMap__list--secondary']}>
               <li>
                 <Link href="/">
-                  Page d&apos;accueil de Une Taupe Chez Vous !
-                </Link>
-              </li>
-              <li>
-                <Link href="/Taupier-agree-professionnel-depuis-1994">
-                  Qui sommes-nous ? Une présentation de notre entreprise,
-                  de notre histoire et de notre équipe dédiée.
+                  Page d&apos;accueil
                 </Link>
               </li>
             </ul>
           </li>
           <li className={styles['siteMap__list--title']}>
-            À propos
+            Qui sommes-nous ?
             <ul className={styles['siteMap__list--secondary']}>
               <li>
                 <Link href="/Taupier-agree-professionnel-depuis-1994">
-                  Nos valeurs : Découvrez nos valeurs fondamentales
-                  qui guident notre travail au quotidien.
-                </Link>
-              </li>
-              <li>
-                <Link href="/Tarifs">
-                  Tarifs : Découvrez nos tarifs pour nos prestations
+                  Présentation de l&apos;entreprise
                 </Link>
               </li>
               <li>
                 <Link href="/Temoignages">
-                  Témoignages : Découvrez les témoignages de nos clients
-                </Link>
-              </li>
-              <li>
-                <Link href="/Mentions-Legales">
-                  Mentions légales : Informations juridiques sur Notre
-                  Entreprise, y compris les détails de l&apos;entreprise et les réglementations.
+                  Témoignages de nos clients
                 </Link>
               </li>
               <li>
                 <Link href="/Contact">
-                  Nous contacter, obtenir un devis gratuit ou prendre rendez-vous avec nous.
+                  Contactez-nous
                 </Link>
               </li>
               <li>
-                <Link href="/Foire-aux-questions">
-                  Foire aux questions : Retrouvez les questions les plus fréquentes
+                <Link href="/Devis-en-ligne">
+                  Devis en ligne
                 </Link>
               </li>
             </ul>
@@ -120,26 +99,18 @@ export default function SiteMapPage({
             <ul className={styles['siteMap__list--secondary']}>
               <li>
                 <Link href="/Articles">
-                  Retrouvez tous nos articles sur les taupes, ragondins, fouines, etc.
+                  Retrouvez tous nos articles
                 </Link>
               </li>
               {subcategory.map((category) => (
                 <li key={category.name}>
                   <Link href={`Articles/${category.slug}`}>
-                    Articles :
-                    {' '}
                     {category.name}
                   </Link>
                 </li>
               ))}
             </ul>
           </li>
-
-          {/* <li className={styles['siteMap__list--title']}>
-            <Link href="/Temoignages">
-              Témoignages
-            </Link>
-          </li> */}
           <li className={styles['siteMap__list--title']}>
             Annuaires
             <ul className={styles['siteMap__list--secondary']}>
@@ -150,16 +121,9 @@ export default function SiteMapPage({
               </li>
               <li>
                 <Link href="/Annuaire/Inscription-annuaire-gratuite">
-                  Ajouter mon site à l&apos;annuaire gratuitement !
+                  Possibilité d&apos;ajouter son site à l&apos;annuaire gratuitement
                 </Link>
               </li>
-              {annuaire.map((annuaires) => (
-                <li key={annuaires.id}>
-                  <Link href={`/Annuaire/${annuaires.slug}`}>
-                    {annuaires.title}
-                  </Link>
-                </li>
-              ))}
             </ul>
           </li>
         </ul>
