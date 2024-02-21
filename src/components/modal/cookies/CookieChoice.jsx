@@ -8,6 +8,7 @@ export default function CookieChoice({ label, checked, onClick }) {
       </td>
       <td>
         <i
+          aria-labelledby="button-label"
           className={`icon-${checked ? 'confirmation' : 'error'}`}
           onClick={onClick}
           role="presentation"

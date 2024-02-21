@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 // import { useRouter } from 'next/router';
 import FormMiddleware from '../../middleware/FormMiddleware';
 import Confirmation from '../modal/Confirmation';
@@ -66,6 +66,13 @@ export default function ContactForm() {
     },
   });
 
+  useEffect(() => {
+    const form = localStorage.getItem('form');
+    if (form) {
+      setState((prevState) => ({ ...prevState, form: JSON.parse(form) }));
+    }
+  }, []);
+
   const handleChangeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const trows = e.target.value.split('\n').length - 1 === 0 ? 1 : e.target.value.split('\n').length - 1;
     setState((prevState) => ({
@@ -129,7 +136,7 @@ export default function ContactForm() {
         email: '',
         message: '',
         postalCode: '',
-        subject: 'Demande de devis',
+        subject: 'Demande de renseignements',
         phone: '',
         emailReturn: true,
         image: null,
@@ -162,6 +169,7 @@ export default function ContactForm() {
             toggleModal: false,
           },
         });
+        localStorage.removeItem('form');
       },
       3000,
     );
@@ -176,6 +184,8 @@ export default function ContactForm() {
         toggleModal: true,
       },
     });
+
+    localStorage.setItem('form', JSON.stringify(state.form));
   };
 
   const handleSubmit = (evt) => {
@@ -239,7 +249,7 @@ export default function ContactForm() {
                 id="name"
                 type="text"
                 title="Nom"
-                placeholder="Nom / Société*"
+                placeholder="ex: Dupont Jean"
                 value={state.form.name}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'name')}
                 onBlur={(e: ChangeEvent<HTMLInputElement>) => {
@@ -283,8 +293,9 @@ export default function ContactForm() {
                     ? setState({ ...state, confirmationCodePostal: true })
                     : setState({ ...state, confirmationCodePostal: false })
                 )}
-                placeholder="Code postal*"
-                minLength={2}
+                placeholder="ex: 78000"
+                minLength={5}
+                maxLength={5}
                 required
               />
             </label>
@@ -332,7 +343,7 @@ export default function ContactForm() {
                 id="phone"
                 type="text"
                 name="phone"
-                placeholder="Téléphone"
+                placeholder="ex: 06 12 34 56 78"
                 value={state.form.phone}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'phone')}
               />
@@ -373,7 +384,7 @@ export default function ContactForm() {
                     : setState({ ...state, confirmationMessage: false }))}
                 name="message"
                 wrap="off"
-                placeholder="Message*"
+                placeholder="ex: Bonjour, j'ai une invasion de taupes dans mon jardin, pouvez-vous m'aider ?"
                 required
               />
             </label>

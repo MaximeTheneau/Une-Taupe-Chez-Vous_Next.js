@@ -82,7 +82,7 @@ export default function CookiesModal() {
                       <i
                         className={`icon-${state.cookiesAll ? 'confirmation' : 'error'}`}
                       // onClick={toggleCookies('all')}
-                        role="presentation"
+                        aria-labelledby="button-label"
                       />
                     </td>
                   </tr>
