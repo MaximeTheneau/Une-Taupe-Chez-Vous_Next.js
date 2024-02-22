@@ -142,20 +142,8 @@ export default function Slug({ post }) {
             )}
           </>
         ))}
-
-        <h3>Référencez-vous gratuitement en tant que professionnel </h3>
-        <p>
-          Le référencement gratuit, c&apos;est comme une publicité gratuite en continu pour
-          votre entreprise. Vous pouvez apparaître dans les résultats de recherche lorsque
-          les clients potentiels cherchent des services dans votre domaine. Et devinez quoi
-          ? Vous pouvez le faire sans débourser un centime !
-        </p>
-        <Link href="/Annuaire/Inscription-annuaire-gratuite" className="stronk">
-          Inscrivez vôtre entreprise gratuitement
-        </Link>
       </section>
       <Comments posts={post} />
-
     </>
   );
 }
