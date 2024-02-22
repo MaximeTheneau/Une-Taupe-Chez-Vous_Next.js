@@ -1,5 +1,6 @@
 /* eslint-disable quote-props */
 import Head from 'next/head';
+import Link from 'next/link';
 import Cards from '../../components/cards/cards';
 import styles from '../../styles/Pages.module.scss';
 import fetcher from '../../utils/fetcher';
@@ -34,19 +35,27 @@ export default function Home({ page, articles }) {
           key="canonical"
         />
       </Head>
-      <>
-        <section>
+      <section>
 
-          <h1>{page.title}</h1>
-          <div dangerouslySetInnerHTML={{ __html: page.contentsHTML }} />
+        <h1>{page.title}</h1>
+        <div dangerouslySetInnerHTML={{ __html: page.contentsHTML }} />
 
-        </section>
         {/* --Articles--*/}
         <h2>Nos Annuaire</h2>
         <div className={styles.home}>
           <Cards cards={articles} />
         </div>
-      </>
+        <h3>Référencez-vous gratuitement en tant que professionnel </h3>
+        <p>
+          Le référencement gratuit, c&apos;est comme une publicité gratuite en continu pour
+          votre entreprise. Vous pouvez apparaître dans les résultats de recherche lorsque
+          les clients potentiels cherchent des services dans votre domaine. Et devinez quoi
+          ? Vous pouvez le faire sans débourser un centime !
+        </p>
+        <Link href="/Annuaire/Inscription-annuaire-gratuite" className="stronk">
+          Inscrivez vôtre entreprise gratuitement
+        </Link>
+      </section>
     </>
   );
 }

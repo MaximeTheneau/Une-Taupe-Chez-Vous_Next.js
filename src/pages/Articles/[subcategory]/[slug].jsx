@@ -163,7 +163,6 @@ export default function Slug({ post, desc, image }) {
             {post.textLinks}
           </Link>
         )}
-
         <h2>Derniers articles</h2>
         <Cards cards={desc} />
         <Comments posts={post} />
