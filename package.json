@@ -2,10 +2,9 @@
   "name": "une_taupe_chez_vous__nextjs",
   "version": "2.1.0",
   "scripts": {
-    "build": "next build && npm run generate-sitemap && npm run pm2:reload",
+    "build": "APP_ENV=export next build && npm run generate-sitemap && npm run pm2:reload",
     "generate-sitemap": "node scripts/sitemap/runAllScripts.script.js",
-    "export": "next build",
-    "start": "node server.js",
+    "start": "APP_ENV=production next build && APP_ENV=production next start --port 3001",
     "pm2": "pm2 start npm --name une-taupe-chez-vous -- start -- --port 3001",
     "pm2:reload": "pm2 reload une-taupe-chez-vous",
     "lint": "next lint",
@@ -24,7 +23,6 @@
     "react-dom": "18.2.0"
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "^13.5.4",
     "@types/node": "20.2.5",
     "@types/react": "18.2.9",
     "cross-env": "^7.0.3",

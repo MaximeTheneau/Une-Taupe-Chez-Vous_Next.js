@@ -55,6 +55,7 @@
         animation: fadeIn 1s ease;
         position: relative;
         &-item{
+            list-style-type: none;
             border-bottom: $font-color 1px solid;
             font-size: 1.5rem;
             cursor: pointer;

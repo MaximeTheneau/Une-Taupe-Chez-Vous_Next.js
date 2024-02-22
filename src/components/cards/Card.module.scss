@@ -11,19 +11,21 @@
   width: 20%;
   height: 100%;
   margin: 1rem 2rem;
+  list-style-type: none;
   &:hover  h3{
     color: $color-blue !important;
     text-decoration: underline;
   }
+
   &__img{
     object-fit: cover;
     &:hover img{
-        filter: blur(0.5px);
-        opacity: 0.8;
-      }
-      & img{
+      filter: blur(0.5px);
+      opacity: 0.8;
+    }
+    & img{
       height: 202px !important;
-      margin: 0 auto;
+      margin: 0 auto 1rem auto;
       transition: all .3s ;
       object-fit: cover;
     }

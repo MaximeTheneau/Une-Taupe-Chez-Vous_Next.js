@@ -1,46 +1,38 @@
-import next from 'next';
+import { exec } from 'child_process';
+// import { createHmac } from 'crypto';
+// pages/api/hello.api.js
 
-export default async function handler(req, res) {
-  const nextApp = next(); // `dev: false` pour la production
+export default function handler(
+  req,
+  res,
+) {
+  exec('npm run build', (error, stdout, stderr) => {
+    // if (error) {
+    //   console.error(`exec error: ${error}`);
+    //   return res.status(200).json({
+    //     message: 'Failed to trigger build and export.', error, stderr, stdout,
+    //   });
+    // }
+    // console.log('stdout: ');
 
-  await nextApp.prepare();
+    try {
+      // const authToken = process.env.AUTH_TOKEN;
 
-  // try {
-  await nextApp.build();
-  res.status(200).send('Build terminée');
-  // } catch (error) {
-  //   console.error(`Erreur lors de la construction : ${error}`);
-  //   res.status(500).send('Erreur lors de la construction');
-  // }
-  // if (req.method === 'POST') {
-  //   const body = await req.json();
+      // const signature = req.headers['x-hub-signature-256'];
+      // const body = JSON.stringify(req.body);
 
-  //   if (body.action === 'build') {
-  //     // Déclenche la construction du projet
+      // const hmac = createHmac('sha256', authToken);
+      // hmac.update(body);
+      // const calculatedSignature = `sha256=${hmac.digest('hex')}`;
 
-  //     res.end('Build en cours...');
-  //   } else {
-  //     res.status(400).end('Requête invalide');
-  //   }
-  // } else {
-  //   res.status(405).end('Méthode non autorisée');
-  // }
-  // try {
-  // const authToken = process.env.AUTH_TOKEN;
-  // const signature = req.headers['x-hub-signature-256'];
-  // const body = JSON.stringify(req.headers);
-
-  // const hmac = createHmac('sha256', authToken);
-  // hmac.update(body);
-  // const calculatedSignature = `sha256=${hmac.digest('hex')}`;
-
-  // if (signature !== calculatedSignature) {
-  //   res.status(401).send(`Invalid signature.${signature} ${calculatedSignature}`);
-  //   res.send(signature);
-  // }
-
-  // } catch (error) {
-  //   console.error(error);
-  //   res.status(500).json({ message: 'Failed to trigger build and export.' });
-  // }
+      // if (signature !== calculatedSignature) {
+      //   res.status(401).json({ message: 'Invalid signature.' });
+      // }
+    } catch {
+      res.status(500).json({ message: 'Failed to trigger build and export.' });
+    }
+    return res.status(200).json({
+      message: 'Commande exécutée avec succès.', output: stdout, error, stderr,
+    });
+  });
 }

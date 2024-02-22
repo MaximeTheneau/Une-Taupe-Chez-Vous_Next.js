@@ -2,15 +2,12 @@ const { createServer } = require('http');
 const { parse } = require('url');
 const next = require('next');
 
-const dev = process.env.NODE_ENV !== 'production';
 const hostname = 'unetaupechezvous.fr';
 const port = 3001;
 // when using middleware `hostname` and `port` must be provided below
-const app = next({ dev, hostname, port });
+const app = next({ hostname, port });
 const handle = app.getRequestHandler();
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config();
-}
+
 app.prepare().then(() => {
   createServer(async (req, res) => {
     try {
