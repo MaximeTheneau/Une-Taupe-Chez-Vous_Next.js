@@ -93,9 +93,13 @@ export default function Slug({ post }) {
       <BreadcrumbJsonLd paragraphPosts={post.paragraphPosts} urlPost={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`} />
       <section>
         <h1>{post.title}</h1>
-        <Link href="/Annuaire" className="stronk">
-          Annuaire
-        </Link>
+        <ul>
+          <li>
+            <Link href="/Annuaire" className="stronk">
+              Annuaire
+            </Link>
+          </li>
+        </ul>
         <p className={styles.page__contents__date}>
           {post.formattedDate}
         </p>
