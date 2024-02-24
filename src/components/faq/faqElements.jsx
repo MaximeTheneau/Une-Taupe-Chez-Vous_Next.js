@@ -8,6 +8,7 @@ Faq element component
 @see Faq.module.scss
 */
 function FaqElements({ faq, toggleFAQ }) {
+  console.log(faq);
   return (
     <li
       key={faq.id}
@@ -30,11 +31,21 @@ function FaqElements({ faq, toggleFAQ }) {
             : <i className="icon-open" />}
         </h2>
       </Link>
-      <p
-        className={`faq-answer ${faq.open ? 'block' : 'none'}`}
-      >
-        {faq.description}
-      </p>
+
+      <div className={`faq-answer ${faq.open ? 'block' : 'none'}`}>
+        <p>{faq.description}</p>
+        {faq.link && (
+        <div className={styles.page__contents__paragraph__links}>
+          <span className={styles.page__contents__paragraph__links__link}>
+            → A lire aussi :
+            <Link href={faq.link}>
+              {' '}
+              {faq.linkSubtitle}
+            </Link>
+          </span>
+        </div>
+        )}
+      </div>
     </li>
   );
 }

@@ -78,6 +78,11 @@ export default function SiteMapPage({
                   Devis en ligne
                 </Link>
               </li>
+              <li>
+                <Link href="/Foire-aux-questions">
+                  Foire aux questions
+                </Link>
+              </li>
             </ul>
           </li>
           <li className={styles['siteMap__list--title']}>

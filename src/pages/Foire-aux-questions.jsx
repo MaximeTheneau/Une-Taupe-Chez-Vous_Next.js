@@ -60,11 +60,12 @@ export default function Slug({ post }) {
               />
               )}
               {paragraphArticle.paragraph}
-
             </p>
             )}
+
           </>
         ))}
+
       </section>
     </>
   );
