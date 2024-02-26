@@ -3,7 +3,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Cards from '../components/cards/cards';
 import styles from '../styles/Home.module.scss';
-import imageLoaderFull from '../utils/imageLoaderFull';
 import fetcher from '../utils/fetcher';
 import LocalBusinessJsonLd from '../components/jsonLd/LocalBusinessJsonLd';
 import SearchJsonLd from '../components/jsonLd/SearchJsonLd';

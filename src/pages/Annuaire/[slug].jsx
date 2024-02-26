@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image';
 import styles from '../../styles/Pages.module.scss';
 import fetcher from '../../utils/fetcher';
 import TableOfContents from '../../components/tableOfContents/TableOfContents';
