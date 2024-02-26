@@ -60,20 +60,21 @@ export default function Home({
       <div className={styles.home__imagesFull}>
 
         <div className={styles.home__imagesFull__text}>
-          <Image
-            src="Accueil.webp"
-            alt={accueil.altImg || accueil.title}
-            loader={imageLoaderFull}
-            width={accueil.imgWidth}
-            height={accueil.imgHeight}
-            sizes="(max-width: 300px) 100vw,
+          <div className={styles.home__imagesFull__image}>
+            <Image
+              src="Accueil.webp"
+              alt={accueil.altImg || accueil.title}
+              loader={imageLoaderFull}
+              width={accueil.imgWidth}
+              height={accueil.imgHeight}
+              sizes="(max-width: 300px) 100vw,
               (max-width: 500px) 100vw,
               (max-width: 800px) 100vw,
               (max-width: 1200px) 100vw,
               100vw"
-            className={styles.home__imagesFull__image}
-            priority
-          />
+              priority
+            />
+          </div>
           <h1>
             {accueil.title}
           </h1>

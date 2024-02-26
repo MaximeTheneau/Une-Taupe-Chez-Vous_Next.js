@@ -1,24 +1,22 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './Card.module.scss';
-import imageThumbnail from '../../utils/imageThumbnail';
 
 export default function Card({ card }) {
   return (
     <li className={styles.card}>
-      <Link href={card.url} className={styles.card__img}>
+      <Link
+        href={card.url}
+        className={styles.card__img}
+        rel="preload"
+      >
         <Image
-          src={`${card.imgPost}.webp`}
+          src={`${process.env.NEXT_PUBLIC_CLOUD_URL}/c_thumb,w_330,q_70/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${card.imgPost}.webp`}
           alt={card.altImg || card.title}
-          loader={imageThumbnail}
           quality={70}
           width={330}
           height={330}
-          sizes="(min-width: 360px) 320px, (min-width: 0px) 260px, 100vw"
-          style={{
-            width: '100%',
-            height: 'auto',
-          }}
+          unoptimized
         />
         <h3 className={styles.card__content}>{card.title}</h3>
       </Link>
