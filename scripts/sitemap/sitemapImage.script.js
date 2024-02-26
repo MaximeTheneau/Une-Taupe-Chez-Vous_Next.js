@@ -35,6 +35,9 @@ const generateSitemapImages = async () => {
   };
 
   generateXmlWithImages(responseAll);
+
+  const totalNumArticles = responseAll.length;
+  console.log(`Total number of news articles in the sitemap: ${totalNumArticles}`);
 };
 
 generateSitemapImages();
