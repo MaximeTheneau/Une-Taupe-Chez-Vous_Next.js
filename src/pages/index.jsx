@@ -72,9 +72,6 @@ export default function Home({
               (max-width: 800px) 100vw,
               (max-width: 1200px) 100vw,
               100vw"
-              style={{
-                width: accueil.imgWidth,
-              }}
               priority
             />
           </div>
