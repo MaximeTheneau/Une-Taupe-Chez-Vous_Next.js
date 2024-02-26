@@ -42,8 +42,14 @@ export default function Home({
         <meta property="og:title" content={accueil.title} />
         <meta property="og:description" content={accueil.metaDescription} />
         <meta property="og:url" content={process.env.NEXT_PUBLIC_URL} />
-        <meta property="og:site_name" content={process.env.NEXT_PUBLIC_URL} />
+        <meta property="og:site_name" content="Une Taupe Chez Vous" />
         <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/Accueil.jpg`} />
+        <meta property="og:image:width" content={accueil.imgWidth} />
+        <meta property="og:image:height" content={accueil.imgHeight} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={accueil.title} />
+        <meta name="twitter:description" content={accueil.metaDescription} />
+        <meta name="twitter:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/Accueil.jpg`} />
         <link
           rel="canonical"
           href={process.env.NEXT_PUBLIC_URL}
@@ -64,14 +70,9 @@ export default function Home({
             <Image
               src="Accueil.webp"
               alt={accueil.altImg || accueil.title}
-              loader={imageLoaderFull}
               width={accueil.imgWidth}
               height={accueil.imgHeight}
-              sizes="(max-width: 300px) 100vw,
-              (max-width: 500px) 100vw,
-              (max-width: 800px) 100vw,
-              (max-width: 1200px) 100vw,
-              100vw"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               priority
             />
           </div>

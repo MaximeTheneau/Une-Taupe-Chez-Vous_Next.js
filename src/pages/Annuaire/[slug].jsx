@@ -65,7 +65,7 @@ export default function Slug({ post }) {
         <meta property="og:type" content="website" />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={post.metaDescription} />
-        <meta property="og:site_name" content={urlPost} />
+        <meta property="og:site_name" content="Une Taupe Chez Vous" />
         <meta property="og:url" content={urlPost} />
         <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.imgPost}.jpg`} />
         <meta property="og:image:width" content="1024" />
@@ -133,6 +133,26 @@ export default function Slug({ post }) {
           <>
             <h2 key={paragraphs} id={paragraphs.slug}>{paragraphs.subtitle}</h2>
             <div dangerouslySetInnerHTML={{ __html: paragraphs.paragraph }} />
+            {paragraphs.imgPostParagh && (
+            <figure className={styles.page__contents__paragraph__figure}>
+              <Image
+                src={`${paragraphs.imgPostParagh}.webp`}
+                alt={paragraphs.subtitle}
+                width={paragraphs.imgWidth}
+                height={paragraphs.imgHeight}
+                sizes="(max-width: 300px) 100vw,
+                    (max-width: 500px) 100vw,
+                    (max-width: 800px) 100vw,
+                    (max-width: 1200px) 100vw,
+                    100vw"
+              />
+              {paragraphs.subtitle !== paragraphs.altImgParagh && (
+              <figcaption className="caption">
+                {paragraphs.altImg}
+              </figcaption>
+              )}
+            </figure>
+            )}
             {paragraphs.linkSubtitle && (
               <div className={styles.page__contents__paragraph__links}>
                 <span className={styles.page__contents__paragraph__links__link}>

@@ -8,7 +8,6 @@ import BreadcrumbJsonLd from '../../components/jsonLd/BreadcrumbJsonLd';
 import ArticleJsonLd from '../../components/jsonLd/ArticleJsonLd';
 import fetcherImage from '../../utils/fetcherImage';
 import ContactButton from '../../components/button/ContactButton';
-import imageLoaderFull from '../../utils/imageLoaderFull';
 
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Interventions`);
@@ -22,12 +21,11 @@ export async function getStaticProps({ params }) {
 // const desc = await fetcher(
 // `${process.env.NEXT_PUBLIC_API_URL}posts&filter=keyword&limit=3&id=${post.id}`);
   const post = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/${params.slug}`);
-  const image = await fetcherImage(post.imgPost);
 
-  return { props: { post, image: image.input } };
+  return { props: { post } };
 }
 
-export default function Slug({ post, image }) {
+export default function Slug({ post }) {
   return (
     <>
       <Head>
@@ -38,8 +36,14 @@ export default function Slug({ post, image }) {
         <meta property="og:title" content={post.title} />
         <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`} />
         <meta property="og:description" content={post.metaDescription} />
-        <meta property="og:site_name" content={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`} />
+        <meta property="og:site_name" content="Une Taupe Chez Vous" />
         <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.imgPost}.jpg`} />
+        <meta property="og:image:width" content={post.imgWidth} />
+        <meta property="og:image:height" content={post.imgHeight} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={post.title} />
+        <meta name="twitter:description" content={post.metaDescription} />
+        <meta name="twitter:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.imgPost}.jpg`} />
         <link
           rel="canonical"
           href={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`}
@@ -65,11 +69,10 @@ export default function Slug({ post, image }) {
         <div className={styles.page__image}>
           <figure>
             <Image
-              loader={imageLoaderFull}
               src={`${post.imgPost}.webp`}
               alt={post.altImg || post.title}
-              width={image.width}
-              height={image.height}
+              width={post.imgWidth}
+              height={post.imgHeight}
               sizes="(max-width: 300px) 100vw,
               (max-width: 500px) 100vw,
               (max-width: 800px) 100vw,
@@ -122,12 +125,8 @@ export default function Slug({ post, image }) {
                     src={`${paragraphArticle.imgPostParagh}.webp`}
                     alt={paragraphArticle.subtitle}
                     quality={75}
-                    width={1080}
-                    height={1080}
-                    style={{
-                      width: '100%',
-                      height: 'auto',
-                    }}
+                    width={paragraphArticle.imgWidth}
+                    height={paragraphArticle.imgHeight}
                   />
                   {paragraphArticle.subtitle !== paragraphArticle.altImgParagh && (
                   <figcaption className="caption">

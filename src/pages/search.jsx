@@ -26,13 +26,6 @@ export default function Recherche({ page, articlesInit, desc }) {
     <>
       <Head>
         <title>{page.heading}</title>
-        <meta name="description" content={page.metaDescription} />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content={page.title} />
-        <meta property="og:description" content={page.metaDescription} />
-        <meta property="og:site_name" content="Une Taupe Chez Vous" />
-        <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/search`} />
-        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${page.imgPost}.jpg`} />
         <meta name="robots" content="noindex,nofollow" />
         <meta name="googlebot" content="noindex,nofollow" />
         <link

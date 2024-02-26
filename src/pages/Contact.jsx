@@ -17,17 +17,25 @@ export async function getStaticProps() {
 }
 
 export default function Contact({ page }) {
+  console.log(page);
   return (
     <>
       <Head>
-        <title>Contact</title>
-        <meta name="description" content="Contactez-nous - Devis gratuit - Nous vous répondrons dans les plus brefs délais pour vous fournir une estimation gratuite et répondre à toutes vos questions." />
+        <title>{page.heading}</title>
+        <meta name="description" content={page.metaDescription} />
+        {/* Open Graph */}
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Contact" />
-        <meta property="og:description" content="Contactez-nous - Devis gratuit - Nous vous répondrons dans les plus brefs délais pour vous fournir une estimation gratuite et répondre à toutes vos questions." />
+        <meta property="og:title" content={page.title} />
+        <meta property="og:description" content={page.metaDescription} />
         <meta property="og:site_name" content="Une Taupe Chez Vous" />
         <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/${page.slug}`} />
         <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${page.imgPost}.jpg`} />
+        <meta property="og:image:width" content={page.imgWidth} />
+        <meta property="og:image:height" content={page.imgHeight} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={page.title} />
+        <meta name="twitter:description" content={page.metaDescription} />
+        <meta name="twitter:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${page.imgPost}.jpg`} />
         <link
           rel="canonical"
           href={`${process.env.NEXT_PUBLIC_URL}/${page.slug}`}

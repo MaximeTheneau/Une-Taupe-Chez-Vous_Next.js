@@ -45,7 +45,7 @@ export default function Home({ articles, subcategoryList }) {
         <meta property="og:type" content="website" />
         <meta property="og:title" content={subcategory.name} />
         <meta property="og:description" content={`${subcategory.name} : Retrouvez tous les articles`} />
-        <meta property="og:site_name" content={urlPost} />
+        <meta property="og:site_name" content="Une Taupe Chez Vous" />
         <meta property="og:url" content={urlPost} />
         <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/Accueil.jpg`} />
         <meta property="og:image:width" content="1024" />
