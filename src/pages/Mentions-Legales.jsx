@@ -70,13 +70,8 @@ export default function MentionsLegal({ page }) {
                     src={`${paragraphArticle.imgPostParagh}.webp`}
                     alt={paragraphArticle.subtitle}
                     quality={75}
-                    width={500}
-                    height={50}
-                    style={{
-                      maxWidth: '100%',
-                      height: 'auto',
-                      display: 'inline-block',
-                    }}
+                    width={paragraphArticle.imgWidth}
+                    height={paragraphArticle.height}
                   />
                   {paragraphArticle.subtitle !== paragraphArticle.altImgParagh && (
                   <figcaption className="caption">

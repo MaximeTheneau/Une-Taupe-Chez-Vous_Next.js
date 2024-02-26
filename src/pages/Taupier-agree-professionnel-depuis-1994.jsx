@@ -2,27 +2,23 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from '../styles/Pages.module.scss';
-import imageLoaderFull from '../utils/imageLoaderFull';
 import GoogleMaps from '../components/maps/GoogleMaps';
 import NotCopie from '../components/notCopie/NotCopie';
 import fetcher from '../utils/fetcher';
 import TableOfContents from '../components/tableOfContents/TableOfContents';
-import fetcherImage from '../utils/fetcherImage';
 import ContactButton from '../components/button/ContactButton';
 
 export async function getStaticProps() {
   const page = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Taupier-agree-professionnel-depuis-1994`);
-  const image = await fetcherImage(page.imgPost);
 
   return {
     props: {
       page,
-      image: image.input,
     },
   };
 }
 
-export default function TaupierPage({ page, image }) {
+export default function TaupierPage({ page }) {
   return (
     <>
       <Head>
@@ -46,9 +42,8 @@ export default function TaupierPage({ page, image }) {
           <Image
             src={`${page.imgPost}.webp`}
             alt={page.altImg || page.title}
-            loader={imageLoaderFull}
-            width={image.width}
-            height={image.height}
+            width={page.imgWidth}
+            height={page.imgHeight}
             sizes="(max-width: 300px) 100vw,
             (max-width: 500px) 100vw,
             (max-width: 800px) 100vw,
@@ -104,12 +99,8 @@ export default function TaupierPage({ page, image }) {
                     src={`${paragraphArticle.imgPostParagh}.webp`}
                     alt={paragraphArticle.subtitle}
                     quality={75}
-                    width={500}
-                    height={500}
-                    style={{
-                      maxWidth: '100%',
-                      display: 'inline-block',
-                    }}
+                    width={paragraphArticle.imgWidth}
+                    height={paragraphArticle.imgHeight}
                   />
                   {paragraphArticle.subtitle !== paragraphArticle.altImgParagh && (
                   <figcaption className="caption">

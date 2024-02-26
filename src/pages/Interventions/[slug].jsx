@@ -8,6 +8,7 @@ import BreadcrumbJsonLd from '../../components/jsonLd/BreadcrumbJsonLd';
 import ArticleJsonLd from '../../components/jsonLd/ArticleJsonLd';
 import fetcherImage from '../../utils/fetcherImage';
 import ContactButton from '../../components/button/ContactButton';
+import imageLoaderFull from '../../utils/imageLoaderFull';
 
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Interventions`);
@@ -64,7 +65,8 @@ export default function Slug({ post, image }) {
         <div className={styles.page__image}>
           <figure>
             <Image
-              src={`${post.imgPost}`}
+              loader={imageLoaderFull}
+              src={`${post.imgPost}.webp`}
               alt={post.altImg || post.title}
               width={image.width}
               height={image.height}

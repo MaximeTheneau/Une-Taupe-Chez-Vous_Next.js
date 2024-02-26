@@ -8,7 +8,6 @@ import fetcher from '../utils/fetcher';
 import LocalBusinessJsonLd from '../components/jsonLd/LocalBusinessJsonLd';
 import SearchJsonLd from '../components/jsonLd/SearchJsonLd';
 import LogoJsonLd from '../components/jsonLd/LogoJsonLd';
-import fetcherImage from '../utils/fetcherImage';
 import DevisButton from '../components/button/DevisButton';
 
 export async function getStaticProps() {
@@ -18,7 +17,6 @@ export async function getStaticProps() {
   const faq = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Foire-aux-questions`);
   const testimonials = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Temoignages`);
   const keyword = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=keyword&limit=3&id=17 `);
-  const image = await fetcherImage(accueil.imgPost);
 
   return {
     props: {
@@ -28,13 +26,12 @@ export async function getStaticProps() {
       faq,
       testimonials,
       keyword,
-      image: image.input,
     },
   };
 }
 
 export default function Home({
-  accueil, services, articles, testimonials, keyword, image,
+  accueil, services, articles, testimonials, keyword,
 }) {
   return (
     <>
@@ -67,8 +64,8 @@ export default function Home({
             src="Accueil.webp"
             alt={accueil.altImg || accueil.title}
             loader={imageLoaderFull}
-            width={image.width}
-            height={image.height}
+            width={accueil.imgWidth}
+            height={accueil.imgHeight}
             sizes="(max-width: 300px) 100vw,
               (max-width: 500px) 100vw,
               (max-width: 800px) 100vw,
@@ -141,9 +138,7 @@ export default function Home({
           , la satisfaction de nos clients est notre plus grande récompense.
           Découvrez ce que nos clients ont à dire sur notre service de lutte
           antinuisible, dirigé par l&apos;expert taupier
-          piégeur,
-          <strong>Laurent Theneau</strong>
-          .
+          piégeur, Laurent Theneau.
         </p>
         <div dangerouslySetInnerHTML={{ __html: testimonials.paragraphPosts[0].paragraph }} className="overflow-x-auto" />
         {accueil.listPosts.map((listArticle) => (

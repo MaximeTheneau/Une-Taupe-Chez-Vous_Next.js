@@ -4,7 +4,8 @@
   "scripts": {
     "build": "APP_ENV=export next build && npm run generate-sitemap && npm run pm2:reload",
     "generate-sitemap": "node scripts/sitemap/runAllScripts.script.js",
-    "start": "APP_ENV=production next build && APP_ENV=production next start --port 3001",
+    "start-cache": "next start -p 3001",
+    "start": "npx serve@latest out -l 3001",
     "pm2": "pm2 start npm --name une-taupe-chez-vous -- start -- --port 3001",
     "pm2:reload": "pm2 reload une-taupe-chez-vous",
     "lint": "next lint",

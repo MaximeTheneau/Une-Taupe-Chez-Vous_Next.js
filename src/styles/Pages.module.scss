@@ -15,8 +15,10 @@
       margin: 1rem auto;
       &__figure{
         margin: 0 1rem 0 0;
-        float: left;
         position: relative;
+        float: left;
+        & img{
+        }
       }
       &__links{
         background: $color-primary;

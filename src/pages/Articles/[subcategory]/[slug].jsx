@@ -4,7 +4,7 @@ import Link from 'next/link';
 import styles from '../../../styles/Pages.module.scss';
 import Cards from '../../../components/cards/cards';
 import Category from '../../../components/category/Category';
-import imageLoaderFull from '../../../utils/imageLoaderFull';
+// import imageLoaderFull from '../../../utils/imageLoaderFull';
 import TableOfContents from '../../../components/tableOfContents/TableOfContents';
 import fetcher from '../../../utils/fetcher';
 import ArticleJsonLd from '../../../components/jsonLd/ArticleJsonLd';
@@ -87,10 +87,13 @@ export default function Slug({ post, desc, image }) {
           <Image
             src={`${post.imgPost}.webp`}
             alt={post.altImg || post.title}
-            loader={imageLoaderFull}
-            width={image.width}
-            height={image.height}
-            sizes={`max-width: ${image.width}px 100vw, ${image.width}px`}
+            width={post.imgWidth}
+            height={post.imgHeight}
+            sizes="(max-width: 300px) 100vw,
+            (max-width: 500px) 100vw,
+            (max-width: 800px) 100vw,
+            (max-width: 1200px) 100vw,
+            100vw"
             priority
           />
           {post.title !== post.altImg && (
@@ -115,8 +118,8 @@ export default function Slug({ post, desc, image }) {
                   <Image
                     src={`${paragraphArticle.imgPostParagh}.webp`}
                     alt={paragraphArticle.subtitle}
-                    width={1080}
-                    height={1080}
+                    width={paragraphArticle.imgWidth}
+                    height={paragraphArticle.imgHeight}
                   />
                   {paragraphArticle.subtitle !== paragraphArticle.altImgParagh && (
                   <figcaption className="caption">
