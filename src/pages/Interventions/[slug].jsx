@@ -119,10 +119,15 @@ export default function Slug({ post }) {
                 <figure className={styles.page__contents__paragraph__figure}>
                   <Image
                     src={`${paragraphArticle.imgPostParagh}.webp`}
-                    alt={paragraphArticle.subtitle}
+                    alt={paragraphArticle.altImg}
                     quality={75}
                     width={paragraphArticle.imgWidth}
                     height={paragraphArticle.imgHeight}
+                    sizes="(max-width: 300px) 100vw,
+                    (max-width: 500px) 100vw,
+                    (max-width: 800px) 100vw,
+                    (max-width: 1200px) 100vw,
+                    100vw"
                   />
                   {paragraphArticle.subtitle !== paragraphArticle.altImgParagh && (
                   <figcaption className="caption">

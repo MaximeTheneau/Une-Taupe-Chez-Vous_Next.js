@@ -138,7 +138,7 @@ export default function Slug({ post }) {
             <figure className={styles.page__contents__paragraph__figure}>
               <Image
                 src={`${paragraphs.imgPostParagh}.webp`}
-                alt={paragraphs.subtitle}
+                alt={paragraphs.altImg}
                 width={paragraphs.imgWidth}
                 height={paragraphs.imgHeight}
                 sizes="(max-width: 300px) 100vw,

@@ -74,7 +74,7 @@ export default function MentionsLegal({ page }) {
                 <figure className={styles.page__contents__paragraph__figure}>
                   <Image
                     src={`${paragraphArticle.imgPostParagh}.webp`}
-                    alt={paragraphArticle.subtitle}
+                    alt={paragraphArticle.altImg}
                     quality={75}
                     width={paragraphArticle.imgWidth}
                     height={paragraphArticle.height}
