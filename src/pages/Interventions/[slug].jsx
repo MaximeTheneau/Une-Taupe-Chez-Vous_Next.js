@@ -17,10 +17,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-// const desc = await fetcher(
-// `${process.env.NEXT_PUBLIC_API_URL}posts&filter=keyword&limit=3&id=${post.id}`);
   const post = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/${params.slug}`);
-
   return { props: { post } };
 }
 
