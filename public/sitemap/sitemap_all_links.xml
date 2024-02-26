@@ -6,11 +6,6 @@
           <changefreq>daily</changefreq>
           <priority>1</priority>
         </url><url>
-          <loc>https://unetaupechezvous.fr/Foire-aux-questions</loc>
-          <lastmod>2024-02-24T13:19:21+00:00</lastmod>
-          <changefreq>daily</changefreq>
-          <priority>1</priority>
-        </url><url>
           <loc>https://unetaupechezvous.fr/Taupier-agree-professionnel-depuis-1994</loc>
           <lastmod>2024-02-26T13:29:38+00:00</lastmod>
           <changefreq>daily</changefreq>
@@ -48,6 +43,11 @@
         </url><url>
           <loc>https://unetaupechezvous.fr/Articles</loc>
           <lastmod>2024-01-23T12:43:22+00:00</lastmod>
+          <changefreq>daily</changefreq>
+          <priority>0.6</priority>
+        </url><url>
+          <loc>https://unetaupechezvous.fr/Foire-aux-questions</loc>
+          <lastmod>2024-02-24T13:19:21+00:00</lastmod>
           <changefreq>daily</changefreq>
           <priority>0.6</priority>
         </url><url>

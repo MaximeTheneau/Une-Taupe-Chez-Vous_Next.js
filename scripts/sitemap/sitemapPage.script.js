@@ -39,7 +39,6 @@ const generateSitemap = async () => {
     'Contact',
     'Interventions',
     'Taupier-agree-professionnel-depuis-1994',
-    'Foire-aux-questions',
   ].includes(page.slug));
 
   const pagesWithoutPriority = responsePages.filter((page) => [
@@ -50,6 +49,7 @@ const generateSitemap = async () => {
     'Plan-de-site',
     'Temoignages',
     'Tarifs',
+    'Foire-aux-questions',
   ].includes(page.slug));
 
   // Set priorities for pages
@@ -82,7 +82,6 @@ const generateSitemap = async () => {
     { slug: 'Articles/Jardin-et-Maison', priority: 0.6, updatedAt: '2023-10-13T11:11:41+00:00' },
     { slug: 'Articles/Piege', priority: 0.6, updatedAt: '2023-10-13T11:11:41+00:00' },
   ];
-
 
   // Generate sitemap with pages
   const allPages = [

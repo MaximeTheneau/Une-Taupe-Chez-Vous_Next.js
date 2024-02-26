@@ -2,7 +2,7 @@
   "name": "une_taupe_chez_vous__nextjs",
   "version": "2.1.0",
   "scripts": {
-    "build": "APP_ENV=export next build && npm run generate-sitemap && npm run pm2:reload",
+    "build": "npm run generate-sitemap && APP_ENV=export next build &&  npm run pm2:reload",
     "generate-sitemap": "node scripts/sitemap/runAllScripts.script.js",
     "start-cache": "next start -p 3001",
     "start": "npx serve@latest out -l 3001",
