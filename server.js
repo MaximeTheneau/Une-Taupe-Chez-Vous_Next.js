@@ -5,20 +5,32 @@ const authToken = process.env.AUTH_TOKEN;
 
 const express = require('express');
 const { createHmac } = require('crypto');
-// const { exec, spawn } = require('child_process');
 const { exec, spawn } = require('child_process');
+const cors = require('cors');
 
 const app = express();
 
+const corsOptions = {
+  origin: 'https://taupe.vercel.app',
+};
+app.use(cors(corsOptions));
+
 app.use(express.json());
+
+function verifySignature(signature, body) {
+  const hmac = createHmac('sha256', authToken);
+  hmac.update(JSON.stringify(body));
+  const calculatedSignature = `sha256=${hmac.digest('hex')}`;
+  return signature === calculatedSignature;
+}
 
 app.post('/api/webhook', (req, res) => {
   const signature = req.headers['x-hub-signature-256'];
   const { body } = req;
 
-  if (!body || typeof body !== 'object') {
-    console.error('Request body is missing or not in JSON format.');
-    return res.status(400).send('Bad request');
+  if (!verifySignature(signature, body)) {
+    console.error('Invalid signature.');
+    return res.status(401).send('Invalid signature');
   }
 
   const bodyString = JSON.stringify(body);
@@ -32,7 +44,7 @@ app.post('/api/webhook', (req, res) => {
     res.status(401).send('Invalid signature');
   }
 
-  if (req.headers[`x-${process.env.NEXT_PUBLIC_DOMAIN}-event`] === 'build') {
+  if (req.headers['x-taupe-event'] === 'build') {
     console.log('Received build event');
     exec('npm run build', (error, stdout) => {
       if (error) {
@@ -41,6 +53,7 @@ app.post('/api/webhook', (req, res) => {
       }
       console.log(`npm run build output: ${stdout}`);
     });
+    res.status(200).send('Build event received');
   }
   if (req.headers['x-github-event'] === 'push') {
     const branch = 'main';
@@ -73,9 +86,11 @@ app.post('/api/webhook', (req, res) => {
         });
       }
     });
+
+    res.status(200).send('Push event received');
   }
 
-  res.status(200).send('Webhook received');
+  res.status(200).send('Webhook error');
 });
 const server = http.createServer(app);
 server.listen(port, () => {

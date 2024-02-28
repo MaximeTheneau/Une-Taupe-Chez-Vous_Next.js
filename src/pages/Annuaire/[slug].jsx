@@ -57,6 +57,7 @@ export default function Slug({ post }) {
       description: descriptionInfo,
     };
   });
+
   return (
     <>
       <Head>
@@ -105,7 +106,7 @@ export default function Slug({ post }) {
           {post.formattedDate}
         </p>
         <div dangerouslySetInnerHTML={{ __html: post.contentsHTML }} />
-        {postsLinks.title && (
+        {!!postsLinks[0] && (
           <div className="overflow-x-auto">
             <table>
               <thead>
