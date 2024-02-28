@@ -2,18 +2,13 @@ const http = require('http');
 
 const port = process.env.PORT;
 const authToken = process.env.AUTH_TOKEN;
+const accessOrigin = process.env.ACCESS_ORIGIN;
 
 const express = require('express');
 const { createHmac } = require('crypto');
 const { exec, spawn } = require('child_process');
-const cors = require('cors');
 
 const app = express();
-
-const corsOptions = {
-  origin: 'https://taupe.vercel.app',
-};
-app.use(cors(corsOptions));
 
 app.use(express.json());
 
@@ -25,23 +20,12 @@ function verifySignature(signature, body) {
 }
 
 app.post('/api/webhook', (req, res) => {
+  const accessOriginHeader = req.headers['access-control-allow-origin'];
   const signature = req.headers['x-hub-signature-256'];
   const { body } = req;
 
-  if (!verifySignature(signature, body)) {
-    console.error('Invalid signature.');
-    return res.status(401).send('Invalid signature');
-  }
-
-  const bodyString = JSON.stringify(body);
-
-  const hmac = createHmac('sha256', authToken);
-  hmac.update(bodyString);
-  const calculatedSignature = `sha256=${hmac.digest('hex')}`;
-
-  if (signature !== calculatedSignature) {
-    console.error('Invalid signature.');
-    res.status(401).send('Invalid signature');
+  if (!verifySignature(signature, body) || accessOriginHeader !== accessOrigin) {
+    return res.status(401).send('Unauthorized');
   }
 
   if (req.headers['x-taupe-event'] === 'build') {
