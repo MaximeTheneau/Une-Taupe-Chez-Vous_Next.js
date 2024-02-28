@@ -71,7 +71,10 @@ export default function Home({
               alt={accueil.altImg || accueil.title}
               width={accueil.imgWidth}
               height={accueil.imgHeight}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              sizes="(max-width: 640px) 100vw,
+                  (max-width: 1280px) 50vw,
+                  (max-width: 1536px) 33vw,
+                  25vw"
               priority
             />
           </div>

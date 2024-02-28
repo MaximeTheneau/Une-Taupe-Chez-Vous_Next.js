@@ -17,7 +17,6 @@ export async function getStaticProps() {
 }
 
 export default function Contact({ page }) {
-  console.log(page);
   return (
     <>
       <Head>

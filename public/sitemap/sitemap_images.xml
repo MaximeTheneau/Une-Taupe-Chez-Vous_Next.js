@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
       <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
         <url>
+                  <loc>https://unetaupechezvous.fr/Articles/Nuisibles/Remede-contre-le-mal-de-dent-chez-les-bebes-Une-idee-farfelue</loc>
+                  <image:image>
+                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Remede-contre-le-mal-de-dent-chez-les-bebes-Une-idee-farfelue.webp</image:loc>
+                  </image:image>
+                  
+                </url><url>
+                  <loc>https://unetaupechezvous.fr/Foire-aux-questions</loc>
+                  <image:image>
+                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Foire-aux-questions.webp</image:loc>
+                  </image:image>
+                  
+                </url><url>
+                  <loc>https://unetaupechezvous.fr/Interventions/Ragondin</loc>
+                  <image:image>
+                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Ragondin.webp</image:loc>
+                  </image:image>
+                  <image:image>
+                         <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Identification-des-Ragondins-D</image:loc>
+                       </image:image><image:image>
+                         <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Pieges-a-Ragondins-Attrapez-le</image:loc>
+                       </image:image>
+                </url><url>
                   <loc>https://unetaupechezvous.fr/Taupier-agree-professionnel-depuis-1994</loc>
                   <image:image>
                     <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Taupier-agree-professionnel-depuis-1994.webp</image:loc>
@@ -26,12 +48,6 @@
                   <loc>https://unetaupechezvous.fr/Annuaire/Listes-des-meilleurs-experts-Anti-Nuisibles-a-Paris</loc>
                   <image:image>
                     <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Listes-des-meilleurs-experts-Anti-Nuisibles-a-Paris.webp</image:loc>
-                  </image:image>
-                  
-                </url><url>
-                  <loc>https://unetaupechezvous.fr/Foire-aux-questions</loc>
-                  <image:image>
-                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Foire-aux-questions.webp</image:loc>
                   </image:image>
                   
                 </url><url>
@@ -131,16 +147,6 @@
                          <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Ragondin-Pourquoi-ses-dents-so</image:loc>
                        </image:image><image:image>
                          <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Impact-Environnemental-Le-Rago</image:loc>
-                       </image:image>
-                </url><url>
-                  <loc>https://unetaupechezvous.fr/Interventions/Ragondin</loc>
-                  <image:image>
-                    <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Ragondin.webp</image:loc>
-                  </image:image>
-                  <image:image>
-                         <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Identification-des-Ragondins-D</image:loc>
-                       </image:image><image:image>
-                         <image:loc>https://res.cloudinary.com/dsn2zwbis/image/upload/unetaupechezvous/Pieges-a-Ragondins-Attrapez-le</image:loc>
                        </image:image>
                 </url><url>
                   <loc>https://unetaupechezvous.fr/Articles/Nuisibles/Taupe-en-Anglais-Comment-le-Dire-et-l-Ecrire</loc>
