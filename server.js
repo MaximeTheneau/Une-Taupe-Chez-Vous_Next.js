@@ -16,7 +16,6 @@ app.post('/api/webhook', (req, res) => {
   const signature = req.headers['x-hub-signature-256'];
   const { body } = req;
 
-  // Vérifier que req.body est défini et qu'il s'agit d'un objet JSON
   if (!body || typeof body !== 'object') {
     console.error('Request body is missing or not in JSON format.');
     return res.status(400).send('Bad request');
@@ -35,7 +34,6 @@ app.post('/api/webhook', (req, res) => {
 
   if (req.headers[`x-${process.env.NEXT_PUBLIC_DOMAIN}-event`] === 'build') {
     console.log('Received build event');
-    // eslint-disable-next-line global-require
     exec('npm run build', (error, stdout) => {
       if (error) {
         console.error(`Error running npm run build: ${error}`);
