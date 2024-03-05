@@ -39,8 +39,7 @@ next-env.d.ts
 /.server.js
 
 # sitemap
-/public/sitemap.xml
-/public/sitemap/sitemap-*.xml
+/public/sitemap/
 
 # .conf
 *.conf
