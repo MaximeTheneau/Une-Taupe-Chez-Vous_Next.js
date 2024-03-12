@@ -3,7 +3,7 @@ import styles from './DirectoryRegistration.module.scss';
 import Middleware from '../../middleware/Middleware';
 import Confirmation from '../modal/Confirmation';
 
-function FormContainer({ article }) {
+export default function DirectoryRegistrationForm({ article }) {
   const [modal, setModal] = useState({
     title: '',
     message: '',
@@ -79,7 +79,7 @@ function FormContainer({ article }) {
         <label htmlFor="name">
           Raison sociale
           <input
-            placeholder="Exemple: Une Taupe Chez Vous"
+            placeholder="Ex: Une Taupe Chez Vous"
             type="text"
             id="name"
             name="name"
@@ -95,7 +95,7 @@ function FormContainer({ article }) {
             type="text"
             title="Location"
             name="location"
-            placeholder="Exemple : Paris"
+            placeholder="Ex : Paris"
             value={formData.location}
             minLength={2}
             maxLength={120}
@@ -109,7 +109,7 @@ function FormContainer({ article }) {
             type="text"
             title="Location"
             name="postalCode"
-            placeholder="Exemple : 78"
+            placeholder="Ex : 78"
             value={formData.postalCode}
             minLength={2}
             maxLength={2}
@@ -125,7 +125,7 @@ function FormContainer({ article }) {
             minLength={2}
             maxLength={500}
             name="email"
-            placeholder="Exemple: exemple@email.com"
+            placeholder="Ex: exemple@email.com"
             value={formData.email}
             onChange={handleInputChange}
             required
@@ -151,7 +151,7 @@ function FormContainer({ article }) {
             type="text"
             title="Service"
             name="service"
-            placeholder="Exemple : Taupier professionnel, Dératisation, Désinsectisation, Désinfection, ..."
+            placeholder="Ex : Taupier professionnel, Dératisation, Désinsectisation, Désinfection, ..."
             maxLength={120}
             minLength={9}
             value={formData.service}
@@ -169,17 +169,17 @@ function FormContainer({ article }) {
             required
           >
             <option value=""> Sélectionner un annuaire</option>
+            <option value="autre">Proposer un annuaire</option>
             {article.map((articleList) => (
               <option key={articleList.id} value={articleList.id}>{articleList.title}</option>
             ))}
-            <option value="autre">Proposer un annuaire</option>
           </select>
           {formData.directory === 'autre' && (
           <input
             type="text"
             title="directoryOther"
             name="directoryOther"
-            placeholder="Proposer un annuaire"
+            placeholder="Ex : Annuaire des dératiseurs, Annuaire des piégeurs, ..."
             value={formData.directoryOther}
             maxLength={120}
             minLength={2}
@@ -197,5 +197,3 @@ function FormContainer({ article }) {
 
   );
 }
-
-export default FormContainer;
