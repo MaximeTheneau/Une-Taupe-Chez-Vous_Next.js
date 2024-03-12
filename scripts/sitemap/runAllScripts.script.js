@@ -12,10 +12,9 @@ const runAllScripts = () => {
 
     // Filter files with the .script.js extension
     const scriptRegex = /\.script\.js$/;
-    const scriptFiles = files.filter((file) => {
+    const scriptFiles = files.filter((file) =>
       // Exclude the runAllScripts.js file itself
-      return scriptRegex.test(file) && file !== 'runAllScripts.script.js';
-    });
+      scriptRegex.test(file) && file !== 'runAllScripts.script.js');
 
     // Execute each matching file
     scriptFiles.forEach((file) => {

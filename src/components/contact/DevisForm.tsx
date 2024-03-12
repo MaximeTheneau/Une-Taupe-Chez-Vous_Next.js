@@ -158,7 +158,6 @@ export default function DevisForm() {
 
     setTimeout(
       () => {
-        // router.push('/');
         setState({
           ...state,
           form: {

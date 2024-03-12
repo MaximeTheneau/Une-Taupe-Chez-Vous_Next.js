@@ -1,17 +1,15 @@
 import { useState } from 'react';
 import styles from './DirectoryRegistration.module.scss';
-
-import Step1 from './step/Step1';
-import Step2 from './step/Step2';
-import Step3 from './step/Step3';
-import Step4 from './step/Step4';
-import Step5 from './step/Step5';
-import Step6 from './step/Step6';
-import Step7 from './step/Step7';
+import Middleware from '../../middleware/Middleware';
+import Confirmation from '../modal/Confirmation';
 
 function FormContainer({ article }) {
-  const [currentStep, setCurrentStep] = useState(1);
-  const [formHistory, setFormHistory] = useState([1]);
+  const [modal, setModal] = useState({
+    title: '',
+    message: '',
+    toggleModal: false,
+  });
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -19,100 +17,184 @@ function FormContainer({ article }) {
     postalCode: '',
     siteWeb: '',
     service: '',
+    directory: '',
+    directoryOther: '',
     subject: 'Webmaster',
 
   });
 
-  const formPages = [
-    {
-      id: 1,
-      component: Step1,
-      articles: null,
-    },
-    {
-      id: 2,
-      component: Step2,
-      articles: null,
-    },
-    {
-      id: 3,
-      component: Step3,
-      articles: null,
-    },
-    {
-      id: 4,
-      component: Step4,
-      articles: null,
-    },
-    {
-      id: 5,
-      component: Step5,
-      articles: null,
-    },
-    {
-      id: 6,
-      component: Step6,
-      articles: article,
-    },
-    {
-      id: 7,
-      component: Step7,
-      articles: null,
-    },
-  ];
-
-  const handleStepClick = (step) => {
-    setCurrentStep(step);
-  };
-
-  const handleNext = () => {
-    const nextStep = currentStep + 1;
-    setFormHistory((prevHistory) => {
-      const updatedHistory = [...prevHistory];
-      const existingIndex = updatedHistory.findIndex((step) => step === nextStep);
-      if (existingIndex !== -1) {
-        updatedHistory[existingIndex] = nextStep;
-      } else {
-        updatedHistory.push(nextStep);
-      }
-      return updatedHistory;
+  const handleResponseError = (error) => {
+    setModal({
+      title: 'Oups !',
+      message: error,
+      toggleModal: true,
     });
-    setCurrentStep(nextStep);
   };
 
-  const currentPage = formPages.find((page) => page.id === currentStep);
+  const handleResponse200 = () => {
+    setModal({
+      title: 'Merci !',
+      message: 'On vous confirmeras votre inscriptiondans les plus brefs délais',
+      toggleModal: true,
+    });
 
+    setFormData((prevData) => ({
+      ...prevData,
+      postalCode: '',
+      name: '',
+    }));
+  };
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    setModal({
+      title: 'Envoi en cours',
+      message: 'Merci de patienter',
+      toggleModal: true,
+    });
+    const req = formData;
+    const apiPath = 'contact&directory';
+    Middleware(req, apiPath, handleResponse200, handleResponseError);
+  };
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
   return (
     <>
-      {currentPage && (
-        <currentPage.component
-          formData={formData}
-          setFormData={setFormData}
-          onNext={handleNext}
-          articles={currentPage.articles}
-
-        />
-      )}
-      <nav className={styles.directoryRegistration__nav}>
-        <ul role="menu" className={styles.directoryRegistration__nav__list}>
-          {formPages.map((step) => (
-            <li
-              role="menuitem"
-              key={step.id}
-              tabIndex={step.id > currentStep ? -1 : 0}
-              className={`${step.id === currentStep ? styles['directoryRegistration__nav__list--active'] : ''} ${styles['directoryRegistration__nav__list--item']} ${formHistory.includes(step.id) ? styles['directoryRegistration__nav__list--validated'] : ''}`}
-              onKeyDown={() => handleStepClick(step.id)}
-              onClick={() => (
-                formHistory.includes(step.id)
-                  ? handleStepClick(step.id) : null
-              )}
-            >
-              {step.id}
-            </li>
-          ))}
-        </ul>
-      </nav>
+      <Confirmation
+        title={modal.title}
+        message={modal.message}
+        toggleModal={modal.toggleModal}
+        onClick={() => setModal({
+          title: '',
+          message: '',
+          toggleModal: false,
+        })}
+      />
+      <form className={styles.directoryRegistration} onSubmit={handleSubmit}>
+        <label htmlFor="name">
+          Raison sociale
+          <input
+            placeholder="Exemple: Une Taupe Chez Vous"
+            type="text"
+            id="name"
+            name="name"
+            value={formData.name}
+            onChange={handleInputChange}
+            maxLength={120}
+            minLength={2}
+          />
+        </label>
+        <label htmlFor="location">
+          Localisation
+          <input
+            type="text"
+            title="Location"
+            name="location"
+            placeholder="Exemple : Paris"
+            value={formData.location}
+            minLength={2}
+            maxLength={120}
+            onChange={handleInputChange}
+            required
+          />
+        </label>
+        <label htmlFor="postalCode">
+          Code postal
+          <input
+            type="text"
+            title="Location"
+            name="postalCode"
+            placeholder="Exemple : 78"
+            value={formData.postalCode}
+            minLength={2}
+            maxLength={2}
+            onChange={handleInputChange}
+            required
+          />
+        </label>
+        <label htmlFor="email">
+          email
+          <input
+            type="email"
+            title="Email"
+            minLength={2}
+            maxLength={500}
+            name="email"
+            placeholder="Exemple: exemple@email.com"
+            value={formData.email}
+            onChange={handleInputChange}
+            required
+          />
+        </label>
+        <label htmlFor="siteWeb">
+          Site web
+          <input
+            type="text"
+            title="siteWeb"
+            name="siteWeb"
+            placeholder="Exemple : https://www.exemple.com"
+            value={formData.siteWeb}
+            minLength={7}
+            maxLength={120}
+            onChange={handleInputChange}
+            required
+          />
+        </label>
+        <label htmlFor="service">
+          Service
+          <input
+            type="text"
+            title="Service"
+            name="service"
+            placeholder="Exemple : Taupier professionnel, Dératisation, Désinsectisation, Désinfection, ..."
+            maxLength={120}
+            minLength={9}
+            value={formData.service}
+            onChange={handleInputChange}
+            required
+          />
+        </label>
+        <label htmlFor="directory">
+          Choisissez un annuaire
+          <select
+            className="contact-form-input"
+            name="directory"
+            value={formData.directory}
+            onChange={handleInputChange}
+            required
+          >
+            <option value=""> Sélectionner un annuaire</option>
+            {article.map((articleList) => (
+              <option key={articleList.id} value={articleList.id}>{articleList.title}</option>
+            ))}
+            <option value="autre">Proposer un annuaire</option>
+          </select>
+          {formData.directory === 'autre' && (
+          <input
+            type="text"
+            title="directoryOther"
+            name="directoryOther"
+            placeholder="Proposer un annuaire"
+            value={formData.directoryOther}
+            maxLength={120}
+            minLength={2}
+            onChange={handleInputChange}
+            required
+          />
+          )}
+        </label>
+        <button className="button" id="confirmation" type="submit" title="Envoyer l'inscription">
+          Envoyer
+          <i className="icon-paper-plane" />
+        </button>
+      </form>
     </>
+
   );
 }
 
