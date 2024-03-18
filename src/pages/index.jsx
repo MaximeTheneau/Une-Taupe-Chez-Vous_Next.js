@@ -63,7 +63,6 @@ export default function Home({
         logoUrl={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/logo-une-taupe-chez-vous.png`}
       />
       <div className={styles.home__imagesFull}>
-
         <div className={styles.home__imagesFull__text}>
           <div className={styles.home__imagesFull__image}>
             <Image
