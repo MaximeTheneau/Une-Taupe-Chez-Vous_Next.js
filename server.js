@@ -60,7 +60,6 @@ app.post('/api/webhook', (req, res) => {
               return res.status(200).send('Push event received and executed');
             });
           }
-          return res.status(500).send('Error executing git pull');
         });
       }
     });
@@ -78,7 +77,6 @@ app.post('/api/webhook', (req, res) => {
           return res.status(200).send('Push event received and executed');
         });
       }
-      return res.status(500).send('Error executing git pull command');
     });
   }
 });
