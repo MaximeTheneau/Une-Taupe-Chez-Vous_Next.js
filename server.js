@@ -80,7 +80,7 @@ app.post('/api/webhook', (req, res) => {
       }
     });
   } else {
-    return res.status(200).send('Unknown event type');
+    return res.status(200).send(`Ok ${event}`);
   }
 });
 

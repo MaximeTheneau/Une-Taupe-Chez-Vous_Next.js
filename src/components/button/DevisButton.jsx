@@ -9,7 +9,7 @@ export default function DevisButton() {
       className={styles.button}
       role="link"
     >
-      <Link href="/Devis-en-ligne">
+      <Link href="/Devis-en-ligne" rel="preload">
         <AnimationHover>
           Demandez un devis
         </AnimationHover>
