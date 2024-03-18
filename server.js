@@ -44,9 +44,9 @@ app.post('/api/webhook', (req, res) => {
       if (code === 1) {
         const stash = spawn('git', ['stash']);
 
-        stash.stdout.on('data', (data) => res.status(500).send(`Error stashing changes: ${data}`));
+        stash.stdout.on('data', (data) => console.error(`Error stashing changes: ${data}`));
 
-        stash.stderr.on('data', (data) => res.status(500).send(`Error stashing changes: ${data}`));
+        stash.stderr.on('data', (data) => console.error(`Error stashing changes: ${data}`));
 
         stash.on('exit', (stashCode) => {
           if (stashCode === 0) {
