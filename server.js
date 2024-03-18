@@ -18,14 +18,14 @@ function verifySignature(signature, body) {
 }
 
 app.post('/api/webhook', (req, res) => {
-  // const signature = req.headers['x-hub-signature-256'];
+  const signature = req.headers['x-hub-signature-256'];
   const branch = 'main';
 
   const { body } = req;
 
-  // if (!verifySignature(signature, body)) {
-  //   return res.status(401).send('Unauthorized');
-  // }
+  if (!verifySignature(signature, body)) {
+    return res.status(401).send('Unauthorized');
+  }
 
   if (req.headers['x-taupe-event'] === 'build') {
     exec('npm run build', (error) => {
@@ -65,6 +65,7 @@ app.post('/api/webhook', (req, res) => {
       }
     });
   }
+  return res.status(200).send('Event received');
 });
 
 const server = http.createServer(app);
