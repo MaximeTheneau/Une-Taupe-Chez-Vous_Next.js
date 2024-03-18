@@ -53,18 +53,15 @@ app.post('/api/webhook', (req, res) => {
 
     gitPull.on('close', (code) => {
       if (code === 0) {
-        res.status(200).send('Git pull successful :).');
         exec('npm run build', (error) => {
           if (error) {
             return res.status(500).send(`Error running npm run build: ${error}`);
           }
-          return res.status(200).send('Push and build Github event received');
+          return res.status(200).send('Push and build Github event received and executed');
         });
       }
     });
   }
-
-  res.status(200).send('Webhook error');
 });
 const server = http.createServer(app);
 server.listen(port, () => {
