@@ -37,19 +37,32 @@ app.post('/api/webhook', (req, res) => {
   }
 
   if (req.headers['x-github-event'] === 'push') {
-    const gitStash = spawn('git', ['stash']);
+    const gitStash = spawn('git', ['status', '--porcelain']);
 
-    gitStash.stdout.on('data', (data) => res.status(500).send(`Error stashing changes${data}`));
+    gitStash.stdout.on('data', (data) => {
+      if (data.toString().trim() !== '') {
+        const gitStashChanges = spawn('git', ['stash']);
 
-    gitStash.stderr.on('data', (data) => res.status(500).send(`Error stashing changes: ${data}`));
+        gitStashChanges.on('close', (code) => {
+          if (code === 0) {
+            const gitPull = spawn('git', ['pull', 'origin', branch]);
 
-    gitStash.on('close', (code) => {
-      if (code === 0) {
+            gitPull.on('close', (close) => {
+              if (close === 0) {
+                exec('npm run build', (error) => {
+                  if (error) {
+                    return res.status(500).send(`Error running npm run build: ${error}`);
+                  }
+                  return res.status(200).send('Push event received and executed');
+                });
+              }
+              return res.status(500).send('Error executing git pull');
+            });
+          }
+          return res.status(500).send('Error stashing changes');
+        });
+      } else {
         const gitPull = spawn('git', ['pull', 'origin', branch]);
-
-        gitPull.stdout.on('data', (data) => res.status(500).send(`Error pulling changes: ${data}`));
-
-        gitPull.stderr.on('data', (data) => res.status(500).send(`Error pulling changes: ${data}`));
 
         gitPull.on('close', (close) => {
           if (close === 0) {
@@ -64,7 +77,10 @@ app.post('/api/webhook', (req, res) => {
         });
       }
     });
+
+    gitStash.stderr.on('data', (data) => res.status(500).send(`Error stashing changes: ${data}`));
   }
+
   return res.status(200).send('Event received');
 });
 
