@@ -27,10 +27,6 @@ app.post('/api/webhook', (req, res) => {
   const event = req.headers['x-github-event'];
   const branch = 'main';
 
-  if (!signature || !event) {
-    return res.status(400).send('Missing required headers');
-  }
-
   const { body } = req;
 
   if (!verifySignature(signature, body)) {
