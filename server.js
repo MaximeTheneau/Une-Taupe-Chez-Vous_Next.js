@@ -23,9 +23,9 @@ app.post('/api/webhook', (req, res) => {
 
   const { body } = req;
 
-  if (!verifySignature(signature, body)) {
-    return res.status(401).send('Unauthorized');
-  }
+  // if (!verifySignature(signature, body)) {
+  //   return res.status(401).send('Unauthorized');
+  // }
 
   if (req.headers['x-taupe-event'] === 'build') {
     exec('npm run build', (error) => {
@@ -37,32 +37,18 @@ app.post('/api/webhook', (req, res) => {
   }
 
   if (req.headers['x-github-event'] === 'push') {
-    const gitStash = spawn('git', ['status', '--porcelain']);
+    const gitStash = spawn('git', ['stash']);
+    const gitPull = spawn('git', ['pull', 'origin', branch]);
 
-    gitStash.stdout.on('data', (data) => {
-      if (data.toString().trim() !== '') {
-        const gitStashChanges = spawn('git', ['stash']);
+    gitStash.stdout.on('data', (data) => res.status(500).send(`Error stashing changes${data}`));
 
-        gitStashChanges.on('close', (code) => {
-          if (code === 0) {
-            const gitPull = spawn('git', ['pull', 'origin', branch]);
+    gitStash.stderr.on('data', (data) => res.status(500).send(`Error stashing changes: ${data}`));
 
-            gitPull.on('close', (close) => {
-              if (close === 0) {
-                exec('npm run build', (error) => {
-                  if (error) {
-                    return res.status(500).send(`Error running npm run build: ${error}`);
-                  }
-                  return res.status(200).send('Push event received and executed');
-                });
-              }
-              return res.status(500).send('Error executing git pull');
-            });
-          }
-          return res.status(500).send('Error stashing changes');
-        });
-      } else {
-        const gitPull = spawn('git', ['pull', 'origin', branch]);
+    gitStash.on('close', (code) => {
+      if (code === 0) {
+        gitPull.stdout.on('data', (data) => res.status(500).send(`Error pulling changes: ${data}`));
+
+        gitPull.stderr.on('data', (data) => res.status(500).send(`Error pulling changes: ${data}`));
 
         gitPull.on('close', (close) => {
           if (close === 0) {
@@ -78,10 +64,22 @@ app.post('/api/webhook', (req, res) => {
       }
     });
 
-    gitStash.stderr.on('data', (data) => res.status(500).send(`Error stashing changes: ${data}`));
-  }
+    gitPull.stdout.on('data', (data) => res.status(500).send(`Error stashing changes: ${data}`));
 
-  return res.status(500).send('Error executing git status n');
+    gitPull.stderr.on('data', (data) => res.status(500).send(`Error stashing changes: ${data}`));
+
+    gitPull.on('close', (code) => {
+      if (code === 0) {
+        exec('npm run build', (error) => {
+          if (error) {
+            return res.status(500).send(`Error running npm run build: ${error}`);
+          }
+          return res.status(200).send('Push event received and executed');
+        });
+      }
+      return res.status(500).send('Error executing git pull');
+    });
+  }
 });
 
 const server = http.createServer(app);
