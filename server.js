@@ -49,7 +49,7 @@ app.post('/api/webhook', (req, res) => {
         stash.stderr.on('data', (data) => res.status(500).send(`Error stashing changes: ${data}`));
 
         stash.on('exit', (stashCode) => {
-          if (stashCode === 1) {
+          if (stashCode === 0) {
             gitPull.stdout.on('data', (data) => res.status(500).send(`Error pull changes: ${data}`));
 
             gitPull.stderr.on('data', (data) => res.status(500).send(`Error changes: ${data}`));
