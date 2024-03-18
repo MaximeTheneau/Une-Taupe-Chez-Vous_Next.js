@@ -109,7 +109,7 @@ export default function Home({
         <ul className={styles.home__list}>
           {articles.map((article) => (
             <li key={article.title} className={styles.home__list__item}>
-              <Link href={`/${article.category.slug}/${article.subcategory.slug}/${article.slug}`}>
+              <Link href={`/${article.category.slug}/${article.subcategory.slug}/${article.slug}`} rel="preload">
                 {article.title}
               </Link>
             </li>
