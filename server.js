@@ -50,9 +50,9 @@ app.post('/api/webhook', (req, res) => {
 
         stash.on('exit', (stashCode) => {
           if (stashCode === 0) {
-            gitPull.stdout.on('data', (data) => res.status(500).send(`Error pull command changes: ${data}`));
+            gitPull.stdout.on('data', (data) => console.error(500).send(`Error pull command changes: ${data}`));
 
-            gitPull.stderr.on('data', (data) => res.status(500).send(`Error pull command changes: ${data}`));
+            gitPull.stderr.on('data', (data) => console.error(500).send(`Error pull command changes: ${data}`));
             exec('npm run build', (error) => {
               if (error) {
                 return res.status(500).send(`Error running npm run build: ${error}`);
