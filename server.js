@@ -67,7 +67,7 @@ app.post('/api/webhook', (req, res) => {
 
     gitPull.stdout.on('data', (data) => res.status(500).send(`Error pull changes: ${data}`));
 
-    gitPull.stderr.on('data', (data) => res.status(500).send(`Error  changes: ${data}`));
+    gitPull.stderr.on('data', (data) => console.error(`Error pulling changes: ${data}`));
 
     gitPull.on('close', (code) => {
       if (code === 0) {
