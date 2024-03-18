@@ -81,7 +81,7 @@ app.post('/api/webhook', (req, res) => {
     gitStash.stderr.on('data', (data) => res.status(500).send(`Error stashing changes: ${data}`));
   }
 
-  return res.status(500).send('Error executing git status');
+  return res.status(500).send('Error executing git status --porcelain');
 });
 
 const server = http.createServer(app);
