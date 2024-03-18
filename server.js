@@ -21,9 +21,9 @@ function verifySignature(signature, body) {
 app.post('/api/webhook', (req, res) => {
   const signature = req.headers['x-hub-signature-256'];
   const { body } = req;
-  // if (!verifySignature(signature, body)) {
-  //   return res.status(401).send('Unauthorized');
-  // }
+  if (!verifySignature(signature, body)) {
+    return res.status(401).send('Unauthorized');
+  }
 
   if (req.headers['x-taupe-event'] === 'build') {
     exec('npm run build', (error) => {
