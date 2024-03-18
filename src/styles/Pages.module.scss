@@ -59,16 +59,19 @@
   }
   &__image{
     display: flex;
-
   }
   & a{
     font-weight: bold;
+  }
+  &__contact{
+    &__block{
+      margin-bottom: 1rem;
+    }
   }
 }
 
 @media screen and (max-width: 768px){
   .page{
-
     &__contact{
       display: flex;
       flex-direction: column;

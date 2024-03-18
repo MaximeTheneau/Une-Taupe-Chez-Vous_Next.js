@@ -60,8 +60,8 @@ export default function Contact({ page }) {
             <Link href="tel:+33232264958"> 02 32 26 49 58</Link>
           </p>
           <NotCopie />
+          <DevisButton />
         </div>
-        <DevisButton />
         <div dangerouslySetInnerHTML={{ __html: page.contentsHTML }} />
         <div className={styles.page__contact}>
           <div className={styles.page__contact__block}>
