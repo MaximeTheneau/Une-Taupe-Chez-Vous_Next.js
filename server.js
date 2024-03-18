@@ -1,8 +1,4 @@
 const http = require('http');
-
-const port = process.env.PORT;
-const authToken = process.env.AUTH_TOKEN;
-
 const express = require('express');
 const { createHmac } = require('crypto');
 const { exec, spawn } = require('child_process');
@@ -10,6 +6,14 @@ const { exec, spawn } = require('child_process');
 const app = express();
 
 app.use(express.json());
+
+const port = process.env.PORT;
+const authToken = process.env.AUTH_TOKEN;
+
+if (!port || !authToken) {
+  console.error('Port or auth token not provided.');
+  process.exit(1);
+}
 
 function verifySignature(signature, body) {
   const hmac = createHmac('sha256', authToken);
@@ -20,50 +24,67 @@ function verifySignature(signature, body) {
 
 app.post('/api/webhook', (req, res) => {
   const signature = req.headers['x-hub-signature-256'];
+  const event = req.headers['x-github-event'];
+  const branch = 'main';
+
+  if (!signature || !event) {
+    return res.status(400).send('Missing required headers');
+  }
+
   const { body } = req;
+
   if (!verifySignature(signature, body)) {
     return res.status(401).send('Unauthorized');
   }
 
-  if (req.headers['x-taupe-event'] === 'build') {
+  if (event === 'build') {
     exec('npm run build', (error) => {
       if (error) {
         return res.status(500).send(`Error running npm run build: ${error}`);
       }
-      return res.status(200).send('Build for back event received');
+      return res.status(200).send('Build event received and executed');
     });
-  }
-  if (req.headers['x-github-event'] === 'push') {
-    const branch = 'main';
+  } else if (event === 'push') {
     const gitStash = spawn('git', ['stash']);
 
     gitStash.stdout.on('data', (data) => {
       console.log(`stdout: ${data}`);
     });
 
-    const gitPull = spawn('git', ['pull', 'origin', branch]);
-
-    gitPull.stdout.on('data', (data) => {
-      console.log(`stdout: ${data}`);
-    });
-
-    gitPull.stderr.on('data', (data) => {
+    gitStash.stderr.on('data', (data) => {
       console.error(`stderr: ${data}`);
     });
 
-    gitPull.on('close', (code) => {
+    gitStash.on('close', (code) => {
       if (code === 0) {
-        exec('npm run build', (error) => {
-          if (error) {
-            return res.status(500).send(`Error running npm run build: ${error}`);
+        const gitPull = spawn('git', ['pull', 'origin', branch]);
+
+        gitPull.stdout.on('data', (data) => {
+          console.log(`stdout: ${data}`);
+        });
+
+        gitPull.stderr.on('data', (data) => {
+          console.error(`stderr: ${data}`);
+        });
+
+        gitPull.on('close', (close) => {
+          if (close === 0) {
+            exec('npm run build', (error) => {
+              if (error) {
+                return res.status(500).send(`Error running npm run build: ${error}`);
+              }
+              return res.status(200).send('Push event received and executed');
+            });
           }
-          return res.status(200).send('Push and build Github event received and executed');
+          return res.status(500).send('Error executing git pull');
         });
       }
+      return res.status(500).send('Error stashing changes');
     });
   }
-  return res.status(200).send('error');
+  return res.status(400).send('Unknown event type');
 });
+
 const server = http.createServer(app);
 server.listen(port, () => {
   console.log(`Server listening on port ${port}`);
