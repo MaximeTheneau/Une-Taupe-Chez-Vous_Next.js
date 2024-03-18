@@ -55,7 +55,7 @@ app.post('/api/webhook', (req, res) => {
       }
     });
   }
-  res.status(200).send('Webhook error');
+  return res.status(200).send('Webhook error');
 });
 
 const server = http.createServer(app);
