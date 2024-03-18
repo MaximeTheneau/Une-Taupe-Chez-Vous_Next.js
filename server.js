@@ -37,11 +37,19 @@ app.post('/api/webhook', (req, res) => {
     const branch = 'main';
     const gitStash = spawn('git', ['stash']);
 
-    gitStash.stdout.on();
+    gitStash.stdout.on('data', (data) => {
+      console.log(`stdout: ${data}`);
+    });
 
     const gitPull = spawn('git', ['pull', 'origin', branch]);
 
-    gitPull.stdout.on();
+    gitPull.stdout.on('data', (data) => {
+      console.log(`stdout: ${data}`);
+    });
+
+    gitPull.stderr.on('data', (data) => {
+      console.error(`stderr: ${data}`);
+    });
 
     gitPull.on('close', (code) => {
       if (code === 0) {
@@ -55,9 +63,9 @@ app.post('/api/webhook', (req, res) => {
       }
     });
   }
-  return res.status(200).send('Webhook error');
-});
 
+  res.status(200).send('Webhook error');
+});
 const server = http.createServer(app);
 server.listen(port, () => {
   console.log(`Server listening on port ${port}`);
