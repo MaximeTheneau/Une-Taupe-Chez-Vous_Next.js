@@ -62,6 +62,7 @@ app.post('/api/webhook', (req, res) => {
       }
     });
   }
+  return res.status(200).send('error');
 });
 const server = http.createServer(app);
 server.listen(port, () => {
