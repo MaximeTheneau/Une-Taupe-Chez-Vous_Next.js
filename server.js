@@ -71,14 +71,17 @@ app.post('/api/webhook', (req, res) => {
               }
               return res.status(200).send('Push event received and executed');
             });
+          } else {
+            return res.status(500).send('Error executing git pull');
           }
-          return res.status(500).send('Error executing git pull');
         });
+      } else {
+        return res.status(500).send('Error stashing changes');
       }
-      return res.status(500).send('Error stashing changes');
     });
+  } else {
+    return res.status(200).send('Unknown event type');
   }
-  return res.status(400).send('Unknown event type');
 });
 
 const server = http.createServer(app);
