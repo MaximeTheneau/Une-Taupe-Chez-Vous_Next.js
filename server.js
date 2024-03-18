@@ -21,58 +21,43 @@ function verifySignature(signature, body) {
 app.post('/api/webhook', (req, res) => {
   const signature = req.headers['x-hub-signature-256'];
   const { body } = req;
-  if (!verifySignature(signature, body)) {
-    return res.status(401).send('Unauthorized');
-  }
+  // if (!verifySignature(signature, body)) {
+  //   return res.status(401).send('Unauthorized');
+  // }
 
   if (req.headers['x-taupe-event'] === 'build') {
-    console.log('Received build event');
-    exec('npm run build', (error, stdout) => {
+    exec('npm run build', (error) => {
       if (error) {
-        console.error(`Error running npm run build: ${error}`);
-        return;
+        return res.status(500).send(`Error running npm run build: ${error}`);
       }
-      console.log(`npm run build output: ${stdout}`);
+      return res.status(200).send('Build for back event received');
     });
-    res.status(200).send('Build event received');
   }
   if (req.headers['x-github-event'] === 'push') {
     const branch = 'main';
     const gitStash = spawn('git', ['stash']);
 
-    gitStash.stdout.on('data', (data) => {
-      console.log(`stdout: ${data}`);
-    });
+    gitStash.stdout.on();
 
     const gitPull = spawn('git', ['pull', 'origin', branch]);
 
-    gitPull.stdout.on('data', (data) => {
-      console.log(`stdout: ${data}`);
-    });
-
-    gitPull.stderr.on('data', (data) => {
-      console.error(`stderr: ${data}`);
-    });
+    gitPull.stdout.on();
 
     gitPull.on('close', (code) => {
       if (code === 0) {
-        console.log('Git pull successful :).');
         res.status(200).send('Git pull successful :).');
-        exec('npm run build', (error, stdout) => {
+        exec('npm run build', (error) => {
           if (error) {
-            console.error(`Error running npm run build: ${error}`);
-            return;
+            return res.status(500).send(`Error running npm run build: ${error}`);
           }
-          console.log(`npm run build output: ${stdout}`);
+          return res.status(200).send('Push and build Github event received');
         });
       }
     });
-
-    res.status(200).send('Push event received');
   }
-
   res.status(200).send('Webhook error');
 });
+
 const server = http.createServer(app);
 server.listen(port, () => {
   console.log(`Server listening on port ${port}`);
