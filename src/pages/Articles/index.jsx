@@ -3,7 +3,6 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Cards from '../../components/cards/cards';
 import styles from '../../styles/Pages.module.scss';
-import AnimationHover from '../../hooks/useHoverAnimation/CloneTextWrapper';
 import fetcher from '../../utils/fetcher';
 import CategoryPage from '../../components/category/CategoryPage';
 
@@ -63,9 +62,7 @@ export default function Home({ page, articles, subcategoryList }) {
         ))}
         <div className="button">
           <Link href="/Contact">
-            <AnimationHover>
-              Contactez-nous
-            </AnimationHover>
+            Contactez-nous
           </Link>
         </div>
       </section>

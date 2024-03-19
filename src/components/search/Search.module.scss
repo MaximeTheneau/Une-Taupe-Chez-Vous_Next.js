@@ -32,6 +32,8 @@
         & button{
           color: $font-color !important;
           font-size: 1rem;
+          background: none;
+          border: none;
           &:hover{
               transform: scale(1.2) rotate(10deg);
           }
