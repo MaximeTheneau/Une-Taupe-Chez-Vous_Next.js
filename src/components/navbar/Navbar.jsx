@@ -27,7 +27,7 @@ export default function Navbar() {
           onClick={() => {
             setToggleNav(!toggleNav);
           }}
-          role="menuitem"
+          role="button"
           id="navbar-toggle"
           tabIndex={0}
           onKeyDown={(e) => {
@@ -50,6 +50,7 @@ export default function Navbar() {
         id="navbar-menu"
         className={`${toggleNav ? styles.navbar : styles['navbar__menu--hidden']} ${styles.navbar__menu}`}
         aria-hidden={toggleNav ? 'false' : 'true'}
+        role="menu"
       >
         <ul className={styles.navbar__list}>
           <li className={styles['navbar__menu__list-item']}>
