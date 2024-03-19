@@ -8,15 +8,12 @@ export default function Footer() {
       <div className={styles.footer__links}>
         <div>
           <p className={styles['footer__links--title']}>
-            Rechercher
-          </p>
-          <Search />
-        </div>
-        <div>
-          <p className={styles['footer__links--title']}>
             Services
           </p>
           <ul>
+            <li>
+              <Search />
+            </li>
             <li>
               <Link href="/Devis-en-ligne">
                 Devis en ligne gratuit

@@ -23,6 +23,11 @@
                 border-color: $color-primary !important;
                 color: $font-color;
             }
+            & label{
+                color: $font-color;
+                font-size: 0.8rem;
+                transition: all 0.3s;
+            }
         }
         & button{
           color: $font-color !important;

@@ -35,9 +35,9 @@ export default function Search({
 
   return (
     <form className={styles.search__form} onSubmit={handleSubmit} aria-label="Formulaire de recherche">
-      <div className={styles.search__form__input}>
-        <label htmlFor="searchInput">
-          Rechercher un article, un sujet ou un nuisible
+      <label htmlFor="searchInput">
+        Rechercher
+        <div className={styles.search__form__input}>
           <input
             id="searchInput"
             type="text"
@@ -46,15 +46,15 @@ export default function Search({
             placeholder="Tapez votre recherche"
             aria-label="Rechercher un article, un sujet ou un nuisible"
           />
-        </label>
-        <button
-          type="submit"
-          tabIndex={0}
-          aria-label="Lancer la recherche"
-        >
-          <i className="icon-paper-plane" aria-hidden="true" />
-        </button>
-      </div>
+          <button
+            type="submit"
+            tabIndex={0}
+            aria-label="Lancer la recherche"
+          >
+            <i className="icon-paper-plane" aria-hidden="true" />
+          </button>
+        </div>
+      </label>
     </form>
   );
 }
