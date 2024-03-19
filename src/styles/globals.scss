@@ -5,7 +5,7 @@
 @import './fonts.scss';
 
 :focus {
-  outline: red solid 5px;
+  outline: red solid 5px !important;
 }   
 
 html,

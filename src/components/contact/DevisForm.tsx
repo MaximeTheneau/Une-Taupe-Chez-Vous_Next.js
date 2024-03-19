@@ -221,39 +221,40 @@ export default function DevisForm() {
       <div className={styles.contact}>
         <form className={styles.contact__block} onSubmit={handleSubmit}>
           <div className={styles.contact__input}>
-
-            <p className={styles.contact__input__label}>
-              Vous êtes
-              <span className={styles.contact__input__label__alert}>*</span>
-            </p>
-            <div className={styles.contact__input__radio}>
-              <label htmlFor="statusParticular">
-                <input
-                  id="statusParticular"
-                  type="radio"
-                  value="Particulier"
-                  name="status"
-                  onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'status')}
-                  required
-                />
-                <span>
-                  Particulier
-                </span>
-              </label>
-              <label htmlFor="statusSociety">
-                <input
-                  id="statusSociety"
-                  type="radio"
-                  value="Société"
-                  name="status"
-                  onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'status')}
-                  required
-                />
-                <span>
-                  Société
-                </span>
-              </label>
-            </div>
+            <fieldset>
+              <legend className={styles.contact__input__label}>
+                Status
+                <span className={styles.contact__input__label__alert}>*</span>
+              </legend>
+              <div
+                className={styles.contact__input__radio}
+              >
+                <label htmlFor="statusParticular">
+                  <input
+                    type="radio"
+                    id="statusParticular"
+                    value="Particulier"
+                    name="status"
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'status')}
+                  />
+                  <span>
+                    Particulier
+                  </span>
+                </label>
+                <label htmlFor="statusSociety">
+                  <input
+                    id="statusSociety"
+                    type="radio"
+                    value="Société"
+                    name="status"
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'status')}
+                  />
+                  <span>
+                    Société
+                  </span>
+                </label>
+              </div>
+            </fieldset>
           </div>
           { state.form.status === 'Société' && (
           <>
