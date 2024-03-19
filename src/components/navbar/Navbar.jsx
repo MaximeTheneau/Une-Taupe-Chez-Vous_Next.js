@@ -37,6 +37,7 @@ export default function Navbar() {
           }}
           aria-expanded={toggleNav ? 'true' : 'false'}
           aria-label="Menu de navigation"
+          aria-controls="navbar-menu"
         >
           {toggleNav ? (
             <i className="icon-x" />
