@@ -51,9 +51,7 @@ export default function Navbar() {
         className={`${toggleNav ? styles.navbar : styles['navbar__menu--hidden']} ${styles.navbar__menu}`}
         aria-hidden={toggleNav ? 'false' : 'true'}
       >
-        <ul
-          className={styles.navbar__list}
-        >
+        <ul className={styles.navbar__list}>
           <li className={styles['navbar__menu__list-item']}>
             <Search closeNav={closeNav} id="navbar-search" />
           </li>
