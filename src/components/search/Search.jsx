@@ -34,20 +34,25 @@ export default function Search({
   }, [router.query.q]);
 
   return (
-    <form className={styles.search__form} onSubmit={handleSubmit}>
+    <form className={styles.search__form} onSubmit={handleSubmit} aria-label="Formulaire de recherche">
       <div className={styles.search__form__input}>
-        <input
-          type="text"
-          placeholder="Rechercher un article, un sujet ou un nuisibles"
-          onChange={handleFilterChange}
-          value={filter || ''}
-        />
+        <label htmlFor="searchInput">
+          Rechercher un article, un sujet ou un nuisible
+          <input
+            id="searchInput"
+            type="text"
+            onChange={handleFilterChange}
+            value={filter || ''}
+            placeholder="Tapez votre recherche"
+            aria-label="Rechercher un article, un sujet ou un nuisible"
+          />
+        </label>
         <button
           type="submit"
           tabIndex={0}
-          aria-label="Rechercher une page ou un article"
+          aria-label="Lancer la recherche"
         >
-          <i className="icon-paper-plane" />
+          <i className="icon-paper-plane" aria-hidden="true" />
         </button>
       </div>
     </form>

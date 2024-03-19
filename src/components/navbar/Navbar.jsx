@@ -10,8 +10,12 @@ export default function Navbar() {
     setToggleNav(false);
   };
   return (
-    <nav>
-      <div className={styles.navbar}>
+    <nav
+      role="navigation"
+    >
+      <div
+        className={styles.navbar}
+      >
         <Link
           href="/"
           className={styles.navbar__logo}
@@ -19,11 +23,19 @@ export default function Navbar() {
           Une Taupe Chez Vous
         </Link>
         <div
-          aria-hidden="true"
           className={styles.navbar__responsive__toggle}
           onClick={() => {
             setToggleNav(!toggleNav);
           }}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              setToggleNav(!toggleNav);
+            }
+          }}
+          aria-expanded={toggleNav ? 'true' : 'false'}
+          aria-controls="navbar-menu"
         >
           {toggleNav ? (
             <i className="icon-x" />
@@ -32,8 +44,14 @@ export default function Navbar() {
           )}
         </div>
       </div>
-      <div className={`${toggleNav ? styles.navbar : styles['navbar__menu--hidden']} ${styles.navbar__menu}`}>
-        <ul className={styles.navbar__list}>
+      <div
+        id="navbar-menu"
+        className={`${toggleNav ? styles.navbar : styles['navbar__menu--hidden']} ${styles.navbar__menu}`}
+        aria-hidden={toggleNav ? 'false' : 'true'}
+      >
+        <ul
+          className={styles.navbar__list}
+        >
           <li className={styles['navbar__menu__list-item']}>
             <Search closeNav={closeNav} />
           </li>

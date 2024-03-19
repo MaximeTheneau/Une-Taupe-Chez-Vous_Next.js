@@ -4,6 +4,10 @@
 @import './variables.scss';
 @import './fonts.scss';
 
+:focus {
+  outline: red solid 5px;
+}   
+
 html,
 body {
   padding: 0;
