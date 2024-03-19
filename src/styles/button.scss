@@ -17,6 +17,7 @@
   margin: 1rem 0 0 0;
   transition: all 0.3s ease-in-out;
   position: relative;
+  width: 50%;
   & i{
     margin: 0 0 0 1rem;
     font-size: 1.2rem;
@@ -42,43 +43,8 @@
 
 }
 
-// .button{
-//   min-width: 8rem;
-//   transition: all 0.3s ease-in-out;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   font-family: $font-secondary;
-//   border: none;
-//   font-size: 1.2rem;
-//   background: $color-blue !important;
-//   color: $color-white;
-//   cursor: pointer;
-//   font-weight: bold;
-//   border-radius: 0.2rem;
-//   padding: 1rem 1.5rem;
-//   & i{
-//     margin: 0 0.5rem 0 0;
-//     margin-left: 1rem;
-//     transition: transform 0.3s ease-in-out;
-//   }
-
-//   &:hover{
-//     & a{
-//       color: $font-color;
-//     }
-//       & i{
-//           transform: translateX(1rem) rotate(-10deg) scale(1.2);
-//       }
-//   }
-//   &--disabled{
-//     background: $font-color-opacity !important;
-//     color: $font-color;
-//     cursor: not-allowed;
-//     &:hover{
-//       & i{
-//           transform: translateX(0) rotate(0) scale(1);
-//       }
-//     }
-//   }
-//   }
+@media screen and (max-width: 768px){
+  .button{
+    width: 100%;
+  }
+}

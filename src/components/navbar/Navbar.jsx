@@ -27,7 +27,8 @@ export default function Navbar() {
           onClick={() => {
             setToggleNav(!toggleNav);
           }}
-          role="button"
+          role="menuitem"
+          id="navbar-toggle"
           tabIndex={0}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
@@ -35,7 +36,7 @@ export default function Navbar() {
             }
           }}
           aria-expanded={toggleNav ? 'true' : 'false'}
-          aria-controls="navbar-menu"
+          aria-label="Menu de navigation"
         >
           {toggleNav ? (
             <i className="icon-x" />
@@ -53,7 +54,7 @@ export default function Navbar() {
           className={styles.navbar__list}
         >
           <li className={styles['navbar__menu__list-item']}>
-            <Search closeNav={closeNav} />
+            <Search closeNav={closeNav} id="navbar-search" />
           </li>
           <li className={styles['navbar__menu__list-item']}>
             <Link href="/Devis-en-ligne" onClick={() => closeNav()}>

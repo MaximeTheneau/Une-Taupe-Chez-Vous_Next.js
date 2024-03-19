@@ -81,7 +81,7 @@ export default function Home({
             {accueil.title}
           </h1>
           <div className={styles['home__imagesFull__text--paragraph']} dangerouslySetInnerHTML={{ __html: accueil.contentsHTML }} />
-          <DevisButton tabIndex="0" />
+          <DevisButton />
         </div>
       </div>
       <section className={styles.home}>

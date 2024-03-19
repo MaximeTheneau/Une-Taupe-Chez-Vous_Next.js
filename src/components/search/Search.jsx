@@ -3,7 +3,7 @@ import Router, { useRouter } from 'next/router';
 import styles from './Search.module.scss';
 
 export default function Search({
-  closeNav, articles, setFilteredArticles,
+  closeNav, articles, setFilteredArticles, id,
 }) {
   const router = useRouter();
   const [filter, setFilter] = useState('');
@@ -35,11 +35,11 @@ export default function Search({
 
   return (
     <form className={styles.search__form} onSubmit={handleSubmit} aria-label="Formulaire de recherche">
-      <label htmlFor="searchInput">
+      <label htmlFor={id}>
         Rechercher
         <div className={styles.search__form__input}>
           <input
-            id="searchInput"
+            id={id}
             type="text"
             onChange={handleFilterChange}
             value={filter || ''}

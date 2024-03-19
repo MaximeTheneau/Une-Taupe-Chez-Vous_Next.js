@@ -12,7 +12,7 @@ export default function Footer() {
           </p>
           <ul>
             <li>
-              <Search />
+              <Search id="footer-search" />
             </li>
             <li>
               <Link href="/Devis-en-ligne">

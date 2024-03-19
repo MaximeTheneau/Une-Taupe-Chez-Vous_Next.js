@@ -4,7 +4,6 @@ import FormMiddleware from '../../middleware/FormMiddleware';
 import Confirmation from '../modal/Confirmation';
 import styles from './Contact.module.scss';
 import Input from './form/Input';
-// import Button from '../button/Button';
 
 interface FormState {
   name: string;

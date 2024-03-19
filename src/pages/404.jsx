@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import CloneTextWrapper from '../hooks/useHoverAnimation/CloneTextWrapper';
 
 export default function Custom404() {
   return (
@@ -16,9 +15,7 @@ export default function Custom404() {
           <Link
             href="/"
           >
-            <CloneTextWrapper>
-              Page d&apos;accueil
-            </CloneTextWrapper>
+            Page d&apos;accueil
           </Link>
         </button>
       </section>

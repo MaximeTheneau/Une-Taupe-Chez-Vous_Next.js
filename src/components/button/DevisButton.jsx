@@ -1,16 +1,9 @@
 import Link from 'next/link';
 
-export default function DevisButton({ tabIndex }) {
+export default function DevisButton() {
   return (
-    <button
-      type="button"
-      className="button"
-      role="link"
-      tabIndex={tabIndex}
-    >
-      <Link href="/Devis-en-ligne" rel="preload">
-        Demandez un devis
-      </Link>
-    </button>
+    <Link href="/Devis-en-ligne" rel="preload" className="button">
+      Demandez un devis
+    </Link>
   );
 }
