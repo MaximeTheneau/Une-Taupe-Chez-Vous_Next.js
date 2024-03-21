@@ -14,6 +14,7 @@ function MyApp({ Component, pageProps }) {
         <link rel="icon" href="/favicon/favicon-16x16.png" sizes="16x16" key="icon16" />
         <link rel="icon" href="/favicon/favicon-32x32.png" sizes="32x32" key="icon32" />
         <link rel="icon" href="/favicon/favicon-96x96.png" sizes="96x96" key="icon96" />
+        <link rel="manifest" href="/favicon/manifest.json" />
       </Head>
       <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID} />
       {/* <CookiesModal /> */}
