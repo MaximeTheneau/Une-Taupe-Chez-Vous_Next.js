@@ -8,6 +8,7 @@ function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <meta name="google-site-verification" content={process.env.NEXT_PUBLIC_GOOGLE_WEBMASTER_ID} />
+        <meta name="theme-color" content="#ffffff" />
         <link rel="icon" href="/favicon/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/favicon/apple-icon.png" key="apple" />
         <link rel="icon" href="/favicon/favicon-16x16.png" sizes="16x16" key="icon16" />
