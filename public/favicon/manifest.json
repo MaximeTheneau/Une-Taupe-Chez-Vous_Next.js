@@ -1,13 +1,15 @@
 {
  "name": "Une Taupe Chez Vous",
  "short_name": "UneTaupeChezVous",
-    "start_url": "/index.html",
-    "display": "standalone",
-    "background_color": "#fff",
-    "theme_color": "#fff",
-    "description": "Taupier, piégeur proffessionnel, spécialiste de la lutte contre les taupes, fouines et ragondins.",
-    "orientation": "portrait",
-    "lang": "fr",
+   "start_url": "/index.html",
+   "display": "standalone",
+   "background_color": "#fff",
+   "theme_color": "#fff",
+   "description": "Taupier, piégeur proffessionnel, spécialiste de la lutte contre les taupes, fouines et ragondins.",
+   "orientation": "portrait",
+   "lang": "fr",
+   "prefer_related_applications": false,
+   "related_applications": [],
  "icons": [
   {
    "src": "\/android-icon-36x36.png",
