@@ -39,7 +39,7 @@ export default function pricing({ page }) {
       </Head>
       <section className={styles.page}>
         <h1>{page.title}</h1>
-        <div dangerouslySetInnerHTML={{ __html: page.contentsHTML }} />
+        <div dangerouslySetInnerHTML={{ __html: page.contents }} />
         {page.paragraphPosts.map((paragraphPosts) => (
           <>
             <h2>{paragraphPosts.subtitle}</h2>

@@ -136,12 +136,7 @@ export default function Home({
           </Link>
         </h2>
         <p>
-          Chez
-          <strong>Une Taupe Chez Vous</strong>
-          , la satisfaction de nos clients est notre plus grande récompense.
-          Découvrez ce que nos clients ont à dire sur notre service de lutte
-          antinuisible, dirigé par l&apos;expert taupier
-          piégeur, Laurent Theneau.
+          {testimonials.contents}
         </p>
         <div dangerouslySetInnerHTML={{ __html: testimonials.paragraphPosts[0].paragraph }} className="overflow-x-auto" />
         {accueil.listPosts.map((listArticle) => (

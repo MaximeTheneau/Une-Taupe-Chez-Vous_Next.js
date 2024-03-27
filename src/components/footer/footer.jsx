@@ -25,6 +25,11 @@ export default function Footer() {
               </Link>
             </li>
             <li>
+              <Link href="/Tarifs">
+                Tarifs
+              </Link>
+            </li>
+            <li>
               <Link href="/Taupier-agree-professionnel-depuis-1994">
                 Qui sommes-nous
               </Link>

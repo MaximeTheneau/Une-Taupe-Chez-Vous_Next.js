@@ -85,6 +85,11 @@ export default function SiteMapPage({
                 </Link>
               </li>
               <li>
+                <Link href="/Tarifs">
+                  Tarifs
+                </Link>
+              </li>
+              <li>
                 <Link href="/Foire-aux-questions">
                   Foire aux questions
                 </Link>
