@@ -55,6 +55,7 @@ export default function DirectoryRegistrationForm({ article }) {
     const apiPath = 'contact&directory';
     Middleware(req, apiPath, handleResponse200, handleResponseError);
   };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
@@ -171,7 +172,7 @@ export default function DirectoryRegistrationForm({ article }) {
             <option value=""> Sélectionner un annuaire</option>
             <option value="autre">Proposer un annuaire</option>
             {article.map((articleList) => (
-              <option key={articleList.id} value={articleList.id}>{articleList.title}</option>
+              <option key={articleList.id} value={articleList.name}>{articleList.title}</option>
             ))}
           </select>
           {formData.directory === 'autre' && (
