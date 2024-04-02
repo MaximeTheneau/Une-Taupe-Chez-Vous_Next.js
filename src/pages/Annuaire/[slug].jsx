@@ -57,7 +57,7 @@ export default function Slug({ post }) {
       description: descriptionInfo,
     };
   });
-
+  console.log(postsLinks[0]?.title);
   return (
     <>
       <Head>
@@ -106,7 +106,7 @@ export default function Slug({ post }) {
           {post.formattedDate}
         </p>
         <div dangerouslySetInnerHTML={{ __html: post.contentsHTML }} />
-        {!!postsLinks[0] && (
+        {postsLinks[0]?.title && (
           <div className="overflow-x-auto">
             <table>
               <thead>
