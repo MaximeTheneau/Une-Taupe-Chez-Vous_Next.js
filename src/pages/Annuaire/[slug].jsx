@@ -74,7 +74,7 @@ export default function Slug({ post }) {
         <meta property="article:modified_time" content={post.updatedAt} />
         <meta property="article:section" content={post.category.name} />
         <meta property="twitter:card" content="summary" />
-        <meta property="twitter:title" content={post.title} />
+        <meta property="twitter:title" content={post.heading} />
         <meta property="twitter:description" content={post.metaDescription} />
         <meta property="twitter:site" content="@UneTaupe_" />
         <meta property="twitter:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.imgPost}.jpg`} />
