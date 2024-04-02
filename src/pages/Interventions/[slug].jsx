@@ -29,7 +29,7 @@ export default function Slug({ post }) {
         <meta name="description" content={post.metaDescription} />
         {/* Open Graph */}
         <meta property="og:type" content="website" />
-        <meta property="og:title" content={post.title} />
+        <meta property="og:title" content={post.heading} />
         <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`} />
         <meta property="og:description" content={post.metaDescription} />
         <meta property="og:site_name" content="Une Taupe Chez Vous" />

@@ -25,7 +25,7 @@ export default function Home({ articles, page }) {
         <meta name="description" content={page.metaDescription} />
         {/* Open Graph */}
         <meta property="og:type" content="website" />
-        <meta property="og:title" content={page.title} />
+        <meta property="og:title" content={page.heading} />
         <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/${page.slug}`} />
         <meta property="og:description" content={page.metaDescription} />
         <meta property="og:site_name" content="Une Taupe Chez Vous" />

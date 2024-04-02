@@ -42,7 +42,7 @@ export default function Slug({ post, desc }) {
         <meta name="description" content={post.metaDescription} />
         {/* Open Graph */}
         <meta property="og:type" content="website" />
-        <meta property="og:title" content={post.title} />
+        <meta property="og:title" content={post.heading} />
         <meta property="og:description" content={post.metaDescription} />
         <meta property="og:site_name" content="Une Taupe Chez Vous" />
         <meta property="og:url" content={urlPost} />
@@ -53,7 +53,7 @@ export default function Slug({ post, desc }) {
         <meta property="article:modified_time" content={post.updatedAt} />
         <meta property="article:section" content={post.subcategory.name} />
         <meta property="twitter:card" content="summary" />
-        <meta property="twitter:title" content={post.title} />
+        <meta property="twitter:title" content={post.heading} />
         <meta property="twitter:description" content={post.metaDescription} />
         <meta property="twitter:site" content="@UneTaupe_" />
         <meta property="twitter:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.imgPost}.jpg`} />

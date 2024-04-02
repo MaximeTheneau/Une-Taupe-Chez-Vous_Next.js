@@ -44,7 +44,6 @@ export default function Slug({ post }) {
         info.services = `${matches[3].trim()}`;
       }
     }
-
     return info;
   }
 
@@ -64,7 +63,7 @@ export default function Slug({ post }) {
         <meta name="description" content={post.metaDescription} />
         {/* Open Graph */}
         <meta property="og:type" content="website" />
-        <meta property="og:title" content={post.title} />
+        <meta property="og:title" content={post.heading} />
         <meta property="og:description" content={post.metaDescription} />
         <meta property="og:site_name" content="Une Taupe Chez Vous" />
         <meta property="og:url" content={urlPost} />
