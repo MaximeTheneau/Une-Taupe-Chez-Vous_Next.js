@@ -21,7 +21,7 @@ const principal = localFont({
 });
 export default function Layout({ children }) {
   return (
-    <div className={` ${principal.className} ${title.className}`}>
+    <div className={` ${principal.className} ${title.variable} font`}>
       <header>
         <Navbar />
       </header>
