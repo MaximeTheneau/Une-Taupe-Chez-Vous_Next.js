@@ -57,7 +57,6 @@ export default function Slug({ post }) {
       description: descriptionInfo,
     };
   });
-  console.log(postsLinks[0]?.title);
   return (
     <>
       <Head>
