@@ -15,12 +15,13 @@ export default function LocalBusinessJsonLd({ descriptionMeta }) {
       'https://twitter.com/UneTaupe_',
       'https://www.linkedin.com/company/une-taupe-chez-vous',
     ],
+    priceRange: '€ - €€',
     address: {
       '@type': 'PostalAddress',
       streetAddress: '71 rue Marie Curie',
       addressLocality: 'Garrenne Sur Eure',
       postalCode: '27780',
-      addressCountry: 'France',
+      addressCountry: 'FR',
     },
   };
 
