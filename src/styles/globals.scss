@@ -4,21 +4,20 @@
 @import './variables.scss';
 @import './fonts.scss';
 
-:focus {
-  outline: red solid 5px !important;
-}   
-
 html,
 body {
+  font-family: var(--font-principal);
   padding: 0;
   margin: 0;
-  font-family: 'fontGeneral';
   font-size: $font-size;
   white-space: pre-line;
   overflow-x: hidden ; 
 }
+div{
+  font-family: var(--font-principal);
+}
 h1,h2,h3,h4,h5,h6{
-  font-family: 'fontTitle', sans-serif;
+  font-family: var(--font-title);
   margin: 1rem 0;
   color: $font-color;
   width: 100%;
