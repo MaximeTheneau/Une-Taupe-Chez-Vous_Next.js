@@ -4,7 +4,9 @@
 @import './variables.scss';
 @import './fonts.scss';
 
-* {
+header,
+main,
+footer{
   font-family: var(--font-principal);
   font-size: $font-size;
 }
