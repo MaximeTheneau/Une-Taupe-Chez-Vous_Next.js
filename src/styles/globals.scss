@@ -4,14 +4,9 @@
 @import './variables.scss';
 @import './fonts.scss';
 
-html,
-body {
+* {
   font-family: var(--font-principal);
-  padding: 0;
-  margin: 0;
   font-size: $font-size;
-  white-space: pre-line;
-  overflow-x: hidden ; 
 }
 
 h1,h2,h3,h4,h5,h6{

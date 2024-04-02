@@ -21,16 +21,16 @@ const principal = localFont({
 });
 export default function Layout({ children }) {
   return (
-    <>
+    <div className={` ${principal.variable} ${title.variable}`}>
       <header>
         <Navbar />
       </header>
-      <main className={` ${principal.variable} ${title.variable}`}>
+      <main>
         {children}
       </main>
       <footer>
         <Footer />
       </footer>
-    </>
+    </div>
   );
 }
