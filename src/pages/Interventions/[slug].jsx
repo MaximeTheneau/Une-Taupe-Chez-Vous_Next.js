@@ -37,7 +37,7 @@ export default function Slug({ post }) {
         <meta property="og:image:width" content={post.imgWidth} />
         <meta property="og:image:height" content={post.imgHeight} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={post.title} />
+        <meta name="twitter:title" content={post.heading} />
         <meta name="twitter:description" content={post.metaDescription} />
         <meta name="twitter:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.imgPost}.jpg`} />
         <link

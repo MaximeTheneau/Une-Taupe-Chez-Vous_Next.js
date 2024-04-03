@@ -5,10 +5,14 @@
 @import './fonts.scss';
 
 
-h1,h2,h3,h4,h5,h6{
-  font-family: var(--font-title);
-  margin: 1rem 0;
+body{
+  font-family: 'fontGeneral', cursive;
   color: $font-color;
+  font-size: $font-size;
+}
+h1,h2,h3,h4,h5,h6{
+  font-family: 'fontTitle', cursive;
+  margin: 1rem 0;
   width: 100%;
   display: inline-block;
 }

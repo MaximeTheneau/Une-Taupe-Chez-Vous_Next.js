@@ -38,7 +38,7 @@ export default function Home({
         <title>{accueil.heading}</title>
         <meta name="description" content={accueil.metaDescription} />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content={accueil.title} />
+        <meta property="og:title" content={accueil.heading} />
         <meta property="og:description" content={accueil.metaDescription} />
         <meta property="og:url" content={process.env.NEXT_PUBLIC_URL} />
         <meta property="og:site_name" content="Une Taupe Chez Vous" />
@@ -46,7 +46,7 @@ export default function Home({
         <meta property="og:image:width" content={accueil.imgWidth} />
         <meta property="og:image:height" content={accueil.imgHeight} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={accueil.title} />
+        <meta name="twitter:title" content={accueil.heading} />
         <meta name="twitter:description" content={accueil.metaDescription} />
         <meta name="twitter:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/Accueil.jpg`} />
         <link
