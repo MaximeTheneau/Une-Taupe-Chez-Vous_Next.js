@@ -1,7 +1,7 @@
 import Head from 'next/head';
-import { GoogleAnalytics } from '@next/third-parties/google';
 import Layout from '../components/layout';
 import '../styles/globals.scss';
+import CookiesModal from '../components/modal/cookies/Cookies';
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -16,8 +16,7 @@ function MyApp({ Component, pageProps }) {
         <link rel="icon" href="/favicon/favicon-96x96.png" sizes="96x96" key="icon96" />
         <link rel="manifest" href="/favicon/manifest.json" />
       </Head>
-      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID} />
-      {/* <CookiesModal /> */}
+      <CookiesModal />
       <Layout {...pageProps}>
         <Component {...pageProps} />
       </Layout>

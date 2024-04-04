@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { GoogleTagManager } from '@next/third-parties/google';
+import Script from 'next/script';
 import style from '../Modal.module.scss';
 import CookieChoice from './CookieChoice';
 
@@ -8,7 +8,7 @@ export default function CookiesModal() {
   const [state, setState] = useState({
     cookiesGoogle: false,
     cookiesWebmaster: false,
-    cookiesChoice: '',
+    cookiesChoice: true,
     cookiesAll: '',
   });
 
@@ -20,15 +20,6 @@ export default function CookiesModal() {
         window.localStorage.setItem('cookiesModal', true);
       }, 1000);
     }
-
-    const cookiesGoogleParam = window.localStorage.getItem('cookiesGoogle');
-
-    if (cookiesGoogleParam) {
-      setState((prevState) => ({
-        ...prevState,
-        cookiesGoogle: cookiesGoogleParam === 'true',
-      }));
-    }
   }, []);
 
   const toggleCookies = (field, value) => {
@@ -39,10 +30,15 @@ export default function CookiesModal() {
     window.localStorage.setItem(field, value);
   };
   const handleAcceptCookies = () => {
+    // allConsentGranted();
+
     setCookiesModal(false);
+    setState({
+      ...state, cookiesAll: true, cookiesGoogle: true,
+    });
 
     window.localStorage.setItem('cookiesModal', cookiesModal);
-    window.localStorage.setItem('cookiesGoogle', state.cookiesGoogle);
+    window.localStorage.setItem('cookiesGoogle', true);
   };
 
   // const handleRefuseCookies = () => {
@@ -50,16 +46,54 @@ export default function CookiesModal() {
   //   window.localStorage.setItem('cookiesModal', cookiesModal);
   //   window.localStorage.setItem('cookiesGoogle', false);
   // };
-
   return (
     <>
-      {state.cookiesGoogle && (
-        <GoogleTagManager gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID} />
+      <Script
+        strategy="afterInteractive"
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
+      />
+      {!state.cookiesGoogle ? (
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('consent', 'update', {
+          'analytics_storage': 'denied'
+        });
+        gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}', {
+          page_path: window.location.pathname
+        });
+      `,
+          }}
+        />
+      ) : (
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('consent', 'update', {
+          'analytics_storage': 'granted'
+        });
+        gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}', {
+          page_path: window.location.pathname
+        });
+      `,
+          }}
+        />
       )}
+
       {cookiesModal && (
       <div className={`modal ${style.cookies__modal}`}>
         <div className={style.cookies}>
-          {state.cookiesChoice ? (
+          {!state.cookiesChoice ? (
             <div className={`card ${style.cookies__choice}`}>
               <h2>Les cookies</h2>
               <p>
@@ -109,18 +143,17 @@ export default function CookiesModal() {
               <p>On aimerait bien vous accompagner pendant votre visite...</p>
               <p>...mais on a besoin de votre accord pour ça !</p>
               <div className={style.cookies__button}>
-                <button type="button" className="button-glass" onClick={() => setState({ ...state, cookiesChoice: true })}>
+                <button
+                  type="button"
+                  className="button-glass"
+                  onClick={() => setState({ ...state, cookiesChoice: false })}
+                >
                   Je choisis
                 </button>
                 <button
                   type="button"
                   className="button-glass"
-                  onClick={() => {
-                    window.localStorage.setItem('cookiesModal', false);
-                    setState({ ...state, cookiesChoice: true });
-                    setCookiesModal(false);
-                    window.localStorage.setItem('cookiesGoogle', true);
-                  }}
+                  onClick={handleAcceptCookies}
                 >
                   Ok pour moi
                 </button>
