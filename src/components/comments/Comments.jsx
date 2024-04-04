@@ -26,6 +26,7 @@ export default function Comments({ posts }) {
       body: JSON.stringify({
         email: e.target.value,
       }),
+      credentials: 'include',
 
     })
       .then(async (response) => {
