@@ -6,13 +6,17 @@ import CookieChoice from './CookieChoice';
 export default function CookiesModal() {
   const [cookiesModal, setCookiesModal] = useState(null);
   const [state, setState] = useState({
-    cookiesGoogle: false,
-    cookiesWebmaster: false,
-    cookiesChoice: true,
+    cookiesGoogle: '',
+    cookiesWebmaster: '',
+    cookiesChoice: '',
     cookiesAll: '',
   });
 
   useEffect(() => {
+    setState({
+      ...state,
+      cookiesGoogle: window.localStorage.getItem('cookiesGoogle'),
+    });
     const cookiesModalParam = window.localStorage.getItem('cookiesModal');
     if (cookiesModalParam === null) {
       setTimeout(() => {
@@ -30,15 +34,13 @@ export default function CookiesModal() {
     window.localStorage.setItem(field, value);
   };
   const handleAcceptCookies = () => {
-    // allConsentGranted();
-
-    setCookiesModal(false);
+    window.localStorage.setItem('cookiesGoogle', true);
+    window.localStorage.setItem('cookiesModal', cookiesModal);
     setState({
       ...state, cookiesAll: true, cookiesGoogle: true,
     });
 
-    window.localStorage.setItem('cookiesModal', cookiesModal);
-    window.localStorage.setItem('cookiesGoogle', true);
+    setCookiesModal(false);
   };
 
   // const handleRefuseCookies = () => {
@@ -46,49 +48,35 @@ export default function CookiesModal() {
   //   window.localStorage.setItem('cookiesModal', cookiesModal);
   //   window.localStorage.setItem('cookiesGoogle', false);
   // };
+
   return (
     <>
       <Script
+        async
         strategy="afterInteractive"
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
+        id={state.cookiesGoogle ? 'granted' : 'denied'}
       />
-      {!state.cookiesGoogle ? (
-        <Script
-          id="google-analytics"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('consent', 'update', {
-          'analytics_storage': 'denied'
-        });
-        gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}', {
-          page_path: window.location.pathname
-        });
-      `,
-          }}
-        />
-      ) : (
-        <Script
-          id="google-analytics"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('consent', 'update', {
-          'analytics_storage': 'granted'
-        });
-        gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}', {
-          page_path: window.location.pathname
-        });
-      `,
-          }}
-        />
-      )}
+
+      <Script
+        id="google-analytics"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}');
+              gtag('consent', 'default', {
+                'ad_storage': 'denied',
+                'ad_user_data': 'denied',
+                'ad_personalization': 'denied',
+                'analytics_storage': '${state.cookiesGoogle ? 'granted' : 'denied'}'
+              });
+              
+            `,
+        }}
+      />
 
       {cookiesModal && (
       <div className={`modal ${style.cookies__modal}`}>
