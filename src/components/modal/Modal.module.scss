@@ -62,12 +62,12 @@
 }
 .cookies{
     position: fixed;
-    padding: 1rem 0 2rem;
+    z-index: 1;
+    padding: 1rem 2rem;
     bottom: 0;
     width: 100%;
     background-color: $color-primary;
-    z-index: 2;
-    line-height: 3rem;
+    border-top: 0.5rem solid $font-color-light;
     &__choice{
         width: $width-desktop;
         margin: auto;
@@ -76,34 +76,16 @@
             flex-direction: row;
             justify-content: space-evenly;
             font-weight: 900;
-            margin: 0 0 1rem 0;
             & i{
-                font-size: 2.5rem;
                 cursor: pointer;
                 text-shadow: $text-shadow-black;
             }
         }
-        & button{
-            width: 100%;
-            font-size: $font-size-large;
-            padding: 1rem 2rem;
-            margin: 0 0 1rem 0;
-            transition: all 0.3s easer-in-out; 
-            &:hover{
-                background-color: $color-primary;
-                transform: scale(1.05);
-            }
-        }
-
     }
 
     & h2{
         margin: 0;
         padding: 0;
-    }
-    & span{
-        font-size: 2.8rem;
-        display: block;
     }
     &__button{
         display: flex;
@@ -111,15 +93,8 @@
         justify-content: center;
         & button{
             margin: 1rem ;        
-            border-radius: $border-radius;
-            border: none;
-            font-size: 1.5rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-            &:hover{
-                transform: scale(1.02);
-            }
+            padding: 1rem;
+            font-size: $font-size-small;
         }
     }
 }

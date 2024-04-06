@@ -17,6 +17,10 @@
   transition: all 0.3s ease-in-out;
   position: relative;
   width: 50%;
+  &--grey{
+    background: $color-grey;
+    
+  }
   & i{
     margin: 0 0 0 1rem;
     font-size: 1.2rem;
