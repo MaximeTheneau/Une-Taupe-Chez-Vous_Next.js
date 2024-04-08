@@ -12,11 +12,7 @@ export default function CookiesModal() {
   });
 
   useEffect(() => {
-    setTimeout(() => {
-      if (window.localStorage.getItem('cookiesModal') === null && cookiesModal === null) {
-        setCookiesModal(false);
-      }
-
+    const loadGoogleTagManagerScript = () => {
       const scriptInit = document.createElement('script');
       scriptInit.src = `https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`;
       scriptInit.async = true;
@@ -37,13 +33,13 @@ export default function CookiesModal() {
         analytics_storage: 'denied',
       };
       const scriptCode = `
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('consent', 'update', ${JSON.stringify(consentSettings)});
-          gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}', {
-            page_path: window.location.pathname
-          });
-          gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('consent', 'update', ${JSON.stringify(consentSettings)});
+        gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}', {
+          page_path: window.location.pathname
+        });
+        gtag('js', new Date());
       `;
       script.textContent = scriptCode;
 
@@ -54,7 +50,20 @@ export default function CookiesModal() {
         document.head.removeChild(scriptInit);
         document.head.removeChild(script);
       };
+    };
+
+    const checkCookiesModal = () => {
+      if (window.localStorage.getItem('cookiesModal') === null && cookiesModal === null) {
+        setCookiesModal(false);
+      }
+    };
+
+    const timeoutId = setTimeout(() => {
+      loadGoogleTagManagerScript();
+      checkCookiesModal();
     }, 1000);
+
+    return () => clearTimeout(timeoutId);
   }, [state.cookiesGoogle, cookiesModal]);
 
   const toggleCookies = (field, value) => {
@@ -108,7 +117,14 @@ export default function CookiesModal() {
           <div className={style.cookies__close}>
             <button
               type="button"
-              onClick={() => setCookiesModal(false)}
+              onClick={() => {
+                if (state.cookiesGoogle) {
+                  setCookiesModal(true);
+                  window.localStorage.setItem('cookiesModal', true);
+                } else {
+                  setCookiesModal(true);
+                }
+              }}
               className="button"
             >
               Soumettre les préférences
