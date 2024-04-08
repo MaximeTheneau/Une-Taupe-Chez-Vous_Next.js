@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import style from '../Modal.module.scss';
 import CookieChoice from './CookieChoice';
 
@@ -12,54 +12,56 @@ export default function CookiesModal() {
   });
 
   const checkCookiesModal = () => {
-    if (window.localStorage.getItem('cookiesModal') === null && cookiesModal === null) {
+    if (typeof window !== 'undefined' && window.localStorage.getItem('cookiesModal') === null && cookiesModal === null) {
       setCookiesModal(false);
     }
   };
 
-  setTimeout(() => {
-    checkCookiesModal();
-    const scriptInit = document.createElement('script');
-    scriptInit.src = `https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`;
-    scriptInit.async = true;
-    scriptInit.id = 'google-analytics-init';
+  useEffect(() => {
+    setTimeout(() => {
+      checkCookiesModal();
+      const scriptInit = document.createElement('script');
+      scriptInit.src = `https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`;
+      scriptInit.async = true;
+      scriptInit.id = 'google-analytics-init';
 
-    const script = document.createElement('script');
-    script.id = 'google-analytics';
+      const script = document.createElement('script');
+      script.id = 'google-analytics';
 
-    const cookiesGoogleValue = window.localStorage.getItem('cookiesGoogle');
-    const consentSettings = cookiesGoogleValue ? {
-      ad_storage: 'granted',
-      ad_user_data: 'granted',
-      ad_personalization: 'granted',
-      analytics_storage: 'granted',
-    } : {
-      ad_storage: 'denied',
-      ad_user_data: 'denied',
-      ad_personalization: 'denied',
-      analytics_storage: 'denied',
-    };
-    const scriptCode = `
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('consent', 'update', ${JSON.stringify(consentSettings)});
-      gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}', {
-        page_path: window.location.pathname
-      });
-      gtag('js', new Date());
-    `;
-    script.textContent = scriptCode;
-    const existingScript = document.getElementById('google-analytics');
-    const existingScriptInit = document.getElementById('google-analytics-init');
-    if (existingScriptInit) {
-      document.head.removeChild(existingScriptInit);
-    }
-    if (existingScript) {
-      document.head.removeChild(existingScript);
-    }
-    document.head.appendChild(scriptInit);
-    document.head.appendChild(script);
-  }, 5000);
+      const cookiesGoogleValue = window.localStorage.getItem('cookiesGoogle');
+      const consentSettings = cookiesGoogleValue ? {
+        ad_storage: 'granted',
+        ad_user_data: 'granted',
+        ad_personalization: 'granted',
+        analytics_storage: 'granted',
+      } : {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+      };
+      const scriptCode = `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('consent', 'update', ${JSON.stringify(consentSettings)});
+        gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}', {
+          page_path: window.location.pathname
+        });
+        gtag('js', new Date());
+      `;
+      script.textContent = scriptCode;
+      const existingScript = document.getElementById('google-analytics');
+      const existingScriptInit = document.getElementById('google-analytics-init');
+      if (existingScriptInit) {
+        document.head.removeChild(existingScriptInit);
+      }
+      if (existingScript) {
+        document.head.removeChild(existingScript);
+      }
+      document.head.appendChild(scriptInit);
+      document.head.appendChild(script);
+    }, 5000);
+  }, [cookiesModal]);
 
   const toggleCookies = (field, value) => {
     setState((prevState) => ({
