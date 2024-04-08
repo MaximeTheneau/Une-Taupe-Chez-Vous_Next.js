@@ -11,60 +11,55 @@ export default function CookiesModal() {
     cookiesAll: false,
   });
 
-  useEffect(() => {
-    const loadGoogleTagManagerScript = () => {
-      const scriptInit = document.createElement('script');
-      scriptInit.src = `https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`;
-      scriptInit.async = true;
+  const checkCookiesModal = () => {
+    if (window.localStorage.getItem('cookiesModal') === null && cookiesModal === null) {
+      setCookiesModal(false);
+    }
+  };
 
-      const script = document.createElement('script');
-      script.id = 'google-analytics';
+  setTimeout(() => {
+    checkCookiesModal();
+    const scriptInit = document.createElement('script');
+    scriptInit.src = `https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`;
+    scriptInit.async = true;
+    scriptInit.id = 'google-analytics-init';
 
-      const cookiesGoogleValue = window.localStorage.getItem('cookiesGoogle');
-      const consentSettings = cookiesGoogleValue ? {
-        ad_storage: 'granted',
-        ad_user_data: 'granted',
-        ad_personalization: 'granted',
-        analytics_storage: 'granted',
-      } : {
-        ad_storage: 'denied',
-        ad_user_data: 'denied',
-        ad_personalization: 'denied',
-        analytics_storage: 'denied',
-      };
-      const scriptCode = `
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('consent', 'update', ${JSON.stringify(consentSettings)});
-        gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}', {
-          page_path: window.location.pathname
-        });
-        gtag('js', new Date());
-      `;
-      script.textContent = scriptCode;
+    const script = document.createElement('script');
+    script.id = 'google-analytics';
 
-      document.head.appendChild(scriptInit);
-      document.head.appendChild(script);
-
-      return () => {
-        document.head.removeChild(scriptInit);
-        document.head.removeChild(script);
-      };
+    const cookiesGoogleValue = window.localStorage.getItem('cookiesGoogle');
+    const consentSettings = cookiesGoogleValue ? {
+      ad_storage: 'granted',
+      ad_user_data: 'granted',
+      ad_personalization: 'granted',
+      analytics_storage: 'granted',
+    } : {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
     };
-
-    const checkCookiesModal = () => {
-      if (window.localStorage.getItem('cookiesModal') === null && cookiesModal === null) {
-        setCookiesModal(false);
-      }
-    };
-
-    const timeoutId = setTimeout(() => {
-      loadGoogleTagManagerScript();
-      checkCookiesModal();
-    }, 5000);
-
-    return () => clearTimeout(timeoutId);
-  }, []);
+    const scriptCode = `
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'update', ${JSON.stringify(consentSettings)});
+      gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}', {
+        page_path: window.location.pathname
+      });
+      gtag('js', new Date());
+    `;
+    script.textContent = scriptCode;
+    const existingScript = document.getElementById('google-analytics');
+    const existingScriptInit = document.getElementById('google-analytics-init');
+    if (existingScriptInit) {
+      document.head.removeChild(existingScriptInit);
+    }
+    if (existingScript) {
+      document.head.removeChild(existingScript);
+    }
+    document.head.appendChild(scriptInit);
+    document.head.appendChild(script);
+  }, 5000);
 
   const toggleCookies = (field, value) => {
     setState((prevState) => ({
