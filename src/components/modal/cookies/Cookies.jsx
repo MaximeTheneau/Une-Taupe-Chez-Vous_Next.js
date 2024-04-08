@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import style from '../Modal.module.scss';
 import CookieChoice from './CookieChoice';
 
