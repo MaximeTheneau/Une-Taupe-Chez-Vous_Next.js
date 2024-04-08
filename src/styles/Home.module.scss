@@ -23,18 +23,11 @@
       padding: 1rem;
       &--paragraph {
       }
-      & h1, div, button{
-        
-      }
       & h1{
         font-size: calc(1rem + ((4vw - 0.48rem) * 1.3889));
         margin: 0 0 1rem 0;
       }
-
     }
-    
-    
-
   }
   &__list{
     list-style: disc;
@@ -47,7 +40,6 @@
         object-fit: cover;
       }
     }
-    
     & h2 {
     width: 100%;
   }
