@@ -64,7 +64,7 @@ export default function CookiesModal() {
     }, 1000);
 
     return () => clearTimeout(timeoutId);
-  }, [state.cookiesGoogle, cookiesModal]);
+  }, []);
 
   const toggleCookies = (field, value) => {
     setState((prevState) => ({
