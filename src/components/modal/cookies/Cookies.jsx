@@ -61,7 +61,7 @@ export default function CookiesModal() {
     const timeoutId = setTimeout(() => {
       loadGoogleTagManagerScript();
       checkCookiesModal();
-    }, 1000);
+    }, 5000);
 
     return () => clearTimeout(timeoutId);
   }, []);
