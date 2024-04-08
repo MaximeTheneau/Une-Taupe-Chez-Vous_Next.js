@@ -63,50 +63,65 @@
 .cookies{
     position: fixed;
     z-index: 1;
-    padding: 1rem 2rem;
+    padding: 0 1rem 1rem 1rem;
     bottom: 0;
     width: 100%;
     background-color: $color-primary;
-    border-top: 0.5rem solid $font-color-light;
+    border-top: 0.2rem solid $font-color-light;
     &__choice{
         width: $width-desktop;
         margin: auto;
         &__table{
+            font-size: $font-size-small;
             width: 100%;
             flex-direction: row;
             justify-content: space-evenly;
             font-weight: 900;
             & i{
                 cursor: pointer;
+                font-size: $font-size-small;
+                
                 text-shadow: $text-shadow-black;
             }
         }
     }
-
-    & h2{
-        margin: 0;
-        padding: 0;
+    & h2,
+    & p{
+        font-size: $font-size-small;
+        text-align: center;
     }
+    
     &__button{
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        & button{
-            margin: 1rem ;        
-            padding: 1rem;
-            font-size: $font-size-small;
-        }
+        width: 100%;
+    }
+    & button{
+        width: 20%;
+        margin: 0.5rem 1rem 0 0rem;        
+        padding: 0.5rem;
+        font-size: $font-size-small;
     }
 }
 
 
-@media screen and (min-width: 720px){
+@media screen and (max-width: 720px){
     .cookies{
         &__choice{
             width: $width-desktop;
         }
+        &__button{
+            & button{
+                width: 100%;
+                font-size: 0.5rem;
+            }
+        }
+        & h2,
         & p{
-            font-size: $font-size-small;
+            font-size: 0.5rem;
+            padding: 0;
+            margin: 0;
         }
     }
 }
