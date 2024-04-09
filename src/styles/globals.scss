@@ -6,12 +6,12 @@
 
 
 body{
-  font-family: 'fontGeneral', cursive;
+  font-family: 'fontGeneral', sans-serif;
   color: $font-color;
   font-size: $font-size;
 }
 h1,h2,h3,h4,h5,h6{
-  font-family: 'fontTitle', cursive;
+  font-family: 'fontTitle', sans-serif;
   margin: 1rem 0;
   width: 100%;
   display: inline-block;
@@ -39,7 +39,7 @@ em {
 }
 img{
   background: $color-primary;
-  width: 100%;
+  max-width: 100%;
   height: auto;
   display: block;
 }
