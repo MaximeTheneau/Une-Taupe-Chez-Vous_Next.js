@@ -65,7 +65,7 @@ export default function Home({
         <div className={styles.home__imagesFull__text}>
           <div className={styles.home__imagesFull__image}>
             <Image
-              src="Accueil"
+              src="Accueil.webp"
               alt={accueil.altImg || accueil.title}
               width={accueil.imgWidth}
               height={accueil.imgHeight}
