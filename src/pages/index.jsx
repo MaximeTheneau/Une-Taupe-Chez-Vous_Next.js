@@ -8,6 +8,7 @@ import LocalBusinessJsonLd from '../components/jsonLd/LocalBusinessJsonLd';
 import SearchJsonLd from '../components/jsonLd/SearchJsonLd';
 import LogoJsonLd from '../components/jsonLd/LogoJsonLd';
 import DevisButton from '../components/button/DevisButton';
+import ImageLoader from '../components/image/ImageLoader';
 
 export async function getStaticProps() {
   const accueil = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Accueil`);
@@ -64,7 +65,7 @@ export default function Home({
       <div className={styles.home__imagesFull}>
         <div className={styles.home__imagesFull__text}>
           <div className={styles.home__imagesFull__image}>
-            <Image
+            <ImageLoader
               src="Accueil.webp"
               alt={accueil.altImg || accueil.title}
               width={accueil.imgWidth}

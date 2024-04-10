@@ -154,7 +154,7 @@ select{
 .caption{
   color: $font-color-light;
   font-size: $font-size-small;
-  margin-bottom: 1rem;
+  margin: 1rem 0 0 0;
   width: 100%;
 }
 
@@ -218,6 +218,10 @@ iframe {
 .block{
   display: block;
   animation: opacity 0.5s ease 0s;
+}
+
+.overflow-hidden{
+  overflow: hidden;
 }
 
 @keyframes opacity{
