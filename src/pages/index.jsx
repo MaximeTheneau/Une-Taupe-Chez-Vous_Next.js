@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
+import { CldImage } from 'next-cloudinary';
 import Cards from '../components/cards/cards';
 import styles from '../styles/Home.module.scss';
 import fetcher from '../utils/fetcher';
@@ -28,7 +29,6 @@ export async function getStaticProps() {
     },
   };
 }
-
 export default function Home({
   accueil, services, articles, testimonials, keyword,
 }) {
@@ -66,14 +66,11 @@ export default function Home({
         <div className={styles.home__imagesFull__text}>
           <div className={styles.home__imagesFull__image}>
             <Image
-              src="Accueil.webp"
+              src="Accueil"
               alt={accueil.altImg || accueil.title}
               width={accueil.imgWidth}
               height={accueil.imgHeight}
-              sizes="(max-width: 640px) 100vw,
-                  (max-width: 1280px) 50vw,
-                  (max-width: 1536px) 33vw,
-                  25vw"
+              sizes="(max-width: 1000px) 100vw, 1000px"
               priority
             />
           </div>

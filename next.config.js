@@ -12,7 +12,6 @@ module.exports = {
   images: {
     loader: 'custom',
     loaderFile: './src/utils/imageLoaderFull.jsx',
-    deviceSizes: [640, 750, 828, 1080],
     formats: ['image/webp'],
     remotePatterns: [
       {
@@ -22,6 +21,5 @@ module.exports = {
         port: '',
       },
     ],
-
   },
 };
