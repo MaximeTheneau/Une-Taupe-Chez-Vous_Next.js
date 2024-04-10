@@ -11,16 +11,10 @@ export default function CookiesModal() {
     cookiesAll: false,
   });
 
-  const checkCookiesModal = () => {
-    if (typeof window !== 'undefined' && window.localStorage.getItem('cookiesModal') === null && cookiesModal === null) {
-      setCookiesModal(false);
-    }
-  };
-
   useEffect(() => {
     setTimeout(() => {
-      checkCookiesModal();
-      if (cookiesModal === null) {
+      if (!cookiesModal && !window.localStorage.getItem('cookiesModal')) {
+        setCookiesModal(false);
         document.body.classList.add('overflow-hidden');
         const scriptInit = document.createElement('script');
         scriptInit.src = `https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`;
@@ -85,7 +79,6 @@ export default function CookiesModal() {
   const handleRefuseCookies = () => {
     setCookiesModal(null);
     document.body.classList.remove('overflow-hidden');
-    window.localStorage.setItem('cookiesModal', false);
     window.localStorage.setItem('cookiesGoogle', false);
   };
 
