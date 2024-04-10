@@ -7,7 +7,12 @@ function imageLoaderFull({ src, width, quality }) {
 }
 
 export default function ImageLoader({
-  src, alt, width, height, quality, priority,
+  src,
+  width,
+  quality,
+  // alt,
+  // height,
+  // priority,
 }) {
   const [loaded, setLoaded] = useState(false);
 

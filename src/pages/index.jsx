@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
-import { CldImage } from 'next-cloudinary';
 import Cards from '../components/cards/cards';
 import styles from '../styles/Home.module.scss';
 import fetcher from '../utils/fetcher';
