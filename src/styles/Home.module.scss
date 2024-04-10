@@ -1,14 +1,6 @@
 @import './variables.scss';
 
-
 .home{
-  & h2{
-    font-size: calc(1rem + ((2vw - 0.48rem) * 1.3889));
-    margin: 1rem 0;
-  }
-  & h3{
-    margin: 1rem 0;
-  }
   &__imagesFull{
     background: $color-primary;
     &__image{
@@ -21,12 +13,6 @@
       flex-direction: column;
       align-items: center;
       padding: 1rem;
-      &--paragraph {
-      }
-      & h1{
-        font-size: calc(1rem + ((4vw - 0.48rem) * 1.3889));
-        margin: 0 0 1rem 0;
-      }
     }
   }
   &__list{
@@ -50,7 +36,6 @@
     margin: 1rem auto;
     width: 90%;
     & h2{
-      font-size: calc(70% + 3vw);
       margin: 1rem 0;
     }
     & h3{
@@ -75,16 +60,15 @@
   &__category{
     margin: 1rem 0;
     &__title{
-      padding: 1rem;
-      & h2{
-        font-size: calc(70% + 2vw);
-      }
       & a{
         display: flex;
         justify-content: space-between;
         align-items: center;
         &:hover{
           color: $font-color;
+        }
+        & span {
+          white-space: nowrap;
         }
         
       }

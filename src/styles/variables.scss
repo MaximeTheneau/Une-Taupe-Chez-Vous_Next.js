@@ -20,7 +20,7 @@ $color-link: #0051AD;;
 
 /*--Fonts--*/
 $font-color: #0b0c0e;
-$font-color-opacity: #d5d2caa1;
+$font-color-opacity: #ffffff73;
 $font-color-light: #666769;
 
 
@@ -28,12 +28,13 @@ $font-primary: var(--font-principal);
 $font-secondary: var(--font-title);
 $font-size: 1rem;
 $font-size-small: 0.825rem;
-$font-size-large: 1.8rem;
+$font-size-large: calc(1rem + ((4vw - 0.48rem) * 1.3889));
 $font-size-medium: 1.2rem;
 $font-size-bold: 900;
 
 /*--Borders--*/
 $border-radius: 0.2rem;
+$border-radius-img: 0.5rem;
 $border: $font-color-opacity 1px solid;
 /*--Margins--*/
 $width-general: 90%;
@@ -46,6 +47,22 @@ $width-desktop: 94%;
 $paddin-card: 0.2rem;
 
 /*--Shadow--*/
-$text-shadow-white: 0 10px 20px rgba(160, 160, 160, 0.459);
-$text-shadow-black: 0 4px 30px rgba(0, 0, 0, 0.18);
+$text-shadow-white: -1px 0 $font-color, 0 1px $font-color,
+1px 0 $font-color, 0 -1px $font-color;
+$text-shadow-black: -1px 0 $color-white-opacity, 0 1px $color-white-opacity,
+1px 0 $color-white-opacity, 0 -1px $color-white-opacity;
 $box-shadow: 0 10px 20px rgba(160, 160, 160, 0.459);
+
+
+/*--Media Queries--*/
+@media screen and (min-width: 640px){
+    $font-size: 1.2rem;
+    $font-size-small: 1rem;
+    $font-size-large: 2rem;
+    $font-size-medium: 1.4rem;
+    $width-general: 84%;
+    $width-general-720: 80%;
+    $width-responsive: 96%;
+    $width-desktop: 90%;
+    
+}

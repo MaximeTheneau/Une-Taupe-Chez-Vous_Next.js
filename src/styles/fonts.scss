@@ -2,7 +2,7 @@
     font-family: 'fontTitle';
     src: url('/font/title/title.woff2') format('woff2'),
     url('/font/title/title.ttf') format('truetype');
-    font-display: optional;
+    font-display: swap;
     font-style: normal;
     line-height: 5;
   }
@@ -12,8 +12,9 @@
     src: url('/font/principal/principal.woff2') format('woff2'),
         url('/font/principal/principal.woff') format('woff'),
         url('/font/principal/principal.ttf') format('truetype');
-        font-weight: normal;
-        line-height: 5;
-        font-style: normal;
+    font-weight: normal;
+    line-height: 5;
+    font-style: normal;
+    font-display: swap;
 
   }
