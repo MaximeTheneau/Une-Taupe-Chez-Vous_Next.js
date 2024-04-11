@@ -14,20 +14,17 @@ export default function ImageLoader({
   height,
   priority,
 }) {
-  const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(true);
 
   const imageSizes = [320, 640, 750, 828, 1080, 1200, 1920, 2048, 3840];
 
-  // Construire l'URL de la dernière image
   const lastImageSrc = imageLoaderFull({ src, width, quality });
 
-  // Construire srcset pour toutes les tailles d'images
   const srcsetString = imageSizes
     .filter((size) => size <= width)
     .map((size) => `${imageLoaderFull({ src, width: size, quality })} ${size}w`)
     .join(', ');
 
-  // Ajouter la dernière image à srcset
   const srcsetWithLastImage = `${srcsetString}, ${lastImageSrc} ${width}w`;
 
   useEffect(() => {
@@ -37,30 +34,28 @@ export default function ImageLoader({
     link.imageSrcset = srcsetWithLastImage;
     document.head.appendChild(link);
 
-    const img = new Image();
-    img.src = lastImageSrc;
-    img.onload = () => {
-      setLoaded(true);
-    };
     return () => {
-      img.onload = null;
       document.head.removeChild(link);
     };
   }, []);
 
+  const handleImageLoaded = () => {
+    setLoaded(true);
+  };
+
   return (
-    <>
-      {!loaded && <div className="loader">Loading...</div>}
-      <img
-        alt={alt}
-        src={lastImageSrc}
-        height={height}
-        width={width}
-        srcSet={srcsetWithLastImage}
-        loading={(priority ? 'eager' : 'lazy')}
-        fetchpriority={priority ? 'hight' : 'low'}
-        sizes={`(max-width: ${width}px) 100vw, ${width}px`}
-      />
-    </>
+    <img
+      alt={alt}
+      src={lastImageSrc}
+      height={height}
+      width={width}
+      srcSet={srcsetWithLastImage}
+      loading={(priority ? 'eager' : 'lazy')}
+      fetchpriority={priority ? 'hight' : 'low'}
+      decoding="async"
+      sizes={`(max-width: ${width}px) 100vw, ${width}px`}
+      onLoad={handleImageLoaded}
+      style={{ opacity: loaded ? 1 : 0, transition: 'opacity 0.5s' }}
+    />
   );
 }
