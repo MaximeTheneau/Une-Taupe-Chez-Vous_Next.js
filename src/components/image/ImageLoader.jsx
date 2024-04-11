@@ -10,13 +10,13 @@ export default function ImageLoader({
   src,
   width,
   quality,
-  // alt,
-  // height,
-  // priority,
+  alt,
+  height,
+  priority,
 }) {
   const [loaded, setLoaded] = useState(false);
 
-  const imageSizes = [640, 750, 828, 1080, 1200, 1920, 2048, 3840];
+  const imageSizes = [320, 640, 750, 828, 1080, 1200, 1920, 2048, 3840];
 
   // Construire l'URL de la dernière image
   const lastImageSrc = imageLoaderFull({ src, width, quality });
@@ -35,7 +35,6 @@ export default function ImageLoader({
     link.rel = 'preload';
     link.as = 'image';
     link.imageSrcset = srcsetWithLastImage;
-    link.imageSizes = '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw';
     document.head.appendChild(link);
 
     const img = new Image();
@@ -45,6 +44,7 @@ export default function ImageLoader({
     };
     return () => {
       img.onload = null;
+      document.head.removeChild(link);
     };
   }, []);
 
@@ -52,13 +52,14 @@ export default function ImageLoader({
     <>
       {!loaded && <div className="loader">Loading...</div>}
       <img
-        alt="alt"
+        alt={alt}
         src={lastImageSrc}
-        // height={height}
-        // width={width}
-        // loading={priority ? 'eager' : 'lazy'}
-        // fetchpriority="high"
-        // sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 1024px"
+        height={height}
+        width={width}
+        srcSet={srcsetWithLastImage}
+        loading={(priority ? 'eager' : 'lazy')}
+        fetchpriority={priority ? 'hight' : 'low'}
+        sizes={`(max-width: ${width}px) 100vw, ${width}px`}
       />
     </>
   );

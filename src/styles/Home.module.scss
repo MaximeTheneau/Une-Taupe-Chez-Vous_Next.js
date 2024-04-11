@@ -3,9 +3,7 @@
 .home{
   &__imagesFull{
     background: $color-primary;
-    &__image{
-      width: 40%;
-    }
+
     &__text{
       width: 100%;
       display: flex;
@@ -128,6 +126,4 @@
     }
   }
 }
-@media screen and (min-width: 1020px){
-  
-}
+

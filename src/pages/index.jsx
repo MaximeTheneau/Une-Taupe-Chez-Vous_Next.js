@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import Image from 'next/image';
 import Cards from '../components/cards/cards';
 import styles from '../styles/Home.module.scss';
 import fetcher from '../utils/fetcher';
@@ -70,7 +69,6 @@ export default function Home({
               alt={accueil.altImg || accueil.title}
               width={accueil.imgWidth}
               height={accueil.imgHeight}
-              sizes="(max-width: 1000px) 100vw, 1000px"
               priority
             />
           </div>
