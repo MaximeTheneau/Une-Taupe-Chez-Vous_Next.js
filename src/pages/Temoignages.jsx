@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import Image from 'next/image';
 import styles from '../styles/Pages.module.scss';
+import ImageLoader from '../components/image/ImageLoader';
 
 export async function getStaticProps() {
   const responsePage = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts/Temoignages`);
@@ -53,7 +53,7 @@ export default function testimonials({ page }) {
               <div key={paragraphArticle.id} className={styles.page__contents__paragraph}>
                 {paragraphArticle.imgPostParagh && (
                 <figure className={styles.page__contents__paragraph__figure}>
-                  <Image
+                  <ImageLoader
                     src={`${paragraphArticle.imgPostParagh}.webp`}
                     alt={paragraphArticle.subtitle}
                     quality={75}

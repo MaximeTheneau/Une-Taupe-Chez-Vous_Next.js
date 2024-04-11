@@ -1,9 +1,9 @@
-import Image from 'next/image';
 import Head from 'next/head';
 import styles from '../styles/Pages.module.scss';
 import Faq from '../components/faq/faq';
 import fetcher from '../utils/fetcher';
 import FaqJsonLd from '../components/jsonLd/FaqJsonLd';
+import ImageLoader from '../components/image/ImageLoader';
 
 export async function getStaticProps() {
   const post = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Foire-aux-questions`);
@@ -53,7 +53,7 @@ export default function Slug({ post }) {
             {paragraphArticle.paragraph && (
             <p key={paragraphArticle.id} className={styles.page__contents__paragraph}>
               {paragraphArticle.imgPostParagh && (
-              <Image
+              <ImageLoader
                 className={styles.page__contents__paragraph}
                 src={`${paragraphArticle.imgPostParagh}.webp`}
                 alt={paragraphArticle.subtitle}

@@ -1,12 +1,12 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import Image from 'next/image';
 import styles from '../../styles/Pages.module.scss';
 import fetcher from '../../utils/fetcher';
 import TableOfContents from '../../components/tableOfContents/TableOfContents';
 import ArticleJsonLd from '../../components/jsonLd/ArticleJsonLd';
 import BreadcrumbJsonLd from '../../components/jsonLd/BreadcrumbJsonLd';
 import Comments from '../../components/comments/Comments';
+import ImageLoader from '../../components/image/ImageLoader';
 
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`);
@@ -135,7 +135,7 @@ export default function Slug({ post }) {
             <div dangerouslySetInnerHTML={{ __html: paragraphs.paragraph }} />
             {paragraphs.imgPostParagh && (
             <figure className={styles.page__contents__paragraph__figure}>
-              <Image
+              <ImageLoader
                 src={`${paragraphs.imgPostParagh}.webp`}
                 alt={paragraphs.altImg}
                 width={paragraphs.imgWidth}

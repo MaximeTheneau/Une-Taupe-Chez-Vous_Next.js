@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import Link from 'next/link';
 import styles from '../../styles/Pages.module.scss';
 import TableOfContents from '../../components/tableOfContents/TableOfContents';
@@ -7,6 +6,7 @@ import fetcher from '../../utils/fetcher';
 import BreadcrumbJsonLd from '../../components/jsonLd/BreadcrumbJsonLd';
 import ArticleJsonLd from '../../components/jsonLd/ArticleJsonLd';
 import ContactButton from '../../components/button/ContactButton';
+import ImageLoader from '../../components/image/ImageLoader';
 
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Interventions`);
@@ -64,16 +64,11 @@ export default function Slug({ post }) {
         </p>
         <div className={styles.page__image}>
           <figure>
-            <Image
+            <ImageLoader
               src={`${post.imgPost}.webp`}
               alt={post.altImg || post.title}
               width={post.imgWidth}
               height={post.imgHeight}
-              sizes="(max-width: 300px) 100vw,
-              (max-width: 500px) 100vw,
-              (max-width: 800px) 100vw,
-              (max-width: 1200px) 100vw,
-              100vw"
               priority
             />
             {post.title !== post.altImg && (
@@ -117,17 +112,12 @@ export default function Slug({ post }) {
               <div key={paragraphArticle.id} className={styles.page__contents__paragraph}>
                 {paragraphArticle.imgPostParagh && (
                 <figure className={styles.page__contents__paragraph__figure}>
-                  <Image
+                  <ImageLoader
                     src={`${paragraphArticle.imgPostParagh}.webp`}
                     alt={paragraphArticle.altImg}
                     quality={75}
                     width={paragraphArticle.imgWidth}
                     height={paragraphArticle.imgHeight}
-                    sizes="(max-width: 300px) 100vw,
-                    (max-width: 500px) 100vw,
-                    (max-width: 800px) 100vw,
-                    (max-width: 1200px) 100vw,
-                    100vw"
                   />
                   {paragraphArticle.subtitle !== paragraphArticle.altImgParagh && (
                   <figcaption className="caption">

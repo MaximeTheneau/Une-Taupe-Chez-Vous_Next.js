@@ -1,8 +1,8 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import Link from 'next/link';
 import fetcher from '../utils/fetcher';
 import styles from '../styles/Pages.module.scss';
+import ImageLoader from '../components/image/ImageLoader';
 
 export async function getStaticProps() {
   const page = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Mentions-Legales`);
@@ -72,7 +72,7 @@ export default function MentionsLegal({ page }) {
               <div key={paragraphArticle.id} className={styles.page__contents__paragraph}>
                 {paragraphArticle.imgPostParagh && (
                 <figure className={styles.page__contents__paragraph__figure}>
-                  <Image
+                  <ImageLoader
                     src={`${paragraphArticle.imgPostParagh}.webp`}
                     alt={paragraphArticle.altImg}
                     quality={75}
