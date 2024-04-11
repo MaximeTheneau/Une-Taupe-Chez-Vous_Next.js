@@ -53,6 +53,11 @@ export default function Home({
           href={process.env.NEXT_PUBLIC_URL}
           key="canonical"
         />
+        <link
+          rel="preload"
+          as="image"
+          imagesrcset="https://res.cloudinary.com/dsn2zwbis/image/upload/c_limit,w_320,q_auto/unetaupechezvous/Accueil.webp 320w, https://res.cloudinary.com/dsn2zwbis/image/upload/c_limit,w_640,q_auto/unetaupechezvous/Accueil.webp 640w, https://res.cloudinary.com/dsn2zwbis/image/upload/c_limit,w_750,q_auto/unetaupechezvous/Accueil.webp 750w, https://res.cloudinary.com/dsn2zwbis/image/upload/c_limit,w_828,q_auto/unetaupechezvous/Accueil.webp 828w, https://res.cloudinary.com/dsn2zwbis/image/upload/c_limit,w_1000,q_auto/unetaupechezvous/Accueil.webp 1000w"
+        />
       </Head>
       <LocalBusinessJsonLd descriptionMeta={accueil.metaDescription} />
       <SearchJsonLd />
