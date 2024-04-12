@@ -67,12 +67,14 @@ export default function Home({
               height={accueil.imgHeight}
               priority
             />
+            <div className={styles.home__imagesFull__image__text}>
+              <h1>
+                {accueil.title}
+              </h1>
+              <p className={styles['home__imagesFull__text--paragraph']} dangerouslySetInnerHTML={{ __html: accueil.contentsHTML }} />
+              <DevisButton />
+            </div>
           </div>
-          <h1>
-            {accueil.title}
-          </h1>
-          <div className={styles['home__imagesFull__text--paragraph']} dangerouslySetInnerHTML={{ __html: accueil.contentsHTML }} />
-          <DevisButton />
         </div>
       </div>
       <section className={styles.home}>
