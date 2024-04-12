@@ -28,6 +28,7 @@ h2{
 section{
   width: 90%;
   margin: 0 auto 1rem auto;
+
 }
 p{
   color: $font-color;
@@ -47,6 +48,7 @@ img{
 main{
   min-height: 80vh;
   padding-top: 3em;
+  contain: content  ;
 }
 
 p a, li a {

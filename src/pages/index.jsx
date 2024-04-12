@@ -12,7 +12,6 @@ import ImageLoader from '../components/image/ImageLoader';
 export async function getStaticProps() {
   const accueil = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Accueil`);
   const services = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&category=Interventions`);
-  const articles = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&category=Articles`);
   const testimonials = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Temoignages`);
   const keyword = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=keyword&limit=3&id=17 `);
 
@@ -20,14 +19,13 @@ export async function getStaticProps() {
     props: {
       accueil,
       services,
-      articles,
       testimonials,
       keyword,
     },
   };
 }
 export default function Home({
-  accueil, services, articles, testimonials, keyword,
+  accueil, services, testimonials, keyword,
 }) {
   return (
     <>
@@ -98,15 +96,6 @@ export default function Home({
           Faites confiance à notre expertise pour préserver la biodiversité
           de votre jardin tout en assurant un contrôle efficace des taupes.
         </p>
-        <ul className={styles.home__list}>
-          {articles.map((article) => (
-            <li key={article.title} className={styles.home__list__item}>
-              <Link href={`/${article.category.slug}/${article.subcategory.slug}/${article.slug}`} rel="preload">
-                {article.title}
-              </Link>
-            </li>
-          ))}
-        </ul>
         {accueil.paragraphPosts.map((paragraphPosts) => (
           <div
             key={paragraphPosts.subtitle}
