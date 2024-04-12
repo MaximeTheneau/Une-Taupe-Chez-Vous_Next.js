@@ -10,7 +10,13 @@ export default function CookiesModal() {
     cookiesChoice: false,
     cookiesAll: false,
   });
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      console.log('CookiesModal loaded');
+    }, 2000);
 
+    return () => clearTimeout(timer);
+  }, []);
   useEffect(() => {
     setTimeout(() => {
       if (!cookiesModal && !window.localStorage.getItem('cookiesModal')) {
