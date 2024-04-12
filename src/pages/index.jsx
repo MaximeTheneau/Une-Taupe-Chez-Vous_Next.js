@@ -13,7 +13,6 @@ export async function getStaticProps() {
   const accueil = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Accueil`);
   const services = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&category=Interventions`);
   const articles = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&category=Articles`);
-  const faq = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Foire-aux-questions`);
   const testimonials = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Temoignages`);
   const keyword = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=keyword&limit=3&id=17 `);
 
@@ -22,7 +21,6 @@ export async function getStaticProps() {
       accueil,
       services,
       articles,
-      faq,
       testimonials,
       keyword,
     },
@@ -117,12 +115,6 @@ export default function Home({
             <div dangerouslySetInnerHTML={{ __html: paragraphPosts.paragraph }} />
           </div>
         ))}
-        {/* <div className={styles.home__faq}>
-          <Link href={faq.slug}>
-            <h2>{faq.title}</h2>
-          </Link>
-          <Faq faq={faq} />
-        </div> */}
         <h2>
           <Link href={testimonials.slug}>
             {testimonials.title}

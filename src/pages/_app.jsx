@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-css-tags */
 import Head from 'next/head';
 import Layout from '../components/layout';
 import '../styles/globals.scss';
@@ -17,6 +18,7 @@ function MyApp({ Component, pageProps }) {
         <link rel="manifest" href="/favicon/manifest.json" />
         <link rel="preload" href="/font/principal/principal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/font/title/title.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="stylesheet" href="/print.css" media="print" type="text/css" />
       </Head>
       <CookiesModal />
       <Layout {...pageProps}>
