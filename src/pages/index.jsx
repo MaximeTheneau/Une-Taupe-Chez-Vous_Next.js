@@ -61,7 +61,7 @@ export default function Home({
         <div className={styles.home__imagesFull__text}>
           <div className={styles.home__imagesFull__image}>
             <ImageLoader
-              src="Accueil.webp"
+              src={`${accueil.imgPost}.webp`}
               alt={accueil.altImg || accueil.title}
               width={accueil.imgWidth}
               height={accueil.imgHeight}
