@@ -4,8 +4,8 @@ import styles from '../../../styles/Pages.module.scss';
 import Cards from '../../../components/cards/cards';
 import Category from '../../../components/category/Category';
 import TableOfContents from '../../../components/tableOfContents/TableOfContents';
-import fetcher from '../../../utils/fetcher';
 import ArticleJsonLd from '../../../components/jsonLd/ArticleJsonLd';
+import fetcher from '../../../utils/fetcher';
 import BreadcrumbJsonLd from '../../../components/jsonLd/BreadcrumbJsonLd';
 import Comments from '../../../components/comments/Comments';
 import ImageLoader from '../../../components/image/ImageLoader';
@@ -34,7 +34,7 @@ export async function getStaticProps({ params }) {
 }
 
 export default function Slug({ post, desc }) {
-  const urlPost = `${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.subcategory.slug}/${post.slug}`;
+  const urlPost = `${process.env.NEXT_PUBLIC_URL}${post.url}`;
   return (
     <>
       <Head>
@@ -46,7 +46,7 @@ export default function Slug({ post, desc }) {
         <meta property="og:description" content={post.metaDescription} />
         <meta property="og:site_name" content="Une Taupe Chez Vous" />
         <meta property="og:url" content={urlPost} />
-        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.imgPost}.jpg`} />
+        <meta property="og:image" content={`${post.imgPost}?format=jpeg`} />
         <meta property="og:image:width" content={post.imgWidth} />
         <meta property="og:image:height" content={post.imgHeight} />
         <meta property="article:published_time" content={post.createdAt} />
@@ -56,7 +56,7 @@ export default function Slug({ post, desc }) {
         <meta property="twitter:title" content={post.heading} />
         <meta property="twitter:description" content={post.metaDescription} />
         <meta property="twitter:site" content="@UneTaupe_" />
-        <meta property="twitter:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.imgPost}.jpg`} />
+        <meta property="twitter:image" content={`${post.imgPost}?format=jpeg`} />
         <meta property="twitter:creator" content="@UneTaupe_" />
         <meta property="twitter:image:alt" content={post.altImg || post.title} />
         <meta property="twitter:domain" content={urlPost} />
@@ -65,6 +65,14 @@ export default function Slug({ post, desc }) {
           rel="canonical"
           href={urlPost}
           key="canonical"
+        />
+        {/* Image Preload */}
+        <link
+          rel="preload"
+          as="image"
+          imageSrcSet={post.srcset}
+          imageSizes="100w"
+          fetchPriority="high"
         />
       </Head>
       {/* Schema.org */}
@@ -82,10 +90,11 @@ export default function Slug({ post, desc }) {
         </p>
         <figure>
           <ImageLoader
-            src={`${post.imgPost}.webp`}
+            src={post.imgPost}
             alt={post.altImg || post.title}
             width={post.imgWidth}
             height={post.imgHeight}
+            srcset={post.srcset}
             priority
           />
           {post.title !== post.altImg && (
@@ -108,10 +117,11 @@ export default function Slug({ post, desc }) {
                 {paragraphArticle.imgPostParagh && (
                 <figure className={styles.page__contents__paragraph__figure}>
                   <ImageLoader
-                    src={`${paragraphArticle.imgPostParagh}.webp`}
+                    src={paragraphArticle.imgPost}
                     alt={paragraphArticle.altImg}
                     width={paragraphArticle.imgWidth}
                     height={paragraphArticle.imgHeight}
+                    srcset={paragraphArticle.srcset}
                   />
                   {paragraphArticle.subtitle !== paragraphArticle.altImgParagh && (
                   <figcaption className="caption">

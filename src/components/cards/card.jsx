@@ -11,7 +11,7 @@ export default function Card({ card }) {
         rel="preload"
       >
         <img
-          src={`${process.env.NEXT_PUBLIC_CLOUD_URL}/c_thumb,w_330,h_330,q_auto:eco/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${card.imgPost}.webp`}
+          src={`${card.imgPost}?width=330&height=330`}
           alt={card.altImg || card.title}
           width={330}
           height={330}

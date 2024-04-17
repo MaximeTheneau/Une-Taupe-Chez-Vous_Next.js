@@ -37,17 +37,25 @@ export default function Home({
         <meta property="og:description" content={accueil.metaDescription} />
         <meta property="og:url" content={process.env.NEXT_PUBLIC_URL} />
         <meta property="og:site_name" content="Une Taupe Chez Vous" />
-        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/Accueil.jpg`} />
+        <meta property="og:image" content={`${accueil.imgPost}?format=jpeg`} />
         <meta property="og:image:width" content={accueil.imgWidth} />
         <meta property="og:image:height" content={accueil.imgHeight} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={accueil.heading} />
         <meta name="twitter:description" content={accueil.metaDescription} />
-        <meta name="twitter:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/Accueil.jpg`} />
+        <meta name="twitter:image" content={`${accueil.imgPost}?format=jpeg`} />
         <link
           rel="canonical"
           href={process.env.NEXT_PUBLIC_URL}
           key="canonical"
+        />
+        {/* Image Preload */}
+        <link
+          rel="preload"
+          as="image"
+          imageSrcSet={accueil.srcset}
+          imageSizes="100w"
+          fetchPriority="high"
         />
       </Head>
       <LocalBusinessJsonLd descriptionMeta={accueil.metaDescription} />
@@ -61,10 +69,11 @@ export default function Home({
         <div className={styles.home__imagesFull__text}>
           <div className={styles.home__imagesFull__image}>
             <ImageLoader
-              src={`${accueil.imgPost}.webp`}
+              src={`${accueil.imgPost}`}
               alt={accueil.altImg || accueil.title}
               width={accueil.imgWidth}
               height={accueil.imgHeight}
+              srcset={accueil.srcset}
               priority
             />
             <div className={styles.home__imagesFull__image__text}>

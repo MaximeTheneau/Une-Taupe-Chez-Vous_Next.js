@@ -33,17 +33,25 @@ export default function Slug({ post }) {
         <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`} />
         <meta property="og:description" content={post.metaDescription} />
         <meta property="og:site_name" content="Une Taupe Chez Vous" />
-        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.imgPost}.jpg`} />
+        <meta property="og:image" content={`${post.imgPost}?format=jpeg`} />
         <meta property="og:image:width" content={post.imgWidth} />
         <meta property="og:image:height" content={post.imgHeight} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={post.heading} />
         <meta name="twitter:description" content={post.metaDescription} />
-        <meta name="twitter:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.imgPost}.jpg`} />
+        <meta name="twitter:image" content={`${post.imgPost}?format=jpeg`} />
         <link
           rel="canonical"
           href={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`}
           key="canonical"
+        />
+        {/* Image Preload */}
+        <link
+          rel="preload"
+          as="image"
+          imageSrcSet={post.srcset}
+          imageSizes="100w"
+          fetchPriority="high"
         />
       </Head>
       <BreadcrumbJsonLd paragraphPosts={post.paragraphPosts} urlPost={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`} />
@@ -65,10 +73,11 @@ export default function Slug({ post }) {
         <div className={styles.page__image}>
           <figure>
             <ImageLoader
-              src={`${post.imgPost}.webp`}
+              src={`${post.imgPost}`}
               alt={post.altImg || post.title}
               width={post.imgWidth}
               height={post.imgHeight}
+              srcset={post.srcset}
               priority
             />
             {post.title !== post.altImg && (
@@ -113,11 +122,11 @@ export default function Slug({ post }) {
                 {paragraphArticle.imgPostParagh && (
                 <figure className={styles.page__contents__paragraph__figure}>
                   <ImageLoader
-                    src={`${paragraphArticle.imgPostParagh}.webp`}
+                    src={paragraphArticle.imgPost}
                     alt={paragraphArticle.altImg}
-                    quality={75}
                     width={paragraphArticle.imgWidth}
                     height={paragraphArticle.imgHeight}
+                    srcset={paragraphArticle.srcset}
                   />
                   {paragraphArticle.subtitle !== paragraphArticle.altImgParagh && (
                   <figcaption className="caption">

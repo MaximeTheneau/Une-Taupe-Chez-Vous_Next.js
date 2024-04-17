@@ -9,7 +9,8 @@ module.exports = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
-  // images: {
+  images: {
+    unoptimized: true,
   //   loader: 'custom',
   //   loaderFile: './src/utils/imageLoaderFull.jsx',
   //   formats: ['image/webp'],
@@ -22,5 +23,5 @@ module.exports = {
   //       port: '',
   //     },
   //   ],
-  // },
+  },
 };

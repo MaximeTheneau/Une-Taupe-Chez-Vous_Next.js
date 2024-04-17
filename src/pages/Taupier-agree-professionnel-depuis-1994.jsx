@@ -30,25 +30,37 @@ export default function TaupierPage({ page }) {
         <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/${page.slug}`} />
         <meta property="og:description" content={page.metaDescription} />
         <meta property="og:site_name" content="Une Taupe Chez Vous" />
-        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${page.imgPost}.jpg`} />
+        <meta property="og:image" content={`${page.imgPost}?format=jpeg`} />
         <meta property="og:image:width" content={page.imgWidth} />
         <meta property="og:image:height" content={page.imgHeight} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={page.heading} />
         <meta name="twitter:description" content={page.metaDescription} />
+        <meta property="twitter:image" content={`${page.imgPost}?format=jpeg`} />
+        <meta property="twitter:creator" content="@UneTaupe_" />
+        <meta property="twitter:image:alt" content={page.altImg || page.title} />
         <link
           rel="canonical"
           href={`${process.env.NEXT_PUBLIC_URL}/${page.slug}`}
           key="canonical"
         />
+        {/* Image Preload */}
+        <link
+          rel="preload"
+          as="image"
+          imageSrcSet={page.srcset}
+          imageSizes="100w"
+          fetchPriority="high"
+        />
       </Head>
       <section>
         <figure>
           <ImageLoader
-            src={`${page.imgPost}.webp`}
+            src={page.imgPost}
             alt={page.altImg || page.title}
             width={page.imgWidth}
             height={page.imgHeight}
+            srcset={page.srcset}
             priority
           />
           {page.title !== page.altImg && (
@@ -96,11 +108,11 @@ export default function TaupierPage({ page }) {
                 {paragraphArticle.imgPostParagh && (
                 <figure className={styles.page__contents__paragraph__figure}>
                   <ImageLoader
-                    src={`${paragraphArticle.imgPostParagh}.webp`}
+                    src={paragraphArticle.imgPostParagh}
                     alt={paragraphArticle.altImg}
-                    quality={75}
                     width={paragraphArticle.imgWidth}
                     height={paragraphArticle.imgHeight}
+                    srcset={paragraphArticle.srcset}
                   />
                   {paragraphArticle.subtitle !== paragraphArticle.altImgParagh && (
                   <figcaption className="caption">
