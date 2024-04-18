@@ -1,13 +1,10 @@
 /* eslint-disable @next/next/no-css-tags */
 import Head from 'next/head';
 import { Suspense } from 'react';
-// import Layout from '../components/layout';
+import Layout from '../components/layout';
 import '../styles/globals.scss';
-import dynamic from 'next/dynamic';
-// import CookiesModal from '../components/modal/cookies/Cookies';
+import CookiesModal from '../components/modal/cookies/Cookies';
 
-const Layout = dynamic(() => import('../components/layout'));
-const CookiesModal = dynamic(() => import('../components/modal/cookies/Cookies'), { ssr: false });
 function MyApp({ Component, pageProps }) {
   return (
     <>

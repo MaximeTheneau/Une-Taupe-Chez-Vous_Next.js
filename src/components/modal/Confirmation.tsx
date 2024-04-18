@@ -1,8 +1,13 @@
+import { useEffect } from 'react';
 import styleModal from './Modal.module.scss';
 
 export default function Confirmation({
   title, message, toggleModal, onClick,
 }) {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    document.body.className = toggleModal ? 'overflow-hidden' : '';
+  }, [toggleModal]);
   return toggleModal ? (
     <>
       <div className={styleModal.modal__blur} />
