@@ -89,6 +89,15 @@
         margin: 1rem;
     }
 }
+.disabled{
+    color: $font-color-light;
+    cursor: not-allowed;
+    & button{
+        background-color: $color-grey;
+        color: $font-color-light;
+        cursor: not-allowed;
+    }
+}
 
 //* Media Queries
 @media screen and (min-width: 720px) {

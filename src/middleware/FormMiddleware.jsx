@@ -16,10 +16,11 @@ export default function formMiddleware(req, apiPath, handleResponse200, handleRe
   fetch(`${process.env.NEXT_PUBLIC_API_URL}${apiPath}`, requestOptions)
     .then((response) => {
       if (response.ok) {
-        handleResponse200();
+        response.json().then((data) => {
+          handleResponse200(data.message);
+        });
       } else {
         response.json().then((data) => {
-          console.log(data);
           handleResponseError(data.erreur);
         });
       }

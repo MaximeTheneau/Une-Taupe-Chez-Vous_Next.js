@@ -80,3 +80,13 @@
         }
     }
 }
+
+.disabled{
+    color: $font-color-light;
+    cursor: not-allowed;
+    & button{
+        background-color: $color-grey;
+        color: $font-color-light;
+        cursor: not-allowed;
+    }
+}

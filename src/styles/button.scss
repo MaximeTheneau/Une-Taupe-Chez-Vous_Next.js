@@ -29,7 +29,7 @@
     content: '';
     position: absolute;
     bottom: 0.5rem;
-    width: 100%;
+    width: 100% !important;
     height: 1px;
     background-color: transparent;
     transition: all 0.3s ease-in-out; 
@@ -40,7 +40,7 @@
       }
       &::after {
         background-color: $color-white;
-        width: 50%;
+        width: 50%!important;
       }
     }
 

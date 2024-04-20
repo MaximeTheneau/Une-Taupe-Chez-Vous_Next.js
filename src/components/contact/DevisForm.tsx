@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 // import { useRouter } from 'next/router';
 import FormMiddleware from '../../middleware/FormMiddleware';
 import Confirmation from '../modal/Confirmation';
@@ -77,6 +77,12 @@ export default function DevisForm() {
       toggleModal: false,
     },
   });
+  useEffect(() => {
+    const form = localStorage.getItem('form');
+    if (form) {
+      setState((prevState) => ({ ...prevState, form: JSON.parse(form) }));
+    }
+  }, []);
 
   const handleChangeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const trows = e.target.value.split('\n').length - 1 === 0 ? 1 : e.target.value.split('\n').length - 1;
@@ -133,7 +139,7 @@ export default function DevisForm() {
     }
   };
 
-  const handleResponse200 = () => {
+  const handleResponse200 = (response) => {
     setState({
       ...state,
       form: {
@@ -150,7 +156,7 @@ export default function DevisForm() {
       },
       modal: {
         title: 'Merci !',
-        message: 'On vous répondra au plus vite',
+        message: response,
         toggleModal: true,
       },
     });
@@ -169,14 +175,15 @@ export default function DevisForm() {
             emailReturn: true,
           },
           modal: {
-            title: '',
-            message: '',
-            toggleModal: false,
+            title: 'Merci !',
+            message: response,
+            toggleModal: true,
           },
         });
       },
       3000,
     );
+    localStorage.removeItem('form');
   };
 
   const handleResponseError = (error) => {
@@ -188,6 +195,7 @@ export default function DevisForm() {
         toggleModal: true,
       },
     });
+    localStorage.setItem('form', JSON.stringify(state.form));
   };
 
   const handleSubmit = (evt) => {
@@ -204,372 +212,365 @@ export default function DevisForm() {
     });
   };
   return (
-    <>
-      <Confirmation
-        title={state.modal.title}
-        message={state.modal.message}
-        toggleModal={state.modal.toggleModal}
-        onClick={() => setState({
-          ...state,
-          modal: {
-            title: '',
-            message: '',
-            toggleModal: false,
-          },
-        })}
-      />
-      <div className={styles.contact}>
-        <form className={styles.contact__block} onSubmit={handleSubmit}>
-          <div className={styles.contact__input}>
-            <fieldset>
-              <legend className={styles.contact__input__label}>
-                Status
-                <span className={styles.contact__input__label__alert}>*</span>
-              </legend>
-              <div
-                className={styles.contact__input__radio}
-              >
-                <label htmlFor="statusParticular">
-                  <input
-                    type="radio"
-                    id="statusParticular"
-                    value="Particulier"
-                    name="status"
-                    onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'status')}
-                  />
-                  <span>
-                    Particulier
-                  </span>
-                </label>
-                <label htmlFor="statusSociety">
-                  <input
-                    id="statusSociety"
-                    type="radio"
-                    value="Société"
-                    name="status"
-                    onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'status')}
-                  />
-                  <span>
-                    Société
-                  </span>
-                </label>
-              </div>
-            </fieldset>
-          </div>
-          { state.form.status === 'Société' && (
-          <>
-            <div className={styles.contact__input}>
-              <input
-                type="text"
-                title="Société"
-                placeholder="Nom de la société"
-                value={state.form.nameSociety}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'nameSociety')}
-              />
-            </div>
-            <div className={styles.contact__input}>
-              <input
-                type="text"
-                title="Siret"
-                placeholder="Siret"
-                value={state.form.siret}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'siret')}
-              />
-            </div>
-          </>
-          )}
-          <div className={styles.contact__input}>
-            <p className={styles.contact__input__label}>
-              Nom
+    <div className={styles.contact}>
+      <form
+        className={state.modal.title === 'Envoi en cours' ? styles.disabled : ''}
+        onSubmit={handleSubmit}
+      >
+        <div className={styles.contact__input}>
+          <fieldset>
+            <legend className={styles.contact__input__label}>
+              Status
               <span className={styles.contact__input__label__alert}>*</span>
-            </p>
-            <Input
+            </legend>
+            <div
+              className={styles.contact__input__radio}
+            >
+              <label htmlFor="statusParticular">
+                <input
+                  type="radio"
+                  id="statusParticular"
+                  value="Particulier"
+                  name="status"
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'status')}
+                />
+                <span>
+                  Particulier
+                </span>
+              </label>
+              <label htmlFor="statusSociety">
+                <input
+                  id="statusSociety"
+                  type="radio"
+                  value="Société"
+                  name="status"
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'status')}
+                />
+                <span>
+                  Société
+                </span>
+              </label>
+            </div>
+          </fieldset>
+        </div>
+        { state.form.status === 'Société' && (
+        <>
+          <div className={styles.contact__input}>
+            <input
               type="text"
-              title="Nom"
-              placeholder="Nom Prénom"
-              value={state.form.name}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'name')}
-              onBlur={(e: ChangeEvent<HTMLInputElement>) => {
-                setState((prevState) => {
-                  const newState = { ...prevState, isFocused: true };
-                  if (e.target.value.length > 2 && e.target.value.length < 35) {
-                    newState.confirmationName = true;
-                  } else {
-                    newState.confirmationName = false;
-                  }
-                  return newState;
-                });
-              }}
+              title="Société"
+              placeholder="Nom de la société"
+              value={state.form.nameSociety}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'nameSociety')}
             />
-            {state.confirmationName === false
+          </div>
+          <div className={styles.contact__input}>
+            <input
+              type="text"
+              title="Siret"
+              placeholder="Siret"
+              value={state.form.siret}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'siret')}
+            />
+          </div>
+        </>
+        )}
+        <div className={styles.contact__input}>
+          <p className={styles.contact__input__label}>
+            Nom
+            <span className={styles.contact__input__label__alert}>*</span>
+          </p>
+          <Input
+            type="text"
+            title="Nom"
+            placeholder="Nom Prénom"
+            value={state.form.name}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'name')}
+            onBlur={(e: ChangeEvent<HTMLInputElement>) => {
+              setState((prevState) => {
+                const newState = { ...prevState, isFocused: true };
+                if (e.target.value.length > 2 && e.target.value.length < 35) {
+                  newState.confirmationName = true;
+                } else {
+                  newState.confirmationName = false;
+                }
+                return newState;
+              });
+            }}
+          />
+          {state.confirmationName === false
               && (
               <span className={styles.contact__input__error}>
                 Veuillez renseigner votre nom (entre 3 et 35 caractères)
               </span>
               )}
-          </div>
-          <div className={styles.contact__input}>
+        </div>
+        <div className={styles.contact__input}>
+          <p className={styles.contact__input__label}>
+            Adresse
+          </p>
+          <input
+            type="text"
+            name="address"
+            placeholder="Adresse"
+            value={state.form.adress}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'adress')}
+          />
+        </div>
+        <div className={styles.contact__input}>
+          <label htmlFor="postalcode">
             <p className={styles.contact__input__label}>
-              Adresse
+              Code postal
+              <span className={styles.contact__input__label__alert}>*</span>
             </p>
             <input
-              type="text"
-              name="address"
-              placeholder="Adresse"
-              value={state.form.adress}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'adress')}
+              id="postalcode"
+              type="number"
+              className="contact-form-input"
+              name="postalCode"
+              value={state.form.postalCode}
+              onChange={(e) => setState(
+                { ...state, form: { ...state.form, postalCode: e.target.value } },
+              )}
+              onBlur={(e) => (
+                e.target.value.length === 5
+                  ? setState({ ...state, confirmationCodePostal: true })
+                  : setState({ ...state, confirmationCodePostal: false })
+              )}
+              placeholder="Code postal*"
+              minLength={2}
+              required
             />
-          </div>
-          <div className={styles.contact__input}>
-            <label htmlFor="postalcode">
-              <p className={styles.contact__input__label}>
-                Code postal
-                <span className={styles.contact__input__label__alert}>*</span>
-              </p>
-              <input
-                id="postalcode"
-                type="number"
-                className="contact-form-input"
-                name="postalCode"
-                value={state.form.postalCode}
-                onChange={(e) => setState(
-                  { ...state, form: { ...state.form, postalCode: e.target.value } },
-                )}
-                onBlur={(e) => (
-                  e.target.value.length === 5
-                    ? setState({ ...state, confirmationCodePostal: true })
-                    : setState({ ...state, confirmationCodePostal: false })
-                )}
-                placeholder="Code postal*"
-                minLength={2}
-                required
-              />
-            </label>
-            {state.confirmationCodePostal === false
+          </label>
+          {state.confirmationCodePostal === false
                 && (
                 <span className={styles.contact__input__error}>
                   Veuillez renseigner votre code postal (5 chiffres)
                 </span>
                 )}
-          </div>
-          <div className={styles.contact__input}>
-            <label htmlFor="email">
-              <p className={styles.contact__input__label}>
-                Email
-                <span className={styles.contact__input__label__alert}>*</span>
-              </p>
-              <input
-                id="email"
-                type="email"
-                title="Email"
-                value={state.form.email}
-                placeholder="exemple@mail.com"
-                onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'email')}
-                onBlur={(e: ChangeEvent<HTMLInputElement>) => (
-                  regex.test(e.target.value)
-                    ? setState({ ...state, confirmationEmail: true })
-                    : setState({ ...state, confirmationEmail: false })
-                )}
-              />
-            </label>
-            {state.confirmationEmail === false
+        </div>
+        <div className={styles.contact__input}>
+          <label htmlFor="email">
+            <p className={styles.contact__input__label}>
+              Email
+              <span className={styles.contact__input__label__alert}>*</span>
+            </p>
+            <input
+              id="email"
+              type="email"
+              title="Email"
+              value={state.form.email}
+              placeholder="exemple@mail.com"
+              onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'email')}
+              onBlur={(e: ChangeEvent<HTMLInputElement>) => (
+                regex.test(e.target.value)
+                  ? setState({ ...state, confirmationEmail: true })
+                  : setState({ ...state, confirmationEmail: false })
+              )}
+            />
+          </label>
+          {state.confirmationEmail === false
                 && (
                 <span className={styles.contact__input__error}>
                   Veuillez renseigner votre adresse email
                 </span>
                 )}
-          </div>
-          <div className={styles.contact__input}>
-            <label htmlFor="phone">
-              <p className={styles.contact__input__label}>
-                Téléphone
-              </p>
-              <input
-                id="phone"
-                type="text"
-                name="phone"
-                placeholder="Téléphone"
-                value={state.form.phone}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'phone')}
-              />
-            </label>
-          </div>
-          {state.form.phone && (
-          <div className={styles.contact__input}>
-            <label htmlFor="date">
-              <p className={styles.contact__input__label}>
-                Etre rappelé le
-              </p>
-              <input
-                type="datetime-local"
-                name="date"
-                value={state.form.date}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'date')}
-                min={`${new Date().toISOString().split('T')[0]}T09:00`}
-                max={`${new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]}T20:00`}
-              />
-            </label>
-          </div>
-          )}
-          <div className={styles.contact__input}>
+        </div>
+        <div className={styles.contact__input}>
+          <label htmlFor="phone">
             <p className={styles.contact__input__label}>
-              Quels sont vos besoins ?
+              Téléphone
             </p>
-            <div className={styles.contact__input__radio}>
-              <label htmlFor="Taupe">
-                <input
-                  type="radio"
-                  name="intervention"
-                  id="Taupe"
-                  value="Taupe"
-                  onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'intervention')}
-                  required
-                />
-                <span>
-                  Taupe
-                </span>
-              </label>
-              <label htmlFor="Ragondin">
-                <input
-                  type="radio"
-                  name="intervention"
-                  id="Ragondin"
-                  value="Ragondin"
-                  onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'intervention')}
-                  required
-                />
-                <span>
-                  Ragondin
-                </span>
-              </label>
-              <label htmlFor="Fouines">
-                <input
-                  type="radio"
-                  name="intervention"
-                  id="Fouines"
-                  value="Fouines"
-                  onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'intervention')}
-                  required
-                />
-                <span>
-                  Fouines
-                </span>
-              </label>
-              <label htmlFor="Autre">
-                <input
-                  type="radio"
-                  name="intervention"
-                  id="Autre"
-                  value="Autre"
-                  onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'intervention')}
-                  required
-                />
-                <span>
-                  Autre
-                </span>
-              </label>
-              {state.form.intervention === 'Autre' && (
-              <div className={styles.contact__input}>
-                <input
-                  type="text"
-                  title="Autre"
-                  placeholder="Précisez si possible le type d'intervention souhaité"
-                  value={state.form.interventionOther}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'interventionOther')}
-                />
-              </div>
-              )}
-            </div>
-          </div>
-          <div className={styles.contact__input}>
-            <p className={styles.contact__input__label}>
-              Surface à traiter
-              <span className={styles.contact__input__label__alert}>*</span>
-            </p>
-            <div className={styles.contact__input__range}>
-              <label htmlFor="surface">
-                <span>
-                  {' '}
-                  {state.form.surface && (state.form.surface >= 1000
-                    ? `Plus de ${state.form.surface}`
-                    : `Environs ${state.form.surface}`
-                  )}
-                  {' '}
-                  m²
-                </span>
-                <input
-                  type="range"
-                  id="surface"
-                  name="surface"
-                  min="0"
-                  max="1000"
-                  step="10"
-                  value={state.form.surface}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'surface')}
-                />
-              </label>
-            </div>
-          </div>
-          <div className={styles.contact__input}>
-            <p className={styles.contact__input__label}>
-              Ajouter un message
-            </p>
-            <textarea
-              rows={state.textArea}
-              title="Message"
-              value={state.form.message}
-              onChange={handleChangeMessage}
-              onBlur={(e: React.FocusEvent<HTMLTextAreaElement>) => (
-                e.target.value.length > 5 && e.target.value.length < 500
-                  ? setState({ ...state, confirmationMessage: true })
-                  : setState({ ...state, confirmationMessage: false }))}
-              name="message"
-              wrap="off"
-              placeholder="Message"
+            <input
+              id="phone"
+              type="text"
+              name="phone"
+              placeholder="Téléphone"
+              value={state.form.phone}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'phone')}
             />
-          </div>
-          <div className={styles.contact__input}>
-            <label htmlFor="image">
-              <p className={styles.contact__input__label}>
-                Ajouter une image (facultatif)
-              </p>
+          </label>
+        </div>
+        {state.form.phone && (
+        <div className={styles.contact__input}>
+          <label htmlFor="date">
+            <p className={styles.contact__input__label}>
+              Etre rappelé le
+            </p>
+            <input
+              type="datetime-local"
+              name="date"
+              value={state.form.date}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'date')}
+              min={`${new Date().toISOString().split('T')[0]}T09:00`}
+              max={`${new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]}T20:00`}
+            />
+          </label>
+        </div>
+        )}
+        <div className={styles.contact__input}>
+          <p className={styles.contact__input__label}>
+            Quels sont vos besoins ?
+          </p>
+          <div className={styles.contact__input__radio}>
+            <label htmlFor="Taupe">
               <input
-                type="file"
-                id="image"
-                name="image"
-                accept="image/*"
-                onChange={handleFileChange}
+                type="radio"
+                name="intervention"
+                id="Taupe"
+                value="Taupe"
+                onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'intervention')}
+                required
+              />
+              <span>
+                Taupe
+              </span>
+            </label>
+            <label htmlFor="Ragondin">
+              <input
+                type="radio"
+                name="intervention"
+                id="Ragondin"
+                value="Ragondin"
+                onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'intervention')}
+                required
+              />
+              <span>
+                Ragondin
+              </span>
+            </label>
+            <label htmlFor="Fouines">
+              <input
+                type="radio"
+                name="intervention"
+                id="Fouines"
+                value="Fouines"
+                onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'intervention')}
+                required
+              />
+              <span>
+                Fouines
+              </span>
+            </label>
+            <label htmlFor="Autre">
+              <input
+                type="radio"
+                name="intervention"
+                id="Autre"
+                value="Autre"
+                onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'intervention')}
+                required
+              />
+              <span>
+                Autre
+              </span>
+            </label>
+            {state.form.intervention === 'Autre' && (
+            <div className={styles.contact__input}>
+              <input
+                type="text"
+                title="Autre"
+                placeholder="Précisez si possible le type d'intervention souhaité"
+                value={state.form.interventionOther}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'interventionOther')}
+              />
+            </div>
+            )}
+          </div>
+        </div>
+        <div className={styles.contact__input}>
+          <p className={styles.contact__input__label}>
+            Surface à traiter
+            <span className={styles.contact__input__label__alert}>*</span>
+          </p>
+          <div className={styles.contact__input__range}>
+            <label htmlFor="surface">
+              <span>
+                {' '}
+                {state.form.surface && (state.form.surface >= 1000
+                  ? `Plus de ${state.form.surface}`
+                  : `Environs ${state.form.surface}`
+                )}
+                {' '}
+                m²
+              </span>
+              <input
+                type="range"
+                id="surface"
+                name="surface"
+                min="0"
+                max="1000"
+                step="10"
+                value={state.form.surface}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'surface')}
               />
             </label>
-            {state.confirmationImage === false
+          </div>
+        </div>
+        <div className={styles.contact__input}>
+          <p className={styles.contact__input__label}>
+            Ajouter un message
+          </p>
+          <textarea
+            rows={state.textArea}
+            title="Message"
+            value={state.form.message}
+            onChange={handleChangeMessage}
+            onBlur={(e: React.FocusEvent<HTMLTextAreaElement>) => (
+              e.target.value.length > 5 && e.target.value.length < 500
+                ? setState({ ...state, confirmationMessage: true })
+                : setState({ ...state, confirmationMessage: false }))}
+            name="message"
+            wrap="off"
+            placeholder="Message"
+          />
+        </div>
+        <div className={styles.contact__input}>
+          <label htmlFor="image">
+            <p className={styles.contact__input__label}>
+              Ajouter une image (facultatif)
+            </p>
+            <input
+              type="file"
+              id="image"
+              name="image"
+              accept="image/*"
+              onChange={handleFileChange}
+            />
+          </label>
+          {state.confirmationImage === false
                 && (
                 <span className={styles.contact__input__error}>
                   Image non valide (JPG, PNG, AVIF, WEBP)
                 </span>
                 )}
-          </div>
-          <div className={styles.contact__input__chekbox}>
-            <label htmlFor="emailReturn">
-              <input
-                type="checkbox"
-                name="emailReturn"
-                id="emailReturn"
-                checked={state.form.emailReturn}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.checked, 'emailReturn')}
-              />
-              <span>
-                Recevoir une copie de cet email
-              </span>
-            </label>
-          </div>
-          <div className="contact-form_button">
-            <button type="submit" className="button">
-              Envoyer
-              <i className="icon-paper-plane" />
-            </button>
-          </div>
-        </form>
-      </div>
-    </>
+        </div>
+        <div className={styles.contact__input__chekbox}>
+          <label htmlFor="emailReturn">
+            <input
+              type="checkbox"
+              name="emailReturn"
+              id="emailReturn"
+              checked={state.form.emailReturn}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.checked, 'emailReturn')}
+            />
+            <span>
+              Recevoir une copie de cet email
+            </span>
+          </label>
+        </div>
+        <div className="contact-form_button">
+          <button type="submit" className="button">
+            Envoyer
+            <i className="icon-paper-plane" />
+          </button>
+        </div>
+      </form>
+      <Confirmation
+        title={state.modal.title}
+        message={state.modal.message}
+        toggleModal={state.modal.toggleModal}
+      />
+    </div>
   );
 }

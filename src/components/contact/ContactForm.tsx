@@ -127,7 +127,7 @@ export default function ContactForm() {
     }
   };
 
-  const handleResponse200 = () => {
+  const handleResponse200 = (response) => {
     setState({
       ...state,
       form: {
@@ -143,14 +143,13 @@ export default function ContactForm() {
       },
       modal: {
         title: 'Merci !',
-        message: 'On vous répondra au plus vite',
+        message: response,
         toggleModal: true,
       },
     });
 
     setTimeout(
       () => {
-        // router.push('/');
         setState({
           ...state,
           form: {
@@ -163,9 +162,9 @@ export default function ContactForm() {
             emailReturn: true,
           },
           modal: {
-            title: '',
-            message: '',
-            toggleModal: false,
+            title: 'Merci !',
+            message: response,
+            toggleModal: true,
           },
         });
         localStorage.removeItem('form');
@@ -178,12 +177,11 @@ export default function ContactForm() {
     setState({
       ...state,
       modal: {
-        title: 'Oups !',
+        title: 'Erreur lors de l\'envoi !',
         message: error,
         toggleModal: true,
       },
     });
-
     localStorage.setItem('form', JSON.stringify(state.form));
   };
 
@@ -201,154 +199,143 @@ export default function ContactForm() {
     });
   };
   return (
-    <>
-      <Confirmation
-        title={state.modal.title}
-        message={state.modal.message}
-        toggleModal={state.modal.toggleModal}
-        onClick={() => setState({
-          ...state,
-          modal: {
-            title: '',
-            message: '',
-            toggleModal: false,
-          },
-        })}
-      />
-      <div className={styles.contact}>
-        <form className={styles.contact__block} onSubmit={handleSubmit}>
-          <div className={styles.contact__input}>
-            <label htmlFor="subjectType">
-              <p className={styles.contact__input__label}>
-                Type de demande
-                <span className={styles.contact__input__label__alert}>*</span>
-              </p>
-              <select
-                id="subjectType"
-                name="subject"
-                value={state.form.subject}
-                onChange={(e: ChangeEvent<HTMLSelectElement>) => setState(
-                  { ...state, form: { ...state.form, subject: e.target.value } },
-                )}
-              >
-                <option value="Demande de renseignements">Demande de renseignements</option>
-                <option value="Autre">Autre</option>
-                <option value="Webmaster">Webmaster</option>
-              </select>
-            </label>
+    <div className={styles.contact}>
+      <form
+        className={state.modal.title === 'Envoi en cours' ? styles.disabled : ''}
+        onSubmit={handleSubmit}
+      >
+        <div className={styles.contact__input}>
+          <label htmlFor="subjectType">
+            <p className={styles.contact__input__label}>
+              Type de demande
+              <span className={styles.contact__input__label__alert}>*</span>
+            </p>
+            <select
+              id="subjectType"
+              name="subject"
+              value={state.form.subject}
+              onChange={(e: ChangeEvent<HTMLSelectElement>) => setState(
+                { ...state, form: { ...state.form, subject: e.target.value } },
+              )}
+            >
+              <option value="Demande de renseignements">Demande de renseignements</option>
+              <option value="Autre">Autre</option>
+              <option value="Webmaster">Webmaster</option>
+            </select>
+          </label>
 
-          </div>
-          <div className={styles.contact__input}>
-            <label htmlFor="name">
-              <p className={styles.contact__input__label}>
-                Nom
-                <span className={styles.contact__input__label__alert}>*</span>
-              </p>
-              <input
-                id="name"
-                type="text"
-                title="Nom"
-                placeholder="ex: Dupont Jean"
-                value={state.form.name}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'name')}
-                onBlur={(e: ChangeEvent<HTMLInputElement>) => {
-                  setState((prevState) => {
-                    const newState = { ...prevState, isFocused: true };
-                    if (e.target.value.length > 2 && e.target.value.length < 35) {
-                      newState.confirmationName = true;
-                    } else {
-                      newState.confirmationName = false;
-                    }
-                    return newState;
-                  });
-                }}
-                required
-              />
-            </label>
-            {state.confirmationName === false
+        </div>
+        <div className={styles.contact__input}>
+          <label htmlFor="name">
+            <p className={styles.contact__input__label}>
+              Nom
+              <span className={styles.contact__input__label__alert}>*</span>
+            </p>
+            <input
+              id="name"
+              type="text"
+              title="Nom"
+              placeholder="ex: Dupont Jean"
+              value={state.form.name}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'name')}
+              onBlur={(e: ChangeEvent<HTMLInputElement>) => {
+                setState((prevState) => {
+                  const newState = { ...prevState, isFocused: true };
+                  if (e.target.value.length > 2 && e.target.value.length < 35) {
+                    newState.confirmationName = true;
+                  } else {
+                    newState.confirmationName = false;
+                  }
+                  return newState;
+                });
+              }}
+              required
+            />
+          </label>
+          {state.confirmationName === false
               && (
               <span className={styles.contact__input__error}>
                 Veuillez renseigner votre nom / société (entre 3 et 35 caractères)
               </span>
               )}
-          </div>
-          <div className={styles.contact__input}>
-            <label htmlFor="postalCode">
-              <p className={styles.contact__input__label}>
-                Code postal
-                <span className={styles.contact__input__label__alert}>*</span>
-              </p>
-              <input
-                id="postalCode"
-                type="number"
-                className="contact-form-input"
-                name="postalCode"
-                value={state.form.postalCode}
-                onChange={(e) => setState(
-                  { ...state, form: { ...state.form, postalCode: e.target.value } },
-                )}
-                onBlur={(e) => (
-                  e.target.value.length === 5
-                    ? setState({ ...state, confirmationCodePostal: true })
-                    : setState({ ...state, confirmationCodePostal: false })
-                )}
-                placeholder="ex: 78000"
-                minLength={5}
-                maxLength={5}
-                required
-              />
-            </label>
-            {state.confirmationCodePostal === false
+        </div>
+        <div className={styles.contact__input}>
+          <label htmlFor="postalCode">
+            <p className={styles.contact__input__label}>
+              Code postal
+              <span className={styles.contact__input__label__alert}>*</span>
+            </p>
+            <input
+              id="postalCode"
+              type="number"
+              className="contact-form-input"
+              name="postalCode"
+              value={state.form.postalCode}
+              onChange={(e) => setState(
+                { ...state, form: { ...state.form, postalCode: e.target.value } },
+              )}
+              onBlur={(e) => (
+                e.target.value.length === 5
+                  ? setState({ ...state, confirmationCodePostal: true })
+                  : setState({ ...state, confirmationCodePostal: false })
+              )}
+              placeholder="ex: 78000"
+              minLength={5}
+              maxLength={5}
+              required
+            />
+          </label>
+          {state.confirmationCodePostal === false
                 && (
                 <span className={styles.contact__input__error}>
                   Veuillez renseigner votre code postal (5 chiffres)
                 </span>
                 )}
-          </div>
-          <div className={styles.contact__input}>
-            <label htmlFor="email">
-              <p className={styles.contact__input__label}>
-                Email
-                <span className={styles.contact__input__label__alert}>*</span>
-              </p>
-              <input
-                id="email"
-                type="email"
-                title="Email"
-                value={state.form.email}
-                placeholder="exemple@mail.com"
-                onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'email')}
-                onBlur={(e: ChangeEvent<HTMLInputElement>) => (
-                  regex.test(e.target.value)
-                    ? setState({ ...state, confirmationEmail: true })
-                    : setState({ ...state, confirmationEmail: false })
-                )}
-                required
-              />
-            </label>
-            {state.confirmationEmail === false
+        </div>
+        <div className={styles.contact__input}>
+          <label htmlFor="email">
+            <p className={styles.contact__input__label}>
+              Email
+              <span className={styles.contact__input__label__alert}>*</span>
+            </p>
+            <input
+              id="email"
+              type="email"
+              title="Email"
+              value={state.form.email}
+              placeholder="exemple@mail.com"
+              onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'email')}
+              onBlur={(e: ChangeEvent<HTMLInputElement>) => (
+                regex.test(e.target.value)
+                  ? setState({ ...state, confirmationEmail: true })
+                  : setState({ ...state, confirmationEmail: false })
+              )}
+              required
+            />
+          </label>
+          {state.confirmationEmail === false
                 && (
                 <span className={styles.contact__input__error}>
                   Veuillez renseigner votre adresse email
                 </span>
                 )}
-          </div>
-          <div className={styles.contact__input}>
-            <label htmlFor="phone">
-              <p className={styles.contact__input__label}>
-                Téléphone
-              </p>
-              <input
-                id="phone"
-                type="text"
-                name="phone"
-                placeholder="ex: 06 12 34 56 78"
-                value={state.form.phone}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'phone')}
-              />
-            </label>
-          </div>
-          {state.form.phone && (
+        </div>
+        <div className={styles.contact__input}>
+          <label htmlFor="phone">
+            <p className={styles.contact__input__label}>
+              Téléphone
+            </p>
+            <input
+              id="phone"
+              type="text"
+              name="phone"
+              placeholder="ex: 06 12 34 56 78"
+              value={state.form.phone}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.value, 'phone')}
+            />
+          </label>
+        </div>
+        {state.form.phone && (
           <div className={styles.contact__input}>
             <label htmlFor="date">
               <p className={styles.contact__input__label}>
@@ -364,78 +351,82 @@ export default function ContactForm() {
               />
             </label>
           </div>
-          )}
-          <div className={styles.contact__input}>
-            <label htmlFor="message">
-              <p className={styles.contact__input__label}>
-                Message
-                <span className={styles.contact__input__label__alert}>*</span>
-              </p>
-              <textarea
-                id="message"
-                rows={state.textArea}
-                title="Message*"
-                value={state.form.message}
-                onChange={handleChangeMessage}
-                onBlur={(e: React.FocusEvent<HTMLTextAreaElement>) => (
-                  e.target.value.length > 5 && e.target.value.length < 500
-                    ? setState({ ...state, confirmationMessage: true })
-                    : setState({ ...state, confirmationMessage: false }))}
-                name="message"
-                wrap="off"
-                placeholder="ex: Bonjour, j'ai une invasion de taupes dans mon jardin, pouvez-vous m'aider ?"
-                required
-              />
-            </label>
-            {state.confirmationMessage === false
+        )}
+        <div className={styles.contact__input}>
+          <label htmlFor="message">
+            <p className={styles.contact__input__label}>
+              Message
+              <span className={styles.contact__input__label__alert}>*</span>
+            </p>
+            <textarea
+              id="message"
+              rows={state.textArea}
+              title="Message*"
+              value={state.form.message}
+              onChange={handleChangeMessage}
+              onBlur={(e: React.FocusEvent<HTMLTextAreaElement>) => (
+                e.target.value.length > 5 && e.target.value.length < 500
+                  ? setState({ ...state, confirmationMessage: true })
+                  : setState({ ...state, confirmationMessage: false }))}
+              name="message"
+              wrap="off"
+              placeholder="ex: Bonjour, j'ai une invasion de taupes dans mon jardin, pouvez-vous m'aider ?"
+              required
+            />
+          </label>
+          {state.confirmationMessage === false
                 && (
                 <span className={styles.contact__input__error}>
                   Veuillez renseigner votre message (entre 5 et 500 caractères)
                 </span>
                 )}
-          </div>
-          <div className={styles.contact__input}>
-            <label htmlFor="image">
-              <p className={styles.contact__input__label}>
-                Pièces jointes (facultatif)
-              </p>
-              <input
-                type="file"
-                id="image"
-                name="image"
-                accept="image/*"
-                onChange={handleFileChange}
-              />
-            </label>
-            {state.confirmationImage === false
+        </div>
+        <div className={styles.contact__input}>
+          <label htmlFor="image">
+            <p className={styles.contact__input__label}>
+              Pièces jointes (facultatif)
+            </p>
+            <input
+              type="file"
+              id="image"
+              name="image"
+              accept="image/*"
+              onChange={handleFileChange}
+            />
+          </label>
+          {state.confirmationImage === false
                 && (
                 <span className={styles.contact__input__error}>
                   Image non valide (JPG, PNG, AVIF, WEBP)
                 </span>
                 )}
-          </div>
-          <div className={styles.contact__input__chekbox}>
-            <label htmlFor="emailReturn">
-              <input
-                type="checkbox"
-                name="emailReturn"
-                id="emailReturn"
-                checked={state.form.emailReturn}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.checked, 'emailReturn')}
-              />
-              <span>
-                Recevoir une copie de cet email
-              </span>
-            </label>
-          </div>
-          <div className="contact-form_button">
-            <button type="submit" className="button">
-              Envoyer
-              <i className="icon-paper-plane" />
-            </button>
-          </div>
-        </form>
-      </div>
-    </>
+        </div>
+        <div className={styles.contact__input__chekbox}>
+          <label htmlFor="emailReturn">
+            <input
+              type="checkbox"
+              name="emailReturn"
+              id="emailReturn"
+              checked={state.form.emailReturn}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => changeField(e.target.checked, 'emailReturn')}
+            />
+            <span>
+              Recevoir une copie de cet email
+            </span>
+          </label>
+        </div>
+        <div className="contact-form_button">
+          <button type="submit" className="button">
+            Envoyer
+            <i className="icon-paper-plane" />
+          </button>
+        </div>
+      </form>
+      <Confirmation
+        title={state.modal.title}
+        message={state.modal.message}
+        toggleModal={state.modal.toggleModal}
+      />
+    </div>
   );
 }
