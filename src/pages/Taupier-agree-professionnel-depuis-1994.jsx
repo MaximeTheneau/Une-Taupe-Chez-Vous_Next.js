@@ -105,10 +105,10 @@ export default function TaupierPage({ page }) {
             )}
             {paragraphArticle.paragraph && (
               <div key={paragraphArticle.id} className={styles.page__contents__paragraph}>
-                {paragraphArticle.imgPostParagh && (
+                {paragraphArticle.imgPost && (
                 <figure className={styles.page__contents__paragraph__figure}>
                   <ImageLoader
-                    src={paragraphArticle.imgPostParagh}
+                    src={paragraphArticle.imgPost}
                     alt={paragraphArticle.altImg}
                     width={paragraphArticle.imgWidth}
                     height={paragraphArticle.imgHeight}
