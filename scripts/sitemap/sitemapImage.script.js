@@ -19,7 +19,7 @@ const generateSitemapImages = async () => {
                   <image:image>
                     <image:loc>${page.imgPost}</image:loc>
                   </image:image>
-                  ${page.paragraphPosts.map((paragraph) => paragraph.imgPostParagh
+                  ${page.paragraphPosts.map((paragraph) => paragraph.imgPost
                        && `<image:image>
                          <image:loc>${paragraph.imgPost}</image:loc>
                        </image:image>`).join('')}
