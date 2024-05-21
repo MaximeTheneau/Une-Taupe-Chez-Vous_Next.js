@@ -15,10 +15,11 @@ export default function ImageLoader({
       height={height}
       width={width}
       srcSet={srcset}
-      loading={(priority ? 'eager' : 'lazy')}
-      fetchpriority={priority ? 'hight' : 'low'}
+      loading={priority ? 'eager' : 'lazy'}
+      fetchpriority={priority ? 'high' : 'low'}
       decoding="async"
       sizes="100vw"
     />
+
   );
 }

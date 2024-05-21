@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import Cards from '../components/cards/cards';
+import Cards from '../components/cardsHome/cards';
 import styles from '../styles/Home.module.scss';
 import fetcher from '../utils/fetcher';
 import LocalBusinessJsonLd from '../components/jsonLd/LocalBusinessJsonLd';
@@ -13,19 +13,17 @@ export async function getStaticProps() {
   const accueil = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Accueil`);
   const services = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&category=Interventions`);
   const testimonials = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Temoignages`);
-  const keyword = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=keyword&limit=3&id=17 `);
 
   return {
     props: {
       accueil,
       services,
       testimonials,
-      keyword,
     },
   };
 }
 export default function Home({
-  accueil, services, testimonials, keyword,
+  accueil, services, testimonials,
 }) {
   return (
     <>
@@ -66,24 +64,22 @@ export default function Home({
         logoUrl={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/logo-une-taupe-chez-vous.png`}
       />
       <div className={styles.home__imagesFull}>
+        <div className={styles.home__imagesFull__image}>
+          <ImageLoader
+            src={`${accueil.imgPost}`}
+            alt={accueil.altImg || accueil.title}
+            width={accueil.imgWidth}
+            height={accueil.imgHeight}
+            srcset={accueil.srcset}
+            priority
+          />
+        </div>
         <div className={styles.home__imagesFull__text}>
-          <div className={styles.home__imagesFull__image}>
-            <ImageLoader
-              src={`${accueil.imgPost}`}
-              alt={accueil.altImg || accueil.title}
-              width={accueil.imgWidth}
-              height={accueil.imgHeight}
-              srcset={accueil.srcset}
-              priority
-            />
-            <div className={styles.home__imagesFull__image__text}>
-              <h1>
-                {accueil.title}
-              </h1>
-              <p className={styles['home__imagesFull__text--paragraph']} dangerouslySetInnerHTML={{ __html: accueil.contentsHTML }} />
-              <DevisButton />
-            </div>
-          </div>
+          <h1>
+            {accueil.title}
+          </h1>
+          <p className={styles['home__imagesFull__text--paragraph']} dangerouslySetInnerHTML={{ __html: accueil.contentsHTML }} />
+          <DevisButton />
         </div>
       </div>
       <section className={styles.home}>
@@ -139,10 +135,6 @@ export default function Home({
           )
         ))}
         <DevisButton />
-      </section>
-      <section>
-        <h2>Découvrez aussi nos articles :</h2>
-        <Cards cards={keyword} />
       </section>
     </>
   );

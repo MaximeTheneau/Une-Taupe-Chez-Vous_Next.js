@@ -2,30 +2,19 @@
 
 .home{
   &__imagesFull{
-    &__image{
-      & img {
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-        margin: 0 auto;
+    background-color: $color-primary;
+    display: flex;
+    flex-wrap: wrap;
+      &__image {
+        display: inline-block;
+        width: 50%;
       }
-      position: relative;
       &__text{
-        top: 0;
-        left: 0;
-        transform: translate(0, 50%);
-        position: absolute;
-        padding-bottom: 1rem;
-        background-color: $color-white-opacity;
-        width: 100%;
-        text-align: center;
-        & a{
-          margin: 0 auto;
-        }
+        padding: 1rem;
+        width: 50%;
       }
-
+      
     }
-  }
   &__list{
     list-style: disc;
     padding-left: 2rem;
@@ -119,15 +108,12 @@
       }
     }
     &__imagesFull{
-      &__image{
-        
-        &__text{
-          background: $color-primary;
-          position: relative;
-          transform: translate(0, 0);
-          padding: 1rem;
-        }
+      &__image img{
+        width: 100%;
       }
+        &__text{
+          width: 100%;
+        }
     }
     &__faq{
       width: 90%;
@@ -136,3 +122,12 @@
   }
 }
 
+@media screen and (min-width: 622px)  {
+  .home{
+    &__imagesFull{
+      &__image{
+        width: 622px;
+      }
+    }
+  }
+}
