@@ -1,5 +1,5 @@
-import Card from './card';
-import styles from './Card.module.scss';
+import Card from './cardHome';
+import styles from './CardHome.module.scss';
 
 export default function Cards({ cards }) {
   return (

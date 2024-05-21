@@ -5,6 +5,7 @@
     background-color: $color-primary;
     display: flex;
     flex-wrap: wrap;
+    margin-bottom: 1rem;
       &__image {
         display: inline-block;
         width: 50%;
@@ -16,20 +17,27 @@
       
     }
   &__list{
-    list-style: disc;
-    padding-left: 2rem;
-    &__item{
-      margin: 1rem 0;
-      &__image{
-        width: 100%;
-        height: auto;
-        object-fit: cover;
+    background: $color-primary;
+    & ul{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      align-self: center;
+    }
+    & li{
+      list-style: none;
+      margin: 0;
+      width: 30%;
+      padding: 1rem;
+      & strong{
+        display: block;
       }
     }
     & h2 {
     width: 100%;
   }
   }
+
   &__testimonials{
     padding: 1rem;
     border: $font-color-opacity 1px solid;
@@ -101,6 +109,11 @@
 
 @media screen and (max-width: 768px){
   .home{
+      & ul{
+      & li{
+        width: 100%;
+      }
+    }
     &__list{
       &__item{
         width: 100%;
@@ -124,10 +137,12 @@
 
 @media screen and (min-width: 622px)  {
   .home{
+
     &__imagesFull{
       &__image{
         width: 622px;
       }
+
     }
   }
 }

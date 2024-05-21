@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import Cards from '../components/cardsHome/cards';
+import Cards from '../components/cardsHome/cardsHome';
 import styles from '../styles/Home.module.scss';
 import fetcher from '../utils/fetcher';
 import LocalBusinessJsonLd from '../components/jsonLd/LocalBusinessJsonLd';
@@ -10,21 +10,23 @@ import DevisButton from '../components/button/DevisButton';
 import ImageLoader from '../components/image/ImageLoader';
 
 export async function getStaticProps() {
-  const accueil = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Accueil`);
-  const services = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&limit=3&category=Interventions`);
-  const testimonials = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Temoignages`);
+  // const testimonials = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Temoignages`);
+  const home = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/home`);
 
   return {
     props: {
-      accueil,
-      services,
-      testimonials,
+      accueil: home.home,
+      services: home.interventions,
+      testimonials: home.testimonials,
     },
   };
 }
 export default function Home({
   accueil, services, testimonials,
 }) {
+  const { paragraphPosts } = accueil;
+  const firstPost = paragraphPosts[0];
+  const otherPosts = paragraphPosts.slice(1);
   return (
     <>
       <Head>
@@ -75,40 +77,25 @@ export default function Home({
           />
         </div>
         <div className={styles.home__imagesFull__text}>
-          <h1>
-            {accueil.title}
-          </h1>
+          <h1>{accueil.title}</h1>
           <p className={styles['home__imagesFull__text--paragraph']} dangerouslySetInnerHTML={{ __html: accueil.contentsHTML }} />
           <DevisButton />
         </div>
       </div>
       <section className={styles.home}>
-        {/* --Services--*/}
-        <div className={styles.home__category}>
-          <div className={styles.home__category__title}>
-            <Link href="../Interventions">
-              <h2>Interventions</h2>
-              <span>
-                Voir plus
-              </span>
-            </Link>
-          </div>
+        {firstPost && (
+        <div key={firstPost.subtitle}>
+          <h2>{firstPost.subtitle}</h2>
+          <div dangerouslySetInnerHTML={{ __html: firstPost.paragraph }} />
         </div>
+        )}
+        {/* --Services--*/}
         <Cards cards={services} />
-        <h2>Taupier au Service de la Nature</h2>
-        <p>
-          Optez pour un piégeur agréé qui œuvre en harmonie avec la nature.
-          Nos interventions sont conçues pour être sans danger pour
-          l&apos;environnement et respectueuses des animaux de compagnie.
-          Faites confiance à notre expertise pour préserver la biodiversité
-          de votre jardin tout en assurant un contrôle efficace des taupes.
-        </p>
-        {accueil.paragraphPosts.map((paragraphPosts) => (
-          <div
-            key={paragraphPosts.subtitle}
-          >
-            <h2>{paragraphPosts.subtitle}</h2>
-            <div dangerouslySetInnerHTML={{ __html: paragraphPosts.paragraph }} />
+
+        {otherPosts.map((post) => (
+          <div key={post.subtitle} className={`${post.subtitle === 'Pourquoi Choisir Nos Services de Taupier Agréé ?' ? styles.home__list : ''}`}>
+            <h2>{post.subtitle}</h2>
+            <div dangerouslySetInnerHTML={{ __html: post.paragraph }} />
           </div>
         ))}
         <h2>
@@ -121,7 +108,7 @@ export default function Home({
         <p>
           {testimonials.contents}
         </p>
-        <div dangerouslySetInnerHTML={{ __html: testimonials.paragraphPosts[0].paragraph }} className="overflow-x-auto" />
+        <div dangerouslySetInnerHTML={{ __html: testimonials.paragraphPosts[0].paragraph }} />
         {accueil.listPosts.map((listArticle) => (
           listArticle.title !== null && (
           <div key={listArticle.title}>
@@ -134,7 +121,6 @@ export default function Home({
           </div>
           )
         ))}
-        <DevisButton />
       </section>
     </>
   );
