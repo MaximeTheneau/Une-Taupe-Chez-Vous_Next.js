@@ -64,7 +64,9 @@ header a:hover{
   text-decoration: none;
 }
 //* Form
-
+form{
+  width: 50%;
+}
 input,
 textarea,
 select
@@ -87,6 +89,7 @@ select
     color: $font-color;
     opacity: 0.5;
   }
+  
 }
 input:-webkit-autofill{
   background: #fff;
@@ -236,7 +239,7 @@ iframe {
   }
 }
 .w-50{
-  width: 50%;
+  width: 50% !important;
 }
 .h-30{
   height: 25vh;

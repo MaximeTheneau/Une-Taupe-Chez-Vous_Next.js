@@ -10,7 +10,6 @@ import DevisButton from '../components/button/DevisButton';
 import ImageLoader from '../components/image/ImageLoader';
 
 export async function getStaticProps() {
-  // const testimonials = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Temoignages`);
   const home = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/home`);
 
   return {
