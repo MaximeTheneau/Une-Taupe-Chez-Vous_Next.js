@@ -7,12 +7,18 @@
     flex-wrap: wrap;
     margin-bottom: 1rem;
       &__image {
-        display: inline-block;
-        width: 50%;
+        margin: 0 auto;
+        & img{
+          border-radius: 100%;
+        }
       }
       &__text{
         padding: 1rem;
         width: 50%;
+        & h2{
+          font-weight: $font-size-bold;
+          margin: 1rem 0;
+        }
       }
       
     }
@@ -87,7 +93,7 @@
     width: 90%;
     margin: 0 auto;
     & h2 {
-      font-size: $font-size-large;
+      font-size: var(--font-size-large);
       font-weight: $font-size-bold;
       margin: 1rem !important;
   }

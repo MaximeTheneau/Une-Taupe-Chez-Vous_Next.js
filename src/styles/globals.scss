@@ -4,6 +4,12 @@
 @import './variables.scss';
 @import './fonts.scss';
 
+:root{
+  --font-size-large: 2rem;
+  --font-size-medium: 1.5rem;
+  --font-size-small: 0.8rem;
+}
+
 body{
   font-family: 'fontGeneral', sans-serif;
   color: $font-color;
@@ -17,11 +23,11 @@ h1,h2,h3,h4,h5,h6{
   display: inline-block;
 }
 h1{
-  font-size: $font-size-large;
+  font-size: var(--font-size-large);
   padding: 0.5rem 0;
 }
 h2{
-  font-size: $font-size-medium;
+  font-size: var(--font-size-medium);
   display: inline-block;
 }
 
@@ -157,7 +163,7 @@ select{
 
 .caption{
   color: $font-color-light;
-  font-size: $font-size-small;
+  font-size: var(--font-size-small);
   margin: 1rem 0 0 0;
   width: 100%;
 }
@@ -286,6 +292,16 @@ iframe {
 strong{
   font-weight: bold;
 }
+
+@media screen and (min-width: 768px){
+  :root{
+    --font-size-large: calc(1rem + ((3vw - 0.48rem) * 1.3889));
+    --font-size-medium: calc(1rem + ((2vw - 0.48rem) * 1.3889));
+    --font-size-small: 0.8rem;
+  }
+  
+}
+
 @media screen and (max-width: 900px){
  
   form {

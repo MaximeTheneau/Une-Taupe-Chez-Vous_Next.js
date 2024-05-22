@@ -77,7 +77,7 @@ export default function Home({
         </div>
         <div className={styles.home__imagesFull__text}>
           <h1>{accueil.title}</h1>
-          <p className={styles['home__imagesFull__text--paragraph']} dangerouslySetInnerHTML={{ __html: accueil.contentsHTML }} />
+          <div className={styles['home__imagesFull__text--paragraph']} dangerouslySetInnerHTML={{ __html: accueil.contents }} />
           <DevisButton />
         </div>
       </div>

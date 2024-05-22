@@ -29,12 +29,12 @@
         }
         &__chekbox{
             & label span {
-                font-size: $font-size-small;
+                font-size: var(--font-size-small);
                 padding: 1rem;
             }
             & input{
-                width:$font-size-small;
-                height: $font-size-small;
+                width:var(--font-size-small);
+                height: var(--font-size-small);
                 margin: 1rem 0;
             }
             display: inline;

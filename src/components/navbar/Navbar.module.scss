@@ -17,7 +17,7 @@
         cursor: pointer;
     }
     & i{
-        font-size: 1rem;
+        font-size: var(--font-size-small);
         padding: 0.5rem;
         border-radius: 25%;
         cursor: pointer;

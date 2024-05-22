@@ -13,14 +13,14 @@
         width: $width-desktop;
         margin: auto;
         &__table{
-            font-size: $font-size-small;
+            font-size: var(--font-size-small);
             width: 100%;
             flex-direction: row;
             justify-content: space-evenly;
             font-weight: 900;
             & i{
                 cursor: pointer;
-                font-size: $font-size-small;
+                font-size: var(--font-size-small);
                 
                 text-shadow: $text-shadow-black;
             }
@@ -28,7 +28,7 @@
     }
     & h2,
     & p{
-        font-size: $font-size-small;
+        font-size: var(--font-size-small);
         text-align: center;
     }
     
@@ -42,7 +42,7 @@
         width: 20%;
         margin: 0.5rem 1rem 0 0rem;        
         padding: 0.5rem;
-        font-size: $font-size-small;
+        font-size: var(--font-size-small);
     }
 }
 
