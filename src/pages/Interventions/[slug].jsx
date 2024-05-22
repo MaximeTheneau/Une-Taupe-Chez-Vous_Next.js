@@ -87,7 +87,7 @@ export default function Slug({ post }) {
             )}
           </figure>
         </div>
-        <div dangerouslySetInnerHTML={{ __html: post.contentsHTML }} />
+        <div dangerouslySetInnerHTML={{ __html: post.contents }} />
         <div className="overflow-x-auto">
           <table className={styles.page__table}>
             <thead>

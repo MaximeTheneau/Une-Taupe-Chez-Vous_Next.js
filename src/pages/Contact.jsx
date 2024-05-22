@@ -5,6 +5,7 @@ import styles from '../styles/Pages.module.scss';
 import NotCopie from '../components/notCopie/NotCopie';
 import fetcher from '../utils/fetcher';
 import DevisButton from '../components/button/DevisButton';
+import ImageLoader from '../components/image/ImageLoader';
 
 export async function getStaticProps() {
   const page = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Contact`);
@@ -45,9 +46,10 @@ export default function Contact({ page }) {
       <section className={styles.page}>
         <h1>{page.title}</h1>
         <div className={styles.page__contact__block} itemScope itemType="https://schema.org/">
+          {' '}
           <p>
             <strong>Société : </strong>
-            <span itemProp="name">Une Taupe Chez Vous</span>
+            <span itemProp="name">Une Taupe Chez Vous </span>
           </p>
           <p itemProp="address">
             <strong>Adresse : </strong>
@@ -60,9 +62,8 @@ export default function Contact({ page }) {
             <Link href="tel:+33232264958"> 02 32 26 49 58</Link>
           </p>
           <NotCopie />
-          <DevisButton />
         </div>
-        <div dangerouslySetInnerHTML={{ __html: page.contentsHTML }} />
+        <div dangerouslySetInnerHTML={{ __html: page.contents }} />
         <div className={styles.page__contact}>
           <div className={styles.page__contact__block}>
             <ContactForm />
