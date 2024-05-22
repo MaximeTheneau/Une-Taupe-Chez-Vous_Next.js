@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styles from './Faq.module.scss';
+import stylesPage from '../../styles/Pages.module.scss';
 
 /**
 Faq element component
@@ -7,35 +8,18 @@ Faq element component
 @param {Function} toggleFAQ - Function to toggle faq open state
 @see Faq.module.scss
 */
-function FaqElements({ faq, toggleFAQ }) {
+function FaqElements({ faq }) {
   return (
     <li
       key={faq.id}
       role="menuitem"
       className={styles.faqs}
     >
-      <Link
-        role="button"
-        href={`/Foire-aux-questions#${faq.id}`}
-        aria-expanded={faq.open}
-        onClick={() => toggleFAQ(faq.id)}
-      >
-
-        <h2 className={styles.faq__question}>
-          <span>
-            {faq.title}
-          </span>
-          {faq.open
-            ? <i className="icon-x" />
-            : <i className="icon-open" />}
-        </h2>
-      </Link>
-
-      <div className={`faq-answer ${faq.open ? 'block' : 'none'}`}>
-        <p>{faq.description}</p>
-        {faq.link && (
-        <div className={styles.page__contents__paragraph__links}>
-          <span className={styles.page__contents__paragraph__links__link}>
+      <h2 className={styles.faq__question}>{faq.title}</h2>
+      <p>{faq.description}</p>
+      {faq.link && (
+        <div className={stylesPage.page__contents__paragraph__links}>
+          <span className={stylesPage.page__contents__paragraph__links__link}>
             → A lire aussi :
             <Link href={faq.link}>
               {' '}
@@ -43,8 +27,7 @@ function FaqElements({ faq, toggleFAQ }) {
             </Link>
           </span>
         </div>
-        )}
-      </div>
+      )}
     </li>
   );
 }

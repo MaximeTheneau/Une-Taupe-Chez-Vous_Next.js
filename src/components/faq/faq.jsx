@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import FaqElements from './faqElements';
+import styles from './Faq.module.scss';
 
 /**
  * Component to render a list of FAQs
@@ -21,7 +22,7 @@ export default function Faq({ faq }) {
     })));
   };
   return (
-    <ul role="menu">
+    <ul role="menu" className={styles.faq}>
       {faqs.map((item) => (
         <FaqElements faq={item} index={item.id} key={item.id} toggleFAQ={toggleFAQ} />
       ))}

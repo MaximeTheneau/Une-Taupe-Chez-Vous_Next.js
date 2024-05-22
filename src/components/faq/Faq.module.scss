@@ -1,48 +1,19 @@
 @import '../../styles/variables.scss';
 
 .faqs{
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    border: 1px solid $font-color-light !important;
-    z-index: 0;
-    cursor: pointer;
-    margin: 1rem 0;
-    border-radius: 12px;
-   
+    padding: 0.5rem 1rem ;
+    margin: 0 2rem 1rem 2rem;
+    border-bottom: $font-color-light 0.01rem solid;
+    & h2 {
+    }
     & p{
         transition: opacity 3s ease;
-        padding: 0.5rem 1rem;
         width: 100%;
     }
     &:hover button{
         background: $color-primary !important;
     }
-}
 
-.faq{
-    &__question{
-        color: $color-link !important;
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        background: none;
-        width: 100%;
-        padding: 1rem 0.5rem;
-        color: $font-color;
-        &:focus{
-            outline: solid 1px $font-color;
-            background: none;
-        }
-        & a{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            & i {
-                font-size: 1rem;
-            }
-        }
-
-    }
 }
 
 @media screen and (min-width: 768px){
