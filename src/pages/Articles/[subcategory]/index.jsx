@@ -78,7 +78,7 @@ export default function Home({ articles, subcategoryList }) {
         </section>
         <section>
           {/* --Articles--*/}
-          <h2>Les derniers articles :</h2>
+          <p>Les derniers articles :</p>
           <div className={styles.home}>
             <Cards cards={articles} />
           </div>
