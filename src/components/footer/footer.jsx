@@ -47,19 +47,19 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link href="https://www.linkedin.com/company/une-taupe-chez-vous" target="_blank" prefetch={false}>
+              <Link href="https://www.linkedin.com/company/une-taupe-chez-vous" rel="noopener" target="_blank" prefetch={false}>
                 <i className="icon-linkedin" />
                 Linkedin
               </Link>
             </li>
             <li>
-              <Link href="https://twitter.com/UneTaupe_" target="_blank" prefetch={false}>
+              <Link href="https://twitter.com/UneTaupe_" target="_blank" rel="noopener" prefetch={false}>
                 <i className="icon-twitter" />
                 Twitter
               </Link>
             </li>
             <li>
-              <Link href="https://www.facebook.com/unetaupechezvous/" target="_blank" prefetch={false}>
+              <Link href="https://www.facebook.com/unetaupechezvous/" target="_blank" rel="noopener" prefetch={false}>
                 <i className="icon-facebook" />
                 Facebook
               </Link>

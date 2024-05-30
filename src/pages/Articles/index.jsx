@@ -49,7 +49,7 @@ export default function Home({ page, articles, subcategoryList }) {
         <h1>{page.title}</h1>
         <CategoryPage category subcategoryList={subcategoryList} />
         {/* --Articles--*/}
-        <h2>Les derniers articles :</h2>
+        <p>Les derniers articles :</p>
 
         <div className={styles.home}>
           <Cards cards={articles} />

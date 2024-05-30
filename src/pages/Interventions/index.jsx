@@ -46,7 +46,7 @@ export default function Home({ articles, page }) {
 
         <h1>{page.title}</h1>
         <div dangerouslySetInnerHTML={{ __html: page.contentsHTML }} />
-        <h2>Nos interventions</h2>
+        <p>Nos interventions</p>
         <div className={styles.home}>
           <Cards cards={articles} />
         </div>

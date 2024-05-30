@@ -43,7 +43,7 @@ export default function Slug({ post }) {
       if (matches) {
         info.localisation = `${matches[1].trim()}`;
         const cleanLink = matches[2].trim().replace(/^(https?:\/\/)?(www\.)?/, '');
-        info.siteWeb = `<a href="${matches[2].trim()}" target="_blank">${cleanLink}</a>`;
+        info.siteWeb = `<a href="${matches[2].trim()}" target="_blank" rel="noopener">${cleanLink}</a>`;
         info.services = `${matches[3].trim()}`;
       }
     }

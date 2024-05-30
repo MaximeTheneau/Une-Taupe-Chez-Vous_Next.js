@@ -60,7 +60,7 @@ export default function Home({
       <LocalBusinessJsonLd descriptionMeta={accueil.metaDescription} />
       <SearchJsonLd />
       <LogoJsonLd
-        name="Une taupe chez vous"
+        name="Une Taupe Chez Vous"
         url={process.env.NEXT_PUBLIC_URL}
         logoUrl={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/logo-une-taupe-chez-vous.png`}
       />

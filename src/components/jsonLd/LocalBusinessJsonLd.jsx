@@ -5,9 +5,10 @@ export default function LocalBusinessJsonLd({ descriptionMeta }) {
   const jsonLdData = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
-    name: 'Une taupe chez vous',
+    name: 'Une Taupe Chez Vous',
     description: descriptionMeta,
     image: `${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/logo-une-taupe-chez-vous.png`,
+    logo: `${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/logo-une-taupe-chez-vous.png`,
     url: process.env.NEXT_PUBLIC_URL,
     telephone: '+33232264958',
     sameAs: [
