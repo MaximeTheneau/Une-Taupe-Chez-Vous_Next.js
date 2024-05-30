@@ -11,10 +11,10 @@ export default function Card({ card }) {
         rel="preload"
       >
         <img
-          src={`${card.imgPost}?width=700&height=700`}
+          src={`${card.imgPost}?width=500&height=500`}
           alt={card.altImg || card.title}
-          width={700}
-          height={700}
+          width={500}
+          height={500}
           loading="lazy"
           decoding="async"
         />
