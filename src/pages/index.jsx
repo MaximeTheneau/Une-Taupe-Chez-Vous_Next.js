@@ -90,7 +90,6 @@ export default function Home({
         )}
         {/* --Services--*/}
         <Cards cards={services} />
-
         {otherPosts.map((post) => (
           <div key={post.subtitle} className={`${post.subtitle === 'Pourquoi Choisir Nos Services de Taupier Agréé ?' ? styles.home__list : ''}`}>
             <h2>{post.subtitle}</h2>
