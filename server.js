@@ -28,7 +28,7 @@ app.post('/api/webhook', (req, res) => {
   }
 
   if (req.headers['x-taupe-event'] === 'build') {
-    exec('npm run build', (error) => {
+    exec('pnpm run build', (error) => {
       if (error) {
         return res.status(500).send(`Error running npm run build: ${error}`);
       }
@@ -53,7 +53,7 @@ app.post('/api/webhook', (req, res) => {
             gitPull.stdout.on('data', (data) => console.error(500).send(`Error pull command changes: ${data}`));
 
             gitPull.stderr.on('data', (data) => console.error(500).send(`Error pull command changes: ${data}`));
-            exec('npm run build', (error) => {
+            exec('pnpm run build', (error) => {
               if (error) {
                 return res.status(500).send(`Error running npm run build: ${error}`);
               }
@@ -70,7 +70,7 @@ app.post('/api/webhook', (req, res) => {
 
     gitPull.on('close', (code) => {
       if (code === 0) {
-        exec('npm run build', (error) => {
+        exec('pnpm run build', (error) => {
           if (error) {
             return res.status(500).send(`Error running npm run build: ${error}`);
           }
