@@ -36,7 +36,7 @@ app.post('/api/webhook', (req, res) => {
     });
   }
 
-  if (req.headers['x-github-event'] === 'push') {
+  if (req.headers['x-taupe-event'] === 'push') {
     const gitStash = spawn('git', ['diff', '--quiet']);
     const gitPull = spawn('git', ['pull', 'origin', branch]);
 
