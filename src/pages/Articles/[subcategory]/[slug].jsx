@@ -76,7 +76,7 @@ export default function Slug({ post, desc }) {
           fetchPriority="high"
         />
       </Head>
-      {ArticlesAdsense}
+      <ArticlesAdsense />
       {/* Schema.org */}
       <ArticleJsonLd post={post} urlPost={urlPost} />
       <BreadcrumbJsonLd paragraphPosts={post.paragraphPosts} urlPost={urlPost} />
