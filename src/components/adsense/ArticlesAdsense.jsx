@@ -1,7 +1,12 @@
 export default function ArticlesAdsense() {
   return window.localStorage.getItem('cookiesAdsense')
     && (
-    <div style={{ display: 'block', textAlign: 'center' }}>
+    <div id="adSense">
+      <script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9194552698690511"
+        crossorigin="anonymous"
+      />
       <ins
         className="adsbygoogle"
         style={{ display: 'block', textAlignt: 'center' }}
