@@ -101,7 +101,7 @@ export default function CookiesModal() {
     }
     document.head.appendChild(script);
 
-    if (window.localStorage.getItem('cookiesAdsense')) {
+    if (!window.localStorage.getItem('cookiesAdsense')) {
       return;
     }
     const adsenseScript = document.createElement('script');
