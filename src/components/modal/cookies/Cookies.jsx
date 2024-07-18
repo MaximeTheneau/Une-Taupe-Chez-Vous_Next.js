@@ -6,6 +6,7 @@ export default function CookiesModal() {
   const [cookiesModal, setCookiesModal] = useState(null);
   const [state, setState] = useState({
     cookiesGoogle: false,
+    cookiesAdsense: false,
     cookiesWebmaster: false,
     cookiesChoice: false,
     cookiesAll: false,
@@ -99,6 +100,17 @@ export default function CookiesModal() {
       document.head.removeChild(existingScript);
     }
     document.head.appendChild(script);
+
+    if (window.localStorage.getItem('cookiesAdsense')) {
+      return;
+    }
+    const adsenseScript = document.createElement('script');
+    adsenseScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9194552698690511';
+    adsenseScript.async = true;
+    adsenseScript.crossOrigin = 'anonymous';
+    document.body.appendChild(adsenseScript);
+
+    (window.adsbygoogle = window.adsbygoogle || []).push({});
   }, [cookiesModal, state.cookiesGoogle]);
 
   const toggleCookies = (field, value) => {
@@ -147,6 +159,11 @@ export default function CookiesModal() {
                 label="Google Analytics GU4"
                 checked={state.cookiesGoogle}
                 onClick={() => toggleCookies('cookiesGoogle', !state.cookiesGoogle)}
+              />
+              <CookieChoice
+                label="Google Adsense"
+                checked={state.cookiesAdsense}
+                onClick={() => toggleCookies('cookiesAdsense', !state.cookiesAdsense)}
               />
             </tbody>
           </table>
