@@ -18,7 +18,7 @@ export default function ArticlesAdsense() {
       <ins
         className="adsbygoogle"
         style={{ display: 'block' }}
-        data-ad-layout="in-article"
+        data-ad-client="ca-pub-9194552698690511"
         data-ad-slot="7832509827"
         data-ad-format="auto"
         data-full-width-responsive="true"
