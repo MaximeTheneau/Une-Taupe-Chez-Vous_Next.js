@@ -4,7 +4,13 @@ import CookieChoice from './CookieChoice';
 import { useCookies } from '../../../context/CookiesContext';
 
 const createGoogleAnalyticsScript = (cookiesGoogle) => {
+  const scriptInit = document.createElement('script');
+  scriptInit.async = true;
+  scriptInit.src = `https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`;
+  scriptInit.id = 'google-analytics-init';
+
   const script = document.createElement('script');
+
   script.id = 'google-analytics';
 
   const consentSettings = cookiesGoogle ? {
@@ -29,7 +35,7 @@ const createGoogleAnalyticsScript = (cookiesGoogle) => {
     gtag('js', new Date());
   `;
   script.textContent = scriptCode;
-  return script;
+  return { scriptInit, script };
 };
 
 export default function CookiesModal() {
@@ -48,8 +54,14 @@ export default function CookiesModal() {
     if (window.localStorage.getItem('cookiesModal')) {
       updateCookies('cookiesGoogle', window.localStorage.getItem('cookiesGoogle'));
       const cookiesGoogleValue = window.localStorage.getItem('cookiesGoogle') !== 'false';
-      const script = createGoogleAnalyticsScript(cookiesGoogleValue);
+      const { scriptInit, script } = createGoogleAnalyticsScript(cookiesGoogleValue);
       const existingScript = document.getElementById('google-analytics');
+      const existingScriptInit = document.getElementById('google-analytics-init');
+
+      if (existingScriptInit) {
+        document.head.removeChild(existingScriptInit);
+      }
+      document.head.appendChild(scriptInit);
 
       if (existingScript) {
         document.head.removeChild(existingScript);
