@@ -114,6 +114,7 @@ export default function CookiesModal() {
     document.body.classList.remove('overflow-hidden');
     window.localStorage.setItem('cookiesModal', true);
     window.localStorage.setItem('cookiesGoogle', true);
+    window.localStorage.setItem('cookiesAdsense', true);
     setState({ ...state, cookiesGoogle: true });
     setCookiesModal(true);
   };
