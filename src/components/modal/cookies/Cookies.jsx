@@ -1,134 +1,89 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import style from '../Modal.module.scss';
 import CookieChoice from './CookieChoice';
+import { useCookies } from '../../../context/CookiesContext';
+
+const createGoogleAnalyticsScript = (cookiesGoogle) => {
+  const script = document.createElement('script');
+  script.id = 'google-analytics';
+
+  const consentSettings = cookiesGoogle ? {
+    ad_storage: 'granted',
+    ad_user_data: 'granted',
+    ad_personalization: 'granted',
+    analytics_storage: 'granted',
+  } : {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: 'denied',
+  };
+  const consent = cookiesGoogle ? 'update' : 'default';
+  const scriptCode = `
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', "${consent}", ${JSON.stringify(consentSettings)});
+    gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}', {
+      page_path: window.location.pathname
+    });
+    gtag('js', new Date());
+  `;
+  script.textContent = scriptCode;
+  return script;
+};
 
 export default function CookiesModal() {
-  const [cookiesModal, setCookiesModal] = useState(null);
-  const [state, setState] = useState({
-    cookiesGoogle: false,
-    cookiesAdsense: false,
-    cookiesWebmaster: false,
-    cookiesChoice: false,
-    cookiesAll: false,
-  });
+  const { cookies, updateCookies } = useCookies();
+
+  const handleCookieChange = (cookieName) => {
+    updateCookies(cookieName, !cookies[cookieName]);
+  };
+
   useEffect(() => {
-    setTimeout(() => {
-      if (window.localStorage.getItem('cookiesModal')) {
-        return;
-      }
-      setCookiesModal(false);
-      const scriptInit = document.createElement('script');
-      scriptInit.src = `https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`;
-      scriptInit.async = true;
-      scriptInit.id = 'google-analytics-init';
-
-      const existingScriptInit = document.getElementById('google-analytics-init');
-      if (existingScriptInit) {
-        document.head.removeChild(existingScriptInit);
-      }
-      document.head.appendChild(scriptInit);
-      document.body.classList.add('overflow-hidden');
-
-      const script = document.createElement('script');
-      script.id = 'google-analytics';
-
-      const cookiesGoogleValue = !window.localStorage.getItem('cookiesGoogle') || false;
-      const consentSettings = cookiesGoogleValue ? {
-        ad_storage: 'granted',
-        ad_user_data: 'granted',
-        ad_personalization: 'granted',
-        analytics_storage: 'granted',
-      } : {
-        ad_storage: 'denied',
-        ad_user_data: 'denied',
-        ad_personalization: 'denied',
-        analytics_storage: 'denied',
-      };
-      const consent = cookiesGoogleValue ? 'update' : 'default';
-      const scriptCode = `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('consent', "${consent}", ${JSON.stringify(consentSettings)});
-            gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}', {
-              page_path: window.location.pathname
-            });
-            gtag('js', new Date());
-          `;
-      script.textContent = scriptCode;
+    if (!window.localStorage.getItem('cookiesAdsense')) {
+      setTimeout(() => {
+        updateCookies('cookiesModal', false);
+      }, 5000);
+    }
+    if (window.localStorage.getItem('cookiesModal')) {
+      updateCookies('cookiesGoogle', window.localStorage.getItem('cookiesGoogle'));
+      const cookiesGoogleValue = window.localStorage.getItem('cookiesGoogle') !== 'false';
+      const script = createGoogleAnalyticsScript(cookiesGoogleValue);
       const existingScript = document.getElementById('google-analytics');
 
       if (existingScript) {
         document.head.removeChild(existingScript);
       }
       document.head.appendChild(script);
-    }, 5000);
-  }, []);
 
-  useEffect(() => {
-    if (window.localStorage.getItem('cookiesModal')) {
+      updateCookies('cookiesAdsense', window.localStorage.getItem('cookiesAdsense'));
       return;
     }
-    const script = document.createElement('script');
-    script.id = 'google-analytics';
 
-    const cookiesGoogleValue = !window.localStorage.getItem('cookiesGoogle');
-    const consentSettings = cookiesGoogleValue ? {
-      ad_storage: 'granted',
-      ad_user_data: 'granted',
-      ad_personalization: 'granted',
-      analytics_storage: 'granted',
-    } : {
-      ad_storage: 'denied',
-      ad_user_data: 'denied',
-      ad_personalization: 'denied',
-      analytics_storage: 'denied',
-    };
-    const consent = cookiesGoogleValue ? 'update' : 'default';
-    const scriptCode = `
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('consent', "${consent}", ${JSON.stringify(consentSettings)});
-          gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}', {
-            page_path: window.location.pathname
-          });
-          gtag('js', new Date());
-        `;
-    script.textContent = scriptCode;
-    const existingScript = document.getElementById('google-analytics');
-
-    if (existingScript) {
-      document.head.removeChild(existingScript);
-    }
-    document.head.appendChild(script);
-  }, [cookiesModal, state.cookiesGoogle]);
-
-  const toggleCookies = (field, value) => {
-    setState((prevState) => ({
-      ...prevState,
-      [field]: value,
-    }));
-    window.localStorage.setItem(field, value);
-  };
+    setTimeout(() => {
+      updateCookies('cookiesModal', false);
+    }, 5000);
+  }, []);
 
   const handleAcceptCookies = () => {
     document.body.classList.remove('overflow-hidden');
     window.localStorage.setItem('cookiesModal', true);
     window.localStorage.setItem('cookiesGoogle', true);
     window.localStorage.setItem('cookiesAdsense', true);
-    setState({ ...state, cookiesGoogle: true });
-    setCookiesModal(true);
+    updateCookies('cookiesModal', true);
+    updateCookies('cookiesGoogle', true);
+    updateCookies('cookiesAdsense', true);
   };
 
   const handleRefuseCookies = () => {
-    setCookiesModal(null);
     document.body.classList.remove('overflow-hidden');
-    window.localStorage.setItem('cookiesGoogle', false);
+    updateCookies('cookiesModal', null);
   };
 
   return (
-    cookiesModal === false && (
+    cookies.cookiesModal === false && (
     <div className={style.cookies}>
-      {state.cookiesChoice ? (
+      {cookies.cookiesChoice ? (
         <div className={`card ${style.cookies__choice}`}>
           <h2>Les cookies</h2>
           <p>
@@ -147,29 +102,29 @@ export default function CookiesModal() {
             <tbody>
               <CookieChoice
                 label="Google Analytics GU4"
-                checked={state.cookiesGoogle}
-                onClick={() => toggleCookies('cookiesGoogle', !state.cookiesGoogle)}
+                checked={cookies.cookiesGoogle}
+                onClick={() => {
+                  handleCookieChange('cookiesGoogle');
+                  window.localStorage.setItem('cookiesGoogle', !cookies.cookiesGoogle);
+                }}
               />
               <CookieChoice
-                label="Google Adsense"
-                checked={state.cookiesAdsense}
-                onClick={() => toggleCookies('cookiesAdsense', !state.cookiesAdsense)}
+                label="Google AdSense"
+                checked={cookies.cookiesAdsense}
+                onClick={() => {
+                  handleCookieChange('cookiesAdsense');
+                  window.localStorage.setItem('cookiesAdsense', !cookies.cookiesAdsense);
+                }}
               />
             </tbody>
           </table>
           <div className={style.cookies__close}>
             <button
               type="button"
-              onClick={() => {
-                document.body.classList.remove('overflow-hidden');
-                if (state.cookiesGoogle) {
-                  setCookiesModal(true);
-                  window.localStorage.setItem('cookiesModal', true);
-                } else {
-                  setCookiesModal(true);
-                }
-              }}
               className="button"
+              onClick={() => {
+                handleCookieChange('cookiesModal');
+              }}
             >
               Soumettre les préférences
             </button>
@@ -202,7 +157,7 @@ export default function CookiesModal() {
             <button
               type="button"
               className="button--grey button"
-              onClick={() => setState({ ...state, cookiesChoice: true })}
+              onClick={() => handleCookieChange('cookiesChoice')}
             >
               Personnaliser
             </button>

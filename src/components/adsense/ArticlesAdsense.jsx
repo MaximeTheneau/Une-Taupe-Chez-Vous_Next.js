@@ -1,14 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { useCookies } from '../../context/CookiesContext';
 
 export default function ArticlesAdsense() {
-  const [adsense, setAdsense] = useState(false);
+  const { cookies } = useCookies();
 
-  useEffect(() => {
-    if (typeof window !== 'undefined' && window.localStorage.getItem('cookiesModal')) {
-      setAdsense(true);
-    }
-  }, []);
-  return adsense && (
+  return cookies.cookiesAdsense && (
     <div id="adSense">
       <script
         async

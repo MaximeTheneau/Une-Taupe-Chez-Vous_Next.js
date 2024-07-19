@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-css-tags */
 import Head from 'next/head';
-import { Suspense } from 'react';
 import Layout from '../components/layout';
 import '../styles/globals.scss';
 import CookiesModal from '../components/modal/cookies/Cookies';
+import { CookiesProvider } from '../context/CookiesContext';
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -22,12 +22,12 @@ function MyApp({ Component, pageProps }) {
         <link rel="preload" href="/font/title/title.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="stylesheet" href="/print.css" media="print" type="text/css" />
       </Head>
-      <Suspense fallback={<div>Loading...</div>}>
+      <CookiesProvider>
         <CookiesModal />
         <Layout {...pageProps}>
           <Component {...pageProps} />
         </Layout>
-      </Suspense>
+      </CookiesProvider>
     </>
   );
 }
