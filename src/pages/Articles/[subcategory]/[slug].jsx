@@ -170,6 +170,8 @@ export default function Slug({ post, desc }) {
             {post.textLinks}
           </Link>
         )}
+        <ArticlesAdsense />
+
         <h2>Derniers articles</h2>
         <Cards cards={desc} />
         <Comments posts={post} />

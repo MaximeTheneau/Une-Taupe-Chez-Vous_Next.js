@@ -1,15 +1,17 @@
+import { useEffect } from 'react';
 import { useCookies } from '../../context/CookiesContext';
 
-export default function ArticlesAdsense() {
+function ArticlesAdsense() {
   const { cookies } = useCookies();
-
+  useEffect(() => {
+    try {
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
   return cookies.cookiesAdsense && (
-    <div id="adSense">
-      <script
-        async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9194552698690511"
-        crossorigin="anonymous"
-      />
+    <div class="adSense">
       <ins
         className="adsbygoogle"
         style={{ display: 'block' }}
@@ -18,12 +20,8 @@ export default function ArticlesAdsense() {
         data-ad-format="auto"
         data-full-width-responsive="true"
       />
-      <script dangerouslySetInnerHTML={{
-        __html: `
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      `,
-      }}
-      />
     </div>
   );
 }
+
+export default ArticlesAdsense;
