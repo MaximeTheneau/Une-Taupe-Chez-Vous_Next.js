@@ -51,9 +51,16 @@ export default function CookiesModal() {
         updateCookies('cookiesModal', false);
       }, 5000);
     }
+    if (!window.localStorage.getItem('cookiesModal')) {
+      setTimeout(() => {
+        updateCookies('cookiesModal', false);
+      }, 5000);
+    }
+  }, []);
+
+  useEffect(() => {
     if (window.localStorage.getItem('cookiesAdsense')) {
       updateCookies('cookiesAdsense', true);
-
       const scriptAdsense = document.createElement('script');
       scriptAdsense.async = true;
       scriptAdsense.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9194552698690511';
@@ -85,13 +92,8 @@ export default function CookiesModal() {
         document.head.removeChild(existingScript);
       }
       document.head.appendChild(script);
-
-      updateCookies('cookiesAdsense', window.localStorage.getItem('cookiesAdsense'));
     }
-    setTimeout(() => {
-      updateCookies('cookiesModal', false);
-    }, 5000);
-  }, []);
+  }, [cookies.cookiesModal]);
 
   const handleAcceptCookies = () => {
     document.body.classList.remove('overflow-hidden');
