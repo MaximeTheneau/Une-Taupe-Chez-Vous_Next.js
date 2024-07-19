@@ -50,7 +50,10 @@ export default function CookiesModal() {
       setTimeout(() => {
         updateCookies('cookiesModal', false);
       }, 5000);
-    } else {
+    }
+    if (window.localStorage.getItem('cookiesAdsense')) {
+      updateCookies('cookiesAdsense', true);
+
       const scriptAdsense = document.createElement('script');
       scriptAdsense.async = true;
       scriptAdsense.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9194552698690511';
@@ -62,6 +65,7 @@ export default function CookiesModal() {
       }
       document.head.appendChild(scriptAdsense);
     }
+
     if (window.localStorage.getItem('cookiesModal')) {
       return;
     }
