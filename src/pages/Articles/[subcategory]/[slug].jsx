@@ -174,7 +174,6 @@ export default function Slug({ post, desc }) {
         <h2>Derniers articles</h2>
         <Cards cards={desc} />
         <Comments posts={post} />
-        <ArticlesAdsense adSlot={7587939571} adformat="autorelaxed" />
         <ArticlesAdsense adSlot={1193921611} adformat="autorelaxed" />
       </section>
 
