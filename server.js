@@ -27,7 +27,7 @@ app.post('/api/webhook', (req, res) => {
     return res.status(401).send('Unauthorized');
   }
 
-  if (req.headers['x-taupe-event'] === 'build') {
+  if (req.headers['X-GitHub-Event'] === 'build') {
     exec('pnpm run build', (error) => {
       if (error) {
         return res.status(500).send(`Error running npm run build: ${error}`);
@@ -36,7 +36,7 @@ app.post('/api/webhook', (req, res) => {
     });
   }
 
-  if (req.headers['x-taupe-event'] === 'push') {
+  if (req.headers['X-GitHub-Event'] === 'push') {
     const gitStash = spawn('git', ['diff', '--quiet']);
     const gitPull = spawn('git', ['pull', 'origin', branch]);
 
