@@ -7,7 +7,7 @@ const app = express();
 
 app.use(express.json());
 
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 const authToken = process.env.AUTH_TOKEN;
 
 function verifySignature(signature, body) {
@@ -19,65 +19,55 @@ function verifySignature(signature, body) {
 
 app.post('/api/webhook', (req, res) => {
   const signature = req.headers['x-hub-signature-256'];
+  const githubEvent = req.headers['x-github-event'];
   const branch = 'main';
 
-  const { body } = req;
-
-  if (!verifySignature(signature, body)) {
-    return res.status(401).send('Unauthorized ');
+  if (!verifySignature(signature, req.body)) {
+    return res.status(400).send('Invalid signature');
   }
 
-  if (req.headers['X-GitHub-Event'] === 'build') {
+  if (githubEvent === 'build') {
     exec('pnpm run build', (error) => {
       if (error) {
-        return res.status(500).send(`Error running npm run build: ${error}`);
+        return res.status(500).send(`Error running pnpm run build: ${error.message}`);
       }
       return res.status(200).send('Build event received and executed');
     });
-  }
+  } else if (githubEvent === 'push') {
+    const gitStash = spawn('git', ['stash']);
 
-  if (req.headers['X-GitHub-Event'] === 'push') {
-    const gitStash = spawn('git', ['diff', '--quiet']);
-    const gitPull = spawn('git', ['pull', 'origin', branch]);
-
-    gitStash.on('exit', (code) => {
-      if (code === 1) {
-        const stash = spawn('git', ['stash']);
-
-        stash.stdout.on('data', (data) => console.error(`Error stashing changes: ${data}`));
-
-        stash.stderr.on('data', (data) => console.error(`Error stashing changes: ${data}`));
-
-        stash.on('exit', (stashCode) => {
-          if (stashCode === 0) {
-            gitPull.stdout.on('data', (data) => console.error(500).send(`Error pull command changes: ${data}`));
-
-            gitPull.stderr.on('data', (data) => console.error(500).send(`Error pull command changes: ${data}`));
-            exec('pnpm run build', (error) => {
-              if (error) {
-                return res.status(500).send(`Error running npm run build: ${error}`);
-              }
-              return res.status(200).send('Push event received and executed');
-            });
-          }
-        });
-      }
+    gitStash.on('error', (error) => {
+      console.error(`Error stashing changes: ${error.message}`);
+      return res.status(500).send(`Error stashing changes: ${error.message}`);
     });
 
-    gitPull.stdout.on('data', (data) => console.error(`Error pulling changes: ${data}`));
+    gitStash.on('exit', (code) => {
+      if (code !== 0) {
+        return res.status(500).send('Failed to stash changes');
+      }
 
-    gitPull.stderr.on('data', (data) => console.error(`Error pulling changes: ${data}`));
+      const gitPull = spawn('git', ['pull', 'origin', branch]);
 
-    gitPull.on('close', (code) => {
-      if (code === 0) {
+      gitPull.on('error', (error) => {
+        console.error(`Error pulling changes: ${error.message}`);
+        return res.status(500).send(`Error pulling changes: ${error.message}`);
+      });
+
+      gitPull.on('exit', (code) => {
+        if (code !== 0) {
+          return res.status(500).send('Failed to pull changes');
+        }
+
         exec('pnpm run build', (error) => {
           if (error) {
-            return res.status(500).send(`Error running npm run build: ${error}`);
+            return res.status(500).send(`Error running pnpm run build: ${error.message}`);
           }
           return res.status(200).send('Push event received and executed');
         });
-      }
+      });
     });
+  } else {
+    return res.status(400).send('Unsupported event type');
   }
 });
 
