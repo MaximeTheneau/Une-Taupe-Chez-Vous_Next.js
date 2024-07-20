@@ -24,7 +24,7 @@ app.post('/api/webhook', (req, res) => {
   const { body } = req;
 
   if (!verifySignature(signature, body)) {
-    return res.status(401).send('Unauthorized');
+    return res.status(401).send('Unauthorized ');
   }
 
   if (req.headers['X-GitHub-Event'] === 'build') {
