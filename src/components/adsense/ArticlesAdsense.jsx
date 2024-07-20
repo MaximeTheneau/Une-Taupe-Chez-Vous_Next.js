@@ -3,7 +3,7 @@ import { useCookies } from '../../context/CookiesContext';
 import LoadingAdsense from '../loading/LoadingAdsense';
 import styles from './ArticlesAdsense.module.scss';
 
-function ArticlesAdsense() {
+function ArticlesAdsense({ adSlot }) {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const { cookies } = useCookies();
@@ -22,7 +22,7 @@ function ArticlesAdsense() {
         className="adsbygoogle"
         style={{ display: 'block' }}
         data-ad-client="ca-pub-9194552698690511"
-        data-ad-slot="7832509827"
+        data-ad-slot={adSlot}
         data-ad-format="auto"
         data-full-width-responsive="true"
       />

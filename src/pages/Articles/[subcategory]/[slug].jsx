@@ -76,7 +76,7 @@ export default function Slug({ post, desc }) {
           fetchPriority="high"
         />
       </Head>
-      <ArticlesAdsense />
+      <ArticlesAdsense adSlot={7832509827} />
       {/* Schema.org */}
       <ArticleJsonLd post={post} urlPost={urlPost} />
       <BreadcrumbJsonLd paragraphPosts={post.paragraphPosts} urlPost={urlPost} />
@@ -173,6 +173,7 @@ export default function Slug({ post, desc }) {
         <h2>Derniers articles</h2>
         <Cards cards={desc} />
         <Comments posts={post} />
+        <ArticlesAdsense adSlot={1193921611} />
       </section>
 
     </>
