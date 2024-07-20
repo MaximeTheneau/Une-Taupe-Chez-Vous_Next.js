@@ -17,7 +17,7 @@ function ArticlesAdsense({ adSlot }) {
   }, []);
   return cookies.cookiesAdsense && (
     <div className={styles.adSense}>
-      {isLoaded && <LoadingAdsense />}
+      {!isLoaded && <LoadingAdsense />}
       <ins
         className="adsbygoogle"
         style={{ display: 'block' }}
