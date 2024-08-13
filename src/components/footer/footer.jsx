@@ -7,9 +7,6 @@ export default function Footer() {
     <div className={styles.footer}>
       <div className={styles.footer__links}>
         <div>
-          <p className={styles['footer__links--title']}>
-            Services
-          </p>
           <ul>
             <li>
               <Search id="footer-search" />
@@ -37,9 +34,6 @@ export default function Footer() {
           </ul>
         </div>
         <div>
-          <p className={styles['footer__links--title']}>
-            Contact
-          </p>
           <ul>
             <li>
               <Link href="/Contact">
