@@ -21,6 +21,7 @@ function MyApp({ Component, pageProps }) {
         <link rel="preload" href="/font/principal/principal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/font/title/title.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="stylesheet" href="/print.css" media="print" type="text/css" />
+        <link rel="alternate" type="application/rss+xml" href="https://unetaupechezvous.fr/rss.xml" />
       </Head>
       <CookiesProvider>
         <CookiesModal />

@@ -47,9 +47,9 @@ const generateRssFeed = async () => {
         { _attr: { version: '2.0' } },
         {
           channel: [
-            { title: 'Your Blog Title' },
+            { title: 'Une Taupe Chez Vous - Le blog ' },
             { link: SITE_URL },
-            { description: 'Description of your blog' },
+            { description: 'Depuis plus de 30 ans, Laurent Theneau, spécialiste des nuisibles, offre des solutions professionnelles pour taupes, fouines et autres. Assurez la protection optimale de votre propriété avec notre expertise.' },
             ...rssItems,
           ],
         },
