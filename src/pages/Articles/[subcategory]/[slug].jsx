@@ -50,6 +50,7 @@ export default function Slug({ post, desc }) {
         <meta property="og:image" content={`${post.imgPost}?format=jpeg`} />
         <meta property="og:image:width" content={post.imgWidth} />
         <meta property="og:image:height" content={post.imgHeight} />
+        <meta property="og:image:alt" content={post.altImg} />
         <meta property="article:published_time" content={post.createdAt} />
         <meta property="article:modified_time" content={post.updatedAt} />
         <meta property="article:section" content={post.subcategory.name} />
@@ -62,6 +63,7 @@ export default function Slug({ post, desc }) {
         <meta property="twitter:image:alt" content={post.altImg || post.title} />
         <meta property="twitter:domain" content={urlPost} />
         <meta property="twitter:url" content={urlPost} />
+        <meta name="robots" content="max-snippet:-1, max-image-preview:large" />
         <link
           rel="canonical"
           href={urlPost}
