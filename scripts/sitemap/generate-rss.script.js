@@ -36,7 +36,7 @@ const generateRssFeed = async () => {
     const rssItems = posts.map((post) => ({
       item: [
         { title: post.title },
-        { description: post.description },
+        { description: post.metaDescription },
         { link: post.link },
         { pubDate: post.pubDate },
       ],
