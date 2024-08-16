@@ -58,7 +58,7 @@ const generateRssFeed = async () => {
     });
 
     fs.writeFileSync('./public/rss.xml', rssFeed, 'utf8');
-    console.log('RSS feed generated successfully!', posts);
+    console.log('RSS feed generated successfully!');
   } catch (error) {
     console.error('Error generating RSS feed:', error);
     process.exit(1); // Exit with error code
