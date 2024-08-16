@@ -95,9 +95,6 @@ export default function CookiesModal() {
       }
       document.head.appendChild(script);
     }
-    if (window.localStorage.getItem('cookiesModal')) {
-
-    }
   }, [cookies.cookiesModal]);
 
   const handleAcceptCookies = () => {
