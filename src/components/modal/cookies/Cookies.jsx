@@ -56,6 +56,12 @@ export default function CookiesModal() {
         updateCookies('cookiesModal', false);
       }, 5000);
     }
+
+    if (!window.localStorage.getItem('cookiesGoogle')) {
+      setTimeout(() => {
+        updateCookies('cookiesGoogle', false);
+      }, 5000);
+    }
   }, []);
 
   useEffect(() => {
@@ -73,16 +79,12 @@ export default function CookiesModal() {
       document.head.appendChild(scriptAdsense);
     }
 
-    if (window.localStorage.getItem('cookiesModal')) {
-      return;
-    }
     if (window.localStorage.getItem('cookiesGoogle')) {
       updateCookies('cookiesGoogle', window.localStorage.getItem('cookiesGoogle'));
       const cookiesGoogleValue = window.localStorage.getItem('cookiesGoogle') !== 'false';
       const { scriptInit, script } = createGoogleAnalyticsScript(cookiesGoogleValue);
       const existingScript = document.getElementById('google-analytics');
       const existingScriptInit = document.getElementById('google-analytics-init');
-
       if (existingScriptInit) {
         document.head.removeChild(existingScriptInit);
       }
@@ -92,6 +94,9 @@ export default function CookiesModal() {
         document.head.removeChild(existingScript);
       }
       document.head.appendChild(script);
+    }
+    if (window.localStorage.getItem('cookiesModal')) {
+
     }
   }, [cookies.cookiesModal]);
 
