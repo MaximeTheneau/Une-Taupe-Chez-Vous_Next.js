@@ -19,7 +19,7 @@ const fetchPostsFromApi = async () => {
 
     return data.map((post) => ({
       title: post.title || 'Untitled',
-      description: post.description || 'No description available',
+      description: post.metaDescription || 'No description available',
       link: `${SITE_URL}${post.url || '/'}`,
       pubDate: new Date(post.updatedAt || post.createdAt).toUTCString(),
     }));
@@ -36,7 +36,7 @@ const generateRssFeed = async () => {
     const rssItems = posts.map((post) => ({
       item: [
         { title: post.title },
-        { description: post.metaDescription },
+        { description: post.description },
         { link: post.link },
         { pubDate: post.pubDate },
       ],
@@ -58,7 +58,7 @@ const generateRssFeed = async () => {
     });
 
     fs.writeFileSync('./public/rss.xml', rssFeed, 'utf8');
-    console.log('RSS feed generated successfully!');
+    console.log('RSS feed generated successfully!', posts);
   } catch (error) {
     console.error('Error generating RSS feed:', error);
     process.exit(1); // Exit with error code
