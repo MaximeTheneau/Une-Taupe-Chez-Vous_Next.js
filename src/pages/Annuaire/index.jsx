@@ -51,6 +51,12 @@ export default function Home({ page, articles }) {
         <div className={styles.home}>
           <Cards cards={articles} />
         </div>
+        {page.paragraphPosts.map((paragraphPosts) => (
+          <>
+            <h2>{paragraphPosts.subtitle}</h2>
+            <div dangerouslySetInnerHTML={{ __html: paragraphPosts.paragraph }} />
+          </>
+        ))}
         <h3>Référencez-vous gratuitement en tant que professionnel </h3>
         <p>
           Le référencement gratuit, c&apos;est comme une publicité gratuite en continu pour

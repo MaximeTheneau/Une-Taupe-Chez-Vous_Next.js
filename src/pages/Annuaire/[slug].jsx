@@ -6,6 +6,7 @@ import TableOfContents from '../../components/tableOfContents/TableOfContents';
 import ArticleJsonLd from '../../components/jsonLd/ArticleJsonLd';
 import BreadcrumbJsonLd from '../../components/jsonLd/BreadcrumbJsonLd';
 import Comments from '../../components/comments/Comments';
+import ArticlesAdsense from '../../components/adsense/ArticlesAdsense';
 
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`);
@@ -132,6 +133,7 @@ export default function Slug({ post }) {
             </table>
           </div>
         )}
+        <ArticlesAdsense adSlot={2932584086} adformat="auto" />
         <TableOfContents post={post} />
         {post.paragraphPosts.map((paragraphs) => (
           <>
@@ -150,8 +152,11 @@ export default function Slug({ post }) {
             )}
           </>
         ))}
+        <ArticlesAdsense adSlot={9927467340} adformat="fluid" />
+
       </section>
       <Comments posts={post} />
+      <ArticlesAdsense adSlot={2900794494} adformat="autorelaxed" />
     </>
   );
 }

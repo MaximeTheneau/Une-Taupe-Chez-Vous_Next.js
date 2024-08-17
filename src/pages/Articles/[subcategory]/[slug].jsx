@@ -78,7 +78,6 @@ export default function Slug({ post, desc }) {
           fetchPriority="high"
         />
       </Head>
-      <ArticlesAdsense adSlot={7832509827} adformat="auto" />
       {/* Schema.org */}
       <ArticleJsonLd post={post} urlPost={urlPost} />
       <BreadcrumbJsonLd paragraphPosts={post.paragraphPosts} urlPost={urlPost} />
@@ -108,6 +107,7 @@ export default function Slug({ post, desc }) {
           )}
         </figure>
         <div dangerouslySetInnerHTML={{ __html: post.contentsHTML }} />
+        <ArticlesAdsense adSlot={7832509827} adformat="auto" />
         <TableOfContents post={post} />
         {post.paragraphPosts.map((paragraphArticle) => (
           <div key={paragraphArticle.id}>
