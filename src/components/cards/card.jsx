@@ -18,7 +18,7 @@ export default function Card({ card }) {
           loading="lazy"
           decoding="async"
         />
-        <h3 className={styles.card__content}>{card.title}</h3>
+        <p className={styles.card__content}>{card.title}</p>
       </Link>
     </li>
   );
