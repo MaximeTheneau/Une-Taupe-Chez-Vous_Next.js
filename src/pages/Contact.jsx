@@ -45,8 +45,8 @@ export default function Contact({ page }) {
         <h1>{page.title}</h1>
         <div className={styles.page__contact__block} itemScope itemType="https://schema.org/">
           {' '}
+          <h2>Société : </h2>
           <p>
-            <strong>Société : </strong>
             <span itemProp="name">Une Taupe Chez Vous </span>
           </p>
           <p itemProp="address">

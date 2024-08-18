@@ -52,18 +52,13 @@ export default function SiteMapPage({
         <div dangerouslySetInnerHTML={{ __html: page.contentsHTML }} />
         <ul className={styles.siteMap__list}>
           <li className={styles['siteMap__list--title']}>
-            Accueil
+            <h2>Qui sommes-nous ?</h2>
             <ul className={styles['siteMap__list--secondary']}>
               <li>
                 <Link href="/">
                   Page d&apos;accueil
                 </Link>
               </li>
-            </ul>
-          </li>
-          <li className={styles['siteMap__list--title']}>
-            Qui sommes-nous ?
-            <ul className={styles['siteMap__list--secondary']}>
               <li>
                 <Link href="/Taupier-agree-professionnel-depuis-1994">
                   Présentation de l&apos;entreprise
