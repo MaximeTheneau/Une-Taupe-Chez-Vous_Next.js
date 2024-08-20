@@ -43,7 +43,7 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link href="https://twitter.com/UneTaupe_" target="_blank" rel="noopener" prefetch={false}>
+              <Link href="https://x.com/UneTaupe_" target="_blank" rel="noopener" prefetch={false}>
                 <i className="icon-twitter" />
                 Twitter
               </Link>
