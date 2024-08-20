@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import styles from './Navbar.module.scss';
-import Search from '../search/Search';
 
 export default function Navbar() {
   const [toggleNav, setToggleNav] = useState(false);
