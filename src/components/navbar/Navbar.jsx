@@ -53,22 +53,20 @@ export default function Navbar() {
         role="menu"
       >
         <ul className={styles.navbar__list}>
-          <li className={styles['navbar__menu__list-item']}>
-            <Search closeNav={closeNav} id="navbar-search" />
-          </li>
+
           <li className={styles['navbar__menu__list-item']}>
             <Link href="/Devis-en-ligne" onClick={() => closeNav()}>
               Devis en ligne
             </Link>
           </li>
           <li className={styles['navbar__menu__list-item']}>
-            <Link href="/Interventions" onClick={() => closeNav()}>
-              Interventions
+            <Link href="/Contact" onClick={() => closeNav()}>
+              Contact
             </Link>
           </li>
           <li className={styles['navbar__menu__list-item']}>
-            <Link href="/Contact" onClick={() => closeNav()}>
-              Contact
+            <Link href="/Interventions" onClick={() => closeNav()}>
+              Interventions
             </Link>
           </li>
           <li className={styles['navbar__menu__list-item']}>

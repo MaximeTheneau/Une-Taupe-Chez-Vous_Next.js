@@ -9,11 +9,13 @@ export default function Footer() {
         <div>
           <ul>
             <li>
-              <Search id="footer-search" />
-            </li>
-            <li>
               <Link href="/Devis-en-ligne">
                 Devis en ligne gratuit
+              </Link>
+            </li>
+            <li>
+              <Link href="/Contact">
+                Formulaire de contact
               </Link>
             </li>
             <li>
@@ -22,24 +24,18 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link href="/Tarifs">
-                Tarifs
-              </Link>
-            </li>
-            <li>
               <Link href="/Taupier-agree-professionnel-depuis-1994">
                 Qui sommes-nous
               </Link>
+            </li>
+            <li>
+              <Search id="footer-search" />
             </li>
           </ul>
         </div>
         <div>
           <ul>
-            <li>
-              <Link href="/Contact">
-                Contactez-nous !
-              </Link>
-            </li>
+
             <li>
               <Link href="https://www.linkedin.com/company/une-taupe-chez-vous" rel="noopener" target="_blank" prefetch={false}>
                 <i className="icon-linkedin" />

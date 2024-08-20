@@ -4,6 +4,7 @@ import ContactForm from '../components/contact/ContactForm';
 import styles from '../styles/Pages.module.scss';
 import NotCopie from '../components/notCopie/NotCopie';
 import fetcher from '../utils/fetcher';
+import Search from '../components/search/Search';
 
 export async function getStaticProps() {
   const page = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Contact`);
@@ -46,20 +47,22 @@ export default function Contact({ page }) {
         <div className={styles.page__contact__block} itemScope itemType="https://schema.org/">
           {' '}
           <h2>Société : </h2>
-          <p>
-            <span itemProp="name">Une Taupe Chez Vous </span>
-          </p>
-          <p itemProp="address">
-            <strong>Adresse : </strong>
-            <span itemProp="streetAddress">71 Marie Curie </span>
-            <span itemProp="postalCode">27780 </span>
-            <span itemProp="addressLocality">Garennes-Sur-Eure </span>
-          </p>
-          <p itemProp="telephone">
-            <strong>Téléphone : </strong>
-            <Link href="tel:+33232264958"> 02 32 26 49 58</Link>
-          </p>
-          <NotCopie />
+          <p />
+          <ul>
+            <li>
+              <span>Une Taupe Chez Vous </span>
+              <strong>71 Marie Curie, 27780 Garennes-Sur-Eure</strong>
+            </li>
+            <li>
+              <strong>
+                <Link href="tel:+33232264958">02 32 26 49 58</Link>
+              </strong>
+            </li>
+            <li>
+              <NotCopie />
+            </li>
+          </ul>
+
         </div>
         <div dangerouslySetInnerHTML={{ __html: page.contents }} />
         <div className={styles.page__contact}>
@@ -67,6 +70,35 @@ export default function Contact({ page }) {
             <ContactForm />
           </div>
         </div>
+        {page.paragraphPosts.map((paragraphArticle) => (
+          <div key={paragraphArticle.id}>
+            {paragraphArticle.subtitle && (
+              <h2 id={paragraphArticle.slug}>
+                {paragraphArticle.subtitle}
+              </h2>
+            )}
+            {paragraphArticle.paragraph && (
+              <div key={paragraphArticle.id} className={styles.page__contents__paragraph}>
+                <div
+                  className={styles.page__contents__paragraph__text}
+                  dangerouslySetInnerHTML={{ __html: paragraphArticle.paragraph }}
+                />
+                {paragraphArticle.link && (
+                  <div className={styles.page__contents__paragraph__links}>
+                    <span className={styles.page__contents__paragraph__links__link}>
+                      → A lire aussi :
+                      <Link href={paragraphArticle.link}>
+                        {' '}
+                        {paragraphArticle.linkSubtitle}
+                      </Link>
+                    </span>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        ))}
+        <Search id="footer-search" />
       </section>
     </>
   );

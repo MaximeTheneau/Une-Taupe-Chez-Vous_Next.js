@@ -106,7 +106,7 @@ export default function Slug({ post, desc }) {
           </figcaption>
           )}
         </figure>
-        <div dangerouslySetInnerHTML={{ __html: post.contentsHTML }} />
+        <div dangerouslySetInnerHTML={{ __html: post.contents }} />
         <ArticlesAdsense adSlot={7832509827} adformat="auto" />
         <TableOfContents post={post} />
         {post.paragraphPosts.map((paragraphArticle) => (
@@ -173,7 +173,7 @@ export default function Slug({ post, desc }) {
           </Link>
         )}
         <ArticlesAdsense adSlot={8493827134} adformat="fluid" />
-        <h2>Derniers articles</h2>
+        <h2>Articles qui pourrait vous intéressez :</h2>
         <Cards cards={desc} />
         <Comments posts={post} />
         <ArticlesAdsense adSlot={1193921611} adformat="autorelaxed" />

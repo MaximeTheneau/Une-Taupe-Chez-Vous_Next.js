@@ -36,7 +36,6 @@ export default function Search({
   return (
     <form className={styles.search__form} onSubmit={handleSubmit} aria-label="Formulaire de recherche">
       <label htmlFor={id}>
-        Rechercher
         <div className={styles.search__form__input}>
           <input
             id={id}
