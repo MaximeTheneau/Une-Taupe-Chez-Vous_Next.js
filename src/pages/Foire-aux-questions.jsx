@@ -7,7 +7,6 @@ import ImageLoader from '../components/image/ImageLoader';
 
 export async function getStaticProps() {
   const post = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Foire-aux-questions`);
-
   return {
     props: {
       post,
@@ -16,6 +15,7 @@ export async function getStaticProps() {
 }
 
 export default function Slug({ post }) {
+  console.log(post);
   return (
     <>
       <Head>
@@ -48,10 +48,11 @@ export default function Slug({ post }) {
         {post.paragraphPosts.map((paragraphArticle) => (
           <>
             {paragraphArticle.subtitle && (
-            <h2 key={paragraphArticle.id}>{paragraphArticle.subtitle}</h2>
+            <p key={paragraphArticle.id}>{paragraphArticle.subtitle}</p>
             )}
             {paragraphArticle.paragraph && (
-            <p key={paragraphArticle.id} className={styles.page__contents__paragraph}>
+
+            <div key={paragraphArticle.id} className={styles.page__contents__paragraph}>
               {paragraphArticle.imgPostParagh && (
               <ImageLoader
                 className={styles.page__contents__paragraph}
@@ -65,8 +66,8 @@ export default function Slug({ post }) {
                         33vw"
               />
               )}
-              {paragraphArticle.paragraph}
-            </p>
+              <div dangerouslySetInnerHTML={{ __html: paragraphArticle.paragraph }} />
+            </div>
             )}
 
           </>

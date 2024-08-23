@@ -15,7 +15,7 @@ function FaqElements({ faq }) {
       role="menuitem"
       className={styles.faqs}
     >
-      <h2 className={styles.faq__question}>{faq.title}</h2>
+      <p className={styles.faq__question}><strong>{faq.title}</strong></p>
       <p>{faq.description}</p>
       {faq.link && (
         <div className={stylesPage.page__contents__paragraph__links}>
