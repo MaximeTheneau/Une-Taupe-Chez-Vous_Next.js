@@ -11,6 +11,7 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <meta name="google-site-verification" content={process.env.NEXT_PUBLIC_GOOGLE_WEBMASTER_ID} />
         <meta name="yandex-verification" content={process.env.NEXT_PUBLIC_YANDEX_WEBMASTER_ID} />
+        <meta name="ahrefs-site-verification" content="80e1e4c68c5760798a0c167d6db84e79e9b343301fd1eb054f1da5fc8529e778" />
         <meta name="theme-color" content="#ffffff" />
         <link rel="icon" href="/favicon/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/favicon/apple-icon.png" key="apple" />
