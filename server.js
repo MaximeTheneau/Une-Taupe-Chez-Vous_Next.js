@@ -21,6 +21,7 @@ app.post('/api/webhook', (req, res) => {
   const signature = req.headers['x-hub-signature-256'];
   const githubEvent = req.headers['x-github-event'];
   const branch = 'main';
+  console.log('test');
   if (!signature || !authToken) {
     return res.status(400).send('Missing signature or authentication token');
   }
