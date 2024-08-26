@@ -15,7 +15,6 @@ export async function getStaticProps() {
 }
 
 export default function Slug({ post }) {
-  console.log(post);
   return (
     <>
       <Head>

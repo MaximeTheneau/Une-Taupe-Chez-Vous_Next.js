@@ -21,12 +21,15 @@ app.post('/api/webhook', (req, res) => {
   const signature = req.headers['x-hub-signature-256'];
   const githubEvent = req.headers['x-github-event'];
   const branch = 'main';
-
-  if (!verifySignature(signature, req.body)) {
-    return res.status(400).send('Invalid signature');
+  if (!signature || !authToken) {
+    return res.status(400).send('Missing signature or authentication token');
   }
 
-  if (githubEvent === 'build') {
+  if (!verifySignature(signature, req.body)) {
+    return res.status(401).send('Invalid signature');
+  }
+
+  if (githubEvent === 'Build') {
     exec('pnpm run build', (error) => {
       if (error) {
         return res.status(500).send(`Error running pnpm run build: ${error.message}`);
