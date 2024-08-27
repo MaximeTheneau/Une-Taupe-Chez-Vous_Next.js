@@ -3,6 +3,7 @@ const xml = require('xml');
 
 const RSS_NAMESPACE = 'http://www.w3.org/2005/Atom';
 const SITE_URL = 'https://unetaupechezvous.fr';
+const FEED_URL = `${SITE_URL}/rss.xml`;
 const API_URL = 'https://back.unetaupechezvous.fr/api/posts&category=Articles';
 
 const fetchPostsFromApi = async () => {
@@ -22,6 +23,7 @@ const fetchPostsFromApi = async () => {
       description: post.metaDescription || 'No description available',
       link: `${SITE_URL}${post.url || '/'}`,
       pubDate: new Date(post.updatedAt || post.createdAt).toUTCString(),
+      guid: `${SITE_URL}${post.url || '/'}`,
     }));
   } catch (error) {
     console.error('Error fetching posts from API:', error);
@@ -38,6 +40,7 @@ const generateRssFeed = async () => {
         { title: post.title },
         { description: post.description },
         { link: post.link },
+        { guid: post.guid },
         { pubDate: post.pubDate },
       ],
     }));
@@ -50,6 +53,7 @@ const generateRssFeed = async () => {
             { title: 'Une Taupe Chez Vous - Le blog ' },
             { link: SITE_URL },
             { description: 'Depuis plus de 30 ans, Laurent Theneau, spécialiste des nuisibles, offre des solutions professionnelles pour taupes, fouines et autres. Assurez la protection optimale de votre propriété avec notre expertise.' },
+            { 'atom:link': { _attr: { href: FEED_URL, rel: 'self', type: 'application/rss+xml' } } },
             ...rssItems,
           ],
         },
