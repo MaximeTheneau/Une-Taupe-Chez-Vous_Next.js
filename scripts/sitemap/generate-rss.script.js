@@ -47,7 +47,7 @@ const generateRssFeed = async () => {
 
     const rssFeed = xml({
       rss: [
-        { _attr: { version: '2.0' } },
+        { _attr: { version: '2.0', 'xmlns:atom': 'http://www.w3.org/2005/Atom' } },
         {
           channel: [
             { title: 'Une Taupe Chez Vous - Le blog ' },
