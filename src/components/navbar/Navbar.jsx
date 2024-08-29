@@ -59,18 +59,13 @@ export default function Navbar() {
             </Link>
           </li>
           <li className={styles['navbar__menu__list-item']}>
-            <Link href="/Contact" onClick={() => closeNav()}>
-              Contact
-            </Link>
-          </li>
-          <li className={styles['navbar__menu__list-item']}>
             <Link href="/Interventions" onClick={() => closeNav()}>
               Interventions
             </Link>
           </li>
           <li className={styles['navbar__menu__list-item']}>
             <Link href="/Taupier-agree-professionnel-depuis-1994" onClick={() => closeNav()}>
-              Qui-sommes-nous
+              Le premier taupier de France
             </Link>
           </li>
         </ul>

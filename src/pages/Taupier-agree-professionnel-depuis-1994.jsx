@@ -70,32 +70,34 @@ export default function TaupierPage({ page }) {
           )}
         </figure>
         <h1>{page.title}</h1>
-        <div itemScope itemType="https://schema.org/PostalAdress">
+        <div className="flex flex-col">
+          <div>
+            <p>
+              <strong>Entreprise : </strong>
+              <span>Une Taupe Chez Vous</span>
+            </p>
+            <p>
+              <strong>Adresse : </strong>
+              <span>71 Marie Curie </span>
+              <span>27780 </span>
+              <span>Garrennes-Sur-Eure</span>
+            </p>
+            <p>
+              <strong>Téléphone : </strong>
+              <Link href="tel:+33232264958"> +33 2 32 26 49 58</Link>
+            </p>
+            <NotCopie />
+            <p>
+              <strong>Numéro SIRET :</strong>
+              {' '}
+              39338032400029
+            </p>
+          </div>
 
-          <p itemProp="name">
-            <strong>Entreprise : </strong>
-            <span itemProp="name">Une Taupe Chez Vous</span>
-          </p>
-          <p itemProp="address">
-            <strong>Adresse : </strong>
-            <span itemProp="streetAddress">71 Marie Curie </span>
-            <span itemProp="postalCode">27780 </span>
-            <span itemProp="addressLocality">Garrennes-Sur-Eure</span>
-          </p>
-          <p itemProp="telephone">
-            <strong>Téléphone : </strong>
-            <Link href="tel:+33232264958"> +33 2 32 26 49 58</Link>
-          </p>
-          <NotCopie />
-          <p>
-            <strong>Numéro SIRET :</strong>
-            {' '}
-            39338032400029
-          </p>
           <GoogleMaps />
-          <div dangerouslySetInnerHTML={{ __html: page.contentsHTML }} />
-          <TableOfContents post={page} />
         </div>
+        <div dangerouslySetInnerHTML={{ __html: page.contentsHTML }} />
+        <TableOfContents post={page} />
         {page.paragraphPosts.map((paragraphArticle) => (
           <div key={paragraphArticle.id}>
             {paragraphArticle.subtitle && (
