@@ -15,7 +15,6 @@ export default function LocalBusinessJsonLd({ descriptionMeta }) {
       'https://twitter.com/UneTaupe_',
       'https://www.linkedin.com/company/une-taupe-chez-vous',
     ],
-    priceRange: '€ - €€',
     provider: {
       '@type': 'LocalBusiness',
       name: 'Taupier piégeur professionnel depuis 1994',
@@ -33,7 +32,6 @@ export default function LocalBusinessJsonLd({ descriptionMeta }) {
       '@type': 'Place',
       name: 'Yvelines',
     },
-    foundingDate: '1994',
     hasCertification: {
       '@type': 'Certification',
       name: 'Taupier piégeur agréé professionnel depuis 1994',
