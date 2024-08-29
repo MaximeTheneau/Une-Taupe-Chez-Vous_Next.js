@@ -14,8 +14,6 @@ const generateNewsSitemap = async () => {
       .map((article) => `<url>
         <loc>${urlFront}${article.url}</loc>
         <lastmod>${article.updatedAt ? article.updatedAt : article.createdAt}</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
       </url>`)
       .join('');
 

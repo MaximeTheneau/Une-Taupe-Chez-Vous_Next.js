@@ -39,7 +39,8 @@ export default function Search({
         <div className={styles.search__form__input}>
           <input
             id={id}
-            type="text"
+            type="search"
+            name="q"
             onChange={handleFilterChange}
             value={filter || ''}
             placeholder="Tapez votre recherche"

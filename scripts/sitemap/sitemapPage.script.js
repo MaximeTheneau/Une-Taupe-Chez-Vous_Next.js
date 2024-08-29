@@ -14,8 +14,6 @@ const generateSitemap = async () => {
       .map((page) => `<url>
           <loc>${urlFront}${page.slug}</loc>
           <lastmod>${page.updatedAt ? page.updatedAt : page.createdAt}</lastmod>
-          <changefreq>daily</changefreq>
-          <priority>${page.priority}</priority>
         </url>`)
       .join('');
 
