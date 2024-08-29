@@ -3,7 +3,7 @@ import Head from 'next/head';
 export default function ArticleJsonLd({ post, urlPost }) {
   const jsonLdData = {
     '@context': 'https://schema.org/',
-    '@type': 'Article',
+    '@type': 'BlogPosting',
     name: post.title,
     headline: post.title,
     description: post.metaDescription,
@@ -16,12 +16,12 @@ export default function ArticleJsonLd({ post, urlPost }) {
     articleBody: post.contents,
     image: {
       '@type': 'ImageObject',
-      url: `${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.imgPost}.jpg`,
+      url: `${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.imgPost}?format=jpeg`,
       caption: post.title,
     },
     associatedMedia: {
       '@type': 'ImageObject',
-      contentUrl: `${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.imgPost}.jpg`,
+      contentUrl: `${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${post.imgPost}?format=jpeg`,
       description: post.title,
     },
     author: {
