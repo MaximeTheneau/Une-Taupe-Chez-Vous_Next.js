@@ -1,0 +1,22 @@
+name: Build Next.js Application
+
+on:
+  repository_dispatch:
+    types: [trigger-nextjs-build]
+
+jobs:
+  build:
+    name: Build Next.js Application
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.*' 
+
+      - name: Build the application
+        run: npm run build
