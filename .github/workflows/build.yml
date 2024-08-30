@@ -18,4 +18,5 @@ jobs:
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.KEY }}
         script: |
+          cd /var/www/html/Une-Taupe-Chez-Vous_Next.js
           ls
