@@ -1,4 +1,4 @@
-name: Deploy to VPS Next.js
+name: Build Push 
 
 on:
   push:
@@ -17,4 +17,4 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.KEY }}
-        script: ls
+        script: pnpm run build
