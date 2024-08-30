@@ -15,4 +15,5 @@ jobs:
 
     - name : Build
       run: |
-        npm run build
+        pnpm install
+        pnpm run build
