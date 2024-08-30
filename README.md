@@ -39,6 +39,7 @@ Assurez-vous d'installer les dépendances nécessaires avant d'utiliser ces scri
 
 La configuration des scripts se trouve dans le fichier `package.json`. 
 
+
 ## Auteurs
 
 * **Theneau Maxime** _alias_ [@MaximeTheneau](https://github.com/MaximeTheneau)
