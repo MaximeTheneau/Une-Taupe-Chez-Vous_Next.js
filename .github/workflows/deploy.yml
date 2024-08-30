@@ -20,6 +20,6 @@ jobs:
         username: ${{ secrets.VPS_USER }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
-          cd ./var/www/html/Une-Taupe-Chez-Vous_Next.js
+          cd /var/www/html/Une-Taupe-Chez-Vous_Next.js
           git stash
           git pull main
