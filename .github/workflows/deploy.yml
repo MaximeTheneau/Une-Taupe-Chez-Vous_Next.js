@@ -22,5 +22,5 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         debug: true
         script: |
-          cd /var/www/html/Une-Taupe-Chez-Vous_Next.js
+          ls
 
