@@ -3,7 +3,7 @@ name: Deploy to VPS
 on:
   push:
     branches:
-      - main  # Remplacez par la branche que vous utilisez
+      - main  # ou la branche que vous souhaitez surveiller
 
 jobs:
   deploy:
@@ -11,7 +11,15 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
-    - name: Print Hello World
-      run: echo "Hello World"
+    - name: Execute remote SSH commands
+      uses: appleboy/ssh-action@v0.1.5
+      with:
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.VPS_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          cd /var/www/html/Une-Taupe-Chez-Vous_Next.js
+          git stash
+          git pull  main
