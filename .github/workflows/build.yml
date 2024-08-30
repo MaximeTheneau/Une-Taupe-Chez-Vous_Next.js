@@ -19,4 +19,4 @@ jobs:
           node-version: '20.*' 
 
       - name: Build the application
-        run: npm run build
+        run: pnpm run build
