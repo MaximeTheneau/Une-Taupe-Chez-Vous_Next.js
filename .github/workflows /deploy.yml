@@ -13,6 +13,11 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+      node-version: '18'
+
     - name: Execute remote SSH commands
       uses: appleboy/ssh-action@v0.1.5
       with:
