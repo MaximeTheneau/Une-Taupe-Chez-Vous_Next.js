@@ -23,5 +23,4 @@ jobs:
         debug: true
         script: |
           cd /var/www/html/Une-Taupe-Chez-Vous_Next.js
-          git stash
-          git pull main
+
