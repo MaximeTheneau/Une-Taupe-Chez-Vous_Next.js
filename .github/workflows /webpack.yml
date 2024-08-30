@@ -22,6 +22,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
  
-    - name: Print Hello World
+    - name: build
       run: echo "Hello World"
 
