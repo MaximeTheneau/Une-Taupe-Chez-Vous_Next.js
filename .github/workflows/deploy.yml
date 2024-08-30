@@ -18,6 +18,6 @@ jobs:
       with:
         host: ${{ secrets.VPS_HOST }}
         username: ${{ secrets.VPS_USER }}
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        password: ${{ secrets.SSH_PRIVATE_KEY }}
         script: whoami
 
