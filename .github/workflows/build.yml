@@ -19,4 +19,6 @@ jobs:
         key: ${{ secrets.KEY }}
         script: |
           cd /var/www/html/Une-Taupe-Chez-Vous_Next.js
+          git stash
+          git pull
           pnpm run build
