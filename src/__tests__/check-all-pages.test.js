@@ -42,7 +42,6 @@ describe('Vérification de toutes les pages', () => {
 
         results.forEach(({ page, status }) => {
             expect(status).toBe(200);
-            console.error(`Erreur pour la page ${page.title}:`);
         });
     });
 
@@ -60,6 +59,5 @@ describe('Vérification de toutes les pages', () => {
         });
 
         expect(responseCode).toBe(404); // Vérifiez que le statut est 404
-        console.log(`La page d'erreur a renvoyé le code ${responseCode}`);
     });
 });
