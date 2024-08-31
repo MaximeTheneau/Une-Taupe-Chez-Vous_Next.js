@@ -41,7 +41,8 @@ describe('Vérification de toutes les pages', () => {
         );
 
         results.forEach(({ page, status }) => {
-            expect(status).toBe(200); // Vérifiez que le statut est 200
+            expect(status).toBe(200);
+            console.error(`Erreur pour la page ${page.title}:`, error);
         });
     });
 
