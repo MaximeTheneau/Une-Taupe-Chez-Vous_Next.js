@@ -42,7 +42,7 @@ describe('Vérification de toutes les pages', () => {
 
         results.forEach(({ page, status }) => {
             expect(status).toBe(200);
-            console.error(`Erreur pour la page ${page.title}:`, error);
+            console.error(`Erreur pour la page ${page.title}:`);
         });
     });
 
