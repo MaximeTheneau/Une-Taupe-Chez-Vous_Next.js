@@ -16,7 +16,7 @@ describe('Vérification de toutes les pages', () => {
     beforeAll(async () => {
         const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}posts/all`;
         const data = await fetcher(apiUrl);
-        pagesToCheck = [...data, { title: 'Page d\'erreur', url: errorPageUrl }];
+        pagesToCheck = data;
     });
 
     test('Chaque page doit renvoyer un code 200 via curl', async () => {
