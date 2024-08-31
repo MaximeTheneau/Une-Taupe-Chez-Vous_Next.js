@@ -18,8 +18,12 @@ jobs:
         with:
           node-version: '20.*' 
 
-      - name: Run tests
-        env:
-          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
-          NEXT_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_URL }}
-        run: pnpm run test
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+            host: ${{ secrets.HOST }}
+            username: ${{ secrets.USERNAME }}
+            key: ${{ secrets.KEY }}
+            script: |
+                cd /var/www/html/Une-Taupe-Chez-Vous_Next.js
+                pnpm run test
