@@ -37,7 +37,12 @@ describe('Vérification de toutes les pages', () => {
         );
 
         results.forEach(({ page, status }) => {
-            expect(status).toBe(200);
+            try {
+                expect(status).toBe(200);
+            } catch (error) {
+                error.message = `Erreur pour la page "${page.title}" (URL: ${page.url}): ${error.message}`;
+                throw error;
+            }
         });
     });
 
