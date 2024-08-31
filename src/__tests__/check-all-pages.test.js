@@ -16,7 +16,7 @@ describe('Vérification de toutes les pages', () => {
     beforeAll(async () => {
         const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}posts/all`;
         const data = await fetcher(apiUrl);
-        pagesToCheck = data;
+        pagesToCheck = [...data, { title: 'Page d\'erreur', url: errorPageUrl }];
     });
 
     test('Il doit y avoir des pages à tester', () => {
