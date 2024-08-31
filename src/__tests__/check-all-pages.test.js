@@ -19,10 +19,6 @@ describe('Vérification de toutes les pages', () => {
         pagesToCheck = [...data, { title: 'Page d\'erreur', url: errorPageUrl }];
     });
 
-    test('Il doit y avoir des pages à tester', () => {
-        expect(pagesToCheck.length).toBeGreaterThan(0);
-    });
-
     test('Chaque page doit renvoyer un code 200 via curl', async () => {
         const results = await Promise.all(
             pagesToCheck.map((page) => {
