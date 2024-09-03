@@ -1,0 +1,24 @@
+@import  '../../styles/variables.scss';
+
+.review{
+    background: $color-primary;
+    padding: 1rem;
+    margin: 1rem;
+    &__author{
+        display: flex;
+        color: $font-color !important;
+        & img{
+            height: 30px;
+        }
+    }
+
+    &__rating{
+        & span{
+            font-weight: 900;
+            margin: 0 .5rem 0 0;
+        }
+    }
+    & p{
+        margin: 1rem;
+    }
+}
