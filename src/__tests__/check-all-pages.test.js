@@ -13,10 +13,15 @@ async function fetcher(url) {
 describe('Vérification de toutes les pages', () => {
     let pagesToCheck = [];
     const errorPageUrl = '/non-existent-page';
+
     beforeAll(async () => {
-        const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}posts/all`;
-        const data = await fetcher(apiUrl);
-        pagesToCheck = data;
+        try {
+            const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}posts/all`;
+            const data = await fetcher(apiUrl);
+            pagesToCheck = data;
+        } catch (error) {
+            throw new Error(`Échec de l'initialisation des pages: ${error.message}`);
+        }
     });
 
     test('Chaque page doit renvoyer un code 200 via curl', async () => {
@@ -40,7 +45,7 @@ describe('Vérification de toutes les pages', () => {
             try {
                 expect(status).toBe(200);
             } catch (error) {
-                error.message = `Erreur pour la page "${page.title}" (URL: ${page.url}): ${error.message}`;
+                console.error(`Erreur de statut pour la page "${page.title}" (${page.url}): attendu 200, reçu ${status}`);
                 throw error;
             }
         });
@@ -59,6 +64,6 @@ describe('Vérification de toutes les pages', () => {
             });
         });
 
-        expect(responseCode).toBe(404); // Vérifiez que le statut est 404
+        expect(responseCode).toBe(404);
     });
 });
