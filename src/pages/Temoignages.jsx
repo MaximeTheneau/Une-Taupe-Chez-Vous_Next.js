@@ -49,8 +49,10 @@ export default function testimonials({ page, reviews }) {
         <p>
           <strong>
             Une note de
+            {' '}
             {reviews.result.rating}
             /5 sur
+            {' '}
             {reviews.result.user_ratings_total}
           </strong>
           .
