@@ -4,28 +4,32 @@ import Cards from '../components/cardsHome/cardsHome';
 import styles from '../styles/Home.module.scss';
 import fetcher from '../utils/fetcher';
 import LocalBusinessJsonLd from '../components/jsonLd/LocalBusinessJsonLd';
-import SearchJsonLd from '../components/jsonLd/SearchJsonLd';
-import LogoJsonLd from '../components/jsonLd/LogoJsonLd';
 import DevisButton from '../components/button/DevisButton';
 import ImageLoader from '../components/image/ImageLoader';
+import Review from '../components/review/Review';
 
 export async function getStaticProps() {
   const home = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/home`);
+  const responseMaps = await fetch(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${process.env.GOOGLE_API_PLACEID}&language=fr&key=${process.env.GOOGLE_API_KEY}`);
+
+  const reviews = await responseMaps.json();
 
   return {
     props: {
       accueil: home.home,
       services: home.interventions,
       testimonials: home.testimonials,
+      reviews,
     },
   };
 }
 export default function Home({
-  accueil, services, testimonials,
+  accueil, services, testimonials, reviews,
 }) {
   const { paragraphPosts } = accueil;
   const firstPost = paragraphPosts[0];
   const otherPosts = paragraphPosts.slice(1);
+  const latestThreeReviews = reviews.result.reviews.slice(0, 3);
   return (
     <>
       <Head>
@@ -57,13 +61,7 @@ export default function Home({
           fetchPriority="high"
         />
       </Head>
-      <LocalBusinessJsonLd descriptionMeta={accueil.metaDescription} />
-      <SearchJsonLd />
-      <LogoJsonLd
-        name="Une Taupe Chez Vous"
-        url={process.env.NEXT_PUBLIC_URL}
-        logoUrl={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/logo-une-taupe-chez-vous.png`}
-      />
+      <LocalBusinessJsonLd descriptionMeta={accueil.metaDescription} reviews={reviews} />
       <div className={styles.home__imagesFull}>
         <div className={styles.home__imagesFull__image}>
           <ImageLoader
@@ -103,6 +101,16 @@ export default function Home({
             de Clients Satisfaits
           </Link>
         </h2>
+        <div className={styles.page__reviews}>
+          {latestThreeReviews.map((review) => (
+            <Review key={review.time} review={review} />
+          ))}
+        </div>
+        <p>
+          <Link href={reviews.result.url} target="_blank" rel="noopener noreferrer">
+            Consultez tous nos avis ici
+          </Link>
+        </p>
         <p>
           {testimonials.contents}
         </p>

@@ -18,7 +18,7 @@ export async function getStaticProps() {
   };
 }
 // == Composant
-export default function testimonials({ page, reviews,  }) {
+export default function testimonials({ page, reviews }) {
   return (
     <>
       <Head>
@@ -46,10 +46,18 @@ export default function testimonials({ page, reviews,  }) {
       <section className={styles.page}>
         <h1>{page.title}</h1>
         <p>{page.contentsHTML}</p>
-        <p><strong>Une note de {reviews.result.rating}/5 sur {reviews.result.user_ratings_total}</strong>.</p>
+        <p>
+          <strong>
+            Une note de
+            {reviews.result.rating}
+            /5 sur
+            {reviews.result.user_ratings_total}
+          </strong>
+          .
+        </p>
         <div className={styles.page__reviews}>
-          {reviews.result.reviews.map((review, index) => (
-            <Review key={index} review={review} />
+          {reviews.result.reviews.map((review) => (
+            <Review key={review.time} review={review} />
           ))}
         </div>
         <p>

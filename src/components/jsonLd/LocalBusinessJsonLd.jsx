@@ -1,12 +1,11 @@
 /* eslint-disable react/no-danger */
 import Head from 'next/head';
 
-export default function LocalBusinessJsonLd({ descriptionMeta }) {
+export default function LocalBusinessJsonLd({ descriptionMeta, reviews }) {
   const jsonLdData = {
     '@context': 'https://schema.org',
-    '@type': 'Service',
-    serviceType: 'Extermination de nuisibles',
-    name: 'Une Taupe Chez Vous',
+    '@type': 'LocalBusiness',
+    name: reviews.reviews,
     description: descriptionMeta,
     image: 'https://picture.unetaupechezvous.fr/Une-Taupe-Chez-Vous-Taupier-10.webp',
     logo: 'https://picture.unetaupechezvous.fr/logo-une-taupe-chez-vous.png',
@@ -17,7 +16,7 @@ export default function LocalBusinessJsonLd({ descriptionMeta }) {
     ],
     provider: {
       '@type': 'LocalBusiness',
-      name: 'Taupier piégeur professionnel depuis 1994',
+      name: reviews.name,
       address: {
         '@type': 'PostalAddress',
         streetAddress: '71 rue Marie Curie',
@@ -53,6 +52,25 @@ export default function LocalBusinessJsonLd({ descriptionMeta }) {
         },
       },
     ],
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: reviews.rating,
+      reviewCount: reviews.user_ratings_total,
+    },
+    review: [
+      reviews.result.reviews.map((review) => (
+        {
+          '@type': 'Review',
+          author: review.author_name,
+          datePublished: new Date(review.time * 1000).toISOString(),
+          reviewBody: review.text,
+          reviewRating: {
+            '@type': 'rating',
+            ratingValue: review.rating,
+          },
+        })),
+    ],
+    priceRange: 'À partir de 150 € TTC',
   };
 
   return (
