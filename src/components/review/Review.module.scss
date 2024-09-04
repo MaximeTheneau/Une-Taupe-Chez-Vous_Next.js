@@ -4,12 +4,13 @@
     background: $color-primary;
     padding: 1rem;
     margin: 1rem;
+    width: 30%;
+    border-radius: $border-radius-img;
+    & img{
+        height: 30px;
+        display: inline-block;
+    }
     &__author{
-        display: flex;
-        color: $font-color !important;
-        & img{
-            height: 30px;
-        }
     }
 
     &__rating{
@@ -20,5 +21,11 @@
     }
     & p{
         margin: 1rem;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .review{
+        width: 100%;
     }
 }

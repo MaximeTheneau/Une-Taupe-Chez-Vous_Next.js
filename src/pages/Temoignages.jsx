@@ -5,20 +5,20 @@ import Review from '../components/review/Review';
 
 export async function getStaticProps() {
   const responsePage = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts/Temoignages`);
-  const responseMaps = await fetch(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${process.env.GOOGLE_API_PLACEID}&language=fr&fields=reviews&key=${process.env.GOOGLE_API_KEY}`);
-  
+  const responseMaps = await fetch(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${process.env.GOOGLE_API_PLACEID}&language=fr&key=${process.env.GOOGLE_API_KEY}`);
+
   const page = await responsePage.json();
   const reviews = await responseMaps.json();
 
   return {
     props: {
       page,
-      reviews: reviews.result.reviews,
+      reviews,
     },
   };
 }
 // == Composant
-export default function testimonials({ page, reviews }) {
+export default function testimonials({ page, reviews,  }) {
   return (
     <>
       <Head>
@@ -45,10 +45,18 @@ export default function testimonials({ page, reviews }) {
       </Head>
       <section className={styles.page}>
         <h1>{page.title}</h1>
-        <div dangerouslySetInnerHTML={{ __html: page.contentsHTML }} />
-        {reviews.map((review, index) => (
-          <Review key={index} review={review} />
-        ))}
+        <p>{page.contentsHTML}</p>
+        <p><strong>Une note de {reviews.result.rating}/5 sur {reviews.result.user_ratings_total}</strong>.</p>
+        <div className={styles.page__reviews}>
+          {reviews.result.reviews.map((review, index) => (
+            <Review key={index} review={review} />
+          ))}
+        </div>
+        <p>
+          <Link href={reviews.result.url} target="_blank" rel="noopener noreferrer">
+            Consultez nos avis Google Maps
+          </Link>
+        </p>
         {page.paragraphPosts.map((paragraphArticle) => (
           <div key={paragraphArticle.id}>
             {paragraphArticle.subtitle && (

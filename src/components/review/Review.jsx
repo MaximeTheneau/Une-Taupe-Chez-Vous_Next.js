@@ -3,32 +3,20 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from './Review.module.scss';
 
-const Review = ({ review }) => {
+const Review = ({ index, review  }) => {
   return (
-    <article className="review" itemScope itemType="http://schema.org/Review" className={styles.review}>
-      <header>
-        <Link href={review.author_url} className={styles.review__author}>
-        <h2 itemProp="author" >
-          {review.author_name}
-        </h2>
-        <Image 
-            src={review.profile_photo_url} 
-            alt={`${review.author_name}'s profile photo`} 
-            width={30} 
-            height={30} 
-            itemProp="image" 
+    <article key={index} className={styles.review}>
+      <img 
+        src={review.profile_photo_url} 
+        alt={`Photo de profil de ${review.author_name}, auteur de l'avis`}
+        width={30}
+        height={30}
         />
-        </Link>
-        <div className={styles.review__rating}itemProp="reviewRating" itemScope itemType="http://schema.org/Rating" >
-          <meta itemProp="worstRating" content="1" />
-          <meta itemProp="bestRating" content="5" />
-          <span itemProp="ratingValue" >{review.rating} étoiles</span> 
-          <time dateTime={new Date(review.time * 1000).toISOString()} itemProp="datePublished">
-            {review.relative_time_description}
-          </time>
-        </div>
-      </header>
-      <p itemProp="reviewBody">{review.text}</p>
+      <h2>{review.author_name}</h2>
+      <p><strong>{review.rating}/5</strong></p>
+      <p><em>{review.relative_time_description}</em></p>
+      <p>{review.text}</p>
+      <p><Link href={review.author_url} target="_blank" rel="noopener noreferrer">Voir l'avis original</Link></p>
     </article>
   );
 };
