@@ -107,7 +107,7 @@ export default function Home({
           ))}
         </div>
         <p>
-          <Link href={reviews.result.url} target="_blank" rel="noopener noreferrer">
+          <Link href="/Temoignages">
             Consultez tous nos avis ici
           </Link>
         </p>
