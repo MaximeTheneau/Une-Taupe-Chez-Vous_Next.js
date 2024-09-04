@@ -21,7 +21,7 @@ function Review({ index, review }) {
       </p>
       <p><em>{review.relative_time_description}</em></p>
       <p>{review.text}</p>
-      <p><Link href={review.author_url} target="_blank" rel="noopener noreferrer">Voir l'avis original</Link></p>
+      <p><Link href={review.author_url} target="_blank" rel="noopener noreferrer">Voir l&apos;avis original</Link></p>
     </article>
   );
 }

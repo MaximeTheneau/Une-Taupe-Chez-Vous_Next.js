@@ -22,5 +22,13 @@
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", "ts", "tsx"] }],
     "react/no-unknown-property": "off",
     "react/prop-types": "off"
-  }
+  },
+  "overrides": [
+    {
+      "files": ["src/__tests__/*"],
+      "env": {
+        "jest": true
+      }
+    }
+  ]
 }
