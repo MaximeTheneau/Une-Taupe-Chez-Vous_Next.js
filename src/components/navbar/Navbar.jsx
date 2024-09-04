@@ -59,8 +59,8 @@ export default function Navbar() {
             </Link>
           </li>
           <li className={styles['navbar__menu__list-item']}>
-            <Link href="/Interventions" onClick={() => closeNav()}>
-              Interventions
+            <Link href="/Temoignages" onClick={() => closeNav()}>
+              Témoignages de Clients Satisfaits
             </Link>
           </li>
           <li className={styles['navbar__menu__list-item']}>

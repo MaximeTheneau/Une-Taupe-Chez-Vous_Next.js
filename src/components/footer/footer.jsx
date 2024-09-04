@@ -19,8 +19,8 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link href="/Interventions">
-                Interventions
+              <Link href="/Temoignages">
+                Consultez les Avis de Nos Clients
               </Link>
             </li>
             <li>
