@@ -57,7 +57,10 @@ export default function LocalBusinessJsonLd({ descriptionMeta, reviewsData }) {
       reviews.map((review) => (
         {
           '@type': 'Review',
-          author: review.author_name,
+          author: {
+            '@type': 'Person',
+            name: review.author_name,
+          },
           datePublished: new Date(review.time * 1000).toISOString(),
           reviewBody: review.text,
           reviewRating: {
