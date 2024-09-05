@@ -19,27 +19,18 @@ export default function LocalBusinessJsonLd({ descriptionMeta, reviewsData }) {
       'https://twitter.com/UneTaupe_',
       'https://www.linkedin.com/company/une-taupe-chez-vous',
     ],
-    provider: {
-      '@type': 'LocalBusiness',
-      name: result.name,
-      address: {
-        '@type': 'PostalAddress',
-        streetAddress: '71 rue Marie Curie',
-        addressLocality: 'Garrenne Sur Eure',
-        postalCode: '27780',
-        addressCountry: 'FR',
-      },
-      telephone: '+33232264958',
-      url: process.env.NEXT_PUBLIC_URL,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: '71 rue Marie Curie',
+      addressLocality: 'Garrenne Sur Eure',
+      postalCode: '27780',
+      addressCountry: 'FR',
     },
+    telephone: '+33232264958',
+    url: process.env.NEXT_PUBLIC_URL,
     areaServed: {
       '@type': 'Place',
       name: 'Yvelines',
-    },
-    hasCertification: {
-      '@type': 'Certification',
-      name: 'Taupier piégeur agréé professionnel depuis 1994',
-      url: 'https://unetaupechezvous.fr/Taupier-agree-professionnel-depuis-1994',
     },
     availableChannel: [
       {
