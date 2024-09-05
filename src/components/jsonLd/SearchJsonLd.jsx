@@ -10,7 +10,6 @@ export default function SearchJsonLd() {
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'WebSite',
-            name: 'Une Taupe Chez Vous',
             url: `${process.env.NEXT_PUBLIC_URL}`,
             potentialAction: {
               '@type': 'SearchAction',

@@ -7,6 +7,7 @@ import LocalBusinessJsonLd from '../components/jsonLd/LocalBusinessJsonLd';
 import DevisButton from '../components/button/DevisButton';
 import ImageLoader from '../components/image/ImageLoader';
 import Review from '../components/review/Review';
+import SearchJsonLd from '../components/jsonLd/SearchJsonLd';
 
 export async function getStaticProps() {
   const home = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/home`);
@@ -62,6 +63,7 @@ export default function Home({
         />
       </Head>
       <LocalBusinessJsonLd descriptionMeta={accueil.metaDescription} reviewsData={reviews} />
+      <SearchJsonLd />
       <div className={styles.home__imagesFull}>
         <div className={styles.home__imagesFull__image}>
           <ImageLoader

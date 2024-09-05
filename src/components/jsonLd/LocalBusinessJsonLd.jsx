@@ -32,22 +32,6 @@ export default function LocalBusinessJsonLd({ descriptionMeta, reviewsData }) {
       '@type': 'Place',
       name: 'Yvelines',
     },
-    availableChannel: [
-      {
-        '@type': 'ServiceChannel',
-        serviceUrl: `${process.env.NEXT_PUBLIC_URL}/search`,
-        providesService: {
-          '@type': 'Service',
-          name: 'Page de recherche',
-          description: 'Rechercher un article, un sujet ou un nuisible',
-          potentialAction: {
-            '@type': 'SearchAction',
-            target: `${process.env.NEXT_PUBLIC_URL}/search?q={search_term_string}`,
-            'query-input': 'required name=search_term_string',
-          },
-        },
-      },
-    ],
     aggregateRating: {
       '@type': 'AggregateRating',
       ratingValue: result.rating,
