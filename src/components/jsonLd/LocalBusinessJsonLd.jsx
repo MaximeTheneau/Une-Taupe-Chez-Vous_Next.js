@@ -1,11 +1,16 @@
 /* eslint-disable react/no-danger */
 import Head from 'next/head';
 
-export default function LocalBusinessJsonLd({ descriptionMeta, reviews }) {
+export default function LocalBusinessJsonLd({ descriptionMeta, reviewsData }) {
+  const {
+    result,
+    reviews = result.reviews,
+  } = reviewsData;
+
   const jsonLdData = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
-    name: reviews.reviews,
+    name: result.name,
     description: descriptionMeta,
     image: 'https://picture.unetaupechezvous.fr/Une-Taupe-Chez-Vous-Taupier-10.webp',
     logo: 'https://picture.unetaupechezvous.fr/logo-une-taupe-chez-vous.png',
@@ -16,7 +21,7 @@ export default function LocalBusinessJsonLd({ descriptionMeta, reviews }) {
     ],
     provider: {
       '@type': 'LocalBusiness',
-      name: reviews.name,
+      name: result.name,
       address: {
         '@type': 'PostalAddress',
         streetAddress: '71 rue Marie Curie',
@@ -54,11 +59,11 @@ export default function LocalBusinessJsonLd({ descriptionMeta, reviews }) {
     ],
     aggregateRating: {
       '@type': 'AggregateRating',
-      ratingValue: reviews.rating,
-      reviewCount: reviews.user_ratings_total,
+      ratingValue: result.rating,
+      reviewCount: result.user_ratings_total,
     },
     review: [
-      reviews.result.reviews.map((review) => (
+      reviews.map((review) => (
         {
           '@type': 'Review',
           author: review.author_name,

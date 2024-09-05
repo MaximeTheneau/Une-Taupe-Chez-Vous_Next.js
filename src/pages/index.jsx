@@ -61,7 +61,7 @@ export default function Home({
           fetchPriority="high"
         />
       </Head>
-      <LocalBusinessJsonLd descriptionMeta={accueil.metaDescription} reviews={reviews} />
+      <LocalBusinessJsonLd descriptionMeta={accueil.metaDescription} reviewsData={reviews} />
       <div className={styles.home__imagesFull}>
         <div className={styles.home__imagesFull__image}>
           <ImageLoader
