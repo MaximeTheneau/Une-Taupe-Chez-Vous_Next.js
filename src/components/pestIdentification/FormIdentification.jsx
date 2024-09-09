@@ -188,7 +188,7 @@ export default function FormIdentification() {
       </form>
       <h3>Response :</h3>
       {state.message && <p>{state.message}</p>}
-      {!state.loading && (
+      {state.loading && (
       <p className={styles.pestIdentification__loading}>
         Envoi en cours...
         {' '}

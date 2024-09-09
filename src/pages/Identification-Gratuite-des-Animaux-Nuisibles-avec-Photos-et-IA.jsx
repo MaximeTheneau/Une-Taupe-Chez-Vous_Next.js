@@ -6,6 +6,7 @@ import TableOfContents from '../components/tableOfContents/TableOfContents';
 import ImageLoader from '../components/image/ImageLoader';
 import FormIdentification from '../components/pestIdentification/FormIdentification';
 import ArticlesAdsense from '../components/adsense/ArticlesAdsense';
+import Comments from '../components/comments/Comments';
 
 export async function getStaticProps() {
   const page = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Identification-Gratuite-des-Animaux-Nuisibles-avec-Photos-et-IA`);
@@ -121,6 +122,8 @@ export default function Page({ page }) {
             )}
           </div>
         ))}
+        <Comments posts={page} />
+
       </section>
     </>
   );
