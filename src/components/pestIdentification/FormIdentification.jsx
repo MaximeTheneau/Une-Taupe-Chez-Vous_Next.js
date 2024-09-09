@@ -62,10 +62,18 @@ export default function FormIdentification() {
       setState({ ...state, error: 'Vous devez sélectionner une option' });
       return;
     }
+    if (!state.form.image) {
+      setState({
+        ...state,
+        message: '',
+        error: 'Vous devez choisir une image',
+      });
+      return;
+    }
 
     FormMiddleware(req, 'pest-identification', handleResponse200, handleResponseError);
 
-    setState({ ...state, loading: true });
+    setState({ ...state, loading: true, message: '' });
   };
 
   function handleInputChange(e) {
@@ -108,50 +116,48 @@ export default function FormIdentification() {
   return (
     <div className={styles.pestIdentification}>
       <form onSubmit={handleSubmit}>
-        <div>
-          <fieldset>
-            <label htmlFor="Insecte">
-              <input
-                type="checkbox"
-                id="Insecte"
-                value="Insecte, Animal, Nid"
-                checked={state.form.type === 'Insecte, Animal, Nid'}
-                onChange={handleInputChange}
-              />
-              Insecte, Animal, Nid
-            </label>
-            <label htmlFor="Larve">
-              <input
-                type="checkbox"
-                id="Larve"
-                value="Larve ou Œuf"
-                checked={state.form.type === 'Larve ou Œuf'}
-                onChange={handleInputChange}
-              />
-              Larve ou Œuf
-            </label>
-            <label htmlFor="Excrément">
-              <input
-                type="checkbox"
-                id="Excrément"
-                value="Excrément"
-                checked={state.form.type === 'Excrément'}
-                onChange={handleInputChange}
-              />
-              Excrément
-            </label>
-            <label htmlFor="Piqûre">
-              <input
-                type="checkbox"
-                id="Piqûre"
-                value="Piqûre"
-                checked={state.form.type === 'Piqûre'}
-                onChange={handleInputChange}
-              />
-              Piqûre
-            </label>
-          </fieldset>
-        </div>
+        <fieldset>
+          <label htmlFor="Insecte">
+            <input
+              type="checkbox"
+              id="Insecte"
+              value="Insecte, Animal, Nid"
+              checked={state.form.type === 'Insecte, Animal, Nid'}
+              onChange={handleInputChange}
+            />
+            Insecte, Animal, Nid
+          </label>
+          <label htmlFor="Larve">
+            <input
+              type="checkbox"
+              id="Larve"
+              value="Larve ou Œuf"
+              checked={state.form.type === 'Larve ou Œuf'}
+              onChange={handleInputChange}
+            />
+            Larve ou Œuf
+          </label>
+          <label htmlFor="Excrément">
+            <input
+              type="checkbox"
+              id="Excrément"
+              value="Excrément"
+              checked={state.form.type === 'Excrément'}
+              onChange={handleInputChange}
+            />
+            Excrément
+          </label>
+          <label htmlFor="Piqûre">
+            <input
+              type="checkbox"
+              id="Piqûre"
+              value="Piqûre"
+              checked={state.form.type === 'Piqûre'}
+              onChange={handleInputChange}
+            />
+            Piqûre
+          </label>
+        </fieldset>
 
         <div>
           <label htmlFor="file" className="button button--grey">
@@ -159,12 +165,13 @@ export default function FormIdentification() {
             <input
               id="file"
               type="file"
+              name="file"
               accept="image/jpg, image/jpeg, image/webp"
               onChange={handleFileChange}
             />
           </label>
-          <p>
-            <span className={styles.pestIdentification__span}>
+          <p className={styles.pestIdentification__span}>
+            <span>
               {state.imageName || 'Aucun fichier sélectionné'}
             </span>
           </p>
@@ -180,8 +187,13 @@ export default function FormIdentification() {
       </>
       )}
       {state.loading
-        && <p>Identification envoye patienter quelque instant</p>}
-      {state.error}
+        && (
+        <>
+          <h3>Response :</h3>
+          <p>Identification envoye patienter quelque instant</p>
+        </>
+        )}
+      <p className={styles.pestIdentification__error}>{state.error}</p>
     </div>
   );
 }
