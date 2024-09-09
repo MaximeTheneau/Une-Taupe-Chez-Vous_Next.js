@@ -7,6 +7,7 @@ import fetcher from '../utils/fetcher';
 import TableOfContents from '../components/tableOfContents/TableOfContents';
 import ContactButton from '../components/button/ContactButton';
 import ImageLoader from '../components/image/ImageLoader';
+import ArticleJsonLd from '../components/jsonLd/ArticleJsonLd';
 
 export async function getStaticProps() {
   const page = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Taupier-agree-professionnel-depuis-1994`);
@@ -52,6 +53,7 @@ export default function TaupierPage({ page }) {
           imageSizes="100w"
           fetchPriority="high"
         />
+        <ArticleJsonLd post={page} urlPost={page.url} />
       </Head>
       <section>
         <figure>
