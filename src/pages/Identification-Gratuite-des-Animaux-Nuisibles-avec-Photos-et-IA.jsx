@@ -70,7 +70,7 @@ export default function Page({ page }) {
           )}
         </figure>
         <h1>{page.title}</h1>
-        <div dangerouslySetInnerHTML={{ __html: page.contentsHTML }} />
+        <div dangerouslySetInnerHTML={{ __html: page.contents }} />
         <ArticlesAdsense adSlot={5685145018} adformat="fluid" />
         <div className={styles.page__adsense}>
           <FormIdentification />

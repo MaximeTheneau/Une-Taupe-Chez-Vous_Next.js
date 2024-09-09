@@ -40,7 +40,7 @@ export default function ArticleJsonLd({ post, urlPost }) {
         id: comment.id,
         author: {
           '@type': 'Person',
-          name: comment.user,
+          name: comment.User,
         },
         description: comment.comment,
         dateCreated: comment.createdAt,
