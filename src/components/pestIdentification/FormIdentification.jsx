@@ -124,6 +124,7 @@ export default function FormIdentification() {
   return (
     <div className={styles.pestIdentification}>
       <form onSubmit={handleSubmit}>
+        <h3>Sélectionnez le type:</h3>
         <fieldset>
           <label htmlFor="Insecte">
             <input
@@ -168,8 +169,9 @@ export default function FormIdentification() {
         </fieldset>
 
         <div>
+          <h3>Choisissez une image:</h3>
           <label htmlFor="file" className="button button--grey">
-            Choisir une image
+            Télécharger une image
             <input
               id="file"
               type="file"
