@@ -97,11 +97,9 @@ export default function Home({
           </div>
         ))}
         <h2>
-          <Link href={testimonials.slug}>
-            {testimonials.title}
-            {' '}
-            de Clients Satisfaits
-          </Link>
+          {testimonials.title}
+          {' '}
+          de Clients Satisfaits
         </h2>
         <div className={styles.page__reviews}>
           {latestThreeReviews.map((review) => (
@@ -113,10 +111,6 @@ export default function Home({
             Consultez tous nos avis ici
           </Link>
         </p>
-        <p>
-          {testimonials.contents}
-        </p>
-        <div dangerouslySetInnerHTML={{ __html: testimonials.paragraphPosts[0].paragraph }} />
         {accueil.listPosts.map((listArticle) => (
           listArticle.title !== null && (
           <div key={listArticle.title}>
