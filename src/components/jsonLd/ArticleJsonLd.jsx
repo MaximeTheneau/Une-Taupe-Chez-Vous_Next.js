@@ -3,7 +3,7 @@ import Head from 'next/head';
 export default function ArticleJsonLd({ post, urlPost }) {
   const jsonLdData = {
     '@context': 'https://schema.org/',
-    '@type': 'BlogPosting',
+    '@type': 'Article',
     name: post.title,
     headline: post.title,
     description: post.metaDescription,
@@ -11,7 +11,7 @@ export default function ArticleJsonLd({ post, urlPost }) {
     ...(post.updatedAt && { dateModified: post.updatedAt }),
     url: urlPost,
     articleSection: `${post.subcategory ? `${post.subcategory.name},` : ''} ${post.category.name}`,
-    isAccessibleForFree: 'True',
+    isAccessibleForFree: true,
     keywords: `${post.title}, ${post.category.name}${post.subcategory ? `, ${post.subcategory.name}` : ''}`,
     articleBody: post.contents,
     image: {
@@ -33,6 +33,19 @@ export default function ArticleJsonLd({ post, urlPost }) {
       '@type': 'Organization',
       name: 'Une taupe chez vous',
     },
+    commentCount: post.comments.length,
+    comment: [
+      post.comments.map((comment) => ({
+        '@type': 'Comment',
+        id: comment.id,
+        author: {
+          '@type': 'Person',
+          name: comment.user,
+        },
+        description: comment.comment,
+        dateCreated: comment.createdAt,
+      })),
+    ],
   };
 
   return (
