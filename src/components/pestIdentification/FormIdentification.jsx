@@ -71,9 +71,17 @@ export default function FormIdentification() {
       return;
     }
 
+    setState({
+      form: {
+        type: '',
+        image: '',
+      },
+      ...state,
+      loading: true,
+      message: '',
+      imageName: '',
+    });
     FormMiddleware(req, 'pest-identification', handleResponse200, handleResponseError);
-
-    setState({ ...state, loading: true, message: '' });
   };
 
   function handleInputChange(e) {
