@@ -178,22 +178,10 @@ export default function FormIdentification() {
         </div>
         <button type="submit" className="button">Envoyer</button>
       </form>
-      {state.message && (
-      <>
-        <h3>Response :</h3>
-        <p>
-          {state.message}
-        </p>
-      </>
-      )}
-      {state.loading
-        && (
-        <>
-          <h3>Response :</h3>
-          <p>Identification envoye patienter quelque instant</p>
-        </>
-        )}
-      <p className={styles.pestIdentification__error}>{state.error}</p>
+      <h3>Response :</h3>
+      {state.message && <p>{state.message}</p>}
+      {state.loading && <p>Identification envoye patienter quelque instant</p>}
+      {state.error && <p className={styles.pestIdentification__error}>{state.error}</p>}
     </div>
   );
 }
