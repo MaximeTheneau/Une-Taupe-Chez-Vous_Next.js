@@ -5,6 +5,7 @@ import fetcher from '../utils/fetcher';
 import TableOfContents from '../components/tableOfContents/TableOfContents';
 import ImageLoader from '../components/image/ImageLoader';
 import FormIdentification from '../components/pestIdentification/FormIdentification';
+import ArticlesAdsense from '../components/adsense/ArticlesAdsense';
 
 export async function getStaticProps() {
   const page = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Identification-Gratuite-des-Animaux-Nuisibles-avec-Photos-et-IA`);
@@ -69,8 +70,13 @@ export default function Page({ page }) {
         </figure>
         <h1>{page.title}</h1>
         <div dangerouslySetInnerHTML={{ __html: page.contentsHTML }} />
-        <FormIdentification />
+        <ArticlesAdsense adSlot={5685145018} adformat="fluid" />
+        <div className={styles.page__adsense}>
+          <FormIdentification />
+          <ArticlesAdsense adSlot={8424346239} adformat="auto" vertical />
+        </div>
         <TableOfContents post={page} />
+        <ArticlesAdsense adSlot={5055946866} adformat="fluid" />
         {page.paragraphPosts.map((paragraphArticle) => (
           <div key={paragraphArticle.id}>
             {paragraphArticle.subtitle && (

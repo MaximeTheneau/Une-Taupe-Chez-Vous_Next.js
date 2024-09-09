@@ -7,6 +7,7 @@
     border: 1px solid rgba(209, 213, 219, 0.3);
     padding: 1rem;
     font-size: +1.4rem;
+    width: 70%;
     & form{
         width: 100%;
     }
@@ -34,16 +35,39 @@
         font-size: 1.2rem;
         font-weight: 900;
     }
+    &__loading{
+        display: flex;
+        justify-content: center;
+        align-items: center;  
+        & i{
+            margin: 0 5px;
+            opacity: 0;
+            animation: loading 2s infinite ease-in-out;
+            &:nth-child(1){
+                animation-delay: 0s;
+            }
+            &:nth-child(2){
+                animation-delay: 0.5s;
+            }
+            &:nth-child(3){
+                animation-delay: 1s;
+            }
+        }
+    }
 }
+
+@keyframes loading {
+    0%, 100% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
 
 @media screen and (max-width: 768px){
     .pestIdentification{
-        backdrop-filter: blur(15px) saturate(179%);
-        background-color: rgba(220, 220, 220, 0.21);
-        border-radius: 12px;
-        border: 1px solid rgba(209, 213, 219, 0.3);
-        padding: 1rem;
-        font-size: +1.4rem;
+        width: 100%;
         & fieldset label{
             display: block;
         }

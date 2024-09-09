@@ -72,6 +72,12 @@
     display: flex;
     justify-content: center
   }
+  &__adsense{
+    display: flex;
+    & ins{
+      width: 30%;
+    }
+  }
 }
 
 @media screen and (max-width: 768px){

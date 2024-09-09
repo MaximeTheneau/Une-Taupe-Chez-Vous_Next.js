@@ -3,7 +3,7 @@ import { useCookies } from '../../context/CookiesContext';
 import LoadingAdsense from '../loading/LoadingAdsense';
 import styles from './ArticlesAdsense.module.scss';
 
-function ArticlesAdsense({ adSlot, adformat }) {
+function ArticlesAdsense({ adSlot, adformat, vertical }) {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const { cookies } = useCookies();
@@ -16,7 +16,7 @@ function ArticlesAdsense({ adSlot, adformat }) {
     }
   }, []);
   return cookies.cookiesAdsense && (
-    <div className={styles.adSense}>
+    <div className={vertical ? `${styles.adSense__vertical} ${styles.adSense}${styles.adSense}` : styles.adSense}>
       {!isLoaded && <LoadingAdsense />}
       <ins
         className="adsbygoogle"

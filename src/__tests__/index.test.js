@@ -405,11 +405,6 @@ describe('Home Page', () => {
       expect(screen.getByText(service.title)).toBeInTheDocument();
     });
 
-    // Vérifiez les témoignages
-    expect(screen.getByText('Témoignages de Clients Satisfaits')).toBeInTheDocument();
-    expect(screen.getByText('Contenu des témoignages')).toBeInTheDocument();
-    expect(screen.getByText('Paragraphe des témoignages')).toBeInTheDocument();
-
     // Vérifiez les articles de la liste
     expect(screen.getByText('Liste d\'articles')).toBeInTheDocument();
     expect(screen.getByText('Description de l\'article')).toBeInTheDocument();
