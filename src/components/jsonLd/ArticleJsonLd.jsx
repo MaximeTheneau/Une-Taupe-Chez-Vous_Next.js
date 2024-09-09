@@ -37,7 +37,6 @@ export default function ArticleJsonLd({ post, urlPost }) {
     comment: [
       post.comments.map((comment) => ({
         '@type': 'Comment',
-        id: comment.id,
         author: {
           '@type': 'Person',
           name: comment.User,
