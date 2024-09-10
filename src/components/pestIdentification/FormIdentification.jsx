@@ -37,8 +37,6 @@ export default function FormIdentification() {
         image: '',
       },
       message: response,
-      imageName: '',
-      imageFile: '',
       timer: 30,
       error: '',
       loading: false,
@@ -83,6 +81,7 @@ export default function FormIdentification() {
       loading: true,
       message: '',
       imageName: '',
+      imageFile: '',
     });
     FormMiddleware(req, 'pest-identification', handleResponse200, handleResponseError);
   };
