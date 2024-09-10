@@ -89,6 +89,11 @@ export default function SiteMapPage({
                   Foire aux questions
                 </Link>
               </li>
+              <li>
+                <Link href="/Identification-Gratuite-des-Animaux-Nuisibles-avec-Photos-et-IA">
+                  Identification des animaux nuisibles
+                </Link>
+              </li>
             </ul>
           </li>
           <li className={styles['siteMap__list--title']}>

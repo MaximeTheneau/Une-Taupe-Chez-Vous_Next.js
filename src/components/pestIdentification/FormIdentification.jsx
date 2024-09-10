@@ -71,7 +71,6 @@ export default function FormIdentification() {
       });
       return;
     }
-
     setState({
       form: {
         type: '',
