@@ -147,11 +147,11 @@ export default function FormIdentification() {
             <input
               type="checkbox"
               id="Insecte"
-              value="Insecte, Animal, Nid"
-              checked={state.form.type === 'Insecte, Animal, Nid'}
+              value="Insecte, Animal ou Nid"
+              checked={state.form.type === 'Insecte, Animal ou Nid'}
               onChange={handleInputChange}
             />
-            Insecte, Animal, Nid
+            Insecte, Animal ou Nid
           </label>
           <label htmlFor="Larve">
             <input
