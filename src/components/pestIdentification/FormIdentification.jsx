@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import styles from './FormIdentification.module.scss';
 import FormMiddleware from '../../middleware/FormMiddleware';
 
@@ -11,6 +12,7 @@ export default function FormIdentification() {
     timer: 0,
     message: '',
     imageName: '',
+    imageFile: '',
     error: '',
     loading: false,
   });
@@ -36,6 +38,7 @@ export default function FormIdentification() {
       },
       message: response,
       imageName: '',
+      imageFile: '',
       timer: 30,
       error: '',
       loading: false,
@@ -103,6 +106,11 @@ export default function FormIdentification() {
   const handleFileChange = (e) => {
     const file = e.target.files && e.target.files[0];
     if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setState({ ...state, imageFile: reader.result });
+      };
+
       const validMimeTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/avif', 'image/webp'];
       if (validMimeTypes.includes(file.type)) {
         setState({
@@ -118,6 +126,7 @@ export default function FormIdentification() {
           ...state,
         });
       }
+      reader.readAsDataURL(file);
     }
   };
 
@@ -185,6 +194,15 @@ export default function FormIdentification() {
               {state.imageName || 'Aucun fichier sélectionné'}
             </span>
           </p>
+          {state.imageFile
+            && (
+            <Image
+              src={state.imageFile}
+              alt="Image sélectionnée"
+              width={500}
+              height={500}
+            />
+            )}
         </div>
         <button type="submit" className="button">Envoyer</button>
       </form>

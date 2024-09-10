@@ -123,7 +123,7 @@ export default function Page({ page }) {
           </div>
         ))}
         <Comments posts={page} />
-
+        <ArticlesAdsense adSlot={1193921611} adformat="autorelaxed" />
       </section>
     </>
   );
