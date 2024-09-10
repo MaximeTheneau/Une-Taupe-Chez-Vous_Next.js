@@ -106,27 +106,37 @@ export default function FormIdentification() {
   const handleFileChange = (e) => {
     const file = e.target.files && e.target.files[0];
 
-    const validMimeTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/avif', 'image/webp'];
-    if (validMimeTypes.includes(file.type)) {
-      setState({
-        ...state,
-        form: {
-          ...state.form,
-          image: file,
-        },
-        imageName: file.name,
-      });
-    } else {
-      setState({
-        ...state,
-      });
-    }
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setState({ ...state, imageFile: reader.result, imageName: file.name });
-      };
-      reader.readAsDataURL(file);
+      const validMimeTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/avif', 'image/webp'];
+
+      // Vérifie si le type MIME est valide
+      if (validMimeTypes.includes(file.type)) {
+        const reader = new FileReader();
+
+        reader.onloadend = () => {
+          setState({
+            ...state,
+            form: {
+              ...state.form,
+              image: file,
+            },
+            imageFile: reader.result,
+            imageName: file.name,
+          });
+        };
+
+        reader.readAsDataURL(file);
+      } else {
+        setState({
+          ...state,
+          form: {
+            ...state.form,
+            image: null,
+          },
+          imageFile: null,
+          imageName: '',
+        });
+      }
     }
   };
 
