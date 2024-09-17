@@ -2,7 +2,7 @@ const fs = require('fs');
 
 const generateSitemap = async () => {
   const urlApi = 'https://back.unetaupechezvous.fr/api/';
-  const urlFront = 'https://unetaupechezvous.fr/';
+  const urlFront = 'https://unetaupechezvous.fr';
 
   const fetchJson = async (url) => {
     const response = await fetch(url);
@@ -12,7 +12,7 @@ const generateSitemap = async () => {
   const generateXml = (pages, urlFront) => {
     const sitemapXml = pages
       .map((page) => `<url>
-          <loc>${urlFront}${page.slug}</loc>
+          <loc>${urlFront}${page.url}</loc>
           <lastmod>${page.updatedAt ? page.updatedAt : page.createdAt}</lastmod>
         </url>`)
       .join('');
@@ -27,42 +27,15 @@ const generateSitemap = async () => {
 
   // Fetch data from API
   const responsePages = await fetchJson(`${urlApi}posts&category=Pages`);
-  const responseAll = await fetchJson(`${urlApi}posts/all`);
   const responseAnuaire = await fetchJson(`${urlApi}posts&category=Annuaire`);
   const responseInterventions = await fetchJson(`${urlApi}posts&category=Interventions`);
 
   // Define page priorities and filter URLs
-  const pagesWithPriority = responsePages.filter((page) => [
-    'Accueil',
-    'Contact',
-    'Interventions',
-    'Taupier-agree-professionnel-depuis-1994',
-  ].includes(page.slug));
-
-  const pagesWithoutPriority = responsePages.filter((page) => [
-    'Articles',
-    'Annuaire',
-    'Inscription-annuaire-gratuite',
-    'Mentions-Legales',
-    'Plan-de-site',
-    'Temoignages',
-    'Tarifs',
-    'Foire-aux-questions',
-  ].includes(page.slug));
-
-  // Set priorities for pages
-  pagesWithPriority.forEach((page) => {
+  const pagesWithPriority = responsePages.map((page) => {
     if (page.slug === 'Accueil') {
       page.slug = '';
     }
-    page.priority = 1.0;
-  });
-
-  pagesWithoutPriority.forEach((page) => {
-    if (page.slug === 'Inscription-annuaire-gratuite') {
-      page.slug = 'Annuaire/Inscription-annuaire-gratuite';
-    }
-    page.priority = 0.6;
+    return page;
   });
 
   responseInterventions.forEach((page) => {
@@ -76,15 +49,14 @@ const generateSitemap = async () => {
   });
 
   const addPages = [
-    { slug: 'Articles/Nuisibles', priority: 0.6, updatedAt: '2023-10-13T11:11:41+00:00' },
-    { slug: 'Articles/Jardin-et-Maison', priority: 0.6, updatedAt: '2023-10-13T11:11:41+00:00' },
-    { slug: 'Articles/Piege', priority: 0.6, updatedAt: '2023-10-13T11:11:41+00:00' },
+    { url: '/Articles/Nuisibles', updatedAt: '2023-10-13T11:11:41+00:00' },
+    { url: '/Articles/Jardin-et-Maison', updatedAt: '2023-10-13T11:11:41+00:00' },
+    { url: '/Articles/Piege', updatedAt: '2023-10-13T11:11:41+00:00' },
   ];
 
   // Generate sitemap with pages
   const allPages = [
     ...pagesWithPriority,
-    ...pagesWithoutPriority,
     ...responseAnuaire,
     ...responseInterventions,
     ...addPages,
