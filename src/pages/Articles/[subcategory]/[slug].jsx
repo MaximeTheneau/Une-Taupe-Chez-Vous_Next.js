@@ -173,7 +173,7 @@ export default function Slug({ post, desc }) {
           </Link>
         )}
         <ArticlesAdsense adSlot={8493827134} adformat="fluid" />
-        <h2>Articles qui pourrait vous intéressez :</h2>
+        <h2>Articles qui pourraient vous intéresser :</h2>
         <Cards cards={desc} />
         <Comments posts={post} />
         <ArticlesAdsense adSlot={1193921611} adformat="autorelaxed" />
