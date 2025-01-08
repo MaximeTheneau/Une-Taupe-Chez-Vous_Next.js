@@ -18,10 +18,10 @@ function MyApp({ Component, pageProps }) {
         <link rel="icon" href="/favicon/favicon-16x16.png" sizes="16x16" key="icon16" />
         <link rel="icon" href="/favicon/favicon-32x32.png" sizes="32x32" key="icon32" />
         <link rel="icon" href="/favicon/favicon-96x96.png" sizes="96x96" key="icon96" />
-        <link rel="manifest" href="/favicon/manifest.json" />
+        {/* <link rel="manifest" href="/favicon/manifest.json" /> */}
         <link rel="preload" href="/font/principal/principal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/font/title/title.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-        <link rel="stylesheet" href="/print.css" media="print" type="text/css" />
+        {/* <link rel="stylesheet" href="/print.css" media="print" type="text/css" /> */}
         <link rel="alternate" type="application/rss+xml" href="https://unetaupechezvous.fr/rss.xml" />
       </Head>
       <CookiesProvider>

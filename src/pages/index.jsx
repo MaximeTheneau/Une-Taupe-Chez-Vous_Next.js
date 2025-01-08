@@ -25,7 +25,7 @@ export async function getStaticProps() {
   };
 }
 export default function Home({
-  accueil, services, testimonials, reviews,
+  accueil, services, reviews,
 }) {
   const { paragraphPosts } = accueil;
   const firstPost = paragraphPosts[0];
@@ -57,70 +57,79 @@ export default function Home({
         <link
           rel="preload"
           as="image"
-          imageSrcSet={accueil.srcset}
-          imageSizes="100w"
-          fetchPriority="high"
+          type="image/webp"
+          href={accueil.imgPost}
+          imagesrcset={accueil.srcset}
+          imagesizes="100w"
+          fetchpriority="high"
         />
       </Head>
       <LocalBusinessJsonLd descriptionMeta={accueil.metaDescription} reviewsData={reviews} />
       <SearchJsonLd />
       <div className={styles.home__imagesFull}>
         <div className={styles.home__imagesFull__image}>
-          <ImageLoader
-            src={`${accueil.imgPost}`}
-            alt={accueil.altImg || accueil.title}
-            width={accueil.imgWidth}
-            height={accueil.imgHeight}
-            srcset={accueil.srcset}
-            priority
-          />
+          <figure>
+            <ImageLoader
+              src={`${accueil.imgPost}`}
+              alt={accueil.altImg || accueil.title}
+              width={accueil.imgWidth}
+              height={accueil.imgHeight}
+              srcset={accueil.srcset}
+              priority
+            />
+          </figure>
         </div>
         <div className={styles.home__imagesFull__text}>
           <h1>{accueil.title}</h1>
-          <div className={styles['home__imagesFull__text--paragraph']} dangerouslySetInnerHTML={{ __html: accueil.contents }} />
-          <DevisButton />
+          <div>
+
+            <div className={styles['home__imagesFull__text--paragraph']} dangerouslySetInnerHTML={{ __html: accueil.contents }} />
+          </div>
         </div>
       </div>
-      <section className={styles.home}>
-        {firstPost && (
-        <div key={firstPost.subtitle}>
-          <h2>{firstPost.subtitle}</h2>
-          <div dangerouslySetInnerHTML={{ __html: firstPost.paragraph }} />
-        </div>
-        )}
+      <section>
+
+        <h2>Nos spécialités</h2>
+        <p>
+
+          <DevisButton />
+        </p>
         {/* --Services--*/}
         <Cards cards={services} />
+        {firstPost && (
+        <article key={firstPost.subtitle}>
+          <h2>{firstPost.subtitle}</h2>
+          <div dangerouslySetInnerHTML={{ __html: firstPost.paragraph }} />
+        </article>
+        )}
+
         {otherPosts.map((post) => (
-          <div key={post.subtitle} className={`${post.subtitle === 'Pourquoi Choisir Nos Services de Taupier Agréé ?' ? styles.home__list : ''}`}>
+          <article key={post.subtitle} className={`${post.subtitle === 'Pourquoi Choisir Nos Services de Taupier Agréé ?' ? styles.home__list : ''}`}>
             <h2>{post.subtitle}</h2>
             <div dangerouslySetInnerHTML={{ __html: post.paragraph }} />
-          </div>
+          </article>
         ))}
-        <h2>
-          {testimonials.title}
-          {' '}
-          de Clients Satisfaits
-        </h2>
-        <div className={styles.page__reviews}>
-          {latestThreeReviews.map((review) => (
-            <Review key={review.time} review={review} />
-          ))}
-        </div>
-        <p>
-          <Link href="/Temoignages">
+        <article>
+          <h2>Ils nous font confiance</h2>
+          <div className={styles.page__reviews}>
+            {latestThreeReviews.map((review) => (
+              <Review key={review.time} review={review} />
+            ))}
+          </div>
+          <Link href="/Temoignages" className="button">
             Consultez tous nos avis ici
           </Link>
-        </p>
+        </article>
         {accueil.listPosts.map((listArticle) => (
           listArticle.title !== null && (
-          <div key={listArticle.title}>
+          <article key={listArticle.title}>
             {listArticle.title && (
             <h2>{listArticle.title}</h2>
             )}
             {listArticle.description && (
             <div dangerouslySetInnerHTML={{ __html: listArticle.description }} />
             )}
-          </div>
+          </article>
           )
         ))}
       </section>

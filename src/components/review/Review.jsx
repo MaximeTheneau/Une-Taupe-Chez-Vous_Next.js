@@ -5,14 +5,14 @@ import styles from './Review.module.scss';
 
 function Review({ index, review }) {
   return (
-    <article key={index} className={styles.review}>
+    <div key={index} className={styles.review}>
       <Image
         src={review.profile_photo_url}
         alt={`Photo de profil de ${review.author_name}, auteur de l'avis`}
         width={30}
         height={30}
       />
-      <h2>{review.author_name}</h2>
+      <h3>{review.author_name}</h3>
       <p>
         <strong>
           {review.rating}
@@ -22,7 +22,7 @@ function Review({ index, review }) {
       <p><em>{review.relative_time_description}</em></p>
       <p>{review.text}</p>
       <p><Link href={review.author_url} target="_blank" rel="noopener noreferrer">Voir l&apos;avis original</Link></p>
-    </article>
+    </div>
   );
 }
 

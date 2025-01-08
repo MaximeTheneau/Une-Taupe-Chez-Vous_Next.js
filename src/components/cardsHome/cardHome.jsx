@@ -21,7 +21,6 @@ export default function Card({ card }) {
         <div className={styles.card__content}>
           <h3>{card.title}</h3>
           <p>{card.metaDescription}</p>
-          <button type="button" className="button--grey button">En savoir plus</button>
         </div>
       </Link>
     </li>
