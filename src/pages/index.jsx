@@ -20,12 +20,13 @@ export async function getStaticProps() {
       accueil: home.home,
       services: home.interventions,
       testimonials: home.testimonials,
+      blog: home.blog,
       reviews,
     },
   };
 }
 export default function Home({
-  accueil, services, reviews,
+  accueil, services, reviews, blog,
 }) {
   const { paragraphPosts } = accueil;
   const firstPost = paragraphPosts[0];
@@ -81,19 +82,15 @@ export default function Home({
         </div>
         <div className={styles.home__imagesFull__text}>
           <h1>{accueil.title}</h1>
-          <div>
-
-            <div className={styles['home__imagesFull__text--paragraph']} dangerouslySetInnerHTML={{ __html: accueil.contents }} />
-          </div>
+          <div className={styles['home__imagesFull__text--paragraph']} dangerouslySetInnerHTML={{ __html: accueil.contents }} />
+          <DevisButton />
         </div>
       </div>
+
       <section>
 
         <h2>Nos spécialités</h2>
-        <p>
-
-          <DevisButton />
-        </p>
+        <p />
         {/* --Services--*/}
         <Cards cards={services} />
         {firstPost && (
@@ -132,6 +129,20 @@ export default function Home({
           </article>
           )
         ))}
+        <aside>
+          <h2>Guide Anti-Nuisibles : Nos Articles Experts</h2>
+          <p>
+            Nos experts partagent leurs connaissances approfondies pour vous aider
+            à identifier et gérer efficacement les nuisibles. Retrouvez nos guides
+            pratiques, conseils professionnels et solutions éprouvées..
+          </p>
+          <Cards cards={blog} />
+          <div class="text-center mt-8">
+            <Link href="/Articles" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
+              Découvrir tous nos articles d&apos;experts
+            </Link>
+          </div>
+        </aside>
       </section>
     </>
   );

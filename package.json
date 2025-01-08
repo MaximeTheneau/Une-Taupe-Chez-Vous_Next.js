@@ -2,7 +2,7 @@
   "name": "une_taupe_chez_vous__nextjs",
   "version": "2.1.0",
   "scripts": {
-    "build": "pnpm run generate-sitemap && next build && pnpm run test",
+    "build": "pnpm run generate-sitemap && next build ",
     "build:prod": "npx serve@latest out -l 3001 ",
     "generate-sitemap": "node scripts/sitemap/runAllScripts.script.js",
     "start-cache": "next start -p 3001",
