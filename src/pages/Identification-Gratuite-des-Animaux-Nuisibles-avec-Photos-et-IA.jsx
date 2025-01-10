@@ -70,61 +70,65 @@ export default function Page({ page }) {
           )}
         </figure>
         <h1>{page.title}</h1>
-        <div dangerouslySetInnerHTML={{ __html: page.contents }} />
         <ArticlesAdsense adSlot={5685145018} adformat="fluid" />
+        <div dangerouslySetInnerHTML={{ __html: page.contents }} />
         <div className={styles.page__adsense}>
           <FormIdentification />
           <ArticlesAdsense adSlot={8424346239} adformat="auto" vertical />
         </div>
         <TableOfContents post={page} />
         <ArticlesAdsense adSlot={5055946866} adformat="fluid" />
+      </section>
+
+      <section>
         {page.paragraphPosts.map((paragraphArticle) => (
           <div key={paragraphArticle.id}>
             {paragraphArticle.subtitle && (
-              <h2 id={paragraphArticle.slug}>
-                {paragraphArticle.subtitle}
-              </h2>
+            <h2 id={paragraphArticle.slug}>
+              {paragraphArticle.subtitle}
+            </h2>
             )}
             {paragraphArticle.paragraph && (
-              <div key={paragraphArticle.id} className={styles.page__contents__paragraph}>
-                {paragraphArticle.imgPost && (
-                <figure className={styles.page__contents__paragraph__figure}>
-                  <ImageLoader
-                    src={paragraphArticle.imgPost}
-                    alt={paragraphArticle.altImg}
-                    width={paragraphArticle.imgWidth}
-                    height={paragraphArticle.imgHeight}
-                    srcset={paragraphArticle.srcset}
-                  />
-                  {paragraphArticle.subtitle !== paragraphArticle.altImgParagh && (
-                  <figcaption className="caption">
-                    {paragraphArticle.altImg}
-                  </figcaption>
-                  )}
-                </figure>
-                )}
-                <div
-                  className={styles.page__contents__paragraph__text}
-                  dangerouslySetInnerHTML={{ __html: paragraphArticle.paragraph }}
+            <div key={paragraphArticle.id} className={styles.page__contents__paragraph}>
+              {paragraphArticle.imgPost && (
+              <figure className={styles.page__contents__paragraph__figure}>
+                <ImageLoader
+                  src={paragraphArticle.imgPost}
+                  alt={paragraphArticle.altImg}
+                  width={paragraphArticle.imgWidth}
+                  height={paragraphArticle.imgHeight}
+                  srcset={paragraphArticle.srcset}
                 />
-                {paragraphArticle.link && (
-                  <div className={styles.page__contents__paragraph__links}>
-                    <span className={styles.page__contents__paragraph__links__link}>
-                      → A lire aussi :
-                      <Link href={paragraphArticle.link}>
-                        {' '}
-                        {paragraphArticle.linkSubtitle}
-                      </Link>
-                    </span>
-                  </div>
+                {paragraphArticle.subtitle !== paragraphArticle.altImgParagh && (
+                <figcaption className="caption">
+                  {paragraphArticle.altImg}
+                </figcaption>
                 )}
+              </figure>
+              )}
+              <div
+                className={styles.page__contents__paragraph__text}
+                dangerouslySetInnerHTML={{ __html: paragraphArticle.paragraph }}
+              />
+              {paragraphArticle.link && (
+              <div className={styles.page__contents__paragraph__links}>
+                <span className={styles.page__contents__paragraph__links__link}>
+                  → A lire aussi :
+                  <Link href={paragraphArticle.link}>
+                    {' '}
+                    {paragraphArticle.linkSubtitle}
+                  </Link>
+                </span>
               </div>
+              )}
+            </div>
             )}
           </div>
         ))}
-        <Comments posts={page} />
-        <ArticlesAdsense adSlot={1193921611} adformat="autorelaxed" />
       </section>
+      
+      <Comments posts={page} />
+      <ArticlesAdsense adSlot={1193921611} adformat="autorelaxed" />
     </>
   );
 }

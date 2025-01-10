@@ -2,7 +2,7 @@ name: Build Next.js Application
 
 on:
   repository_dispatch:
-    types: [trigger-nextjs-build]
+    types: [trigger-back-build]
 
 jobs:
   build:
