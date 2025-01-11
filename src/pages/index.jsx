@@ -94,19 +94,19 @@ export default function Home({
         {/* --Services--*/}
         <Cards cards={services} />
         {firstPost && (
-        <article key={firstPost.subtitle}>
+        <div key={firstPost.subtitle}>
           <h2>{firstPost.subtitle}</h2>
           <div dangerouslySetInnerHTML={{ __html: firstPost.paragraph }} />
-        </article>
+        </div>
         )}
 
         {otherPosts.map((post) => (
-          <article key={post.subtitle} className={`${post.subtitle === 'Pourquoi Choisir Nos Services de Taupier Agréé ?' ? styles.home__list : ''}`}>
+          <div key={post.subtitle}>
             <h2>{post.subtitle}</h2>
             <div dangerouslySetInnerHTML={{ __html: post.paragraph }} />
-          </article>
+          </div>
         ))}
-        <article>
+        <div>
           <h2>Ils nous font confiance</h2>
           <div className={styles.page__reviews}>
             {latestThreeReviews.map((review) => (
@@ -116,17 +116,17 @@ export default function Home({
           <Link href="/Temoignages" className="button">
             Consultez tous nos avis ici
           </Link>
-        </article>
+        </div>
         {accueil.listPosts.map((listArticle) => (
           listArticle.title !== null && (
-          <article key={listArticle.title}>
+          <div key={listArticle.title}>
             {listArticle.title && (
             <h2>{listArticle.title}</h2>
             )}
             {listArticle.description && (
             <div dangerouslySetInnerHTML={{ __html: listArticle.description }} />
             )}
-          </article>
+          </div>
           )
         ))}
         <aside>
