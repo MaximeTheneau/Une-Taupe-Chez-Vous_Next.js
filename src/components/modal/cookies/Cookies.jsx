@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import Script from 'next/script';
 import style from '../Modal.module.scss';
 import CookieChoice from './CookieChoice';
 import { useCookies } from '../../../context/CookiesContext';
@@ -113,90 +114,97 @@ export default function CookiesModal() {
   };
 
   return (
-    cookies.cookiesModal === false && (
-    <div className={style.cookies}>
-      {cookies.cookiesChoice ? (
-        <div className={`card ${style.cookies__choice}`}>
-          <h2>Les cookies</h2>
-          <p>
-            Les cookies sont utilisés pour mesurer notre audience et améliorer nos contenus.
-            <br />
-            En désactivant les cookies, vous ne pourrez pas utiliser certaines
-            fonctionnalités de notre site.
-          </p>
-          <table className={`card ${style.cookies__choice__table}`}>
-            <thead>
-              <tr>
-                <th>Services</th>
-                <th>Activer</th>
-              </tr>
-            </thead>
-            <tbody>
-              <CookieChoice
-                label="Google Analytics GU4"
-                checked={cookies.cookiesGoogle}
+    <>
+      {/* Google tag (gtag.js) */}
+      <Script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-40PV0SEJS5"
+      />
+      {cookies.cookiesModal === false && (
+      <div className={style.cookies}>
+        {cookies.cookiesChoice ? (
+          <div className={`card ${style.cookies__choice}`}>
+            <h2>Les cookies</h2>
+            <p>
+              Les cookies sont utilisés pour mesurer notre audience et améliorer nos contenus.
+              <br />
+              En désactivant les cookies, vous ne pourrez pas utiliser certaines
+              fonctionnalités de notre site.
+            </p>
+            <table className={`card ${style.cookies__choice__table}`}>
+              <thead>
+                <tr>
+                  <th>Services</th>
+                  <th>Activer</th>
+                </tr>
+              </thead>
+              <tbody>
+                <CookieChoice
+                  label="Google Analytics GU4"
+                  checked={cookies.cookiesGoogle}
+                  onClick={() => {
+                    handleCookieChange('cookiesGoogle');
+                    window.localStorage.setItem('cookiesGoogle', !cookies.cookiesGoogle);
+                  }}
+                />
+                <CookieChoice
+                  label="Google AdSense"
+                  checked={cookies.cookiesAdsense}
+                  onClick={() => {
+                    handleCookieChange('cookiesAdsense');
+                    window.localStorage.setItem('cookiesAdsense', !cookies.cookiesAdsense);
+                  }}
+                />
+              </tbody>
+            </table>
+            <div className={style.cookies__close}>
+              <button
+                type="button"
+                className="button"
                 onClick={() => {
-                  handleCookieChange('cookiesGoogle');
-                  window.localStorage.setItem('cookiesGoogle', !cookies.cookiesGoogle);
+                  handleCookieChange('cookiesModal');
                 }}
-              />
-              <CookieChoice
-                label="Google AdSense"
-                checked={cookies.cookiesAdsense}
-                onClick={() => {
-                  handleCookieChange('cookiesAdsense');
-                  window.localStorage.setItem('cookiesAdsense', !cookies.cookiesAdsense);
-                }}
-              />
-            </tbody>
-          </table>
-          <div className={style.cookies__close}>
-            <button
-              type="button"
-              className="button"
-              onClick={() => {
-                handleCookieChange('cookiesModal');
-              }}
-            >
-              Soumettre les préférences
-            </button>
+              >
+                Soumettre les préférences
+              </button>
+            </div>
           </div>
-        </div>
-      ) : (
-        <>
-          <h2>
-            À vous de choisir !
-          </h2>
-          <p>
-            En poursuivant votre navigation, vous acceptez l&apos;utilisation des cookies
-            pour nous aider à améliorer notre site internet. À vous de choisir !
-          </p>
-          <div className={style.cookies__button}>
-            <button
-              type="button"
-              className="button"
-              onClick={handleAcceptCookies}
-            >
-              Accepter
-            </button>
-            <button
-              type="button"
-              className="button"
-              onClick={handleRefuseCookies}
-            >
-              Refuser les cookies
-            </button>
-            <button
-              type="button"
-              className="button--grey button"
-              onClick={() => handleCookieChange('cookiesChoice')}
-            >
-              Personnaliser
-            </button>
-          </div>
-        </>
+        ) : (
+          <>
+            <h2>
+              À vous de choisir !
+            </h2>
+            <p>
+              En poursuivant votre navigation, vous acceptez l&apos;utilisation des cookies
+              pour nous aider à améliorer notre site internet. À vous de choisir !
+            </p>
+            <div className={style.cookies__button}>
+              <button
+                type="button"
+                className="button"
+                onClick={handleAcceptCookies}
+              >
+                Accepter
+              </button>
+              <button
+                type="button"
+                className="button"
+                onClick={handleRefuseCookies}
+              >
+                Refuser les cookies
+              </button>
+              <button
+                type="button"
+                className="button--grey button"
+                onClick={() => handleCookieChange('cookiesChoice')}
+              >
+                Personnaliser
+              </button>
+            </div>
+          </>
+        )}
+      </div>
       )}
-    </div>
-    )
+    </>
   );
 }
