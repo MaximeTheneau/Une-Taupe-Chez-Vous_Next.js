@@ -8,9 +8,11 @@ import BreadcrumbJsonLd from '../../components/jsonLd/BreadcrumbJsonLd';
 import Comments from '../../components/comments/Comments';
 import ArticlesAdsense from '../../components/adsense/ArticlesAdsense';
 import ImageLoader from '../../components/image/ImageLoader';
+import Cards from '../../components/cardsHome/cardsHome';
 
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`);
+
   const posts = await res.json();
 
   const filteredPosts = posts.filter((post) => post.slug !== 'Inscription-annuaire-gratuite');
@@ -21,15 +23,17 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const post = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/${params.slug}`);
+  const relatedPosts = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/related/${params?.slug}`);
 
   return {
     props: {
       post,
+      relatedPosts,
     },
   };
 }
 
-export default function Slug({ post }) {
+export default function Slug({ post, relatedPosts }) {
   const urlPost = `${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`;
 
   return (
@@ -128,6 +132,10 @@ export default function Slug({ post }) {
       </section>
       <Comments posts={post} />
       <ArticlesAdsense adSlot={2900794494} adformat="autorelaxed" />
+      <aside>
+        <h2>Articles similaires</h2>
+        <Cards cards={relatedPosts} />
+      </aside>
     </>
   );
 }
