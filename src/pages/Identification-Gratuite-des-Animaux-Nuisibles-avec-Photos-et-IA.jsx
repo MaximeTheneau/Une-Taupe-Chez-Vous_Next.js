@@ -2,7 +2,6 @@ import Head from 'next/head';
 import Link from 'next/link';
 import styles from '../styles/Pages.module.scss';
 import fetcher from '../utils/fetcher';
-import TableOfContents from '../components/tableOfContents/TableOfContents';
 import ImageLoader from '../components/image/ImageLoader';
 import FormIdentification from '../components/pestIdentification/FormIdentification';
 import ArticlesAdsense from '../components/adsense/ArticlesAdsense';
