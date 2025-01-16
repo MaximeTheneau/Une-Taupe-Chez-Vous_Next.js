@@ -21,11 +21,10 @@
       margin: 0;
       display: flex;
       & a{
-        padding: 1rem 1rem 0rem 0rem;
         display: flex;
         align-items: center;
       }
-      & i{
+      & i, svg{
         margin-right: 0.5rem;
       }
       & form{
@@ -33,6 +32,23 @@
         font-weight: bold;
         width: 100%;
       }
+    }
+    &__social{
+      display: flex;
+      justify-content: space-around;
+      width: 30%;
+      margin: auto 0;  
+      & a{
+        margin: 0.5rem;
+        padding: 0.5rem;
+        color: $font-color;
+        &:hover{
+          color: $color-link;
+        }
+      }
+    }
+    &__list{
+      width: 100%;
     }
   }
   &__lower{
@@ -73,6 +89,9 @@
     &__links{
       flex-direction: row;
       align-items: flex-start;
+      &__list{
+        width: 50%;
+      }
     }
     &__lower{
       flex-direction: row;
