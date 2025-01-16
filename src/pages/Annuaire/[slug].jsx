@@ -133,30 +133,7 @@ export default function Slug({ post }) {
           )}
         </figure>
         <div dangerouslySetInnerHTML={{ __html: post.contentsHTML }} />
-        {/* {postsLinks[0]?.title && (
-          <div className="overflow-x-auto">
-            <table>
-              <thead>
-                <tr>
-                  <th scope="col">Entreprise</th>
-                  <th scope="col">Localisation</th>
-                  <th scope="col">Services</th>
-                  <th scope="col">Contact</th>
-                </tr>
-              </thead>
-              <tbody>
-                {postsLinks.map((item) => item.description.localisation && (
-                <tr key={item.id}>
-                  <td aria-label="Entreprise">{item.title}</td>
-                  <td aria-label="Localisation" dangerouslySetInnerHTML={{ __html: item.description.localisation }} />
-                  <td aria-label="Services" dangerouslySetInnerHTML={{ __html: item.description.services }} />
-                  <td aria-label="Site web" dangerouslySetInnerHTML={{ __html: item.description.siteWeb }} />
-                </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )} */}
+
         <ArticlesAdsense adSlot={2932584086} adformat="auto" />
         <TableOfContents post={post} />
         {post.paragraphPosts.map((paragraphs) => (
