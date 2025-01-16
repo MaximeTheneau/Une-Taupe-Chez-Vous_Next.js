@@ -16,7 +16,7 @@ body{
   font-size: $font-size;
 }
 h1,h2,h3,h4,h5,h6{
-  font-family: 'fontTitle', sans-serif;
+  font-family: var(--font-heading), sans-serif;
   font-weight: 600;
   margin: 1rem 0;
   width: 100%;

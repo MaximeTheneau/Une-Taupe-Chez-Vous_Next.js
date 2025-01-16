@@ -1,12 +1,12 @@
 /* eslint-disable @next/next/no-css-tags */
 import Head from 'next/head';
-import { Manrope } from 'next/font/google';
+import { Inter } from 'next/font/google';
 import Layout from '../components/layout';
 import '../styles/globals.scss';
 import CookiesModal from '../components/modal/cookies/Cookies';
 import { CookiesProvider } from '../context/CookiesContext';
 
-const title = Manrope({
+const title = Inter({
   weight: '400',
   subsets: ['latin'],
 });
