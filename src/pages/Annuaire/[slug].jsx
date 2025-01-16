@@ -132,10 +132,12 @@ export default function Slug({ post, relatedPosts }) {
       </section>
       <Comments posts={post} />
       <ArticlesAdsense adSlot={2900794494} adformat="autorelaxed" />
+      {relatedPosts.length > 0 && (
       <aside>
         <h2>Articles similaires</h2>
         <Cards cards={relatedPosts} />
       </aside>
+      )}
     </>
   );
 }
