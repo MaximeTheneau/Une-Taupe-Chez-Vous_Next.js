@@ -32,36 +32,6 @@ export async function getStaticProps({ params }) {
 export default function Slug({ post }) {
   const urlPost = `${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`;
 
-  function extractInfo(description) {
-    const info = {
-      localisation: '',
-      siteWeb: '',
-      services: '',
-    };
-
-    if (description) {
-      const matches = description.match(/Localisation : (.*?)Site web : (.*?)Services : (.*)/s);
-
-      if (matches) {
-        info.localisation = `${matches[1].trim()}`;
-        const cleanLink = matches[2].trim().replace(/^(https?:\/\/)?(www\.)?/, '');
-        info.siteWeb = `<a href="${matches[2].trim()}" target="_blank" rel="noopener">${cleanLink}</a>`;
-        info.services = `${matches[3].trim()}`;
-      }
-    }
-    return info;
-  }
-
-  const postsLinks = post.listPosts.map((postItem) => {
-    const descriptionInfo = extractInfo(postItem.description);
-
-    return {
-      id: postItem.id,
-      title: postItem.title,
-      description: descriptionInfo,
-    };
-  });
-
   return (
     <>
       <Head>
