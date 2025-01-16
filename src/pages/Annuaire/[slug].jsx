@@ -7,6 +7,7 @@ import ArticleJsonLd from '../../components/jsonLd/ArticleJsonLd';
 import BreadcrumbJsonLd from '../../components/jsonLd/BreadcrumbJsonLd';
 import Comments from '../../components/comments/Comments';
 import ArticlesAdsense from '../../components/adsense/ArticlesAdsense';
+import ImageLoader from '../../components/image/ImageLoader';
 
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`);
@@ -92,6 +93,14 @@ export default function Slug({ post }) {
           href={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`}
           key="canonical"
         />
+        {/* Image Preload */}
+        <link
+          rel="preload"
+          as="image"
+          imageSrcSet={post.srcset}
+          imageSizes="100w"
+          fetchPriority="high"
+        />
       </Head>
       {/* Schema.org */}
       <ArticleJsonLd post={post} urlPost={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`} />
@@ -108,8 +117,23 @@ export default function Slug({ post }) {
         <p className={styles.page__contents__date}>
           {post.formattedDate}
         </p>
+        <figure>
+          <ImageLoader
+            src={post.imgPost}
+            alt={post.altImg || post.title}
+            width={post.imgWidth}
+            height={post.imgHeight}
+            srcset={post.srcset}
+            priority
+          />
+          {post.title !== post.altImg && (
+          <figcaption className="caption">
+            {post.altImg}
+          </figcaption>
+          )}
+        </figure>
         <div dangerouslySetInnerHTML={{ __html: post.contentsHTML }} />
-        {postsLinks[0]?.title && (
+        {/* {postsLinks[0]?.title && (
           <div className="overflow-x-auto">
             <table>
               <thead>
@@ -132,7 +156,7 @@ export default function Slug({ post }) {
               </tbody>
             </table>
           </div>
-        )}
+        )} */}
         <ArticlesAdsense adSlot={2932584086} adformat="auto" />
         <TableOfContents post={post} />
         {post.paragraphPosts.map((paragraphs) => (
