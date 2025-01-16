@@ -27,11 +27,10 @@
   }
   &__content{
     width: 100%;
-    padding: 1rem;
+    padding: 0 .5rem;
     display: flex;
     flex-direction: column;
     & h3{
-      font-size: var(--font-size-large);
       margin-bottom: 1rem;
       &:hover{
         text-decoration: none !important;
