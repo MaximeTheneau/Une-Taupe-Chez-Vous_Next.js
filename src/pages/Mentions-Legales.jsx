@@ -49,7 +49,7 @@ export default function MentionsLegal({ page }) {
           <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/${page.slug}`} />
           <meta property="og:description" content={page.metaDescription} />
           <meta property="og:site_name" content="Une Taupe Chez Vous" />
-          <meta property="og:image" content={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${process.env.NEXT_PUBLIC_CLOUD_FILE_KEY}/${page.imgPost}.jpg`} />
+          <meta property="og:image" content={`${page.imgPost}?format=jpeg`} />
           <link
             rel="canonical"
             href={`${process.env.NEXT_PUBLIC_URL}/${page.slug}`}

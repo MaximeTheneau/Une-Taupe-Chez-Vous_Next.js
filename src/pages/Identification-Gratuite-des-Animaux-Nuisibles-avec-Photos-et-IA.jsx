@@ -76,8 +76,8 @@ export default function Page({ page }) {
           <FormIdentification />
           <ArticlesAdsense adSlot={8424346239} adformat="auto" vertical />
         </div>
-        <TableOfContents post={page} />
-        <ArticlesAdsense adSlot={5055946866} adformat="fluid" />
+        {/* <TableOfContents post={page} /> */}
+        {/* <ArticlesAdsense adSlot={5055946866} adformat="fluid" /> */}
       </section>
 
       <section>
