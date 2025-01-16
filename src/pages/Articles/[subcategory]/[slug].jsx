@@ -30,11 +30,12 @@ export async function getStaticProps({ params }) {
 
   const post = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/${slug}`);
   const desc = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&filter=keyword&limit=3&id=${post.id}`);
+  const relatedPosts = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/related/${params?.slug}`);
 
-  return { props: { post, desc } };
+  return { props: { post, desc, relatedPosts } };
 }
 
-export default function Slug({ post, desc }) {
+export default function Slug({ post, desc, relatedPosts }) {
   const urlPost = `${process.env.NEXT_PUBLIC_URL}${post.url}`;
   return (
     <>
@@ -173,11 +174,17 @@ export default function Slug({ post, desc }) {
           </Link>
         )}
         <ArticlesAdsense adSlot={8493827134} adformat="fluid" />
-        <h2>Articles qui pourraient vous intéresser :</h2>
-        <Cards cards={desc} />
-        <Comments posts={post} />
-        <ArticlesAdsense adSlot={1193921611} adformat="autorelaxed" />
       </section>
+      <aside>
+        <h2>Articles qui pourraient vous intéresser :</h2>
+        {!relatedPosts.length > 0 && (
+          <Cards cards={desc} />
+        )}
+        <Cards cards={relatedPosts} />
+      </aside>
+
+      <Comments posts={post} />
+      <ArticlesAdsense adSlot={1193921611} adformat="autorelaxed" />
 
     </>
   );
