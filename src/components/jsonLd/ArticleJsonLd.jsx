@@ -14,16 +14,7 @@ export default function ArticleJsonLd({ post, urlPost }) {
     isAccessibleForFree: true,
     keywords: `${post.title}, ${post.category.name}${post.subcategory ? `, ${post.subcategory.name}` : ''}`,
     articleBody: post.contents,
-    image: {
-      '@type': 'ImageObject',
-      url: `${post.imgPost}?format=jpeg`,
-      caption: post.title,
-    },
-    associatedMedia: {
-      '@type': 'ImageObject',
-      contentUrl: `${post.imgPost}?format=jpeg`,
-      description: post.title,
-    },
+    image: `${post.imgPost}?format=jpeg`,
     author: {
       '@type': 'Person',
       name: 'Laurent THENEAU',
