@@ -2,8 +2,9 @@ import Head from 'next/head';
 
 export default function ArticleJsonLd({ post, urlPost }) {
   const jsonLdData = {
-    '@context': 'https://schema.org/',
-    '@type': 'Article',
+    '@type': 'BlogPosting',
+    '@id': `${process.env.NEXT_PUBLIC_URL}/Articles`,
+    mainEntityOfPage: `${process.env.NEXT_PUBLIC_URL}/Articles`,
     name: post.title,
     headline: post.title,
     description: post.metaDescription,
@@ -14,7 +15,13 @@ export default function ArticleJsonLd({ post, urlPost }) {
     isAccessibleForFree: true,
     keywords: `${post.title}, ${post.category.name}${post.subcategory ? `, ${post.subcategory.name}` : ''}`,
     articleBody: post.contents,
-    image: `${post.imgPost}?format=jpeg`,
+    image: {
+      '@type': 'ImageObject',
+      '@id': `${post.imgPost}?format=jpeg`,
+      url: `${post.imgPost}?format=jpeg`,
+      height: post.imgPost.height,
+      width: post.imgPost.width,
+    },
     author: {
       '@type': 'Person',
       name: 'Laurent THENEAU',
@@ -36,6 +43,16 @@ export default function ArticleJsonLd({ post, urlPost }) {
         dateCreated: comment.createdAt,
       })),
     ],
+    isPartOf: {
+      '@type': 'Blog',
+      '@id': `${process.env.NEXT_PUBLIC_URL}/blog/${post.category.slug}`,
+      name: 'Une taupe chez vous - Blog',
+      publisher: {
+        '@type': 'Organization',
+        '@id': `${process.env.NEXT_PUBLIC_URL}`,
+        name: 'Une taupe chez vous - Blog',
+      },
+    },
   };
 
   return (
