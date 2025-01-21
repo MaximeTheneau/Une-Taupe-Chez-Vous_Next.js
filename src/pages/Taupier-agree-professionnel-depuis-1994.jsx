@@ -5,7 +5,6 @@ import GoogleMaps from '../components/maps/GoogleMaps';
 import NotCopie from '../components/notCopie/NotCopie';
 import fetcher from '../utils/fetcher';
 import TableOfContents from '../components/tableOfContents/TableOfContents';
-import ContactButton from '../components/button/ContactButton';
 import ImageLoader from '../components/image/ImageLoader';
 import ImageObjectJsonLd from '../components/jsonLd/ImageObjectJsonLd';
 import BreadcrumbJsonLd from '../components/jsonLd/BreadcrumbJsonLd';
@@ -111,23 +110,7 @@ export default function TaupierPage({ page }) {
               </h2>
             )}
             {paragraphArticle.paragraph && (
-              <div key={paragraphArticle.id} className={styles.page__contents__paragraph}>
-                {paragraphArticle.imgPost && (
-                <figure className={styles.page__contents__paragraph__figure}>
-                  <ImageLoader
-                    src={paragraphArticle.imgPost}
-                    alt={paragraphArticle.altImg}
-                    width={paragraphArticle.imgWidth}
-                    height={paragraphArticle.imgHeight}
-                    srcset={paragraphArticle.srcset}
-                  />
-                  {paragraphArticle.subtitle !== paragraphArticle.altImgParagh && (
-                  <figcaption className="caption">
-                    {paragraphArticle.altImg}
-                  </figcaption>
-                  )}
-                </figure>
-                )}
+              <div key={paragraphArticle.id}>
                 <div
                   className={styles.page__contents__paragraph__text}
                   dangerouslySetInnerHTML={{ __html: paragraphArticle.paragraph }}
@@ -147,7 +130,6 @@ export default function TaupierPage({ page }) {
             )}
           </div>
         ))}
-        <ContactButton />
       </section>
     </>
   );

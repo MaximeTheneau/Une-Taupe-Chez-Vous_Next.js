@@ -168,13 +168,24 @@ select{
   margin: 0.5rem 0;
   display: block;
 }
+figure {
+  display: inline-block;
+  margin: 0;
 
-.caption{
-  color: $font-color-light;
-  font-size: var(--font-size-small);
-  margin: 1rem 0;
-  width: 100%;
+  & figcaption {
+    width: 100%;
+    background: $color-primary;
+    font-size: 0.9rem; 
+    color: $font-color-light;
+    font-size: var(--font-size-small);
+    padding: 1rem .5rem;
+
+  }
 }
+
+// .caption{
+//   width: 100%;
+// }
 
 .stronk{
   font-weight: bold;
@@ -244,6 +255,10 @@ iframe {
 }
 .image-style-align-left{
   float: left;
+  margin: 0 1rem 1rem 0;
+}
+.image-style-align-right{
+  float: right;
   margin: 0 1rem 1rem 0;
 }
 @keyframes opacity{
