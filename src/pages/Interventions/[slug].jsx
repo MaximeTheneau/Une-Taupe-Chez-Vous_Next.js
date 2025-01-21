@@ -7,6 +7,7 @@ import BreadcrumbJsonLd from '../../components/jsonLd/BreadcrumbJsonLd';
 import ArticleJsonLd from '../../components/jsonLd/ArticleJsonLd';
 import ContactButton from '../../components/button/ContactButton';
 import ImageLoader from '../../components/image/ImageLoader';
+import ImageObjectJsonLd from '../../components/jsonLd/ImageObjectJsonLd';
 
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Interventions`);
@@ -54,8 +55,10 @@ export default function Slug({ post }) {
           fetchPriority="high"
         />
       </Head>
+      {/* Schema.org */}
+      <ArticleJsonLd post={post} urlPost={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`} />
+      <ImageObjectJsonLd post={post} />
       <BreadcrumbJsonLd paragraphPosts={post.paragraphPosts} urlPost={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`} />
-      <ArticleJsonLd post={post} />
       <section>
         <h1>{post.title}</h1>
         <nav>

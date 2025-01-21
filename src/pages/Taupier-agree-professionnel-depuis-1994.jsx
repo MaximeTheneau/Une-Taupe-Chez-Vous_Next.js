@@ -7,7 +7,8 @@ import fetcher from '../utils/fetcher';
 import TableOfContents from '../components/tableOfContents/TableOfContents';
 import ContactButton from '../components/button/ContactButton';
 import ImageLoader from '../components/image/ImageLoader';
-import ArticleJsonLd from '../components/jsonLd/ArticleJsonLd';
+import ImageObjectJsonLd from '../components/jsonLd/ImageObjectJsonLd';
+import BreadcrumbJsonLd from '../components/jsonLd/BreadcrumbJsonLd';
 
 export async function getStaticProps() {
   const page = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Taupier-agree-professionnel-depuis-1994`);
@@ -53,8 +54,10 @@ export default function TaupierPage({ page }) {
           imageSizes="100w"
           fetchPriority="high"
         />
-        <ArticleJsonLd post={page} urlPost={page.url} />
       </Head>
+      {/* Schema.org */}
+      <ImageObjectJsonLd post={page} />
+      <BreadcrumbJsonLd paragraphPosts={page.paragraphPosts} urlPost={`${process.env.NEXT_PUBLIC_URL}/${page.urlPost}`} />
       <section>
         <figure>
           <ImageLoader
@@ -79,18 +82,18 @@ export default function TaupierPage({ page }) {
               <span>Une Taupe Chez Vous</span>
             </p>
             <p>
-              <strong>Adresse : </strong>
+              <strong>📍Adresse : </strong>
               <span>71 Marie Curie </span>
               <span>27780 </span>
               <span>Garrennes-Sur-Eure</span>
             </p>
             <p>
-              <strong>Téléphone : </strong>
+              <strong>📞 Téléphone : </strong>
               <Link href="tel:+33232264958"> +33 2 32 26 49 58</Link>
             </p>
             <NotCopie />
             <p>
-              <strong>Numéro SIRET :</strong>
+              <strong>🏢 Numéro SIRET :</strong>
               {' '}
               39338032400029
             </p>

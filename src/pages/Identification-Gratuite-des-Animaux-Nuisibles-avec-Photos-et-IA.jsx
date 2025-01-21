@@ -6,6 +6,9 @@ import ImageLoader from '../components/image/ImageLoader';
 import FormIdentification from '../components/pestIdentification/FormIdentification';
 import ArticlesAdsense from '../components/adsense/ArticlesAdsense';
 import Comments from '../components/comments/Comments';
+import ArticleJsonLd from '../components/jsonLd/ArticleJsonLd';
+import ImageObjectJsonLd from '../components/jsonLd/ImageObjectJsonLd';
+import BreadcrumbJsonLd from '../components/jsonLd/BreadcrumbJsonLd';
 
 export async function getStaticProps() {
   const page = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Identification-Gratuite-des-Animaux-Nuisibles-avec-Photos-et-IA`);
@@ -52,6 +55,10 @@ export default function Page({ page }) {
           fetchPriority="high"
         />
       </Head>
+      {/* Schema.org */}
+      <ArticleJsonLd post={page} urlPost={`${process.env.NEXT_PUBLIC_URL}/${page.urlPost}`} />
+      <ImageObjectJsonLd post={page} />
+      <BreadcrumbJsonLd paragraphPosts={page.paragraphPosts} urlPost={`${process.env.NEXT_PUBLIC_URL}/${page.urlPost}`} />
       <section>
         <figure>
           <ImageLoader

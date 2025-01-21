@@ -5,6 +5,9 @@ import styles from '../styles/Pages.module.scss';
 import NotCopie from '../components/notCopie/NotCopie';
 import fetcher from '../utils/fetcher';
 import Search from '../components/search/Search';
+import ArticleJsonLd from '../components/jsonLd/ArticleJsonLd';
+import ImageObjectJsonLd from '../components/jsonLd/ImageObjectJsonLd';
+import BreadcrumbJsonLd from '../components/jsonLd/BreadcrumbJsonLd';
 
 export async function getStaticProps() {
   const page = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Contact`);
@@ -41,7 +44,9 @@ export default function Contact({ page }) {
           key="canonical"
         />
       </Head>
-
+      <ArticleJsonLd post={page} urlPost={`${process.env.NEXT_PUBLIC_URL}/${page.urlPost}`} />
+      <ImageObjectJsonLd post={page} />
+      <BreadcrumbJsonLd paragraphPosts={page.paragraphPosts} urlPost={`${process.env.NEXT_PUBLIC_URL}/${page.urlPost}`} />
       <section className={styles.page}>
         <h1>{page.title}</h1>
         <div className={styles.page__contact__block} itemScope itemType="https://schema.org/">

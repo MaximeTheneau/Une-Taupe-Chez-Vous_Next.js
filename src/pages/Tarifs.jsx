@@ -1,5 +1,7 @@
 import Head from 'next/head';
 import styles from '../styles/Pages.module.scss';
+import ImageObjectJsonLd from '../components/jsonLd/ImageObjectJsonLd';
+import BreadcrumbJsonLd from '../components/jsonLd/BreadcrumbJsonLd';
 
 export async function getStaticProps() {
   const responsePage = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts/Tarifs`);
@@ -37,6 +39,9 @@ export default function pricing({ page }) {
           key="canonical"
         />
       </Head>
+      {/* Schema.org */}
+      <ImageObjectJsonLd post={page} />
+      <BreadcrumbJsonLd paragraphPosts={page.paragraphPosts} urlPost={`${process.env.NEXT_PUBLIC_URL}/${page.urlPost}`} />
       <section className={styles.page}>
         <h1>{page.title}</h1>
         <div dangerouslySetInnerHTML={{ __html: page.contents }} />

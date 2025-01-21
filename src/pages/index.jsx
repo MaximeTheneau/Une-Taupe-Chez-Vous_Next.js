@@ -8,6 +8,9 @@ import DevisButton from '../components/button/DevisButton';
 import ImageLoader from '../components/image/ImageLoader';
 import Review from '../components/review/Review';
 import SearchJsonLd from '../components/jsonLd/SearchJsonLd';
+import ImageObjectJsonLd from '../components/jsonLd/ImageObjectJsonLd';
+import BreadcrumbJsonLd from '../components/jsonLd/BreadcrumbJsonLd';
+import FaqJsonLd from '../components/jsonLd/FaqJsonLd';
 
 export async function getStaticProps() {
   const home = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/home`);
@@ -65,7 +68,11 @@ export default function Home({
           fetchpriority="high"
         />
       </Head>
+      {/* Schema.org */}
+      <ImageObjectJsonLd post={accueil} />
+      <BreadcrumbJsonLd paragraphPosts={accueil.paragraphPosts} urlPost={`${process.env.NEXT_PUBLIC_URL}`} />
       <LocalBusinessJsonLd descriptionMeta={accueil.metaDescription} reviewsData={reviews} />
+      <FaqJsonLd listPosts={accueil.listPosts} />
       <SearchJsonLd />
       <div className={styles.home__imagesFull}>
         <div className={styles.home__imagesFull__image}>

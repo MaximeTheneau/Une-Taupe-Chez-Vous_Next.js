@@ -9,6 +9,7 @@ import Comments from '../../components/comments/Comments';
 import ArticlesAdsense from '../../components/adsense/ArticlesAdsense';
 import ImageLoader from '../../components/image/ImageLoader';
 import Cards from '../../components/cardsHome/cardsHome';
+import ImageObjectJsonLd from '../../components/jsonLd/ImageObjectJsonLd';
 
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`);
@@ -78,7 +79,8 @@ export default function Slug({ post, relatedPosts }) {
       </Head>
       {/* Schema.org */}
       <ArticleJsonLd post={post} urlPost={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`} />
-      <BreadcrumbJsonLd paragraphPosts={post.paragraphPosts} urlPost={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`} />
+      <ImageObjectJsonLd post={post} />
+      <BreadcrumbJsonLd paragraphPosts={post.paragraphPosts} urlPost={`${process.env.NEXT_PUBLIC_URL}/${post.urlPost}`} />
       <section>
         <h1>{post.title}</h1>
         <ul>

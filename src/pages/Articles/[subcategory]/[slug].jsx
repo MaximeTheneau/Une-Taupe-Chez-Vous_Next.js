@@ -10,6 +10,7 @@ import BreadcrumbJsonLd from '../../../components/jsonLd/BreadcrumbJsonLd';
 import Comments from '../../../components/comments/Comments';
 import ImageLoader from '../../../components/image/ImageLoader';
 import ArticlesAdsense from '../../../components/adsense/ArticlesAdsense';
+import ImageObjectJsonLd from '../../../components/jsonLd/ImageObjectJsonLd';
 
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Articles`);
@@ -80,6 +81,7 @@ export default function Slug({ post, desc, relatedPosts }) {
         />
       </Head>
       {/* Schema.org */}
+      <ImageObjectJsonLd post={post} />
       <ArticleJsonLd post={post} urlPost={urlPost} />
       <BreadcrumbJsonLd paragraphPosts={post.paragraphPosts} urlPost={urlPost} />
       <section>

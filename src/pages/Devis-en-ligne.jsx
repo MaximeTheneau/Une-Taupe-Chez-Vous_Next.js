@@ -2,6 +2,8 @@ import Head from 'next/head';
 import DevisForm from '../components/contact/DevisForm';
 import styles from '../styles/Pages.module.scss';
 import fetcher from '../utils/fetcher';
+import ImageObjectJsonLd from '../components/jsonLd/ImageObjectJsonLd';
+import BreadcrumbJsonLd from '../components/jsonLd/BreadcrumbJsonLd';
 
 export async function getStaticProps() {
   const page = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Devis-en-ligne`);
@@ -38,6 +40,8 @@ export default function DevisEnLigne({ page }) {
           key="canonical"
         />
       </Head>
+      <ImageObjectJsonLd post={page} />
+      <BreadcrumbJsonLd paragraphPosts={page.paragraphPosts} urlPost={`${process.env.NEXT_PUBLIC_URL}/${page.urlPost}`} />
       <section className={styles.page}>
         <h1>{page.title}</h1>
         <div dangerouslySetInnerHTML={{ __html: page.contentsHTML }} />

@@ -3,6 +3,9 @@ import styles from '../../styles/Pages.module.scss';
 import DirectoryRegistrationForm from '../../components/directoryRegistrationForm/DirectoryRegistrationForm';
 import fetcher from '../../utils/fetcher';
 import ImageLoader from '../../components/image/ImageLoader';
+import ArticleJsonLd from '../../components/jsonLd/ArticleJsonLd';
+import ImageObjectJsonLd from '../../components/jsonLd/ImageObjectJsonLd';
+import BreadcrumbJsonLd from '../../components/jsonLd/BreadcrumbJsonLd';
 
 export async function getStaticProps() {
   const article = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Annuaire`);
@@ -52,6 +55,10 @@ export default function Page({ page, article }) {
           fetchpriority="high"
         />
       </Head>
+      {/* Schema.org */}
+      <ArticleJsonLd post={page} urlPost={`${process.env.NEXT_PUBLIC_URL}/${page.category.slug}/${page.slug}`} />
+      <ImageObjectJsonLd post={page} />
+      <BreadcrumbJsonLd paragraphPosts={page.paragraphPosts} urlPost={`${process.env.NEXT_PUBLIC_URL}/${page.urlPost}`} />
       <section className={styles.page}>
         <figure>
           <ImageLoader
