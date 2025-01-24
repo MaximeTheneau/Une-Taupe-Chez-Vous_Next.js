@@ -5,9 +5,9 @@ import TableOfContents from '../../components/tableOfContents/TableOfContents';
 import fetcher from '../../utils/fetcher';
 import BreadcrumbJsonLd from '../../components/jsonLd/BreadcrumbJsonLd';
 import ArticleJsonLd from '../../components/jsonLd/ArticleJsonLd';
-import ContactButton from '../../components/button/ContactButton';
 import ImageLoader from '../../components/image/ImageLoader';
 import ImageObjectJsonLd from '../../components/jsonLd/ImageObjectJsonLd';
+import DevisButton from '../../components/button/DevisButton';
 
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Interventions`);
@@ -157,7 +157,17 @@ export default function Slug({ post }) {
             )}
           </div>
         ))}
-        <ContactButton />
+        <h2>
+          Obtenez un devis gratuit -
+          {' '}
+          {post.title}
+        </h2>
+        <p>
+          Trouvez une solution rapide et adaptée à vos problèmes de nuisibles.
+          Faites votre demande de devis dès maintenant pour une intervention
+          efficace et sur mesure !
+        </p>
+        <DevisButton />
       </section>
     </>
   );
