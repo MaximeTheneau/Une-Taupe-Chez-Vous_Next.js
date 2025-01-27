@@ -3,6 +3,7 @@
 @use './button.scss';
 @import './variables.scss';
 @import './fonts.scss';
+@import "tailwindcss";
 
 :root{
   --font-size-large: 2rem;

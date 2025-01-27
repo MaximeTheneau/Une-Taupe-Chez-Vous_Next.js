@@ -9,7 +9,6 @@ import fetcher from '../../../utils/fetcher';
 import BreadcrumbJsonLd from '../../../components/jsonLd/BreadcrumbJsonLd';
 import Comments from '../../../components/comments/Comments';
 import ImageLoader from '../../../components/image/ImageLoader';
-import ArticlesAdsense from '../../../components/adsense/ArticlesAdsense';
 import ImageObjectJsonLd from '../../../components/jsonLd/ImageObjectJsonLd';
 
 export async function getStaticPaths() {
@@ -85,7 +84,7 @@ export default function Slug({ post, desc, relatedPosts }) {
       <ArticleJsonLd post={post} urlPost={urlPost} />
       <BreadcrumbJsonLd paragraphPosts={post.paragraphPosts} urlPost={urlPost} />
       <section>
-        <h1>{post.title}</h1>
+        <h1 className="bg-red-100 underline">{post.title}</h1>
         <Category
           category={false}
           subcategoryName={post.subcategory.name}
@@ -110,7 +109,6 @@ export default function Slug({ post, desc, relatedPosts }) {
           )}
         </figure>
         <div dangerouslySetInnerHTML={{ __html: post.contents }} />
-        <ArticlesAdsense adSlot={7832509827} adformat="auto" />
         <TableOfContents post={post} />
         {post.paragraphPosts.map((paragraphArticle) => (
           <div key={paragraphArticle.id}>
@@ -175,7 +173,6 @@ export default function Slug({ post, desc, relatedPosts }) {
             {post.textLinks}
           </Link>
         )}
-        <ArticlesAdsense adSlot={8493827134} adformat="fluid" />
       </section>
       <aside>
         <h2>Articles qui pourraient vous intéresser :</h2>
@@ -186,8 +183,6 @@ export default function Slug({ post, desc, relatedPosts }) {
       </aside>
 
       <Comments posts={post} />
-      <ArticlesAdsense adSlot={1193921611} adformat="autorelaxed" />
-
     </>
   );
 }

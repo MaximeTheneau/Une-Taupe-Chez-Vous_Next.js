@@ -1,10 +1,13 @@
 import React, { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Script from 'next/script';
-import style from '../Modal.module.scss';
 import CookieChoice from './CookieChoice';
 import { useCookies } from '../../../context/CookiesContext';
+import Button from '../../ui/Button';
 
 const createGoogleAnalyticsScript = (cookiesGoogle) => {
+  if (document.getElementById('google-analytics-init')) return;
+
   const scriptInit = document.createElement('script');
   scriptInit.async = true;
   scriptInit.src = `https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`;
@@ -29,83 +32,110 @@ const createGoogleAnalyticsScript = (cookiesGoogle) => {
   const scriptCode = `
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('consent', "${consent}", ${JSON.stringify(consentSettings)});
     gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}', {
       page_path: window.location.pathname
     });
+    gtag('consent', "${consent}", ${JSON.stringify(consentSettings)});
     gtag('js', new Date());
   `;
   script.textContent = scriptCode;
-  return { scriptInit, script };
+
+  document.head.appendChild(scriptInit);
+  document.head.appendChild(script);
+};
+
+const createGoogleAdsenseScript = () => {
+  const idGoogle = document.getElementById('google-adsense');
+  // console.log(document.getElementById('google-adsense'));
+
+  if (idGoogle) return;
+
+  const scriptAdsense = document.createElement('script');
+  scriptAdsense.async = true;
+  scriptAdsense.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9194552698690511';
+  scriptAdsense.id = 'google-adsense';
+  scriptAdsense.crossOrigin = 'anonymous';
+
+  document.head.appendChild(scriptAdsense);
 };
 
 export default function CookiesModal() {
   const { cookies, updateCookies } = useCookies();
+  const router = useRouter();
 
   const handleCookieChange = (cookieName) => {
     updateCookies(cookieName, !cookies[cookieName]);
   };
 
+  // if (router.pathname.startsWith('/blog/')) {
+  //   if (cookies) {
+  //     setTimeout(() => {
+  //       createGoogleAdsenseScript();
+  //     }, 1000);
+  //   }
+  // } else {
+  //   setTimeout(() => {
+  //     const adsElements = document.querySelectorAll('ins');
+  //     const existingScript1 = document.getElementById('google-adsense');
+  //     const existingScript2 = document.getElementById('google_esf');
+  //     const existingAdsenseScript = document.querySelector('script[src*="/adsense/"]');
+
+  //     adsElements.forEach((adElement) => {
+  //       adElement.remove();
+  //     });
+
+  //     if (existingScript1) {
+  //       existingScript1.remove();
+  //     }
+
+  //     if (existingScript2) {
+  //       existingScript2.remove();
+  //     }
+  //     if (existingAdsenseScript) {
+  //       existingAdsenseScript.remove();
+  //     }
+  //   }, 1000);
+  // }
+
   useEffect(() => {
-    if (!window.localStorage.getItem('cookiesAdsense')) {
-      setTimeout(() => {
-        updateCookies('cookiesModal', false);
-      }, 5000);
-    }
-    if (!window.localStorage.getItem('cookiesModal')) {
+    if (window.localStorage.getItem('cookiesGoogle')) {
+      createGoogleAnalyticsScript(true);
+    } else {
       setTimeout(() => {
         updateCookies('cookiesModal', false);
       }, 5000);
     }
 
-    if (!window.localStorage.getItem('cookiesGoogle')) {
+    if (window.localStorage.getItem('cookiesAdsense')) {
+      if (router.pathname.startsWith('/Articles/')) {
+        createGoogleAdsenseScript();
+      }
+    } else {
       setTimeout(() => {
-        updateCookies('cookiesGoogle', false);
+        updateCookies('cookiesModal', false);
       }, 5000);
     }
   }, []);
 
   useEffect(() => {
     if (window.localStorage.getItem('cookiesAdsense')) {
-      updateCookies('cookiesAdsense', true);
-      const scriptAdsense = document.createElement('script');
-      scriptAdsense.async = true;
-      scriptAdsense.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9194552698690511';
-      scriptAdsense.id = 'google-adsense';
-      const existingScriptAd = document.getElementById('google-adsense');
-
-      if (existingScriptAd) {
-        document.head.removeChild(existingScriptAd);
+      if (router.pathname.startsWith('/Articles/')) {
+        createGoogleAdsenseScript();
       }
-      document.head.appendChild(scriptAdsense);
     }
-
-    if (window.localStorage.getItem('cookiesGoogle')) {
-      updateCookies('cookiesGoogle', window.localStorage.getItem('cookiesGoogle'));
-      const cookiesGoogleValue = window.localStorage.getItem('cookiesGoogle') !== 'false';
-      const { scriptInit, script } = createGoogleAnalyticsScript(cookiesGoogleValue);
-      const existingScript = document.getElementById('google-analytics');
-      const existingScriptInit = document.getElementById('google-analytics-init');
-      if (existingScriptInit) {
-        document.head.removeChild(existingScriptInit);
-      }
-      document.head.appendChild(scriptInit);
-
-      if (existingScript) {
-        document.head.removeChild(existingScript);
-      }
-      document.head.appendChild(script);
-    }
-  }, [cookies.cookiesModal]);
-
+  }, [router]);
   const handleAcceptCookies = () => {
     document.body.classList.remove('overflow-hidden');
     window.localStorage.setItem('cookiesModal', true);
     window.localStorage.setItem('cookiesGoogle', true);
     window.localStorage.setItem('cookiesAdsense', true);
-    updateCookies('cookiesModal', true);
+    updateCookies('cookiesModal', null);
     updateCookies('cookiesGoogle', true);
     updateCookies('cookiesAdsense', true);
+    createGoogleAnalyticsScript(true);
+    if (router.pathname.startsWith('/Articles/')) {
+      createGoogleAdsenseScript();
+    }
   };
 
   const handleRefuseCookies = () => {
@@ -113,34 +143,26 @@ export default function CookiesModal() {
     updateCookies('cookiesModal', null);
   };
 
+  if (cookies.cookiesModal === null) {
+    return null;
+  }
+
   return (
     <>
-      {/* Google tag (gtag.js) */}
       <Script
         async
-        src="https://www.googletagmanager.com/gtag/js?id=G-40PV0SEJS5"
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
       />
-      {cookies.cookiesModal === false && (
-      <div className={style.cookies}>
+      <div className="bottom-0 fixed bg-form z-10 p-4 w-full shadow-custom ">
+        <div className="-translate-y-6">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-75 29-147t81-128.5q52-56.5 125-91T475-881q21 0 43 2t45 7q-9 45 6 85t45 66.5q30 26.5 71.5 36.5t85.5-5q-26 59 7.5 113t99.5 56q1 11 1.5 20.5t.5 20.5q0 82-31.5 154.5t-85.5 127q-54 54.5-127 86T480-80Zm-60-480q25 0 42.5-17.5T480-620q0-25-17.5-42.5T420-680q-25 0-42.5 17.5T360-620q0 25 17.5 42.5T420-560Zm-80 200q25 0 42.5-17.5T400-420q0-25-17.5-42.5T340-480q-25 0-42.5 17.5T280-420q0 25 17.5 42.5T340-360Zm260 40q17 0 28.5-11.5T640-360q0-17-11.5-28.5T600-400q-17 0-28.5 11.5T560-360q0 17 11.5 28.5T600-320ZM480-160q122 0 216.5-84T800-458q-50-22-78.5-60T683-603q-77-11-132-66t-68-132q-80-2-140.5 29t-101 79.5Q201-644 180.5-587T160-480q0 133 93.5 226.5T480-160Zm0-324Z" /></svg>
+        </div>
         {cookies.cookiesChoice ? (
-          <div className={`card ${style.cookies__choice}`}>
-            <h2>Les cookies</h2>
-            <p>
-              Les cookies sont utilisés pour mesurer notre audience et améliorer nos contenus.
-              <br />
-              En désactivant les cookies, vous ne pourrez pas utiliser certaines
-              fonctionnalités de notre site.
-            </p>
-            <table className={`card ${style.cookies__choice__table}`}>
-              <thead>
-                <tr>
-                  <th>Services</th>
-                  <th>Activer</th>
-                </tr>
-              </thead>
+          <div>
+            <table className="w-full ">
               <tbody>
                 <CookieChoice
-                  label="Google Analytics GU4"
+                  label="Google Analytic"
                   checked={cookies.cookiesGoogle}
                   onClick={() => {
                     handleCookieChange('cookiesGoogle');
@@ -153,58 +175,55 @@ export default function CookiesModal() {
                   onClick={() => {
                     handleCookieChange('cookiesAdsense');
                     window.localStorage.setItem('cookiesAdsense', !cookies.cookiesAdsense);
+                    if (router.pathname.startsWith('/Articles/')) {
+                      createGoogleAdsenseScript();
+                    }
                   }}
                 />
               </tbody>
             </table>
-            <div className={style.cookies__close}>
-              <button
+            <div>
+              <Button
                 type="button"
-                className="button"
+                className="bg-green"
                 onClick={() => {
                   handleCookieChange('cookiesModal');
+                  updateCookies('cookiesModal', null);
                 }}
               >
-                Soumettre les préférences
-              </button>
+                Confirmer
+              </Button>
             </div>
           </div>
         ) : (
           <>
-            <h2>
-              À vous de choisir !
-            </h2>
             <p>
-              En poursuivant votre navigation, vous acceptez l&apos;utilisation des cookies
-              pour nous aider à améliorer notre site internet. À vous de choisir !
+              Acceptez l&apos;utilisation des cookies pour nous aider à améliorer
+              notre site internet. À vous de choisir !
             </p>
-            <div className={style.cookies__button}>
-              <button
-                type="button"
-                className="button"
+            <div className="flex justify-around my-4">
+              <Button
                 onClick={handleAcceptCookies}
+                className="bg-green"
               >
                 Accepter
-              </button>
-              <button
-                type="button"
-                className="button"
-                onClick={handleRefuseCookies}
-              >
-                Refuser les cookies
-              </button>
-              <button
-                type="button"
-                className="button--grey button"
+              </Button>
+              <Button
+                className="bg-form"
                 onClick={() => handleCookieChange('cookiesChoice')}
               >
-                Personnaliser
-              </button>
+                Personaliser
+              </Button>
+              <Button
+                className="font-thin"
+                onClick={handleRefuseCookies}
+              >
+                Refuser
+              </Button>
             </div>
           </>
         )}
       </div>
-      )}
     </>
   );
 }
