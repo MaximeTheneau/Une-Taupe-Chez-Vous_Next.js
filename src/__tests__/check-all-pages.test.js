@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const { exec } = require('child_process');
 require('dotenv').config();
 // eslint-disable-next-line import/no-unresolved

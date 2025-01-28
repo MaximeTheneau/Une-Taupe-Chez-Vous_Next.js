@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import RecentArticles from '@/components/ui/RecentArticles';
 import styles from '../../../styles/Pages.module.scss';
 import Cards from '../../../components/cards/Cards';
 import Category from '../../../components/category/Category';
@@ -10,7 +11,6 @@ import BreadcrumbJsonLd from '../../../components/jsonLd/BreadcrumbJsonLd';
 import Comments from '../../../components/comments/Comments';
 import ImageLoader from '../../../components/image/ImageLoader';
 import ImageObjectJsonLd from '../../../components/jsonLd/ImageObjectJsonLd';
-import RecentArticles from '@/components/ui/RecentArticles';
 
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts&category=Articles`);
@@ -97,12 +97,6 @@ export default function Slug({
       <BreadcrumbJsonLd paragraphPosts={post.paragraphPosts} urlPost={urlPost} />
       <div className="flex flex-wrap justify-center">
         <article className=" md:w-3/4 px-4">
-          <h1>{post.title}</h1>
-          <Category
-            category={false}
-            subcategoryName={post.subcategory.name}
-            subcategorySlug={post.subcategory.slug}
-          />
 
           <figure>
             <ImageLoader
@@ -122,6 +116,13 @@ export default function Slug({
           <p className={styles.page__contents__date}>
             {post.formattedDate}
           </p>
+          <h1>{post.title}</h1>
+          <Category
+            category={false}
+            subcategoryName={post.subcategory.name}
+            subcategorySlug={post.subcategory.slug}
+          />
+
           <div dangerouslySetInnerHTML={{ __html: post.contents }} />
           <TableOfContents post={post} />
           {post.paragraphPosts.map((paragraphArticle) => (
@@ -167,6 +168,7 @@ export default function Slug({
               </div>
               )}
             </div>
+
           ))}
           <ol>
             {post.listPosts.map((listArticle) => (
@@ -192,15 +194,25 @@ export default function Slug({
           <h2 className="text-xl font-bold mb-4">Articles récents :</h2>
           <RecentArticles articles={latestPosts} />
           <h2 className="text-xl font-bold mb-4">Liens utiles :</h2>
-          <Link href="/Articles" className="block">
-            Blog
-          </Link>
-          <Link href="/Taupier-agree-professionnel-depuis-1994" className="block">
-            A propos
-          </Link>
-          <Link href="/Contact" className="block">
-            Contact
-          </Link>
+          <ul>
+            <li>
+              <Link href="/Articles" className="block">
+                Blog
+              </Link>
+            </li>
+            <li>
+              <Link href="/Taupier-agree-professionnel-depuis-1994" className="block">
+                A propos
+              </Link>
+            </li>
+            <li>
+
+              <Link href="/Contact" className="block">
+                Contact
+              </Link>
+            </li>
+          </ul>
+
         </aside>
         <Comments posts={post} />
       </div>
