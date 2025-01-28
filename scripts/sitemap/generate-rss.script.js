@@ -77,7 +77,7 @@ const genererFluxRSS = async () => {
 
     const xmlWithDeclaration = `<?xml version="1.0" encoding="utf-8"?>\n${fluxRSS}`;
 
-    fs.writeFileSync('./public/atom.xml', xmlWithDeclaration, 'utf8');
+    fs.writeFileSync('./public/rss.xml', xmlWithDeclaration, 'utf8');
     console.log('Le flux RSS a été généré avec succès !');
   } catch (error) {
     console.error('Erreur lors de la génération du flux RSS :', error);

@@ -1,14 +1,12 @@
 
-    User-agent: *
-    allow: /
+User-agent: *
+allow: /
     
-    disallow: /api/
+Disallow: /api/
+Disallow: /verify_email
+Disallow: /_next/
+Disallow: /search?q=*
 
-    #INTERNAL SEARCH
-    Disallow: /search?q=*
-
-    # Host
-    Host: https://unetaupechezvous.fr/
     
-    # Sitemaps
-    Sitemap: https://unetaupechezvous.fr/sitemap_index.xml
+# Sitemaps
+Sitemap: https://unetaupechezvous.fr/sitemap_index.xml
