@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { Inter } from 'next/font/google';
 import Layout from '../components/layout';
 import '../styles/globals.scss';
+
 import CookiesModal from '../components/modal/cookies/Cookies';
 import { CookiesProvider } from '../context/CookiesContext';
 

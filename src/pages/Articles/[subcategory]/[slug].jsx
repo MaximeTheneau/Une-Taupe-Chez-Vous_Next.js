@@ -84,7 +84,7 @@ export default function Slug({ post, desc, relatedPosts }) {
       <ArticleJsonLd post={post} urlPost={urlPost} />
       <BreadcrumbJsonLd paragraphPosts={post.paragraphPosts} urlPost={urlPost} />
       <section>
-        <h1 className="bg-red-100 underline">{post.title}</h1>
+        <h1>{post.title}</h1>
         <Category
           category={false}
           subcategoryName={post.subcategory.name}

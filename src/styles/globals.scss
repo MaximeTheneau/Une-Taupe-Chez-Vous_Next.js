@@ -1,14 +1,19 @@
-@use 'reset.scss';
-@use './icon.scss';
-@use './button.scss';
+@import "tailwindcss";  
+@import "./theme.css" layer(theme);
+@import './reset.scss';
+@import './icon.scss';
+@import './button.scss';
 @import './variables.scss';
 @import './fonts.scss';
-@import "tailwindcss";
+
 
 :root{
   --font-size-large: 2rem;
   --font-size-medium: 1.5rem;
   --font-size-small: 0.8rem;
+  --white-color: #fff;
+  --primary: #f5f6ec;
+  --secondary: #cdb87f;
 }
 
 body{
