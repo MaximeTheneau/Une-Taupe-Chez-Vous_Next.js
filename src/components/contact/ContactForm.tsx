@@ -127,7 +127,7 @@ export default function ContactForm() {
     }
   };
 
-  const handleResponse200 = (response) => {
+  const handleResponse200 = (response: any) => {
     setState({
       ...state,
       form: {
@@ -173,7 +173,7 @@ export default function ContactForm() {
     );
   };
 
-  const handleResponseError = (error) => {
+  const handleResponseError = (error :any) => {
     setState({
       ...state,
       modal: {
@@ -185,7 +185,7 @@ export default function ContactForm() {
     localStorage.setItem('form', JSON.stringify(state.form));
   };
 
-  const handleSubmit = (evt) => {
+  const handleSubmit = (evt:any) => {
     evt.preventDefault();
     const req = state.form;
     FormMiddleware(req, 'contact', handleResponse200, handleResponseError);

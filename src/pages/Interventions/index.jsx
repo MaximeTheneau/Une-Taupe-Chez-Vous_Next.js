@@ -1,6 +1,6 @@
 /* eslint-disable quote-props */
 import Head from 'next/head';
-import Cards from '../../components/cards/cards';
+import Cards from '../../components/cards/Cards';
 import styles from '../../styles/Pages.module.scss';
 import fetcher from '../../utils/fetcher';
 import TableOfContents from '../../components/tableOfContents/TableOfContents';

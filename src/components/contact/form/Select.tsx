@@ -1,16 +1,15 @@
-export default function Select({ onChange, value, id }) {
+export default function Select({ onChange, value, required }:any) {
   return (
     <select
-      id={id}
       title="Sujet"
       name="subject"
       value={value}
       onChange={onChange}
+      required={required}
     >
       <option value="Demande de renseignements">Demande de renseignements</option>
       <option value="Demande de devis">Demande de devis</option>
       <option value="Autre">Autre</option>
-      <option value="Webmaster">Webmaster</option>
     </select>
   );
 }

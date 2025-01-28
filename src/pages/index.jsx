@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import Cards from '../components/cardsHome/cardsHome';
+import Cards from '../components/cards/Cards';
 import styles from '../styles/Home.module.scss';
 import fetcher from '../utils/fetcher';
 import LocalBusinessJsonLd from '../components/jsonLd/LocalBusinessJsonLd';

@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { useState } from 'react';
 import fetcher from '../utils/fetcher';
-import Cards from '../components/cards/cards';
+import Cards from '../components/cards/Cards';
 import styles from '../components/search/Search.module.scss';
 import Search from '../components/search/Search';
 

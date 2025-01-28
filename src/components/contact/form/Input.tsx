@@ -1,11 +1,14 @@
+import { InputHTMLAttributes } from 'react';
+
 export default function Input({
   type,
   title,
   value,
   placeholder,
   onChange,
-  onBlur,
-}) {
+  required,
+  ...props
+}: InputHTMLAttributes<HTMLInputElement>) {
   return (
     <input
       type={type}
@@ -13,8 +16,8 @@ export default function Input({
       value={value}
       placeholder={placeholder}
       onChange={onChange}
-      onBlur={onBlur}
-      required
+      required={required}
+      {...props}
     />
   );
 }
