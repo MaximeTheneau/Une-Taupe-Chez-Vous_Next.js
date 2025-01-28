@@ -11,7 +11,7 @@ export default function Cards({ cards }: CardsProps) {
       {cards.map((card) => (
         <li
           key={card.title}
-          className="w-[150px] md:w-[330px]  m-2 transform transition-all !list-none "
+          className="w-[150px] md:w-[330px]  transform transition-all !list-none !m-2 "
         >
           <Card card={card} />
         </li>

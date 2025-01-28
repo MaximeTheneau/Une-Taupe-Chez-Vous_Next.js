@@ -136,6 +136,8 @@ export default function Home({
           </div>
           )
         ))}
+
+      </section>
         <aside>
           <h2>Guide Anti-Nuisibles : Nos Articles Experts</h2>
           <p>
@@ -145,12 +147,11 @@ export default function Home({
           </p>
           <Cards cards={blog} />
           <div class="text-center mt-8">
-            <Link href="/Articles" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
+            <Link href="/Articles" >
               Découvrir tous nos articles d&apos;experts
             </Link>
           </div>
         </aside>
-      </section>
     </>
   );
 }

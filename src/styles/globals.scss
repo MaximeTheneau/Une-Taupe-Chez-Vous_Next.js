@@ -59,8 +59,6 @@ em {
 img{
   background: $color-primary;
   max-width: 100%;
-  height: auto;
-  display: block;
 }
 
 main{
@@ -326,7 +324,56 @@ iframe {
 strong{
   font-weight: bold;
 }
+figure{
+  background-color: $color-primary;
+  display: block;
+  text-align: center;
+  margin: 0 0 2rem 0;
 
+  & img{
+    margin: 0 auto;
+
+  }
+}
+.table {
+  overflow-x: auto;
+  display: block;
+    & table {
+      display: table;
+      word-break: normal;
+      text-indent: initial;
+      unicode-bidi: isolate;
+      width: 100%;
+      border-collapse: collapse;
+    & th, td {
+      padding: 10px 15px; 
+      border: 1px solid #ddd; 
+    }
+
+    // th {
+    //   font-weight: bold; 
+    // }
+
+    // tr:nth-child(even) {
+    //   background-color: #f9f9f9; 
+    // }
+
+
+    // caption {
+    //   font-size: 1.25rem;
+    //   font-weight: bold;
+    //   margin-bottom: 10px; 
+    // }
+
+  }
+}
+figcaption{
+  display: inline-block;
+  color: var(--tw-text-opacity, 1);
+  padding: 1rem .25rem 1rem  ;
+  font-style: italic;
+  font-size: 0.9rem;
+}
 @media screen and (min-width: 768px){
   :root{
     --font-size-large: calc(1rem + ((3vw - 0.48rem) * 1.3889));
