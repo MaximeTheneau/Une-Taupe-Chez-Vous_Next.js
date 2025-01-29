@@ -12,6 +12,7 @@ const createGoogleAnalyticsScript = (cookiesGoogle) => {
   scriptInit.async = true;
   scriptInit.src = `https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`;
   scriptInit.id = 'google-analytics-init';
+  scriptInit.defer = true;
 
   const script = document.createElement('script');
 
@@ -150,6 +151,7 @@ export default function CookiesModal() {
   return (
     <>
       <Script
+        defer
         async
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
       />
