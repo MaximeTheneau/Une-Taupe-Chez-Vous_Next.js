@@ -1,15 +1,16 @@
-/* eslint-disable @next/next/no-css-tags */
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { Inter } from 'next/font/google';
 import Layout from '../components/layout';
 import '../styles/globals.scss';
-
-import CookiesModal from '../components/modal/cookies/Cookies';
 import { CookiesProvider } from '../context/CookiesContext';
+
+const CookiesModal = dynamic(() => import('../components/modal/cookies/Cookies'), { ssr: false });
 
 const title = Inter({
   weight: '400',
   subsets: ['latin'],
+  display: 'swap',
 });
 
 function MyApp({ Component, pageProps }) {
