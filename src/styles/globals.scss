@@ -6,7 +6,10 @@
 @import './variables.scss';
 @import './fonts.scss';
 
-
+@theme {
+  --color-primary:  var(--primary);
+  --color-form: #f5f6ec;
+}
 :root{
   --font-size-large: 2rem;
   --font-size-medium: 1.5rem;
@@ -16,10 +19,7 @@
   --secondary: #cdb87f;
 }
 
-@theme {
-  --color-primary:  var(--primary);
-  --color-form: #f5f6ec;
-}
+
 
 body{
   font-family: 'fontGeneral', sans-serif;

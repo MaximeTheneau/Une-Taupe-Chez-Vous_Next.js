@@ -1,61 +1,60 @@
 import Link from 'next/link';
-import styles from './Footer.module.scss';
 import Search from '../search/Search';
 
 export default function Footer() {
   return (
-    <div className={styles.footer}>
-      <div className={styles.footer__links}>
-        <div className={styles.footer__links__list}>
-          <ul>
+    <div className="bg-primary py-8 px-4">
+      <div className="flex flex-wrap justify-around items-center  w-full">
+        <div className="md:!w-1/2 w-full">
+          <ul className="grid gap-6 ">
             <li>
-              <Link href="/">
+              <Link href="/" className="!text-black">
                 Accueil - Une Taupe Chez Vous
               </Link>
             </li>
             <li>
-              <Link href="/Devis-en-ligne">
-                Devis en ligne gratuit
+              <Link href="/Devis-en-ligne" className=" !text-black">
+                Devis en ligne
               </Link>
             </li>
             <li>
-              <Link href="/Contact">
-                Formulaire de contact
+              <Link href="/Contact" className=" !text-black">
+                Contactez-nous
               </Link>
             </li>
             <li>
-              <Link href="/Temoignages">
-                Consultez les Avis de Nos Clients
+              <Link href="/Temoignages" className=" !text-black">
+                Témoignages
               </Link>
             </li>
             <li>
-              <Link href="/Taupier-agree-professionnel-depuis-1994">
-                Qui-sommes-nous
+              <Link href="/Taupier-agree-professionnel-depuis-1994" className=" !text-black">
+                Taupier agréé professionnel depuis 1994
               </Link>
             </li>
             <li />
           </ul>
         </div>
-        <div>
-          <p className={styles.footer__links__title}>Recherche</p>
+        <div className="md:!w-1/2 w-full">
           <Search id="footer-search" />
         </div>
 
       </div>
-      <ul className={styles.footer__links__social}>
+      <hr className="border-black" />
+      <ul className="flex flex-wrap justify-center gap-8 my-4 text-black">
         <li>
           <Link href="https://www.linkedin.com/company/une-taupe-chez-vous" title="Linkedin" rel="noopener" target="_blank" prefetch={false}>
-            <i className="icon-linkedin" />
+            <i className="icon-linkedin text-black" />
           </Link>
         </li>
         <li>
           <Link href="https://x.com/UneTaupe_" title=" X (anciennement Twitter)" target="_blank" rel="noopener" prefetch={false}>
-            <i className="icon-twitter" />
+            <i className="icon-twitter text-black" />
           </Link>
         </li>
         <li>
           <Link href="https://www.facebook.com/unetaupechezvous/" title="Facebook" target="_blank" rel="noopener" prefetch={false}>
-            <i className="icon-facebook" />
+            <i className="icon-facebook text-black" />
           </Link>
         </li>
         <li>
@@ -83,19 +82,21 @@ export default function Footer() {
         </li>
 
       </ul>
-      <div className={styles.footer__lower}>
+
+      <hr className="border-black mb-4" />
+      <div className="flex justify-center md:!flex-row flex-col gap-4 ">
         <p>
-          <Link href="/Plan-de-site">
+          <Link href="/Plan-de-site" className="!text-black">
             Plan du site
           </Link>
         </p>
         <p>
-          <Link href="/Foire-aux-questions">
+          <Link href="/Foire-aux-questions" className="!text-black">
             Question fréquentes (FAQ)
           </Link>
         </p>
         <p>
-          <Link href="/Mentions-Legales">
+          <Link href="/Mentions-Legales" className="!text-black">
             Mentions légales
           </Link>
         </p>
