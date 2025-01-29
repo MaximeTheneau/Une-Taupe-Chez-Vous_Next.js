@@ -9,6 +9,11 @@ export default function Footer() {
         <div className={styles.footer__links__list}>
           <ul>
             <li>
+              <Link href="/">
+                Accueil - Une Taupe Chez Vous
+              </Link>
+            </li>
+            <li>
               <Link href="/Devis-en-ligne">
                 Devis en ligne gratuit
               </Link>

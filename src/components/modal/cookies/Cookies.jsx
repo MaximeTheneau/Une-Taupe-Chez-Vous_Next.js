@@ -155,7 +155,7 @@ export default function CookiesModal() {
         async
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
       />
-      <div className="w-[100vw] h-[100vh] fixed inset-0  bg-black/50 z-10" />
+      <div className=" fixed inset-0  bg-black/50 z-10" />
       <div className=" m-4 p-2 z-10 bg-form text-center overflow-hidden outline rounded-sm fixed  bottom-0 left-0 right-0  transition-all ease-smooth duration-medium  ">
         {cookies.cookiesChoice ? (
           <div>
