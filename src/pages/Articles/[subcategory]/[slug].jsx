@@ -195,19 +195,19 @@ export default function Slug({
           <RecentArticles articles={latestPosts} />
           <h2 className="text-xl font-bold mb-4">Liens utiles :</h2>
           <ul>
-            <li>
-              <Link href="/Articles" className="block">
+            <li className="py-2 !border-b !border-black-200 last:border-b-0">
+              <Link href="/Articles" className="block !text-black">
                 Blog
               </Link>
             </li>
-            <li>
-              <Link href="/Taupier-agree-professionnel-depuis-1994" className="block">
+            <li className="py-2 !border-b !border-black-200 last:border-b-0 ">
+              <Link href="/Taupier-agree-professionnel-depuis-1994" className="block !text-black">
                 A propos
               </Link>
             </li>
-            <li>
+            <li className="py-2 !border-b !border-black-200 last:border-b-0">
 
-              <Link href="/Contact" className="block">
+              <Link href="/Contact" className="block !text-black">
                 Contact
               </Link>
             </li>
