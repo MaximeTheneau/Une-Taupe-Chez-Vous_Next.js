@@ -41,7 +41,6 @@ export default function DevisEnLigne({ page }) {
         />
       </Head>
       <ImageObjectJsonLd post={page} />
-      <BreadcrumbJsonLd paragraphPosts={page.paragraphPosts} urlPost={`${process.env.NEXT_PUBLIC_URL}/${page.urlPost}`} />
       <section className={styles.page}>
         <h1>{page.title}</h1>
         <div dangerouslySetInnerHTML={{ __html: page.contentsHTML }} />
