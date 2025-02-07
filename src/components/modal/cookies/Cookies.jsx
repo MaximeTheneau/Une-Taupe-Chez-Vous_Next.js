@@ -64,6 +64,13 @@ export default function CookiesModal() {
   const { cookies, updateCookies } = useCookies();
   const router = useRouter();
 
+  const loadAdsense = () => {
+    const allowedPaths = ['/Articles/', '/Annuaire', '/Identification'];
+    if (allowedPaths.some((path) => router.pathname.startsWith(path))) {
+      createGoogleAdsenseScript();
+    }
+  };
+
   const handleCookieChange = (cookieName) => {
     updateCookies(cookieName, !cookies[cookieName]);
   };
@@ -108,9 +115,7 @@ export default function CookiesModal() {
     }
 
     if (window.localStorage.getItem('cookiesAdsense')) {
-      if (router.pathname.startsWith('/Articles/')) {
-        createGoogleAdsenseScript();
-      }
+      loadAdsense();
     } else {
       setTimeout(() => {
         updateCookies('cookiesModal', false);
@@ -120,11 +125,10 @@ export default function CookiesModal() {
 
   useEffect(() => {
     if (window.localStorage.getItem('cookiesAdsense')) {
-      if (router.pathname.startsWith('/Articles/')) {
-        createGoogleAdsenseScript();
-      }
+      loadAdsense();
     }
   }, [router]);
+
   const handleAcceptCookies = () => {
     document.body.classList.remove('overflow-hidden');
     window.localStorage.setItem('cookiesModal', true);
@@ -134,9 +138,7 @@ export default function CookiesModal() {
     updateCookies('cookiesGoogle', true);
     updateCookies('cookiesAdsense', true);
     createGoogleAnalyticsScript(true);
-    if (router.pathname.startsWith('/Articles/')) {
-      createGoogleAdsenseScript();
-    }
+    loadAdsense();
   };
 
   const handleRefuseCookies = () => {
@@ -175,9 +177,7 @@ export default function CookiesModal() {
                   onClick={() => {
                     handleCookieChange('cookiesAdsense');
                     window.localStorage.setItem('cookiesAdsense', !cookies.cookiesAdsense);
-                    if (router.pathname.startsWith('/Articles/')) {
-                      createGoogleAdsenseScript();
-                    }
+                    loadAdsense();
                   }}
                 />
               </tbody>
