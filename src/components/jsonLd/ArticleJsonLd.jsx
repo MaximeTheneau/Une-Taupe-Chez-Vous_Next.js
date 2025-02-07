@@ -3,8 +3,8 @@ import Head from 'next/head';
 export default function ArticleJsonLd({ post, urlPost }) {
   const jsonLdData = {
     '@type': 'BlogPosting',
-    '@id': `${process.env.NEXT_PUBLIC_URL}/Articles`,
-    mainEntityOfPage: `${process.env.NEXT_PUBLIC_URL}/Articles`,
+    '@id': `${process.env.NEXT_PUBLIC_URL}/${post.category.slug}`,
+    mainEntityOfPage: `${process.env.NEXT_PUBLIC_URL}/${post.category.slug}`,
     name: post.title,
     headline: post.title,
     description: post.metaDescription,
@@ -44,13 +44,13 @@ export default function ArticleJsonLd({ post, urlPost }) {
       })),
     ],
     isPartOf: {
-      '@type': 'Blog',
-      '@id': `${process.env.NEXT_PUBLIC_URL}/blog/${post.category.slug}`,
-      name: 'Une taupe chez vous - Blog',
+      '@type': post.category.name,
+      '@id': `${process.env.NEXT_PUBLIC_URL}/${post.category.slug}`,
+      name: `Une taupe chez vous - ${post.category.name}`,
       publisher: {
         '@type': 'Organization',
         '@id': `${process.env.NEXT_PUBLIC_URL}`,
-        name: 'Une taupe chez vous - Blog',
+        name: `Une taupe chez vous -  ${post.category.name}`,
       },
     },
   };

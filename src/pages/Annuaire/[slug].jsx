@@ -1,12 +1,12 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import RecentArticles from '@/components/ui/RecentArticles';
 import styles from '../../styles/Pages.module.scss';
 import fetcher from '../../utils/fetcher';
 import TableOfContents from '../../components/tableOfContents/TableOfContents';
 import ArticleJsonLd from '../../components/jsonLd/ArticleJsonLd';
 import BreadcrumbJsonLd from '../../components/jsonLd/BreadcrumbJsonLd';
 import Comments from '../../components/comments/Comments';
-import ArticlesAdsense from '../../components/adsense/ArticlesAdsense';
 import ImageLoader from '../../components/image/ImageLoader';
 import Cards from '../../components/cardsHome/cardsHome';
 import ImageObjectJsonLd from '../../components/jsonLd/ImageObjectJsonLd';
@@ -23,19 +23,22 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const post = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/${params.slug}`);
+  const { slug } = params;
+
+  const post = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/blog/${slug}`);
   const relatedPosts = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/related/${params?.slug}`);
 
   return {
     props: {
-      post,
+      post: post.post,
       relatedPosts,
+      latestPosts: post.latestPosts,
     },
   };
 }
 
-export default function Slug({ post, relatedPosts }) {
-  const urlPost = `${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`;
+export default function Slug({ post, relatedPosts, latestPosts }) {
+  const urlPost = `${process.env.NEXT_PUBLIC_URL}/Annuaire/${post.slug}`;
 
   return (
     <>
@@ -53,7 +56,7 @@ export default function Slug({ post, relatedPosts }) {
         <meta property="og:image:height" content="720" />
         <meta property="article:published_time" content={post.createdAt} />
         <meta property="article:modified_time" content={post.updatedAt} />
-        <meta property="article:section" content={post.category.name} />
+        <meta property="article:section" content="Annuaire" />
         <meta property="twitter:card" content="summary" />
         <meta property="twitter:title" content={post.heading} />
         <meta property="twitter:description" content={post.metaDescription} />
@@ -65,7 +68,7 @@ export default function Slug({ post, relatedPosts }) {
         <meta property="og:image" content={`${post.imgPost}?format=jpeg`} />
         <link
           rel="canonical"
-          href={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`}
+          href={urlPost}
           key="canonical"
         />
         {/* Image Preload */}
@@ -78,68 +81,137 @@ export default function Slug({ post, relatedPosts }) {
         />
       </Head>
       {/* Schema.org */}
-      <ArticleJsonLd post={post} urlPost={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`} />
+      <ArticleJsonLd post={post} urlPost={urlPost} />
       <ImageObjectJsonLd post={post} />
-      <BreadcrumbJsonLd paragraphPosts={post.paragraphPosts} urlPost={`${process.env.NEXT_PUBLIC_URL}/${post.urlPost}`} />
-      <section>
-        <h1>{post.title}</h1>
-        <ul>
-          <li>
-            <Link href="/Annuaire" className="stronk">
-              Annuaire
-            </Link>
-          </li>
-        </ul>
-        <p className={styles.page__contents__date}>
-          {post.formattedDate}
-        </p>
-        <figure>
-          <ImageLoader
-            src={post.imgPost}
-            alt={post.altImg || post.title}
-            width={post.imgWidth}
-            height={post.imgHeight}
-            srcset={post.srcset}
-            priority
-          />
-          {post.title !== post.altImg && (
-          <figcaption className="caption">
-            {post.altImg}
-          </figcaption>
-          )}
-        </figure>
-        <div dangerouslySetInnerHTML={{ __html: post.contentsHTML }} />
-
-        <ArticlesAdsense adSlot={2932584086} adformat="auto" />
-        <TableOfContents post={post} />
-        {post.paragraphPosts.map((paragraphs) => (
-          <>
-            <h2 key={paragraphs} id={paragraphs.slug}>{paragraphs.subtitle}</h2>
-            <div dangerouslySetInnerHTML={{ __html: paragraphs.paragraph }} />
-            {paragraphs.linkSubtitle && (
-              <div className={styles.page__contents__paragraph__links}>
-                <span className={styles.page__contents__paragraph__links__link}>
-                  → A lire aussi :
-                  <Link href={paragraphs.link}>
-                    {' '}
-                    {paragraphs.linkSubtitle}
-                  </Link>
-                </span>
-              </div>
+      <BreadcrumbJsonLd paragraphPosts={post.paragraphPosts} urlPost={`${urlPost}`} />
+      <div className="flex flex-wrap justify-center">
+        <article className=" md:w-3/4 px-4">
+          <figure>
+            <ImageLoader
+              src={post.imgPost}
+              alt={post.altImg || post.title}
+              width={post.imgWidth}
+              height={post.imgHeight}
+              srcset={post.srcset}
+              priority
+            />
+            {post.title !== post.altImg && (
+            <figcaption className="caption">
+              {post.altImg}
+            </figcaption>
             )}
-          </>
-        ))}
-        <ArticlesAdsense adSlot={9927467340} adformat="fluid" />
+          </figure>
+          <p className={styles.page__contents__date}>
+            {post.formattedDate}
+          </p>
+          <h1>{post.title}</h1>
+          <ul>
+            <li>
+              <Link href="/Annuaire" className="stronk">
+                Annuaire
+              </Link>
+            </li>
+          </ul>
 
-      </section>
-      <Comments posts={post} />
-      <ArticlesAdsense adSlot={2900794494} adformat="autorelaxed" />
-      {relatedPosts.length > 0 && (
+          <div dangerouslySetInnerHTML={{ __html: post.contents }} />
+          <TableOfContents post={post} />
+          {post.paragraphPosts.map((paragraphArticle) => (
+            <div key={paragraphArticle.id}>
+              {paragraphArticle.subtitle && (
+              <h2 id={paragraphArticle.slug}>
+                {paragraphArticle.subtitle}
+              </h2>
+              )}
+              {paragraphArticle.paragraph && (
+              <div key={paragraphArticle.id} className={styles.page__contents__paragraph}>
+                {paragraphArticle.imgPostParagh && (
+                <figure className={styles.page__contents__paragraph__figure}>
+                  <ImageLoader
+                    src={paragraphArticle.imgPost}
+                    alt={paragraphArticle.altImg}
+                    width={paragraphArticle.imgWidth}
+                    height={paragraphArticle.imgHeight}
+                    srcset={paragraphArticle.srcset}
+                  />
+                  {paragraphArticle.subtitle !== paragraphArticle.altImgParagh && (
+                  <figcaption className="caption">
+                    {paragraphArticle.altImg}
+                  </figcaption>
+                  )}
+                </figure>
+                )}
+                <div
+                  className={styles.page__contents__paragraph__text}
+                  dangerouslySetInnerHTML={{ __html: paragraphArticle.paragraph }}
+                />
+                {paragraphArticle.link && (
+                <div className={styles.page__contents__paragraph__links}>
+                  <span className={styles.page__contents__paragraph__links__link}>
+                    → A lire aussi :
+                    <Link href={paragraphArticle.link}>
+                      {' '}
+                      {paragraphArticle.linkSubtitle}
+                    </Link>
+                  </span>
+                </div>
+                )}
+              </div>
+              )}
+            </div>
+
+          ))}
+          <ol>
+            {post.listPosts.map((listArticle) => (
+              listArticle.title !== null && (
+              <li key={listArticle.slug}>
+                {listArticle.title && (
+                <h3>{listArticle.title}</h3>
+                )}
+                {listArticle.description && (
+                <p>{listArticle.description}</p>
+                )}
+              </li>
+              )
+            ))}
+          </ol>
+          {post.links && (
+          <Link href={post.links}>
+            {post.textLinks}
+          </Link>
+          )}
+        </article>
+        <aside className="w-full md:!w-1/4 bg-secondary p-4">
+          <h2 className="text-xl font-bold mb-4">Articles récents :</h2>
+          <RecentArticles articles={latestPosts} />
+          <h2 className="text-xl font-bold mb-4">Liens utiles :</h2>
+          <ul>
+            <li className="py-2 !border-b !border-black-200 last:border-b-0">
+              <Link href="/Articles" className="block !text-black">
+                Blog
+              </Link>
+            </li>
+            <li className="py-2 !border-b !border-black-200 last:border-b-0 ">
+              <Link href="/Taupier-agree-professionnel-depuis-1994" className="block !text-black">
+                A propos
+              </Link>
+            </li>
+            <li className="py-2 !border-b !border-black-200 last:border-b-0">
+
+              <Link href="/Contact" className="block !text-black">
+                Contact
+              </Link>
+            </li>
+          </ul>
+
+        </aside>
+        <Comments posts={post} />
+      </div>
       <aside>
-        <h2>Articles similaires</h2>
+
+        <h2>Articles qui pourraient vous intéresser :</h2>
         <Cards cards={relatedPosts} />
       </aside>
-      )}
+
     </>
   );
 }

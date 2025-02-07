@@ -97,7 +97,6 @@ export default function Slug({
       <BreadcrumbJsonLd paragraphPosts={post.paragraphPosts} urlPost={urlPost} />
       <div className="flex flex-wrap justify-center">
         <article className=" md:w-3/4 px-4">
-
           <figure>
             <ImageLoader
               src={post.imgPost}

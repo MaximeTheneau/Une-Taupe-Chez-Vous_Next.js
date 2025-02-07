@@ -4,7 +4,6 @@ import styles from '../styles/Pages.module.scss';
 import fetcher from '../utils/fetcher';
 import ImageLoader from '../components/image/ImageLoader';
 import FormIdentification from '../components/pestIdentification/FormIdentification';
-import ArticlesAdsense from '../components/adsense/ArticlesAdsense';
 import Comments from '../components/comments/Comments';
 import ArticleJsonLd from '../components/jsonLd/ArticleJsonLd';
 import ImageObjectJsonLd from '../components/jsonLd/ImageObjectJsonLd';
@@ -76,14 +75,11 @@ export default function Page({ page }) {
           )}
         </figure>
         <h1>{page.title}</h1>
-        <ArticlesAdsense adSlot={5685145018} adformat="fluid" />
         <div dangerouslySetInnerHTML={{ __html: page.contents }} />
         <div className={styles.page__adsense}>
           <FormIdentification />
-          <ArticlesAdsense adSlot={8424346239} adformat="auto" vertical />
         </div>
         {/* <TableOfContents post={page} /> */}
-        {/* <ArticlesAdsense adSlot={5055946866} adformat="fluid" /> */}
       </section>
 
       <section>
@@ -133,7 +129,6 @@ export default function Page({ page }) {
         ))}
       </section>
       <Comments posts={page} />
-      <ArticlesAdsense adSlot={1193921611} adformat="autorelaxed" />
     </>
   );
 }
