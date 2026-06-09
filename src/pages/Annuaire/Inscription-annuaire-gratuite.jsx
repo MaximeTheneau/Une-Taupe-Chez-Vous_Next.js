@@ -56,9 +56,13 @@ export default function Page({ page, article }) {
         />
       </Head>
       {/* Schema.org */}
-      <ArticleJsonLd post={page} urlPost={`${process.env.NEXT_PUBLIC_URL}/${page.category.slug}/${page.slug}`} />
+      <ArticleJsonLd post={page} urlPost={`${process.env.NEXT_PUBLIC_URL}/Annuaire/${page.slug}`} />
       <ImageObjectJsonLd post={page} />
-      <BreadcrumbJsonLd paragraphPosts={page.paragraphPosts} urlPost={`${process.env.NEXT_PUBLIC_URL}/${page.urlPost}`} />
+      <BreadcrumbJsonLd breadcrumbs={[
+        { name: 'Accueil', url: process.env.NEXT_PUBLIC_URL },
+        { name: 'Annuaire', url: `${process.env.NEXT_PUBLIC_URL}/Annuaire` },
+        { name: page.title, url: `${process.env.NEXT_PUBLIC_URL}/Annuaire/${page.slug}` },
+      ]} />
       <section className={styles.page}>
         <figure>
           <ImageLoader
@@ -81,7 +85,7 @@ export default function Page({ page, article }) {
           article={article}
         />
         {/* <TableOfContents post={page} /> */}
-        {page.paragraphPosts.map((paragraphPosts) => (
+        {(page.paragraphPosts || []).map((paragraphPosts) => (
           <div key={paragraphPosts.id}>
             <h2 id={paragraphPosts.slug}>{paragraphPosts.subtitle}</h2>
             <div dangerouslySetInnerHTML={{ __html: paragraphPosts.paragraph }} />

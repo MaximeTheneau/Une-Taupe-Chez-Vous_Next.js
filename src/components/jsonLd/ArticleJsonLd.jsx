@@ -12,9 +12,11 @@ export default function ArticleJsonLd({ post, urlPost }) {
     datePublished: post.createdAt,
     ...(post.updatedAt && { dateModified: post.updatedAt }),
     url: urlPost,
-    articleSection: `${post.subcategory ? `${post.subcategory.name},` : ''} ${post.category.name}`,
+    ...(post.category && {
+      articleSection: `${post.subcategory ? `${post.subcategory.name}, ` : ''}${post.category.name}`,
+      keywords: `${post.title}, ${post.category.name}${post.subcategory ? `, ${post.subcategory.name}` : ''}`,
+    }),
     isAccessibleForFree: true,
-    keywords: `${post.title}, ${post.category.name}${post.subcategory ? `, ${post.subcategory.name}` : ''}`,
     articleBody: post.contents,
     image: {
       '@type': 'ImageObject',
@@ -36,8 +38,8 @@ export default function ArticleJsonLd({ post, urlPost }) {
         url: 'https://picture.unetaupechezvous.fr/logo-une-taupe-chez-vous.png',
       },
     },
-    commentCount: post.comments.length,
-    comment: post.comments.map((comment) => ({
+    commentCount: Array.isArray(post.comments) ? post.comments.length : 0,
+    comment: (Array.isArray(post.comments) ? post.comments : []).map((comment) => ({
       '@type': 'Comment',
       author: {
         '@type': 'Person',
@@ -46,16 +48,18 @@ export default function ArticleJsonLd({ post, urlPost }) {
       description: comment.comment,
       dateCreated: comment.createdAt,
     })),
-    isPartOf: {
-      '@type': 'Blog',
-      '@id': `${process.env.NEXT_PUBLIC_URL}/${post.category.slug}`,
-      name: `Une taupe chez vous - ${post.category.name}`,
-      publisher: {
-        '@type': 'Organization',
-        '@id': process.env.NEXT_PUBLIC_URL,
-        name: 'Une taupe chez vous',
+    ...(post.category && {
+      isPartOf: {
+        '@type': 'Blog',
+        '@id': `${process.env.NEXT_PUBLIC_URL}/${post.category.slug}`,
+        name: `Une taupe chez vous - ${post.category.name}`,
+        publisher: {
+          '@type': 'Organization',
+          '@id': process.env.NEXT_PUBLIC_URL,
+          name: 'Une taupe chez vous',
+        },
       },
-    },
+    }),
   };
 
   return (

@@ -23,6 +23,7 @@ export async function getStaticProps({ params }) {
 }
 
 export default function Slug({ post }) {
+  const urlPost = `${process.env.NEXT_PUBLIC_URL}/${post.category?.slug ?? 'Interventions'}/${post.slug}`;
   return (
     <>
       <Head>
@@ -31,7 +32,7 @@ export default function Slug({ post }) {
         {/* Open Graph */}
         <meta property="og:type" content="article" />
         <meta property="og:title" content={post.heading} />
-        <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`} />
+        <meta property="og:url" content={urlPost} />
         <meta property="og:description" content={post.metaDescription} />
         <meta property="og:site_name" content="Une Taupe Chez Vous" />
         <meta property="og:locale" content="fr_FR" />
@@ -47,7 +48,7 @@ export default function Slug({ post }) {
         <meta name="twitter:image:alt" content={post.altImg || post.title} />
         <link
           rel="canonical"
-          href={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`}
+          href={urlPost}
           key="canonical"
         />
         {/* Image Preload */}
@@ -61,12 +62,12 @@ export default function Slug({ post }) {
         />
       </Head>
       {/* Schema.org */}
-      <ArticleJsonLd post={post} urlPost={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`} />
+      <ArticleJsonLd post={post} urlPost={urlPost} />
       <ImageObjectJsonLd post={post} />
       <BreadcrumbJsonLd breadcrumbs={[
         { name: 'Accueil', url: process.env.NEXT_PUBLIC_URL },
         { name: 'Interventions', url: `${process.env.NEXT_PUBLIC_URL}/Interventions` },
-        { name: post.title, url: `${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}` },
+        { name: post.title, url: urlPost },
       ]} />
       <section>
         <h1>{post.title}</h1>
@@ -105,7 +106,7 @@ export default function Slug({ post }) {
           <table className={styles.page__table}>
             <thead>
               <tr>
-                {post.listPosts.map((listArticle) => listArticle.title !== null
+                {(post.listPosts || []).map((listArticle) => listArticle.title !== null
                   && listArticle.title && <th>{listArticle.title}</th>)}
               </tr>
 
@@ -113,7 +114,7 @@ export default function Slug({ post }) {
             <tbody>
               <tr>
                 {
-                    post.listPosts.map(
+                    (post.listPosts || []).map(
                       (listArticle) => listArticle.title !== null
                         && listArticle.description && <td>{listArticle.description}</td>,
                     )
@@ -123,7 +124,7 @@ export default function Slug({ post }) {
           </table>
         </div>
         <TableOfContents post={post} />
-        {post.paragraphPosts.map((paragraphArticle) => (
+        {(post.paragraphPosts || []).map((paragraphArticle) => (
           <div key={paragraphArticle.id}>
             {paragraphArticle.subtitle && (
               <h2 id={paragraphArticle.slug}>

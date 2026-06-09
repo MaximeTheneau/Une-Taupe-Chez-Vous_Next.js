@@ -41,11 +41,14 @@ export default function pricing({ page }) {
       </Head>
       {/* Schema.org */}
       <ImageObjectJsonLd post={page} />
-      <BreadcrumbJsonLd paragraphPosts={page.paragraphPosts} urlPost={`${process.env.NEXT_PUBLIC_URL}/${page.urlPost}`} />
+      <BreadcrumbJsonLd breadcrumbs={[
+        { name: 'Accueil', url: process.env.NEXT_PUBLIC_URL },
+        { name: page.title, url: `${process.env.NEXT_PUBLIC_URL}/${page.slug}` },
+      ]} />
       <section className={styles.page}>
         <h1>{page.title}</h1>
         <div dangerouslySetInnerHTML={{ __html: page.contents }} />
-        {page.paragraphPosts.map((paragraphPosts) => (
+        {(page.paragraphPosts || []).map((paragraphPosts) => (
           <>
             <h2>{paragraphPosts.subtitle}</h2>
             <div dangerouslySetInnerHTML={{ __html: paragraphPosts.paragraph }} />

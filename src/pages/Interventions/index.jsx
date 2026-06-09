@@ -51,7 +51,7 @@ export default function Home({ articles, page }) {
           <Cards cards={articles} />
         </div>
         <TableOfContents post={page} />
-        {page.paragraphPosts.map((paragraphPosts) => (
+        {(page.paragraphPosts || []).map((paragraphPosts) => (
           <>
             <h2 id={paragraphPosts.slug}>{paragraphPosts.subtitle}</h2>
             <div dangerouslySetInnerHTML={{ __html: paragraphPosts.paragraph }} />

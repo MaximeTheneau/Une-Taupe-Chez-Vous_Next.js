@@ -19,6 +19,8 @@ export async function getStaticProps() {
 }
 // == Composant
 export default function testimonials({ page, reviews }) {
+  const result = reviews?.result;
+  const googleReviews = Array.isArray(result?.reviews) ? result.reviews : [];
   return (
     <>
       <Head>
@@ -46,28 +48,32 @@ export default function testimonials({ page, reviews }) {
       <section className={styles.page}>
         <h1>{page.title}</h1>
         <p>{page.contentsHTML}</p>
-        <p>
-          <strong>
-            Une note de
-            {' '}
-            {reviews.result.rating}
-            /5 sur
-            {' '}
-            {reviews.result.user_ratings_total}
-          </strong>
-          .
-        </p>
+        {result?.rating && (
+          <p>
+            <strong>
+              Une note de
+              {' '}
+              {result.rating}
+              /5 sur
+              {' '}
+              {result.user_ratings_total}
+            </strong>
+            .
+          </p>
+        )}
         <div className={styles.page__reviews}>
-          {reviews.result.reviews.map((review) => (
+          {googleReviews.map((review) => (
             <Review key={review.time} review={review} />
           ))}
         </div>
-        <p>
-          <Link href={reviews.result.url} target="_blank" rel="noopener noreferrer">
-            Consultez nos avis Google Maps
-          </Link>
-        </p>
-        {page.paragraphPosts.map((paragraphArticle) => (
+        {result?.url && (
+          <p>
+            <Link href={result.url} target="_blank" rel="noopener noreferrer">
+              Consultez nos avis Google Maps
+            </Link>
+          </p>
+        )}
+        {(page.paragraphPosts || []).map((paragraphArticle) => (
           <div key={paragraphArticle.id}>
             {paragraphArticle.subtitle && (
               <h2 id={paragraphArticle.slug}>

@@ -1,6 +1,7 @@
 import Head from 'next/head';
 
 export default function FaqJsonLd({ listPosts }) {
+  if (!listPosts || listPosts.length === 0) return null;
   const jsonLdData = {
     '@context': 'https://schema.org/',
     '@type': 'FAQPage',

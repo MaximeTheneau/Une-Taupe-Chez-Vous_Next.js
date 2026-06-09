@@ -2,12 +2,13 @@ import Link from 'next/link';
 import styles from './TableOfContents.module.scss';
 
 export default function TableOfContents({ post }) {
+  const items = post.paragraphPosts || [];
   return (
-    post.paragraphPosts[0] && (
+    items[0] && (
     <nav className={styles.tableOfContents} aria-label="Sommaire">
       <p className={styles.tableOfContents__title}>Sommaire</p>
       <ul className={styles.tableOfContents__list}>
-        {post.paragraphPosts.map((paragraphArticle) => (
+        {items.map((paragraphArticle) => (
           <li key={paragraphArticle.slug} className={styles.tableOfContents__item}>
             <Link href={`#${paragraphArticle.slug}`} className={styles.tableOfContents__link}>{paragraphArticle.subtitle}</Link>
           </li>

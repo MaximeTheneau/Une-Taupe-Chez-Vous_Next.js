@@ -131,7 +131,7 @@ export default function Slug({
 
           <div dangerouslySetInnerHTML={{ __html: post.contents }} />
           <TableOfContents post={post} />
-          {post.paragraphPosts.map((paragraphArticle) => (
+          {(post.paragraphPosts || []).map((paragraphArticle) => (
             <div key={paragraphArticle.id}>
               {paragraphArticle.subtitle && (
               <h2 id={paragraphArticle.slug}>
@@ -178,7 +178,7 @@ export default function Slug({
 
           ))}
           <ol>
-            {post.listPosts.map((listArticle) => (
+            {(post.listPosts || []).map((listArticle) => (
               listArticle.title !== null && (
               <li key={listArticle.slug}>
                 {listArticle.title && (

@@ -57,7 +57,10 @@ export default function Page({ page }) {
       {/* Schema.org */}
       <ArticleJsonLd post={page} urlPost={`${process.env.NEXT_PUBLIC_URL}/${page.urlPost}`} />
       <ImageObjectJsonLd post={page} />
-      <BreadcrumbJsonLd paragraphPosts={page.paragraphPosts} urlPost={`${process.env.NEXT_PUBLIC_URL}/${page.urlPost}`} />
+      <BreadcrumbJsonLd breadcrumbs={[
+        { name: 'Accueil', url: process.env.NEXT_PUBLIC_URL },
+        { name: page.title, url: `${process.env.NEXT_PUBLIC_URL}/${page.slug}` },
+      ]} />
       <section>
         <figure>
           <ImageLoader
@@ -83,7 +86,7 @@ export default function Page({ page }) {
       </section>
 
       <section>
-        {page.paragraphPosts.map((paragraphArticle) => (
+        {(page.paragraphPosts || []).map((paragraphArticle) => (
           <div key={paragraphArticle.id}>
             {paragraphArticle.subtitle && (
             <h2 id={paragraphArticle.slug}>

@@ -8,7 +8,7 @@ import styles from './Faq.module.scss';
  * @returns {JSX.Element} - Returns a JSX element representing the list of FAQs
  */
 export default function Faq({ faq }) {
-  const [faqs, setFaqs] = useState(faq.listPosts);
+  const [faqs, setFaqs] = useState(faq.listPosts || []);
 
   /**
    * Function to toggle the "open" state of a FAQ

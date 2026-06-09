@@ -46,7 +46,10 @@ export default function Contact({ page }) {
       </Head>
       <ArticleJsonLd post={page} urlPost={`${process.env.NEXT_PUBLIC_URL}/${page.urlPost}`} />
       <ImageObjectJsonLd post={page} />
-      <BreadcrumbJsonLd paragraphPosts={page.paragraphPosts} urlPost={`${process.env.NEXT_PUBLIC_URL}/${page.urlPost}`} />
+      <BreadcrumbJsonLd breadcrumbs={[
+        { name: 'Accueil', url: process.env.NEXT_PUBLIC_URL },
+        { name: page.title, url: `${process.env.NEXT_PUBLIC_URL}/${page.slug}` },
+      ]} />
       <section className={styles.page}>
         <h1>{page.title}</h1>
         <div className={styles.page__contact__block} itemScope itemType="https://schema.org/">
@@ -75,7 +78,7 @@ export default function Contact({ page }) {
             <ContactForm />
           </div>
         </div>
-        {page.paragraphPosts.map((paragraphArticle) => (
+        {(page.paragraphPosts || []).map((paragraphArticle) => (
           <div key={paragraphArticle.id}>
             {paragraphArticle.subtitle && (
               <h2 id={paragraphArticle.slug}>

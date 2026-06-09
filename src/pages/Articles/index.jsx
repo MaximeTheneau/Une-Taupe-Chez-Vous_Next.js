@@ -56,7 +56,7 @@ export default function Home({ page, articles, subcategoryList }) {
         <div className={styles.home}>
           <Cards cards={articles} />
         </div>
-        {page.paragraphPosts.map((paragraphPosts) => (
+        {(page.paragraphPosts || []).map((paragraphPosts) => (
           <>
             <h2>{paragraphPosts.subtitle}</h2>
             <div dangerouslySetInnerHTML={{ __html: paragraphPosts.paragraph }} />

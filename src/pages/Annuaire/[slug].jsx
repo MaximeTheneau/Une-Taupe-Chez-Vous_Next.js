@@ -83,7 +83,11 @@ export default function Slug({ post, relatedPosts, latestPosts }) {
       {/* Schema.org */}
       <ArticleJsonLd post={post} urlPost={urlPost} />
       <ImageObjectJsonLd post={post} />
-      <BreadcrumbJsonLd paragraphPosts={post.paragraphPosts} urlPost={`${urlPost}`} />
+      <BreadcrumbJsonLd breadcrumbs={[
+        { name: 'Accueil', url: process.env.NEXT_PUBLIC_URL },
+        { name: 'Annuaire', url: `${process.env.NEXT_PUBLIC_URL}/Annuaire` },
+        { name: post.title, url: urlPost },
+      ]} />
       <div className="flex flex-wrap justify-center">
         <article className=" md:w-3/4 px-4">
           <figure>
@@ -115,7 +119,7 @@ export default function Slug({ post, relatedPosts, latestPosts }) {
 
           <div dangerouslySetInnerHTML={{ __html: post.contents }} />
           <TableOfContents post={post} />
-          {post.paragraphPosts.map((paragraphArticle) => (
+          {(post.paragraphPosts || []).map((paragraphArticle) => (
             <div key={paragraphArticle.id}>
               {paragraphArticle.subtitle && (
               <h2 id={paragraphArticle.slug}>
@@ -161,7 +165,7 @@ export default function Slug({ post, relatedPosts, latestPosts }) {
 
           ))}
           <ol>
-            {post.listPosts.map((listArticle) => (
+            {(post.listPosts || []).map((listArticle) => (
               listArticle.title !== null && (
               <li key={listArticle.slug}>
                 {listArticle.title && (

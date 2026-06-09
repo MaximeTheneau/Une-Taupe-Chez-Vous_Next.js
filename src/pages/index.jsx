@@ -125,7 +125,7 @@ export default function Home({
             Consultez tous nos avis ici
           </Link>
         </div>
-        {accueil.listPosts.map((listArticle) => (
+        {(accueil.listPosts || []).map((listArticle) => (
           listArticle.title !== null && (
           <div key={listArticle.title}>
             {listArticle.title && (

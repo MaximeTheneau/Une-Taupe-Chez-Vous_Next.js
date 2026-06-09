@@ -60,7 +60,7 @@ export default function MentionsLegal({ page }) {
           <h1>{page.title}</h1>
           <h2>{page.subtitle}</h2>
           <div dangerouslySetInnerHTML={{ __html: page.contentsHTML }} />
-          {page.paragraphPosts.map((paragraphArticle) => (
+          {(page.paragraphPosts || []).map((paragraphArticle) => (
             <div key={paragraphArticle.id}>
               {paragraphArticle.subtitle && (
               <h2 id={paragraphArticle.slug}>
