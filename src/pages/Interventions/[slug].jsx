@@ -29,18 +29,22 @@ export default function Slug({ post }) {
         <title>{post.heading}</title>
         <meta name="description" content={post.metaDescription} />
         {/* Open Graph */}
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content="article" />
         <meta property="og:title" content={post.heading} />
         <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`} />
         <meta property="og:description" content={post.metaDescription} />
         <meta property="og:site_name" content="Une Taupe Chez Vous" />
+        <meta property="og:locale" content="fr_FR" />
         <meta property="og:image" content={`${post.imgPost}?format=jpeg`} />
         <meta property="og:image:width" content={post.imgWidth} />
         <meta property="og:image:height" content={post.imgHeight} />
+        <meta property="og:image:alt" content={post.altImg || post.title} />
         <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@UneTaupe_" />
         <meta name="twitter:title" content={post.heading} />
         <meta name="twitter:description" content={post.metaDescription} />
         <meta name="twitter:image" content={`${post.imgPost}?format=jpeg`} />
+        <meta name="twitter:image:alt" content={post.altImg || post.title} />
         <link
           rel="canonical"
           href={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`}
@@ -50,15 +54,20 @@ export default function Slug({ post }) {
         <link
           rel="preload"
           as="image"
+          href={`${post.imgPost}`}
           imageSrcSet={post.srcset}
-          imageSizes="100w"
+          imageSizes="(max-width: 768px) 100vw, 60vw"
           fetchPriority="high"
         />
       </Head>
       {/* Schema.org */}
       <ArticleJsonLd post={post} urlPost={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`} />
       <ImageObjectJsonLd post={post} />
-      <BreadcrumbJsonLd paragraphPosts={post.paragraphPosts} urlPost={`${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}`} />
+      <BreadcrumbJsonLd breadcrumbs={[
+        { name: 'Accueil', url: process.env.NEXT_PUBLIC_URL },
+        { name: 'Interventions', url: `${process.env.NEXT_PUBLIC_URL}/Interventions` },
+        { name: post.title, url: `${process.env.NEXT_PUBLIC_URL}/${post.category.slug}/${post.slug}` },
+      ]} />
       <section>
         <h1>{post.title}</h1>
         <nav>
@@ -81,6 +90,7 @@ export default function Slug({ post }) {
               width={post.imgWidth}
               height={post.imgHeight}
               srcset={post.srcset}
+              sizes="(max-width: 768px) 100vw, 60vw"
               priority
             />
             {post.title !== post.altImg && (
@@ -130,6 +140,7 @@ export default function Slug({ post }) {
                     width={paragraphArticle.imgWidth}
                     height={paragraphArticle.imgHeight}
                     srcset={paragraphArticle.srcset}
+                    sizes="(max-width: 768px) 100vw, 40vw"
                   />
                   {paragraphArticle.subtitle !== paragraphArticle.altImgParagh && (
                   <figcaption className="caption">

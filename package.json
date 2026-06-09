@@ -53,6 +53,21 @@
     "typescript": "5.1.6",
     "typescript-eslint": "^8.22.0"
   },
+  "browserslist": {
+    "production": [
+      "chrome >= 80",
+      "firefox >= 74",
+      "safari >= 13.1",
+      "edge >= 80",
+      "not dead",
+      "not IE 11"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "pnpm": {
     "overrides": {
       "braces@<3.0.3": ">=3.0.3",

@@ -7,6 +7,7 @@ export default function ImageLoader({
   alt,
   height,
   priority,
+  sizes = '100vw',
 }) {
   return (
     <img
@@ -18,8 +19,7 @@ export default function ImageLoader({
       loading={priority ? 'eager' : 'lazy'}
       fetchpriority={priority ? 'high' : 'low'}
       decoding="async"
-      sizes="100vw"
+      sizes={sizes}
     />
-
   );
 }

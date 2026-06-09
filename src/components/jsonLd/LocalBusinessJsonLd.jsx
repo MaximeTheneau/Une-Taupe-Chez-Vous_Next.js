@@ -2,10 +2,9 @@
 import Head from 'next/head';
 
 export default function LocalBusinessJsonLd({ descriptionMeta, reviewsData }) {
-  const {
-    result,
-    reviews = result.reviews,
-  } = reviewsData;
+  const { result } = reviewsData || {};
+  if (!result) return null;
+  const reviews = result.reviews || [];
 
   const jsonLdData = {
     '@context': 'https://schema.org',

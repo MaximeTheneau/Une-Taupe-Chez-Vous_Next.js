@@ -46,21 +46,20 @@ export default function Home({ articles, subcategoryList }) {
         <meta property="og:title" content={subcategory.name} />
         <meta property="og:description" content={`${subcategory.name} : Retrouvez tous les articles`} />
         <meta property="og:site_name" content="Une Taupe Chez Vous" />
+        <meta property="og:locale" content="fr_FR" />
         <meta property="og:url" content={urlPost} />
         <meta property="og:image" content="https://picture.unetaupechezvous.fr/Accueil.webp?format=jpeg" />
         <meta property="og:image:width" content="1024" />
         <meta property="og:image:height" content="720" />
-        <meta property="article:section" content={subcategory.name} />
-        <meta property="twitter:card" content="summary" />
+        <meta property="og:image:alt" content={`${subcategory.name} - Une Taupe Chez Vous`} />
+        <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:title" content={subcategory.name} />
         <meta property="twitter:description" content={`${subcategory.name} : Retrouvez tous les articles`} />
         <meta property="twitter:site" content="@UneTaupe_" />
         <meta property="twitter:image" content="https://picture.unetaupechezvous.fr/Accueil.webp?format=jpeg" />
         <meta property="twitter:creator" content="@UneTaupe_" />
         <meta property="twitter:image:alt" content={`${subcategory.name} : Retrouvez tous les articles`} />
-        <meta property="twitter:domain" content={urlPost} />
         <meta property="twitter:url" content={urlPost} />
-        <meta property="og:image" content="https://picture.unetaupechezvous.fr/Accueil.webp?format=jpeg" />
         <link
           rel="canonical"
           href={`${process.env.NEXT_PUBLIC_URL}/Articles/${subcategory.slug}`}

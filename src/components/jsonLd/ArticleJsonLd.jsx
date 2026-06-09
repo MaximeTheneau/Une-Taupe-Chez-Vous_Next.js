@@ -2,9 +2,10 @@ import Head from 'next/head';
 
 export default function ArticleJsonLd({ post, urlPost }) {
   const jsonLdData = {
+    '@context': 'https://schema.org',
     '@type': 'BlogPosting',
-    '@id': `${process.env.NEXT_PUBLIC_URL}/${post.category.slug}`,
-    mainEntityOfPage: `${process.env.NEXT_PUBLIC_URL}/${post.category.slug}`,
+    '@id': urlPost,
+    mainEntityOfPage: urlPost,
     name: post.title,
     headline: post.title,
     description: post.metaDescription,
@@ -30,27 +31,29 @@ export default function ArticleJsonLd({ post, urlPost }) {
     publisher: {
       '@type': 'Organization',
       name: 'Une taupe chez vous',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://picture.unetaupechezvous.fr/logo-une-taupe-chez-vous.png',
+      },
     },
     commentCount: post.comments.length,
-    comment: [
-      post.comments.map((comment) => ({
-        '@type': 'Comment',
-        author: {
-          '@type': 'Person',
-          name: comment.User,
-        },
-        description: comment.comment,
-        dateCreated: comment.createdAt,
-      })),
-    ],
+    comment: post.comments.map((comment) => ({
+      '@type': 'Comment',
+      author: {
+        '@type': 'Person',
+        name: comment.User,
+      },
+      description: comment.comment,
+      dateCreated: comment.createdAt,
+    })),
     isPartOf: {
-      '@type': post.category.name,
+      '@type': 'Blog',
       '@id': `${process.env.NEXT_PUBLIC_URL}/${post.category.slug}`,
       name: `Une taupe chez vous - ${post.category.name}`,
       publisher: {
         '@type': 'Organization',
-        '@id': `${process.env.NEXT_PUBLIC_URL}`,
-        name: `Une taupe chez vous -  ${post.category.name}`,
+        '@id': process.env.NEXT_PUBLIC_URL,
+        name: 'Une taupe chez vous',
       },
     },
   };

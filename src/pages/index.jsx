@@ -6,7 +6,6 @@ import fetcher from '../utils/fetcher';
 import LocalBusinessJsonLd from '../components/jsonLd/LocalBusinessJsonLd';
 import DevisButton from '../components/button/DevisButton';
 import ImageLoader from '../components/image/ImageLoader';
-import Review from '../components/review/Review';
 import SearchJsonLd from '../components/jsonLd/SearchJsonLd';
 import ImageObjectJsonLd from '../components/jsonLd/ImageObjectJsonLd';
 import BreadcrumbJsonLd from '../components/jsonLd/BreadcrumbJsonLd';
@@ -34,7 +33,7 @@ export default function Home({
   const { paragraphPosts } = accueil;
   const firstPost = paragraphPosts[0];
   const otherPosts = paragraphPosts.slice(1);
-  const latestThreeReviews = reviews.result.reviews.slice(0, 3);
+  // const latestThreeReviews = reviews.result?.reviews?.slice(0, 3);
   return (
     <>
       <Head>
@@ -45,13 +44,17 @@ export default function Home({
         <meta property="og:description" content={accueil.metaDescription} />
         <meta property="og:url" content={process.env.NEXT_PUBLIC_URL} />
         <meta property="og:site_name" content="Une Taupe Chez Vous" />
+        <meta property="og:locale" content="fr_FR" />
         <meta property="og:image" content={`${accueil.imgPost}?format=jpeg`} />
         <meta property="og:image:width" content={accueil.imgWidth} />
         <meta property="og:image:height" content={accueil.imgHeight} />
+        <meta property="og:image:alt" content={accueil.altImg || accueil.title} />
         <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@UneTaupe_" />
         <meta name="twitter:title" content={accueil.heading} />
         <meta name="twitter:description" content={accueil.metaDescription} />
         <meta name="twitter:image" content={`${accueil.imgPost}?format=jpeg`} />
+        <meta name="twitter:image:alt" content={accueil.altImg || accueil.title} />
         <link
           rel="canonical"
           href={process.env.NEXT_PUBLIC_URL}
@@ -64,14 +67,16 @@ export default function Home({
           type="image/webp"
           href={accueil.imgPost}
           imagesrcset={accueil.srcset}
-          imagesizes="100w"
+          imagesizes="(max-width: 768px) 100vw, (min-width: 1270px) 635px, 50vw"
           fetchpriority="high"
         />
       </Head>
       {/* Schema.org */}
       <ImageObjectJsonLd post={accueil} />
-      <BreadcrumbJsonLd paragraphPosts={accueil.paragraphPosts} urlPost={`${process.env.NEXT_PUBLIC_URL}`} />
       <LocalBusinessJsonLd descriptionMeta={accueil.metaDescription} reviewsData={reviews} />
+      <BreadcrumbJsonLd breadcrumbs={[
+        { name: 'Accueil', url: process.env.NEXT_PUBLIC_URL },
+      ]} />
       <FaqJsonLd listPosts={accueil.listPosts} />
       <SearchJsonLd />
       <div className={styles.home__imagesFull}>
@@ -83,6 +88,7 @@ export default function Home({
               width={accueil.imgWidth}
               height={accueil.imgHeight}
               srcset={accueil.srcset}
+              sizes="(max-width: 768px) 100vw, (min-width: 1270px) 635px, 50vw"
               priority
             />
           </figure>
@@ -97,7 +103,6 @@ export default function Home({
       <section>
 
         <h2>Nos spécialités</h2>
-        <p />
         {/* --Services--*/}
         <Cards cards={services} />
         {firstPost && (
@@ -115,11 +120,7 @@ export default function Home({
         ))}
         <div>
           <h2>Ils nous font confiance</h2>
-          <div className={styles.page__reviews}>
-            {latestThreeReviews.map((review) => (
-              <Review key={review.time} review={review} />
-            ))}
-          </div>
+          <div className={styles.page__reviews} />
           <Link href="/Temoignages" className="button">
             Consultez tous nos avis ici
           </Link>
@@ -146,7 +147,7 @@ export default function Home({
           pratiques, conseils professionnels et solutions éprouvées..
         </p>
         <Cards cards={blog} />
-        <div class="text-center mt-8">
+        <div className="text-center mt-8">
           <Link href="/Articles">
             Découvrir tous nos articles d&apos;experts
           </Link>

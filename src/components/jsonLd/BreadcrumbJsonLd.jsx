@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-export default function BreadcrumbJsonLd({ paragraphPosts, urlPost }) {
+export default function BreadcrumbJsonLd({ breadcrumbs }) {
   return (
     <Head>
       <script
@@ -9,11 +9,11 @@ export default function BreadcrumbJsonLd({ paragraphPosts, urlPost }) {
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'BreadcrumbList',
-            itemListElement: paragraphPosts.map((paragraphArticle, index) => ({
+            itemListElement: breadcrumbs.map(({ name, url }, index) => ({
               '@type': 'ListItem',
               position: index + 1,
-              name: paragraphArticle.subtitle,
-              item: `${urlPost}#${paragraphArticle.slug}`,
+              name,
+              item: url,
             })),
           }),
         }}

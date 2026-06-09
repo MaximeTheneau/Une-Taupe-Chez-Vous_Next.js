@@ -47,7 +47,6 @@ export async function getStaticProps({ params }) {
 export default function Slug({
   post, desc, relatedPosts, latestPosts,
 }) {
-  // console.log(id);
   const urlPost = `${process.env.NEXT_PUBLIC_URL}${post.url}`;
   return (
     <>
@@ -55,10 +54,11 @@ export default function Slug({
         <title>{post.heading}</title>
         <meta name="description" content={post.metaDescription} />
         {/* Open Graph */}
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content="article" />
         <meta property="og:title" content={post.heading} />
         <meta property="og:description" content={post.metaDescription} />
         <meta property="og:site_name" content="Une Taupe Chez Vous" />
+        <meta property="og:locale" content="fr_FR" />
         <meta property="og:url" content={urlPost} />
         <meta property="og:image" content={`${post.imgPost}?format=jpeg`} />
         <meta property="og:image:width" content={post.imgWidth} />
@@ -67,14 +67,14 @@ export default function Slug({
         <meta property="article:published_time" content={post.createdAt} />
         <meta property="article:modified_time" content={post.updatedAt} />
         <meta property="article:section" content={post.subcategory.name} />
-        <meta property="twitter:card" content="summary" />
+        <meta property="article:author" content="Laurent THENEAU" />
+        <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:title" content={post.heading} />
         <meta property="twitter:description" content={post.metaDescription} />
         <meta property="twitter:site" content="@UneTaupe_" />
         <meta property="twitter:image" content={`${post.imgPost}?format=jpeg`} />
         <meta property="twitter:creator" content="@UneTaupe_" />
         <meta property="twitter:image:alt" content={post.altImg || post.title} />
-        <meta property="twitter:domain" content={urlPost} />
         <meta property="twitter:url" content={urlPost} />
         <meta name="robots" content="max-snippet:-1, max-image-preview:large" />
         <link
@@ -86,15 +86,21 @@ export default function Slug({
         <link
           rel="preload"
           as="image"
+          href={post.imgPost}
           imageSrcSet={post.srcset}
-          imageSizes="100w"
+          imageSizes="(max-width: 768px) 100vw, 75vw"
           fetchPriority="high"
         />
       </Head>
       {/* Schema.org */}
       <ImageObjectJsonLd post={post} />
       <ArticleJsonLd post={post} urlPost={urlPost} />
-      <BreadcrumbJsonLd paragraphPosts={post.paragraphPosts} urlPost={urlPost} />
+      <BreadcrumbJsonLd breadcrumbs={[
+        { name: 'Accueil', url: process.env.NEXT_PUBLIC_URL },
+        { name: 'Articles', url: `${process.env.NEXT_PUBLIC_URL}/Articles` },
+        { name: post.subcategory.name, url: `${process.env.NEXT_PUBLIC_URL}/Articles/${post.subcategory.slug}` },
+        { name: post.title, url: urlPost },
+      ]} />
       <div className="flex flex-wrap justify-center">
         <article className=" md:w-3/4 px-4">
           <figure>
@@ -104,6 +110,7 @@ export default function Slug({
               width={post.imgWidth}
               height={post.imgHeight}
               srcset={post.srcset}
+              sizes="(max-width: 768px) 100vw, 75vw"
               priority
             />
             {post.title !== post.altImg && (
@@ -141,6 +148,7 @@ export default function Slug({
                     width={paragraphArticle.imgWidth}
                     height={paragraphArticle.imgHeight}
                     srcset={paragraphArticle.srcset}
+                    sizes="(max-width: 768px) 100vw, 40vw"
                   />
                   {paragraphArticle.subtitle !== paragraphArticle.altImgParagh && (
                   <figcaption className="caption">
