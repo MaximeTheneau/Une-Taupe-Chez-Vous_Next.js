@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import styles from '../styles/Pages.module.scss';
 import Review from '../components/review/Review';
+import ReviewsJsonLd from '../components/jsonLd/ReviewsJsonLd';
 
 export async function getStaticProps() {
   const responsePage = await fetch(`${process.env.NEXT_PUBLIC_API_URL}posts/Temoignages`);
@@ -32,10 +33,13 @@ export default function testimonials({ page, reviews }) {
         <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/${page.slug}`} />
         <meta property="og:description" content={page.metaDescription} />
         <meta property="og:site_name" content="Une Taupe Chez Vous" />
+        <meta property="og:locale" content="fr_FR" />
         <meta property="og:image" content="https://picture.unetaupechezvous.fr/Accueil.webp?format=jpeg" />
         <meta property="og:image:width" content={page.imgWidth} />
         <meta property="og:image:height" content={page.imgHeight} />
+        <meta property="og:image:alt" content={page.altImg || page.title} />
         <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@UneTaupe_" />
         <meta name="twitter:title" content={page.heading} />
         <meta name="twitter:description" content={page.metaDescription} />
         <meta name="twitter:image" content="https://picture.unetaupechezvous.fr/Accueil.webp?format=jpeg" />
@@ -45,6 +49,7 @@ export default function testimonials({ page, reviews }) {
           key="canonical"
         />
       </Head>
+      <ReviewsJsonLd reviews={reviews} />
       <section className={styles.page}>
         <h1>{page.title}</h1>
         <p>{page.contentsHTML}</p>

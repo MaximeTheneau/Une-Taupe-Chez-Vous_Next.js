@@ -8,6 +8,7 @@ import TableOfContents from '../components/tableOfContents/TableOfContents';
 import ImageLoader from '../components/image/ImageLoader';
 import ImageObjectJsonLd from '../components/jsonLd/ImageObjectJsonLd';
 import BreadcrumbJsonLd from '../components/jsonLd/BreadcrumbJsonLd';
+import PersonJsonLd from '../components/jsonLd/PersonJsonLd';
 
 export async function getStaticProps() {
   const page = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}posts/Taupier-agree-professionnel-depuis-1994`);
@@ -31,10 +32,13 @@ export default function TaupierPage({ page }) {
         <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/${page.slug}`} />
         <meta property="og:description" content={page.metaDescription} />
         <meta property="og:site_name" content="Une Taupe Chez Vous" />
+        <meta property="og:locale" content="fr_FR" />
         <meta property="og:image" content={`${page.imgPost}?format=jpeg`} />
         <meta property="og:image:width" content={page.imgWidth} />
         <meta property="og:image:height" content={page.imgHeight} />
+        <meta property="og:image:alt" content={page.altImg || page.title} />
         <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@UneTaupe_" />
         <meta name="twitter:title" content={page.heading} />
         <meta name="twitter:description" content={page.metaDescription} />
         <meta property="twitter:image" content={`${page.imgPost}?format=jpeg`} />
@@ -49,12 +53,14 @@ export default function TaupierPage({ page }) {
         <link
           rel="preload"
           as="image"
+          href={page.imgPost}
           imageSrcSet={page.srcset}
-          imageSizes="100w"
+          imageSizes="(max-width: 768px) 100vw, 60vw"
           fetchPriority="high"
         />
       </Head>
       {/* Schema.org */}
+      <PersonJsonLd page={page} />
       <ImageObjectJsonLd post={page} />
       <BreadcrumbJsonLd breadcrumbs={[
         { name: 'Accueil', url: process.env.NEXT_PUBLIC_URL },

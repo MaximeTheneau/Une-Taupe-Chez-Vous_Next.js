@@ -46,26 +46,26 @@ export default function Slug({ post, relatedPosts, latestPosts }) {
         <title>{post.heading}</title>
         <meta name="description" content={post.metaDescription} />
         {/* Open Graph */}
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content="article" />
         <meta property="og:title" content={post.heading} />
         <meta property="og:description" content={post.metaDescription} />
         <meta property="og:site_name" content="Une Taupe Chez Vous" />
+        <meta property="og:locale" content="fr_FR" />
         <meta property="og:url" content={urlPost} />
         <meta property="og:image" content={`${post.imgPost}?format=jpeg`} />
-        <meta property="og:image:width" content="1024" />
-        <meta property="og:image:height" content="720" />
+        <meta property="og:image:width" content={post.imgWidth || '1024'} />
+        <meta property="og:image:height" content={post.imgHeight || '720'} />
+        <meta property="og:image:alt" content={post.altImg || post.title} />
         <meta property="article:published_time" content={post.createdAt} />
         <meta property="article:modified_time" content={post.updatedAt} />
         <meta property="article:section" content="Annuaire" />
-        <meta property="twitter:card" content="summary" />
+        <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:title" content={post.heading} />
         <meta property="twitter:description" content={post.metaDescription} />
         <meta property="twitter:site" content="@UneTaupe_" />
         <meta property="twitter:image" content={`${post.imgPost}?format=jpeg`} />
         <meta property="twitter:creator" content="@UneTaupe_" />
         <meta property="twitter:image:alt" content={post.altImg || post.title} />
-        <meta property="twitter:domain" content={urlPost} />
-        <meta property="og:image" content={`${post.imgPost}?format=jpeg`} />
         <link
           rel="canonical"
           href={urlPost}
@@ -75,8 +75,9 @@ export default function Slug({ post, relatedPosts, latestPosts }) {
         <link
           rel="preload"
           as="image"
+          href={post.imgPost}
           imageSrcSet={post.srcset}
-          imageSizes="100w"
+          imageSizes="(max-width: 768px) 100vw, 75vw"
           fetchPriority="high"
         />
       </Head>

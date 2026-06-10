@@ -4,6 +4,7 @@ import Cards from '../components/cards/Cards';
 import styles from '../styles/Home.module.scss';
 import fetcher from '../utils/fetcher';
 import LocalBusinessJsonLd from '../components/jsonLd/LocalBusinessJsonLd';
+import Review from '../components/review/Review';
 import DevisButton from '../components/button/DevisButton';
 import ImageLoader from '../components/image/ImageLoader';
 import SearchJsonLd from '../components/jsonLd/SearchJsonLd';
@@ -33,7 +34,7 @@ export default function Home({
   const { paragraphPosts } = accueil;
   const firstPost = paragraphPosts[0];
   const otherPosts = paragraphPosts.slice(1);
-  // const latestThreeReviews = reviews.result?.reviews?.slice(0, 3);
+  const latestThreeReviews = reviews.result?.reviews?.slice(0, 3);
   return (
     <>
       <Head>
@@ -120,6 +121,11 @@ export default function Home({
         ))}
         <div>
           <h2>Ils nous font confiance</h2>
+          <div className={styles.page__reviews}>
+            {latestThreeReviews?.map((review) => (
+              <Review key={review.time} review={review} />
+            ))}
+          </div>
           <div className={styles.page__reviews} />
           <Link href="/Temoignages" className="button">
             Consultez tous nos avis ici
