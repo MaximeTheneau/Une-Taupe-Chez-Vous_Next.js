@@ -13,7 +13,11 @@ export default function BreadcrumbJsonLd({ breadcrumbs }) {
               '@type': 'ListItem',
               position: index + 1,
               name,
-              item: url,
+              item: {
+                '@type': 'WebPage',
+                '@id': url,
+                name,
+              },
             })),
           }),
         }}
