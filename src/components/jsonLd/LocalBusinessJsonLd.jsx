@@ -9,8 +9,9 @@ export default function LocalBusinessJsonLd({ descriptionMeta, reviewsData }) {
   const jsonLdData = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
-    '@id': process.env.NEXT_PUBLIC_URL,
+    '@id': `${process.env.NEXT_PUBLIC_URL}/#localbusiness`,
     name: result.name || 'Une Taupe Chez Vous',
+    isPartOf: { '@id': `${process.env.NEXT_PUBLIC_URL}/#website` },
     description: descriptionMeta,
     image: 'https://picture.unetaupechezvous.fr/Une-Taupe-Chez-Vous-Taupier-10.webp',
     logo: {

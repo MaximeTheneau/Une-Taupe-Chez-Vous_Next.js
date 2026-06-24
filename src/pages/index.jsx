@@ -8,6 +8,7 @@ import Review from '../components/review/Review';
 import DevisButton from '../components/button/DevisButton';
 import ImageLoader from '../components/image/ImageLoader';
 import SearchJsonLd from '../components/jsonLd/SearchJsonLd';
+import SiteNavigationJsonLd from '../components/jsonLd/SiteNavigationJsonLd';
 import ImageObjectJsonLd from '../components/jsonLd/ImageObjectJsonLd';
 import BreadcrumbJsonLd from '../components/jsonLd/BreadcrumbJsonLd';
 import FaqJsonLd from '../components/jsonLd/FaqJsonLd';
@@ -80,6 +81,7 @@ export default function Home({
       ]} />
       <FaqJsonLd listPosts={accueil.listPosts} />
       <SearchJsonLd />
+      <SiteNavigationJsonLd />
       <div className={styles.home__imagesFull}>
         <div className={styles.home__imagesFull__image}>
           <figure>
