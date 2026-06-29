@@ -48,6 +48,7 @@ export default function Slug({
   post, desc, relatedPosts, latestPosts,
 }) {
   const urlPost = `${process.env.NEXT_PUBLIC_URL}${post.url}`;
+  
   return (
     <>
       <Head>
@@ -119,14 +120,14 @@ export default function Slug({
             </figcaption>
             )}
           </figure>
-          <p className={styles.page__contents__date}>
-            {post.formattedDate}
-          </p>
           {post.sponsored && (
-            <p className="inline-block bg-yellow-400 text-black text-sm font-semibold px-3 py-1 rounded-full mb-3">
+            <p className="inline-block bg-black/10 text-black text-sm font-semibold px-3 py-1 rounded-full mb-3">
               Article sponsorisé
             </p>
           )}
+          <p className={styles.page__contents__date}>
+            {post.formattedDate}
+          </p>
           <h1>{post.title}</h1>
           <Category
             category={false}

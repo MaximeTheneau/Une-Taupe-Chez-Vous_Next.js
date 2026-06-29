@@ -147,20 +147,6 @@ export default function Home({
         ))}
 
       </section>
-      <aside>
-        <h2>Guide Anti-Nuisibles : Nos Articles Experts</h2>
-        <p>
-          Nos experts partagent leurs connaissances approfondies pour vous aider
-          à identifier et gérer efficacement les nuisibles. Retrouvez nos guides
-          pratiques, conseils professionnels et solutions éprouvées..
-        </p>
-        <Cards cards={blog} />
-        <div className="text-center mt-8">
-          <Link href="/Articles">
-            Découvrir tous nos articles d&apos;experts
-          </Link>
-        </div>
-      </aside>
     </>
   );
 }

@@ -29,7 +29,7 @@ export default function Card({ card }: CardProps) {
           srcset={undefined}
         />
         {card.sponsored && (
-          <span className="absolute z-20 top-2 right-2 bg-yellow-400 text-black text-xs font-semibold px-2 py-1 rounded-full">
+          <span className="absolute z-20 top-2 right-2 bg-black/10 text-black text-xs font-semibold px-2 py-1 rounded-full">
             Sponsorisé
           </span>
         )}
