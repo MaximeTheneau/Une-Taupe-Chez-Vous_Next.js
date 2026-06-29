@@ -5,5 +5,5 @@ export type CardType = {
   title: string;
   url: string;
   imgPost: string;
-
+  sponsored?: boolean;
 };

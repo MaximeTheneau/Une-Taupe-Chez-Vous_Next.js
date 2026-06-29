@@ -76,7 +76,7 @@ export default function Slug({
         <meta property="twitter:creator" content="@UneTaupe_" />
         <meta property="twitter:image:alt" content={post.altImg || post.title} />
         <meta property="twitter:url" content={urlPost} />
-        <meta name="robots" content="max-snippet:-1, max-image-preview:large" />
+        <meta name="robots" content={post.sponsored ? 'noindex, nofollow' : 'max-snippet:-1, max-image-preview:large'} />
         <link
           rel="canonical"
           href={urlPost}
@@ -122,6 +122,11 @@ export default function Slug({
           <p className={styles.page__contents__date}>
             {post.formattedDate}
           </p>
+          {post.sponsored && (
+            <p className="inline-block bg-yellow-400 text-black text-sm font-semibold px-3 py-1 rounded-full mb-3">
+              Article sponsorisé
+            </p>
+          )}
           <h1>{post.title}</h1>
           <Category
             category={false}

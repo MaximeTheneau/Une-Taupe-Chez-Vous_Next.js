@@ -8,6 +8,7 @@ type CardProps = {
     altImg?: string;
     title: string;
     url: string;
+    sponsored?: boolean;
   };
 };
 
@@ -27,6 +28,11 @@ export default function Card({ card }: CardProps) {
           priority={false}
           srcset={undefined}
         />
+        {card.sponsored && (
+          <span className="absolute z-20 top-2 right-2 bg-yellow-400 text-black text-xs font-semibold px-2 py-1 rounded-full">
+            Sponsorisé
+          </span>
+        )}
         <div className="absolute z-10 bottom-0 left-0 w-full h-2/3 md:h-2/3 bg-gray-900/50 text-white  p-2">
           <h3>
             {card.title}
